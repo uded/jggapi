@@ -51,7 +51,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -284,7 +284,8 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
         /**
          * @param outgoingPackage pakiet wychodz±cy
          */
-        private synchronized void sendPackage(GGOutgoingPackage outgoingPackage) {
+        private synchronized void sendPackage(
+                GGOutgoingPackage outgoingPackage) {
             int header = outgoingPackage.getHeader();
             int length = outgoingPackage.getLength();
 
