@@ -18,7 +18,6 @@
 package pl.mn.communicator.packet.handlers;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -27,6 +26,7 @@ import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IPublicDirectoryService;
 import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
+import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.PublicDirListener;
 import pl.mn.communicator.packet.out.GGPubdirRequest;
@@ -35,7 +35,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.6 2004-12-18 00:08:44 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.7 2004-12-18 14:19:33 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -122,10 +122,11 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		}
 	}
 
-	protected void notifyPubdirGotSearchResults(Collection searchResults) {
+	protected void notifyPubdirGotSearchResults(PublicDirSearchReply publicDirSearchReply) {
+		if (publicDirSearchReply == null) throw new NullPointerException("publicDirSearchReply cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
-			publicDirListener.pubdirGotSearchResults(searchResults);
+			publicDirListener.pubdirGotSearchResults(publicDirSearchReply);
 		}
 	}
 

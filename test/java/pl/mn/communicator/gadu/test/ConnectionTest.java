@@ -26,8 +26,6 @@ import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.LoginContext;
-import pl.mn.communicator.Server;
-import pl.mn.communicator.event.ConnectionListener;
 
 /**
  * @author mnaglik

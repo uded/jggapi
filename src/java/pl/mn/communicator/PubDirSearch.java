@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-12-17
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PubDirSearch.java,v 1.1 2004-12-18 00:08:43 winnetou25 Exp $
+ * @version $Id: PubDirSearch.java,v 1.2 2004-12-18 14:23:36 winnetou25 Exp $
  */
 public abstract class PubDirSearch {
 
@@ -32,7 +32,6 @@ public abstract class PubDirSearch {
 	protected String m_city = null;
 	protected String m_familyName = null;
 	protected String m_familyCity = null;
-	protected Integer m_start = null;
 
 	public Integer getUin() {
 		return m_uin;
@@ -88,14 +87,6 @@ public abstract class PubDirSearch {
 	
 	public String getFamilyCity() {
 		return m_familyCity;
-	}
-
-	public void setStart(Integer start) {
-		m_start = start;
-	}
-	
-	public Integer getStart() {
-		return m_start;
 	}
 
 }

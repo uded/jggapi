@@ -21,13 +21,14 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirSearchQuery.java,v 1.1 2004-12-18 00:08:43 winnetou25 Exp $
+ * @version $Id: PublicDirSearchQuery.java,v 1.2 2004-12-18 14:23:36 winnetou25 Exp $
  */
 public class PublicDirSearchQuery extends PubDirSearch {
 
 	private String m_lastName = null;
 	private Gender m_gender = null;
 	private Boolean m_activeOnly = null;
+	protected Integer m_start = null;
 
 	public Gender getGender() {
 		return m_gender;
@@ -51,6 +52,14 @@ public class PublicDirSearchQuery extends PubDirSearch {
 	
 	public Boolean isActiveOnly() {
 		return m_activeOnly;
+	}
+
+	public void setStart(Integer start) {
+		m_start = start;
+	}
+	
+	public Integer getStart() {
+		return m_start;
 	}
 
 }

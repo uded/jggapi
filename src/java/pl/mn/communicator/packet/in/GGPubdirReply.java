@@ -17,8 +17,6 @@
  */
 package pl.mn.communicator.packet.in;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.StringTokenizer;
 
 import pl.mn.communicator.Gender;
@@ -33,7 +31,7 @@ import pl.mn.communicator.packet.PublicDirConstants;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.6 2004-12-18 00:08:45 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.7 2004-12-18 14:20:32 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
@@ -43,8 +41,7 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	private int m_sequence = -1;
 	
 	private PublicDirInfo m_pubDirInfo = null;
-	
-	private Collection m_pubDirSearchReplies = new ArrayList();
+	private PublicDirSearchReply m_publicDirSearchReply = null;
 	
 	public GGPubdirReply(byte[] data) {
 		m_replyType = data[0];
@@ -60,8 +57,8 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 		return m_pubDirInfo; 
 	}
 	
-	public Collection getPubdirSearchReplies() {
-		return m_pubDirSearchReplies;
+	public PublicDirSearchReply getPubdirSearchReply() {
+		return m_publicDirSearchReply;
 	}
 	
 	/**
@@ -134,38 +131,26 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 				m_pubDirInfo.setFamilyCity(familyCity);
 			}
 		}
-		m_pubDirSearchReplies.add(m_pubDirInfo);
 	}
 	
 	private void handlePubdirSearchReply(byte[] data) {
 		String string = byteToString(data, 5);
-		PublicDirSearchReply publicDirSearchReply = new PublicDirSearchReply();
+		m_publicDirSearchReply = new PublicDirSearchReply();
 		StringTokenizer tokenizer = new StringTokenizer(string, "\0");
-		int count = tokenizer.countTokens();
-		PublicDirSearchReply.Entry entry = publicDirSearchReply.createSearchEntry();
+		PublicDirSearchReply.Entry entry = m_publicDirSearchReply.createSearchEntry();
 
 		boolean processedUin = false;
-		boolean processedFirstName = false;
-		boolean processedStatus = false;
-		boolean processedBirthYear = false;
-		boolean processedCity = false;
-		boolean processedNickName = false;
-		
 		while (tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken();
-			boolean newEntry = processedUin && processedFirstName && processedStatus && processedBirthYear && processedCity || processedNickName;
-			if (newEntry) {
+			if (processedUin && token.equals(PublicDirConstants.UIN)) {
 				processedUin = false;
-				processedFirstName = false;
-				processedStatus = false;
-				processedBirthYear = false;
-				processedCity = false;
-				processedNickName = false;
-				entry = publicDirSearchReply.createSearchEntry();
+				entry = m_publicDirSearchReply.createSearchEntry();
+				String uin = tokenizer.nextToken();
+				entry.setUin(Integer.valueOf(uin));
+				processedUin = true;
 			} else if (token.equals(PublicDirConstants.FIRST_NAME)) {
 				String firstName = tokenizer.nextToken();
 				entry.setFirstName(firstName);
-				processedFirstName = true;
 			} else if(token.equals(PublicDirConstants.UIN)) {
 				String uin = tokenizer.nextToken();
 				entry.setUin(Integer.valueOf(uin));
@@ -175,24 +160,20 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 				int protocolStatus = Integer.valueOf(status).intValue();
 				IStatus statusBiz = GGUtils.getClientStatus(protocolStatus, null, -1);
 				entry.setStatus(statusBiz);
-				processedStatus = true;
 			} else if (token.equals(PublicDirConstants.BIRTH_YEAR)) {
 				String birthYear = tokenizer.nextToken();
 				entry.setBirthYear(birthYear);
-				processedBirthYear = true;
 			} else if (token.equals(PublicDirConstants.CITY)) {
 				String city = tokenizer.nextToken();
 				entry.setCity(city);
-				processedCity = true;
 			} else if (token.equals(PublicDirConstants.NICK_NAME)) {
 				String nickName = tokenizer.nextToken();
 				entry.setNickName(nickName);
-				processedNickName = true;
 			} else if(token.equals("\0")) {
 				String tok = tokenizer.nextToken();
 				String[] split = tok.split("\0");
 				String nextNumber = split[1];
-				publicDirSearchReply.setNextStart(Integer.valueOf(nextNumber));
+				m_publicDirSearchReply.setNextStart(Integer.valueOf(nextNumber));
 				break;
 			}
 		}

@@ -40,6 +40,7 @@ import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.MessageArrivedEvent;
 import pl.mn.communicator.event.MessageDeliveredEvent;
@@ -52,7 +53,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.6 2004-12-18 00:08:44 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.7 2004-12-18 14:19:33 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -279,8 +280,8 @@ public class Session implements ISession {
 			m_publicDirectoryService.notifyPubdirUpdated();
 		}
 
-		public void notifyPubdirGotSearchResults(Collection searchResults) {
-			m_publicDirectoryService.notifyPubdirGotSearchResults(searchResults);
+		public void notifyPubdirGotSearchResults(PublicDirSearchReply searchReply) {
+			m_publicDirectoryService.notifyPubdirGotSearchResults(searchReply);
 		}
 
 		public void setLoginSeed(int seed) {
