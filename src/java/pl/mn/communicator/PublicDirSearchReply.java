@@ -22,10 +22,16 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**
+ * This class represents an object that is contructed as a result
+ * of a reply from Gadu-Gadu's public directory.
+ * <p>
+ * It holds the collection of entries, each entry represents a single matched
+ * Gadu-Gadu user. These entries can be viewed through a public iterator.
+ * <p>
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirSearchReply.java,v 1.6 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: PublicDirSearchReply.java,v 1.7 2004-12-21 20:21:23 winnetou25 Exp $
  */
 public class PublicDirSearchReply {
 
@@ -33,20 +39,41 @@ public class PublicDirSearchReply {
 	
 	private Collection m_publicDirSearchEntries = new ArrayList();
 
+	/**
+	 * Method that creates a new entry
+	 * and adds it to entries collection.
+	 * 
+	 * @return <code>PublicDirSearchReply.Entry</code> object
+	 */
 	public PublicDirSearchReply.Entry createSearchEntry() {
 		Entry entry = new Entry();
 		m_publicDirSearchEntries.add(entry);
 		return entry;
 	}
 	
+	/**
+	 * Returns an unmodifiable iterator over search results entries.
+	 * 
+	 * @return <code>Iterator</code> over search results entries.
+	 */
 	public Iterator listResults() {
 		return new UnmodifiableIterator(m_publicDirSearchEntries.iterator());
 	}
 	
+	/**
+	 * Sets nextStart.
+	 * 
+	 * @param nextStart
+	 */
 	public void setNextStart(Integer nextStart) {
 		m_nextStart = nextStart;
 	}
 	
+	/**
+	 * Returns nextStart.
+	 * 
+	 * @return <code>Integer</code> value that holds nextStart.
+	 */
 	public Integer getNextStart() {
 		return m_nextStart;
 	}

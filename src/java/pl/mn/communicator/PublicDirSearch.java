@@ -18,10 +18,13 @@
 package pl.mn.communicator;
 
 /**
+ * This is an abstract class that is common for a query to
+ * Gadu-Gadu's public directory and reply from it.
+ * <p>
  * Created on 2004-12-17
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirSearch.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: PublicDirSearch.java,v 1.6 2004-12-21 20:21:24 winnetou25 Exp $
  */
 public abstract class PublicDirSearch {
 
@@ -64,13 +67,13 @@ public abstract class PublicDirSearch {
 	public void setNickName(String nickName) {
 		m_nickName = nickName;
 	}
-	
-	public void setCity(String city) {
-		m_city = city;
-	}
-	
+
 	public String getCity() {
 		return m_city;
+	}
+
+	public void setCity(String city) {
+		m_city = city;
 	}
 	
 	public String getFamilyName() {

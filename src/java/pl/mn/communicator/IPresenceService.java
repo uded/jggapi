@@ -36,13 +36,13 @@ import pl.mn.communicator.event.UserListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IPresenceService.java,v 1.6 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: IPresenceService.java,v 1.7 2004-12-21 20:21:24 winnetou25 Exp $
  */
 public interface IPresenceService {
 	
 	/**
 	 * Invocation of this method tries to set a new status
-	 * for the user that is currently logged in.
+	 * of the user that is currently logged in.
 	 * 
 	 * @param status the new status to be set.
 	 * @throws GGException if there is an error while setting status.

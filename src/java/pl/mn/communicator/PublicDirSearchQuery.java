@@ -18,17 +18,24 @@
 package pl.mn.communicator;
 
 /**
+ * This class should be used when there is a need to search in
+ * Gadu-Gadu's public directory.
+ * <p>
+ * Create instance of this class and then narrow search by
+ * setting criteria on this object. All methods can return null
+ * if a certain criteria was not used in narrowing search.
+ * <p>
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirSearchQuery.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: PublicDirSearchQuery.java,v 1.8 2004-12-21 20:21:24 winnetou25 Exp $
  */
 public class PublicDirSearchQuery extends PublicDirSearch {
 
 	private String m_lastName = null;
 	private Gender m_gender = null;
 	private Boolean m_activeOnly = null;
-	protected Integer m_start = null;
+	private Integer m_start = null;
 
 	public Gender getGender() {
 		return m_gender;
