@@ -1,16 +1,24 @@
 package pl.mn.communicator.logger;
 
+import java.util.HashMap;
+import java.util.Map;
+
+
 /**
  * Przykladowy most do loggera log4j.
  *
  * @author mnaglik
  */
 public class Logger4J extends Logger {
+    private static Map loggers = new HashMap();
+    private org.apache.log4j.Logger rootLogger;
+
     /**
-     * @param clazz klasa która loguje
+     * Twórz instancje obiektu.
+     * @param logger apachowy logger
      */
-    public Logger4J(Class clazz) {
-        // TODO Auto-generated constructor stub
+    private Logger4J(org.apache.log4j.Logger logger) {
+        this.rootLogger = logger;
     }
 
     /**
@@ -18,14 +26,14 @@ public class Logger4J extends Logger {
      *      java.lang.Throwable)
      */
     public void debug(Object arg0, Throwable arg1) {
-        // TODO Auto-generated method stub
+        rootLogger.debug(arg0, arg1);
     }
 
     /**
      * @see pl.mn.communicator.logger.ILogger#debug(java.lang.Object)
      */
     public void debug(Object arg0) {
-        // TODO Auto-generated method stub
+        rootLogger.debug(arg0);
     }
 
     /**
@@ -33,14 +41,14 @@ public class Logger4J extends Logger {
      *      java.lang.Throwable)
      */
     public void error(Object arg0, Throwable arg1) {
-        // TODO Auto-generated method stub
+        rootLogger.error(arg0, arg1);
     }
 
     /**
      * @see pl.mn.communicator.logger.ILogger#error(java.lang.Object)
      */
     public void error(Object arg0) {
-        // TODO Auto-generated method stub
+        rootLogger.error(arg0);
     }
 
     /**
@@ -48,14 +56,14 @@ public class Logger4J extends Logger {
      *      java.lang.Throwable)
      */
     public void fatal(Object arg0, Throwable arg1) {
-        // TODO Auto-generated method stub
+        rootLogger.fatal(arg0, arg1);
     }
 
     /**
      * @see pl.mn.communicator.logger.ILogger#fatal(java.lang.Object)
      */
     public void fatal(Object arg0) {
-        // TODO Auto-generated method stub
+        rootLogger.fatal(arg0);
     }
 
     /**
@@ -63,14 +71,14 @@ public class Logger4J extends Logger {
      *      java.lang.Throwable)
      */
     public void info(Object arg0, Throwable arg1) {
-        // TODO Auto-generated method stub
+        rootLogger.info(arg0, arg1);
     }
 
     /**
      * @see pl.mn.communicator.logger.ILogger#info(java.lang.Object)
      */
     public void info(Object arg0) {
-        // TODO Auto-generated method stub
+        rootLogger.info(arg0);
     }
 
     /**
@@ -78,14 +86,14 @@ public class Logger4J extends Logger {
      *      java.lang.Throwable)
      */
     public void warn(Object arg0, Throwable arg1) {
-        // TODO Auto-generated method stub
+        rootLogger.warn(arg0, arg1);
     }
 
     /**
      * @see pl.mn.communicator.logger.ILogger#warn(java.lang.Object)
      */
     public void warn(Object arg0) {
-        // TODO Auto-generated method stub
+        rootLogger.warn(arg0);
     }
 
     /**
@@ -94,6 +102,13 @@ public class Logger4J extends Logger {
      * @return instancja loggera
      */
     public static synchronized Logger getLogger(Class clazz) {
-        return new Logger4J(clazz);
+        Logger4J l = (Logger4J) loggers.get(clazz);
+
+        if (l == null) {
+            l = new Logger4J(org.apache.log4j.Logger.getLogger(clazz));
+            loggers.put(clazz, l);
+        }
+
+        return l;
     }
 }
