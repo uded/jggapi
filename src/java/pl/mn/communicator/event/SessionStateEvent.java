@@ -25,7 +25,7 @@ import pl.mn.communicator.SessionState;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionStateEvent.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: SessionStateEvent.java,v 1.2 2004-12-18 14:27:48 mnaglik Exp $
  */
 public class SessionStateEvent extends EventObject {
 
@@ -48,4 +48,10 @@ public class SessionStateEvent extends EventObject {
 		return m_newState;
 	}
 	
+	/**
+	 * @see java.util.EventObject#toString()
+	 */
+	public String toString() {
+		return "[SessionStateEvent("+m_oldState+","+m_newState+")]";
+	}
 }
