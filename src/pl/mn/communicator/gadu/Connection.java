@@ -51,7 +51,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.19 $
+ * @version $Revision: 1.20 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -59,6 +59,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
     private IServer server;
     private ILocalUser localUser;
     private ConnectionThread connectionThread;
+    private Collection monitoredUsers;
     private boolean isConnected = false;
 
     /**
@@ -126,7 +127,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      */
     public void setMonitoredUserList(Collection userList)
         throws IOException {
-        // TODO Auto-generated method stub
+    	this.monitoredUsers = userList;
     }
 
     /**

@@ -38,7 +38,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  * @author mnaglik
  */
 public interface IConnection {
@@ -121,9 +121,10 @@ public interface IConnection {
     void changeStatus(IStatus status) throws IOException;
 
     /**
-     * Wy¶lij listê monitorowanych u¿ytkowników.<br>
+     * Ustaw listê monitorowanych u¿ytkowników.<br>
      * Lista zawiera u¿ytkowników dla których serwer
-     * przesy³a informacje o zmianie statusu
+     * przesy³a informacje o zmianie statusu. Wysy³ana jest zaraz
+     * po po³±czeniu z serwerem.
      * @param userList lista u¿ytkowników
      * @throws IOException b³±d wysy³ania listy u¿ytkowników
      */
