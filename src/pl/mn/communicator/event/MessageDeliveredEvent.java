@@ -20,14 +20,14 @@ package pl.mn.communicator.event;
 import java.util.EventObject;
 
 import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.gadu.GGUtils;
+import pl.mn.communicator.packet.GGUtils;
 
 /**
  * The event class that describes sent message ack.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageDeliveredEvent.java,v 1.2 2004-12-12 16:21:55 winnetou25 Exp $
+ * @version $Id: MessageDeliveredEvent.java,v 1.3 2004-12-14 19:29:58 winnetou25 Exp $
  */
 public class MessageDeliveredEvent extends EventObject {
 

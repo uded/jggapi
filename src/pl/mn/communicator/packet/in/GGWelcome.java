@@ -15,39 +15,38 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
-
-import java.util.Date;
+package pl.mn.communicator.packet.in;
 
 import pl.mn.communicator.packet.GGUtils;
 
 /**
- * Created on 2004-11-21
+ * The packet is retrieved from the Gadu-Gadu server just after we connect to it.
+ * The class parses package and gets seed from server.
  * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncommingMessage.java,v 1.3 2004-12-14 19:29:58 winnetou25 Exp $
+ * @version $Id: GGWelcome.java,v 1.1 2004-12-14 19:29:55 winnetou25 Exp $
  */
-public class IncommingMessage extends AbstractMessage {
+public class GGWelcome implements GGIncomingPackage {
+    
+	public static final int GG_PACKAGE_WELCOME = 0x1;
 
-	private Date m_messageDate;
-	private int m_messageID;
-	
+	private int m_seed = -1;
+
+    public GGWelcome(byte[] data) {
+    	if (data == null) throw new NullPointerException("data cannot be null");
+        m_seed = GGUtils.byteToInt(data);
+    }
+    
     /**
-	 * @param toUser
-	 * @param text
+	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
 	 */
-	public IncommingMessage(int uin, String text, int messageID, long messageDate, int protocolMessageClass) {
-		super(uin, text, GGUtils.getClientMessageClass(protocolMessageClass));
-		m_messageDate = new Date(messageDate);
-		m_messageID = messageID;
-	}
-	
-	public int getMessageID() {
-		return m_messageID;
+	public int getPacketType() {
+		return GG_PACKAGE_WELCOME;
 	}
 
-    public Date getMessageDate() {
-    	return m_messageDate;
+    public int getSeed() {
+        return m_seed;
     }
     
 }

@@ -15,39 +15,31 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.packet.handlers;
 
-import java.util.Date;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.packet.GGUtils;
+import pl.mn.communicator.packet.in.GGDisconnecting;
 
 /**
- * Created on 2004-11-21
+ * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncommingMessage.java,v 1.3 2004-12-14 19:29:58 winnetou25 Exp $
+ * @version $Id: GGDisconnectingPacketHandler.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
  */
-public class IncommingMessage extends AbstractMessage {
+public class GGDisconnectingPacketHandler implements PacketHandler {
 
-	private Date m_messageDate;
-	private int m_messageID;
+	private final static Log logger = LogFactory.getLog(GGDisconnectingPacketHandler.class);
 	
-    /**
-	 * @param toUser
-	 * @param text
+	/**
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
-	public IncommingMessage(int uin, String text, int messageID, long messageDate, int protocolMessageClass) {
-		super(uin, text, GGUtils.getClientMessageClass(protocolMessageClass));
-		m_messageDate = new Date(messageDate);
-		m_messageID = messageID;
-	}
-	
-	public int getMessageID() {
-		return m_messageID;
+	public void handle(Context context) {
+		logger.debug("GGDisconnecting packet received.");
+		GGDisconnecting disconnecting = GGDisconnecting.getInstance();
+		context.getSessionAccessor().notifyGGPacketReceived(disconnecting);
+		context.getSessionAccessor().notifyConnectionClosed();
 	}
 
-    public Date getMessageDate() {
-    	return m_messageDate;
-    }
-    
 }

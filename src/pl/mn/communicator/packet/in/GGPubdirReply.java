@@ -15,39 +15,33 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.packet.in;
 
-import java.util.Date;
-
-import pl.mn.communicator.packet.GGUtils;
 
 /**
- * Created on 2004-11-21
  * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncommingMessage.java,v 1.3 2004-12-14 19:29:58 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.1 2004-12-14 19:29:55 winnetou25 Exp $
  */
-public class IncommingMessage extends AbstractMessage {
-
-	private Date m_messageDate;
-	private int m_messageID;
+public class GGPubdirReply implements GGIncomingPackage {
 	
-    /**
-	 * @param toUser
-	 * @param text
+	public static final int GG_PUBDIR50_REPLY = 0x000E;
+
+	/**
+	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
 	 */
-	public IncommingMessage(int uin, String text, int messageID, long messageDate, int protocolMessageClass) {
-		super(uin, text, GGUtils.getClientMessageClass(protocolMessageClass));
-		m_messageDate = new Date(messageDate);
-		m_messageID = messageID;
+	public int getPacketType() {
+		return GG_PUBDIR50_REPLY;
 	}
 	
-	public int getMessageID() {
-		return m_messageID;
-	}
-
-    public Date getMessageDate() {
-    	return m_messageDate;
-    }
-    
+	//TODO implement
+//	#define GG_PUBDIR50_REPLY 0x000e
+	
+//struct gg_pubdir50_reply {
+//	char type;
+//	int seq;
+//	char reply[];
+//};
+	
 }

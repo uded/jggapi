@@ -15,39 +15,36 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.packet.in;
 
-import java.util.Date;
-
-import pl.mn.communicator.packet.GGUtils;
 
 /**
- * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncommingMessage.java,v 1.3 2004-12-14 19:29:58 winnetou25 Exp $
+ * @version $Id: GGDisconnecting.java,v 1.1 2004-12-14 19:29:55 winnetou25 Exp $
  */
-public class IncommingMessage extends AbstractMessage {
+public class GGDisconnecting implements GGIncomingPackage {
 
-	private Date m_messageDate;
-	private int m_messageID;
+	public static final int GG_DISCONNECTING = 0x000B;
+
+	private static GGDisconnecting m_instance = null;
 	
-    /**
-	 * @param toUser
-	 * @param text
+	private GGDisconnecting() {
+		//private constructor
+	}
+	
+	/**
+	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
 	 */
-	public IncommingMessage(int uin, String text, int messageID, long messageDate, int protocolMessageClass) {
-		super(uin, text, GGUtils.getClientMessageClass(protocolMessageClass));
-		m_messageDate = new Date(messageDate);
-		m_messageID = messageID;
+	public int getPacketType() {
+		return GG_DISCONNECTING;
 	}
 	
-	public int getMessageID() {
-		return m_messageID;
+	public static GGDisconnecting getInstance() {
+		if (m_instance == null) {
+			m_instance = new GGDisconnecting();
+		}
+		return m_instance;
 	}
-
-    public Date getMessageDate() {
-    	return m_messageDate;
-    }
-    
+	
 }

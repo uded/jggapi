@@ -15,42 +15,35 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
-
-import junit.framework.TestCase;
+package pl.mn.communicator.packet.handlers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.packet.GGUtils;
+import pl.mn.communicator.packet.in.GGPong;
 
 /**
- * @author mnaglik
+ * Created on 2004-11-28
+ * 
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGPongPacketHandler.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
  */
-public class GGConversionTest extends TestCase {
+public class GGPongPacketHandler implements PacketHandler {
 
-	private static Log logger = LogFactory.getLog(GGConversionTest.class);
+	private final static Log logger = LogFactory.getLog(GGPongPacketHandler.class);
 
-    /*
-     * Class to test for int byteToInt(byte[])
-     */
-    public void testByteToIntbyteArray() {
-        byte[] bajty = new byte[] {41, -54, 26, 0};
-        int out = GGUtils.byteToInt(bajty);
-        logger.info("Bajty wejsciowe: " + GGUtils.bytesToString(bajty));
-        logger.info("Wyjscie: " + out);
-        assertEquals(out, 1755689);
-    }
+	/**
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
+	 */
+	public void handle(Context context) {
+		logger.debug("GGPoing packet received.");
+		logger.debug("PacketHeader: "+context.getHeader());
+		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
 
-    /*
-     * Class to test for int byteToInt(byte[], int)
-     */
-    public void testByteToIntbyteArrayint() {
-    }
+		GGPong pong = GGPong.getInstance();
+		context.getSessionAccessor().notifyGGPacketReceived(pong);
+		context.getSessionAccessor().notifyPongReceived();
+	}
 
-    public void testIntToByte() {
-    }
-
-    public void testUnsignedIntToLong() {
-    }
 }

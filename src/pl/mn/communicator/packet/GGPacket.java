@@ -15,39 +15,19 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
-
-import java.util.Date;
-
-import pl.mn.communicator.packet.GGUtils;
+package pl.mn.communicator.packet;
 
 /**
- * Created on 2004-11-21
+ * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncommingMessage.java,v 1.3 2004-12-14 19:29:58 winnetou25 Exp $
+ * @version $Id: GGPacket.java,v 1.1 2004-12-14 19:29:57 winnetou25 Exp $
  */
-public class IncommingMessage extends AbstractMessage {
+public interface GGPacket {
 
-	private Date m_messageDate;
-	private int m_messageID;
-	
-    /**
-	 * @param toUser
-	 * @param text
+	/**
+	 * @return constant specyfing Gadu-Gadu packet type.
 	 */
-	public IncommingMessage(int uin, String text, int messageID, long messageDate, int protocolMessageClass) {
-		super(uin, text, GGUtils.getClientMessageClass(protocolMessageClass));
-		m_messageDate = new Date(messageDate);
-		m_messageID = messageID;
-	}
+	int getPacketType();
 	
-	public int getMessageID() {
-		return m_messageID;
-	}
-
-    public Date getMessageDate() {
-    	return m_messageDate;
-    }
-    
 }

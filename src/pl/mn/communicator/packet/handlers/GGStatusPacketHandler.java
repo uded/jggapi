@@ -15,39 +15,29 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.packet.handlers;
 
-import java.util.Date;
-
-import pl.mn.communicator.packet.GGUtils;
+import pl.mn.communicator.IStatus60;
+import pl.mn.communicator.IUser;
+import pl.mn.communicator.packet.in.GGStatus;
 
 /**
- * Created on 2004-11-21
+ * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncommingMessage.java,v 1.3 2004-12-14 19:29:58 winnetou25 Exp $
+ * @version $Id: GGStatusPacketHandler.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
  */
-public class IncommingMessage extends AbstractMessage {
+public class GGStatusPacketHandler implements PacketHandler {
 
-	private Date m_messageDate;
-	private int m_messageID;
-	
-    /**
-	 * @param toUser
-	 * @param text
+	/**
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
-	public IncommingMessage(int uin, String text, int messageID, long messageDate, int protocolMessageClass) {
-		super(uin, text, GGUtils.getClientMessageClass(protocolMessageClass));
-		m_messageDate = new Date(messageDate);
-		m_messageID = messageID;
-	}
-	
-	public int getMessageID() {
-		return m_messageID;
+	public void handle(Context context) {
+		GGStatus status = new GGStatus(context.getPackageContent());
+		context.getSessionAccessor().notifyGGPacketReceived(status);
+		IUser user = status.getUser();
+		IStatus60 statusBiz = status.getStatus();
+		context.getSessionAccessor().notifyUserChangedStatus(user, statusBiz);
 	}
 
-    public Date getMessageDate() {
-    	return m_messageDate;
-    }
-    
 }

@@ -15,21 +15,16 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.packet.in;
 
-import pl.mn.communicator.packet.handlers.Session;
+import pl.mn.communicator.packet.GGPacket;
 
 /**
- * Created on 2004-12-12
+ * Incomming Gadu-Gadu packet.
  * 
- * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionFactory.java,v 1.4 2004-12-14 19:29:58 winnetou25 Exp $
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGIncomingPackage.java,v 1.1 2004-12-14 19:29:55 winnetou25 Exp $ 
  */
-public class SessionFactory {
-
-	public static ISession createSession(LoginContext loginContext) throws GGException {
-		IServer server = Server.getDefaultServer(loginContext);
-		return new Session(server, loginContext);
-	}
+public interface GGIncomingPackage extends GGPacket {
 	
 }

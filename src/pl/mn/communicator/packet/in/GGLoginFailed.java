@@ -15,37 +15,37 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.event;
+package pl.mn.communicator.packet.in;
 
-import java.util.EventListener;
-
-import pl.mn.communicator.packet.in.GGIncomingPackage;
-import pl.mn.communicator.packet.out.GGOutgoingPackage;
 
 /**
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPacketListener.java,v 1.3 2004-12-14 19:29:58 winnetou25 Exp $
+ * @version $Id: GGLoginFailed.java,v 1.1 2004-12-14 19:29:55 winnetou25 Exp $
  */
-public interface GGPacketListener extends EventListener {
+public class GGLoginFailed implements GGIncomingPackage {
 
-	void sentPacket(GGOutgoingPackage outgoingPacket);
+	public final static int GG_LOGIN_FAILED = 9;
+
+	private static GGLoginFailed m_instance = null;
 	
-	void receivedPacket(GGIncomingPackage incomingPacket);
-	
-	public static class Stub implements GGPacketListener {
-
-		/**
-		 * @see pl.mn.communicator.event.GGPacketListener#sentPacket(pl.mn.communicator.gadu.GGOutgoingPackage)
-		 */
-		public void sentPacket(GGOutgoingPackage outgoingPacket) { }
-
-		/**
-		 * @see pl.mn.communicator.event.GGPacketListener#receivedPacket(pl.mn.communicator.gadu.GGIncomingPackage)
-		 */
-		public void receivedPacket(GGIncomingPackage incomingPacket) { }
-		
+	private GGLoginFailed() {
+		//prevent instant
 	}
 	
+	/**
+	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_LOGIN_FAILED;
+	}
+	
+	public static GGLoginFailed getInstance() {
+		if (m_instance == null) {
+			m_instance = new GGLoginFailed();
+		}
+		return m_instance;
+	}
+
 }
