@@ -28,21 +28,21 @@ import pl.mn.communicator.LocalUser;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReply.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGUserListReply.java,v 1.2 2004-12-19 11:49:06 winnetou25 Exp $
  */
 public class GGUserListReply implements GGIncomingPackage {
 
 	public final static int GG_USERLIST_REPLY  = 0x0010;
 	
-	private final static int GG_USERLIST_PUT_REPLY  = 0x00 ;        /* początek eksportu listy */
+	private final static int GG_USERLIST_PUT_REPLY  = 0x00;        /* początek eksportu listy */
 	private final static int GG_USERLIST_PUT_MORE_REPLY  = 0x02;    /* kontynuacja */
 
 	private final static int GG_USERLIST_GET_MORE_REPLY  = 0x04;    /* początek importu listy */
 	private final static int GG_USERLIST_GET_REPLY = 0x06; 			/* ostatnia część importu */ 
 	
-	private byte m_type;
+	private byte m_type = -1;
 	
-	private Collection m_users;
+	private Collection m_users = null;
 	
 	public GGUserListReply(byte[] data) {
 		m_type = (byte) data[0];
@@ -91,7 +91,7 @@ public class GGUserListReply implements GGIncomingPackage {
 
 		LocalUser localUser = new LocalUser();
 		localUser.setName(firstName);
-		localUser.setSurname(surName);
+		localUser.setLastName(surName);
 		localUser.setNickName(nickname);
 		localUser.setDisplayName(displayName);
 		localUser.setTelephone(telephone);

@@ -18,12 +18,15 @@
 package pl.mn.communicator;
 
 /**
+ * This class represents personal user's information. It is stored remotely
+ * in Gadu-Gadu public directory service.
+ * 
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirInfo.java,v 1.1 2004-12-17 20:20:25 winnetou25 Exp $
+ * @version $Id: PersonalInfo.java,v 1.1 2004-12-19 11:49:12 winnetou25 Exp $
  */
-public class PublicDirInfo {
+public class PersonalInfo {
 
 	private String m_firstName = null;
 	private String m_lastName = null;
@@ -34,7 +37,7 @@ public class PublicDirInfo {
 	private String m_familyName = null;
 	private String m_familyCity = null;
 
-	public PublicDirInfo() {
+	public PersonalInfo() {
 		
 	}
 	

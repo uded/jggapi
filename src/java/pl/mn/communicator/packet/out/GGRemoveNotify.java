@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.packet.out;
 
-import pl.mn.communicator.GGUserMode;
+import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGNotifiable;
 import pl.mn.communicator.packet.GGUtils;
 
@@ -26,7 +26,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGRemoveNotify.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGRemoveNotify.java,v 1.2 2004-12-19 11:49:12 winnetou25 Exp $
  */
 public class GGRemoveNotify implements GGOutgoingPackage, GGNotifiable {
 	
@@ -35,10 +35,10 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGNotifiable {
     /** Gadu-Gadu uin */
     private int m_uin = -1;
 
-    private GGUserMode m_userMode = null;
+    private User.UserMode m_userMode = null;
     private byte m_userType = GG_USER_BUDDY;
     
-    public GGRemoveNotify(int uin, GGUserMode userMode) {
+    public GGRemoveNotify(int uin, User.UserMode userMode) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
     	if (userMode == null) throw new NullPointerException("userMode cannot be null");
     	m_uin = uin;
@@ -49,7 +49,7 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGNotifiable {
     	return m_uin;
     }
     
-    public GGUserMode getUserMode() {
+    public User.UserMode getUserMode() {
     	return m_userMode;
     }
     

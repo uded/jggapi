@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.packet.out;
 
-import pl.mn.communicator.GGUserMode;
+import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGNotifiable;
 import pl.mn.communicator.packet.GGUtils;
 
@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGAddNotify.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGAddNotify.java,v 1.2 2004-12-19 11:49:13 winnetou25 Exp $
  */
 public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
 
@@ -36,11 +36,11 @@ public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
     /** Gadu-Gadu uin number */
     private int m_uin = -1;
 
-    private GGUserMode m_userMode = GGUserMode.BUDDY;
+    private User.UserMode m_userMode = User.UserMode.BUDDY;
     
     private byte m_userType = GG_USER_BUDDY;
 
-    public GGAddNotify(int uin, GGUserMode userMode) {
+    public GGAddNotify(int uin, User.UserMode userMode) {
     	if (userMode == null) throw new NullPointerException("userMode cannot be null");
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
         m_uin = uin;
@@ -52,7 +52,7 @@ public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
     	return m_uin;
     }
     
-    public GGUserMode getUserMode() {
+    public User.UserMode getUserMode() {
     	return m_userMode;
     }
 

@@ -20,10 +20,9 @@ package pl.mn.communicator.packet.in;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.GGUser;
-import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGStatusEnabled;
 import pl.mn.communicator.packet.GGUtils;
 
@@ -31,7 +30,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.2 2004-12-19 11:49:06 winnetou25 Exp $
  */
 public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
 
@@ -62,8 +61,8 @@ public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
     private void handleUser(byte[] data) {
     	int uin = GGUtils.byteToInt(data);
         int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
-        GGUserMode userMode = GGUtils.getUserMode(protocolStatus);
-        m_user =  new GGUser(uin, userMode);
+        User.UserMode userMode = GGUtils.getUserMode(protocolStatus);
+        m_user =  new User(uin, userMode);
     }
     
     private void handleStatus(byte[] data) {

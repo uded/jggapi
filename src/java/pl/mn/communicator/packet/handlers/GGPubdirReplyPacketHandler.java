@@ -20,7 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGPubdirReply;
@@ -29,7 +29,7 @@ import pl.mn.communicator.packet.in.GGPubdirReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReplyPacketHandler.java,v 1.8 2004-12-18 21:59:47 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.9 2004-12-19 11:49:13 winnetou25 Exp $
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 
@@ -49,7 +49,7 @@ public class GGPubdirReplyPacketHandler implements PacketHandler {
 		int querySeq = pubdirReply.getQuerySeq();
 		
 		if (pubdirReply.isPubdirReadReply()) {
-			PublicDirInfo publicDirInfo = (PublicDirInfo) pubdirReply.getPubdirReadReply();
+			PersonalInfo publicDirInfo = (PersonalInfo) pubdirReply.getPubdirReadReply();
 			context.getSessionAccessor().notifyPubdirRead(querySeq, publicDirInfo);
 		} else if (pubdirReply.isPubdirWriteReply()) {
 			context.getSessionAccessor().notifyPubdirUpdated(querySeq);

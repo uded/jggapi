@@ -24,7 +24,7 @@ import java.util.Iterator;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IPublicDirectoryService;
-import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionState;
@@ -35,7 +35,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.11 2004-12-18 21:59:47 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.12 2004-12-19 11:49:13 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -82,7 +82,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	/**
 	 * @see pl.mn.communicator.IPublicDirectoryService#write()
 	 */
-	public void writeToPublicDirectory(PublicDirInfo publicDirInfo) throws GGException {
+	public void writeToPublicDirectory(PersonalInfo publicDirInfo) throws GGException {
 		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
 		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
 			throw new GGSessionException(m_session.getSessionState());
@@ -108,7 +108,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		m_directoryListeners.remove(publicDirListener);
 	}
 	
-	protected void notifyPubdirRead(int queryID, PublicDirInfo publicDirInfo) {
+	protected void notifyPubdirRead(int queryID, PersonalInfo publicDirInfo) {
 		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();

@@ -3,8 +3,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGUser;
-import pl.mn.communicator.GGUserMode;
+import pl.mn.communicator.User;
+import pl.mn.communicator.UserMode;
 import pl.mn.communicator.Gender;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
@@ -13,7 +13,7 @@ import pl.mn.communicator.IncommingMessage;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
-import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionFactory;
@@ -44,7 +44,7 @@ public class Main2 {
 
 		ArrayList users = new ArrayList();
 		
-		GGUser user2 = new GGUser(1136132, GGUserMode.BUDDY);
+		User user2 = new User(1136132, UserMode.BUDDY);
 
 		users.add(user2);
 		
@@ -136,7 +136,7 @@ public class Main2 {
 				
 			}
 
-			public void onPublicDirectoryRead(int queryID, PublicDirInfo pubDirReply) {
+			public void onPublicDirectoryRead(int queryID, PersonalInfo pubDirReply) {
 				System.out.println("Got pubDir read reply");
 				System.out.println("FirstName: "+pubDirReply.getFirstName());
 				System.out.println("Surname: "+pubDirReply.getLastName());

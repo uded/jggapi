@@ -41,7 +41,7 @@ import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncommingMessage;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.SessionStateListener;
@@ -52,7 +52,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.11 2004-12-18 21:59:47 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.12 2004-12-19 11:49:13 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -272,7 +272,7 @@ public class Session implements ISession {
 			m_contactListService.notifyContactListReceived(contacts);
 		}
 		
-		public void notifyPubdirRead(int queryID, PublicDirInfo publicDirInfo) {
+		public void notifyPubdirRead(int queryID, PersonalInfo publicDirInfo) {
 			m_publicDirectoryService.notifyPubdirRead(queryID, publicDirInfo);
 		}
 

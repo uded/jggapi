@@ -22,13 +22,13 @@ import pl.mn.communicator.event.SessionStateListener;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISession.java,v 1.3 2004-12-18 15:14:09 winnetou25 Exp $
+ * @version $Id: ISession.java,v 1.4 2004-12-19 11:49:12 winnetou25 Exp $
  */
 public interface ISession {
 
 	/**
-	 * Returns object representing Gadu-Gadu server that is currently associated
-	 * with this session.
+	 * Returns object representing Gadu-Gadu server that 
+	 * is currently associated with this session.
 	 * 
 	 * @return <code>IServer</code> associated with the session instance.
 	 */

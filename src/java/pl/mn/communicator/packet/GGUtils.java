@@ -19,36 +19,36 @@ package pl.mn.communicator.packet;
 
 import java.util.Date;
 
-import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.MessageClass;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.Status;
 import pl.mn.communicator.StatusType;
+import pl.mn.communicator.User;
 import pl.mn.communicator.packet.in.GGSendMsgAck;
 import pl.mn.communicator.packet.out.GGNotify;
 
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.2 2004-12-18 16:07:24 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.3 2004-12-19 11:49:14 winnetou25 Exp $
  */
 public class GGUtils {
 
-	public static GGUserMode getUserMode(int protocolStatus) {
+	public static User.UserMode getUserMode(int protocolStatus) {
 		if ((protocolStatus & GGStatusEnabled.GG_STATUS_FRIENDS_MASK) == GGStatusEnabled.GG_STATUS_FRIENDS_MASK) {
-			return GGUserMode.FRIEND;
+			return User.UserMode.FRIEND;
 		}
 		if ((protocolStatus & GGStatusEnabled.GG_STATUS_BLOCKED) == GGStatusEnabled.GG_STATUS_BLOCKED) {
-			return GGUserMode.BLOCKED;
+			return User.UserMode.BLOCKED;
 		}
-		return GGUserMode.FRIEND;
+		return User.UserMode.FRIEND;
 	}
 	
-	public static byte getProtocolUserMode(GGUserMode userMode) {
-		if (userMode == GGUserMode.BUDDY) return GGNotify.GG_USER_BUDDY;
-		if (userMode == GGUserMode.BLOCKED) return GGNotify.GG_USER_BLOCKED;
-		if (userMode == GGUserMode.FRIEND) return GGNotify.GG_USER_FRIEND;
+	public static byte getProtocolUserMode(User.UserMode userMode) {
+		if (userMode == User.UserMode.BUDDY) return GGNotify.GG_USER_BUDDY;
+		if (userMode == User.UserMode.BLOCKED) return GGNotify.GG_USER_BLOCKED;
+		if (userMode == User.UserMode.FRIEND) return GGNotify.GG_USER_FRIEND;
 		throw new RuntimeException("Unable to convert userMode: "+userMode);
 	}
 	

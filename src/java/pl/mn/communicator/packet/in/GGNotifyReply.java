@@ -23,9 +23,8 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.GGUser;
-import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.Status;
+import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.out.GGNewStatus;
 
@@ -33,7 +32,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGNotifyReply.java,v 1.2 2004-12-19 11:49:06 winnetou25 Exp $
  */
 public class GGNotifyReply implements GGIncomingPackage {
 
@@ -116,8 +115,8 @@ public class GGNotifyReply implements GGIncomingPackage {
             statusBiz.setRemotePort(remotePort);
             statusBiz.setGGVersion((byte)version);
             
-            GGUserMode userMode = GGUtils.getUserMode(status);
-            GGUser user = new GGUser(uin, userMode);
+            User.UserMode userMode = GGUtils.getUserMode(status);
+            User user = new User(uin, userMode);
             m_statuses.put(user, statusBiz);
         }
     }

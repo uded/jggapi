@@ -21,9 +21,9 @@ package pl.mn.communicator;
  * Created on 2004-12-17
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PubDirSearch.java,v 1.2 2004-12-18 14:23:36 winnetou25 Exp $
+ * @version $Id: PublicDirSearch.java,v 1.1 2004-12-19 11:49:12 winnetou25 Exp $
  */
-public abstract class PubDirSearch {
+public abstract class PublicDirSearch {
 
 	protected Integer m_uin = null;
 	protected String m_firstName = null;

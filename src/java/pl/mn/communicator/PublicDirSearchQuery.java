@@ -21,9 +21,9 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirSearchQuery.java,v 1.2 2004-12-18 14:23:36 winnetou25 Exp $
+ * @version $Id: PublicDirSearchQuery.java,v 1.3 2004-12-19 11:49:12 winnetou25 Exp $
  */
-public class PublicDirSearchQuery extends PubDirSearch {
+public class PublicDirSearchQuery extends PublicDirSearch {
 
 	private String m_lastName = null;
 	private Gender m_gender = null;

@@ -21,7 +21,7 @@ import java.util.StringTokenizer;
 
 import pl.mn.communicator.Gender;
 import pl.mn.communicator.IStatus;
-import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.packet.GGPubdirEnabled;
 import pl.mn.communicator.packet.GGUtils;
@@ -30,7 +30,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.10 2004-12-18 21:59:56 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.11 2004-12-19 11:49:06 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
@@ -39,7 +39,7 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	private byte m_replyType = -1;
 	private int m_querySeq = -1;
 	
-	private PublicDirInfo m_pubDirInfo = null;
+	private PersonalInfo m_pubDirInfo = null;
 	private PublicDirSearchReply m_publicDirSearchReply = null;
 	
 	public GGPubdirReply(byte[] data) {
@@ -56,7 +56,7 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 		return m_querySeq;
 	}
 	
-	public PublicDirInfo getPubdirReadReply() {
+	public PersonalInfo getPubdirReadReply() {
 		return m_pubDirInfo; 
 	}
 	
@@ -99,7 +99,7 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	private void handlePubdirReadReply(byte[] data) {
 		String string = byteToString(data, 5);
 		StringTokenizer tokenizer = new StringTokenizer(string, "\0");
-		m_pubDirInfo = new PublicDirInfo();
+		m_pubDirInfo = new PersonalInfo();
 		while (tokenizer.hasMoreTokens()) {
 			String token = (String) tokenizer.nextToken();
 			if (token.equals(FIRST_NAME)) {

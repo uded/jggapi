@@ -21,12 +21,12 @@ package pl.mn.communicator;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IUser.java,v 1.2 2004-12-18 15:14:28 winnetou25 Exp $
+ * @version $Id: IUser.java,v 1.3 2004-12-19 11:49:12 winnetou25 Exp $
  */
 public interface IUser {
-
-    int getUin();
-
-    GGUserMode getUserMode();
-    
+	
+	int getUin();
+	
+	User.UserMode getUserMode();
+	
 }

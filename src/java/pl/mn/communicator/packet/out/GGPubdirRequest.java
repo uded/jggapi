@@ -20,7 +20,7 @@ package pl.mn.communicator.packet.out;
 import java.util.Random;
 
 import pl.mn.communicator.Gender;
-import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.packet.GGPubdirEnabled;
 
@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.GGPubdirEnabled;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.7 2004-12-18 16:47:21 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.8 2004-12-19 11:49:13 winnetou25 Exp $
  */
 public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
 
@@ -137,7 +137,7 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
     	return pubdirRequest;
     }
     
-    public static GGPubdirRequest createWritePubdirRequest(PublicDirInfo publicDirInfo) {
+    public static GGPubdirRequest createWritePubdirRequest(PersonalInfo publicDirInfo) {
     	if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
     	GGPubdirRequest pubdirRequest = new GGPubdirRequest();
     	pubdirRequest.m_requestType = GG_PUBDIR50_WRITE;
@@ -145,7 +145,7 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
     	return pubdirRequest;
     }
     
-    private static String prepareWriteRequest(PublicDirInfo publicDirInfo) {
+    private static String prepareWriteRequest(PersonalInfo publicDirInfo) {
     	StringBuffer buffer = new StringBuffer();
     	if (publicDirInfo.getFirstName() != null) {
     		String firstNameEntry = getEntry(FIRST_NAME, publicDirInfo.getFirstName());

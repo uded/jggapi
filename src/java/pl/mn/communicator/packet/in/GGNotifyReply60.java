@@ -23,10 +23,9 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.GGUser;
-import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.Status;
+import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.out.GGNewStatus;
 
@@ -34,7 +33,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.2 2004-12-19 11:49:06 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -77,7 +76,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
 
         	int uin = GGUtils.byteToInt(data, offset);
         	int status = GGUtils.unsignedByteToInt(data[offset+4]);
-        	GGUserMode userMode = GGUtils.getUserMode(status);
+        	User.UserMode userMode = GGUtils.getUserMode(status);
 
         	//TODO remoteIP is wrongly converted
         	byte[] remoteIP = new byte[4];
@@ -119,7 +118,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
             } else {
             	 offset += 14; // packet without description is only 14 bytes long            	
             }
-        	IUser user = new GGUser(uin, userMode);
+        	IUser user = new User(uin, userMode);
             Status status60 = GGUtils.getClientStatus(status, description, timeInMillis);
 
             if (remotePort == 0) {

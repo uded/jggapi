@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-11-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LocalUser.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: LocalUser.java,v 1.2 2004-12-19 11:49:12 winnetou25 Exp $
  */
 public class LocalUser {
 
@@ -29,7 +29,7 @@ public class LocalUser {
 	
 	private int m_uin = -1;
 	private String m_name = null;
-	private String m_surname = null;
+	private String m_lastName = null;
 	private String m_nickName = null;
 	private String m_displayName = null;
 	private String m_telephone = null;
@@ -59,12 +59,12 @@ public class LocalUser {
 		return m_name;
 	}
 	
-	public void setSurname(String surname) {
-		m_surname = surname;
+	public void setLastName(String surname) {
+		m_lastName = surname;
 	}
 	
-	public String getSurname() {
-		return m_surname;
+	public String getLastName() {
+		return m_lastName;
 	}
 
 	public void setNickName(String nickName) {

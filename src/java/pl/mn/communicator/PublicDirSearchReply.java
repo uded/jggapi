@@ -25,7 +25,7 @@ import java.util.Iterator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirSearchReply.java,v 1.1 2004-12-18 00:08:43 winnetou25 Exp $
+ * @version $Id: PublicDirSearchReply.java,v 1.2 2004-12-19 11:49:12 winnetou25 Exp $
  */
 public class PublicDirSearchReply {
 
@@ -51,7 +51,7 @@ public class PublicDirSearchReply {
 		return m_nextStart;
 	}
 
-	public static class Entry extends PubDirSearch {
+	public static class Entry extends PublicDirSearch {
 
 		private IStatus m_status = null;
 
