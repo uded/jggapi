@@ -15,47 +15,34 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.in;
+
+import pl.mn.communicator.gadu.GGIncomingPackage;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.4 2004-12-11 17:22:49 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
-public class GGPubdirRequest implements GGOutgoingPackage {
-
-	public static final int GG_PUBDIR50_REQUEST = 0x0014;
+public class GGPubdirReply implements GGIncomingPackage {
 	
-//#define GG_PUBDIR50_REQUEST 0x0014
-//	
-//struct gg_pubdir50 {
-//	char type;
-//	int seq;
-//	char request[];
-//};
+	public static final int GG_PUBDIR50_REPLY = 0x000E;
 
 	/**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
-     */
-    public int getHeader() {
-    	return GG_PUBDIR50_REQUEST;
-    }
-
-    /**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
-     */
-    public int getLength() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    /**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
-     */
-    public byte[] getContents() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-    
+	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_PUBDIR50_REPLY;
+	}
+	
+	//TODO implement
+//	#define GG_PUBDIR50_REPLY 0x000e
+	
+//struct gg_pubdir50_reply {
+//	char type;
+//	int seq;
+//	char reply[];
+//};
+	
 }

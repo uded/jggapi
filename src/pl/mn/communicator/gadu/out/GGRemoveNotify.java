@@ -15,42 +15,48 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.out;
+
+import pl.mn.communicator.GGUserMode;
+import pl.mn.communicator.gadu.GGNotifiable;
+import pl.mn.communicator.gadu.GGOutgoingPackage;
+import pl.mn.communicator.gadu.GGUtils;
 
 /**
  * Packet that deletes certain user from the list of monitored users.<BR>
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGRemoveNotify.java,v 1.11 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGRemoveNotify.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
-public class GGRemoveNotify implements GGOutgoingPackage {
+public class GGRemoveNotify implements GGOutgoingPackage, GGNotifiable {
 	
 	public final static int GG_REMOVE_NOTIFY = 0x000E;
 	
-//		#define GG_REMOVE_NOTIFY 0x000e
-//		
-//		struct gg_remove_notify {
-//			int uin;	/* numerek */
-//			char type;	/* rodzaj u�ytkownika */
-//		};
-	
-    /** Numer u�ytkownika */
-    private int m_uin;
+    /** Gadu-Gadu uin */
+    private int m_uin = -1;
 
+    private byte m_userType = GG_USER_BUDDY;
+    
     /**
      * Tw�rz pakiet do usuni�cia u�ytkownika z listy monitorowanych
      * @param userNo numer u�ytkownika do usuni�cia
      */
-    public GGRemoveNotify(int uin) {
+    public GGRemoveNotify(int uin, GGUserMode userMode) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
-        m_uin = uin;
+    	if (userMode == null) throw new NullPointerException("userMode cannot be null");
+    	m_uin = uin;
+    	m_userType = GGUtils.getProtocolUserMode(userMode);
     }
 
+    public int getUin(){
+    	return m_uin;
+    }
+    
     /**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getPacketType()
      */
-    public int getHeader() {
+    public int getPacketType() {
         return GG_REMOVE_NOTIFY;
     }
 
@@ -69,7 +75,8 @@ public class GGRemoveNotify implements GGOutgoingPackage {
 
         byte[] uin = GGUtils.intToByte(m_uin);
         System.arraycopy(uin, 0, dane, 0, uin.length);
-        dane[4] = GGNotify.GG_USER_NORMAL;
+
+        dane[4] = m_userType;
 
         return dane;
     }

@@ -19,66 +19,86 @@ package pl.mn.communicator.gadu;
 
 import java.util.Date;
 
+import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.IStatus;
+import pl.mn.communicator.Status60;
 import pl.mn.communicator.MessageClass;
 import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.Status;
-import pl.mn.communicator.StatusConst;
+import pl.mn.communicator.StatusType;
+import pl.mn.communicator.gadu.in.GGSendMsgAck;
+import pl.mn.communicator.gadu.out.GGNotify;
 
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.3 2004-12-12 01:22:30 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.4 2004-12-12 16:21:54 winnetou25 Exp $
  */
 public class GGUtils {
 
-	public static IStatus getClientStatus(int status, String description, long returnTimeInMillis) {
-		IStatus statusBiz = null;
+	public static GGUserMode getUserMode(int protocolStatus) {
+		if ((protocolStatus & GGStatusEnabled.GG_STATUS_FRIENDS_MASK) == GGStatusEnabled.GG_STATUS_FRIENDS_MASK) {
+			return GGUserMode.FRIEND;
+		}
+		if ((protocolStatus & GGStatusEnabled.GG_STATUS_BLOCKED) == GGStatusEnabled.GG_STATUS_BLOCKED) {
+			return GGUserMode.BLOCKED;
+		}
+		return GGUserMode.FRIEND;
+	}
+	
+	public static byte getProtocolUserMode(GGUserMode userMode) {
+		if (userMode == GGUserMode.BUDDY) return GGNotify.GG_USER_BUDDY;
+		if (userMode == GGUserMode.BLOCKED) return GGNotify.GG_USER_BLOCKED;
+		if (userMode == GGUserMode.FRIEND) return GGNotify.GG_USER_FRIEND;
+		throw new RuntimeException("Unable to conver userMode: "+userMode);
+	}
+	
+	public static Status60 getClientStatus(int status, String description, long returnTimeInMillis) {
+		Status60 localStatus = null;
 		
 		switch (status) {
 		case GGStatusEnabled.GG_STATUS_AVAIL: 
-			statusBiz = new Status(StatusConst.ONLINE);
+			localStatus = new Status60(StatusType.ONLINE);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_AVAIL_DESCR:
-			statusBiz = new Status(StatusConst.ONLINE_WITH_DESCRIPTION);
-			statusBiz.setDescription(description);
+			localStatus = new Status60(StatusType.ONLINE_WITH_DESCRIPTION);
+		localStatus.setDescription(description);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_BUSY:
-			statusBiz = new Status(StatusConst.BUSY);
+			localStatus = new Status60(StatusType.BUSY);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_BUSY_DESCR:
-			statusBiz = new Status(StatusConst.BUSY_WITH_DESCRIPTION);
-			statusBiz.setDescription(description);
+			localStatus = new Status60(StatusType.BUSY_WITH_DESCRIPTION);
+			localStatus.setDescription(description);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_INVISIBLE:
-			statusBiz = new Status(StatusConst.INVISIBLE);
+			localStatus = new Status60(StatusType.INVISIBLE);
 			break;
 
 		case GGStatusEnabled.GG_STATUS_INVISIBLE_DESCR:
-			statusBiz = new Status(StatusConst.INVISIBLE_WITH_DESCRIPTION);
-			statusBiz.setDescription(description);
+			localStatus = new Status60(StatusType.INVISIBLE_WITH_DESCRIPTION);
+		localStatus.setDescription(description);
 			break;
 		
 		case GGStatusEnabled.GG_STATUS_NOT_AVAIL:
-			statusBiz = new Status(StatusConst.OFFLINE);
+			localStatus = new Status60(StatusType.OFFLINE);
 			break;
 
 		case GGStatusEnabled.GG_STATUS_NOT_AVAIL_DESCR:
-			statusBiz = new Status(StatusConst.OFFLINE);
-			statusBiz.setDescription(description);
+			localStatus = new Status60(StatusType.OFFLINE);
+			localStatus.setDescription(description);
 			break;
 		}
 		
-		if (statusBiz != null && returnTimeInMillis != -1) {
-			statusBiz.setReturnDate(new Date(returnTimeInMillis));
+		if (localStatus != null && returnTimeInMillis != -1) {
+			localStatus.setReturnDate(new Date(returnTimeInMillis));
 		}
 		
-		if (statusBiz == null) throw new RuntimeException("Conversion error");
-		return statusBiz;
+		if (localStatus == null) throw new RuntimeException("Conversion error");
+		return localStatus;
 	}
 	
 	public static int getProtocolStatus(IStatus clientStatus, boolean isFriendsOnly, boolean isBlocked) {
@@ -86,21 +106,21 @@ public class GGUtils {
 
 		int protocolStatus = -1;
 		
-		if (clientStatus.getStatus() == StatusConst.ONLINE) {
+		if (clientStatus.getStatusType() == StatusType.ONLINE) {
 			protocolStatus = GGStatusEnabled.GG_STATUS_AVAIL;
-		} else if (clientStatus.getStatus() == StatusConst.ONLINE_WITH_DESCRIPTION) {
+		} else if (clientStatus.getStatusType() == StatusType.ONLINE_WITH_DESCRIPTION) {
 			protocolStatus = GGStatusEnabled.GG_STATUS_AVAIL_DESCR;
-		} else if (clientStatus.getStatus() == StatusConst.BUSY) {
+		} else if (clientStatus.getStatusType() == StatusType.BUSY) {
 			protocolStatus = GGStatusEnabled.GG_STATUS_BUSY;
-		} else if (clientStatus.getStatus() == StatusConst.BUSY_WITH_DESCRIPTION) {
+		} else if (clientStatus.getStatusType() == StatusType.BUSY_WITH_DESCRIPTION) {
 			protocolStatus = GGStatusEnabled.GG_STATUS_BUSY_DESCR;
-		} else if (clientStatus.getStatus() == StatusConst.OFFLINE) {
+		} else if (clientStatus.getStatusType() == StatusType.OFFLINE) {
 			protocolStatus = GGStatusEnabled.GG_STATUS_NOT_AVAIL;
-		} else if (clientStatus.getStatus() == StatusConst.OFFLINE_WITH_DESCRIPTION) {
+		} else if (clientStatus.getStatusType() == StatusType.OFFLINE_WITH_DESCRIPTION) {
 			protocolStatus = GGStatusEnabled.GG_STATUS_NOT_AVAIL_DESCR;
-		} else if (clientStatus.getStatus() == StatusConst.INVISIBLE) {
+		} else if (clientStatus.getStatusType() == StatusType.INVISIBLE) {
 			protocolStatus = GGStatusEnabled.GG_STATUS_INVISIBLE;
-		} else if (clientStatus.getStatus() == StatusConst.INVISIBLE_WITH_DESCRIPTION) {
+		} else if (clientStatus.getStatusType() == StatusType.INVISIBLE_WITH_DESCRIPTION) {
 			protocolStatus = GGStatusEnabled.GG_STATUS_INVISIBLE_DESCR;
 		}
 
@@ -192,6 +212,20 @@ public class GGUtils {
 	    i += tmp;
 	
 	    return i;
+	}
+	
+	public static short byteToShort(byte[] buf, int start) {
+	    int i = 0;
+	    int pos = start;
+	
+	    int tmp;
+	    int plus = 0;
+	    tmp = unsignedByteToInt(buf[pos++]) << 0;
+	    i += tmp;
+	    tmp = unsignedByteToInt(buf[pos++]) << 8;
+	    i += tmp;
+	
+	    return (short) i;
 	}
 	
 	public static long secondsToMillis(int seconds) {

@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
-import pl.mn.communicator.gadu.GGPong;
+import pl.mn.communicator.gadu.in.GGPong;
 
 /**
  * Created on 2004-11-28

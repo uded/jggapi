@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
-import pl.mn.communicator.gadu.GGWelcome;
+import pl.mn.communicator.gadu.in.GGWelcome;
 
 /**
  * Created on 2004-11-27

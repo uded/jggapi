@@ -1,15 +1,15 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import pl.mn.communicator.GGException;
-import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IStatus60;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.LocalUser;
 import pl.mn.communicator.LoginContext;
-import pl.mn.communicator.Server;
+import pl.mn.communicator.OutgoingMessage;
+import pl.mn.communicator.SessionFactory;
+import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.event.LoginListener;
@@ -17,7 +17,6 @@ import pl.mn.communicator.event.MessageArrivedEvent;
 import pl.mn.communicator.event.MessageDeliveredEvent;
 import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.event.UserListener;
-import pl.mn.communicator.gadu.handlers.Session;
 
 /*
  * Created on 2004-11-28
@@ -36,9 +35,11 @@ public class Main2 {
 
 	public static void main(String args[]) throws IOException, GGException {
 		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
-		IServer server = Server.getDefaultServer(loginContext);
-		final ISession session = new Session(server, loginContext);
-
+		IStatus status = loginContext.getStatus();
+		status.setStatusType(StatusType.BUSY);
+		
+		final ISession session = SessionFactory.createSession(loginContext);
+		
 		session.getConnectionService().addConnectionListener(new ConnectionListener.Stub() {
 
 			public void connectionEstablished() {
@@ -75,7 +76,14 @@ public class Main2 {
 
 			public void userStatusChanged(IUser user, IStatus newStatus) {
 				System.out.println("User changed status: "+user.getUin());
-				System.out.println("Status: "+newStatus.getStatus());
+				System.out.println("Status: "+newStatus.getStatusType());
+				System.out.println("Description: "+newStatus.getDescription());
+				System.out.println("ReturnDate: "+newStatus.getReturnDate());
+			}
+			
+			public void userStatus60Changed(IUser user, IStatus60 newStatus) {
+				System.out.println("User changed status60: "+user.getUin());
+				System.out.println("Status: "+newStatus.getStatusType());
 				System.out.println("Description: "+newStatus.getDescription());
 				System.out.println("ReturnDate: "+newStatus.getReturnDate());
 			}
@@ -93,7 +101,7 @@ public class Main2 {
 
 			public void messageDelivered(MessageDeliveredEvent messageDeliveredEvent) {
 				System.out.println("MessageDelivered, messageID: "+messageDeliveredEvent.getMessageID());
-				System.out.println("MessageDelivered, fromUser: "+messageDeliveredEvent.getRecipient().getUin());
+				System.out.println("MessageDelivered, fromUser: "+messageDeliveredEvent.getRecipientUin());
 				System.out.println("MessageDelivered, messageStatus: "+messageDeliveredEvent.getDeliveryStatus());
 			}
 			
@@ -115,30 +123,30 @@ public class Main2 {
 		});
 
 		session.getConnectionService().connect();
-		IStatus status = session.getPresenceService().getStatus();
-		status.setFriendsOnly(true);
-		session.getPresenceService().setStatus(status);
-		
-//		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-//		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-//		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-//		session.getMessageService().sendMessage(OutgoingMessage.createMessageWithoutConfirmation(376798, String.valueOf(System.currentTimeMillis())));
+//		IStatus status = session.getPresenceService().getStatus();
+//		status.setFriendsOnly(true);
+//		session.getPresenceService().setStatus(status);
+//		
+		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+		session.getMessageService().sendMessage(OutgoingMessage.createMessageWithoutConfirmation(376798, String.valueOf(System.currentTimeMillis())));
 
-		LocalUser localUser1 = new LocalUser();
-		localUser1.setDisplayName("ziom");
-		localUser1.setUin(376712);
+//		LocalUser localUser1 = new LocalUser();
+//		localUser1.setDisplayName("ziom");
+//		localUser1.setUin(376712);
+//
+//		LocalUser localUser2 = new LocalUser();
+//		localUser2.setDisplayName("jan");
+//		localUser2.setUin(326712);
 
-		LocalUser localUser2 = new LocalUser();
-		localUser2.setDisplayName("jan");
-		localUser2.setUin(326712);
-
-		ArrayList localUsers = new ArrayList();
-		localUsers.add(localUser1);
-		localUsers.add(localUser2);
+//		ArrayList localUsers = new ArrayList();
+//		localUsers.add(localUser1);
+//		localUsers.add(localUser2);
 		
 //		session.getContactListService().clearUserListRequest();
 //		session.getContactListService().exportContacts(localUsers);
-		session.getContactListService().importContacts();
+//		session.getContactListService().importContacts();
 		
 		session.getLoginService().logout();
 		session.getConnectionService().disconnect();

@@ -15,16 +15,19 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.out;
 
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.Status60;
+import pl.mn.communicator.gadu.GGOutgoingPackage;
+import pl.mn.communicator.gadu.GGStatusEnabled;
+import pl.mn.communicator.gadu.GGUtils;
 
 /**
  * Packet that sets new status of the Gadu-Gadu user.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNewStatus.java,v 1.7 2004-12-12 01:22:30 winnetou25 Exp $
+ * @version $Id: GGNewStatus.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
 public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
 	
@@ -32,20 +35,20 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
 
     private static final int MAX_OPIS = 70;
 
-    private IStatus m_status = null;
+    private Status60 m_localStatus = null;
     
     /**
      * The protocol status contructor.
      */
-    public GGNewStatus(IStatus status) {
-    	if (status == null) throw new NullPointerException("status cannot be null");
-        m_status = status;
+    public GGNewStatus(Status60 localStatus) {
+    	if (localStatus == null) throw new NullPointerException("status cannot be null");
+        m_localStatus = localStatus;
     }
 
     /**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getPacketType()
      */
-    public int getHeader() {
+    public int getPacketType() {
         return GG_NEW_STATUS;
     }
 
@@ -55,9 +58,9 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
     public int getLength() {
     	int length = 4;
     	
-    	if (m_status.getStatus().isDescriptionStatus() && m_status.isDescriptionSet()) {
-    		length+=m_status.getDescription().length()+1;
-    		if (m_status.isReturnDateSet()) {
+    	if (m_localStatus.getStatusType().isDescriptionStatus() && m_localStatus.isDescriptionSet()) {
+    		length+=m_localStatus.getDescription().length()+1;
+    		if (m_localStatus.isReturnDateSet()) {
     			length+=4;
     		}
     	}
@@ -69,7 +72,7 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-    	int statusToSend = GGUtils.getProtocolStatus(m_status, m_status.isFriendsOnly(), m_status.isBlockedMask());
+    	int statusToSend = GGUtils.getProtocolStatus(m_localStatus, m_localStatus.isFriendsOnly(), false);
     	
     	byte[] toSend = new byte[getLength()];
     	
@@ -78,14 +81,14 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
     	toSend[2] = (byte) ((statusToSend >> 16) & 0xFF);
     	toSend[3] = (byte) ((statusToSend >> 24) & 0xFF);
 
-    	if (m_status.getStatus().isDescriptionStatus() && m_status.isDescriptionSet()) {
-    		String description = trimDescription(m_status.getDescription());
+    	if (m_localStatus.getStatusType().isDescriptionStatus() && m_localStatus.isDescriptionSet()) {
+    		String description = trimDescription(m_localStatus.getDescription());
     		byte[] descBytes = description.getBytes();
     		for (int i=0; i<descBytes.length; i++) {
     			toSend[4+i] = (byte) descBytes[i];
     		}
-    		if (m_status.isReturnDateSet()) {
-    			int timeInSeconds = GGUtils.millisToSeconds(m_status.getReturnDate().getTime());
+    		if (m_localStatus.isReturnDateSet()) {
+    			int timeInSeconds = GGUtils.millisToSeconds(m_localStatus.getReturnDate().getTime());
     			toSend[4+description.length()+1]= (byte) (timeInSeconds & 0xFF);
     			toSend[4+description.length()+2]= (byte) (timeInSeconds >> 8 & 0xFF);
     			toSend[4+description.length()+3]= (byte) (timeInSeconds >> 16 & 0xFF);

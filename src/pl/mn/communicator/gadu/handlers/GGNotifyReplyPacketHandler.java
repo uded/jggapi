@@ -22,7 +22,7 @@ import java.util.Map;
 
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.gadu.GGNotifyReply;
+import pl.mn.communicator.gadu.in.GGNotifyReply;
 
 
 /**

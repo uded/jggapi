@@ -34,8 +34,8 @@ import pl.mn.communicator.event.GGPacketListener;
 import pl.mn.communicator.gadu.GGHeader;
 import pl.mn.communicator.gadu.GGIncomingPackage;
 import pl.mn.communicator.gadu.GGOutgoingPackage;
-import pl.mn.communicator.gadu.GGPing;
 import pl.mn.communicator.gadu.GGUtils;
+import pl.mn.communicator.gadu.out.GGPing;
 
 /**
  * Created on 2004-11-27
@@ -76,7 +76,7 @@ public class DefaultConnectionService implements IConnectionService {
 				throw new GGException("Unable to connect to Gadu-Gadu server: "+m_session.getServer(), ex);
 			}
 		} else {
-			throw new GGSessionException("Invalid session state: "+SessionState.getState(m_session.getSessionState()));
+			throw new GGSessionException("Invalid session state: "+m_session.getSessionState());
 		}
 	}
 
@@ -85,8 +85,8 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void disconnect() {
 		if ((m_session.getSessionState() == SessionState.CONNECTED)
-				|| (m_session.getSessionState() == SessionState.AUTHENTICATED)
-				|| (m_session.getSessionState() == SessionState.SESSION_INVALID)) {
+				|| (m_session.getSessionState() == SessionState.LOGGED_IN)
+				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)) {
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 			try {
 				m_connectionThread.closeConnection();
@@ -96,7 +96,7 @@ public class DefaultConnectionService implements IConnectionService {
 				m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 			}
 		} else {
-			throw new GGSessionException("Invalid session state: "+SessionState.getState(m_session.getSessionState()));
+			throw new GGSessionException("Invalid session state: "+m_session.getSessionState());
 		}
 	}
 	
@@ -104,7 +104,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.mn.communicator.IConnectionService#isConnected()
 	 */
 	public boolean isConnected() {
-		boolean authenticated = m_session.getSessionState() == SessionState.AUTHENTICATED;
+		boolean authenticated = m_session.getSessionState() == SessionState.LOGGED_IN;
 		boolean authenticationAwaiting = m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING;
 		boolean connected = m_session.getSessionState() == SessionState.CONNECTED;
 		return authenticated || authenticationAwaiting || connected;
@@ -195,7 +195,7 @@ public class DefaultConnectionService implements IConnectionService {
     }
 
     protected void sendPackage(GGOutgoingPackage outgoingPackage) throws IOException {
-		int header = outgoingPackage.getHeader();
+		int header = outgoingPackage.getPacketType();
 		int length = outgoingPackage.getLength();
 		byte[] contents = outgoingPackage.getContents();
 		m_connectionThread.sendPackage(header, length, contents);

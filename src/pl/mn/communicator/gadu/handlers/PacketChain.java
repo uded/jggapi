@@ -22,17 +22,18 @@ import java.util.HashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.gadu.GGDisconnecting;
-import pl.mn.communicator.gadu.GGLoginFailed;
-import pl.mn.communicator.gadu.GGLoginOK;
-import pl.mn.communicator.gadu.GGNotifyReply;
-import pl.mn.communicator.gadu.GGPong;
-import pl.mn.communicator.gadu.GGRecvMsg;
-import pl.mn.communicator.gadu.GGSendMsgAck;
-import pl.mn.communicator.gadu.GGStatus;
-import pl.mn.communicator.gadu.GGUserListReply;
 import pl.mn.communicator.gadu.GGUtils;
-import pl.mn.communicator.gadu.GGWelcome;
+import pl.mn.communicator.gadu.in.GGDisconnecting;
+import pl.mn.communicator.gadu.in.GGLoginFailed;
+import pl.mn.communicator.gadu.in.GGLoginOK;
+import pl.mn.communicator.gadu.in.GGNotifyReply;
+import pl.mn.communicator.gadu.in.GGPong;
+import pl.mn.communicator.gadu.in.GGRecvMsg;
+import pl.mn.communicator.gadu.in.GGSendMsgAck;
+import pl.mn.communicator.gadu.in.GGStatus;
+import pl.mn.communicator.gadu.in.GGStatus60;
+import pl.mn.communicator.gadu.in.GGUserListReply;
+import pl.mn.communicator.gadu.in.GGWelcome;
 
 /**
  * Created on 2004-11-27
@@ -92,6 +93,7 @@ public class PacketChain {
 		registerGGPackageHandler(GGRecvMsg.GG_RECV_MSG, new GGMessageReceivedPacketHandler());
 		registerGGPackageHandler(GGSendMsgAck.GG_SEND_MSG_ACK, new GGSentMessageAckPacketHandler());
 		registerGGPackageHandler(GGUserListReply.GG_USERLIST_REPLY, new GGUserListReplyHandler());
+		registerGGPackageHandler(GGStatus60.GG_STATUS60, new GGStatus60PacketHandler());
 	}
 
 }

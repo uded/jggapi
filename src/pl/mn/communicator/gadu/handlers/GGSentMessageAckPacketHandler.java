@@ -17,10 +17,8 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
-import pl.mn.communicator.IUser;
-import pl.mn.communicator.User;
 import pl.mn.communicator.event.MessageDeliveredEvent;
-import pl.mn.communicator.gadu.GGSendMsgAck;
+import pl.mn.communicator.gadu.in.GGSendMsgAck;
 
 /**
  * Created on 2004-11-28
@@ -38,8 +36,8 @@ public class GGSentMessageAckPacketHandler implements PacketHandler {
 	public void handle(Context context) {
 		GGSendMsgAck sendMessageAck = new GGSendMsgAck(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(sendMessageAck);
-		IUser user = new User(sendMessageAck.getRecipientUin());
-		MessageDeliveredEvent messageDeliveredEvent = new MessageDeliveredEvent(this, user, sendMessageAck.getMessageSeq(), sendMessageAck.getStatus());
+		int uin  = sendMessageAck.getRecipientUin();
+		MessageDeliveredEvent messageDeliveredEvent = new MessageDeliveredEvent(this, uin, sendMessageAck.getMessageSeq(), sendMessageAck.getStatus());
 		context.getSessionAccessor().notifyMessageDelivered(messageDeliveredEvent);
 	}
 

@@ -11,8 +11,8 @@ import java.util.Collection;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.gadu.GGUserListReply;
 import pl.mn.communicator.gadu.GGUtils;
+import pl.mn.communicator.gadu.in.GGUserListReply;
 
 /**
  * @author mateusz

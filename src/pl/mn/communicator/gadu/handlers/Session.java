@@ -24,18 +24,15 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import pl.mn.communicator.GGException;
 import pl.mn.communicator.IConnectionService;
 import pl.mn.communicator.IContactListService;
-import pl.mn.communicator.IFileService;
 import pl.mn.communicator.ILoginService;
 import pl.mn.communicator.IMessageService;
 import pl.mn.communicator.IPresenceService;
-import pl.mn.communicator.IPublicDirectoryService;
-import pl.mn.communicator.IRegistrationService;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IStatus60;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.SessionState;
@@ -56,7 +53,7 @@ import pl.mn.communicator.gadu.GGOutgoingPackage;
  */
 public class Session implements ISession {
 
-	private int m_sessionState = SessionState.CONNECTION_AWAITING;
+	private SessionState m_sessionState = SessionState.CONNECTION_AWAITING;
 	
 	private SessionAccessor m_sessionAccessor = null; 
 	private Set m_sessionStateListeners = null;
@@ -83,13 +80,13 @@ public class Session implements ISession {
 		m_sessionStateListeners = new HashSet();
 		m_connectionService = new DefaultConnectionService(this);
 		m_loginService = new DefaultLoginService(this);
-		m_presenceService = new DefaultPresenceService(this);
 		m_messageService = new DefaultMessageService(this);
-		m_registrationService = new DefaultRegistrationService(this);
+		m_presenceService = new DefaultPresenceService(this);
 		m_contactListService = new DefaultContactListService(this);
+		//m_registrationService = new DefaultRegistrationService(this);
 	}
 
-	public int getSessionState() {
+	public SessionState getSessionState() {
 		return m_sessionState;
 	}
 	
@@ -144,28 +141,28 @@ public class Session implements ISession {
 		return m_presenceService;
 	}
 
-	/**
-	 * @see pl.mn.communicator.ISession#getFileService()
-	 */
-	public IFileService getFileService() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @see pl.mn.communicator.ISession#getPublicDirectoryService()
-	 */
-	public IPublicDirectoryService getPublicDirectoryService() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * @see pl.mn.communicator.ISession#getRegistrationService()
-	 */
-	public IRegistrationService getRegistrationService() {
-		return m_registrationService;
-	}
+//	/**
+//	 * @see pl.mn.communicator.ISession#getFileService()
+//	 */
+//	public IFileService getFileService() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @see pl.mn.communicator.ISession#getPublicDirectoryService()
+//	 */
+//	public IPublicDirectoryService getPublicDirectoryService() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+//
+//	/**
+//	 * @see pl.mn.communicator.ISession#getRegistrationService()
+//	 */
+//	public IRegistrationService getRegistrationService() {
+//		return m_registrationService;
+//	}
 
 	/**
 	 * @see pl.mn.communicator.ISession#getContactListService()
@@ -174,7 +171,7 @@ public class Session implements ISession {
 		return m_contactListService;
 	}
 	
-	protected void notifySessionStateChanged(int oldState, int newState) {
+	protected void notifySessionStateChanged(SessionState oldState, SessionState newState) {
 		
 		for (Iterator it = m_sessionStateListeners.iterator(); it.hasNext();) {
 			SessionStateListener sessionStateListener = (SessionStateListener) it.next();
@@ -192,9 +189,9 @@ public class Session implements ISession {
 
 	public class SessionAccessor {
 		
-		public void setSessionState(int sessionState) {
+		public void setSessionState(SessionState sessionState) {
 			if (m_sessionState != sessionState) {
-				int oldState = m_sessionState;
+				SessionState oldState = m_sessionState;
 				m_sessionState = sessionState;
 				notifySessionStateChanged(oldState, sessionState);
 			}
@@ -232,6 +229,10 @@ public class Session implements ISession {
 			m_presenceService.notifyUserChangedStatus(user, status);
 		}
 
+		public void notifyUserChangedStatus60(IUser user, IStatus60 status) {
+			m_presenceService.notifyUserChangedStatus60(user, status);
+		}
+
 		public void notifyMessageArrived(MessageArrivedEvent messageArrivedEvent) {
 			m_messageService.notifyMessageArrived(messageArrivedEvent);
 		}
@@ -256,10 +257,6 @@ public class Session implements ISession {
 			m_sessionAttributes.put(attributeName, new Integer(integer));
 		}
 		
-		public void setStatus(IStatus status) throws GGException {
-			m_presenceService.setStatus(status);
-		}
-
 		public LoginContext getLoginContext() {
 			return m_loginContext;
 		}

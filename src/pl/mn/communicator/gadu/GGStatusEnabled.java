@@ -20,38 +20,38 @@ package pl.mn.communicator.gadu;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatusEnabled.java,v 1.1 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGStatusEnabled.java,v 1.2 2004-12-12 16:21:54 winnetou25 Exp $
  */
 public interface GGStatusEnabled {
 
-    /** Status dostepny */
+    /** Status available */
     int GG_STATUS_AVAIL = 0x00000002;
 
-    /** Status dostepny z opisem */
+    /** Status available with description */
     int GG_STATUS_AVAIL_DESCR = 0x00000004;
 
-    /** Status niedostepny */
+    /** Status inavailable */
     int GG_STATUS_NOT_AVAIL = 0x00000001;
 
-    /** Status niedostepny z opisem */
+    /** Status inavailable with description */
     int GG_STATUS_NOT_AVAIL_DESCR = 0x00000015;
 
-    /** Status zajety */
+    /** Status busy */
     int GG_STATUS_BUSY = 0x00000003;
 
-    /** Status zajety z opisem */
+    /** Status busy with description */
     int GG_STATUS_BUSY_DESCR = 0x00000005;
 
-    /** Status niewidoczny */
+    /** Status invisible */
     int GG_STATUS_INVISIBLE = 0x00000014;
 
-    /** Status niewidoczny z opisem */
+    /** Status invidible with description */
     int GG_STATUS_INVISIBLE_DESCR = 0x00000016;
 
-    /** Status zablokowany */
+    /** Bitmask for status blocked */
     int GG_STATUS_BLOCKED = 0x00000006;
 
-    /** Maska bitowa oznaczajaca tryb tylko dla przyjaciol */
+    /** Bitmask for status for friends only */
     int GG_STATUS_FRIENDS_MASK = 0x00008000; //1|000|000|000|000|000 = 32768 = (2^16)/2
 
 }

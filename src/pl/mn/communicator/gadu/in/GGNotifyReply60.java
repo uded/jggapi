@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.in;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -25,35 +25,32 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.IStatus;
-import pl.mn.communicator.User;
+import pl.mn.communicator.GGUser;
+import pl.mn.communicator.gadu.GGIncomingPackage;
+import pl.mn.communicator.gadu.GGUtils;
+import pl.mn.communicator.gadu.out.GGNewStatus;
 
 /**
  * numer, status, opis i czas.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.22 2004-12-11 19:40:50 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
-public class GGNotifyReply implements GGIncomingPackage {
+public class GGNotifyReply60 implements GGIncomingPackage {
 
-    private static Log logger = LogFactory.getLog(GGNotifyReply.class);
+	public static final int GG_NOTIFY_REPLY60 = 0x0011;
 
-	public static final int GG_NOTIFY_REPLY = 0x000C;
+    private static Log logger = LogFactory.getLog(GGNotifyReply60.class);
 
-	private byte[] m_data;
     private Map m_statuses = new HashMap();
 
-    /**
-     * @param m_data dane do utworzenia pakietu
-     */
-    public GGNotifyReply(byte[] data) {
-        logger.debug("Pakiet zmiany stanu u�ytkownika");
-        m_data = data;
+    public GGNotifyReply60(byte[] data) {
         analize();
     }
 
     public int getPacketType() {
-    	return GG_NOTIFY_REPLY;
+    	return GG_NOTIFY_REPLY60;
     }
     
     /**
@@ -128,7 +125,7 @@ public class GGNotifyReply implements GGIncomingPackage {
             }
             
             IStatus statusBiz = GGUtils.getClientStatus(status, description, returnTime.getTime());
-            User uzytkownik = new User(nr);
+            GGUser uzytkownik = new GGUser(nr);
             m_statuses.put(uzytkownik, statusBiz);
         }
     }

@@ -19,7 +19,6 @@ package pl.mn.communicator.event;
 
 import java.util.EventObject;
 
-import pl.mn.communicator.IUser;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.gadu.GGUtils;
 
@@ -28,17 +27,18 @@ import pl.mn.communicator.gadu.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageDeliveredEvent.java,v 1.1 2004-12-12 00:29:34 winnetou25 Exp $
+ * @version $Id: MessageDeliveredEvent.java,v 1.2 2004-12-12 16:21:55 winnetou25 Exp $
  */
 public class MessageDeliveredEvent extends EventObject {
 
-	private IUser m_recipient = null;
+	private int m_recipientUin = -1;
 	private MessageStatus m_messageStatus = null;
 	private int m_messageID = -1;
 	
-	public MessageDeliveredEvent(Object source, IUser recipient, int messageSeq, int protocolMessageStatus) {
+	public MessageDeliveredEvent(Object source, int recipientUin, int messageSeq, int protocolMessageStatus) {
 		super(source);
-		m_recipient = recipient;
+		if (recipientUin < 0) throw new IllegalArgumentException("recipientUin cannot be less than 0");
+		m_recipientUin = recipientUin;
 		m_messageStatus = GGUtils.getClientMessageStatus(protocolMessageStatus);
 		m_messageID = messageSeq;
 	}
@@ -46,8 +46,8 @@ public class MessageDeliveredEvent extends EventObject {
 	/** 
 	 * @return the user to whom message was sucessfuly delivered.
 	 */
-	public IUser getRecipient() {
-		return m_recipient;
+	public int getRecipientUin() {
+		return m_recipientUin;
 	}
 	
 	public int getMessageID() {

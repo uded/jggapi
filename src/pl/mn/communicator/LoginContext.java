@@ -17,13 +17,15 @@
  */
 package pl.mn.communicator;
 
+import java.util.Collection;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.4 2004-12-11 20:08:58 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.5 2004-12-12 16:21:55 winnetou25 Exp $
  */
 public final class LoginContext {
 	
@@ -33,7 +35,9 @@ public final class LoginContext {
 
 	private String m_password = null;
 
-	private IStatus m_status = new Status(StatusConst.ONLINE);
+	private Status60 m_localStatus = new Status60(StatusType.ONLINE);
+	
+	private Collection m_monitoredUsers = null;
 	
     private byte m_imageSize = 64;
     
@@ -73,13 +77,13 @@ public final class LoginContext {
         m_uin = uin;
     }
  
-    public void setStatus(IStatus status) {
-    	if (status == null) throw new NullPointerException("status cannot be null");
-    	m_status = status;
+    public void setStatus(Status60 localStatus) {
+    	if (localStatus == null) throw new NullPointerException("localStatus cannot be null");
+    	m_localStatus = localStatus;
     }
     
-    public IStatus getStatus() {
-    	return m_status;
+    public Status60 getStatus() {
+    	return m_localStatus;
     }
     
     public void setImageSize(byte imageSize) {
@@ -127,6 +131,15 @@ public final class LoginContext {
 	
 	public int getLocalPort() {
 		return m_localPort;
+	}
+	
+	public void setMonitoredUsers(Collection monitoredUsers) {
+		//if (monitoredUsers == null) throw new NullPointerException("monitoredUsers cannot be null");
+		m_monitoredUsers = monitoredUsers;
+	} 
+	
+	public Collection getMonitoredUsers() {
+		return m_monitoredUsers;
 	}
 	
 }

@@ -15,32 +15,40 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.in;
+
+import pl.mn.communicator.gadu.GGIncomingPackage;
 
 /**
+ * Created on 2004-12-11
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.3 2004-10-27 00:29:48 winnetou25 Exp $
+ * @author mateusz
+ *
+ * TODO To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GGPubdirReply implements GGIncomingPackage {
-	
-	public static final int GG_PUBDIR50_REPLY = 0x000E;
+public class GGLoginOK implements GGIncomingPackage {
 
+	private static GGLoginOK m_instance = null;
+	
+	public final static int GG_LOGIN_OK = 3;
+
+	private GGLoginOK() {
+		//prevent instant
+	}
+	
 	/**
 	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
 	 */
 	public int getPacketType() {
-		return GG_PUBDIR50_REPLY;
+		return GG_LOGIN_OK;
 	}
 	
-	//TODO implement
-//	#define GG_PUBDIR50_REPLY 0x000e
-	
-//struct gg_pubdir50_reply {
-//	char type;
-//	int seq;
-//	char reply[];
-//};
-	
+	public static GGLoginOK getInstance() {
+		if (m_instance == null) {
+			m_instance = new GGLoginOK();
+		}
+		return m_instance;
+	}
+
 }

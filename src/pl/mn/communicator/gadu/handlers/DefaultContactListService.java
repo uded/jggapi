@@ -16,7 +16,7 @@ import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IContactListService;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.ContactListListener;
-import pl.mn.communicator.gadu.GGUserListRequest;
+import pl.mn.communicator.gadu.out.GGUserListRequest;
 
 /**
  * @author mateusz
@@ -41,11 +41,11 @@ public class DefaultContactListService implements IContactListService {
 	 */
 	public void clearUserListRequest() throws GGException {
 		try {
-			if (m_session.getSessionState() == SessionState.AUTHENTICATED) {
+			if (m_session.getSessionState() == SessionState.LOGGED_IN) {
 				GGUserListRequest clearContactListRequest = GGUserListRequest.createClearUsetListRequest();
 				m_session.getSessionAccessor().sendPackage(clearContactListRequest);
 			} else {
-				throw new GGSessionException("Invalid session state: "+SessionState.getState(m_session.getSessionState()));
+				throw new GGSessionException("Invalid session state: "+m_session.getSessionState());
 			}
 		} catch (IOException ex) {
 			throw new GGException("Unable to clear contact list", ex);
@@ -57,11 +57,11 @@ public class DefaultContactListService implements IContactListService {
 	 */
 	public void exportContacts(Collection localUsers) throws GGException {
 		try {
-			if (m_session.getSessionState() == SessionState.AUTHENTICATED) {
+			if (m_session.getSessionState() == SessionState.LOGGED_IN) {
 				GGUserListRequest putUserListRequest = GGUserListRequest.createPutUserListRequest(localUsers);
 				m_session.getSessionAccessor().sendPackage(putUserListRequest);
 			} else {
-				throw new GGSessionException("Invalid session state: "+SessionState.getState(m_session.getSessionState()));
+				throw new GGSessionException("Invalid session state: "+m_session.getSessionState());
 			}
 		} catch (IOException ex) {
 			throw new GGException("Unable to export contact list", ex);
@@ -73,7 +73,7 @@ public class DefaultContactListService implements IContactListService {
 	 */
 	public void importContacts() throws GGException {
 		try {
-			if (m_session.getSessionState() == SessionState.AUTHENTICATED) {
+			if (m_session.getSessionState() == SessionState.LOGGED_IN) {
 				GGUserListRequest getContactListRequest = GGUserListRequest.createGetUserListRequest();
 				m_session.getSessionAccessor().sendPackage(getContactListRequest);
 			}

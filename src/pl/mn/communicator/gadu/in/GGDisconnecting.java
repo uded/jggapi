@@ -15,30 +15,37 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.gadu.in;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import pl.mn.communicator.gadu.GGIncomingPackage;
 
 /**
- * The class represents Gadu-Gadu user.
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: User.java,v 1.3 2004-12-11 17:22:33 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGDisconnecting.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
-public class User extends AbstractUser {
+public class GGDisconnecting implements GGIncomingPackage {
+
+	public static final int GG_DISCONNECTING = 0x000B;
+
+	private static GGDisconnecting m_instance = null;
 	
-    private static Log logger = LogFactory.getLog(User.class);
-
-    public User(int uin) {
-        super(uin);
-    }
-
-    /**
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
-        return "Uin: " + m_uin;
-    }
-    
+	private GGDisconnecting() {
+		//private constructor
+	}
+	
+	/**
+	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_DISCONNECTING;
+	}
+	
+	public static GGDisconnecting getInstance() {
+		if (m_instance == null) {
+			m_instance = new GGDisconnecting();
+		}
+		return m_instance;
+	}
+	
 }

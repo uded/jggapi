@@ -24,36 +24,21 @@ import java.util.Date;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IStatus.java,v 1.10 2004-12-11 17:22:33 winnetou25 Exp $
+ * @version $Id: IStatus.java,v 1.11 2004-12-12 16:21:55 winnetou25 Exp $
  */
 public interface IStatus {
 
-//    /** friends mask */
-//    int FRIENDS_MASK = 10;
-//    
-//    /** blocked mask */
-//    int BLOCKED_MASK = 20;
-    
     /**
-     * Get the actual status.<BR>
-     * @return int
+     * Get the StatusType.
+     * @return StatusType
      */
-    StatusConst getStatus();
+    StatusType getStatusType();
 
     /**
      * Set the actual status.<BR>
      * @param status status
      */
-    void setStatus(StatusConst status);
-    
-    /** */
-    void setFriendsOnly(boolean bool);
-    
-    void setBlockedMask(boolean bool);
-    
-    boolean isFriendsOnly();
-    
-    boolean isBlockedMask();
+    void setStatusType(StatusType status);
     
     /** 
      * Set the description of status.<BR>
@@ -90,5 +75,13 @@ public interface IStatus {
      * @return <code>true</code> if the return date has been set, <code>false</code> otherwise.
      */
     boolean isReturnDateSet();
+    
+    void setFriendsOnly(boolean friendsOnly);
+    
+    boolean isFriendsOnly();
+
+    void setBlocked(boolean blocked);
+    
+    boolean isBlocked();
     
 }

@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.in;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +23,7 @@ import java.util.Collection;
 import java.util.List;
 
 import pl.mn.communicator.LocalUser;
+import pl.mn.communicator.gadu.GGIncomingPackage;
 
 /**
  * Created on 2004-12-11

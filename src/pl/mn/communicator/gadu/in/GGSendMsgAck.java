@@ -15,13 +15,16 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.in;
+
+import pl.mn.communicator.gadu.GGIncomingPackage;
+import pl.mn.communicator.gadu.GGUtils;
 
 /**
  * Acknowledgment of successuly delivered message that is recieved from Gadu-Gadu server.
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsgAck.java,v 1.3 2004-12-11 17:22:49 winnetou25 Exp $
+ * @version $Id: GGSendMsgAck.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
 public class GGSendMsgAck implements GGIncomingPackage {
 

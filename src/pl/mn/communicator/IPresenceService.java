@@ -31,9 +31,9 @@ import pl.mn.communicator.event.UserListener;
  */
 public interface IPresenceService {
 
-	void setStatus(IStatus status) throws GGException;
+	void setStatus(Status60 status) throws GGException;
 
-	IStatus getStatus();
+	Status60 getStatus();
 	
 	void addMonitoredUser(IUser user) throws GGException;
 

@@ -15,53 +15,43 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.in;
+
+import pl.mn.communicator.gadu.GGIncomingPackage;
+import pl.mn.communicator.gadu.GGUtils;
 
 /**
+ * The packet is retrieved from the Gadu-Gadu server just after we connect to it.
+ * The class parses package and gets seed from server.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGListEmpty.java,v 1.7 2004-12-11 17:22:49 winnetou25 Exp $
+ * @version $Id: GGWelcome.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
-public class GGListEmpty implements GGOutgoingPackage {
-	
-	public static final int GG_EMPTY_LIST = 0x0012;
-	
-	private static GGListEmpty m_instance = null;
-	
-	private byte[] m_data = null;
-	
-	private GGListEmpty() {
-		m_data = new byte[0];
-		//private constructor
+public class GGWelcome implements GGIncomingPackage {
+    
+	public static final int GG_PACKAGE_WELCOME = 0x1;
+
+	private int m_seed = -1;
+
+    /**
+     * Constructor for Welcome.
+     * @param data dane pakietu
+     */
+    public GGWelcome(byte[] data) {
+    	if (data == null) throw new NullPointerException("data cannot be null");
+        m_seed = GGUtils.byteToInt(data);
+    }
+    
+    /**
+	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_PACKAGE_WELCOME;
 	}
-	
-    public static GGListEmpty getInstance() {
-    	if (m_instance == null) {
-    		m_instance = new GGListEmpty();
-    	}
-    	return m_instance;
-    }
-	
-    /**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
-     */
-    public int getHeader() {
-    	return GG_EMPTY_LIST;
-    }
 
-    /**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
-     */
-    public int getLength() {
-        return m_data.length;
-    }
-
-    /**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
-     */
-    public byte[] getContents() {
-    	return m_data;
+    public int getSeed() {
+        return m_seed;
     }
     
 }

@@ -21,10 +21,8 @@ package pl.mn.communicator.gadu;
  * Incomming Gadu-Gadu packet.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGIncomingPackage.java,v 1.6 2004-12-11 16:25:58 winnetou25 Exp $ 
+ * @version $Id: GGIncomingPackage.java,v 1.7 2004-12-12 16:21:54 winnetou25 Exp $ 
  */
-public interface GGIncomingPackage {
-	
-	int getPacketType();
+public interface GGIncomingPackage extends GGPacket {
 	
 }

@@ -19,7 +19,7 @@ package pl.mn.communicator.gadu.handlers;
 
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.gadu.GGStatus;
+import pl.mn.communicator.gadu.in.GGStatus;
 
 /**
  * Created on 2004-11-28

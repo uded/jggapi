@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
-import pl.mn.communicator.gadu.GGLoginFailed;
+import pl.mn.communicator.gadu.in.GGLoginFailed;
 
 /**
  * Created on 2004-11-28

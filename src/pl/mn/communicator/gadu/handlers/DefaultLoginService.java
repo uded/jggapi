@@ -25,12 +25,11 @@ import java.util.Set;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.ILoginService;
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.Status60;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.Status;
-import pl.mn.communicator.StatusConst;
+import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.LoginListener;
-import pl.mn.communicator.gadu.GGLogin60;
+import pl.mn.communicator.gadu.out.GGLogin60;
 
 /**
  * Created on 2004-11-28
@@ -75,7 +74,7 @@ public class DefaultLoginService implements ILoginService {
 				throw new GGException("Unable to login, loginContext: "+m_session.getLoginContext(), ex);
 			}
 		} else {
-			throw new GGSessionException("Unable to login, wrong session state: "+SessionState.getState(m_session.getSessionState()));
+			throw new GGSessionException("Unable to login, wrong session state: "+m_session.getSessionState());
 		}
 	}
 
@@ -83,11 +82,11 @@ public class DefaultLoginService implements ILoginService {
 	 * @see pl.mn.communicator.ILoginService#logout()
 	 */
 	public void logout() throws GGException {
-		if (m_session.getSessionState() == SessionState.AUTHENTICATED) {
-			m_session.getPresenceService().setStatus(new Status(StatusConst.OFFLINE));
-			m_session.getSessionAccessor().setSessionState(SessionState.SESSION_INVALID);
+		if (m_session.getSessionState() == SessionState.LOGGED_IN) {
+			m_session.getPresenceService().setStatus(new Status60(StatusType.OFFLINE));
+			m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
 		} else {
-			throw new GGSessionException("Unable to logout, wrong session state: "+SessionState.getState(m_session.getSessionState()));
+			throw new GGSessionException("Unable to logout, wrong session state: "+m_session.getSessionState());
 		}
 	}
 	
@@ -96,15 +95,15 @@ public class DefaultLoginService implements ILoginService {
 	 */
 	public void logout(String description) throws GGException {
 		if (description == null) throw new NullPointerException("description cannot be null");
-		if (m_session.getSessionState() == SessionState.AUTHENTICATED) {
+		if (m_session.getSessionState() == SessionState.LOGGED_IN) {
 			if (description.length() > 0) {
-				IStatus status = new Status(StatusConst.OFFLINE_WITH_DESCRIPTION);
-				status.setDescription(description);
-				m_session.getPresenceService().setStatus(status);
-				m_session.getSessionAccessor().setSessionState(SessionState.SESSION_INVALID);
+				Status60 localStatus = new Status60(StatusType.OFFLINE_WITH_DESCRIPTION);
+				localStatus.setDescription(description);
+				m_session.getPresenceService().setStatus(localStatus);
+				m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
 			}
 		} else {
-			throw new GGSessionException("Unable to logout, wrong session state: "+SessionState.getState(m_session.getSessionState()));
+			throw new GGSessionException("Unable to logout, wrong session state: "+m_session.getSessionState());
 		}
 	}
 	
@@ -125,13 +124,17 @@ public class DefaultLoginService implements ILoginService {
 	}
 	
 	protected void notifyLoginOK() {
-		m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATED);
+		m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_IN);
 		for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {
 			LoginListener loginListener = (LoginListener) it.next();
 			loginListener.loginOK();
 		}
 	}
 	
+	//TODO sprawdzic czy przy zlym zalogowaniu mozna sie jeszcze raz zalogowac czy juz jest po sesji
+	//i trzeba sie rozlaczyc
+	//jezeli tak to service ConnectionListener moglby miec LoginHandler na loginFailed event
+	//i jezeli takowy sie zdarzy wtedy od razu wywolac disconnect metode.
 	protected void notifyLoginFailed() {
 		m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
 		for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {

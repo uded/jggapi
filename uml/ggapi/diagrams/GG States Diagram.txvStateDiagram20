@@ -3,7 +3,7 @@
     <view uin="V-d9nhuoe2auxfks-romof3">
         <property name="$metaclass" value="StateDiagram20"/>
         <property name="$description" value=""/>
-        <property name="@__options" value="zoomFactor = 0.8264462809917354&#xA;toolbar.group.Tools.expanded = true&#xA;toolbar.buttonRunCount = 2&#xA;toolbar.group.#DEFAULT.expanded = true&#xA;toolbar.group.note.expanded = true&#xA;scrollX = 0&#xA;scrollY = 72&#xA;"/>
+        <property name="@__options" value="zoomFactor = 0.8264462809917354&#xA;toolbar.group.Tools.expanded = true&#xA;toolbar.buttonRunCount = 2&#xA;toolbar.group.#DEFAULT.expanded = true&#xA;toolbar.group.note.expanded = true&#xA;scrollX = 0&#xA;scrollY = 59&#xA;"/>
         <reference referencedUin="design:node:::N-3uf15de2avcpwvmexzw6">
             <property name="$shortcutReference" value=""/>
             <property name="@location_set_by_user" value="true"/>
@@ -62,7 +62,7 @@
         <reference referencedUin="design:node:::N-3uf15de2avbvav-5euaj2">
             <property name="$shortcutReference" value=""/>
             <property name="@location_set_by_user" value="true"/>
-            <property name="bounds" value="310,400,90,46"/>
+            <property name="bounds" value="310,400,68,46"/>
             <reference referencedUin="design:link:::Lujnvd9e2avlajzf4ulcv:N-3uf15de2avbvav-5euaj2">
                 <property name="@location_set_by_user" value="false"/>
                 <property name="sourceAnchor" value="311,402"/>
@@ -71,13 +71,13 @@
             </reference>
             <reference referencedUin="design:node:::-acitv2e2avbvbbz9nbv3:N-3uf15de2avbvav-5euaj2">
                 <property name="@location_set_by_user" value="false"/>
-                <property name="bounds" value="5,21,80,20"/>
+                <property name="bounds" value="5,21,58,20"/>
             </reference>
             <reference referencedUin="design:link:::Lujnvd9e2ayo4pd-mpkdba:N-3uf15de2avbvav-5euaj2">
                 <property name="@location_set_by_user" value="false"/>
                 <property name="sourceAnchor" value="315,445"/>
                 <property name="bendpoints" value=""/>
-                <property name="targetAnchor" value="315,500"/>
+                <property name="targetAnchor" value="274,500"/>
             </reference>
         </reference>
         <reference referencedUin="design:node:::N-3uf15de2av8guv-6hfgk3">
@@ -105,7 +105,7 @@
         <reference referencedUin="design:node:::N-3uf15de2avd3fe-6qj7jl">
             <property name="$shortcutReference" value=""/>
             <property name="@location_set_by_user" value="true"/>
-            <property name="bounds" value="220,500,100,46"/>
+            <property name="bounds" value="220,500,77,46"/>
             <reference referencedUin="design:link:::Lujnvd9e2aypw0w-p40lx0:N-3uf15de2avd3fe-6qj7jl">
                 <property name="@location_set_by_user" value="false"/>
                 <property name="sourceAnchor" value="256,500"/>
@@ -114,7 +114,7 @@
             </reference>
             <reference referencedUin="design:node:::-acitv2e2avd3feqjmdej:N-3uf15de2avd3fe-6qj7jl">
                 <property name="@location_set_by_user" value="false"/>
-                <property name="bounds" value="5,21,90,20"/>
+                <property name="bounds" value="5,21,67,20"/>
             </reference>
         </reference>
         <reference referencedUin="design:node:::N-3uf15de2avasfkljk4c4">
@@ -215,7 +215,7 @@
                 <property name="@location_set_by_user" value="false"/>
                 <property name="sourceAnchor" value="485,550"/>
                 <property name="bendpoints" value=""/>
-                <property name="targetAnchor" value="379,446"/>
+                <property name="targetAnchor" value="371,445"/>
             </reference>
             <reference referencedUin="design:link:::Lujnvd9e2ayibb68bayzk:N-3uf15de2avbao9u58izg">
                 <property name="@location_set_by_user" value="true"/>
@@ -242,8 +242,8 @@
         </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2ayo4pd-mpkdba:N-3uf15de2avbvav-5euaj2">
             <property name="@location_set_by_user" value="true"/>
-            <property name="@__referenceContsraints" value="weight=0.2727272727272727"/>
-            <property name="bounds" value="318,471,42,16"/>
+            <property name="@__referenceContsraints" value="weight=0.7272727272727273"/>
+            <property name="bounds" value="293,477,42,16"/>
         </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2ax1ud0-xkj69u:N-3uf15de2avcpwvmexzw6">
             <property name="@location_set_by_user" value="true"/>
@@ -261,8 +261,8 @@
         </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avlajzf4ulcv:N-3uf15de2avbvav-5euaj2">
             <property name="@location_set_by_user" value="true"/>
-            <property name="@__referenceContsraints" value="weight=0.7030868123920666"/>
-            <property name="bounds" value="233,345,68,16"/>
+            <property name="@__referenceContsraints" value="weight=0.8508276716716182"/>
+            <property name="bounds" value="217,337,68,16"/>
         </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avdsqvdl46ci:N-3uf15de2avasfkljk4c4">
             <property name="@location_set_by_user" value="true"/>
@@ -288,15 +288,15 @@
             <property name="@__referenceContsraints" value="weight=0.6185953791413138"/>
             <property name="bounds" value="230,660,200,16"/>
         </reference>
-        <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avfvpn-joiadw:N-3uf15de2avbao9u58izg">
-            <property name="@location_set_by_user" value="true"/>
-            <property name="@__referenceContsraints" value="weight=0.5972376758796608"/>
-            <property name="bounds" value="441,488,52,16"/>
-        </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avfhtn-8y33fc:N-3uf15de2av8guv-6hfgk3">
             <property name="@location_set_by_user" value="true"/>
             <property name="@__referenceContsraints" value="weight=0.2619047619047619"/>
             <property name="bounds" value="488,395,138,16"/>
+        </reference>
+        <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avfvpn-joiadw:N-3uf15de2avbao9u58izg">
+            <property name="@location_set_by_user" value="true"/>
+            <property name="@__referenceContsraints" value="weight=0.5835852687452291"/>
+            <property name="bounds" value="400,510,52,16"/>
         </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2ayibb68bayzk:N-3uf15de2avbao9u58izg">
             <property name="@location_set_by_user" value="false"/>
@@ -304,8 +304,8 @@
         </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2aypw0w-p40lx0:N-3uf15de2avd3fe-6qj7jl">
             <property name="@location_set_by_user" value="true"/>
-            <property name="@__referenceContsraints" value="weight=0.39349982112452947"/>
-            <property name="bounds" value="231,441,68,16"/>
+            <property name="@__referenceContsraints" value="weight=0.5397727171429234"/>
+            <property name="bounds" value="220,420,68,16"/>
         </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avaegjqmzy2y:N-3uf15de2av9rvlw9r8by">
             <property name="@location_set_by_user" value="true"/>
@@ -483,7 +483,7 @@
     </node>
     <node uin="N-3uf15de2avbvav-5euaj2">
         <property name="$metaclass" value="State20"/>
-        <property name="$name" value="Authenticated"/>
+        <property name="$name" value="LoggedIn"/>
         <node uin="-acitv2e2avbvbbz9nbv3">
             <property name="$metaclass" value="Region20"/>
             <property name="$name" value="Region20"/>
@@ -563,7 +563,7 @@
     </node>
     <node uin="N-3uf15de2avd3fe-6qj7jl">
         <property name="$metaclass" value="State20"/>
-        <property name="$name" value="Session Invalid"/>
+        <property name="$name" value="LoggedOut"/>
         <node uin="-acitv2e2avd3feqjmdej">
             <property name="$metaclass" value="Region20"/>
             <property name="$name" value="Region20"/>

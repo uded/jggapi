@@ -20,7 +20,7 @@ package pl.mn.communicator;
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: IUser.java,v 1.10 2004-12-11 17:22:33 winnetou25 Exp $
+ * @version $Id: IUser.java,v 1.11 2004-12-12 16:21:55 winnetou25 Exp $
  */
 public interface IUser {
 
@@ -29,9 +29,6 @@ public interface IUser {
      */
     int getUin();
 
-    /**
-     * @param uin
-     */
-    void setUin(int uin);
+    GGUserMode getUserMode();
     
 }

@@ -19,7 +19,7 @@ package pl.mn.communicator.gadu.handlers;
 
 import pl.mn.communicator.IncommingMessage;
 import pl.mn.communicator.event.MessageArrivedEvent;
-import pl.mn.communicator.gadu.GGRecvMsg;
+import pl.mn.communicator.gadu.in.GGRecvMsg;
 
 /**
  * Created on 2004-11-28

@@ -15,14 +15,18 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.out;
 
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.GGVersion;
+import pl.mn.communicator.Status60;
+import pl.mn.communicator.gadu.GGOutgoingPackage;
+import pl.mn.communicator.gadu.GGStatusEnabled;
+import pl.mn.communicator.gadu.GGUtils;
 
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.5 2004-12-12 01:22:30 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 
@@ -59,7 +63,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 	private String m_description = null;
 	
 	/** Version of the client */
-	private int m_version =  0x20; //wersja 6.00
+	private int m_version =  GGVersion.VERSION_60;
 
 	/** Return time */
 	private int m_time = -1;
@@ -72,18 +76,18 @@ public class GGLogin60 implements GGOutgoingPackage {
 		m_loginHash = GGUtils.getLoginHash(password, seed);
 	}
 	
-	public void setStatus(IStatus status) {
-		if (status == null) throw new NullPointerException("Status cannot be null");
-		m_status = GGUtils.getProtocolStatus(status, status.isFriendsOnly(), status.isBlockedMask());
-		if (status.isDescriptionSet()) {
-			m_description = status.getDescription();
+	public void setStatus(Status60 localStatus) {
+		if (localStatus == null) throw new NullPointerException("localStatus cannot be null");
+		m_status = GGUtils.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
+		if (localStatus.isDescriptionSet()) {
+			m_description = localStatus.getDescription();
 		}
-		if (status.isReturnDateSet()) {
-			m_time = GGUtils.millisToSeconds(status.getReturnDate().getTime());
+		if (localStatus.isReturnDateSet()) {
+			m_time = GGUtils.millisToSeconds(localStatus.getReturnDate().getTime());
 		}
 	}
 	
-	public IStatus getStatus() {
+	public Status60 getStatus() {
 		if (m_time > 0) {
 			long timeInMillis = GGUtils.secondsToMillis(m_time);
 			return GGUtils.getClientStatus(m_status, m_description, timeInMillis);
@@ -136,9 +140,9 @@ public class GGLogin60 implements GGOutgoingPackage {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getPacketType()
 	 */
-	public int getHeader() {
+	public int getPacketType() {
 		return GG_LOGIN60;
 	}
 

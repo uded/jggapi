@@ -15,9 +15,12 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.out;
 
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.gadu.GGNotifiable;
+import pl.mn.communicator.gadu.GGOutgoingPackage;
+import pl.mn.communicator.gadu.GGUtils;
 
 /**
  * 
@@ -26,39 +29,29 @@ import pl.mn.communicator.IUser;
  *      char type;  // rodzaj u�ytkownika
  *     };
  *
- * @see pl.mn.communicator.gadu.GGNotifyReply
+ * @see pl.mn.communicator.gadu.in.GGNotifyReply
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotify.java,v 1.14 2004-12-11 17:22:49 winnetou25 Exp $
+ * @version $Id: GGNotify.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
-public class GGNotify implements GGOutgoingPackage {
-	
-	public static final int GG_NOTIFY = 0x10;
+public class GGNotify implements GGOutgoingPackage, GGNotifiable {
 
-    public static final int GG_USER_OFFLINE = 0x01;
+	public static final int GG_NOTIFY_FIRST = 0x0F;
+	public static final int GG_NOTIFY_LAST = 0x10;
 
-    public static final int GG_USER_NORMAL = 0x03;
-
-    public static final int GG_USER_BLOCKED = 0x04;
-    
-    private IUser[] m_users;
+    private IUser[] m_users = new IUser[0];
 
     public GGNotify(IUser[] users) {
         if (users == null) throw new NullPointerException("users cannot be null");
     	m_users = users;
     }
 
-    GGNotify(IUser users) {
-        m_users = new IUser[1];
-        m_users[0] = users;
-    }
-
     /**
-     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getPacketType()
      */
-    public int getHeader() {
-        return GG_NOTIFY;
+    public int getPacketType() {
+        return GG_NOTIFY_LAST;
     }
 
     /**
@@ -72,22 +65,22 @@ public class GGNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        //      4 dla int'a i jeden dla char'a
-        byte[] data = new byte[m_users.length * 5];
+        byte[] toSend = new byte[getLength()];
 
-        for (int i = 0; i < m_users.length; i++) {
-            byte[] userNo = GGUtils.intToByte(m_users[i].getUin());
+        for (int i=0; i<m_users.length; i++) {
+        	IUser user = m_users[i];
+            byte[] uinByte = GGUtils.intToByte(user.getUin());
 
-            for (int j = 0; j < userNo.length; j++) {
-                // skopiuj nr uzytkownika do data
-                data[(i * 5) + j] = userNo[j];
+            for (int j=0;j<uinByte.length; j++) {
+            	toSend[(i * 5) + j] = uinByte[j];
             }
 
-            // sprawdzic czy sie dobrze konwertuje z char do unsigned byte
-            data[(i * 5) + 4] = GG_USER_NORMAL;
+            byte protocolUserMode = GGUtils.getProtocolUserMode(user.getUserMode());
+            
+            toSend[(i * 5) + 4] = protocolUserMode;
         }
 
-        return data;
+        return toSend;
     }
     
 }

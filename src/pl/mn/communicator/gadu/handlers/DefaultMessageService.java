@@ -30,7 +30,7 @@ import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.MessageArrivedEvent;
 import pl.mn.communicator.event.MessageDeliveredEvent;
 import pl.mn.communicator.event.MessageListener;
-import pl.mn.communicator.gadu.GGSendMsg;
+import pl.mn.communicator.gadu.out.GGSendMsg;
 
 /**
  * Created on 2004-11-28
@@ -55,7 +55,7 @@ public class DefaultMessageService implements IMessageService {
 	 * @see pl.mn.communicator.IMessageService#sendMessage(pl.mn.communicator.OutgoingMessage)
 	 */
 	public void sendMessage(OutgoingMessage outgoingMessage) throws GGException {
-		if (m_session.getSessionState() == SessionState.AUTHENTICATED) {
+		if (m_session.getSessionState() == SessionState.LOGGED_IN) {
 			try {
 				GGSendMsg messageOut = new GGSendMsg(outgoingMessage);
 				m_session.getSessionAccessor().sendPackage(messageOut);
@@ -63,7 +63,7 @@ public class DefaultMessageService implements IMessageService {
 				throw new GGException("Error occured while sending message: "+outgoingMessage, ex);
 			}
 		} else {
-			throw new GGSessionException("Incorrect session state: "+SessionState.getState(m_session.getSessionState()));
+			throw new GGSessionException("Incorrect session state: "+m_session.getSessionState());
 		}
 	}
 	

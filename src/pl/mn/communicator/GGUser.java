@@ -21,19 +21,23 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * The class represents Gadu-Gadu user.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractUser.java,v 1.15 2004-12-11 17:22:33 winnetou25 Exp $
+ * @version $Id: GGUser.java,v 1.1 2004-12-12 16:21:55 winnetou25 Exp $
  */
-public abstract class AbstractUser implements IUser {
+public class GGUser implements IUser {
 	
-    private static Log logger = LogFactory.getLog(AbstractUser.class);
-    
-    protected int m_uin;
+    private static Log logger = LogFactory.getLog(GGUser.class);
 
-    public AbstractUser(int uin) {
+    private int m_uin = -1;
+    private GGUserMode m_userMode = null;
+    
+    public GGUser(int uin, GGUserMode userMode) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
-        m_uin = uin;
+    	if (userMode == null) throw new NullPointerException("userMode cannot be null");
+    	m_uin = uin;
+    	m_userMode = userMode;
     }
 
     /**
@@ -42,13 +46,13 @@ public abstract class AbstractUser implements IUser {
     public int getUin() {
         return m_uin;
     }
-
+    
     /**
-     * @param uin 
-     */
-    public void setUin(int uin) {
-        m_uin = uin;
-    }
+	 * @see pl.mn.communicator.IUser#getUserMode()
+	 */
+	public GGUserMode getUserMode() {
+		return m_userMode;
+	}
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)
@@ -68,4 +72,11 @@ public abstract class AbstractUser implements IUser {
         return m_uin;
     }
 
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "Uin: " + m_uin;
+    }
+    
 }

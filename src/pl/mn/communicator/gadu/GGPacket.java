@@ -18,35 +18,18 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Created on 2004-12-11
+ * Created on 2004-12-12
  * 
  * @author mateusz
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GGLoginFailed implements GGIncomingPackage {
+public interface GGPacket {
 
-	public final static int GG_LOGIN_FAILED = 9;
-
-	private static GGLoginFailed m_instance = null;
-	
-	private GGLoginFailed() {
-		//prevent instant
-	}
-	
 	/**
-	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
+	 * @return constant denoting Gadu-Gadu packet type
 	 */
-	public int getPacketType() {
-		return GG_LOGIN_FAILED;
-	}
+	int getPacketType();
 	
-	public static GGLoginFailed getInstance() {
-		if (m_instance == null) {
-			m_instance = new GGLoginFailed();
-		}
-		return m_instance;
-	}
-
 }

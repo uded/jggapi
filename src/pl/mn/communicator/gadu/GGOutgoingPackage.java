@@ -20,12 +20,10 @@ package pl.mn.communicator.gadu;
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGOutgoingPackage.java,v 1.9 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGOutgoingPackage.java,v 1.10 2004-12-12 16:21:54 winnetou25 Exp $
  */
-public interface GGOutgoingPackage {
+public interface GGOutgoingPackage extends GGPacket {
 	
-    int getHeader();
-
     int getLength();
 
     byte[] getContents();

@@ -20,7 +20,7 @@ package pl.mn.communicator.gadu.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.gadu.GGDisconnecting;
+import pl.mn.communicator.gadu.in.GGDisconnecting;
 
 /**
  * Created on 2004-11-28

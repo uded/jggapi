@@ -15,7 +15,9 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.in;
+
+import pl.mn.communicator.gadu.GGIncomingPackage;
 
 /**
  * Created on 2004-12-11
@@ -25,13 +27,13 @@ package pl.mn.communicator.gadu;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GGLoginOK implements GGIncomingPackage {
+public class GGLoginFailed implements GGIncomingPackage {
 
-	private static GGLoginOK m_instance = null;
+	public final static int GG_LOGIN_FAILED = 9;
+
+	private static GGLoginFailed m_instance = null;
 	
-	public final static int GG_LOGIN_OK = 3;
-
-	private GGLoginOK() {
+	private GGLoginFailed() {
 		//prevent instant
 	}
 	
@@ -39,12 +41,12 @@ public class GGLoginOK implements GGIncomingPackage {
 	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
 	 */
 	public int getPacketType() {
-		return GG_LOGIN_OK;
+		return GG_LOGIN_FAILED;
 	}
 	
-	public static GGLoginOK getInstance() {
+	public static GGLoginFailed getInstance() {
 		if (m_instance == null) {
-			m_instance = new GGLoginOK();
+			m_instance = new GGLoginFailed();
 		}
 		return m_instance;
 	}

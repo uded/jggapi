@@ -19,6 +19,8 @@ package pl.mn.communicator.event;
 
 import java.util.EventObject;
 
+import pl.mn.communicator.SessionState;
+
 /**
  * Created on 2004-11-28
  * 
@@ -29,20 +31,22 @@ import java.util.EventObject;
  */
 public class SessionStateEvent extends EventObject {
 
-	private int m_oldState = -1;
-	private int m_newState = -1;
+	private SessionState m_oldState = null;
+	private SessionState m_newState = null;
 	
-	public SessionStateEvent(Object source, int oldState, int newState) {
+	public SessionStateEvent(Object source, SessionState oldState, SessionState newState) {
 		super(source);
+		if (oldState == null) throw new NullPointerException("oldState cannot be null");
+		if (newState == null) throw new NullPointerException("newState cannot be null");
 		m_oldState = oldState;
 		m_newState = newState;
 	}
 	
-	public int getOldState() {
+	public SessionState getOldState() {
 		return m_oldState;
 	}
 	
-	public int getNewState() {
+	public SessionState getNewState() {
 		return m_newState;
 	}
 	

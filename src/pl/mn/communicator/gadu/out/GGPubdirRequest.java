@@ -15,40 +15,49 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.gadu.out;
+
+import pl.mn.communicator.gadu.GGOutgoingPackage;
 
 /**
- * The packet is retrieved from the Gadu-Gadu server just after we connect to it.
- * The class parses package and gets seed from server.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcome.java,v 1.12 2004-12-11 17:22:49 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
  */
-public class GGWelcome implements GGIncomingPackage {
-    
-	public static final int GG_PACKAGE_WELCOME = 0x1;
+public class GGPubdirRequest implements GGOutgoingPackage {
 
-	private int m_seed = -1;
+	public static final int GG_PUBDIR50_REQUEST = 0x0014;
+	
+//#define GG_PUBDIR50_REQUEST 0x0014
+//	
+//struct gg_pubdir50 {
+//	char type;
+//	int seq;
+//	char request[];
+//};
 
-    /**
-     * Constructor for Welcome.
-     * @param data dane pakietu
+	/**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getPacketType()
      */
-    public GGWelcome(byte[] data) {
-    	if (data == null) throw new NullPointerException("data cannot be null");
-        m_seed = GGUtils.byteToInt(data);
+    public int getPacketType() {
+    	return GG_PUBDIR50_REQUEST;
     }
-    
-    /**
-	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_PACKAGE_WELCOME;
-	}
 
-    public int getSeed() {
-        return m_seed;
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
+     */
+    public int getLength() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
+     */
+    public byte[] getContents() {
+        // TODO Auto-generated method stub
+        return null;
     }
     
 }

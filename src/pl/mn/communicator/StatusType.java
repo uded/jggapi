@@ -24,37 +24,37 @@ package pl.mn.communicator;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class StatusConst {
+public class StatusType {
 
 	private String m_status;
 	
-	private StatusConst(String status) {
+	private StatusType(String status) {
 		m_status = status;
 	}
 
 	/** Status online */
-	public final static StatusConst ONLINE = new StatusConst("online");
+	public final static StatusType ONLINE = new StatusType("online");
 	
 	/** Status online with description */
-	public final static StatusConst ONLINE_WITH_DESCRIPTION = new StatusConst("online_with_desc");
+	public final static StatusType ONLINE_WITH_DESCRIPTION = new StatusType("online_with_desc");
 	
 	/** Status offline */
-	public final static StatusConst OFFLINE = new StatusConst("offline");
+	public final static StatusType OFFLINE = new StatusType("offline");
 	
 	/** Status offline with description */
-	public final static StatusConst OFFLINE_WITH_DESCRIPTION = new StatusConst("offline_with_desc");
+	public final static StatusType OFFLINE_WITH_DESCRIPTION = new StatusType("offline_with_desc");
 	
 	/** Status busy */
-	public final static StatusConst BUSY = new StatusConst("busy");
+	public final static StatusType BUSY = new StatusType("busy");
 	
 	/** Status busy with description */
-	public final static StatusConst BUSY_WITH_DESCRIPTION = new StatusConst("busy_with_desc");
+	public final static StatusType BUSY_WITH_DESCRIPTION = new StatusType("busy_with_desc");
 	
 	/** Status invisible */
-	public final static StatusConst INVISIBLE = new StatusConst("invisible");
+	public final static StatusType INVISIBLE = new StatusType("invisible");
 	
 	/** Status invisible with description */
-	public final static StatusConst INVISIBLE_WITH_DESCRIPTION = new StatusConst("invisible_with_desc");
+	public final static StatusType INVISIBLE_WITH_DESCRIPTION = new StatusType("invisible_with_desc");
 	
 	public boolean isDescriptionStatus() {
 		return m_status.endsWith("desc");
