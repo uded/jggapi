@@ -21,44 +21,56 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IRegistrationService.java,v 1.8 2005-01-25 23:46:35 winnetou25 Exp $
+ * @version $Id: IRegistrationService.java,v 1.9 2005-01-26 23:05:46 winnetou25 Exp $
  */
 public interface IRegistrationService {
-
-	GGToken getRegToken() throws GGException;
+	
+	GGToken getRegistrationToken() throws GGException;
 	
 	/**
 	 * This method allows to change password on Gadu-Gadu account.
 	 * 
-	 * @param email e-mail the e-mail of the user
-	 * @param password the current password
-	 * @param qa question
-	 * @param answer answer to the above question
 	 */
-	void changePassword(String email, String password, int qa, String answer);
-	
+	void changePassword(int uin, String email, String oldPassword, String newPassword, String tokenID, String tokenVal) throws GGException;
+
 	/**
 	 * Use this method if you want to create a new Gadu-Gadu account.
 	 * 
-	 * @param email Email address that is associated with the new account.
+	 * @param email e-mail address that is associated with the new account.
 	 * @param password Password to access the new account.
-	 * @param qa The question type that is used to remind password.
-	 * @param answer to the qa question.
+	 * @param tokenID the id of the token
+	 * @param tokenVal the value of the token
 	 * @return uin of new Gadu-Gadu account.
 	 * @throws <code>GGException</code> if error occurs while registering new Gadu-Gadu account.
 	 */
-	int registerAccount(String email, String password, String tokenID, String code, int qa, String answer) throws GGException;
+	int registerAccount(String email, String password, String tokenID, String tokenVal) throws GGException;
 
 	/**
-	 * Use this method if you want to delete your current account from Gadu-Gadu server.<BR>
+	 * Use this method if you want to create a new Gadu-Gadu account.
+	 * 
+	 * @param email e-mail address that is associated with the new account.
+	 * @param password password to access the new account.
+	 * @param tokenID the id of the token
+	 * @param tokenVal the value of the token
+	 * @param question the question type that is used to remind password.
+	 * @param answer the answer to the previous question.
+	 * @return uin of new Gadu-Gadu account.
+	 * @throws <code>GGException</code> if error occurs while registering new Gadu-Gadu account.
+	 */
+	int registerAccount(String email, String password, String tokenID, String tokenVal, int question, String answer) throws GGException;
+
+	/**
+	 * Use this method if you want to delete your current account from Gadu-Gadu server.
 	 * 
 	 * @param uin Gadu-Gadu number to unregister.
 	 * @param password the password that will be used together with uin in unregistration process.
+	 * @param tokenID the id of the token
+	 * @param tokenVal the value of the token
 	 * @return <code>true</code> if unregistration was successful, false otherwise.
 	 * @throws <code>GGException</code> if error occurs while unregistering Gadu-Gadu account.
 	 */
-	void unregisterAccount(int uin, String password) throws GGException;
-	
+	void unregisterAccount(int uin, String password, String tokenID, String tokenVal) throws GGException;
+
 	/**
 	 * Sends user's current password to user's mailbox.
 	 * 

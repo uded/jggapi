@@ -27,7 +27,7 @@ public class Main3 {
 
 		final ISession session = new Session();
 		
-		GGToken token = session.getRegistrationService().getRegToken();
+		GGToken token = session.getRegistrationService().getRegistrationToken();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		String line = reader.readLine();
 		
