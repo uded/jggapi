@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -21,7 +21,7 @@ package pl.mn.communicator.packet.in;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginOK.java,v 1.2 2004-12-17 20:23:02 winnetou25 Exp $
+ * @version $Id: GGLoginOK.java,v 1.3 2004-12-19 17:14:43 winnetou25 Exp $
  */
 public class GGLoginOK implements GGIncomingPackage {
 

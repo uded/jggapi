@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -37,7 +37,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.13 2004-12-19 16:10:34 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.14 2004-12-19 17:14:42 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 

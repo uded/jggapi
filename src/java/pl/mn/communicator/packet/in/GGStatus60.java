@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.4 2004-12-19 11:49:06 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.5 2004-12-19 17:14:43 winnetou25 Exp $
  */
 public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -21,7 +21,7 @@ package pl.mn.communicator.packet;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPacket.java,v 1.2 2004-12-18 16:07:24 winnetou25 Exp $
+ * @version $Id: GGPacket.java,v 1.3 2004-12-19 17:14:43 winnetou25 Exp $
  */
 public interface GGPacket {
 

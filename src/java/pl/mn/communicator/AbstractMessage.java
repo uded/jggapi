@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * is common for incoming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.4 2004-12-19 16:10:42 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.5 2004-12-19 17:14:35 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -34,7 +34,7 @@ import pl.mn.communicator.PublicDirSearchReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.11 2004-12-19 13:42:31 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.12 2004-12-19 17:14:42 winnetou25 Exp $
  */
 public interface PublicDirListener extends EventListener {
 
