@@ -17,13 +17,15 @@ PARTIALY-DONE - 7. MED - Export i import listy kontaktow , TODO. obsluga PUT_MOR
 16. Nie dziala odblokowywanie, jezeli zablokowalismy usera i potem metoda changeStatus w presence service
 	to zmieniamy, to user jest nadal zablokowany.
 
-17. Napisac ant-build.
 18. Napisac testy junit.
 19. RemoteIP jest zle konwertowane do IP. O co chodzi?
 20.	Dzisiaj nie potrafimy monitorowac wiecej niz 2040 bytes long uzytkownikow. Jezeli taki jest pakiet
 	trzeba uzywac GG_Request_First i potem  GG_Request_last a my dzisiaj tylko GG_request_last pakietu uzywamy.
+	Przynajmniej przy staracie, bo w trakcie dzialania mozemy zawsze AddNotify zrobic.
 
-Bugs:
+21. Implementacja wysylania obrazkow i wiadomosci richtext.
+
+KnownBugs:
 status in LoginContext does not work out! Tak jakby serwer GG to ignorowal
 na razie rozwiazalem to tak ze po dostaniu pakietu login ok ustawiam status recznie.
 
