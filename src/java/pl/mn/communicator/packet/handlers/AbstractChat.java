@@ -26,7 +26,7 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractChat.java,v 1.2 2005-01-29 15:44:17 winnetou25 Exp $
+ * @version $Id: AbstractChat.java,v 1.3 2005-01-30 17:59:34 winnetou25 Exp $
  */
 public abstract class AbstractChat implements IChat {
 
@@ -36,7 +36,7 @@ public abstract class AbstractChat implements IChat {
 	protected AbstractChat(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
-		session.getMessageService().addMessageListener(getMessageHandler());
+		//session.getMessageService().addMessageListener(getMessageHandler());
 	}
 
 	public void addChatListener(MessageListener messageListener) {

@@ -34,7 +34,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GroupChat.java,v 1.4 2005-01-29 17:09:48 winnetou25 Exp $
+ * @version $Id: GroupChat.java,v 1.5 2005-01-30 17:59:35 winnetou25 Exp $
  */
 public class GroupChat extends AbstractChat implements IGroupChat {
 	
@@ -45,6 +45,7 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		this(session, new int[0]);
 	}
 
+	//friendly
 	GroupChat(Session session, int[] recipientUins) {
 		super(session);
 		for (int i=0; i<recipientUins.length; i++) {
