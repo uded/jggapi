@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="jggapi" default="javadoc">
+    <target name="javadoc">
+        <javadoc destdir="doc" access="public" use="true" notree="false"
+            nonavbar="false" noindex="false" splitindex="true"
+            author="true" version="true" nodeprecatedlist="false"
+            nodeprecated="false"
+            packagenames="pl.mn.communicator.gadu,pl.mn.communicator"
+            sourcepath="src"
+            classpath="bin;lib\jface.jar;lib\runtime.jar;lib\workbench.jar;lib\swt.jar;lib\boot.jar" doctitle="JGGAPI"/>
+    </target>
+</project>
