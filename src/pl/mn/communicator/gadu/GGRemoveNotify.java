@@ -17,35 +17,34 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
  * Pakiet usuwaj±cy konkretnego u¿ytkownika z listy monitorowanych u¿ytkowników.
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 class GGRemoveNotify implements GGOutgoingPackage {
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+     */
+    public int getHeader() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
-	 */
-	public int getHeader() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
+     */
+    public int getLength() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
-	 */
-	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
-	 */
-	public byte[] getContents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
+     */
+    public byte[] getContents() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -19,56 +19,56 @@ package pl.mn.communicator.gadu;
 
 import pl.mn.communicator.IUser;
 
+
 /**
  * Pakiet informuj±cy serwer rozmów o monitorowanym u¿ytkowniku.
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 class GGNotify implements GGOutgoingPackage {
-	public static final int GG_USER_OFFLINE = 0x01;
-	public static final int GG_USER_NORMAL = 0x03;
-	public static final int GG_USER_BLOCKED = 0x04;
+    public static final int GG_USER_OFFLINE = 0x01;
+    public static final int GG_USER_NORMAL = 0x03;
+    public static final int GG_USER_BLOCKED = 0x04;
+    private IUser[] users;
 
-	private IUser[] users;
+    /**
+     * Tworzy pakiet <code>GGNotify</code> na podstawie listy u¿ytkowników.
+     * @param users lista u¿ytkowników
+     */
+    GGNotify(IUser[] users) {
+        this.users = users;
+    }
 
-	/**
-	 * Tworzy pakiet <code>GGNotify</code> na podstawie listy u¿ytkowników.
-	 * @param users lista u¿ytkowników
-	 */
-	GGNotify(IUser[] users) {
-		this.users = users;
-	}
+    /**
+     * Tworzy pakiet <code>GGNotyfy</code> na podstawie u¿ytkownika.
+     * @param users u¿ytkownik
+     */
+    GGNotify(IUser users) {
+        this.users = new IUser[1];
+        this.users[0] = users;
+    }
 
-	/**
-	 * Tworzy pakiet <code>GGNotyfy</code> na podstawie u¿ytkownika.
-	 * @param users u¿ytkownik
-	 */
-	GGNotify(IUser users) {
-		this.users = new IUser[1];
-		this.users[0] = users;
-	}
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+     */
+    public int getHeader() {
+        return 0x10;
+    }
 
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
-	 */
-	public int getHeader() {
-		return 0x10;
-	}
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
+     */
+    public int getLength() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
-	 */
-	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
-	 */
-	public byte[] getContents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
+     */
+    public byte[] getContents() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

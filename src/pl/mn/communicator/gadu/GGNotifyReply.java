@@ -17,10 +17,10 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
-
 }

@@ -17,45 +17,47 @@
  */
 package pl.mn.communicator.gadu;
 
-import java.util.Map;
-
 import org.apache.log4j.Logger;
 
 import pl.mn.communicator.AbstractStatus;
 
+import java.util.Map;
+
+
 /**
  * Status u¿ytkownika gg.
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public class Status extends AbstractStatus {
-	private static Logger logger = Logger.getLogger(Status.class);
-	/**
-	 * Status niewidoczny.
-	 */
-	public final static int NOT_VISIBLE = 3;
+    private static Logger logger = Logger.getLogger(Status.class);
 
-	/**
-	 * Status zajety.
-	 */
-	public final static int BUSY = 6;
+    /**
+     * Status niewidoczny.
+     */
+    public final static int NOT_VISIBLE = 3;
 
-	/**
-	 * @param status status u¿ytkownika
-	 */
-	public Status(int status) {
-		super(status);
-	}
+    /**
+     * Status zajety.
+     */
+    public final static int BUSY = 6;
 
-	/**
-	 * Pobierz dostêpne statusy.
-	 * @return Map mapa dostêpnych statusów
-	 * @see pl.mn.communicator.AbstractStatus#getAvaiableStatuses()
-	 */
-	public Map getAvaiableStatuses() {
-		Map map = super.getAvaiableStatuses();
-		map.put(new Integer(Status.NOT_VISIBLE), "NOT VISIBLE");
-		return map;
-	}
+    /**
+     * @param status status u¿ytkownika
+     */
+    public Status(int status) {
+        super(status);
+    }
 
+    /**
+     * Pobierz dostêpne statusy.
+     * @return Map mapa dostêpnych statusów
+     * @see pl.mn.communicator.AbstractStatus#getAvaiableStatuses()
+     */
+    public Map getAvaiableStatuses() {
+        Map map = super.getAvaiableStatuses();
+        map.put(new Integer(Status.NOT_VISIBLE), "NOT VISIBLE");
+
+        return map;
+    }
 }

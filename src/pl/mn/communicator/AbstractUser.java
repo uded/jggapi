@@ -19,99 +19,97 @@ package pl.mn.communicator;
 
 import org.apache.log4j.Logger;
 
+
 /**
  * U¿ytkownik serwera rozmów.
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public class AbstractUser implements IUser {
-	private static Logger logger = Logger.getLogger(AbstractUser.class);
+    private static Logger logger = Logger.getLogger(AbstractUser.class);
+    protected int number;
+    protected boolean onLine;
+    protected String name;
 
-	protected int number;
-	protected boolean onLine;
-	protected String name;
+    /**
+     * Tworz u¿ytkownika.
+     * @param number numer u¿ykownika
+     * @param name nazwa u¿ytkownika
+     * @param onLine status u¿ytkownika
+     */
+    public AbstractUser(int number, String name, boolean onLine) {
+        this.number = number;
+        this.onLine = onLine;
+        this.name = name;
+    }
 
-	/**
-	 * Tworz u¿ytkownika.
-	 * @param number numer u¿ykownika
-	 * @param name nazwa u¿ytkownika
-	 * @param onLine status u¿ytkownika
-	 */
-	public AbstractUser(int number, String name, boolean onLine) {
-		this.number = number;
-		this.onLine = onLine;
-		this.name = name;
-	}
+    /**
+     * Zwróæ nick u¿ytkownika.
+     * @return String
+     */
+    public String getName() {
+        return name;
+    }
 
-	/**
-	 * Zwróæ nick u¿ytkownika.
-	 * @return String
-	 */
-	public String getName() {
-		return name;
-	}
+    /**
+     * Zwróæ numer u¿ytkownika.
+     * @return int
+     */
+    public int getNumber() {
+        return number;
+    }
 
-	/**
-	 * Zwróæ numer u¿ytkownika.
-	 * @return int
-	 */
-	public int getNumber() {
-		return number;
-	}
+    /**
+     * Zmieñ nick u¿ytkownika
+     * @param name nowe nick u¿ytkownika
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	/**
-	 * Zmieñ nick u¿ytkownika
-	 * @param name nowe nick u¿ytkownika
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Zmieñ numer u¿ytkownika.
+     * @param number nowy numer u¿ytkownika
+     */
+    public void setNumber(int number) {
+        this.number = number;
+    }
 
-	/**
-	 * Zmieñ numer u¿ytkownika.
-	 * @param number nowy numer u¿ytkownika
-	 */
-	public void setNumber(int number) {
-		this.number = number;
-	}
+    /**
+     * Zwróæ status u¿ytkownika.
+     * True - u¿ytkownik online
+     * @return boolean
+     */
+    public boolean isOnLine() {
+        return onLine;
+    }
 
-	/**
-	 * Zwróæ status u¿ytkownika.
-	 * True - u¿ytkownik online
-	 * @return boolean
-	 */
-	public boolean isOnLine() {
-		return onLine;
-	}
+    /**
+     * Zmieñ status u¿ytkownika.
+     * @param onLine nowy status u¿ytkownika
+     */
+    public void setOnLine(boolean onLine) {
+        this.onLine = onLine;
+    }
 
-	/**
-	 * Zmieñ status u¿ytkownika.
-	 * @param onLine nowy status u¿ytkownika
-	 */
-	public void setOnLine(boolean onLine) {
-		this.onLine = onLine;
-	}
+    /**
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    public boolean equals(Object o) {
+        return (o instanceof IUser) && (number == ((IUser) o).getNumber());
+    }
 
-	/**
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	public boolean equals(Object o) {
-		return (o instanceof IUser)
-			&& (number == ((IUser) o).getNumber());
-	}
+    /**
+     * @see java.lang.Object#hashCode()
+     */
+    public int hashCode() {
+        return number;
+    }
 
-	/**
-	 * @see java.lang.Object#hashCode()
-	 */
-	public int hashCode() {
-		return number;
-	}
-
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return "[" + name + ":" + number + ":" + onLine + "]";
-	}
-
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "[" + name + ":" + number + ":" + onLine + "]";
+    }
 }

@@ -17,28 +17,29 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
  * Wiadomosc otrzymywana zaraz po polaczeniu z serwerem gg
  * zawiera seed (int) potrzebny do zakodowania hasla
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 class GGWelcome implements GGIncomingPackage {
-	private int seed;
+    private int seed;
 
-	/**
-	 * Constructor for Welcome.
-	 * @param data dane pakietu
-	 */
-	public GGWelcome(byte[] data) {
-		this.seed = GGConversion.byteToInt(data);
-	}
+    /**
+     * Constructor for Welcome.
+     * @param data dane pakietu
+     */
+    public GGWelcome(byte[] data) {
+        this.seed = GGConversion.byteToInt(data);
+    }
 
-	/**
-	 * Pobierz warto¶æ seed pobran± z serwera.
-	 * @return numer seed u¿ywany do szyfrowania has³a.
-	 */
-	public int getSeed() {
-		return seed;
-	}
+    /**
+     * Pobierz warto¶æ seed pobran± z serwera.
+     * @return numer seed u¿ywany do szyfrowania has³a.
+     */
+    public int getSeed() {
+        return seed;
+    }
 }

@@ -17,9 +17,10 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
  * Pakiet przychodz±cy gg.
- * @version $Revision: 1.2 $
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 interface GGIncomingPackage {

@@ -19,60 +19,62 @@ package pl.mn.communicator;
 
 import org.apache.log4j.Logger;
 
+
 /**
  * Wiadomo¶æ do serwera rozmów.
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public abstract class AbstractMessage implements IMessage {
-	private static Logger logger = Logger.getLogger(AbstractMessage.class);
-	/**
-	 * Nr adresata wiadomo¶ci
-	 */
-	protected int user;
+    private static Logger logger = Logger.getLogger(AbstractMessage.class);
 
-	/**
-	 * Tre¶æ wiadomo¶ci
-	 */
-	protected String text;
+    /**
+     * Nr adresata wiadomo¶ci
+     */
+    protected int user;
 
-	/**
-	 * Tworzy wiadomo¶æ do konkretnego u¿ytkownika.
-	 * @param toUser nr u¿ytkownika do którego wysy³amy
-	 * @param text wiadomo¶æ tekstowa
-	 */
-	public AbstractMessage(int toUser, String text) {
-		this.user = toUser;
-		this.text = text;
-	}
+    /**
+     * Tre¶æ wiadomo¶ci
+     */
+    protected String text;
 
-	/**
-	 * Pobierz u¿ytkownika do którego jest wiadomoœæ
-	 * @return User numer u¿ytkownika
-	 */
-	public int getUser() {
-		return user;
-	}
+    /**
+     * Tworzy wiadomo¶æ do konkretnego u¿ytkownika.
+     * @param toUser nr u¿ytkownika do którego wysy³amy
+     * @param text wiadomo¶æ tekstowa
+     */
+    public AbstractMessage(int toUser, String text) {
+        this.user = toUser;
+        this.text = text;
+    }
 
-	/**
-	 * Pobierz tre¶æ wiadomo¶æi
-	 * @return String
-	 */
-	public String getText() {
-		return text;
-	}
-	/**
-	 * @param text tre¶æ wiadomo¶ci
-	 */
-	public void setText(String text) {
-		this.text = text;
-	}
+    /**
+     * Pobierz u¿ytkownika do którego jest wiadomoœæ
+     * @return User numer u¿ytkownika
+     */
+    public int getUser() {
+        return user;
+    }
 
-	/**
-	 * @param user numer u¿ytkownika
-	 */
-	public void setUser(int user) {
-		this.user = user;
-	}
+    /**
+     * Pobierz tre¶æ wiadomo¶æi
+     * @return String
+     */
+    public String getText() {
+        return text;
+    }
 
+    /**
+     * @param text tre¶æ wiadomo¶ci
+     */
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    /**
+     * @param user numer u¿ytkownika
+     */
+    public void setUser(int user) {
+        this.user = user;
+    }
 }

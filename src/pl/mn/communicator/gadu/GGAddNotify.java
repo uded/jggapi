@@ -17,36 +17,35 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
  * Pakiet dodaj±cy konkretnego u¿ytkownika do listy montorowancyh u¿ytkowników.
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 class GGAddNotify implements GGOutgoingPackage {
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+     */
+    public int getHeader() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
-	 */
-	public int getHeader() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
+     */
+    public int getLength() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
-	 */
-	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
-	 */
-	public byte[] getContents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
+     */
+    public byte[] getContents() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }

@@ -17,28 +17,32 @@
  */
 package pl.mn.communicator;
 
+
 /**
  * Klasa reprezentuj±ca serwer rozmów.
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public interface IServer {
-	/**
-	 * Zwróæ adres serwera rozmów.
-	 * @return String
-	 */
-	String getAddress();
-	/**
-	 * Zwróæ port serwera rozmów.
-	 * @return int
-	 */
-	int getPort();
-	/**
-	 * @param address adres serwera
-	 */
-	void setAddress(String address);
-	/**
-	 * @param port port serwera
-	 */
-	void setPort(int port);
+    /**
+     * Zwróæ adres serwera rozmów.
+     * @return String
+     */
+    String getAddress();
+
+    /**
+     * Zwróæ port serwera rozmów.
+     * @return int
+     */
+    int getPort();
+
+    /**
+     * @param address adres serwera
+     */
+    void setAddress(String address);
+
+    /**
+     * @param port port serwera
+     */
+    void setPort(int port);
 }

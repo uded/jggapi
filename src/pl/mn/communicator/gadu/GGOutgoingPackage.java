@@ -17,28 +17,29 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
  * Pakiet wychodz±cy gg.
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 interface GGOutgoingPackage {
-	/**
-	 * Zwróæ nag³ówek pakietu
-	 * @return int
-	 */
-	int getHeader();
+    /**
+     * Zwróæ nag³ówek pakietu
+     * @return int
+     */
+    int getHeader();
 
-	/**
-	 * Zwróæ d³ugo¶æ pakietu
-	 * D³ugo¶æ bez nag³ówka i inta zawieraj±cego d³ugo¶æ ca³ego pakietu.
-	 * @return int
-	 */
-	int getLength();
+    /**
+     * Zwróæ d³ugo¶æ pakietu
+     * D³ugo¶æ bez nag³ówka i inta zawieraj±cego d³ugo¶æ ca³ego pakietu.
+     * @return int
+     */
+    int getLength();
 
-	/**
-	 * Zwróæ bajty z zawarto¶ci± pakietu do wys³ania
-	 * @return byte[] zawarto¶æ pakietu
-	 */
-	byte [] getContents();
+    /**
+     * Zwróæ bajty z zawarto¶ci± pakietu do wys³ania
+     * @return byte[] zawarto¶æ pakietu
+     */
+    byte[] getContents();
 }

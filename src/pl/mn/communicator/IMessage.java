@@ -17,28 +17,32 @@
  */
 package pl.mn.communicator;
 
+
 /**
  * Wiadomo¶æ do serwera rozmów.
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public interface IMessage {
-	/**
-	 * Pobierz u¿ytkownika do którego jest wiadomo¶æ
-	 * @return User
-	 */
-	int getUser();
-	/**
-	 * Pobierz tre¶æ wiadomo¶æi
-	 * @return String
-	 */
-	String getText();
-	/**
-	 * @param text tre¶æ wiadomo¶ci
-	 */
-	void setText(String text);
-	/**
-	 * @param user u¿ytkownik
-	 */
-	void setUser(int user);
+    /**
+     * Pobierz u¿ytkownika do którego jest wiadomo¶æ
+     * @return User
+     */
+    int getUser();
+
+    /**
+     * Pobierz tre¶æ wiadomo¶æi
+     * @return String
+     */
+    String getText();
+
+    /**
+     * @param text tre¶æ wiadomo¶ci
+     */
+    void setText(String text);
+
+    /**
+     * @param user u¿ytkownik
+     */
+    void setUser(int user);
 }

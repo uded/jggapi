@@ -17,63 +17,64 @@
  */
 package pl.mn.communicator;
 
+import org.apache.log4j.Logger;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 
 /**
  * Klasa reprezentuj±ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
  * mog± zostaæ dodane w podklasach.
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public abstract class AbstractStatus implements IStatus {
-	private static Logger logger = Logger.getLogger(AbstractStatus.class);
+    private static Logger logger = Logger.getLogger(AbstractStatus.class);
 
-	/**
-	 * Aktualny status
-	 */
-	protected int status;
+    /**
+     * Aktualny status
+     */
+    protected int status;
 
-	/**
-	 * Tworz status.
-	 * @param status status u¿ytkownika
-	 */
-	public AbstractStatus(int status) {
-		this.status = status;
-	}
+    /**
+     * Tworz status.
+     * @param status status u¿ytkownika
+     */
+    public AbstractStatus(int status) {
+        this.status = status;
+    }
 
-	/**
-	 * Pobierz aktualny status
-	 * @return int
-	 */
-	public int getStatus() {
-		return status;
-	}
+    /**
+     * Pobierz aktualny status
+     * @return int
+     */
+    public int getStatus() {
+        return status;
+    }
 
-	/**
-	 * Ustaw aktualny status
-	 * @param status u¿ytkownika
-	 */
-	public void setStatus(int status) {
-		this.status = status;
-	}
+    /**
+     * Ustaw aktualny status
+     * @param status u¿ytkownika
+     */
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
-	/**
-	 * Pobierz dostêpne statusy.
-	 * Zwraca mapê dostêpnych statusów.
-	 * Kluczem jest Integer z nr statusu,
-	 * a wartoscia String z nazw± statusu
-	 * @return Map dostêpne statusy
-	 */
-	public Map getAvaiableStatuses() {
-		HashMap map = new HashMap();
+    /**
+     * Pobierz dostêpne statusy.
+     * Zwraca mapê dostêpnych statusów.
+     * Kluczem jest Integer z nr statusu,
+     * a wartoscia String z nazw± statusu
+     * @return Map dostêpne statusy
+     */
+    public Map getAvaiableStatuses() {
+        HashMap map = new HashMap();
 
-		map.put(new Integer(IStatus.ON_LINE), "On Line");
-		map.put(new Integer(IStatus.OFF_LINE), "Off Line");
+        map.put(new Integer(IStatus.ON_LINE), "On Line");
+        map.put(new Integer(IStatus.OFF_LINE), "Off Line");
 
-		return map;
-	}
+        return map;
+    }
 }

@@ -21,21 +21,22 @@ import org.apache.log4j.Logger;
 
 import pl.mn.communicator.AbstractUser;
 
+
 /**
  * U퓓tkownik gg.
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public class User extends AbstractUser {
-	private static Logger logger = Logger.getLogger(User.class);
+    private static Logger logger = Logger.getLogger(User.class);
 
-	/**
-	 * Tworz u퓓tkownika na podstawie numeru i nazwy.
-	 * @param number numer u퓓tkownika
-	 * @param name nazwa u퓓tkownika
-	 * @param onLine status u퓓tkownika
-	 */
-	public User(int number, String name, boolean onLine) {
-		super(number, name, onLine);
-	}
+    /**
+     * Tworz u퓓tkownika na podstawie numeru i nazwy.
+     * @param number numer u퓓tkownika
+     * @param name nazwa u퓓tkownika
+     * @param onLine status u퓓tkownika
+     */
+    public User(int number, String name, boolean onLine) {
+        super(number, name, onLine);
+    }
 }

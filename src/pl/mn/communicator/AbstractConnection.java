@@ -19,6 +19,7 @@ package pl.mn.communicator;
 
 import org.apache.log4j.Logger;
 
+
 /**
  * Po³±czenie z serwerem gg.<BR>
  * S³u¿y do tworzenia po³±czenia.
@@ -35,81 +36,83 @@ import org.apache.log4j.Logger;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public abstract class AbstractConnection implements IConnection {
-	private static Logger logger
-		= Logger.getLogger(AbstractConnection.class);
-	/**
-	 * Listener u¿ytkowników
-	 */
-	protected UserListener userListener = null;
+    private static Logger logger = Logger.getLogger(AbstractConnection.class);
 
-	/**
-	 * Listener po³±czenia
-	 */
-	protected ConnectionListener connectionListener = null;
+    /**
+     * Listener u¿ytkowników
+     */
+    protected UserListener userListener = null;
 
-	/**
-	 * Listener wiadomo¶ci
-	 */
-	protected MessageListener messageListener = null;
+    /**
+     * Listener po³±czenia
+     */
+    protected ConnectionListener connectionListener = null;
 
-	/**
-	 * Dodaj listenera u¿ytkowników.<BR>
-	 * Obs³uguje odpowiednie zdarzenia zwi±zane z u¿ytkownikami
-	 * takie jak pryj¶cie i odej¶cie u¿ytkownika
-	 * @see UserListener
-	 * @param userListener obiekt listenera
-	 */
-	public void addUserListener(UserListener userListener) {
-		this.userListener = userListener;
-	}
-	/**
-	 * Usuwa listenera u¿ytkowników.<BR>
-	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * @see UserListener
-	 */
-	public void removeUserListener() {
-		this.userListener = null;
-	}
+    /**
+     * Listener wiadomo¶ci
+     */
+    protected MessageListener messageListener = null;
 
-	/**
-	 * Dodaj listenera zwi±zanego z po³¹czeniem.<BR>
-	 * Obs³uguje on takie zdarzenia jak nawi±zanie po³±czenia,
-	 * zerwanie po³±czenia itp.
-	 * @see ConnectionListener
-	 * @param connectionListener obiekt listenera
-	 */
-	public void addConnectionListener(
-			ConnectionListener connectionListener) {
-		this.connectionListener = connectionListener;
-	}
-	/**
-	 * Usuwa listenera zwi±zanego z po³±czeniem.<BR>
-	 * Jê¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * @see ConnectionListener
-	 */
-	public void removeConnectionListener() {
-		this.connectionListener = null;
-	}
-	/**
-	 * Dodaje listenera wiadomo¶ci.<BR>
-	 * Obs³uguje on takie zdarzenia jak nadej¶cie wiadomo¶ci.
-	 * @see MessageListener
-	 * @param messageListener obiekt listenera
-	 */
-	public void addMessageListener(MessageListener messageListener) {
-		this.messageListener = messageListener;
-	}
+    /**
+     * Dodaj listenera u¿ytkowników.<BR>
+     * Obs³uguje odpowiednie zdarzenia zwi±zane z u¿ytkownikami
+     * takie jak pryj¶cie i odej¶cie u¿ytkownika
+     * @see UserListener
+     * @param userListener obiekt listenera
+     */
+    public void addUserListener(UserListener userListener) {
+        this.userListener = userListener;
+    }
 
-	/**
-	 * Usuwa listenera wiadomo¶ci.<BR>
-	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * @see MessageListener
-	 */
-	public void removeMessageListener() {
-		this.messageListener = null;
-	}
+    /**
+     * Usuwa listenera u¿ytkowników.<BR>
+     * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
+     * @see UserListener
+     */
+    public void removeUserListener() {
+        this.userListener = null;
+    }
+
+    /**
+     * Dodaj listenera zwi±zanego z po³¹czeniem.<BR>
+     * Obs³uguje on takie zdarzenia jak nawi±zanie po³±czenia,
+     * zerwanie po³±czenia itp.
+     * @see ConnectionListener
+     * @param connectionListener obiekt listenera
+     */
+    public void addConnectionListener(ConnectionListener connectionListener) {
+        this.connectionListener = connectionListener;
+    }
+
+    /**
+     * Usuwa listenera zwi±zanego z po³±czeniem.<BR>
+     * Jê¿eli nie ma aktywnego listenera nic siê nie dzieje.
+     * @see ConnectionListener
+     */
+    public void removeConnectionListener() {
+        this.connectionListener = null;
+    }
+
+    /**
+     * Dodaje listenera wiadomo¶ci.<BR>
+     * Obs³uguje on takie zdarzenia jak nadej¶cie wiadomo¶ci.
+     * @see MessageListener
+     * @param messageListener obiekt listenera
+     */
+    public void addMessageListener(MessageListener messageListener) {
+        this.messageListener = messageListener;
+    }
+
+    /**
+     * Usuwa listenera wiadomo¶ci.<BR>
+     * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
+     * @see MessageListener
+     */
+    public void removeMessageListener() {
+        this.messageListener = null;
+    }
 }

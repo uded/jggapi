@@ -17,38 +17,39 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
  * Naglowek wiadomosci gg.
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 class GGHeader {
-	private byte[] data;
-	private int type;
-	private int length;
+    private byte[] data;
+    private int type;
+    private int length;
 
-	/**
-	 * Constructor for Header.
-	 * @param data dane naglowka
-	 */
-	public GGHeader(byte[] data) {
-		this.type = GGConversion.byteToInt(data, 0);
-		this.length = GGConversion.byteToInt(data, 4);
-	}
+    /**
+     * Constructor for Header.
+     * @param data dane naglowka
+     */
+    public GGHeader(byte[] data) {
+        this.type = GGConversion.byteToInt(data, 0);
+        this.length = GGConversion.byteToInt(data, 4);
+    }
 
-	/**
-	 * Returns the length.
-	 * @return int
-	 */
-	public int getLength() {
-		return length;
-	}
+    /**
+     * Returns the length.
+     * @return int
+     */
+    public int getLength() {
+        return length;
+    }
 
-	/**
-	 * Returns the type.
-	 * @return int
-	 */
-	public int getType() {
-		return type;
-	}
+    /**
+     * Returns the type.
+     * @return int
+     */
+    public int getType() {
+        return type;
+    }
 }

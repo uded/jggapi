@@ -19,40 +19,43 @@ package pl.mn.communicator;
 
 import java.util.Map;
 
+
 /**
  * Klasa reprezentuj±ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
  * mog± zostaæ dodane w podklasach.
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public interface IStatus {
-	/**
-	 * Status on-line
-	 */
-	int ON_LINE = 1;
+    /**
+     * Status on-line
+     */
+    int ON_LINE = 1;
 
-	/**
-	 * Status off-line
-	 */
-	int OFF_LINE = 0;
+    /**
+     * Status off-line
+     */
+    int OFF_LINE = 0;
 
-	/**
-	 * Pobierz aktualny status
-	 * @return int
-	 */
-	int getStatus();
-	/**
-	 * Ustaw aktualny status
-	 * @param status status
-	 */
-	void setStatus(int status);
-	/**
-	 * Pobierz dostêpne statusy.
-	 * Zwraca mapê dostêpnych statusów.
-	 * Kluczem jest Integer z nr statusu,
-	 * a wartoscia String z nazw± statusu
-	 * @return Map
-	 */
-	Map getAvaiableStatuses();
+    /**
+     * Pobierz aktualny status
+     * @return int
+     */
+    int getStatus();
+
+    /**
+     * Ustaw aktualny status
+     * @param status status
+     */
+    void setStatus(int status);
+
+    /**
+     * Pobierz dostêpne statusy.
+     * Zwraca mapê dostêpnych statusów.
+     * Kluczem jest Integer z nr statusu,
+     * a wartoscia String z nazw± statusu
+     * @return Map
+     */
+    Map getAvaiableStatuses();
 }

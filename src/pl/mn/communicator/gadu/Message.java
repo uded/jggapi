@@ -21,20 +21,21 @@ import org.apache.log4j.Logger;
 
 import pl.mn.communicator.AbstractMessage;
 
+
 /**
  * Wiadomo¶æ gg.
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public final class Message extends AbstractMessage {
-	private static Logger logger = Logger.getLogger(Message.class);
+    private static Logger logger = Logger.getLogger(Message.class);
 
-	/**
-	 * Tworz wiadomo¶æ na podstawie adresata i tre¶ci.
-	 * @param toUser adresat wiadomo¶ci
-	 * @param text tre¶c wiadomo¶ci
-	 */
-	public Message(int toUser, String text) {
-		super(toUser, text);
-	}
+    /**
+     * Tworz wiadomo¶æ na podstawie adresata i tre¶ci.
+     * @param toUser adresat wiadomo¶ci
+     * @param text tre¶c wiadomo¶ci
+     */
+    public Message(int toUser, String text) {
+        super(toUser, text);
+    }
 }

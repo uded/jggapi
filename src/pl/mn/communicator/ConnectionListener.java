@@ -17,27 +17,28 @@
  */
 package pl.mn.communicator;
 
+
 /**
  * Listener ze zdarzeniami po³±czenia.
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public interface ConnectionListener {
-	/**
-	 * Po³±czenie zosta³o pomy¶lnie nawi±zane.
-	 */
-	void connectionEstablished();
+    /**
+     * Po³±czenie zosta³o pomy¶lnie nawi±zane.
+     */
+    void connectionEstablished();
 
-	/**
-	 * Roz³aczono z serwerem.<BR>
-	 * Wywo³ywane podczas celowego roz³±czania z serwerem.
-	 */
-	void disconnected();
+    /**
+     * Roz³aczono z serwerem.<BR>
+     * Wywo³ywane podczas celowego roz³±czania z serwerem.
+     */
+    void disconnected();
 
-	/**
-	 * Problem z po³±czeniem.<BR>
-	 * Wyst±pi³ b³±d w po³±czeniu.
-	 * @param error tekstowy opis b³êdu zwi±zanego z po³±czeniem
-	 */
-	void connectionError(String error);
+    /**
+     * Problem z po³±czeniem.<BR>
+     * Wyst±pi³ b³±d w po³±czeniu.
+     * @param error tekstowy opis b³êdu zwi±zanego z po³±czeniem
+     */
+    void connectionError(String error);
 }

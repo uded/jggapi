@@ -17,30 +17,34 @@
  */
 package pl.mn.communicator;
 
+
 /**
  * U篡tkownik lokalny klienta rozm闚.<BR>
  * Obiekt reprezentuje lokalnego u篡tkownika.
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public interface ILocalUser {
-	/**
-	 * Pobierz has這 u篡tkownika.<BR>
-	 * Has這 jest w postaci niezaszyfrowanej.
-	 * @return String password
-	 */
-	String getPassword();
-	/**
-	 * Pobierz nr u篡tkownika.
-	 * @return int userNo
-	 */
-	int getUserNo();
-	/**
-	 * @param password has這
-	 */
-	void setPassword(String password);
-	/**
-	 * @param userNo u篡tkownik
-	 */
-	void setUserNo(int userNo);
+    /**
+     * Pobierz has這 u篡tkownika.<BR>
+     * Has這 jest w postaci niezaszyfrowanej.
+     * @return String password
+     */
+    String getPassword();
+
+    /**
+     * Pobierz nr u篡tkownika.
+     * @return int userNo
+     */
+    int getUserNo();
+
+    /**
+     * @param password has這
+     */
+    void setPassword(String password);
+
+    /**
+     * @param userNo u篡tkownik
+     */
+    void setUserNo(int userNo);
 }

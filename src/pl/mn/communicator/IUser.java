@@ -17,40 +17,46 @@
  */
 package pl.mn.communicator;
 
+
 /**
  * U¿ytkownik serwera rozmów.
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public interface IUser {
-	/**
-	 * Zwróæ nick u¿ytkownika.
-	 * @return String
-	 */
-	String getName();
-	/**
-	 * Zwróæ numer u¿ytkownika.
-	 * @return int
-	 */
-	int getNumber();
-	/**
-	 * Zmieñ nick u¿ytkownika
-	 * @param name nowe nick u¿ytkownika
-	 */
-	void setName(String name);
-	/**
-	 * Zmieñ numer u¿ytkownika.
-	 * @param number nowy numer u¿ytkownika
-	 */
-	void setNumber(int number);
-	/**
-	 * Zwróæ status u¿ytkownika.
-	 * @return boolean status u¿ytkownika <code>true</code>- online
-	 */
-	boolean isOnLine();
-	/**
-	 * Zmieñ status u¿ytkownika.
-	 * @param onLine nowy status u¿ytkownika
-	 */
-	void setOnLine(boolean onLine);
+    /**
+     * Zwróæ nick u¿ytkownika.
+     * @return String
+     */
+    String getName();
+
+    /**
+     * Zwróæ numer u¿ytkownika.
+     * @return int
+     */
+    int getNumber();
+
+    /**
+     * Zmieñ nick u¿ytkownika
+     * @param name nowe nick u¿ytkownika
+     */
+    void setName(String name);
+
+    /**
+     * Zmieñ numer u¿ytkownika.
+     * @param number nowy numer u¿ytkownika
+     */
+    void setNumber(int number);
+
+    /**
+     * Zwróæ status u¿ytkownika.
+     * @return boolean status u¿ytkownika <code>true</code>- online
+     */
+    boolean isOnLine();
+
+    /**
+     * Zmieñ status u¿ytkownika.
+     * @param onLine nowy status u¿ytkownika
+     */
+    void setOnLine(boolean onLine);
 }

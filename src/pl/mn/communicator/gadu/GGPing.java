@@ -17,47 +17,48 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
  * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 final class GGPing implements GGOutgoingPackage {
-	private byte[] data;
-	private static GGPing ggPing = new GGPing();
+    private static GGPing ggPing = new GGPing();
+    private byte[] data;
 
-	/**
-	 * Prywatny konstruktor.
-	 */
-	private GGPing() {
-	}
-	
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
-	 */
-	public int getHeader() {
-		return 0x08;
-	}
+    /**
+     * Prywatny konstruktor.
+     */
+    private GGPing() {
+    }
 
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
-	 */
-	public int getLength() {
-		return 0x00;
-	}
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+     */
+    public int getHeader() {
+        return 0x08;
+    }
 
-	/**
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
-	 */
-	public byte[] getContents() {
-		return new byte[0];
-	}
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
+     */
+    public int getLength() {
+        return 0x00;
+    }
 
-	/**
-	 * Pobierz instancje tego obiektu.
-	 * @return instancja <code>GGPing</code>
-	 */
-	public static GGPing getPing() {
-		return ggPing;
-	}
+    /**
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
+     */
+    public byte[] getContents() {
+        return new byte[0];
+    }
+
+    /**
+     * Pobierz instancje tego obiektu.
+     * @return instancja <code>GGPing</code>
+     */
+    public static GGPing getPing() {
+        return ggPing;
+    }
 }

@@ -22,64 +22,66 @@ import org.apache.log4j.Logger;
 
 /**
  * Klasa reprezentuj±ca serwer rozmów.
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public abstract class AbstractServer implements IServer {
-	private static Logger logger = Logger.getLogger(AbstractServer.class);
-	/**
-	 * Adres ip, lub tekstowy serwera rozmów
-	 */
-	protected String address;
+    private static Logger logger = Logger.getLogger(AbstractServer.class);
 
-	/**
-	 * Numer portu serwera
-	 */
-	protected int port;
+    /**
+     * Adres ip, lub tekstowy serwera rozmów
+     */
+    protected String address;
 
-	/**
-	 * Utworz adres serwera rozmów.
-	 * @param address adres serwera
-	 * @param port post serwera
-	 */
-	public AbstractServer(String address, int port) {
-		this.address = address;
-		this.port = port;
-	}
-	/**
-	 * Zwróæ adres serwera rozmów.
-	 * @return String
-	 */
-	public String getAddress() {
-		return address;
-	}
+    /**
+     * Numer portu serwera
+     */
+    protected int port;
 
-	/**
-	 * Zwróæ port serwera rozmów.
-	 *  @return int
-	 */
-	public int getPort() {
-		return port;
-	}
+    /**
+     * Utworz adres serwera rozmów.
+     * @param address adres serwera
+     * @param port post serwera
+     */
+    public AbstractServer(String address, int port) {
+        this.address = address;
+        this.port = port;
+    }
 
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return "[" + this.address + "-" + this.port + "]";
-	}
-	/**
-	 * @param address adres serwera
-	 */
-	public void setAddress(String address) {
-		this.address = address;
-	}
+    /**
+     * Zwróæ adres serwera rozmów.
+     * @return String
+     */
+    public String getAddress() {
+        return address;
+    }
 
-	/**
-	 * @param port port serwera
-	 */
-	public void setPort(int port) {
-		this.port = port;
-	}
+    /**
+     * Zwróæ port serwera rozmów.
+     *  @return int
+     */
+    public int getPort() {
+        return port;
+    }
 
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "[" + this.address + "-" + this.port + "]";
+    }
+
+    /**
+     * @param address adres serwera
+     */
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    /**
+     * @param port port serwera
+     */
+    public void setPort(int port) {
+        this.port = port;
+    }
 }
