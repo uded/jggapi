@@ -84,6 +84,13 @@
   </dependencies>
   <build>
     <sourceDirectory>src/java</sourceDirectory>
+    <resources>
+		<resource>
+	      	<directory>${basedir}</directory>
+				<includes>
+            		<include>TODO</include>
+         		</includes>
+		</resource>
+  	</resources>
   </build>
 </project>
-
