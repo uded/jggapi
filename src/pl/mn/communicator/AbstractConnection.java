@@ -35,12 +35,12 @@ import org.apache.log4j.Logger;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public abstract class AbstractConnection implements IConnection {
-	private static Logger logger = Logger.getLogger(AbstractConnection.class);
+	private static Logger logger
+		= Logger.getLogger(AbstractConnection.class);
 	/**
 	 * Listener u¿ytkowników
 	 */
@@ -60,7 +60,6 @@ public abstract class AbstractConnection implements IConnection {
 	 * Dodaj listenera u¿ytkowników.<BR>
 	 * Obs³uguje odpowiednie zdarzenia zwi±zane z u¿ytkownikami
 	 * takie jak pryj¶cie i odej¶cie u¿ytkownika
-	 * 
 	 * @see UserListener
 	 * @param userListener obiekt listenera
 	 */
@@ -70,7 +69,6 @@ public abstract class AbstractConnection implements IConnection {
 	/**
 	 * Usuwa listenera u¿ytkowników.<BR>
 	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * 
 	 * @see UserListener
 	 */
 	public void removeUserListener() {
@@ -81,17 +79,16 @@ public abstract class AbstractConnection implements IConnection {
 	 * Dodaj listenera zwi±zanego z po³¹czeniem.<BR>
 	 * Obs³uguje on takie zdarzenia jak nawi±zanie po³±czenia,
 	 * zerwanie po³±czenia itp.
-	 * 
 	 * @see ConnectionListener
 	 * @param connectionListener obiekt listenera
 	 */
-	public void addConnectionListener(ConnectionListener connectionListener) {
+	public void addConnectionListener(
+			ConnectionListener connectionListener) {
 		this.connectionListener = connectionListener;
 	}
 	/**
 	 * Usuwa listenera zwi±zanego z po³±czeniem.<BR>
 	 * Jê¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * 
 	 * @see ConnectionListener
 	 */
 	public void removeConnectionListener() {
@@ -100,8 +97,7 @@ public abstract class AbstractConnection implements IConnection {
 	/**
 	 * Dodaje listenera wiadomo¶ci.<BR>
 	 * Obs³uguje on takie zdarzenia jak nadej¶cie wiadomo¶ci.
-	 * 
-	 * @see MessageListener 
+	 * @see MessageListener
 	 * @param messageListener obiekt listenera
 	 */
 	public void addMessageListener(MessageListener messageListener) {
@@ -111,7 +107,6 @@ public abstract class AbstractConnection implements IConnection {
 	/**
 	 * Usuwa listenera wiadomo¶ci.<BR>
 	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * 
 	 * @see MessageListener
 	 */
 	public void removeMessageListener() {

@@ -22,41 +22,37 @@ import java.util.Map;
 /**
  * Klasa reprezentuj±ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
- * mog¹ zostaæ dodane w podklasach.
- * 
- * @version $Revision: 1.5 $
+ * mog± zostaæ dodane w podklasach.
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public interface IStatus {
 	/**
 	 * Status on-line
 	 */
-	public final static int ON_LINE = 1;
+	int ON_LINE = 1;
 
 	/**
 	 * Status off-line
 	 */
-	public final static int OFF_LINE = 0;
+	int OFF_LINE = 0;
 
 	/**
 	 * Pobierz aktualny status
-	 * 
 	 * @return int
 	 */
-	public int getStatus();
+	int getStatus();
 	/**
 	 * Ustaw aktualny status
-	 * 
-	 * @return int
+	 * @param status status
 	 */
-	public void setStatus(int status);
+	void setStatus(int status);
 	/**
 	 * Pobierz dostêpne statusy.
 	 * Zwraca mapê dostêpnych statusów.
 	 * Kluczem jest Integer z nr statusu,
 	 * a wartoscia String z nazw± statusu
-	 * 
 	 * @return Map
 	 */
-	public Map getAvaiableStatuses();
+	Map getAvaiableStatuses();
 }

@@ -22,12 +22,12 @@ import org.apache.log4j.Logger;
 /**
  * U篡tkownik lokalny klienta rozm闚.<BR>
  * Obiekt reprezentuje lokalnego u篡tkownika.
- * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public abstract class AbstractLocalUser implements ILocalUser {
-	private static Logger logger = Logger.getLogger(AbstractLocalUser.class);
+	private static Logger logger =
+		Logger.getLogger(AbstractLocalUser.class);
 	/**
 	 * Numer u篡tkownika
 	 */
@@ -40,7 +40,6 @@ public abstract class AbstractLocalUser implements ILocalUser {
 
 	/**
 	 * Utw鏎z u篡tkownika lokalnego.
-	 * 
 	 * @param userNo nr uzytkownika
 	 * @param password has這
 	 */
@@ -50,8 +49,7 @@ public abstract class AbstractLocalUser implements ILocalUser {
 	}
 	/**
 	 * Pobierz has這 u篡tkownika.<BR>
-	 * Has這 jest w postaci niezaszyfrowanej. 
-	 * 
+	 * Has這 jest w postaci niezaszyfrowanej.
 	 * @return String password
 	 */
 	public String getPassword() {
@@ -60,7 +58,6 @@ public abstract class AbstractLocalUser implements ILocalUser {
 
 	/**
 	 * Pobierz nr u篡tkownika.
-	 * 
 	 * @return int userNo
 	 */
 	public int getUserNo() {
@@ -68,14 +65,14 @@ public abstract class AbstractLocalUser implements ILocalUser {
 	}
 
 	/**
-	 * @param password
+	 * @param password has這 do ustawienia
 	 */
 	public void setPassword(String password) {
 		this.password = password;
 	}
 
 	/**
-	 * @param userNo
+	 * @param userNo numer u篡tkownika do ustawienia.
 	 */
 	public void setUserNo(int userNo) {
 		this.userNo = userNo;

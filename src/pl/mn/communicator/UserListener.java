@@ -19,22 +19,19 @@ package pl.mn.communicator;
 
 /**
  * Listener zwi±zany ze zdarzeniami u¿ytkowników.
- * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public interface UserListener {
 	/**
 	 * U¿ytkownik pod³±czy³ siê.
-	 * 
 	 * @param userNumber nr u¿ytkownika, który siê pod³±czy³
 	 */
-	public void userEntered(int userNumber);
+	void userEntered(int userNumber);
 
 	/**
 	 * U¿ytkownik od³±czy³ siê.
-	 * 
 	 * @param userNumber nr u¿ytkownika, który siê od³¹czy³
 	 */
-	public void userLeaved(int userNumber);
+	void userLeaved(int userNumber);
 }

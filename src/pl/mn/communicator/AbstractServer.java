@@ -22,8 +22,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Klasa reprezentuj±ca serwer rozmów.
- * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public abstract class AbstractServer implements IServer {
@@ -32,7 +31,7 @@ public abstract class AbstractServer implements IServer {
 	 * Adres ip, lub tekstowy serwera rozmów
 	 */
 	protected String address;
-	
+
 	/**
 	 * Numer portu serwera
 	 */
@@ -40,7 +39,6 @@ public abstract class AbstractServer implements IServer {
 
 	/**
 	 * Utworz adres serwera rozmów.
-	 * 
 	 * @param address adres serwera
 	 * @param port post serwera
 	 */
@@ -50,7 +48,6 @@ public abstract class AbstractServer implements IServer {
 	}
 	/**
 	 * Zwróæ adres serwera rozmów.
-	 * 
 	 * @return String
 	 */
 	public String getAddress() {
@@ -59,7 +56,6 @@ public abstract class AbstractServer implements IServer {
 
 	/**
 	 * Zwróæ port serwera rozmów.
-	 *
 	 *  @return int
 	 */
 	public int getPort() {
@@ -73,14 +69,14 @@ public abstract class AbstractServer implements IServer {
 		return "[" + this.address + "-" + this.port + "]";
 	}
 	/**
-	 * @param address
+	 * @param address adres serwera
 	 */
 	public void setAddress(String address) {
 		this.address = address;
 	}
 
 	/**
-	 * @param port
+	 * @param port port serwera
 	 */
 	public void setPort(int port) {
 		this.port = port;

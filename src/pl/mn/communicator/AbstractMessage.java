@@ -21,8 +21,7 @@ import org.apache.log4j.Logger;
 
 /**
  * Wiadomo¶æ do serwera rozmów.
- * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public abstract class AbstractMessage implements IMessage {
@@ -31,7 +30,7 @@ public abstract class AbstractMessage implements IMessage {
 	 * Nr adresata wiadomo¶ci
 	 */
 	protected int user;
-	
+
 	/**
 	 * Tre¶æ wiadomo¶ci
 	 */
@@ -39,7 +38,6 @@ public abstract class AbstractMessage implements IMessage {
 
 	/**
 	 * Tworzy wiadomo¶æ do konkretnego u¿ytkownika.
-	 * 
 	 * @param toUser nr u¿ytkownika do którego wysy³amy
 	 * @param text wiadomo¶æ tekstowa
 	 */
@@ -50,30 +48,28 @@ public abstract class AbstractMessage implements IMessage {
 
 	/**
 	 * Pobierz u¿ytkownika do którego jest wiadomoœæ
-	 * 
-	 * @return User 
+	 * @return User numer u¿ytkownika
 	 */
 	public int getUser() {
 		return user;
 	}
 
 	/**
-	 * Pobierz tre¶æ wiadomoœæi
-	 * 
+	 * Pobierz tre¶æ wiadomo¶æi
 	 * @return String
 	 */
 	public String getText() {
 		return text;
 	}
 	/**
-	 * @param text
+	 * @param text tre¶æ wiadomo¶ci
 	 */
 	public void setText(String text) {
 		this.text = text;
 	}
 
 	/**
-	 * @param user
+	 * @param user numer u¿ytkownika
 	 */
 	public void setUser(int user) {
 		this.user = user;

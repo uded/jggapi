@@ -25,36 +25,37 @@ import org.apache.log4j.Logger;
 /**
  * Klasa reprezentuj±ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
- * mog¹ zostaæ dodane w podklasach.
- * 
- * @version $Revision: 1.6 $
+ * mog± zostaæ dodane w podklasach.
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public abstract class AbstractStatus implements IStatus {
 	private static Logger logger = Logger.getLogger(AbstractStatus.class);
 
 	/**
-	 * Aktualny status 
+	 * Aktualny status
 	 */
-	protected int status; 
+	protected int status;
 
+	/**
+	 * Tworz status.
+	 * @param status status u¿ytkownika
+	 */
 	public AbstractStatus(int status) {
 		this.status = status;
 	}
-	
+
 	/**
 	 * Pobierz aktualny status
-	 * 
 	 * @return int
 	 */
 	public int getStatus() {
 		return status;
 	}
-	
+
 	/**
 	 * Ustaw aktualny status
-	 * 
-	 * @return int
+	 * @param status u¿ytkownika
 	 */
 	public void setStatus(int status) {
 		this.status = status;
@@ -64,16 +65,15 @@ public abstract class AbstractStatus implements IStatus {
 	 * Pobierz dostêpne statusy.
 	 * Zwraca mapê dostêpnych statusów.
 	 * Kluczem jest Integer z nr statusu,
-	 * a wartoscia String z nazw¹ statusu
-	 * 
-	 * @return Map
+	 * a wartoscia String z nazw± statusu
+	 * @return Map dostêpne statusy
 	 */
 	public Map getAvaiableStatuses() {
 		HashMap map = new HashMap();
 
-		map.put(new Integer(IStatus.ON_LINE),"On Line");
-		map.put(new Integer(IStatus.OFF_LINE),"Off Line");
-	
+		map.put(new Integer(IStatus.ON_LINE), "On Line");
+		map.put(new Integer(IStatus.OFF_LINE), "Off Line");
+
 		return map;
 	}
 }

@@ -21,8 +21,7 @@ import org.apache.log4j.Logger;
 
 /**
  * U¿ytkownik serwera rozmów.
- *  
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public class AbstractUser implements IUser {
@@ -32,6 +31,12 @@ public class AbstractUser implements IUser {
 	protected boolean onLine;
 	protected String name;
 
+	/**
+	 * Tworz u¿ytkownika.
+	 * @param number numer u¿ykownika
+	 * @param name nazwa u¿ytkownika
+	 * @param onLine status u¿ytkownika
+	 */
 	public AbstractUser(int number, String name, boolean onLine) {
 		this.number = number;
 		this.onLine = onLine;
@@ -40,7 +45,6 @@ public class AbstractUser implements IUser {
 
 	/**
 	 * Zwróæ nick u¿ytkownika.
-	 * 
 	 * @return String
 	 */
 	public String getName() {
@@ -49,7 +53,6 @@ public class AbstractUser implements IUser {
 
 	/**
 	 * Zwróæ numer u¿ytkownika.
-	 * 
 	 * @return int
 	 */
 	public int getNumber() {
@@ -58,7 +61,6 @@ public class AbstractUser implements IUser {
 
 	/**
 	 * Zmieñ nick u¿ytkownika
-	 * 
 	 * @param name nowe nick u¿ytkownika
 	 */
 	public void setName(String name) {
@@ -67,7 +69,6 @@ public class AbstractUser implements IUser {
 
 	/**
 	 * Zmieñ numer u¿ytkownika.
-	 * 
 	 * @param number nowy numer u¿ytkownika
 	 */
 	public void setNumber(int number) {
@@ -77,7 +78,6 @@ public class AbstractUser implements IUser {
 	/**
 	 * Zwróæ status u¿ytkownika.
 	 * True - u¿ytkownik online
-	 * 
 	 * @return boolean
 	 */
 	public boolean isOnLine() {
@@ -86,7 +86,6 @@ public class AbstractUser implements IUser {
 
 	/**
 	 * Zmieñ status u¿ytkownika.
-	 * 
 	 * @param onLine nowy status u¿ytkownika
 	 */
 	public void setOnLine(boolean onLine) {
@@ -97,7 +96,8 @@ public class AbstractUser implements IUser {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object o) {
-		return (o instanceof IUser) && (number == ((IUser) o).getNumber());
+		return (o instanceof IUser)
+			&& (number == ((IUser) o).getNumber());
 	}
 
 	/**

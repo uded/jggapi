@@ -19,29 +19,26 @@ package pl.mn.communicator;
 
 /**
  * Wiadomo¶æ do serwera rozmów.
- * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public interface IMessage {
 	/**
 	 * Pobierz u¿ytkownika do którego jest wiadomo¶æ
-	 * 
-	 * @return User 
+	 * @return User
 	 */
-	public int getUser();
+	int getUser();
 	/**
 	 * Pobierz tre¶æ wiadomo¶æi
-	 * 
 	 * @return String
 	 */
-	public String getText();
+	String getText();
 	/**
-	 * @param text
+	 * @param text tre¶æ wiadomo¶ci
 	 */
-	public void setText(String text);
+	void setText(String text);
 	/**
-	 * @param user
+	 * @param user u¿ytkownik
 	 */
-	public void setUser(int user);
+	void setUser(int user);
 }

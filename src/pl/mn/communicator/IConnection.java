@@ -18,7 +18,6 @@
 package pl.mn.communicator;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 import java.util.Collection;
 
 /**
@@ -37,8 +36,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * 
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @author mnaglik
  */
 public interface IConnection {
@@ -46,102 +44,96 @@ public interface IConnection {
 	 * Dodaj listenera u¿ytkowników.<BR>
 	 * Obs³uguje odpowiednie zdarzenia zwi¹zane z u¿ytkownikami
 	 * takie jak pryj¶cie i odej¶cie u¿ytkownika
-	 * 
 	 * @see UserListener
 	 * @param userListener obiekt listenera
 	 */
-	public void addUserListener(UserListener userListener);
+	void addUserListener(UserListener userListener);
 	/**
 	 * Usuwa listenera u¿ytkowników.<BR>
 	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * 
 	 * @see UserListener
 	 */
-	public void removeUserListener();
+	void removeUserListener();
 	/**
 	 * Dodaj listenera zwi±zanego z po³±czeniem.<BR>
 	 * Obs³uguje on takie zdarzenia jak nawi¹zanie po³±czenia,
 	 * zerwanie po³±czenia itp.
-	 * 
 	 * @see ConnectionListener
 	 * @param connectionListener obiekt listenera
 	 */
-	public void addConnectionListener(ConnectionListener connectionListener);
+	void addConnectionListener(ConnectionListener connectionListener);
 	/**
 	 * Usuwa listenera zwi±zanego z po³±czeniem.<BR>
 	 * Jê¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * 
 	 * @see ConnectionListener
 	 */
-	public void removeConnectionListener();
+	void removeConnectionListener();
 	/**
 	 * Dodaje listenera wiadomo¶ci.<BR>
 	 * Obs³uguje on takie zdarzenia jak nadej¶cie wiadomo¶ci.
-	 * 
-	 * @see MessageListener 
+	 * @see MessageListener
 	 * @param messageListener obiekt listenera
 	 */
-	public void addMessageListener(MessageListener messageListener);
+	void addMessageListener(MessageListener messageListener);
 	/**
 	 * Usuwa listenera wiadomo¶ci.<BR>
 	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
-	 * 
 	 * @see MessageListener
 	 */
-	public void removeMessageListener();
+	void removeMessageListener();
 	/**
 	 * Pod³±cz sie do serwera rozmów.<BR>
 	 * Próbuje ³±czyæ siê z serwerem rozmów, na podstawie danych<BR>
 	 * z konstruktora.<BR>
 	 * W wypadku niepowodzenie wyrzuca odpowiednie wyj±tki
-	 * 
-	 * @throws UnknownHostException nieznany serwer 
-	 * @throws IOException nie powiodla siê próba po³±czenia - nie ma po³±czenia sieciowego?
+	 * @throws UnknownHostException nieznany serwer
+	 * @throws IOException nie powiodla siê próba po³±czenia
+	 * - nie ma po³±czenia sieciowego?
 	 */
-	public void connect() throws UnknownHostException, IOException;
+	void connect() throws IOException;
 	/**
 	 * Zamyka po³±czenie z serwerem rozmów.
-	 * 
-	 * @throws IOException b³¹d przy zamykaniu po³±czenia
+	 * @throws IOException b³±d przy zamykaniu po³±czenia
 	 */
-	public void disconnect() throws IOException;
+	void disconnect() throws IOException;
 	/**
 	 * Wy¶lij wiadomo¶æ do serwera rozmów.
-	 * 
 	 * @see AbstractMessage
 	 * @param message wiadomo¶æ do wys³ania.
+	 * @throws IOException b³±d wysy³ania wiadomo¶ci
 	 */
-	public void sendMessage(IMessage message)
-		throws IOException;
+	void sendMessage(IMessage message) throws IOException;
 	/**
 	 * Zmien aktualny status u¿ytkownika.<BR>
-	 * 
 	 * @param status - kolejny status
+	 * @throws IOException b³±d zmiany statusu
 	 */
-	public void changeStatus(IStatus status)
-		throws IOException;
-		
+	void changeStatus(IStatus status) throws IOException;
+
 	/**
 	 * Wy¶lij listê monitorowanych u¿ytkowników.<br>
 	 * Lista zawiera u¿ytkowników dla których serwer
 	 * przesy³a informacje o zmianie statusu
-	 * @param userList
+	 * @param userList lista u¿ytkowników
+	 * @throws IOException b³±d wysy³ania listy u¿ytkowników
 	 */
-	public void sendMonitoredUserList(Collection userList) throws IOException;
-	
+	void sendMonitoredUserList(Collection userList) throws IOException;
+
 	/**
 	 * Dodaj u¿ytkownika do u¿ytkowników monitorowanych.<br>
 	 * Dla dodanego u¿ytkownika bêdzie przesy³ana informacja o zmianie
 	 * statusu.
-	 * @param user
+	 * @param user u¿ytkownik do monitorowania
+	 * @throws IOException b³±d dodawania u¿ytkownika
 	 */
-	public void addMonitoredUser(IUser user) throws IOException;
-	
+	void addMonitoredUser(IUser user) throws IOException;
+
 	/**
 	 * Usuñ u¿ytkownika z listy u¿ytkowników monitorowanych.<br>
 	 * Dla podanego u¿ytkownika nie bêdzie przesy³ana informacja
 	 * o zmianie statusu.
-	 * @param user
+	 * @param user u¿tykownik do niemonitorowania
+	 * @throws IOException b³ad usuwania u¿ytkownika
 	 */
-	public void removeMonitoredUser(IUser user) throws IOException;
+	void removeMonitoredUser(IUser user) throws IOException;
 }
