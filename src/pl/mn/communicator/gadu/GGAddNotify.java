@@ -21,31 +21,38 @@ package pl.mn.communicator.gadu;
 /**
  * Pakiet dodaj±cy konkretnego u¿ytkownika do listy montorowancyh u¿ytkowników.
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 class GGAddNotify implements GGOutgoingPackage {
+    private int userNo;
+    GGAddNotify(int userNo) {
+    	this.userNo = userNo;
+    }
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 0x000d;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 5;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        // TODO Auto-generated method stub
-        return null;
+    	byte[] dane = new byte[5];
+
+        byte[] userNo = GGConversion.intToByte(this.userNo);
+        System.arraycopy(userNo,0,dane,0,userNo.length);
+        dane[4] = GGNotify.GG_USER_NORMAL;
+
+    	return dane;
     }
 }

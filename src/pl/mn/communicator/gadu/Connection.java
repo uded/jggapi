@@ -51,7 +51,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.26 $
+ * @version $Revision: 1.27 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -125,7 +125,11 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      * #addMonitoredUser(pl.mn.communicator.IUser)
      */
     public void addMonitoredUser(IUser user) throws IOException {
-        // TODO Auto-generated method stub
+        if (isConnected) {
+        	logger.debug("dodaje monitorowanego uzytkownika: "+user.getNumber());
+        	GGAddNotify addNotify = new GGAddNotify(user.getNumber());
+            connectionThread.sendPackage(addNotify);
+        }
     }
 
     /**
@@ -133,7 +137,11 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      * #removeMonitoredUser(pl.mn.communicator.IUser)
      */
     public void removeMonitoredUser(IUser user) throws IOException {
-        // TODO Auto-generated method stub
+        if (isConnected) {
+        	logger.debug("usuwam monitorowanego uzytkownika: "+user.getNumber());
+        	GGRemoveNotify removeNotify = new GGRemoveNotify(user.getNumber());
+            connectionThread.sendPackage(removeNotify);
+        }
     }
 
     /**

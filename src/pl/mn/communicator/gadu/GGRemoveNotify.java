@@ -20,31 +20,39 @@ package pl.mn.communicator.gadu;
 
 /**
  * Pakiet usuwaj±cy konkretnego u¿ytkownika z listy monitorowanych u¿ytkowników.
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 class GGRemoveNotify implements GGOutgoingPackage {
+    private int userNo;
+	GGRemoveNotify(int userNo) {
+    	this.userNo = userNo;
+    }
+    
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 0x000e;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        // TODO Auto-generated method stub
-        return 0;
+        return 5;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        // TODO Auto-generated method stub
-        return null;
+    	byte[] dane = new byte[5];
+
+        byte[] userNo = GGConversion.intToByte(this.userNo);
+        System.arraycopy(userNo,0,dane,0,userNo.length);
+        dane[4] = GGNotify.GG_USER_NORMAL;
+
+    	return dane;
     }
 }
