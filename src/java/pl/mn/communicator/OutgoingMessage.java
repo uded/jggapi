@@ -28,62 +28,62 @@ import org.apache.commons.logging.LogFactory;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.11 2004-12-26 12:46:48 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.12 2005-01-25 21:46:12 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
-
+	
 	private final static Random RANDOM = new Random();
 	
 	private static Log logger = LogFactory.getLog(OutgoingMessage.class);
-
+	
 	//private constructor
 	private OutgoingMessage(int uin, String text, MessageClass messageClass) {
 		super(uin, text, messageClass);
-		m_uin = RANDOM.nextInt(99999);
+		m_messageID = RANDOM.nextInt(9999);
 	}
-    
-    /** 
-     * Creates an outgoing message that will be poped up in a new window.
-     * 
-     * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
-     * @param messageBody the body of the message.
-     * @return OutgoingMessage outgoing message.
-     */
+	
+	/** 
+	 * Creates an outgoing message that will be poped up in a new window.
+	 * 
+	 * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
+	 * @param messageBody the body of the message.
+	 * @return OutgoingMessage outgoing message.
+	 */
 	public static OutgoingMessage createNewMessage(int uin, String messageBody) {
 		return new OutgoingMessage(uin, messageBody, MessageClass.IN_NEW_WINDOW);
 	}
-
-    /** 
-     * Creates an outgoing message that is a part of a previous conversation
-     * 
-     * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
-     * @param messageBody the body of the message.
-     * @return OutgoingMessage outgoing message.
-     */
+	
+	/** 
+	 * Creates an outgoing message that is a part of a previous conversation
+	 * 
+	 * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
+	 * @param messageBody the body of the message.
+	 * @return OutgoingMessage outgoing message.
+	 */
 	public static OutgoingMessage createChatMessage(int uin, String messageBody) {
 		return new OutgoingMessage(uin, messageBody, MessageClass.CHAT);
 	}
-
-    /** 
-     * Creates an outgoing message that only pings the user.
-     * 
-     * @param uin Gadu-Gadu number to of the user to whom this ping is addressed.
-     * @return OutgoingMessage outgoing message.
-     */
+	
+	/** 
+	 * Creates an outgoing message that only pings the user.
+	 * 
+	 * @param uin Gadu-Gadu number to of the user to whom this ping is addressed.
+	 * @return OutgoingMessage outgoing message.
+	 */
 	public static OutgoingMessage createPingMessage(int uin) {
 		return new OutgoingMessage(uin, "", MessageClass.PING);
 	}
-
-    /** 
-     * Creates an outgoing message and sets a special flag
-     * that will notify Gadu-Gadu server that we do not want to receive the
-     * confirmation from the server that this message was delivered to the user
-     * it is addressed.
-     * 
-     * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
-     * @param messageBody the body of the message.
-     * @return OutgoingMessage outgoing message.
-     */
+	
+	/** 
+	 * Creates an outgoing message and sets a special flag
+	 * that will notify Gadu-Gadu server that we do not want to receive the
+	 * confirmation from the server that this message was delivered to the user
+	 * it is addressed.
+	 * 
+	 * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
+	 * @param messageBody the body of the message.
+	 * @return OutgoingMessage outgoing message.
+	 */
 	public static OutgoingMessage createMessageWithoutConfirmation(int uin, String messageBody) {
 		return new OutgoingMessage(uin, messageBody, MessageClass.DO_NOT_CONFIRM);
 	}
