@@ -20,13 +20,16 @@ package pl.mn.communicator;
 /**
  * Created on 2004-11-30
  * 
+ * Exception that is thrown when user tries to move from certain state 
+ * to state that is not allowed at that moment. 
+ * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSessionException.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: GGSessionException.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
  */
 public class GGSessionException extends RuntimeException {
 
-	public GGSessionException(String message) {
-		super(message);
+	public GGSessionException(SessionState actualSessionState) {
+		super("incorrect session state:" +actualSessionState);
 	}
 
 }

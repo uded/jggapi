@@ -21,9 +21,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * Abstract implementation of <code>IMessage</code> that
+ * is common for incomming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 
@@ -35,38 +37,50 @@ public abstract class AbstractMessage implements IMessage {
     /** The body of the message */
     protected String m_text;
     
+    /** The message class associated with this message */
     protected MessageClass m_messageClass;
 
     public AbstractMessage(int uin, String text, MessageClass messageClass) {
-        m_uin = uin;
+    	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+    	if (text == null) throw new NullPointerException("text cannot be null");
+    	if (messageClass == null) throw new NullPointerException("messageClass cannot be null");
+    	m_uin = uin;
         m_text = text;
         m_messageClass = messageClass;
     }
 
+    /**
+     * @see pl.mn.communicator.IMessage#getUin()
+     */
     public int getUin() {
         return m_uin;
     }
 
     /**
-     * @return String
+     * @see pl.mn.communicator.IMessage#setText(java.lang.String)
+     */
+    public void setUin(int uin) {
+    	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+    	m_uin = uin;
+    }
+
+    /**
+     * @see pl.mn.communicator.IMessage#getText()
      */
     public String getText() {
         return m_text;
     }
 
+    /**
+     * @see pl.mn.communicator.IMessage#setText(java.lang.String)
+     */
     public void setText(String text) {
     	if (text == null) throw new NullPointerException("text cannot be null");
     	m_text = text;
     }
 
-    public void setUin(int uin) {
-    	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
-    	m_uin = uin;
-    }
-    
     /**
-     * Gets MessageClass of this message.
-     * @return messageClass attached to this message.
+     * @see pl.mn.communicator.IMessage#getMessageClass();
      */
     public MessageClass getMessageClass() {
     	return m_messageClass;

@@ -19,9 +19,11 @@ package pl.mn.communicator;
 
 /**
  * 
+ * This is a basic interface for Gadu-Gadu messages.
+ * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: IMessage.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
  */
 public interface IMessage {
 	
@@ -32,13 +34,13 @@ public interface IMessage {
     int getUin();
 
     /**
-     * @param user number of Gadu-Gadu user.<BR>
+     * @param uin Gadu-Gadu user.
      */
     void setUin(int uin);
 
     /**
      * Gets message body.
-     * @return String message body
+     * @return String message body as string.
      */
     String getText();
 
@@ -47,6 +49,10 @@ public interface IMessage {
      */
     void setText(String text);
 
+    /**
+     * MessageClass associated with this message.
+     * @return MessageClass
+     */
     MessageClass getMessageClass();
     
 }

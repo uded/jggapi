@@ -36,7 +36,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.2 2004-12-14 22:52:04 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -54,7 +54,7 @@ public class DefaultLoginService implements ILoginService {
 	 */
 	public void login() throws GGException {
 		if (m_session.getSessionState() != SessionState.AUTHENTICATION_AWAITING) {
-			throw new GGSessionException("Unable to login, wrong session state: "+m_session.getSessionState());
+			throw new GGSessionException(m_session.getSessionState());
 		}
 		
 		try {
@@ -129,7 +129,7 @@ public class DefaultLoginService implements ILoginService {
 	
 	private void checkSessionState() {
 		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
-			throw new GGSessionException("Incorrect session state: "+m_session.getSessionState());
+			throw new GGSessionException(m_session.getSessionState());
 		}
 	}
 	

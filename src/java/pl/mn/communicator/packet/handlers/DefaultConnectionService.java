@@ -44,7 +44,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.2 2004-12-14 22:52:04 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -79,7 +79,7 @@ public class DefaultConnectionService implements IConnectionService {
 				throw new GGException("Unable to connect to Gadu-Gadu server: "+m_session.getServer(), ex);
 			}
 		} else {
-			throw new GGSessionException("Invalid session state: "+m_session.getSessionState());
+			throw new GGSessionException(m_session.getSessionState());
 		}
 	}
 
@@ -100,7 +100,7 @@ public class DefaultConnectionService implements IConnectionService {
 				m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 			}
 		} else {
-			throw new GGSessionException("Invalid session state: "+m_session.getSessionState());
+			throw new GGSessionException(m_session.getSessionState());
 		}
 	}
 	

@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.2 2004-12-14 22:52:04 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
@@ -179,7 +179,7 @@ public class DefaultPresenceService implements IPresenceService {
 	
 	private void checkSessionState() {
 		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
-			throw new GGSessionException("Incorrect session state: "+m_session.getSessionState());
+			throw new GGSessionException(m_session.getSessionState());
 		}
 	}
 

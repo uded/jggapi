@@ -17,22 +17,22 @@
  */
 package pl.mn.communicator;
 
-import java.util.Collection;
-
 /**
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IPublicDirectoryService.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: IPublicDirectoryService.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
  */
 public interface IPublicDirectoryService {
 
 	/**
 	 * Looks up for users matching certain criteria.
 	 * 
-	 * @param searchContext the information provided to look for users.
+	 * @param publicDirQuery the information provided to look for users.
 	 * @return the collection of users that matched the query.
 	 */
-	Collection search(SearchContext searchContext);
+	void search(PublicDirQuery publicDirQuery) throws GGException;
+	
+//	void addPublic
 	
 }

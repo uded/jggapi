@@ -21,9 +21,9 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SearchContext.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: PublicDirQuery.java,v 1.1 2004-12-14 22:52:11 winnetou25 Exp $
  */
-public class SearchContext {
+public class PublicDirQuery {
 
 	private String m_uin = null;
 	private String m_firstName = null;
@@ -34,6 +34,22 @@ public class SearchContext {
 	private Boolean m_activeOnly = null;
 	private String m_familyName = null;
 	private String m_familyCity = null;
+
+	public String getFirstname() {
+		return m_firstName;
+	}
+	
+	public void setFirstname(String firstName) {
+		m_firstName = firstName;
+	}
+	
+	public String getSurname() {
+		return m_surName;
+	}
+	
+	public void setSurname(String surName) {
+		m_surName = surName;
+	}
 	
 	/**
 	 * @param only The m_activeOnly to set.
@@ -49,4 +65,17 @@ public class SearchContext {
 		return m_activeOnly;
 	}
 	
+	public final static class Gender {
+		
+		private String m_gender;
+		
+		private Gender(String gender) {
+			m_gender = gender;
+		}
+		
+		public final static Gender FEMALE = new Gender("female");
+		public final static Gender MALE = new Gender("male");
+		
+	}
+
 }

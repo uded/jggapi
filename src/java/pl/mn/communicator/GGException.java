@@ -20,8 +20,11 @@ package pl.mn.communicator;
 /**
  * Created on 2004-11-30
  * 
+ * <P>An exception that provides information on access to Gadu-Gadu server.
+ * It contains the exception chain.
+ * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGException.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: GGException.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
  */
 public class GGException extends Exception {
 

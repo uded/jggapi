@@ -17,17 +17,25 @@
  */
 package pl.mn.communicator.packet.out;
 
+import java.util.Random;
+
+import pl.mn.communicator.PublicDirQuery;
+import pl.mn.communicator.packet.GGPubDir;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
  */
 public class GGPubdirRequest implements GGOutgoingPackage {
 
 	public static final int GG_PUBDIR50_REQUEST = 0x0014;
 	
+	private final static int GG_PUBDIR50_WRITE = 0x01;
+	private final static int GG_PUBDIR50_READ = 0x02;
+	private final static int GG_PUBDIR50_SEARCH = 0x03;
+
 //#define GG_PUBDIR50_REQUEST 0x0014
 //	
 //struct gg_pubdir50 {
@@ -36,6 +44,16 @@ public class GGPubdirRequest implements GGOutgoingPackage {
 //	char request[];
 //};
 
+	private final static Random SEQUENCER = new Random();
+	
+	private byte m_requestType = -1;
+	private int m_seq = SEQUENCER.nextInt(99999);
+	private String m_request = "";
+	
+	private GGPubdirRequest() {
+		m_seq = SEQUENCER.nextInt(99999);
+	}
+	
 	/**
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getPacketType()
      */
@@ -47,16 +65,47 @@ public class GGPubdirRequest implements GGOutgoingPackage {
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        // TODO Auto-generated method stub
-        return 0;
+    	return 5+m_request.getBytes().length;
     }
 
     /**
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        // TODO Auto-generated method stub
-        return null;
+    	byte[] toSend = new byte[getLength()];
+    	
+    	toSend[0] = m_requestType;
+    	toSend[1] = (byte) (m_seq & 0xFF);
+       	toSend[2] = (byte) ((m_seq >> 8) & 0xFF);
+       	toSend[3] = (byte) ((m_seq >> 16) & 0xFF);
+       	toSend[4] = (byte) ((m_seq >> 24) & 0xFF);
+
+       	byte[] requestBytes = m_request.getBytes();
+       	for (int i=0; i<requestBytes.length; i++) {
+       		toSend[5+i] = requestBytes[i];
+       	}
+       	
+        return toSend;
+    }
+    
+    public static GGPubdirRequest createSearchPubdirRequest(PublicDirQuery publicDirQuery) {
+    	GGPubdirRequest pubdirRequest = new GGPubdirRequest();
+    	pubdirRequest.m_requestType = GG_PUBDIR50_SEARCH;
+    	StringBuffer buffer = new StringBuffer();
+    	
+    	if (publicDirQuery.getFirstname()!=null) {
+    		buffer.append(GGPubDir.FIRST_NAME);
+    		buffer.append('.');
+    		buffer.append(publicDirQuery.getFirstname());
+    	}
+    	if (publicDirQuery.getSurname()!=null) {
+    		buffer.append(GGPubDir.LAST_NAME);
+    		buffer.append('.');
+    		buffer.append(publicDirQuery.getSurname());
+    	}
+    	
+    	pubdirRequest.m_request = buffer.toString();
+    	return pubdirRequest;
     }
     
 }
