@@ -49,7 +49,7 @@ import java.net.Socket;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.22 $
+ * @version $Revision: 1.23 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -147,6 +147,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
         private static final int GG_PACKAGE_LOGIN_ERROR = 9;
         private static final int GG_PACKAGE_MESSAGE = 10;
         private static final int GG_PACKAGE_CONNECTION_ERROR = 11;
+        private static final int GG_NOTIFY_REPLY = 0x11;
         private Socket socket;
         private Thread thread;
         private BufferedInputStream dataInput;
@@ -226,8 +227,14 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                     connectionListener.connectionEstablished();
                 }
                 logger.debug("Login OK");
-                changeStatus(new Status(Status.ON_LINE));
 
+                // <test>
+                if (true || monitoredUsers != null) {
+                    logger.debug("Wysylam liste uzytkownikow do serwera");
+                    sendPackage(new GGNotify(new User(1411367)));
+                }
+                // </test>
+                changeStatus(new Status(Status.ON_LINE));
                 break;
 
             case GG_PACKAGE_LOGIN_ERROR:
@@ -264,6 +271,9 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 
                 break;
 
+            case GG_NOTIFY_REPLY:
+            	GGNotifyReply notify = new GGNotifyReply(keyBytes);
+            	break;
             default:
                 logger.debug("Unknown package");
             }
