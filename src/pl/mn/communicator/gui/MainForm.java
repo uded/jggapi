@@ -294,6 +294,9 @@ public class MainForm
 		try {
 			connection.changeStatus(new Status(Status.ON_LINE));
 			connection.sendMonitoredUserList(usersData.getUsers());
+//			IUser user = ((IUser)usersData.getUsers().iterator().next());
+//			user.setOnLine(true);
+//			logger.info("Status changed for user "+user.getName());
 		} catch (IOException e) {
 			logger.error("Error changing status",e);
 		}
