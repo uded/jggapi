@@ -23,7 +23,7 @@ package pl.mn.communicator;
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ILocalStatus.java,v 1.2 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: ILocalStatus.java,v 1.3 2004-12-26 13:40:03 winnetou25 Exp $
  */
 public interface ILocalStatus extends IStatus {
 
@@ -33,5 +33,7 @@ public interface ILocalStatus extends IStatus {
 	 * @return whether or not we want to be visible only for friends.
 	 */
     boolean isFriendsOnly();
+    
+    void setFriendsOnly(boolean isFriendsOnly);
 
 }
