@@ -32,8 +32,6 @@ import java.io.IOException;
 
 import java.net.Socket;
 
-import java.util.Collection;
-
 
 /**
  * Implementacja klienta gg.<BR>
@@ -51,7 +49,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.21 $
+ * @version $Revision: 1.22 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -59,7 +57,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
     private IServer server;
     private ILocalUser localUser;
     private ConnectionThread connectionThread;
-    private Collection monitoredUsers;
     private boolean isConnected = false;
 
     /**
@@ -119,15 +116,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
             GGStatus newStatus = new GGStatus(status.getStatus(), "estem");
             connectionThread.sendPackage(newStatus);
         }
-    }
-
-    /**
-     * @see pl.mn.communicator.IConnection
-     * #setMonitoredUserList(java.util.Collection)
-     */
-    public void setMonitoredUserList(Collection userList)
-        throws IOException {
-        this.monitoredUsers = userList;
     }
 
     /**
@@ -237,7 +225,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                 if (connectionListener != null) {
                     connectionListener.connectionEstablished();
                 }
-                
                 logger.debug("Login OK");
                 changeStatus(new Status(Status.ON_LINE));
 

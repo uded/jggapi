@@ -19,6 +19,8 @@ package pl.mn.communicator;
 
 import org.apache.log4j.Logger;
 
+import java.util.Collection;
+
 
 /**
  * Po³±czenie z serwerem gg.<BR>
@@ -36,11 +38,16 @@ import org.apache.log4j.Logger;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 public abstract class AbstractConnection implements IConnection {
     private static Logger logger = Logger.getLogger(AbstractConnection.class);
+
+    /**
+     * Lista monitorowanych u¿ytkowników.
+     */
+    protected Collection monitoredUsers;
 
     /**
      * Listener u¿ytkowników
@@ -114,5 +121,13 @@ public abstract class AbstractConnection implements IConnection {
      */
     public void removeMessageListener() {
         this.messageListener = null;
+    }
+
+    /**
+     * Ustaw listê monitorowanych u¿ytkowników.
+     * @param userList lista u¿ytkowników
+     */
+    public void setMonitoredUserList(Collection userList) {
+        this.monitoredUsers = userList;
     }
 }
