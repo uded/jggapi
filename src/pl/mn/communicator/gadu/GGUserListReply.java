@@ -1,15 +1,32 @@
 /*
- * Created on 2004-12-11
+ * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 package pl.mn.communicator.gadu;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+
+import pl.mn.communicator.LocalUser;
 
 /**
+ * Created on 2004-12-11
+ * 
  * @author mateusz
  *
  * TODO To change the template for this generated type comment go to
@@ -31,8 +48,8 @@ public class GGUserListReply implements GGIncomingPackage {
 	
 	public GGUserListReply(byte[] data) {
 		m_type = (byte) data[0];
-		if (isGetMoreReply()) {
-			m_users = createUsersCollection();
+		if (isGetMoreReply() || isGetReply()) {
+			m_users = createUsersCollection(data);
 		}
 	}
 	
@@ -43,11 +60,48 @@ public class GGUserListReply implements GGIncomingPackage {
 		return GG_USERLIST_PUT_REPLY;
 	}
 	
-	private Collection createUsersCollection() {
+	private Collection createUsersCollection(byte[] data) {
 		ArrayList list = new ArrayList();
-		//TODO
+		String contactListString = new String(data, 1, data.length-1);
+
+		String[] contactListStrings = contactListString.split(";");
+		List contactList = Arrays.asList(contactListStrings);
+		
+		int count = contactListStrings.length/11;
+		
+		int index = 0;
+		for (int i=0; i<count; i++) {
+			List subList = contactList.subList(index, index+11);
+			index+=11;
+			LocalUser localUser = createLocalUser(subList);
+			list.add(localUser);
+		}
 		
 		return list;
+	}
+	
+//	imie;nazwisko;pseudo;wyswietlane;telefon;grupa;uin;adres@email;0;;0;
+	private LocalUser createLocalUser(List entries) {
+		String firstName = (String) entries.get(0);
+		String surName = (String) entries.get(1);
+		String nickname = (String) entries.get(2);
+		String displayName = (String) entries.get(3);
+		String telephone = (String) entries.get(4);
+		String group = (String) entries.get(5);
+		String uin = (String) entries.get(6);
+		String email = (String) entries.get(7);
+
+		LocalUser localUser = new LocalUser();
+		localUser.setName(firstName);
+		localUser.setSurname(surName);
+		localUser.setNickName(nickname);
+		localUser.setDisplayName(displayName);
+		localUser.setTelephone(telephone);
+		localUser.setGroup(group);
+		localUser.setUin(Integer.valueOf(uin).intValue());
+		localUser.setEmailAddress(email);
+		
+		return localUser;
 	}
 	
 	public Collection getContactList() {

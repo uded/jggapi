@@ -132,8 +132,8 @@ public class Main2 {
 		localUsers.add(localUser1);
 		localUsers.add(localUser2);
 		
-		session.getContactListService().clearUserListRequest();
-		session.getContactListService().exportContacts(localUsers);
+//		session.getContactListService().clearUserListRequest();
+//		session.getContactListService().exportContacts(localUsers);
 		session.getContactListService().importContacts();
 		
 		session.getLoginService().logout();

@@ -52,7 +52,6 @@ public class LocalUser {
 	}
 	
 	public void setSurname(String surname) {
-		if (surname == null) throw new NullPointerException("surname cannot be null");
 		m_surname = surname;
 	}
 	
@@ -61,7 +60,6 @@ public class LocalUser {
 	}
 
 	public void setNickName(String nickName) {
-		if (nickName == null) throw new NullPointerException("nickName cannot be null");
 		m_nickName = nickName;
 	}
 
@@ -70,7 +68,6 @@ public class LocalUser {
 	}
 	
 	public void setDisplayName(String displayName) {
-		if (displayName == null) throw new NullPointerException("displayName cannot be null");
 		m_displayName = displayName;
 	}
 
@@ -79,7 +76,6 @@ public class LocalUser {
 	}
 
 	public void setTelephone(String telephone) {
-		if (telephone == null) throw new NullPointerException("telephone cannot be null");
 		m_telephone = telephone;
 	}
 	
@@ -92,7 +88,6 @@ public class LocalUser {
 	}
 	
 	public void setGroup(String group) {
-		if (group == null) throw new NullPointerException("group cannot be null");
 		m_group = group;
 	}
 	
@@ -106,7 +101,6 @@ public class LocalUser {
 	}
 	
 	public void setEmailAddress(String emailAddress) {
-		if (emailAddress == null) throw new NullPointerException("Email address cannot be null");
 		m_emailAddress = emailAddress;
 	}
 	

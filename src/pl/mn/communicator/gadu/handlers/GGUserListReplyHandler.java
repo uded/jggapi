@@ -32,13 +32,20 @@ public class GGUserListReplyHandler implements PacketHandler {
 		logger.debug("Got packet: "+GGUtils.bytesToString(context.getPackageContent()));
 
 		GGUserListReply userListReply = new GGUserListReply(context.getPackageContent());
-		if (userListReply.isPutMoreReply()) {
+		context.getSessionAccessor().notifyGGPacketReceived(userListReply);
+
+		if (userListReply.isPutReply()) {
+			logger.debug("GGUserListReply.PutReply");
 			context.getSessionAccessor().notifyContactListExported();
 		} else if (userListReply.isGetMoreReply()) {
+			logger.debug("GGUserListReply.GetMoreReply");
+			Collection contactList = userListReply.getContactList();
+			context.getSessionAccessor().notifyContactListReceived(contactList);
+		} else if (userListReply.isGetReply()) {
+			logger.debug("GGUserListReply.GetReply");
 			Collection contactList = userListReply.getContactList();
 			context.getSessionAccessor().notifyContactListReceived(contactList);
 		}
-
 	}
 
 }

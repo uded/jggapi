@@ -21,7 +21,6 @@ import pl.mn.communicator.GGException;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.gadu.GGLoginOK;
 
-
 /**
  * Created on 2004-11-27
  * 
