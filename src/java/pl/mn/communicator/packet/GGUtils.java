@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.7 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.8 2004-12-20 19:18:23 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -201,7 +201,7 @@ public class GGUtils {
 	    int pos = start;
 	
 	    int tmp;
-	    int plus = 0;
+	    //int plus = 0;
 	    tmp = unsignedByteToInt(buf[pos++]) << 0;
 	    i += tmp;
 	    tmp = unsignedByteToInt(buf[pos++]) << 8;
@@ -219,7 +219,7 @@ public class GGUtils {
 	    int pos = start;
 	
 	    int tmp;
-	    int plus = 0;
+	    //int plus = 0;
 	    tmp = unsignedByteToInt(buf[pos++]) << 0;
 	    i += tmp;
 	    tmp = unsignedByteToInt(buf[pos++]) << 8;
