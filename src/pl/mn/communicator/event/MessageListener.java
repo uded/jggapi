@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
@@ -24,7 +24,7 @@ import java.util.EventListener;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageListener.java,v 1.13 2004-12-11 17:22:33 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.1 2004-12-12 00:29:34 winnetou25 Exp $
  */
 public interface MessageListener extends EventListener {
 	
@@ -43,12 +43,12 @@ public interface MessageListener extends EventListener {
     public final static class Stub implements MessageListener {
 
 		/**
-		 * @see pl.mn.communicator.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
+		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
 		 */
 		public void messageArrived(MessageArrivedEvent arrivedEvent) { }
 
 		/**
-		 * @see pl.mn.communicator.MessageListener#messageDelivered(pl.mn.communicator.MessageDeliveredEvent)
+		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(pl.mn.communicator.MessageDeliveredEvent)
 		 */
 		public void messageDelivered(MessageDeliveredEvent messageDeliveredEvent) { }
 

@@ -17,6 +17,8 @@
  */
 package pl.mn.communicator;
 
+import pl.mn.communicator.event.LoginListener;
+
 /**
  * Created on 2004-11-27
  * 

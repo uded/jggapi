@@ -15,20 +15,30 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
 
-import java.util.EventListener;
+import java.util.EventObject;
+
+import pl.mn.communicator.IncommingMessage;
 
 /**
+ * Arrived message event.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: UserListener.java,v 1.10 2004-12-11 17:22:33 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: MessageArrivedEvent.java,v 1.1 2004-12-12 00:29:34 winnetou25 Exp $
  */
-public interface UserListener extends EventListener {
+public class MessageArrivedEvent extends EventObject {
 
-	/**
-	 * The notification that user changed the status.
-     */
-    void userStatusChanged(IUser user, IStatus newStatus);
-    
+	private IncommingMessage m_message = null;
+	
+	public MessageArrivedEvent(Object source, IncommingMessage message) {
+		super(source);
+		m_message = message;
+	}
+
+	public IncommingMessage getMessage() {
+		return m_message;
+	}
+	
 }

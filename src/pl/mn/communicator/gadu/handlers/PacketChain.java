@@ -30,9 +30,9 @@ import pl.mn.communicator.gadu.GGPong;
 import pl.mn.communicator.gadu.GGRecvMsg;
 import pl.mn.communicator.gadu.GGSendMsgAck;
 import pl.mn.communicator.gadu.GGStatus;
+import pl.mn.communicator.gadu.GGUserListReply;
 import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.GGWelcome;
-
 
 /**
  * Created on 2004-11-27
@@ -74,8 +74,9 @@ public class PacketChain {
 	public void sendToChain(Context packageContent) {
 		PacketHandler packetHandler = (PacketHandler) m_packetHandlers.get(new Integer(packageContent.getHeader().getType()));
 		if (packetHandler == null) {
-			System.out.println("Unknown package: "+GGUtils.bytesToString(packageContent.getPackageContent()));
-			logger.error("Unknown package: "+GGUtils.bytesToString(packageContent.getPackageContent()));
+			logger.error("Unknown package.");
+			logger.error("PacketHeader: "+packageContent.getHeader());
+			logger.error("PacketBody: "+GGUtils.bytesToString(packageContent.getPackageContent()));
 		}
 		packetHandler.handle(packageContent);
 	}
@@ -90,6 +91,7 @@ public class PacketChain {
 		registerGGPackageHandler(GGPong.GG_PONG, new GGPongPacketHandler());
 		registerGGPackageHandler(GGRecvMsg.GG_RECV_MSG, new GGMessageReceivedPacketHandler());
 		registerGGPackageHandler(GGSendMsgAck.GG_SEND_MSG_ACK, new GGSentMessageAckPacketHandler());
+		registerGGPackageHandler(GGUserListReply.GG_USERLIST_REPLY, new GGUserListReplyHandler());
 	}
 
 }

@@ -24,13 +24,13 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import pl.mn.communicator.ConnectionListener;
 import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGPacketListener;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IConnectionService;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.SessionState;
+import pl.mn.communicator.event.ConnectionListener;
+import pl.mn.communicator.event.GGPacketListener;
 import pl.mn.communicator.gadu.GGHeader;
 import pl.mn.communicator.gadu.GGIncomingPackage;
 import pl.mn.communicator.gadu.GGOutgoingPackage;

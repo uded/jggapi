@@ -30,7 +30,7 @@ import pl.mn.communicator.IPresenceService;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.UserListener;
+import pl.mn.communicator.event.UserListener;
 import pl.mn.communicator.gadu.GGAddNotify;
 import pl.mn.communicator.gadu.GGNewStatus;
 import pl.mn.communicator.gadu.GGRemoveNotify;

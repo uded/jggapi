@@ -26,10 +26,10 @@ import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.ILoginService;
 import pl.mn.communicator.IStatus;
-import pl.mn.communicator.LoginListener;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.Status;
 import pl.mn.communicator.StatusConst;
+import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.gadu.GGLogin60;
 
 /**

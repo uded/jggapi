@@ -15,30 +15,20 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator.event;
+
+import java.util.EventListener;
 
 /**
+ * Created on 2004-11-28
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserlistReply.java,v 1.4 2004-12-11 16:25:58 winnetou25 Exp $
+ * @author mateusz
+ *
+ * TODO To change the template for this generated type comment go to
+ * Window - Preferences - Java - Code Style - Code Templates
  */
-class GGUserlistReply implements GGIncomingPackage {
-	
-	public final static int GG_USERLIST_REPLY = 0x0010;
-	
-//	#define GG_USERLIST_REPLY 0x0010
-//	
-//struct gg_userlist_reply {
-//	char type;		/* rodzaj zapytania *
-//	char request[];		/* tre��, nie musi wyst�pi� */
-//};
-	
-	/**
-	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_USERLIST_REPLY;
-	}
+public interface SessionStateListener extends EventListener {
+
+	void sessionStateChanged(SessionStateEvent stateEvent);
 	
 }

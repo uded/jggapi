@@ -15,39 +15,35 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
 
-import java.util.EventListener;
-
-import pl.mn.communicator.gadu.GGIncomingPackage;
-import pl.mn.communicator.gadu.GGOutgoingPackage;
+import java.util.EventObject;
 
 /**
- * Created on 2004-12-11
+ * Created on 2004-11-28
  * 
  * @author mateusz
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public interface GGPacketListener extends EventListener {
+public class SessionStateEvent extends EventObject {
 
-	void sentPacket(GGOutgoingPackage outgoingPacket);
+	private int m_oldState = -1;
+	private int m_newState = -1;
 	
-	void receivedPacket(GGIncomingPackage incomingPacket);
+	public SessionStateEvent(Object source, int oldState, int newState) {
+		super(source);
+		m_oldState = oldState;
+		m_newState = newState;
+	}
 	
-	public static class Stub implements GGPacketListener {
-
-		/**
-		 * @see pl.mn.communicator.GGPacketListener#sentPacket(pl.mn.communicator.gadu.GGOutgoingPackage)
-		 */
-		public void sentPacket(GGOutgoingPackage outgoingPacket) { }
-
-		/**
-		 * @see pl.mn.communicator.GGPacketListener#receivedPacket(pl.mn.communicator.gadu.GGIncomingPackage)
-		 */
-		public void receivedPacket(GGIncomingPackage incomingPacket) { }
-		
+	public int getOldState() {
+		return m_oldState;
+	}
+	
+	public int getNewState() {
+		return m_newState;
 	}
 	
 }

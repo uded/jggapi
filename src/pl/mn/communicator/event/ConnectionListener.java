@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
@@ -24,7 +24,7 @@ import java.util.EventListener;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ConnectionListener.java,v 1.8 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: ConnectionListener.java,v 1.1 2004-12-12 00:29:34 winnetou25 Exp $
  */
 public interface ConnectionListener extends EventListener {
 	
@@ -43,22 +43,22 @@ public interface ConnectionListener extends EventListener {
     public static class Stub implements ConnectionListener {
 
 		/**
-		 * @see pl.mn.communicator.ConnectionListener#connectionEstablished()
+		 * @see pl.mn.communicator.event.ConnectionListener#connectionEstablished()
 		 */
 		public void connectionEstablished() { }
 
 		/**
-		 * @see pl.mn.communicator.ConnectionListener#disconnected()
+		 * @see pl.mn.communicator.event.ConnectionListener#disconnected()
 		 */
 		public void connectionClosed() { }
 
 		/**
-		 * @see pl.mn.communicator.ConnectionListener#connectionError(java.lang.Exception)
+		 * @see pl.mn.communicator.event.ConnectionListener#connectionError(java.lang.Exception)
 		 */
 		public void connectionError(Exception e) { }
 		
 		/**
-		 * @see pl.mn.communicator.ConnectionListener#pongReceived()
+		 * @see pl.mn.communicator.event.ConnectionListener#pongReceived()
 		 */
 		public void pongReceived() { }
     	

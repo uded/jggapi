@@ -17,6 +17,9 @@
  */
 package pl.mn.communicator;
 
+import pl.mn.communicator.event.ConnectionListener;
+import pl.mn.communicator.event.GGPacketListener;
+
 /**
  * Created on 2004-11-27
  * 

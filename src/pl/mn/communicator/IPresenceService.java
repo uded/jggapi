@@ -19,6 +19,8 @@ package pl.mn.communicator;
 
 import java.util.Collection;
 
+import pl.mn.communicator.event.UserListener;
+
 /**
  * Created on 2004-11-27
  * 

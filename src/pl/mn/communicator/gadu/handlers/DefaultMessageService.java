@@ -25,11 +25,11 @@ import java.util.Set;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IMessageService;
-import pl.mn.communicator.MessageArrivedEvent;
-import pl.mn.communicator.MessageDeliveredEvent;
-import pl.mn.communicator.MessageListener;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.SessionState;
+import pl.mn.communicator.event.MessageArrivedEvent;
+import pl.mn.communicator.event.MessageDeliveredEvent;
+import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.gadu.GGSendMsg;
 
 /**

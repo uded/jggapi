@@ -1,19 +1,22 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import pl.mn.communicator.ConnectionListener;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.LocalUser;
 import pl.mn.communicator.LoginContext;
-import pl.mn.communicator.LoginListener;
-import pl.mn.communicator.MessageArrivedEvent;
-import pl.mn.communicator.MessageDeliveredEvent;
-import pl.mn.communicator.MessageListener;
-import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.Server;
-import pl.mn.communicator.UserListener;
+import pl.mn.communicator.event.ConnectionListener;
+import pl.mn.communicator.event.ContactListListener;
+import pl.mn.communicator.event.LoginListener;
+import pl.mn.communicator.event.MessageArrivedEvent;
+import pl.mn.communicator.event.MessageDeliveredEvent;
+import pl.mn.communicator.event.MessageListener;
+import pl.mn.communicator.event.UserListener;
 import pl.mn.communicator.gadu.handlers.Session;
 
 /*
@@ -95,12 +98,44 @@ public class Main2 {
 			}
 			
 		});
+		
+		session.getContactListService().addContactListListener(new ContactListListener() {
+
+			public void contactListExported() {
+				System.out.println("ContactList successfuly exported.");
+			}
+			
+			/**
+			 * @see pl.mn.communicator.event.ContactListListener#contactListReceived(java.util.Collection)
+			 */
+			public void contactListReceived(Collection users) {
+				System.out.println("ContactList received.");
+			}
+			
+		});
 
 		session.getConnectionService().connect();
-		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-		session.getMessageService().sendMessage(OutgoingMessage.createMessageWithoutConfirmation(376798, String.valueOf(System.currentTimeMillis())));
+//		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+//		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+//		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+//		session.getMessageService().sendMessage(OutgoingMessage.createMessageWithoutConfirmation(376798, String.valueOf(System.currentTimeMillis())));
+
+		LocalUser localUser1 = new LocalUser();
+		localUser1.setDisplayName("ziom");
+		localUser1.setUin(376712);
+
+		LocalUser localUser2 = new LocalUser();
+		localUser2.setDisplayName("jan");
+		localUser2.setUin(326712);
+
+		ArrayList localUsers = new ArrayList();
+		localUsers.add(localUser1);
+		localUsers.add(localUser2);
+		
+		session.getContactListService().clearUserListRequest();
+		session.getContactListService().exportContacts(localUsers);
+		session.getContactListService().importContacts();
+		
 		session.getLoginService().logout();
 		session.getConnectionService().disconnect();
 	}

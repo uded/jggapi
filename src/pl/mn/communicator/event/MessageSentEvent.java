@@ -15,28 +15,36 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
 
+import java.util.Date;
 import java.util.EventObject;
 
-/**
- * Arrived message event.
- * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageArrivedEvent.java,v 1.2 2004-12-11 16:25:57 winnetou25 Exp $
- */
-public class MessageArrivedEvent extends EventObject {
+import pl.mn.communicator.IMessage;
 
-	private IncommingMessage m_message = null;
+/**
+ * Message sent event.
+ * 
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: MessageSentEvent.java,v 1.1 2004-12-12 00:29:34 winnetou25 Exp $
+ */
+public class MessageSentEvent extends EventObject {
+
+	private IMessage m_message = null;
+	private Date m_sentDate = null;
 	
-	public MessageArrivedEvent(Object source, IncommingMessage message) {
+	public MessageSentEvent(Object source, IMessage message, Date sentDate) {
 		super(source);
 		m_message = message;
+		m_sentDate = sentDate;
 	}
 
-	public IncommingMessage getMessage() {
+	public IMessage getMessage() {
 		return m_message;
+	}
+	
+	public Date getSentDate() {
+		return m_sentDate;
 	}
 	
 }

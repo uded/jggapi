@@ -15,10 +15,12 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
 
 import java.util.EventObject;
 
+import pl.mn.communicator.IUser;
+import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.gadu.GGUtils;
 
 /**
@@ -26,7 +28,7 @@ import pl.mn.communicator.gadu.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageDeliveredEvent.java,v 1.2 2004-12-11 16:25:57 winnetou25 Exp $
+ * @version $Id: MessageDeliveredEvent.java,v 1.1 2004-12-12 00:29:34 winnetou25 Exp $
  */
 public class MessageDeliveredEvent extends EventObject {
 

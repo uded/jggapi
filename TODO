@@ -2,7 +2,6 @@ TODO LIST
 ---------
 
 DONE - wysylanie listy uzytkownikow do serwera
-- statusy z opisem i czasem powrotu
 DONE - powiadomianie o zmianie statusow uzytkownikow
 - obslugiwanie serwisow dostepnych przez www
 (rejestracja uzytkownika, zmiana danych itp...)

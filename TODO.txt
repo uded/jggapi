@@ -1,19 +1,18 @@
--taki logincontext w ktorym bylyby localIP, localPort, externalIP, externalPort
-dobrym pomyslem jest tutaj zastosowanie factory, albo statycznych metod fabrykujacych
+Features:
+1. HIGH - Implementacja monitorowania uzytkonikow i zmiany statusu uzytkownikow.
+2. HIGH - Implementacja trybu tylko dla przyjaciol
+3. HIGH - implementacja szukania i klasy LocalUser, SearchContext
+4. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
+5. LOW - Obslugiwanie serwisow dostepnych przez www (RegisstrationService) (rejestracja uzytkownika, zmiana danych itp...)
+6. LOW - Implementacja wysylania plikow.
+7. MED - Export listy kontaktow
+8. MED - Bardziej dokladna dokumentacja w java docs.
+9. LATER (obecnie mozna odpowiedziec nadawcy dla rozmowy grupowej) - rozmowy grupowe
 
--implementacja trybu tylko dla przyjaciol
--implementacja blokowania uzytkownikow
+Bugs:
+status in LoginContext does not work out! Tak jakby serwer GG to ignorowal
+na razie rozwiazalem to tak ze po dostaniu pakietu login ok ustawiam status recznie.
 
-- obslugiwanie serwisow dostepnych przez www
-(rejestracja uzytkownika, zmiana danych itp...)
-
--eksport listy kontaktow
-
--Initial status in LoginContext does not work out.
-
-GGLogin w ktorym adresy beda dzialaly (localIp, externalIP)
-
--provide more accurate documentation.
-
+Ogolne:
 -nie wiem czy to jest takie sprytne, ze jest GGSessionException. Wlasciwie z command line to nie mozna tej biblioteki uzywac.
 chyba ze zrobic sie jakies wiszenie i dopoki cos sie nie stanie to sie nie bedzie dalej probowalo.

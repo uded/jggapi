@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
 
 /**
  * Created on 2004-11-27
@@ -40,12 +40,12 @@ public interface LoginListener {
 	public static class Stub implements LoginListener {
 		
 		/**
-		 * @see pl.mn.communicator.LoginListener#userLoggedIn()
+		 * @see pl.mn.communicator.event.LoginListener#userLoggedIn()
 		 */
 		public void loginOK() { }
 		
 		/**
-		 * @see pl.mn.communicator.LoginListener#userLoggedOut()
+		 * @see pl.mn.communicator.event.LoginListener#userLoggedOut()
 		 */
 		public void loginFailed() { }
 

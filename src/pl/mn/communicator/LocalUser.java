@@ -27,16 +27,20 @@ package pl.mn.communicator;
  */
 public class LocalUser {
 
-	//imie;nazwisko;pseudo;wyswietlane;telefon;grupa;uin;adres@email;0;;0;
-	private String m_name;
-	private String m_surname;
-	private String m_nickName;
-	private String m_displayName;
-	private String m_telephone;
-	private String m_group;
-	private String m_uin;
-	private String m_emailAddress;
+	private int m_uin = -1;
+	private String m_name = null;
+	private String m_surname = null;
+	private String m_nickName = null;
+	private String m_displayName = null;
+	private String m_telephone = null;
+	private String m_group = null;
+	private String m_emailAddress = null;
 	private int m_mode = -1;
+	
+//	public LocalUser(int uin) {
+//		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+//		m_uin = uin;
+//	}
 	
 	public void setName(String name) {
 		if (name == null) throw new NullPointerException("name cannot be null");
@@ -83,17 +87,21 @@ public class LocalUser {
 		return m_telephone;
 	}
 
+	public String getGroup() {
+		return m_group;
+	}
+	
 	public void setGroup(String group) {
 		if (group == null) throw new NullPointerException("group cannot be null");
 		m_group = group;
 	}
 	
-	public void setUin(String uin) {
-		if (uin == null) throw new NullPointerException("uin cannot be null");
+	public void setUin(int uin) {
+		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		m_uin = uin;
 	}
 
-	public String getUin() {
+	public int getUin() {
 		return m_uin;
 	}
 	

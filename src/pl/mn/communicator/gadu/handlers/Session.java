@@ -18,6 +18,7 @@
 package pl.mn.communicator.gadu.handlers;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -37,11 +38,11 @@ import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
-import pl.mn.communicator.MessageArrivedEvent;
-import pl.mn.communicator.MessageDeliveredEvent;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.SessionStateEvent;
-import pl.mn.communicator.SessionStateListener;
+import pl.mn.communicator.event.MessageArrivedEvent;
+import pl.mn.communicator.event.MessageDeliveredEvent;
+import pl.mn.communicator.event.SessionStateEvent;
+import pl.mn.communicator.event.SessionStateListener;
 import pl.mn.communicator.gadu.GGIncomingPackage;
 import pl.mn.communicator.gadu.GGOutgoingPackage;
 
@@ -68,6 +69,7 @@ public class Session implements ISession {
 	private DefaultPresenceService m_presenceService = null;
 	private DefaultMessageService m_messageService = null;
 	private DefaultRegistrationService m_registrationService = null;
+	private DefaultContactListService m_contactListService = null;
 	
 	private IServer m_server = null;
 	
@@ -84,6 +86,7 @@ public class Session implements ISession {
 		m_presenceService = new DefaultPresenceService(this);
 		m_messageService = new DefaultMessageService(this);
 		m_registrationService = new DefaultRegistrationService(this);
+		m_contactListService = new DefaultContactListService(this);
 	}
 
 	public int getSessionState() {
@@ -168,8 +171,7 @@ public class Session implements ISession {
 	 * @see pl.mn.communicator.ISession#getContactListService()
 	 */
 	public IContactListService getContactListService() {
-		// TODO Auto-generated method stub
-		return null;
+		return m_contactListService;
 	}
 	
 	protected void notifySessionStateChanged(int oldState, int newState) {
@@ -240,6 +242,14 @@ public class Session implements ISession {
 		
 		public void notifyGGPacketReceived(GGIncomingPackage incomingPackage) {
 			m_connectionService.notifyPacketReceived(incomingPackage);
+		}
+		
+		public void notifyContactListExported() {
+			m_contactListService.notifyContactListExported();
+		}
+		
+		public void notifyContactListReceived(Collection contacts) {
+			m_contactListService.notifyContactListReceived(contacts);
 		}
 
 		public void setIntegerAttribute(String attributeName, int integer) {

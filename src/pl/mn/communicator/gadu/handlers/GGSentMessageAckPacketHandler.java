@@ -18,8 +18,8 @@
 package pl.mn.communicator.gadu.handlers;
 
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.MessageDeliveredEvent;
 import pl.mn.communicator.User;
+import pl.mn.communicator.event.MessageDeliveredEvent;
 import pl.mn.communicator.gadu.GGSendMsgAck;
 
 /**

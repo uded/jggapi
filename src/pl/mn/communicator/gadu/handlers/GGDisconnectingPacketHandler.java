@@ -17,6 +17,9 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pl.mn.communicator.gadu.GGDisconnecting;
 
 /**
@@ -29,10 +32,13 @@ import pl.mn.communicator.gadu.GGDisconnecting;
  */
 public class GGDisconnectingPacketHandler implements PacketHandler {
 
+	private final static Log logger = LogFactory.getLog(GGDisconnectingPacketHandler.class);
+	
 	/**
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
+		logger.debug("Got disconnecting packet.");
 		GGDisconnecting disconnecting = GGDisconnecting.getInstance();
 		context.getSessionAccessor().notifyGGPacketReceived(disconnecting);
 		context.getSessionAccessor().notifyConnectionClosed();

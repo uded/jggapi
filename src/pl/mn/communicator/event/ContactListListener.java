@@ -15,35 +15,36 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
 
-import java.util.EventObject;
+import java.util.Collection;
+import java.util.EventListener;
 
 /**
- * Created on 2004-11-28
+ * Created on 2004-12-11
  * 
  * @author mateusz
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class SessionStateEvent extends EventObject {
+public interface ContactListListener extends EventListener {
 
-	private int m_oldState = -1;
-	private int m_newState = -1;
-	
-	public SessionStateEvent(Object source, int oldState, int newState) {
-		super(source);
-		m_oldState = oldState;
-		m_newState = newState;
-	}
-	
-	public int getOldState() {
-		return m_oldState;
-	}
-	
-	public int getNewState() {
-		return m_newState;
+	void contactListExported();
+	void contactListReceived(Collection users);
+
+	public static class Stub implements ContactListListener {
+
+		/**
+		 * @see pl.mn.communicator.event.ContactListListener#contactListExported()
+		 */
+		public void contactListExported() { }
+
+		/**
+		 * @see pl.mn.communicator.event.ContactListListener#receivedContactList(java.util.Collection)
+		 */
+		public void contactListReceived(Collection users) { }
+		
 	}
 	
 }

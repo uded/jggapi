@@ -19,6 +19,8 @@ package pl.mn.communicator;
 
 import java.util.Collection;
 
+import pl.mn.communicator.event.ContactListListener;
+
 /**
  * Created on 2004-11-27
  * 
@@ -29,16 +31,21 @@ import java.util.Collection;
  */
 public interface IContactListService {
 
+	void clearUserListRequest() throws GGException;
+	
 	/**
 	 * Exports the collection of local users to server.
 	 * @param localUsers 
 	 */
-	void exportContacts(Collection localUsers);
+	void exportContacts(Collection localUsers) throws GGException;
 
 	/**
 	 * Imports the collection of localUsers from server.
-	 * @return
 	 */
-	Collection importContacts();
+	void importContacts() throws GGException;
+	
+	void addContactListListener(ContactListListener contactListListener);
+	
+	void removeContactListlistener(ContactListListener contactListListener);
 	
 }

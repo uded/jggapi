@@ -17,10 +17,12 @@
  */
 package pl.mn.communicator;
 
+import pl.mn.communicator.event.SessionStateListener;
+
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISession.java,v 1.2 2004-12-11 20:08:58 winnetou25 Exp $
+ * @version $Id: ISession.java,v 1.3 2004-12-12 00:29:34 winnetou25 Exp $
  */
 public interface ISession {
 

@@ -3,7 +3,7 @@
     <view uin="V-d9nhuoe2auxfks-romof3">
         <property name="$metaclass" value="StateDiagram20"/>
         <property name="$description" value=""/>
-        <property name="@__options" value="zoomFactor = 0.8264462809917354&#xA;toolbar.group.Tools.expanded = true&#xA;toolbar.buttonRunCount = 2&#xA;toolbar.group.#DEFAULT.expanded = true&#xA;toolbar.group.note.expanded = true&#xA;scrollX = 0&#xA;scrollY = 131&#xA;"/>
+        <property name="@__options" value="zoomFactor = 0.8264462809917354&#xA;toolbar.group.Tools.expanded = true&#xA;toolbar.buttonRunCount = 2&#xA;toolbar.group.#DEFAULT.expanded = true&#xA;toolbar.group.note.expanded = true&#xA;scrollX = 0&#xA;scrollY = 72&#xA;"/>
         <reference referencedUin="design:node:::N-3uf15de2avcpwvmexzw6">
             <property name="$shortcutReference" value=""/>
             <property name="@location_set_by_user" value="true"/>
@@ -288,15 +288,15 @@
             <property name="@__referenceContsraints" value="weight=0.6185953791413138"/>
             <property name="bounds" value="230,660,200,16"/>
         </reference>
-        <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avfhtn-8y33fc:N-3uf15de2av8guv-6hfgk3">
-            <property name="@location_set_by_user" value="true"/>
-            <property name="@__referenceContsraints" value="weight=0.2619047619047619"/>
-            <property name="bounds" value="488,395,138,16"/>
-        </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avfvpn-joiadw:N-3uf15de2avbao9u58izg">
             <property name="@location_set_by_user" value="true"/>
             <property name="@__referenceContsraints" value="weight=0.5972376758796608"/>
             <property name="bounds" value="441,488,52,16"/>
+        </reference>
+        <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2avfhtn-8y33fc:N-3uf15de2av8guv-6hfgk3">
+            <property name="@location_set_by_user" value="true"/>
+            <property name="@__referenceContsraints" value="weight=0.2619047619047619"/>
+            <property name="bounds" value="488,395,138,16"/>
         </reference>
         <reference referencedUin="label:$transition20InplaceEditing:design:link:::Lujnvd9e2ayibb68bayzk:N-3uf15de2avbao9u58izg">
             <property name="@location_set_by_user" value="false"/>
