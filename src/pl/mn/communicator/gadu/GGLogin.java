@@ -25,14 +25,14 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {
     private static Logger logger = Logger.getLogger(GGLogin.class);
     private int uin;
     private int hash;
-    private int status = GGStatus.GG_STATUS_AVAIL;
+    private int status = GGNewStatus.GG_STATUS_AVAIL;
     private static final int VERSION = 0x40000021; //wersja 6.00
     private int localIp;
     private short localPort;

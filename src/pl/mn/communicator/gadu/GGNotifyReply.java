@@ -28,7 +28,7 @@ import java.util.Map;
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
@@ -75,10 +75,10 @@ class GGNotifyReply implements GGIncomingPackage {
             String description = null;
             Date returnTime = null;
 
-            if ((status == GGStatus.GG_STATUS_AVAIL_DESCR) ||
-                    (status == GGStatus.GG_STATUS_BUSY_DESCR) ||
-                    (status == GGStatus.GG_STATUS_INVISIBLE_DESCR) ||
-                    (status == GGStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
+            if ((status == GGNewStatus.GG_STATUS_AVAIL_DESCR) ||
+                    (status == GGNewStatus.GG_STATUS_BUSY_DESCR) ||
+                    (status == GGNewStatus.GG_STATUS_INVISIBLE_DESCR) ||
+                    (status == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
                 int descriptionSize = GGConversion.unsignedByteToInt(dane[przesuniecie +
                         14]);
 
@@ -129,20 +129,20 @@ class GGNotifyReply implements GGIncomingPackage {
 
     private int dajStatusBiz(int ggStatus) {
         switch (ggStatus) {
-        case GGStatus.GG_STATUS_AVAIL:
-        case GGStatus.GG_STATUS_AVAIL_DESCR:
+        case GGNewStatus.GG_STATUS_AVAIL:
+        case GGNewStatus.GG_STATUS_AVAIL_DESCR:
             return Status.ON_LINE;
 
-        case GGStatus.GG_STATUS_BUSY:
-        case GGStatus.GG_STATUS_BUSY_DESCR:
+        case GGNewStatus.GG_STATUS_BUSY:
+        case GGNewStatus.GG_STATUS_BUSY_DESCR:
             return Status.BUSY;
 
-        case GGStatus.GG_STATUS_INVISIBLE:
-        case GGStatus.GG_STATUS_INVISIBLE_DESCR:
+        case GGNewStatus.GG_STATUS_INVISIBLE:
+        case GGNewStatus.GG_STATUS_INVISIBLE_DESCR:
             return Status.NOT_VISIBLE;
 
-        case GGStatus.GG_STATUS_NOT_AVAIL:
-        case GGStatus.GG_STATUS_NOT_AVAIL_DESCR:default:
+        case GGNewStatus.GG_STATUS_NOT_AVAIL:
+        case GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR:default:
             return Status.OFF_LINE;
         }
     }

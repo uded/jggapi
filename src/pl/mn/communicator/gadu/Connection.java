@@ -52,7 +52,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.28 $
+ * @version $Revision: 1.29 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -116,7 +116,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      */
     public void changeStatus(IStatus status) throws IOException {
         if (isConnected) {
-            GGStatus newStatus = new GGStatus(status.getStatus(), "estem");
+            GGNewStatus newStatus = new GGNewStatus(status.getStatus(), "estem");
             connectionThread.sendPackage(newStatus);
         }
     }
