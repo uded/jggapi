@@ -1,5 +1,7 @@
 package pl.mn.communicator.gadu;
 
+import pl.mn.communicator.IUser;
+
 /**
  * @author mnaglik
  */
@@ -8,10 +10,10 @@ class GGNotify implements GGOutgoingPackage {
 	public static final int GG_USER_NORMAL = 0x03;
 	public static final int GG_USER_BLOCKED = 0x04;
 	
-	private int userNo;
+	private IUser[] users;
 	
-	GGNotify(int userNo) {
-		this.userNo = userNo;
+	GGNotify(IUser[] users) {
+		this.users = users;
 	}
 	
 	/**
