@@ -24,38 +24,49 @@ import org.apache.commons.logging.LogFactory;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.2 2004-12-18 22:07:55 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
 
 	private static Log logger = LogFactory.getLog(OutgoingMessage.class);
 
-    public OutgoingMessage(int toUser, String text, MessageClass messageClass) {
-    	super(toUser, text, messageClass);
+    public OutgoingMessage(int uin, String text, MessageClass messageClass) {
+    	super(uin, text, messageClass);
     }
     
-	public static OutgoingMessage createMessage(int uin, String messageText) {
-		return new OutgoingMessage(uin, messageText, MessageClass.IN_NEW_WINDOW);
+	public static OutgoingMessage createMessage(int uin, String messageBody) {
+		return new OutgoingMessage(uin, messageBody, MessageClass.IN_NEW_WINDOW);
 	}
 
 	/**
 	 * Creates an outgoing message that is just a ping.
-	 * @param toUser
+	 * 
+	 * @param uin
 	 */
-	public static OutgoingMessage createPingMessage(int toUser) {
-		return new OutgoingMessage(toUser, "", MessageClass.PING);
+	public static OutgoingMessage createPingMessage(int uin) {
+		return new OutgoingMessage(uin, "", MessageClass.PING);
 	}
 
 	/**
 	 * Creates an outgoing message and sends information that we do not
 	 * want to receive confirmation whether this message was successfuly delivered or not.
 	 * 
-	 * @param toUser
+	 * @param uin
 	 * @param text
 	 * @return OutgoingMessage
 	 */
-	public static OutgoingMessage createMessageWithoutConfirmation(int toUser, String text) {
-		return new OutgoingMessage(toUser, text, MessageClass.DO_NOT_CONFIRM);
+	public static OutgoingMessage createMessageWithoutConfirmation(int uin, String messageBody) {
+		return new OutgoingMessage(uin, messageBody, MessageClass.DO_NOT_CONFIRM);
+	}
+	
+	public void setMessageBody(String messageBody) {
+		if (messageBody == null) throw new NullPointerException("messageBody cannot be null");
+		m_messageBody = messageBody;
+	}
+
+	public void setUin(int uin) {
+		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+		m_uin = uin;
 	}
 	
 }

@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.2 2004-12-18 22:07:54 winnetou25 Exp $
  */
 public final class LoginContext {
 	
@@ -53,16 +53,10 @@ public final class LoginContext {
     	m_password = password;
     }
     
-    /**
-     * @return String password
-     */
     public String getPassword() {
         return m_password;
     }
 
-    /**
-     * @return int uin
-     */
     public int getUin() {
         return m_uin;
     }
@@ -73,7 +67,7 @@ public final class LoginContext {
     }
 
     public void setUin(int uin) {
-    	if (uin < 0) throw new IllegalArgumentException("userNo must be a positive number");
+    	if (uin < 0) throw new IllegalArgumentException("uin must be a positive number");
         m_uin = uin;
     }
  

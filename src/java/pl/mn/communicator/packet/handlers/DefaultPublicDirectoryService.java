@@ -35,7 +35,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.10 2004-12-18 16:47:20 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.11 2004-12-18 21:59:47 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -108,26 +108,26 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		m_directoryListeners.remove(publicDirListener);
 	}
 	
-	protected void notifyPubdirRead(PublicDirInfo publicDirInfo) {
+	protected void notifyPubdirRead(int queryID, PublicDirInfo publicDirInfo) {
 		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
-			publicDirListener.onPublicDirectoryRead(publicDirInfo);
+			publicDirListener.onPublicDirectoryRead(queryID, publicDirInfo);
 		}
 	}
 
-	protected void notifyPubdirUpdated() {
+	protected void notifyPubdirUpdated(int queryID) {
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
-			publicDirListener.onPublicDirectoryUpdated();
+			publicDirListener.onPublicDirectoryUpdated(queryID);
 		}
 	}
 
-	protected void notifyPubdirGotSearchResults(PublicDirSearchReply publicDirSearchReply) {
+	protected void notifyPubdirGotSearchResults(int queryID, PublicDirSearchReply publicDirSearchReply) {
 		if (publicDirSearchReply == null) throw new NullPointerException("publicDirSearchReply cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
-			publicDirListener.onPublicDirectorySearchReply(publicDirSearchReply);
+			publicDirListener.onPublicDirectorySearchReply(queryID, publicDirSearchReply);
 		}
 	}
 

@@ -26,7 +26,7 @@ import pl.mn.communicator.PublicDirSearchReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.8 2004-12-18 15:52:15 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.9 2004-12-18 21:59:34 winnetou25 Exp $
  */
 public interface PublicDirListener extends EventListener {
 
@@ -37,7 +37,7 @@ public interface PublicDirListener extends EventListener {
 	 * <p>
 	 * The parameter contains collection of matched results.
 	 */
-	void onPublicDirectorySearchReply(PublicDirSearchReply publicDirSearchReply);
+	void onPublicDirectorySearchReply(int queryID, PublicDirSearchReply publicDirSearchReply);
 
 	/**
 	 * Messaged when we have successfuly retrieved information about our
@@ -45,30 +45,30 @@ public interface PublicDirListener extends EventListener {
 	 * 
 	 * @param pubDirReply
 	 */
-	void onPublicDirectoryRead(PublicDirInfo pubDirReply);
+	void onPublicDirectoryRead(int queryID, PublicDirInfo pubDirReply);
 
 	/**
 	 * Messaged when information has been successfuly written
 	 * to the public directory.
 	 */
-	void onPublicDirectoryUpdated();
+	void onPublicDirectoryUpdated(int queryID);
 
 	public static class Stub implements PublicDirListener {
 
 		/**
 		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectoryUpdated()
 		 */
-		public void onPublicDirectoryUpdated() { }
+		public void onPublicDirectoryUpdated(int queryID) { }
 
 		/**
 		 * @see pl.mn.communicator.event.PublicDirListener#gotSearchResults(java.util.Collection)
 		 */
-		public void onPublicDirectorySearchReply(PublicDirSearchReply publicDirSearchReply) { }
+		public void onPublicDirectorySearchReply(int queryID, PublicDirSearchReply publicDirSearchReply) { }
 
 		/**
 		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectoryRead(pl.mn.communicator.PublicDirQuery)
 		 */
-		public void onPublicDirectoryRead(PublicDirInfo pubDirReply) { }
+		public void onPublicDirectoryRead(int queryID, PublicDirInfo pubDirReply) { }
 		
 	}
 	

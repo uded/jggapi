@@ -29,7 +29,7 @@ import pl.mn.communicator.packet.in.GGPubdirReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReplyPacketHandler.java,v 1.7 2004-12-18 16:47:20 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.8 2004-12-18 21:59:47 winnetou25 Exp $
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 
@@ -46,15 +46,16 @@ public class GGPubdirReplyPacketHandler implements PacketHandler {
 		}
 		
 		GGPubdirReply pubdirReply = new GGPubdirReply(context.getPackageContent());
+		int querySeq = pubdirReply.getQuerySeq();
 		
 		if (pubdirReply.isPubdirReadReply()) {
 			PublicDirInfo publicDirInfo = (PublicDirInfo) pubdirReply.getPubdirReadReply();
-			context.getSessionAccessor().notifyPubdirRead(publicDirInfo);
+			context.getSessionAccessor().notifyPubdirRead(querySeq, publicDirInfo);
 		} else if (pubdirReply.isPubdirWriteReply()) {
-			context.getSessionAccessor().notifyPubdirUpdated();
+			context.getSessionAccessor().notifyPubdirUpdated(querySeq);
 		} else if (pubdirReply.isPubdirSearchReply()) {
 			PublicDirSearchReply pubDirSearchReply = pubdirReply.getPubdirSearchReply();
-			context.getSessionAccessor().notifyPubdirGotSearchResults(pubDirSearchReply);
+			context.getSessionAccessor().notifyPubdirGotSearchResults(querySeq, pubDirSearchReply);
 		}
 	}
 

@@ -52,7 +52,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.10 2004-12-18 15:52:15 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.11 2004-12-18 21:59:47 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -272,16 +272,16 @@ public class Session implements ISession {
 			m_contactListService.notifyContactListReceived(contacts);
 		}
 		
-		public void notifyPubdirRead(PublicDirInfo publicDirInfo) {
-			m_publicDirectoryService.notifyPubdirRead(publicDirInfo);
+		public void notifyPubdirRead(int queryID, PublicDirInfo publicDirInfo) {
+			m_publicDirectoryService.notifyPubdirRead(queryID, publicDirInfo);
 		}
 
-		public void notifyPubdirUpdated() {
-			m_publicDirectoryService.notifyPubdirUpdated();
+		public void notifyPubdirUpdated(int queryID) {
+			m_publicDirectoryService.notifyPubdirUpdated(queryID);
 		}
 
-		public void notifyPubdirGotSearchResults(PublicDirSearchReply searchReply) {
-			m_publicDirectoryService.notifyPubdirGotSearchResults(searchReply);
+		public void notifyPubdirGotSearchResults(int queryID, PublicDirSearchReply searchReply) {
+			m_publicDirectoryService.notifyPubdirGotSearchResults(queryID, searchReply);
 		}
 
 		public void setLoginSeed(int seed) {

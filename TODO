@@ -1,27 +1,26 @@
 Bugs or features for version 1.0
-1. Implementacja monitorowania uzytkownikow i zmiany statusu uzytkownikow.
-   Generalnie zrobione, ale  dzisiaj nie potrafimy monitorowac wiecej niz 2040 bytes long uzytkownikow. Jezeli taki jest pakiet
-   trzeba uzywac GGRequestFirst i potem GGRequestLast a my dzisiaj tylko GGRequestLast pakietu uzywamy.
-   Przynajmniej przy staracie, bo w trakcie dzialania mozemy zawsze AddNotify zrobic.
+1. W przypadku monitorowania uzytkownikow obsluzyc sytuacje w ktorej
+	na poczatku wysylamy liste pakietow przekraczajaca 2040 bajtow (chyba).
+	W tym celu trzeba wyslac inny pakiet. GGRequestFirst a potem GGRequestLast
 2. HIGH - Implementacja trybu tylko dla przyjaciol.
-3. HIGH - implementacja szukania w katalogu publicznym i pisania i czytania wlasnych danych z katalogu.
-	Czytanie i pisanie wlasnych informacji jest juz zrobione. Z szukaniem sa jeszcze problemy.
-4. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
-5. Audyt session states.
-6. PARTIALY-DONE - 7. MED - Export i import listy kontaktow , TODO. obsluga PUT_MORE i GET_MORE
-7. RemoteIP jest zle konwertowane do IP. O co chodzi?
-8. Podzielic kod na api i impl?
-9. Maven POM i documentation (xdocs).
-10. Przejrzec jggapi w punktu widzenia watkow. Ta biblioteka moze byc teraz nie thread-safe.
-11. Zobaczyc czy nie da sie zastosowac dekoratora do InputStream'a przy
+3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
+4. Audyt session states.
+5. Napisac oblusge wysylania listy kontaktow dla wiekszej ilosci kontaktow
+	w tym celu trzeba uzyc pakietow PUT_MORE i GET_MORE przy pobieraniu tej listy.
+6. RemoteIP jest zle konwertowane do IP. O co chodzi?
+7. Podzielic kod na api i impl?
+8. Maven POM i documentation (xdocs).
+9. Przejrzec jggapi w punktu widzenia watkow. Ta biblioteka moze byc teraz nie thread-safe.
+10. Zobaczyc czy nie da sie zastosowac dekoratora do InputStream'a przy
 	czytaniu.
 	np. GGInputStream extends BufferedInputStream
 	void read() // wisimy na read.
 	//po odwieszeniu sie biezemy pakiet.
 	GGIncomingPacket getIncommingPacket(); //incomming packet ma juz GGHeader.
-12. Podzial statusu na local i remote.
-13. MED - Bardziej dokladna dokumentacja w java docs.
-14. Rozwazyc wprowadzenie socket.setTimeout();
+11. Podzial statusu na local i remote.
+12. MED - Bardziej dokladna dokumentacja w java docs.
+13. Rozwazyc wprowadzenie socket.setTimeout();
+14. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
 
 Bugs or features for 1.5 version.
 1. LOW - Obslugiwanie serwisow dostepnych przez www (RegistrationService) (rejestracja uzytkownika, zmiana danych itp...)

@@ -30,26 +30,30 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.9 2004-12-18 21:51:11 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.10 2004-12-18 21:59:56 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
 	public static final int GG_PUBDIR50_REPLY = 0x000E;
 
 	private byte m_replyType = -1;
-	private int m_sequence = -1;
+	private int m_querySeq = -1;
 	
 	private PublicDirInfo m_pubDirInfo = null;
 	private PublicDirSearchReply m_publicDirSearchReply = null;
 	
 	public GGPubdirReply(byte[] data) {
 		m_replyType = data[0];
-		m_sequence = GGUtils.byteToInt(data, 1);
+		m_querySeq = GGUtils.byteToInt(data, 1);
 		if (isPubdirReadReply()) {
 			handlePubdirReadReply(data);
 		} else if (isPubdirSearchReply()) {
 			handlePubdirSearchReply(data);
 		}
+	}
+	
+	public int getQuerySeq() {
+		return m_querySeq;
 	}
 	
 	public PublicDirInfo getPubdirReadReply() {
