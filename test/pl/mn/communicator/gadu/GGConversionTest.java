@@ -7,7 +7,7 @@ import pl.mn.communicator.gadu.util.Util;
 import junit.framework.TestCase;
 
 /**
- * @author Marcin
+ * @author mnaglik
  */
 public class GGConversionTest extends TestCase {
 	private static Logger logger = Logger.getLogger(GGConversionTest.class);

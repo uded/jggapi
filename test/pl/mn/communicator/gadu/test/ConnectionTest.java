@@ -1,9 +1,3 @@
-/*
- * Created on 2003-09-30
- *
- * To change the template for this generated file go to
- * Window - Preferences - Java - Code Generation - Code and Comments
- */
 package pl.mn.communicator.gadu.test;
 
 import java.io.IOException;
@@ -17,9 +11,6 @@ import pl.mn.communicator.gadu.Server;
 
 /**
  * @author mnaglik
- *
- * To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class ConnectionTest extends TestCase {
 	IConnection connection;
