@@ -17,34 +17,34 @@
  */
 package pl.mn.communicator.gadu;
 
+
 /**
  * Pakiet zlecaj±cy import u¿ytkowników z serwera.
- * @version $Revision: 1.1 $
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 class GGUserlistRequest implements GGOutgoingPackage {
+    /* (non-Javadoc)
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+     */
+    public int getHeader() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	/* (non-Javadoc)
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
-	 */
-	public int getHeader() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+    /* (non-Javadoc)
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
+     */
+    public int getLength() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
 
-	/* (non-Javadoc)
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
-	 */
-	public int getLength() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	/* (non-Javadoc)
-	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
-	 */
-	public byte[] getContents() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    /* (non-Javadoc)
+     * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
+     */
+    public byte[] getContents() {
+        // TODO Auto-generated method stub
+        return null;
+    }
 }
