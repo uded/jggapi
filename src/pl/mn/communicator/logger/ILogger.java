@@ -8,54 +8,54 @@ public interface ILogger {
      * @see org.apache.log4j.Category#debug(java.lang.Object,
      *      java.lang.Throwable)
      */
-    public abstract void debug(Object arg0, Throwable arg1);
+    void debug(Object arg0, Throwable arg1);
 
     /**
      * @see org.apache.log4j.Category#debug(java.lang.Object)
      */
-    public abstract void debug(Object arg0);
+    void debug(Object arg0);
 
     /**
      * @see org.apache.log4j.Category#error(java.lang.Object,
      *      java.lang.Throwable)
      */
-    public abstract void error(Object arg0, Throwable arg1);
+    void error(Object arg0, Throwable arg1);
 
     /**
      * @see org.apache.log4j.Category#error(java.lang.Object)
      */
-    public abstract void error(Object arg0);
+    void error(Object arg0);
 
     /**
      * @see org.apache.log4j.Category#fatal(java.lang.Object,
      *      java.lang.Throwable)
      */
-    public abstract void fatal(Object arg0, Throwable arg1);
+    void fatal(Object arg0, Throwable arg1);
 
     /**
      * @see org.apache.log4j.Category#fatal(java.lang.Object)
      */
-    public abstract void fatal(Object arg0);
+    void fatal(Object arg0);
 
     /**
      * @see org.apache.log4j.Category#info(java.lang.Object,
      *      java.lang.Throwable)
      */
-    public abstract void info(Object arg0, Throwable arg1);
+    void info(Object arg0, Throwable arg1);
 
     /**
      * @see org.apache.log4j.Category#info(java.lang.Object)
      */
-    public abstract void info(Object arg0);
+    void info(Object arg0);
 
     /**
      * @see org.apache.log4j.Category#warn(java.lang.Object,
      *      java.lang.Throwable)
      */
-    public abstract void warn(Object arg0, Throwable arg1);
+    void warn(Object arg0, Throwable arg1);
 
     /**
      * @see org.apache.log4j.Category#warn(java.lang.Object)
      */
-    public abstract void warn(Object arg0);
+    void warn(Object arg0);
 }

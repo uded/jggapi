@@ -7,7 +7,7 @@ package pl.mn.communicator.logger;
  */
 public class Logger4J extends Logger {
     /**
-     * @param clazz
+     * @param clazz klasa która loguje
      */
     public Logger4J(Class clazz) {
         // TODO Auto-generated constructor stub
@@ -88,6 +88,11 @@ public class Logger4J extends Logger {
         // TODO Auto-generated method stub
     }
 
+    /**
+     * Zwróæ instancje loggera.
+     * @param clazz klasa która loguje
+     * @return instancja loggera
+     */
     public static synchronized Logger getLogger(Class clazz) {
         return new Logger4J(clazz);
     }
