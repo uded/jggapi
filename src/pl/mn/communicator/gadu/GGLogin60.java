@@ -22,7 +22,7 @@ import pl.mn.communicator.IStatus;
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.4 2004-12-11 20:08:59 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.5 2004-12-12 01:22:30 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 
@@ -74,7 +74,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 	
 	public void setStatus(IStatus status) {
 		if (status == null) throw new NullPointerException("Status cannot be null");
-		m_status = GGUtils.getProtocolStatus(status, false, false);
+		m_status = GGUtils.getProtocolStatus(status, status.isFriendsOnly(), status.isBlockedMask());
 		if (status.isDescriptionSet()) {
 			m_description = status.getDescription();
 		}

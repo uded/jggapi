@@ -28,7 +28,7 @@ import pl.mn.communicator.StatusConst;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.2 2004-12-11 19:40:50 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.3 2004-12-12 01:22:30 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -105,10 +105,8 @@ public class GGUtils {
 		}
 
 		if (protocolStatus != -1) {
-			if (isFriendsOnly) {
-				protocolStatus = protocolStatus | GGStatusEnabled.GG_STATUS_FRIENDS_MASK;
-			}
-			if (isBlocked) protocolStatus = protocolStatus | GGStatusEnabled.GG_STATUS_BLOCKED;
+			if (isFriendsOnly) protocolStatus |= GGStatusEnabled.GG_STATUS_FRIENDS_MASK;
+			if (isBlocked) 	protocolStatus |= GGStatusEnabled.GG_STATUS_BLOCKED;
 			return protocolStatus;
 		}
 		throw new RuntimeException("Incorrect status: "+clientStatus);

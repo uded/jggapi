@@ -26,24 +26,15 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Status.java,v 1.2 2004-12-11 16:25:57 winnetou25 Exp $
+ * @version $Id: Status.java,v 1.3 2004-12-12 01:22:29 winnetou25 Exp $
  */
 public class Status implements IStatus {
 	
     private static Log logger = LogFactory.getLog(Status.class);
 
-//    /** Adres IP bezpo�rednich po��cze� */
-//    private String remoteIp;
-
-//    /** wersja klienta */
-//    private int version;
-
-//    /** maksymalny rozmiar obrazk�w w KB */
-//    private int imageSize;
-
     private StatusConst m_status = StatusConst.ONLINE;
     
-    /** Opis w statusie */
+    /** Status description */
     private String m_description = null;
 
     private Date m_returnTime = null;

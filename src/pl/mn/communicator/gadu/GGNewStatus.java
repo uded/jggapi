@@ -20,12 +20,11 @@ package pl.mn.communicator.gadu;
 import pl.mn.communicator.IStatus;
 
 /**
- * Status uzytkownika gg
- * TODO implementacja trybu tylko dla przyjaciol
+ * Packet that sets new status of the Gadu-Gadu user.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNewStatus.java,v 1.6 2004-12-11 19:40:50 winnetou25 Exp $
+ * @version $Id: GGNewStatus.java,v 1.7 2004-12-12 01:22:30 winnetou25 Exp $
  */
 public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
 	
@@ -78,6 +77,7 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
     	toSend[1] = (byte) ((statusToSend >> 8) & 0xFF);
     	toSend[2] = (byte) ((statusToSend >> 16) & 0xFF);
     	toSend[3] = (byte) ((statusToSend >> 24) & 0xFF);
+
     	if (m_status.getStatus().isDescriptionStatus() && m_status.isDescriptionSet()) {
     		String description = trimDescription(m_status.getDescription());
     		byte[] descBytes = description.getBytes();

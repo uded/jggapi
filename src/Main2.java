@@ -115,6 +115,10 @@ public class Main2 {
 		});
 
 		session.getConnectionService().connect();
+		IStatus status = session.getPresenceService().getStatus();
+		status.setFriendsOnly(true);
+		session.getPresenceService().setStatus(status);
+		
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
