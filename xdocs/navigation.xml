@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <project name="JGGApi">
 
-  <title>JGGApi</title>
+  <title>JGGApi: Java Gadu-Gadu library</title>
 
   <body>
     <links>
       <item name="Maven"  href="http://maven.apache.org/"/>
+      <item name="Gadu-Gadu protocol specification"  href="http://dev.null.pl/ekg/docs/protocol.html"/>
     </links>
     <menu>
-      <item name="Main" href="/index.html"/>   
-      <item name="Javadocs" href="/apidocs/index.html"/>   
-      <item name="Source" href="/xref/index.html"/>   
+      <item name="Overview" href="/index.html"/>   
+      <item name="Javadocs" href="/apidocs/index.html"/>
+	  <item name="CVS Access" href="http://sourceforge.net/cvs/?group_id=79198"/>
+      <item name="Source" href="/xref/index.html"/>
       <item name="Downloads" href="http://sourceforge.net/projects/jggapi"/>   
       <item name="Bugs" href="http://sourceforge.net/tracker/?group_id=79198"/>   
     </menu>
