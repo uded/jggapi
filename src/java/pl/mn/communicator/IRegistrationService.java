@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IRegistrationService.java,v 1.9 2005-01-26 23:05:46 winnetou25 Exp $
+ * @version $Id: IRegistrationService.java,v 1.10 2005-01-27 22:39:50 winnetou25 Exp $
  */
 public interface IRegistrationService {
 	
@@ -75,7 +75,9 @@ public interface IRegistrationService {
 	 * Sends user's current password to user's mailbox.
 	 * 
 	 * @param uin User's Gadu-Gadu number.
+	 * @param tokenID the id of the token
+	 * @param tokenVal the value of the token
 	 */
-	void remindAndSendPassword(int uin);
+	void remindAndSendPassword(int uin, String email, String tokenID, String tokenVal) throws GGException;
 	
 }

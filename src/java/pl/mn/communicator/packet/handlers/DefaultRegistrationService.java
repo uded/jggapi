@@ -38,7 +38,7 @@ import pl.mn.communicator.IRegistrationService;
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.12 2005-01-26 23:06:29 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.13 2005-01-27 22:39:54 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 	
@@ -133,7 +133,6 @@ public class DefaultRegistrationService implements IRegistrationService {
 		} catch (IOException ex) {
 			throw new GGException("Unable to register Gadu-Gadu account", ex);
 		}
-
 		
 	}
 	
@@ -227,19 +226,50 @@ public class DefaultRegistrationService implements IRegistrationService {
 	/**
 	 * @see pl.mn.communicator.IRegistrationService#remindAndSendPassword(int)
 	 */
-	public void remindAndSendPassword(int uin) {
-		// TODO Auto-generated method stub
-		
+	public void remindAndSendPassword(int uin, String email, String tokenID, String tokenVal) throws GGException {
+		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+		if (email == null) throw new NullPointerException("email cannot be null");
+		if (tokenID == null) throw new NullPointerException("tokenID cannot be null");
+		if (tokenVal == null) throw new NullPointerException("tokenVal cannot be null");
+
+		try {
+			String remindPasswordRequest = prepareRemindPasswordRequest(uin, email, tokenID, tokenVal);
+			HttpURLConnection huc = createPostHttpRequest("http://retr.gadu-gadu.pl/appsvc/fmsendpwd3.asp", remindPasswordRequest);
+			huc.connect();
+			
+			PrintWriter out = new PrintWriter(huc.getOutputStream(), true);
+			
+			out.println(remindPasswordRequest);
+			out.close();
+			
+			BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), WINDOW_ENCODING));
+			String line = reader.readLine();
+
+			if (line.equals("bademail")) {
+				throw new GGException("Incorrect e-mail passed while trying requesting to send password");
+			}
+			
+			if (!line.equals("pwdsend_success")) {
+				throw new GGException("Unexpected error occured while trying requesting to send password");
+			}
+			
+			reader.close();
+			huc.disconnect();
+
+		} catch (IOException ex) {
+			throw new GGException("Unable to remind and send password", ex);
+		}
 	}
 	
 	private int getHashCode(String email, String password) {
 		if (password == null) throw new NullPointerException("password cannot be null");
 		if (email == null) throw new NullPointerException("email cannot be null");
+
 		int a,b,c;
 		
 		b=-1;
 		
-		for(int i=0;i<email.length();i++) {
+		for(int i=0; i<email.length(); i++) {
 			c = (int) email.charAt(i);	
 			a = (c ^ b) + (c << 8);
 			b = (a >>> 24 ) | (a << 8);
@@ -251,6 +281,22 @@ public class DefaultRegistrationService implements IRegistrationService {
 			b = (a >>> 24 ) | (a << 8);
 		}
 		
+		return ( b < 0 ? -b : b);
+	}
+	
+	private int getHashCode(String uin) {
+		if (uin == null) throw new NullPointerException("uin cannot be null");
+
+		int a,b,c;
+		
+		b=-1;
+
+		for(int i=0; i<uin.length(); i++) {
+			c = (int) uin.charAt(i);	
+			a = (c ^ b) + (c << 8);
+			b = (a >>> 24 ) | (a << 8);
+		}
+
 		return ( b < 0 ? -b : b);
 	}
 	
@@ -334,7 +380,27 @@ public class DefaultRegistrationService implements IRegistrationService {
 		
 		return buffer.toString();
 	}
-	
+
+	private String prepareRemindPasswordRequest(int uin, String email, String tokenID, String tokenVal) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("userid=");
+		buffer.append(uin);
+		buffer.append('&');
+		buffer.append("email=");
+		buffer.append(email);
+		buffer.append('&');
+		buffer.append("tokenid=");
+		buffer.append(tokenID);
+		buffer.append('&');
+		buffer.append("tokenval=");
+		buffer.append(tokenVal);
+		buffer.append('&');
+		buffer.append("code=");
+		buffer.append(getHashCode(String.valueOf(uin)));
+		
+		return buffer.toString();
+	}
+
 	private HttpURLConnection createPostHttpRequest(String urlString, String requestBody) throws IOException {
 		URL url = new URL(urlString);
 		HttpURLConnection huc = (HttpURLConnection) url.openConnection();

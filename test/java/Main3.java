@@ -3,7 +3,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGQuestions;
 import pl.mn.communicator.GGToken;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.packet.handlers.Session;
@@ -31,7 +30,9 @@ public class Main3 {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 		String line = reader.readLine();
 		
-		session.getRegistrationService().registerAccount("dupa@dupa.com", "dupka", token.getTokenID(), line, GGQuestions.FAVOURITE_ACTOR, "Willis");
+		//session.getRegistrationService().registerAccount("dupa@dupa.com", "dupka", token.getTokenID(), line, GGQuestions.FAVOURITE_ACTOR, "Willis");
+
+		session.getRegistrationService().remindAndSendPassword(376798, "mati@sz.home.pl", token.getTokenID(), line.toLowerCase().trim());
 	}
 	
 }
