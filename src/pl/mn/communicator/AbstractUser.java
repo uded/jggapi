@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 
 /**
  * U¿ytkownik serwera rozmów.
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 public class AbstractUser implements IUser {
@@ -34,8 +34,6 @@ public class AbstractUser implements IUser {
     /**
      * Tworz u¿ytkownika.
      * @param number numer u¿ykownika
-     * @param name nazwa u¿ytkownika
-     * @param onLine status u¿ytkownika
      */
     public AbstractUser(int number) {
         this.number = number;
