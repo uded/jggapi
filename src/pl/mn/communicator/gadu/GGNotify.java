@@ -19,20 +19,25 @@ package pl.mn.communicator.gadu;
 
 import pl.mn.communicator.IUser;
 
-
 /**
  * Pakiet informuj±cy serwer rozmów o monitorowanym u¿ytkowniku.
  * Zawiera do 409 struktur jak poni¿ej:
+ * 
  *  struct gg_notify {
  *      int uin;    // numerek danej osoby
  *      char type;  // rodzaj u¿ytkownika
  *     };
  *
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.11 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGNotify.java,v 1.12 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGNotify implements GGOutgoingPackage {
+public class GGNotify implements GGOutgoingPackage {
+	
+	public static final int GG_NOTIFY = 0x10;
+
     /** U¿ytkownik dla którego bêdziemy niedostêpni */
     public static final int GG_USER_OFFLINE = 0x01;
 
@@ -41,13 +46,14 @@ class GGNotify implements GGOutgoingPackage {
 
     /** U¿ytkownik, którego wiadomo¶ci nie chcemy otrzymywaæ */
     public static final int GG_USER_BLOCKED = 0x04;
+    
     private IUser[] users;
 
     /**
      * Tworzy pakiet <code>GGNotify</code> na podstawie listy u¿ytkowników.
      * @param users lista u¿ytkowników
      */
-    GGNotify(IUser[] users) {
+    public GGNotify(IUser[] users) {
         this.users = users;
     }
 
@@ -64,7 +70,7 @@ class GGNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        return 0x10;
+        return GG_NOTIFY;
     }
 
     /**
@@ -95,4 +101,5 @@ class GGNotify implements GGOutgoingPackage {
 
         return data;
     }
+    
 }

@@ -21,18 +21,25 @@ package pl.mn.communicator.gadu;
  * Pakiet zlecaj±cy import u¿ytkowników z serwera.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGUserlistRequest.java,v 1.3 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGUserlistRequest.java,v 1.4 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGUserlistRequest implements GGOutgoingPackage {
-    /* (non-Javadoc)
+public class GGUserlistRequest implements GGOutgoingPackage {
+ 
+	public static final int GG_USERLIST_REQUEST  = 0x0016;
+	
+	public static final int GG_USER_LIST_PUT = 0x00;
+	public static final int GG_USERLIST_PUT_MORE = 0x01;
+	public static final int GG_USERLIST_GET = 0x02;
+
+	/**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        // TODO Auto-generated method stub
-        return 0;
+    	return GG_USERLIST_REQUEST;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {

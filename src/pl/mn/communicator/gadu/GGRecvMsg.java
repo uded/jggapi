@@ -21,10 +21,13 @@ package pl.mn.communicator.gadu;
  * Wiadomosc otrzymana z serwera gg (tekstowa)
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGRecvMsg.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGRecvMsg.java,v 1.11 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGRecvMsg implements GGIncomingPackage {
-	
+public class GGRecvMsg implements GGIncomingPackage {
+
+	public static final int GG_RECV_MSG  = 0x000A;
+
     private long sender;
     private int seq;
     private int time;
@@ -32,15 +35,20 @@ class GGRecvMsg implements GGIncomingPackage {
     private String message = "";
 
     public GGRecvMsg(byte[] data) {
-        this.sender = GGConversion.unsignedIntToLong(GGConversion.byteToInt(
-                    data));
+        this.sender = GGConversion.unsignedIntToLong(GGConversion.byteToInt(data));
         this.seq = GGConversion.byteToInt(data, 4);
         this.time = GGConversion.byteToInt(data, 8);
         this.msgClass = GGConversion.byteToInt(data, 12);
-
         message = GGConversion.byteToString(data,16);;
     }
-
+    
+    /**
+	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_RECV_MSG;
+	}
+    
     /**
      * Returns the message.
      * @return String
@@ -80,4 +88,5 @@ class GGRecvMsg implements GGIncomingPackage {
     public int getTime() {
         return time;
     }
+    
 }

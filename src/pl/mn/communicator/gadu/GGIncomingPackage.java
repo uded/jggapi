@@ -21,9 +21,9 @@ package pl.mn.communicator.gadu;
  * Pakiet przychodz±cy gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGIncomingPackage.java,v 1.4 2004-10-26 23:56:40 winnetou25 Exp $ 
+ * @version $Id: GGIncomingPackage.java,v 1.5 2004-10-27 00:29:48 winnetou25 Exp $ 
  */
-interface GGIncomingPackage {
+public interface GGIncomingPackage {
 	
 	int getPacketType();
 	

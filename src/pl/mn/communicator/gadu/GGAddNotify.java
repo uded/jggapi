@@ -22,17 +22,21 @@ package pl.mn.communicator.gadu;
  * @see pl.mn.communicator.gadu.GGNotifyReply
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGAddNotify.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGAddNotify.java,v 1.11 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGAddNotify implements GGOutgoingPackage {
-    /** Numer u¿ytkownika */
+public class GGAddNotify implements GGOutgoingPackage {
+
+	public final int GG_ADD_NOTIFY = 0x000D;
+	
+    /** GG UID number */
     private int userNo;
 
     /**
      * Tworz pakiet dodanie do monitorowania dla konkretnego u¿ytkownika.
      * @param userNo numer u¿ytkownika
      */
-    GGAddNotify(int userNo) {
+    public GGAddNotify(int userNo) {
         this.userNo = userNo;
     }
 
@@ -40,9 +44,9 @@ class GGAddNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        return 0x000d;
+        return GG_ADD_NOTIFY;
     }
-
+    
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
@@ -62,4 +66,5 @@ class GGAddNotify implements GGOutgoingPackage {
 
         return dane;
     }
+    
 }

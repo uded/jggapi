@@ -18,12 +18,22 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Pakiet usuwaj±cy konkretnego u¿ytkownika z listy monitorowanych u¿ytkowników.
+ * Packet that deletes certain user from the list of monitored users.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGRemoveNotify.java,v 1.9 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGRemoveNotify.java,v 1.10 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGRemoveNotify implements GGOutgoingPackage {
+public class GGRemoveNotify implements GGOutgoingPackage {
+	
+	public final static int GG_REMOVE_NOTIFY = 0x000E;
+	
+//		#define GG_REMOVE_NOTIFY 0x000e
+//		
+//		struct gg_remove_notify {
+//			int uin;	/* numerek */
+//			char type;	/* rodzaj u¿ytkownika */
+//		};
 	
     /** Numer u¿ytkownika */
     private int userNo;
@@ -32,7 +42,7 @@ class GGRemoveNotify implements GGOutgoingPackage {
      * Twórz pakiet do usuniêcia u¿ytkownika z listy monitorowanych
      * @param userNo numer u¿ytkownika do usuniêcia
      */
-    GGRemoveNotify(int userNo) {
+    public GGRemoveNotify(int userNo) {
         this.userNo = userNo;
     }
 
@@ -40,7 +50,7 @@ class GGRemoveNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        return 0x000e;
+        return GG_REMOVE_NOTIFY;
     }
 
     /**

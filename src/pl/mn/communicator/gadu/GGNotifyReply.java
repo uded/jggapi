@@ -29,19 +29,23 @@ import pl.mn.communicator.logger.Logger;
  * numer, status, opis i czas.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGNotifyReply.java,v 1.17 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGNotifyReply.java,v 1.18 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGNotifyReply implements GGIncomingPackage {
+public class GGNotifyReply implements GGIncomingPackage {
     
+	public static final int GG_NOTIFY_REPLY = 0x000C;
+
 	private static Logger logger = Logger.getLogger(GGNotifyReply.class);
-    private byte[] dane;
+
+	private byte[] dane;
     private Map statusy = new HashMap();
 
     /**
      * Tworz pakiet odpowiedzi na listê u¿ytkonwików dostêpnych.
      * @param dane dane do utworzenia pakietu
      */
-    GGNotifyReply(byte[] dane) {
+    public GGNotifyReply(byte[] dane) {
         logger.debug("Pakiet zmiany stanu u¿ytkownika");
         this.dane = dane;
         analize();

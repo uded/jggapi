@@ -21,19 +21,29 @@ package pl.mn.communicator.gadu;
  * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGPubdirRequest.java,v 1.2 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGPubdirRequest.java,v 1.3 2004-10-27 00:29:47 winnetou25 Exp $
  */
-class GGPubdirRequest implements GGOutgoingPackage {
+public class GGPubdirRequest implements GGOutgoingPackage {
 
-	/* (non-Javadoc)
+	public static final int GG_PUBDIR50_REQUEST = 0x0014;
+	
+//#define GG_PUBDIR50_REQUEST 0x0014
+//	
+//struct gg_pubdir50 {
+//	char type;
+//	int seq;
+//	char request[];
+//};
+
+	/**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        // TODO Auto-generated method stub
-        return 0;
+    	return GG_PUBDIR50_REQUEST;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
@@ -41,7 +51,7 @@ class GGPubdirRequest implements GGOutgoingPackage {
         return 0;
     }
 
-    /* (non-Javadoc)
+    /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {

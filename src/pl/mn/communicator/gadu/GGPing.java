@@ -21,9 +21,13 @@ package pl.mn.communicator.gadu;
  * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGPing.java,v 1.7 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGPing.java,v 1.8 2004-10-27 00:29:48 winnetou25 Exp $
  */
-final class GGPing implements GGOutgoingPackage {
+public final class GGPing implements GGOutgoingPackage {
+	
+	public static final int GG_PING = 0x08;
+
     private static GGPing ggPing = new GGPing();
     private byte[] data;
 
@@ -37,7 +41,7 @@ final class GGPing implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        return 0x08;
+        return GG_PING;
     }
 
     /**
@@ -61,4 +65,5 @@ final class GGPing implements GGOutgoingPackage {
     public static GGPing getPing() {
         return ggPing;
     }
+    
 }

@@ -21,9 +21,9 @@ package pl.mn.communicator.gadu;
  * Pakiet wychodz±cy gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGOutgoingPackage.java,v 1.7 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: GGOutgoingPackage.java,v 1.8 2004-10-27 00:29:48 winnetou25 Exp $
  */
-interface GGOutgoingPackage {
+public interface GGOutgoingPackage {
 	
     /**
      * Zwróæ nag³ówek pakietu

@@ -27,11 +27,14 @@ import pl.mn.communicator.logger.Logger;
  * Pakiet powiadomienia u¿ytkownika o zmianie statusu u¿ytkownika z listy.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGStatus.java,v 1.16 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGStatus.java,v 1.17 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGStatus implements GGIncomingPackage {
-	
-    private static Logger logger = Logger.getLogger(GGStatus.class);
+public class GGStatus implements GGIncomingPackage {
+
+	public static final int GG_STATUS = 0x02;
+
+	private static Logger logger = Logger.getLogger(GGStatus.class);
     private IUser user;
     private Status statusBiz;
     private byte[] dane;
@@ -41,6 +44,10 @@ class GGStatus implements GGIncomingPackage {
         this.dane = dane;
         analize();
     }
+    
+	public int getPacketType() {
+		return GG_STATUS;
+	}
 
     /**
      * Analizuj pakiet przychodz±cy.
@@ -99,4 +106,5 @@ class GGStatus implements GGIncomingPackage {
     public IStatus getStatus() {
         return statusBiz;
     }
+    
 }

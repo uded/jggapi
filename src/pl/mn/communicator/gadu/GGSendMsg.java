@@ -22,9 +22,13 @@ import pl.mn.communicator.IMessage;
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGSendMsg.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGSendMsg.java,v 1.11 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGSendMsg implements GGOutgoingPackage {
+public class GGSendMsg implements GGOutgoingPackage {
+	
+	public static final int GG_SEND_MSG = 0x0B;
+
     private static int seqNo;
     private int user;
     private String text;
@@ -41,7 +45,7 @@ class GGSendMsg implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        return 0x0b;
+        return GG_SEND_MSG;
     }
 
     /**
@@ -79,4 +83,5 @@ class GGSendMsg implements GGOutgoingPackage {
         }
         return toSend;
     }
+    
 }

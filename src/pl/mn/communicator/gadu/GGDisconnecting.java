@@ -18,39 +18,12 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Wiadomosc otrzymywana zaraz po polaczeniu z serwerem gg
- * zawiera seed (int) potrzebny do zakodowania hasla.
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcome.java,v 1.10 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGDisconnecting.java,v 1.1 2004-10-27 00:29:48 winnetou25 Exp $
  */
-public class GGWelcome implements GGIncomingPackage {
-    
-	public static final int GG_PACKAGE_WELCOME = 0x1;
+public class GGDisconnecting {
 
-	private int seed;
-
-    /**
-     * Constructor for Welcome.
-     * @param data dane pakietu
-     */
-    public GGWelcome(byte[] data) {
-        this.seed = GGConversion.byteToInt(data);
-    }
-    
-    /**
-	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_PACKAGE_WELCOME;
-	}
-
-    /**
-     * Pobierz warto¶æ seed pobran± z serwera.
-     * @return numer seed u¿ywany do szyfrowania has³a.
-     */
-    public int getSeed() {
-        return seed;
-    }
+	public static final int GG_DISCONNECTING = 0x000B;
+	
 }

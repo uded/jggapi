@@ -20,7 +20,27 @@ package pl.mn.communicator.gadu;
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGPubdirReply.java,v 1.2 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGPubdirReply.java,v 1.3 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGPubdirReply implements GGIncomingPackage {
+public class GGPubdirReply implements GGIncomingPackage {
+	
+	public static final int GG_PUBDIR50_REPLY = 0x000E;
+
+	/**
+	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_PUBDIR50_REPLY;
+	}
+	
+	//TODO implement
+//	#define GG_PUBDIR50_REPLY 0x000e
+	
+//struct gg_pubdir50_reply {
+//	char type;
+//	int seq;
+//	char reply[];
+//};
+	
 }

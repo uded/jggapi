@@ -17,25 +17,27 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
- * Pakiet wysy³any gdy nie mamy nikogo na li¶cie u¿ytkowników.
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGListEmpty.java,v 1.5 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGListEmpty implements GGOutgoingPackage {
+public class GGListEmpty implements GGOutgoingPackage {
+	
+	public static final int GG_EMPTY_LIST = 0x0012;
+	
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        // TODO Auto-generated method stub
-        return 0;
+    	return GG_EMPTY_LIST;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -43,7 +45,7 @@ class GGListEmpty implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        // TODO Auto-generated method stub
-        return null;
+    	return new byte[0];
     }
+
 }

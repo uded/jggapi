@@ -20,15 +20,22 @@ package pl.mn.communicator.gadu;
 import pl.mn.communicator.ILocalUser;
 import pl.mn.communicator.logger.Logger;
 
-
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.18 $
- * @author mnaglik
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGLogin.java,v 1.19 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGLogin implements GGOutgoingPackage {
+public class GGLogin implements GGOutgoingPackage {
+
+	public final static int GG_LOGIN = 0x000C;
+	
+	public final static int GG_LOGIN_OK = 3;
+	public final static int GG_LOGIN_FAILED = 9;
+
     private static Logger logger = Logger.getLogger(GGLogin.class);
+    
     private int uin;
     private int hash;
     private int status = GGNewStatus.GG_STATUS_AVAIL;
@@ -96,7 +103,7 @@ class GGLogin implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        return 0x0c;
+        return GG_LOGIN;
     }
 
     /**
@@ -142,4 +149,5 @@ class GGLogin implements GGOutgoingPackage {
 
         return toSend;
     }
+    
 }

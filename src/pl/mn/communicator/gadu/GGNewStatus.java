@@ -19,14 +19,18 @@ package pl.mn.communicator.gadu;
 
 import java.util.Date;
 
-
 /**
  * Status uzytkownika gg
  * TODO implementacja trybu tylko dla przyjaciol
- * @version $Revision: 1.2 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGNewStatus.java,v 1.3 2004-10-27 00:29:48 winnetou25 Exp $
  */
-class GGNewStatus implements GGOutgoingPackage {
+public class GGNewStatus implements GGOutgoingPackage {
+	
+	public static final int GG_NEW_STATUS = 0x0002;
+
     /** Status dostepny */
     public static final int GG_STATUS_AVAIL = 0x00000002;
 
@@ -96,7 +100,7 @@ class GGNewStatus implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
-        return 0x02;
+        return GG_NEW_STATUS;
     }
 
     /**
@@ -201,4 +205,5 @@ class GGNewStatus implements GGOutgoingPackage {
             }
         }
     }
+    
 }

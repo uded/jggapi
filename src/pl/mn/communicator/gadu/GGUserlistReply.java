@@ -21,7 +21,25 @@ package pl.mn.communicator.gadu;
  * Pakiet odpowied¼ na importowanie listy u¿ytkowników.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGUserlistReply.java,v 1.2 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGUserlistReply.java,v 1.3 2004-10-27 00:29:48 winnetou25 Exp $
  */
 class GGUserlistReply implements GGIncomingPackage {
+	
+	public final static int GG_USERLIST_REPLY = 0x0010;
+	
+//	#define GG_USERLIST_REPLY 0x0010
+//	
+//struct gg_userlist_reply {
+//	char type;		/* rodzaj zapytania *
+//	char request[];		/* treœæ, nie musi wyst¹piæ */
+//};
+	
+	/**
+	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_USERLIST_REPLY;
+	}
+	
 }
