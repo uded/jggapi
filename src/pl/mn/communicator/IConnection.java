@@ -38,7 +38,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @author mnaglik
  */
 public interface IConnection {
@@ -127,7 +127,7 @@ public interface IConnection {
      * @param userList lista u¿ytkowników
      * @throws IOException b³±d wysy³ania listy u¿ytkowników
      */
-    void sendMonitoredUserList(Collection userList) throws IOException;
+    void setMonitoredUserList(Collection userList) throws IOException;
 
     /**
      * Dodaj u¿ytkownika do u¿ytkowników monitorowanych.<br>

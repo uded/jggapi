@@ -51,7 +51,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.18 $
+ * @version $Revision: 1.19 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -122,9 +122,9 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 
     /**
      * @see pl.mn.communicator.IConnection
-     * #sendMonitoredUserList(java.util.Collection)
+     * #setMonitoredUserList(java.util.Collection)
      */
-    public void sendMonitoredUserList(Collection userList)
+    public void setMonitoredUserList(Collection userList)
         throws IOException {
         // TODO Auto-generated method stub
     }
@@ -236,7 +236,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                 if (connectionListener != null) {
                     connectionListener.connectionEstablished();
                 }
-
+                
                 logger.debug("Login OK");
                 changeStatus(new Status(Status.ON_LINE));
 
