@@ -38,12 +38,12 @@ import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.IncommingMessage;
 import pl.mn.communicator.LoginContext;
+import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.event.MessageArrivedEvent;
-import pl.mn.communicator.event.MessageDeliveredEvent;
 import pl.mn.communicator.event.SessionStateEvent;
 import pl.mn.communicator.event.SessionStateListener;
 import pl.mn.communicator.packet.in.GGIncomingPackage;
@@ -53,7 +53,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.7 2004-12-18 14:19:33 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.8 2004-12-18 15:35:06 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -252,12 +252,12 @@ public class Session implements ISession {
 			m_presenceService.notifyUserChangedStatus(user, status);
 		}
 
-		public void notifyMessageArrived(MessageArrivedEvent messageArrivedEvent) {
-			m_messageService.notifyMessageArrived(messageArrivedEvent);
+		public void notifyMessageArrived(IncommingMessage incommingMessage) {
+			m_messageService.notifyMessageArrived(incommingMessage);
 		}
 
-		public void notifyMessageDelivered(MessageDeliveredEvent messageDeliveredEvent) {
-			m_messageService.notifyMessageDelivered(messageDeliveredEvent);
+		public void notifyMessageDelivered(int uin, int messageID, MessageStatus messageStatus) {
+			m_messageService.notifyMessageDelivered(uin, messageID, messageStatus);
 		}
 		
 		public void notifyGGPacketReceived(GGIncomingPackage incomingPackage) {

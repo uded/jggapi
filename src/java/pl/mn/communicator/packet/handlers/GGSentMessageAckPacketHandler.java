@@ -20,7 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.event.MessageDeliveredEvent;
+import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGSendMsgAck;
 
@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.in.GGSendMsgAck;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSentMessageAckPacketHandler.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: GGSentMessageAckPacketHandler.java,v 1.2 2004-12-18 15:35:06 winnetou25 Exp $
  */
 public class GGSentMessageAckPacketHandler implements PacketHandler {
 
@@ -40,13 +40,14 @@ public class GGSentMessageAckPacketHandler implements PacketHandler {
 	public void handle(Context context) {
 		logger.debug("GGSentMessageAck packet received.");
 		logger.debug("PacketHeader: "+context.getHeader());
-		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+		logger.debug("PacketBody: "+GGUtils.bytesToString(context.getPackageContent()));
 
 		GGSendMsgAck sendMessageAck = new GGSendMsgAck(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(sendMessageAck);
 		int uin  = sendMessageAck.getRecipientUin();
-		MessageDeliveredEvent messageDeliveredEvent = new MessageDeliveredEvent(this, uin, sendMessageAck.getMessageSeq(), sendMessageAck.getStatus());
-		context.getSessionAccessor().notifyMessageDelivered(messageDeliveredEvent);
+		int messageID = sendMessageAck.getMessageSeq();
+		MessageStatus messageStatus = GGUtils.getClientMessageStatus(sendMessageAck.getMessageStatus());
+		context.getSessionAccessor().notifyMessageDelivered(uin, messageID, messageStatus);
 	}
 
 }

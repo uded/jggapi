@@ -23,7 +23,7 @@ import java.util.EventListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginListener.java,v 1.2 2004-12-15 22:12:54 winnetou25 Exp $
+ * @version $Id: LoginListener.java,v 1.3 2004-12-18 15:35:05 winnetou25 Exp $
  */
 public interface LoginListener extends EventListener {
 	
@@ -33,7 +33,7 @@ public interface LoginListener extends EventListener {
 	void loginOK();
 	
 	/** 
-	 * Messaged when user has not successfully logged in to Gadu-Gadu server.
+	 * Messaged when there was an error while logging in, most probably because of an incorrect password.
 	 */
 	void loginFailed();
 	

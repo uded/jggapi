@@ -19,38 +19,41 @@ package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
+import pl.mn.communicator.IncommingMessage;
+import pl.mn.communicator.MessageStatus;
+
 /**
  * Listener associated with messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageListener.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.2 2004-12-18 15:35:05 winnetou25 Exp $
  */
 public interface MessageListener extends EventListener {
 	
 	/**
-     * Notification that a message arrived.<BR>
+     * Notification that a message arrived.
+     * 
      * @param <code>IncommingMessage</code> object
      */
-	void messageArrived(MessageArrivedEvent messageArrivedEvent);
+	void messageArrived(IncommingMessage incommingMessage);
 
 	/**
-	 * Notification that the message was delivered to the recipient.<BR>
-	 * @param MessageDeliveredEvent object
+	 * Notification that the message was delivered to the recipient.
 	 */
-    void messageDelivered(MessageDeliveredEvent messageDeliveredEvent);
+    void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus);
     
     public final static class Stub implements MessageListener {
 
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
 		 */
-		public void messageArrived(MessageArrivedEvent arrivedEvent) { }
+		public void messageArrived(IncommingMessage incommingMessage) { }
 
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(pl.mn.communicator.MessageDeliveredEvent)
 		 */
-		public void messageDelivered(MessageDeliveredEvent messageDeliveredEvent) { }
+		public void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus) { }
 
     }
         

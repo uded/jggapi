@@ -32,13 +32,14 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPacketListener.java,v 1.2 2004-12-18 15:15:46 winnetou25 Exp $
+ * @version $Id: GGPacketListener.java,v 1.3 2004-12-18 15:35:05 winnetou25 Exp $
  */
 public interface GGPacketListener extends EventListener {
 
 	/** Notification that Gadu-Gadu outgoing packet has been written to socket */
 	void sentPacket(GGOutgoingPackage outgoingPacket);
-	
+
+	/** Notification that Gadu-Gadu incomming packet has been received */
 	void receivedPacket(GGIncomingPackage incomingPacket);
 	
 	public static class Stub implements GGPacketListener {

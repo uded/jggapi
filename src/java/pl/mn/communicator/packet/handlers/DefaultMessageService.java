@@ -25,10 +25,10 @@ import java.util.Set;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IMessageService;
+import pl.mn.communicator.IncommingMessage;
+import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.event.MessageArrivedEvent;
-import pl.mn.communicator.event.MessageDeliveredEvent;
 import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.packet.out.GGSendMsg;
 
@@ -36,7 +36,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.2 2004-12-14 22:52:04 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.3 2004-12-18 15:35:06 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
@@ -79,19 +79,21 @@ public class DefaultMessageService implements IMessageService {
 		m_messageListeners.remove(messageListener);
 	}
 	
-	protected void notifyMessageArrived(MessageArrivedEvent messageArrivedEvent) {
-		if (messageArrivedEvent == null) throw new NullPointerException("messageArrivedEvent cannot be null");
+	protected void notifyMessageArrived(IncommingMessage incommingMessage) {
+		if (incommingMessage == null) throw new NullPointerException("incommingMessage cannot be null");
 		for (Iterator it = m_messageListeners.iterator(); it.hasNext();) {
 			MessageListener messageListener = (MessageListener) it.next();
-			messageListener.messageArrived(messageArrivedEvent);
+			messageListener.messageArrived(incommingMessage);
 		}
 	}
 
-	protected void notifyMessageDelivered(MessageDeliveredEvent messageDeliveredEvent) {
-		if (messageDeliveredEvent == null) throw new NullPointerException("messageDeliveredEvent cannot be null");
+	protected void notifyMessageDelivered(int uin, int messageID, MessageStatus messageStatus) {
+		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+		if (messageID <0) throw new IllegalArgumentException("messageID cannot be less than 0");
+		if (messageStatus == null) throw new NullPointerException("messageStatus cannot be less than 0");
 		for (Iterator it = m_messageListeners.iterator(); it.hasNext();) {
 			MessageListener messageListener = (MessageListener) it.next();
-			messageListener.messageDelivered(messageDeliveredEvent);
+			messageListener.messageDelivered(uin, messageID, messageStatus);
 		}
 	}
 

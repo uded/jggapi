@@ -9,7 +9,9 @@ import pl.mn.communicator.Gender;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.IncommingMessage;
 import pl.mn.communicator.LoginContext;
+import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
@@ -19,8 +21,6 @@ import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.event.LoginListener;
-import pl.mn.communicator.event.MessageArrivedEvent;
-import pl.mn.communicator.event.MessageDeliveredEvent;
 import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.event.PublicDirListener;
 import pl.mn.communicator.event.UserListener;
@@ -94,18 +94,18 @@ public class Main2 {
 		});
 		session.getMessageService().addMessageListener(new MessageListener() {
 
-			public void messageArrived(MessageArrivedEvent messageArrivedEvent) {
-				System.out.println("MessageArrived, from user: "+messageArrivedEvent.getMessage().getUin());
-				System.out.println("MessageBody: "+messageArrivedEvent.getMessage().getMessageBody());
-				System.out.println("MessageID: "+messageArrivedEvent.getMessage().getMessageID());
-				System.out.println("MessageStatus: "+messageArrivedEvent.getMessage().getMessageClass());
-				System.out.println("MessageTime: "+messageArrivedEvent.getMessage().getMessageDate());
+			public void messageArrived(IncommingMessage incommingMessage) {
+				System.out.println("MessageArrived, from user: "+incommingMessage.getUin());
+				System.out.println("MessageBody: "+incommingMessage.getMessageBody());
+				System.out.println("MessageID: "+incommingMessage.getMessageID());
+				System.out.println("MessageStatus: "+incommingMessage.getMessageClass());
+				System.out.println("MessageTime: "+incommingMessage.getMessageDate());
 			}
 
-			public void messageDelivered(MessageDeliveredEvent messageDeliveredEvent) {
-				System.out.println("MessageDelivered, messageID: "+messageDeliveredEvent.getMessageID());
-				System.out.println("MessageDelivered, fromUser: "+messageDeliveredEvent.getRecipientUin());
-				System.out.println("MessageDelivered, messageStatus: "+messageDeliveredEvent.getDeliveryStatus());
+			public void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus) {
+				System.out.println("MessageDelivered, fromUser: "+String.valueOf(uin));
+				System.out.println("MessageDelivered, messageID: "+String.valueOf(messageID));
+				System.out.println("MessageDelivered, messageStatus: "+deliveryStatus);
 			}
 			
 		});
