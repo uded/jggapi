@@ -3,7 +3,7 @@
 	<pomVersion>3</pomVersion>
 	<id>jggapi</id>
 	<name>Java Gadu Gadu protocol implementation</name>
-	<currentVersion>0.94</currentVersion>
+	<currentVersion>0.98</currentVersion>
 	<organization>
 		<name>SourceForge.net</name>
 		<url>http://sourceforge.net/projects/${pom.artifactId}/</url>
