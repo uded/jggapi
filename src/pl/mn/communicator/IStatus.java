@@ -3,10 +3,11 @@ package pl.mn.communicator;
 import java.util.Map;
 
 /**
+ * Klasa reprezentuj¹ca status u¿ytkownika.
+ * Dodatkowe statusy specyficzne dla serwerów rozmów
+ * mog¹ zostaæ dodane w podklasach.
+ * 
  * @author mnaglik
- *
- * To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Generation - Code and Comments
  */
 public interface IStatus {
 	/**

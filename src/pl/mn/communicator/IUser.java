@@ -1,10 +1,9 @@
 package pl.mn.communicator;
 
 /**
- * @author mnaaglik
- *
- * To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Generation - Code and Comments
+ * U¿ytkownik serwera rozmów.
+ *  
+ * @author mnaglik
  */
 public interface IUser {
 	/**

@@ -4,10 +4,23 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 
 /**
+ * Po³¹czenie z serwerem gg.<BR>
+ * S³u¿y do tworzenia po³¹czenia.
+ * <BR><BR>
+ * <i>Przyk³ad u¿ycia:</i><BR><BR>
+ * <code>
+ * AbstractLocalUser user = new XXXLocalUser(1234,"password");<BR>
+ * AbstractServer server = XXXServerAddress.getHost(user);<BR>
+ * AbstractServer s = new XXXServer(server.user);<BR>
+ * AcstractConnection c = new XXXConnection();<BR><BR>
+ * try{<BR>
+ * &nbsp; &nbsp; c.connect();<BR>
+ * }catch(Exception e){<BR>
+ * &nbsp; &nbsp; ...<BR>
+ * }
+ * </code>
+ * 
  * @author mnaglik
- *
- * To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Generation - Code and Comments
  */
 public interface IConnection {
 	/**
