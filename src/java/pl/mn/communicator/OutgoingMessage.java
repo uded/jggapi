@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.12 2005-01-25 21:46:12 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.13 2005-01-25 23:54:01 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
 	
@@ -39,7 +39,7 @@ public class OutgoingMessage extends AbstractMessage {
 	//private constructor
 	private OutgoingMessage(int uin, String text, MessageClass messageClass) {
 		super(uin, text, messageClass);
-		m_messageID = RANDOM.nextInt(9999);
+		m_messageID = RANDOM.nextInt(99999);
 	}
 	
 	/** 
