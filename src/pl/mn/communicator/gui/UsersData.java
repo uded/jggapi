@@ -15,8 +15,7 @@ public class UsersData{
 	private ArrayList users = new ArrayList();
 
 	public UsersData() {
-		addUser(new User(12345678, "nonexisting", false));
-		addUser(new User(2569522, "JAREK", false));
+		addUser(new User(1755689, "Autor", false));
 	}
 
 	public void addUser(AbstractUser user) {
