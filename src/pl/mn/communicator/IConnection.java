@@ -38,7 +38,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * @author mnaglik
  */
 public interface IConnection {
@@ -94,7 +94,6 @@ public interface IConnection {
      * Próbuje ³±czyæ siê z serwerem rozmów, na podstawie danych<BR>
      * z konstruktora.<BR>
      * W wypadku niepowodzenie wyrzuca odpowiednie wyj±tki
-     * @throws UnknownHostException nieznany serwer
      * @throws IOException nie powiodla siê próba po³±czenia
      * - nie ma po³±czenia sieciowego?
      */
