@@ -16,8 +16,8 @@ OK - implementacja w connection powiadamianie listenera o zmianie statusu
 OK - implementacja dodanie do monitorowania,
      usuniecia z monitorowania
 - reakcja na zmiane statusu uzytkownika podczas dzialania
-- poprawienie pinga
 - statusy z opisem i czasem powrotu dla uzytkownika lokalnego
+- poprawienie pinga
 - implementacja importu i eksportu uzytkownikow
 - implementacja katalogu publicznego (wyszukiwania)
 - wprowadzenie wzorca chain of responsibility w rozpoznawaniu
