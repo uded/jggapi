@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2005 <a href="http://jggapi.sourceforge.net/team-list.html">JGGApi Development Team</a> All Rights Reserved.
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -31,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Server.java,v 1.3 2004-12-19 18:50:43 winnetou25 Exp $
+ * @version $Id: Server.java,v 1.4 2004-12-19 21:14:06 winnetou25 Exp $
  */
 public final class Server implements IServer {
 	

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2005 <a href="http://jggapi.sourceforge.net/team-list.html">JGGApi Development Team</a> All Rights Reserved.
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * is common for incoming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.6 2004-12-19 18:50:43 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.7 2004-12-19 21:14:06 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 

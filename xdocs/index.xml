@@ -16,5 +16,29 @@
 			design patterns (GoF) that minimizie the learnining curve for developers.
             </p>
         </section>
+		<section name="Released">
+			<p>
+			There is an old version of the library that has already been released. It works fine but has
+			limited functionality.
+			</p>
+			<p>
+			Currently we are preparing for the new release of the library (1.) that has many improvements
+			and clearer design. It is not compatible with the old version, interfaces have changed
+			significantly but porting from old version should not be a difficult task.
+			</p>
+		</section>
+        <section name="Features">
+            <p>
+			The new version of the library (1.0) will allow:
+				<ul>
+					<li>1. Sending and receiving messages.</li>
+					<li>2. Exporting and importing of the contact list.</li>
+					<li>3. Setting status and notification of user's changing status.</li>
+					<li>4. Notification of changing statuses.</li>
+					<li>5. Ability to read and write personal information to the public directory.</li>
+					<li>6. Possibility to search public directory based on user defined criteria.</li>
+				</ul>
+            </p>
+        </section>
     </body>
 </document>

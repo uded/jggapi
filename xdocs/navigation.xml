@@ -9,7 +9,7 @@
       <item name="Gadu-Gadu protocol specification" href="http://dev.null.pl/ekg/docs/protocol.html"/>
     </links>
     <menu>
-      <item name="Overview" href="/index.html"/>   
+      <item name="Overview" href="/index.html"/>
       <item name="FAQ" href="/faq.html"/>   
 	  <item name="Javadocs" href="/apidocs/index.html"/>
 	  <item name="CVS Access" href="http://sourceforge.net/cvs/?group_id=79198"/>
