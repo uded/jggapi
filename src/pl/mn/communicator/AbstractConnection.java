@@ -1,8 +1,5 @@
 package pl.mn.communicator;
 
-import java.io.IOException;
-import java.net.UnknownHostException;
-
 import org.apache.log4j.Logger;
 
 /**
@@ -24,7 +21,7 @@ import org.apache.log4j.Logger;
  * 
  * @author mnaglik
  */
-public abstract class AbstractConnection {
+public abstract class AbstractConnection implements IConnection {
 	private static Logger logger = Logger.getLogger(AbstractConnection.class);
 	/**
 	 * Listener u¿ytkowników
@@ -102,37 +99,4 @@ public abstract class AbstractConnection {
 	public void removeMessageListener() {
 		this.messageListener = null;
 	}
-
-	/**
-	 * Pod³¹cz sie do serwera rozmów.<BR>
-	 * Próbuje ³¹czyæ siê z serwerem rozmów, na podstawie danych<BR>
-	 * z konstruktora.<BR>
-	 * W wypadku niepowodzenie wyrzuca odpowiednie wyj¹tki
-	 * 
-	 * @throws UnknownHostException nieznany serwer 
-	 * @throws IOException nie powiodla siê próba po³¹czenia - nie ma po³¹czenia sieciowego?
-	 */
-	public abstract void connect() throws UnknownHostException, IOException;
-
-	/**
-	 * Zamyka po³¹czenie z serwerem rozmów.
-	 * 
-	 * @throws IOException b³¹d przy zamykaniu po³¹czenia
-	 */
-	public abstract void disconnect() throws IOException;
-	
-	/**
-	 * Wyœlij wiadomoœæ do serwera rozmów.
-	 * 
-	 * @see AbstractMessage
-	 * @param message wiadomoœæ do wys³ania.
-	 */
-	public abstract void sendMessage(AbstractMessage message) throws IOException;
-
-	/**
-	 * Zmien aktualny status u¿ytkownika.<BR>
-	 * 
-	 * @param status - kolejny status
-	 */
-	public abstract void changeStatus(AbstractStatus status) throws IOException;
 }

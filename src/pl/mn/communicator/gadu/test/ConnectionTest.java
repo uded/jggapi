@@ -9,6 +9,7 @@ package pl.mn.communicator.gadu.test;
 import java.io.IOException;
 
 import junit.framework.TestCase;
+import pl.mn.communicator.IConnection;
 import pl.mn.communicator.gadu.Connection;
 import pl.mn.communicator.gadu.LocalUser;
 import pl.mn.communicator.gadu.Message;
@@ -21,7 +22,7 @@ import pl.mn.communicator.gadu.Server;
  * Window - Preferences - Java - Code Generation - Code and Comments
  */
 public class ConnectionTest extends TestCase {
-	Connection connection;
+	IConnection connection;
 
 
 	public void testConnect() throws IOException {
