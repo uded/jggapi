@@ -10,7 +10,9 @@ TODO LIST
 PRIORITY
 --------
 OK - implementacja GGNotify 
-NOW - implementacja GGNotifyReply
+OK - implementacja GGNotifyReply
+OK - implementacja w connection powiadamianie listenera o zmianie statusu
+     uzytkownika
 - implementacja GGListEmpty
 - implementacja dodanie do monitorowania,
   usuniecia z monitorowania
