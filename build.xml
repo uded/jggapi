@@ -5,7 +5,8 @@
 	<property file="${user.home}/.ant.properties"/>
 	<property name="name" value="jggapi"/>
 
-	<property name="gg.api.src" value="src"/>
+	<property name="gg.api.src" value="src/java"/>
+	<property name="gg.api.src.test" value="src/test"/>
 	<property name="gg.api.lib" value="lib"/>
 	<property name="gg.api.uml" value="uml"/>
 	<property name="gg.api.jar.bin" value="${name}-${version.number}-bin.jar"/>
@@ -24,6 +25,7 @@
 	<property name="build.javadocs" value="${build.dir}/javadocs"/>
 	
 	<property name="dist.dir" value="dist"/>
+	<property name="dist.lib" value="${dist.dir}/lib"/>
 	<property name="dist.docs" value="${dist.dir}/docs"/>
 	<property name="dist.docs.uml" value="${dist.docs}/uml"/>
 
@@ -39,6 +41,7 @@
 		<delete dir="${build.classes}"/>
 		<delete dir="${build.javadocs}"/>
     	<delete dir="${dist.dir}"/>
+    	<delete dir="${dist.lib}"/>
 		<delete dir="${dist.docs}"/>
 		<delete dir="${dist.docs.uml}"/>
     </target>
@@ -49,6 +52,7 @@
 		<mkdir dir="${build.classes}"/>
 		<mkdir dir="${build.javadocs}"/>
 		<mkdir dir="${dist.dir}"/>
+		<mkdir dir="${dist.lib}"/>
 		<mkdir dir="${dist.docs}"/>
 		<mkdir dir="${dist.docs.uml}"/>
 	</target>
@@ -60,7 +64,7 @@
 	</target>
 
 	<target name="dist-bin" depends="compile">
-	    <jar jarfile="${dist.dir}/${gg.api.jar.bin}" basedir="${build.classes}"/>
+	    <jar jarfile="${dist.lib}/${gg.api.jar.bin}" basedir="${build.classes}"/>
 	</target>
 	
 	<target name="javadoc">
@@ -75,19 +79,19 @@
     </target>
 
 	<target name="dist-src" depends="javadoc">
-		
 		<copy todir="${dist.docs}">
 			<fileset dir="${build.javadocs}"/>
 		</copy>
+
 		<copy todir="${dist.docs.uml}">
 			<fileset dir="${gg.api.uml}"/>
 		</copy>
 
-		<jar jarfile="${dist.dir}/${gg.api.jar.src}">
+		<jar jarfile="${dist.lib}/${gg.api.jar.src}">
 	    	<fileset dir="${gg.api.src}"/>
 			<fileset dir="${dist.dir}"/>
-			<exclude name="*.jar"/>
-			<filename name="COPYING"/>
+			<exclude name="${dist.lib}"/>
+			<includesfile name="LICENSE.txt"/>
 	    </jar>
 	</target>
 	
