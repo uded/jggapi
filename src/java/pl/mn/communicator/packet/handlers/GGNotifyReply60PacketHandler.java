@@ -31,8 +31,9 @@ import pl.mn.communicator.packet.in.GGNotifyReply60;
 /**
  * Created on 2004-12-12
  * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60PacketHandler.java,v 1.6 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60PacketHandler.java,v 1.7 2004-12-20 00:02:38 winnetou25 Exp $
  */
 public class GGNotifyReply60PacketHandler implements PacketHandler {
 
