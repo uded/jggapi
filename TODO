@@ -1,26 +1,25 @@
 Bugs or features for version 1.0
 1. W przypadku monitorowania uzytkownikow obsluzyc sytuacje w ktorej
-	na poczatku wysylamy liste pakietow przekraczajaca 2040 bajtow (chyba).
+	na poczatku wysylamy liste pakietow przekraczajaca 2048 bajtow.
 	W tym celu trzeba wyslac inny pakiet. GGRequestFirst a potem GGRequestLast
 DONE-2. HIGH - Implementacja trybu tylko dla przyjaciol.
 DONE-3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
 4. Audyt session states.
 5. Napisac obsluge wysylania listy kontaktow dla wiekszej ilosci kontaktow
 	w tym celu trzeba uzyc pakietow PUT_MORE i GET_MORE przy pobieraniu tej listy.
-7. Podzielic kod na api i impl?
-8. Maven POM i documentation (xdocs).
-9. Przejrzec jggapi w punktu widzenia watkow. Ta biblioteka moze byc teraz nie thread-safe.
-10. Zobaczyc czy nie da sie zastosowac dekoratora do InputStream'a przy
+6. Podzielic kod na api i impl?
+7. Przejrzec jggapi w punktu widzenia watkow. Ta biblioteka moze byc teraz nie thread-safe.
+8. Zobaczyc czy nie da sie zastosowac dekoratora do InputStream'a przy
 	czytaniu.
 	np. GGInputStream extends BufferedInputStream
 	void read() // wisimy na read.
 	//po odwieszeniu sie biezemy pakiet.
 	GGIncomingPacket getIncommingPacket(); //incomming packet ma juz GGHeader.
-12. MED - Bardziej dokladna dokumentacja w java docs.
-13. Rozwazyc wprowadzenie socket.setTimeout();
-14. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
-15. Zastanowic sie czy to ma sens miec dwie oddzielne klasy reprezentujace uzytkownkow, GGUser i LocalUser.
-16. Zrobic porzadek w GGUtils
+9. MED - Bardziej dokladna dokumentacja w java docs.
+10. Rozwazyc wprowadzenie socket.setTimeout();
+11. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
+12. Zastanowic sie czy to ma sens miec dwie oddzielne klasy reprezentujace uzytkownkow, GGUser i LocalUser.
+13. Zrobic porzadek w GGUtils.
 
 Bugs or features for 1.5 version.
 1. LOW - Obslugiwanie serwisow dostepnych przez www (RegistrationService) (rejestracja uzytkownika, zmiana danych itp...)
@@ -40,7 +39,3 @@ Bugs or features for 1.5 version.
 KnownBugs:
 status in LoginContext does not work out! Tak jakby serwer GG to ignorowal
 na razie rozwiazalem to tak ze po dostaniu pakietu login ok ustawiam status recznie.
-
-Ogolne:
--nie wiem czy to jest takie sprytne, ze jest GGSessionException. Wlasciwie z command line to nie mozna tej biblioteki uzywac.
-chyba ze zrobic sie jakies wiszenie i dopoki cos sie nie stanie to sie nie bedzie dalej probowalo.
