@@ -75,7 +75,7 @@ public class Main2 {
 				IGroupChat groupChat = session.getMessageService().createGroupChat();
 				groupChat.addRecipient(376798);
 				groupChat.addRecipient(1136132);
-				groupChat.addRecipient(1516253);
+				//groupChat.addRecipient(1516253);
 				
 				groupChat.sendMessage("GroupChatMessageTest1");
 				

@@ -27,15 +27,12 @@ import pl.mn.communicator.packet.GGUtils;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncomingMessage.java,v 1.8 2004-12-25 17:32:07 winnetou25 Exp $
+ * @version $Id: IncomingMessage.java,v 1.9 2005-01-30 18:55:20 winnetou25 Exp $
  */
 public class IncomingMessage extends AbstractMessage {
 
 	/** The time the message was sent */
 	private Date m_messageDate = null;
-	
-	/** The unique messageID that is set by client to identify message */
-	private int m_messageID = -1;
 	
     /**
      * Constructor for <code>IncomingMessage</code>.
