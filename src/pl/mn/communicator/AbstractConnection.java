@@ -36,7 +36,7 @@ import org.apache.log4j.Logger;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public abstract class AbstractConnection implements IConnection {
@@ -78,7 +78,7 @@ public abstract class AbstractConnection implements IConnection {
     }
 
     /**
-     * Dodaj listenera zwi±zanego z po³¹czeniem.<BR>
+     * Dodaj listenera zwi±zanego z po³±czeniem.<BR>
      * Obs³uguje on takie zdarzenia jak nawi±zanie po³±czenia,
      * zerwanie po³±czenia itp.
      * @see ConnectionListener
