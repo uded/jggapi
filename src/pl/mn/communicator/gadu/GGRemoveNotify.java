@@ -20,11 +20,17 @@ package pl.mn.communicator.gadu;
 
 /**
  * Pakiet usuwaj±cy konkretnego u¿ytkownika z listy monitorowanych u¿ytkowników.
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 class GGRemoveNotify implements GGOutgoingPackage {
-    private int userNo;
+    /** Numer u¿ytkownika */
+	private int userNo;
+	
+	/**
+	 * Twórz pakiet do usuniêcia u¿ytkownika z listy monitorowanych
+	 * @param userNo numer u¿ytkownika do usuniêcia
+	 */
 	GGRemoveNotify(int userNo) {
     	this.userNo = userNo;
     }
