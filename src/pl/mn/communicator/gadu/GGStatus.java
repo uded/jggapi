@@ -22,12 +22,12 @@ import java.util.Date;
 /**
  * Status uzytkownika gg
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 class GGStatus implements GGOutgoingPackage {
 	private int status;
-	private byte[] opis = new byte[40];
+	private byte[] opis;
 	private int czas;
 
 	/** Status dostepny */
@@ -57,6 +57,7 @@ class GGStatus implements GGOutgoingPackage {
 	 */
 	public GGStatus(int status){
 		this.status = status;
+		this.opis = new byte[0];
 	}
 	
 	/**
@@ -65,7 +66,10 @@ class GGStatus implements GGOutgoingPackage {
 	 * @param opis opis tekstowy (maks. 40 znakow)
 	 */
 	public GGStatus(int status, String opis) {
-		// TODO implement
+		this.status = status;
+		if (opis.length() > 40)
+			opis = opis.substring(0,39);
+		this.opis = opis.getBytes();
 	}
 	
 	/**
@@ -89,6 +93,7 @@ class GGStatus implements GGOutgoingPackage {
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
+		//return opis.length == 0 ? 4 : 4 + opis.length + 1; 
 		return 4;
 	}
 
@@ -112,8 +117,13 @@ class GGStatus implements GGOutgoingPackage {
 				break;
 		}
 
-		byte [] toSend = new byte[4];
-
+		int length = 4;// + opis.length + (opis.length > 0 ? 1 : 0);
+		byte [] toSend = new byte[length];
+/*			
+		for (int i = 0; i < opis.length; i++) {
+			toSend[4+i] = opis[i];
+		}
+*/		
 		toSend[3] = (byte) (statusToSend >> 24 & 0xFF);
 		toSend[2] = (byte) (statusToSend >> 16 & 0xFF);
 		toSend[1] = (byte) (statusToSend >> 8 & 0xFF);

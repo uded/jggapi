@@ -51,7 +51,7 @@ import pl.mn.communicator.gadu.util.Util;
  * }
  * </code>
  * 
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -121,7 +121,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	 */
 	public void changeStatus(IStatus status) throws IOException{
 		if (isConnected){
-			GGStatus newStatus = new GGStatus(status.getStatus(),"sam nie wiem");
+			GGStatus newStatus = new GGStatus(status.getStatus(),"juz jestem");
 			connectionThread.sendPackage(newStatus);
 		}
 	}
