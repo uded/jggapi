@@ -17,23 +17,23 @@
  */
 package pl.mn.communicator;
 
+import pl.mn.communicator.event.MessageListener;
+
 /**
- * Created on 2004-11-30
+ * Created on 2005-01-29
+ * 
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGQuestions.java,v 1.1 2005-01-25 23:40:50 winnetou25 Exp $
+ * @version $Id: IChat.java,v 1.1 2005-01-29 13:20:26 winnetou25 Exp $
  */
-public interface GGQuestions {
+public interface IChat {
 
-	/** The favourite dish you like the most? */
-	int FAVOURITE_DISH = 1;
-	int FIRST_LOVE = 2;
-	int SCHOOL_BENCH_NAME = 3;
-	int GRAND_FATHER_NAME = 4;
-	int GRAND_MOTHER_NAME = 5;
-	int MOTHERS_MAIDEN_NAME = 6;
-	int FAVOURITE_MOVIE = 7;
-	int FAVOURITE_ACTOR = 8;
-	int FAVOURITE_BAND = 9;
+	IChat sendMessage(String messageBody) throws GGException;
+	
+//	IMessage nextMessage();
+	
+	void addChatListener(MessageListener messageListener);
+	
+	void removeChatListener(MessageListener messageListener);
 	
 }

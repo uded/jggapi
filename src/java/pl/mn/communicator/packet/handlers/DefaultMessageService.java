@@ -24,7 +24,9 @@ import java.util.Set;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
+import pl.mn.communicator.IGroupChat;
 import pl.mn.communicator.IMessageService;
+import pl.mn.communicator.ISingleChat;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
@@ -38,7 +40,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.11 2005-01-25 23:52:29 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.12 2005-01-29 13:20:05 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
@@ -64,6 +66,20 @@ public class DefaultMessageService implements IMessageService {
 		} catch (IOException ex) {
 			throw new GGException("Error occured while sending message: "+outgoingMessage, ex);
 		}
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IMessageService#createSingleChat(int)
+	 */
+	public ISingleChat createSingleChat(int uin) {
+		return new SingleChat(m_session, uin);
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IMessageService#createGroupChat(int[])
+	 */
+	public IGroupChat createGroupChat(int[] uins) {
+		return new GroupChat(m_session, uins);
 	}
 	
 	/**

@@ -26,7 +26,7 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessageService.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: IMessageService.java,v 1.8 2005-01-29 13:20:26 winnetou25 Exp $
  */
 public interface IMessageService {
 
@@ -41,6 +41,16 @@ public interface IMessageService {
 	 */
 	void sendMessage(OutgoingMessage outgoingMessage) throws GGException;
 
+	/**
+	 * Create chat with some Gadu-Gadu user.
+	 * 
+	 * @param uin the Gadu-Gadu number of the user one wants to chat with
+	 * @return chat object that represents chat with some user.
+	 */
+	ISingleChat createSingleChat(int uin);
+	
+	IGroupChat createGroupChat(int[] uins);
+	
 	/** 
 	 * Adds <code>MessageListener</code> object to the list
 	 * that will be notified of message related events.

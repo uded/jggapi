@@ -4,11 +4,11 @@ import java.util.Collection;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.ISession;
+import pl.mn.communicator.ISingleChat;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.Server;
@@ -180,8 +180,12 @@ public class Main2 {
 //		status.setFriendsOnly(true);
 //		session.getPresenceService().setStatus(status);
 //		
-		OutgoingMessage.createNewMessage(376798, "body");
-		session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
+		ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
+		matiChat.sendMessage("body");
+		matiChat.sendMessage("dupka");
+		
+//		OutgoingMessage.createNewMessage(376798, "body");
+//		session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessageWithoutConfirmation(376798, String.valueOf(System.currentTimeMillis())));
