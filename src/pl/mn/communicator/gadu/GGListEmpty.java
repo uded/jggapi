@@ -22,7 +22,7 @@ package pl.mn.communicator.gadu;
  * 
  * @author mnaglik
  */
-public class GGListEmpty implements GGOutgoingPackage {
+class GGListEmpty implements GGOutgoingPackage {
 	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
 	 */
