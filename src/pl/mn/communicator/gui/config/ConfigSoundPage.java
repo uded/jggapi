@@ -1,4 +1,4 @@
-package pl.mn.communicator.gui;
+package pl.mn.communicator.gui.config;
 
 import org.eclipse.jface.preference.PreferencePage;
 import org.eclipse.swt.SWT;

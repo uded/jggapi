@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Text;
 import pl.mn.communicator.gui.Config;
 
 /**
- * @author Administrator
+ * @author mnaglik
  */
 public class ConfigUserPage extends PreferencePage {
 	private String userNumber;

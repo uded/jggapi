@@ -43,6 +43,7 @@ import pl.mn.communicator.gadu.LocalUser;
 import pl.mn.communicator.gadu.Message;
 import pl.mn.communicator.gadu.Server;
 import pl.mn.communicator.gadu.User;
+import pl.mn.communicator.gui.config.*;
 
 /**
  * @author mnaglik

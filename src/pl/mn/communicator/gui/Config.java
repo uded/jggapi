@@ -11,7 +11,7 @@ import java.io.IOException;
 import org.eclipse.jface.preference.PreferenceStore;
 
 /**
- * @author Administrator
+ * @author mnaglik
  */
 public class Config {
 	/*

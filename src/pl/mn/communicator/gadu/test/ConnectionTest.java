@@ -15,7 +15,7 @@ import pl.mn.communicator.gadu.Message;
 import pl.mn.communicator.gadu.Server;
 
 /**
- * @author mna
+ * @author mnaglik
  *
  * To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Generation - Code and Comments

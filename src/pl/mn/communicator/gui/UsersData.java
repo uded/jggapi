@@ -7,7 +7,7 @@ import pl.mn.communicator.AbstractUser;
 import pl.mn.communicator.gadu.User;
 
 /**
- * @author Administrator
+ * @author mnaglik
  *
  * Wszyscy uzytkownicy aktywni i nieaktywni
  */

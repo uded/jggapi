@@ -8,7 +8,7 @@ import org.eclipse.jface.preference.PreferenceNode;
 import org.eclipse.swt.widgets.Shell;
 
 /**
- * @author Administrator
+ * @author mnaglik
  */
 public class ConfigForm extends PreferenceDialog {
 	public ConfigForm(Shell shell, PreferenceManager preference) {

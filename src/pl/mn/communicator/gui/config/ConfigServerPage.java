@@ -18,7 +18,7 @@ import org.eclipse.swt.widgets.Text;
 import pl.mn.communicator.gui.Config;
 
 /**
- * @author Administrator
+ * @author mnaglik
  */
 public class ConfigServerPage extends PreferencePage {
 	private String serverAddress;
