@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.14 2004-12-26 22:11:48 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.15 2005-01-25 23:53:02 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -169,7 +169,7 @@ public class GGUtils {
 		throw new RuntimeException("Unable to convert, messageClass: "+clientMessageClass);
 	}
 
-	public static String bytesToString(byte[] bytes) {
+	public static String prettyBytesToString(byte[] bytes) {
 	    StringBuffer odebrane = new StringBuffer();
 	    odebrane.append("{");
 	

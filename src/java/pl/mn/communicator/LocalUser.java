@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-11-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LocalUser.java,v 1.9 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: LocalUser.java,v 1.10 2005-01-25 23:47:47 winnetou25 Exp $
  */
 public class LocalUser {
 
@@ -49,10 +49,6 @@ public class LocalUser {
 	/** the e-mail address of the user */
 	private String m_emailAddress = null;
 
-	public LocalUser() {
-		
-	}
-	
 	public void setFirstName(String name) {
 		if (name == null) throw new NullPointerException("name cannot be null");
 		m_name = name;

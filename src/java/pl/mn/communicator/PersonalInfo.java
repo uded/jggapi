@@ -24,7 +24,7 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PersonalInfo.java,v 1.6 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: PersonalInfo.java,v 1.7 2005-01-25 23:48:58 winnetou25 Exp $
  */
 public class PersonalInfo {
 
@@ -52,10 +52,6 @@ public class PersonalInfo {
 	/** the name of the user's city */
 	private String m_familyCity = null;
 
-	public PersonalInfo() {
-		
-	}
-	
 	public String getFirstName() {
 		return m_firstName;
 	}

@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.in.GGPong;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPongPacketHandler.java,v 1.8 2005-01-02 15:16:29 winnetou25 Exp $
+ * @version $Id: GGPongPacketHandler.java,v 1.10 2005-01-25 23:55:58 winnetou25 Exp $
  */
 public class GGPongPacketHandler implements PacketHandler {
 
@@ -36,11 +36,11 @@ public class GGPongPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(Context context) {
+	public void handle(PacketContext context) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("GGPong packet received.");
 			logger.debug("PacketHeader: "+context.getHeader());
-			logger.debug("PacketBody: "+GGUtils.bytesToString(context.getPackageContent()));
+			logger.debug("PacketBody: "+GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		GGPong pong = GGPong.getInstance();

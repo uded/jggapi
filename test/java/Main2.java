@@ -13,7 +13,7 @@ import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.PublicDirSearchReply;
-import pl.mn.communicator.SessionFactory;
+import pl.mn.communicator.Server;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.User;
 import pl.mn.communicator.User.UserMode;
@@ -24,6 +24,7 @@ import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.event.PublicDirListener;
 import pl.mn.communicator.event.SessionStateListener;
 import pl.mn.communicator.event.UserListener;
+import pl.mn.communicator.packet.handlers.Session;
 
 /*
  * Created on 2004-11-28
@@ -42,23 +43,12 @@ public class Main2 {
 
 	public static void main(String args[]) throws IOException, GGException {
 
-		IUser acze = new User(1136132, UserMode.BUDDY);
-		IUser jaffa = new User(1542863, UserMode.BUDDY);
-		IUser mati = new User(376798, UserMode.BUDDY);
-
-		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
-		loginContext.getStatus().setFriendsOnly(true);
-		
-		loginContext.getMonitoredUsers().add(acze);
-		loginContext.getMonitoredUsers().add(jaffa);
-		loginContext.getMonitoredUsers().add(mati);
-		
-		final ISession session = SessionFactory.createSession(loginContext);
+		final ISession session = new Session();
 		
 		session.addSessionStateListener(new SessionStateListener(){
 
 			public void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState) {
-				
+				System.out.println("session state changed, oldState: "+oldSessionState+",newState: "+newSessionState);
 			}
 			
 		});
@@ -151,8 +141,19 @@ public class Main2 {
 			
 		});
 		
- 		session.getConnectionService().connect();
-		session.getLoginService().login();
+		IUser acze = new User(1136132, UserMode.BUDDY);
+		IUser jaffa = new User(1542863, UserMode.BUDDY);
+		IUser mati = new User(376798, UserMode.BUDDY);
+
+		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
+		loginContext.getStatus().setFriendsOnly(true);
+		
+		loginContext.getMonitoredUsers().add(acze);
+		loginContext.getMonitoredUsers().add(jaffa);
+		loginContext.getMonitoredUsers().add(mati);
+
+ 		session.getConnectionService().connect(Server.getDefaultServer(loginContext.getUin()));
+		session.getLoginService().login(loginContext);
 		
 //		session.getPublicDirectoryService().readFromPublicDirectory();
 //		PublicDirInfo publicDirInfo = new PublicDirInfo();
@@ -167,12 +168,12 @@ public class Main2 {
 //		session.getPublicDirectoryService().writeToPublicDirectory(publicDirInfo);
 //		session.getPublicDirectoryService().readFromPublicDirectory();
 //
-		PublicDirSearchQuery publicDirQuery = new PublicDirSearchQuery();
-		publicDirQuery.setCity("Szczecin");
-		publicDirQuery.setGender(Gender.FEMALE);
-		publicDirQuery.setActiveOnly(new Boolean(true));
-		
-		session.getPublicDirectoryService().search(publicDirQuery);
+//		PublicDirSearchQuery publicDirQuery = new PublicDirSearchQuery();
+//		publicDirQuery.setCity("Szczecin");
+//		publicDirQuery.setGender(Gender.FEMALE);
+//		publicDirQuery.setActiveOnly(new Boolean(true));
+//		
+//		session.getPublicDirectoryService().search(publicDirQuery);
 		
 //		loginContext.setPassword("dupadupa");
 //		session.getLoginService().login();

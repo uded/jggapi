@@ -22,24 +22,24 @@ import pl.mn.communicator.event.SessionStateListener;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISession.java,v 1.8 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: ISession.java,v 1.9 2005-01-25 23:47:23 winnetou25 Exp $
  */
 public interface ISession {
 
-	/**
-	 * Returns object representing Gadu-Gadu server that 
-	 * is currently associated with this session.
-	 * 
-	 * @return <code>IServer</code> associated with the session instance.
-	 */
-	IServer getServer();
-	
-	/**
-	 * Returns login context that is currenly bound to this session.
-	 * 
-	 * @return <code>LoginContext</code>
-	 */
-	LoginContext getLoginContext();
+//	/**
+//	 * Returns object representing Gadu-Gadu server that 
+//	 * is currently associated with this session.
+//	 * 
+//	 * @return <code>IServer</code> associated with the session instance.
+//	 */
+//	IServer getServer();
+//	
+//	/**
+//	 * Returns login context that is currenly bound to this session.
+//	 * 
+//	 * @return <code>LoginContext</code>
+//	 */
+//	LoginContext getLoginContext();
 
 	/**
 	 * Returns state of this session.
@@ -60,9 +60,7 @@ public interface ISession {
 
 	IPublicDirectoryService getPublicDirectoryService();
 	
-//	IRegistrationService getRegistrationService();
-//
-//	IFileService getFileService();
+	IRegistrationService getRegistrationService();
 
 	void addSessionStateListener(SessionStateListener sessionStateListener);
 	

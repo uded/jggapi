@@ -21,7 +21,7 @@ package pl.mn.communicator.packet.handlers;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PacketHandler.java,v 1.6 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: PacketHandler.java,v 1.7 2005-01-25 23:55:59 winnetou25 Exp $
  */
 public interface PacketHandler {
 
@@ -30,6 +30,6 @@ public interface PacketHandler {
 	 * 
 	 * @param context
 	 */
-	void handle(Context context);
+	void handle(PacketContext context);
 	
 }

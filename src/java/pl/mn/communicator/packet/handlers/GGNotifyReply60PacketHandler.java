@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.in.GGNotifyReply60;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60PacketHandler.java,v 1.10 2005-01-02 15:16:29 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60PacketHandler.java,v 1.12 2005-01-25 23:55:58 winnetou25 Exp $
  */
 public class GGNotifyReply60PacketHandler implements PacketHandler {
 
@@ -42,11 +42,11 @@ public class GGNotifyReply60PacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(Context context) {
+	public void handle(PacketContext context) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("NotifyPacketReply60 packet received.");
 			logger.debug("PacketHeader: "+context.getHeader());
-			logger.debug("PacketBody: "+GGUtils.bytesToString(context.getPackageContent()));
+			logger.debug("PacketBody: "+GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 		
 		GGNotifyReply60 notifyReply = new GGNotifyReply60(context.getPackageContent());

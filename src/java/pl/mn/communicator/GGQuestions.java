@@ -21,9 +21,9 @@ package pl.mn.communicator;
  * Created on 2004-11-30
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: QA.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: GGQuestions.java,v 1.1 2005-01-25 23:40:50 winnetou25 Exp $
  */
-public interface QA {
+public interface GGQuestions {
 
 	/** The favourite dish you like the most? */
 	int FAVOURITE_DISH = 1;

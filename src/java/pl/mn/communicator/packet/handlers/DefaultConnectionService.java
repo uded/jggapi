@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.10 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.12 2005-01-25 23:56:01 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -63,6 +63,8 @@ public class DefaultConnectionService implements IConnectionService {
 	/** thread that monitors connection */
 	private ConnectionThread m_connectionThread = null;
 	
+	private IServer m_server = null;
+	
 	//friendly
 	DefaultConnectionService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
@@ -74,15 +76,17 @@ public class DefaultConnectionService implements IConnectionService {
 	/**
 	 * @see pl.mn.communicator.IConnectionService#connect()
 	 */
-	public void connect() throws GGException {
+	public void connect(IServer server) throws GGException {
+		if (server == null) throw new NullPointerException("server cannot be null");
+		m_server = server;
 		checkConnectionState();
 		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
 		try {
-			m_connectionThread.openConnection();
+			m_connectionThread.openConnection(server.getAddress(), server.getPort());
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTED);
 		} catch (IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
-			throw new GGException("Unable to connect to Gadu-Gadu server: "+m_session.getServer(), ex);
+			throw new GGException("Unable to connect to Gadu-Gadu server: "+server, ex);
 		}
 	}
 
@@ -96,6 +100,7 @@ public class DefaultConnectionService implements IConnectionService {
 			m_connectionThread.closeConnection();
 			notifyConnectionClosed();
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
+			m_server = null;
 		} catch (IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 		}
@@ -108,7 +113,14 @@ public class DefaultConnectionService implements IConnectionService {
 		boolean authenticated = m_session.getSessionState() == SessionState.LOGGED_IN;
 		boolean authenticationAwaiting = m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING;
 		boolean connected = m_session.getSessionState() == SessionState.CONNECTED;
-		return authenticated || authenticationAwaiting || connected;
+		return authenticated || authenticationAwaiting || connected ;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IConnectionService#getServer()
+	 */
+	public IServer getServer() {
+		return m_server;
 	}
 	
 	/**
@@ -256,9 +268,9 @@ public class DefaultConnectionService implements IConnectionService {
     		}
     	}
 
-    	private void openConnection() throws IOException {
-    		IServer server = m_session.getServer();
-    		m_socket = new Socket(server.getAddress(), server.getPort());
+    	private void openConnection(String host, int port) throws IOException {
+    		//add runtime checking for port
+    		m_socket = new Socket(host, port);
    			m_dataInput = new BufferedInputStream(m_socket.getInputStream());
    			m_dataOutput = new BufferedOutputStream(m_socket.getOutputStream());
    			start();
@@ -291,7 +303,7 @@ public class DefaultConnectionService implements IConnectionService {
 		private void decodePacket(GGHeader header) throws IOException {
 			byte[] keyBytes = new byte[header.getLength()];
 			m_dataInput.read(keyBytes);
-			Context context = new Context(m_session, header, keyBytes);
+			PacketContext context = new PacketContext(m_session, header, keyBytes);
 			m_packetChain.sendToChain(context);
 		}
 		

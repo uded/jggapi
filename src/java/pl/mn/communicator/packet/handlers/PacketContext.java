@@ -24,15 +24,15 @@ import pl.mn.communicator.packet.handlers.Session.SessionAccessor;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Context.java,v 1.6 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: PacketContext.java,v 1.1 2005-01-25 23:55:58 winnetou25 Exp $
  */
-public class Context {
+public class PacketContext {
 
 	private Session m_session = null;
 	private GGHeader m_header = null;
 	private byte[] m_packageContent = null;
 	
-	public Context(Session session, GGHeader header, byte[] packageContent) {
+	public PacketContext(Session session, GGHeader header, byte[] packageContent) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		if (header == null) throw new NullPointerException("header cannot be null");
 		if (packageContent == null) throw new NullPointerException("packageContent cannot be null");

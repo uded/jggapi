@@ -28,7 +28,7 @@ import pl.mn.communicator.event.LoginListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ILoginService.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: ILoginService.java,v 1.8 2005-01-25 23:44:34 winnetou25 Exp $
  */
 public interface ILoginService {
 
@@ -41,7 +41,7 @@ public interface ILoginService {
 	 * @throws GGException if an error occurs while logging in.
 	 * @throws GGSessionException if there is an incorrect session state.
 	 */
-	void login() throws GGException;
+	void login(LoginContext loginContext) throws GGException;
 
 	/**
 	 * Invocation of this method tries to log out user from the
@@ -68,6 +68,10 @@ public interface ILoginService {
 	 * @throws NullPointerException if the description is null.
 	 */
 	void logout(String description, Date returnTime) throws GGException;
+	
+	boolean isLoggedIn();
+	
+	LoginContext getLoginContext();
 	
 	/**
 	 * Adds <code>LoginListener</code> instance to the list that

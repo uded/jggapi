@@ -33,7 +33,9 @@ import pl.mn.communicator.ILocalStatus;
 import pl.mn.communicator.IPresenceService;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.LocalStatus;
 import pl.mn.communicator.SessionState;
+import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.UserListener;
 import pl.mn.communicator.packet.out.GGAddNotify;
@@ -49,7 +51,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.10 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.11 2005-01-25 23:52:49 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
@@ -62,7 +64,7 @@ public class DefaultPresenceService implements IPresenceService {
 	private Session m_session = null;
 
 	/** The actual status */
-	private ILocalStatus m_localStatus = null;
+	private ILocalStatus m_localStatus = new LocalStatus(StatusType.ONLINE);
 
 	/** The set of users that are monitored */
 	private Collection m_monitoredUsers = new HashSet();
@@ -71,9 +73,11 @@ public class DefaultPresenceService implements IPresenceService {
 	DefaultPresenceService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
-		m_localStatus = session.getLoginContext().getStatus();
+		if (m_session.getLoginService().isLoggedIn()) {
+			m_localStatus = session.getLoginService().getLoginContext().getStatus();
+			m_monitoredUsers = session.getLoginService().getLoginContext().getMonitoredUsers();
+		}
 		m_userListeners = new HashSet();
-		m_monitoredUsers = session.getLoginContext().getMonitoredUsers();
 		m_session.getLoginService().addLoginListener(new LoginHandler());
 	}
 	

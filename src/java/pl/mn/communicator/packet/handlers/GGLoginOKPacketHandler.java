@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.in.GGLoginOK;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginOKPacketHandler.java,v 1.8 2005-01-02 15:16:29 winnetou25 Exp $
+ * @version $Id: GGLoginOKPacketHandler.java,v 1.10 2005-01-25 23:56:02 winnetou25 Exp $
  */
 public class GGLoginOKPacketHandler implements PacketHandler {
 
@@ -36,11 +36,11 @@ public class GGLoginOKPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(Context context) {
+	public void handle(PacketContext context) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("LoginOK packet received.");
 			logger.debug("PacketHeader: "+context.getHeader());
-			logger.debug("PacketBody: "+GGUtils.bytesToString(context.getPackageContent()));
+			logger.debug("PacketBody: "+GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		GGLoginOK loginOk = GGLoginOK.getInstance();

@@ -21,16 +21,19 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IRegistrationService.java,v 1.7 2004-12-26 22:07:35 winnetou25 Exp $
+ * @version $Id: IRegistrationService.java,v 1.8 2005-01-25 23:46:35 winnetou25 Exp $
  */
 public interface IRegistrationService {
 
+	GGToken getRegToken() throws GGException;
+	
 	/**
+	 * This method allows to change password on Gadu-Gadu account.
 	 * 
-	 * @param email
-	 * @param password
-	 * @param qa
-	 * @param answer
+	 * @param email e-mail the e-mail of the user
+	 * @param password the current password
+	 * @param qa question
+	 * @param answer answer to the above question
 	 */
 	void changePassword(String email, String password, int qa, String answer);
 	
@@ -44,7 +47,7 @@ public interface IRegistrationService {
 	 * @return uin of new Gadu-Gadu account.
 	 * @throws <code>GGException</code> if error occurs while registering new Gadu-Gadu account.
 	 */
-	int registerAccount(String email, String password, int qa, String answer) throws GGException;
+	int registerAccount(String email, String password, String tokenID, String code, int qa, String answer) throws GGException;
 
 	/**
 	 * Use this method if you want to delete your current account from Gadu-Gadu server.<BR>
@@ -58,6 +61,8 @@ public interface IRegistrationService {
 	
 	/**
 	 * Sends user's current password to user's mailbox.
+	 * 
+	 * @param uin User's Gadu-Gadu number.
 	 */
 	void remindAndSendPassword(int uin);
 	

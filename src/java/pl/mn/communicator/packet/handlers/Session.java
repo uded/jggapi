@@ -34,12 +34,11 @@ import pl.mn.communicator.ILoginService;
 import pl.mn.communicator.IMessageService;
 import pl.mn.communicator.IPresenceService;
 import pl.mn.communicator.IPublicDirectoryService;
+import pl.mn.communicator.IRegistrationService;
 import pl.mn.communicator.IRemoteStatus;
-import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
-import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
@@ -52,7 +51,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.18 2004-12-21 21:25:51 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.19 2005-01-25 23:52:48 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -62,25 +61,25 @@ public class Session implements ISession {
 	private Set m_sessionStateListeners = null;
 	private HashMap m_sessionAttributes;
 	
-	private LoginContext m_loginContext = null;
+	//private LoginContext m_loginContext = null;
 	
 	private DefaultConnectionService m_connectionService = null;
 	private DefaultLoginService m_loginService = null;
 	private DefaultPresenceService m_presenceService = null;
 	private DefaultMessageService m_messageService = null;
-	//private DefaultRegistrationService m_registrationService = null;
+	private DefaultRegistrationService m_registrationService = null;
 	private DefaultContactListService m_contactListService = null;
 	private DefaultPublicDirectoryService m_publicDirectoryService = null;
 	
 	private HashMap m_proxies = new HashMap();
 	
-	private IServer m_server = null;
+	//private IServer m_server = null;
 	
-	public Session(IServer server, LoginContext loginContext) {
-		if (server == null) throw new NullPointerException("server cannot be null");
-		if (loginContext == null) throw new NullPointerException("loginContext cannot be null");
-		m_server = server;
-		m_loginContext = loginContext;
+	public Session() {
+		//if (server == null) throw new NullPointerException("server cannot be null");
+		//if (loginContext == null) throw new NullPointerException("loginContext cannot be null");
+		//m_server = server;
+		//m_loginContext = loginContext;
 		m_sessionAccessor = new SessionAccessor();
 		m_sessionAttributes = new HashMap();
 		m_sessionStateListeners = new HashSet();
@@ -90,20 +89,20 @@ public class Session implements ISession {
 		m_presenceService = new DefaultPresenceService(this);
 		m_contactListService = new DefaultContactListService(this);
 		m_publicDirectoryService = new DefaultPublicDirectoryService(this);
-		//m_registrationService = new DefaultRegistrationService(this);
+		m_registrationService = new DefaultRegistrationService(this);
 	}
 
 	public SessionState getSessionState() {
 		return m_sessionState;
 	}
 	
-	public IServer getServer() {
-		return m_server;
-	}
+//	public IServer getServer() {
+//		return m_server;
+//	}
 	
-	public LoginContext getLoginContext() {
-		return m_loginContext;
-	}
+//	public LoginContext getLoginContext() {
+//		return m_loginContext;
+//	}
 	
 	public void addSessionStateListener(SessionStateListener sessionStateListener) {
 		if (sessionStateListener == null) throw new NullPointerException("sessionStateListener cannot be null.");
@@ -191,6 +190,13 @@ public class Session implements ISession {
 			m_proxies.put(IContactListService.class.getName(), contactListServiceProxy);
 		}
 		return (IContactListService) m_proxies.get(IContactListService.class.getName());
+	}
+	
+	/**
+	 * @see pl.mn.communicator.ISession#getRegistrationService()
+	 */
+	public IRegistrationService getRegistrationService() {
+		return m_registrationService;
 	}
 	
 	protected void notifySessionStateChanged(SessionState oldState, SessionState newState) {
@@ -294,9 +300,9 @@ public class Session implements ISession {
 			return seedInteger.intValue();
 		}
 
-		public LoginContext getLoginContext() {
-			return m_loginContext;
-		}
+//		public LoginContext getLoginContext() {
+//			return m_loginContext;
+//		}
 		
 	}
 

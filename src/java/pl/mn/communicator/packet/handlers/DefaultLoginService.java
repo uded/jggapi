@@ -40,7 +40,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.11 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.12 2005-01-25 23:53:01 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -49,6 +49,8 @@ public class DefaultLoginService implements ILoginService {
 
 	/** The set of <code>LoginListener</code>'s */
 	private Set m_loginListeners = null;
+	
+	private LoginContext m_loginContext = null;
 	
 	//friendly
 	DefaultLoginService(Session session) {
@@ -60,19 +62,20 @@ public class DefaultLoginService implements ILoginService {
 	/**
 	 * @see pl.mn.communicator.ILoginService#login()
 	 */
-	public void login() throws GGException {
+	public void login(LoginContext loginContext) throws GGException {
+		if (loginContext == null) throw new NullPointerException("loginContext cannot be null");
+		m_loginContext = loginContext;
+		
 		if (m_session.getSessionState() != SessionState.AUTHENTICATION_AWAITING) {
 			throw new GGSessionException(m_session.getSessionState());
 		}
 		
 		try {
-			int uin = m_session.getLoginContext().getUin();
-			String password = m_session.getLoginContext().getPassword();
+			int uin = loginContext.getUin();
+			String password = loginContext.getPassword();
 			int seed = m_session.getSessionAccessor().getLoginSeed();
 
 			GGLogin60 login = new GGLogin60(uin, password.toCharArray(), seed);
-
-			LoginContext loginContext = m_session.getLoginContext();
 			login.setStatus(loginContext.getStatus());
 
 			if (loginContext.getImageSize() != -1) {
@@ -93,7 +96,7 @@ public class DefaultLoginService implements ILoginService {
 			m_session.getSessionAccessor().sendPackage(login);
 		} catch (IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
-			throw new GGException("Unable to login, loginContext: "+m_session.getLoginContext(), ex);
+			throw new GGException("Unable to login, loginContext: "+loginContext, ex);
 		}
 	}
 
@@ -105,6 +108,21 @@ public class DefaultLoginService implements ILoginService {
 		ILocalStatus localStatus = new LocalStatus(StatusType.OFFLINE);
 		m_session.getPresenceService().setStatus(localStatus);
 		m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
+		m_loginContext = null;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.ILoginService#getLoginContext()
+	 */
+	public LoginContext getLoginContext() {
+		return m_loginContext;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.ILoginService#isLoggedIn()
+	 */
+	public boolean isLoggedIn() {
+		return (m_session.getSessionState() == SessionState.LOGGED_IN);
 	}
 	
 	/**
