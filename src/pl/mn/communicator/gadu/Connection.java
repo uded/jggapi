@@ -51,7 +51,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -150,14 +150,14 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      * @author mnaglik
      */
     private class ConnectionThread implements Runnable {
-        private final static int HEADER_LENGTH = 8;
-        private final static int PING_COUNT = 200;
-        private final static int THREAD_SLEEP_TIME = 100;
-        private final static int GG_PACKAGE_WELCOME = 1;
-        private final static int GG_PACKAGE_LOGIN_OK = 3;
-        private final static int GG_PACKAGE_LOGIN_ERROR = 9;
-        private final static int GG_PACKAGE_MESSAGE = 10;
-        private final static int GG_PACKAGE_CONNECTION_ERROR = 11;
+        private static final int HEADER_LENGTH = 8;
+        private static final int PING_COUNT = 200;
+        private static final int THREAD_SLEEP_TIME = 100;
+        private static final int GG_PACKAGE_WELCOME = 1;
+        private static final int GG_PACKAGE_LOGIN_OK = 3;
+        private static final int GG_PACKAGE_LOGIN_ERROR = 9;
+        private static final int GG_PACKAGE_MESSAGE = 10;
+        private static final int GG_PACKAGE_CONNECTION_ERROR = 11;
         private Socket socket;
         private Thread thread;
         private BufferedInputStream dataInput;
@@ -217,8 +217,8 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
         private void decodePocket(GGHeader ggHeader) throws IOException {
             byte[] keyBytes = new byte[ggHeader.getLength()];
             dataInput.read(keyBytes);
-            logger.debug("Pakiet przychodzacy: " +
-                Util.bytesToString(keyBytes));
+            logger.debug("Pakiet przychodzacy: "
+                    + Util.bytesToString(keyBytes));
 
             switch (ggHeader.getType()) {
             case GG_PACKAGE_WELCOME:
