@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="C:\Program Files\Apache Software Foundation\Maven 1.0.2\maven-project.xsd">
+	<pomVersion>3</pomVersion>
+	<id>jggapi</id>
+	<name>Java Gadu Gadu protocol implementation</name>
+	<currentVersion>0.94</currentVersion>
+	<organization>
+		<name>SourceForge.net</name>
+		<url>http://sourceforge.net/projects/${pom.artifactId}/</url>
+		<logo>http://sourceforge.net/sflogo.php?group_id=79198&amp;type=5</logo>
+	</organization>
+	<inceptionYear>2004</inceptionYear>
+	<shortDescription>
+		Java Gadu Gadu protocol implementation
+	</shortDescription>
+
+  <issueTrackingUrl>http://sourceforge.net/tracker/?group_id=79198</issueTrackingUrl>
+  <siteAddress>jggapi.sourceforge.net</siteAddress>
+  <siteDirectory>/home/groups/${pom.groupId.substring(0,1)}/${pom.groupId.substring(0,2)}/${pom.artifactId}/htdocs/</siteDirectory>
+  <distributionSite>shell1.jggapi.sf.net</distributionSite>
+  <distributionDirectory>/home/groups/${pom.groupId.substring(0,1)}/${pom.groupId.substring(0,2)}/${pom.groupId}/htdocs/repository/</distributionDirectory>
+
+
+
+ <repository>
+    <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</connection>
+    <developerConnection>scm:cvs:ssh:username@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</developerConnection>
+    <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jggapi/jggapi/</url>
+	</repository>
+	
+	<developers>
+		<developer>
+			<name>Marcin Naglik</name>
+			<id>mnaglik</id>
+			<email>mnaglik@gazeta.pl</email>
+		</developer>
+		<developer>
+			<name>Mateusz Szczap</name>
+			<id>winnetou25</id>
+			<email>mati@sz.home.pl</email>
+		</developer>
+	</developers>
+	<dependencies>
+<dependency>
+    <groupId>commons-logging</groupId>
+    <artifactId>commons-logging</artifactId>
+    <version>1.0.4</version>
+</dependency>
+	</dependencies>
+
+  
+	<build>
+		<sourceDirectory>src/java</sourceDirectory>
+	</build>
+</project>
