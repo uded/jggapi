@@ -17,23 +17,21 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.logger.Logger;
-import pl.mn.communicator.util.Util;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Iterator;
+import java.util.Map;
 
 import pl.mn.communicator.ILocalUser;
 import pl.mn.communicator.IMessage;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.IOException;
-
-import java.net.Socket;
-
-import java.util.Iterator;
-import java.util.Map;
+import pl.mn.communicator.logger.Logger;
+import pl.mn.communicator.util.Util;
 
 
 /**
@@ -52,7 +50,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.34 $
+ * @version $Revision: 1.35 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -91,9 +89,12 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      * @throws IOException b³±d przy zamykaniu po³±czenia
      */
     public void disconnect() throws IOException {
-        changeStatus(new Status(Status.OFF_LINE));
+        setStatus(new Status(Status.OFF_LINE));
         connectionThread.closeConnection();
         isConnected = false;
+        if (connectionListener != null) {
+        	connectionListener.disconnected();
+        }
     }
 
     /**
@@ -109,18 +110,27 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
         }
     }
 
+    private IStatus actualStatus = new Status(Status.OFF_LINE);
     /**
      * Zmien aktualny status.<BR>
      * @param status - kolejny status
      * @throws IOException {@inheritDoc}
      */
-    public void changeStatus(IStatus status) throws IOException {
-        if (isConnected) {
-            GGNewStatus newStatus = new GGNewStatus(status.getStatus(), "estem");
-            connectionThread.sendPackage(newStatus);
-        }
+    public void setStatus(IStatus status) throws IOException {
+    	logger.debug("zmieniam status na "+status.toString());
+    	GGNewStatus newStatus = new GGNewStatus(status.getStatus(), "");
+        connectionThread.sendPackage(newStatus);
+        actualStatus = status;
     }
-
+    
+    /**
+     * Pobierz aktualny status.
+     * @return aktualny status
+     */
+    public IStatus getStatus() {
+    	return actualStatus;
+    }
+    
     /**
      * @see pl.mn.communicator.IConnection
      * #addMonitoredUser(pl.mn.communicator.IUser)
@@ -237,11 +247,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                 break;
 
             case GG_PACKAGE_LOGIN_OK:
-
-                if (connectionListener != null) {
-                    connectionListener.connectionEstablished();
-                }
-
                 logger.debug("Login OK");
 
                 if (monitoredUsers != null) {
@@ -250,8 +255,12 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                             (IUser[]) monitoredUsers.toArray(new IUser[0])));
                 }
 
-                changeStatus(new Status(Status.ON_LINE));
+                setStatus(new Status(Status.ON_LINE));
 
+                
+                if (connectionListener != null) {
+                    connectionListener.connectionEstablished();
+                }
                 break;
 
             case GG_PACKAGE_LOGIN_ERROR:
