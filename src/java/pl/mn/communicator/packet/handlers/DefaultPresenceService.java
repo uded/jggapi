@@ -49,7 +49,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.9 2004-12-21 21:25:52 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.10 2004-12-26 22:19:56 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
@@ -78,7 +78,7 @@ public class DefaultPresenceService implements IPresenceService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IPresenceService#setStatus(pl.mn.communicator.IStatus)
+	 * @see pl.mn.communicator.IPresenceService#setStatus(pl.mn.communicator.ILocalStatus)
 	 */
 	public void setStatus(ILocalStatus localStatus) throws GGException {
 		if (localStatus == null) throw new NullPointerException("status cannot be null");
@@ -168,7 +168,7 @@ public class DefaultPresenceService implements IPresenceService {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IPresenceService#addUserListener(pl.mn.communicator.UserListener)
+	 * @see pl.mn.communicator.IPresenceService#addUserListener(pl.mn.communicator.event.UserListener)
 	 */
 	public void addUserListener(UserListener userListener) {
 		if (userListener == null) throw new NullPointerException("userListener cannot be null");
@@ -176,7 +176,7 @@ public class DefaultPresenceService implements IPresenceService {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IPresenceService#removeUserListener(pl.mn.communicator.UserListener)
+	 * @see pl.mn.communicator.IPresenceService#removeUserListener(pl.mn.communicator.event.UserListener)
 	 */
 	public void removeUserListener(UserListener userListener) {
 		if (userListener == null) throw new NullPointerException("userListener cannot be null");

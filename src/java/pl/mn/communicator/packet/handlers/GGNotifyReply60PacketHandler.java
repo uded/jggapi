@@ -33,14 +33,14 @@ import pl.mn.communicator.packet.in.GGNotifyReply60;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60PacketHandler.java,v 1.8 2004-12-21 21:25:51 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60PacketHandler.java,v 1.9 2004-12-26 22:19:56 winnetou25 Exp $
  */
 public class GGNotifyReply60PacketHandler implements PacketHandler {
 
 	private final static Log logger = LogFactory.getLog(GGNotifyReply60PacketHandler.class);
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.handlers.Context)
 	 */
 	public void handle(Context context) {
 		if (logger.isDebugEnabled()) {

@@ -21,10 +21,15 @@ package pl.mn.communicator.packet.handlers;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PacketHandler.java,v 1.5 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: PacketHandler.java,v 1.6 2004-12-26 22:19:56 winnetou25 Exp $
  */
 public interface PacketHandler {
 
+	/**
+	 * Handles an incoming Gadu-Gadu packet.
+	 * 
+	 * @param context
+	 */
 	void handle(Context context);
 	
 }

@@ -40,7 +40,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.10 2004-12-25 17:35:23 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.11 2004-12-26 22:19:56 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -58,7 +58,7 @@ public class DefaultLoginService implements ILoginService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.ILoginService#login(pl.mn.communicator.LoginContext)
+	 * @see pl.mn.communicator.ILoginService#login()
 	 */
 	public void login() throws GGException {
 		if (m_session.getSessionState() != SessionState.AUTHENTICATION_AWAITING) {
@@ -124,7 +124,7 @@ public class DefaultLoginService implements ILoginService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.ILoginService#addLoginListener(pl.mn.communicator.LoginListener)
+	 * @see pl.mn.communicator.ILoginService#addLoginListener(pl.mn.communicator.event.LoginListener)
 	 */
 	public void addLoginListener(LoginListener loginListener) {
 		if (loginListener == null) throw new NullPointerException("loginListener cannot be null");
@@ -132,7 +132,7 @@ public class DefaultLoginService implements ILoginService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.ILoginService#removeLoginListener(pl.mn.communicator.LoginListener)
+	 * @see pl.mn.communicator.ILoginService#removeLoginListener(pl.mn.communicator.event.LoginListener)
 	 */
 	public void removeLoginListener(LoginListener loginListener) {
 		if (loginListener == null) throw new NullPointerException("loginListener cannot  be null");

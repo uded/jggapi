@@ -37,7 +37,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.17 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.18 2004-12-26 22:19:56 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -52,7 +52,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IPublicDirectoryService#search(pl.mn.communicator.PublicDirQuery)
+	 * @see pl.mn.communicator.IPublicDirectoryService#search(pl.mn.communicator.PublicDirSearchQuery)
 	 */
 	public void search(PublicDirSearchQuery publicDirQuery) throws GGException {
 		if (publicDirQuery == null) throw new NullPointerException("publicDirQuery cannot be null");
@@ -79,7 +79,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IPublicDirectoryService#write()
+	 * @see pl.mn.communicator.IPublicDirectoryService#writeToPublicDirectory(pl.mn.communicator.PersonalInfo)
 	 */
 	public void writeToPublicDirectory(PersonalInfo publicDirInfo) throws GGException {
 		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
@@ -99,7 +99,10 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		if (publicDirListener == null) throw new NullPointerException("publicDirListener cannot be null");
 		m_directoryListeners.add(publicDirListener);
 	}
-	
+
+	/**
+	 * @see pl.mn.communicator.IPublicDirectoryService#removePublicDirListener(pl.mn.communicator.event.PublicDirListener)
+	 */
 	public void removePublicDirListener(PublicDirListener publicDirListener) {
 		if (publicDirListener == null) throw new NullPointerException("pubDirListener cannot be null");
 		m_directoryListeners.remove(publicDirListener);

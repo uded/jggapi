@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.9 2004-12-25 17:33:21 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.10 2004-12-26 22:19:56 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -112,7 +112,7 @@ public class DefaultConnectionService implements IConnectionService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IConnectionService#addConnectionListener(pl.mn.communicator.ConnectionListener)
+	 * @see pl.mn.communicator.IConnectionService#addConnectionListener(pl.mn.communicator.event.ConnectionListener)
 	 */
 	public void addConnectionListener(ConnectionListener connectionListener) {
 		if (connectionListener == null) throw new NullPointerException("connectionListener cannot be null");
@@ -120,7 +120,7 @@ public class DefaultConnectionService implements IConnectionService {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IConnectionService#removeConnectionListener(pl.mn.communicator.ConnectionListener)
+	 * @see pl.mn.communicator.IConnectionService#removeConnectionListener(pl.mn.communicator.event.ConnectionListener)
 	 */
 	public void removeConnectionListener(ConnectionListener connectionListener) {
 		if (connectionListener == null) throw new NullPointerException("connectionListener cannot be null");
@@ -128,7 +128,7 @@ public class DefaultConnectionService implements IConnectionService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IConnectionService#addPacketListener(pl.mn.communicator.GGPacketListener)
+	 * @see pl.mn.communicator.IConnectionService#addPacketListener(pl.mn.communicator.event.GGPacketListener)
 	 */
 	public void addPacketListener(GGPacketListener packetListener) {
 		if (packetListener == null) throw new NullPointerException("packetListener cannot be null");
@@ -136,7 +136,7 @@ public class DefaultConnectionService implements IConnectionService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IConnectionService#removePacketListener(pl.mn.communicator.GGPacketListener)
+	 * @see pl.mn.communicator.IConnectionService#removePacketListener(pl.mn.communicator.event.GGPacketListener)
 	 */
 	public void removePacketListener(GGPacketListener packetListener) {
 		if (packetListener == null) throw new NullPointerException("packetListener cannot be null");

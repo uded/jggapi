@@ -27,14 +27,14 @@ import pl.mn.communicator.packet.in.GGPong;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPongPacketHandler.java,v 1.6 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: GGPongPacketHandler.java,v 1.7 2004-12-26 22:19:56 winnetou25 Exp $
  */
 public class GGPongPacketHandler implements PacketHandler {
 
 	private final static Log logger = LogFactory.getLog(GGPongPacketHandler.class);
 
 	/**
-	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.handlers.Context)
 	 */
 	public void handle(Context context) {
 		if (logger.isDebugEnabled()) {

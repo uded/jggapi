@@ -38,7 +38,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.9 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.10 2004-12-26 22:19:56 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
@@ -67,7 +67,7 @@ public class DefaultMessageService implements IMessageService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IMessageService#addMessageListener(pl.mn.communicator.MessageListener)
+	 * @see pl.mn.communicator.IMessageService#addMessageListener(pl.mn.communicator.event.MessageListener)
 	 */
 	public void addMessageListener(MessageListener messageListener) {
 		if (messageListener == null) throw new NullPointerException("messageListener cannot be null");
@@ -75,7 +75,7 @@ public class DefaultMessageService implements IMessageService {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IMessageService#removeMessageListener(pl.mn.communicator.MessageListener)
+	 * @see pl.mn.communicator.IMessageService#removeMessageListener(pl.mn.communicator.event.MessageListener)
 	 */
 	public void removeMessageListener(MessageListener messageListener) {
 		if (messageListener == null) throw new NullPointerException("messageListener cannot be null");
