@@ -17,24 +17,40 @@
  */
 package pl.mn.communicator;
 
+import java.util.Date;
+
 import pl.mn.communicator.event.LoginListener;
 
 /**
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ILoginService.java,v 1.5 2004-12-13 23:43:53 winnetou25 Exp $
+ * @version $Id: ILoginService.java,v 1.6 2004-12-14 20:10:50 winnetou25 Exp $
  */
 public interface ILoginService {
 
 	/**
-	 * Login user to currently connected server.
+	 * Logins user to currently connected server.
 	 * 
 	 * @throws GGException if an error occurs while logging in.
 	 */
 	void login() throws GGException;
+
+	/**
+	 * Logs out user from the server we are currently conneced.
+	 * 
+	 * @throws GGException if there is an error while logging out.
+	 */
 	void logout() throws GGException;
-	void logout(String description) throws GGException;
+	
+	/**
+	 * Logs out user and sets the description.
+	 * Description cannot be null, but the second parameter the returnTime can
+	 * be null.
+	 * @param description
+	 * @throws GGException
+	 */
+	void logout(String description, Date returnTime) throws GGException;
 	void addLoginListener(LoginListener loginListener);
 	void removeLoginListener(LoginListener loginListener);
 	

@@ -18,6 +18,7 @@
 package pl.mn.communicator.packet.handlers;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -35,7 +36,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.2 2004-12-14 19:49:05 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.3 2004-12-14 20:10:49 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -86,14 +87,17 @@ public class DefaultLoginService implements ILoginService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.ILoginService#logout(java.lang.String)
+	 * @see pl.mn.communicator.ILoginService#logout(java.lang.String, java.util.Date returnTime)
 	 */
-	public void logout(String description) throws GGException {
+	public void logout(String description, Date returnTime) throws GGException {
 		if (description == null) throw new NullPointerException("description cannot be null");
 		checkSessionState();
 		if (description.length() > 0) {
 			Status localStatus = new Status(StatusType.OFFLINE_WITH_DESCRIPTION);
 			localStatus.setDescription(description);
+			if (returnTime != null) {
+				localStatus.setReturnDate(returnTime);
+			}
 			m_session.getPresenceService().setStatus(localStatus);
 			m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
 		}
@@ -129,12 +133,8 @@ public class DefaultLoginService implements ILoginService {
 		}
 	}
 	
-	//TODO sprawdzic czy przy zlym zalogowaniu mozna sie jeszcze raz zalogowac czy juz jest po sesji
-	//i trzeba sie rozlaczyc
-	//jezeli tak to service ConnectionListener moglby miec LoginHandler na loginFailed event
-	//i jezeli takowy sie zdarzy wtedy od razu wywolac disconnect metode.
 	protected void notifyLoginFailed() {
-		m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
+		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 		for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {
 			LoginListener loginListener = (LoginListener) it.next();
 			loginListener.loginFailed();

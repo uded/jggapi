@@ -1,5 +1,5 @@
 Features:
-1. HIGH - Implementacja monitorowania uzytkownikow i zmiany statusu uzytkownikow.
+PARTIALY-DONE-1. HIGH - Implementacja monitorowania uzytkownikow i zmiany statusu uzytkownikow.
 2. HIGH - Implementacja trybu tylko dla przyjaciol
 3. HIGH - implementacja szukania i klasy LocalUser, SearchContext
 4. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
@@ -11,7 +11,6 @@ PARTIALY-DONE - 7. MED - Export i import listy kontaktow , TODO. obsluga PUT_MOR
 10. Rozwazyc wprodzadzenie SessionState.SESSION_INVALID, ktory bylby ustawiany jezeli nie udalo sie nam zalogowac.
 11. Czy interval pingowania powinien byc konfiguralny?
 12. Do monitorowanych uzytkownikow chyba lepiej przekazywac LocalUsers, ale wtedy moze byc problem z blokowanymi.
-14. Wrzucic do interfejsu IStatus metody z IStatus60.
 15. Dodac na starcie liste uzytkownikow do zablokowania. Wrzucic to do LoginContext, czy nazwa
 	monitored user w przypadku zablokowanych ma sens?
 
@@ -20,6 +19,9 @@ PARTIALY-DONE - 7. MED - Export i import listy kontaktow , TODO. obsluga PUT_MOR
 
 17. Napisac ant-build.
 18. Napisac testy junit.
+19. RemoteIP jest zle konwertowane do IP. O co chodzi?
+20.	Dzisiaj nie potrafimy monitorowac wiecej niz 2040 bytes long uzytkownikow. Jezeli taki jest pakiet
+	trzeba uzywac GG_Request_First i potem  GG_Request_last a my dzisiaj tylko GG_request_last pakietu uzywamy.
 
 Bugs:
 status in LoginContext does not work out! Tak jakby serwer GG to ignorowal

@@ -44,7 +44,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.2 2004-12-14 20:10:49 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -68,8 +68,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void connect() throws GGException {
 		if ((m_session.getSessionState() == SessionState.CONNECTION_AWAITING)
-				|| (m_session.getSessionState() == SessionState.DISCONNECTED)
-				|| (m_session.getSessionState() == SessionState.CONNECTION_ERROR)) {
+				|| (m_session.getSessionState() == SessionState.DISCONNECTED)) {
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
 			try {
 				m_connectionThread.openConnection();
@@ -89,7 +88,8 @@ public class DefaultConnectionService implements IConnectionService {
 	public void disconnect() {
 		if ((m_session.getSessionState() == SessionState.CONNECTED)
 				|| (m_session.getSessionState() == SessionState.LOGGED_IN)
-				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)) {
+				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)
+				|| (m_session.getSessionState() == SessionState.CONNECTION_ERROR)) {
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 			try {
 				m_connectionThread.closeConnection();
@@ -170,7 +170,7 @@ public class DefaultConnectionService implements IConnectionService {
     	try {
         	m_connectionThread.closeConnection();
     	} catch (IOException e) {
-    		e.printStackTrace();
+    		logger.error("Unable to close connection: "+e);
     	} finally {
         	m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
     	}

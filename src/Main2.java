@@ -45,7 +45,7 @@ public class Main2 {
 		users.add(user1);
 		users.add(user2);
 		
-		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
+		final LoginContext loginContext = new LoginContext(1336843, "dupa");
 		loginContext.setMonitoredUsers(users);
 		
 		IStatus status = loginContext.getStatus();
@@ -57,12 +57,6 @@ public class Main2 {
 
 			public void connectionEstablished() {
 				System.out.println("Connection established.");
-				try {
-					session.getLoginService().login();
-				} catch (GGException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 
 			public void connectionClosed() {
@@ -128,7 +122,14 @@ public class Main2 {
 			
 		});
 
-		session.getConnectionService().connect();
+ 		session.getConnectionService().connect();
+		session.getLoginService().login();
+		
+		session.getConnectionService().disconnect();
+
+//		loginContext.setPassword("dupadupa");
+//		session.getLoginService().login();
+		
 //		IStatus status = session.getPresenceService().getStatus();
 //		status.setFriendsOnly(true);
 //		session.getPresenceService().setStatus(status);
@@ -154,10 +155,10 @@ public class Main2 {
 //		session.getContactListService().exportContacts(localUsers);
 //		session.getContactListService().importContacts();
 		
-		GGUser user3 = new GGUser(2944956, GGUserMode.BUDDY);
-		session.getPresenceService().addMonitoredUser(user3);
-
-		session.getPresenceService().removeMonitoredUser(user1);
+//		GGUser user3 = new GGUser(2944956, GGUserMode.BUDDY);
+//		session.getPresenceService().addMonitoredUser(user3);
+//
+//		session.getPresenceService().removeMonitoredUser(user1);
 		
 //		IUser user2 = new GGUser(2040781, GGUserMode.BUDDY);
 //		session.getPresenceService().addMonitoredUser(user2);
