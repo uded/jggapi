@@ -1,7 +1,5 @@
 package pl.mn.communicator.gadu.test;
 
-import java.io.IOException;
-
 import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
@@ -12,43 +10,42 @@ import pl.mn.communicator.gadu.Connection;
 import pl.mn.communicator.gadu.LocalUser;
 import pl.mn.communicator.gadu.Server;
 
+import java.io.IOException;
+
+
 /**
  * @author mnaglik
  */
 public class ConnectionTest extends TestCase {
-	IConnection connection;
-	private static Logger log = Logger.getLogger(ConnectionTest.class);
+    private static Logger log = Logger.getLogger(ConnectionTest.class);
+    IConnection connection;
 
-	public void testConnect() throws IOException {
-	}
+    public void testConnect() throws IOException {
+    }
 
-	public void testSendMessage() throws IOException {
-		LocalUser user = new LocalUser(1336843,"dupadupa");
-		Server server = Server.getDefaultServer(user);
-		
-		log.info(server.getAddress()+":"+server.getPort());
-		
-		connection = new Connection(server,user);
-		connection.addConnectionListener(new ConnectionListener() {
+    public void testSendMessage() throws IOException {
+        LocalUser user = new LocalUser(1336843, "dupadupa");
+        Server server = Server.getDefaultServer(user);
 
-			public void connectionEstablished() {
-				log.info("connection established");
-			}
+        log.info(server.getAddress() + ":" + server.getPort());
 
-			public void disconnected() {
-                log.info("disconnected");
-			}
+        connection = new Connection(server, user);
+        connection.addConnectionListener(new ConnectionListener() {
+                public void connectionEstablished() {
+                    log.info("connection established");
+                }
 
-			public void connectionError(String error) {
-                log.info("connection error: "+error);
-			}
-            
-        });
+                public void disconnected() {
+                    log.info("disconnected");
+                }
+
+                public void connectionError(String error) {
+                    log.info("connection error: " + error);
+                }
+            });
         connection.connect();
-	}
+    }
 
-	public void testDisconnect() throws IOException {
-	}
-
-
+    public void testDisconnect() throws IOException {
+    }
 }
