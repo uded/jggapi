@@ -5,6 +5,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.Collection;
 
 import org.apache.log4j.Logger;
 
@@ -12,6 +13,7 @@ import pl.mn.communicator.ILocalUser;
 import pl.mn.communicator.IMessage;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IUser;
 import pl.mn.communicator.gadu.util.Util;
 
 
@@ -262,6 +264,30 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 			dataOutput = null;
 			socket.close();
 		}
+	}
+
+	/**
+	 * @see pl.mn.communicator.IConnection#sendMonitoredUserList(java.util.Collection)
+	 */
+	public void sendMonitoredUserList(Collection userList) {
+		// TODO implement sendMonitoredUserList
+		logger.error("nie zaimplementowano");
+	}
+
+	/**
+	 * @see pl.mn.communicator.IConnection#addMonitoredUser(pl.mn.communicator.IUser)
+	 */
+	public void addMonitoredUser(IUser user) {
+		// TODO implement addMonitoredUser
+		logger.error("nie zaimplementowano");
+	}
+
+	/**
+	 * @see pl.mn.communicator.IConnection#removeMonitoredUser(pl.mn.communicator.IUser)
+	 */
+	public void removeMonitoredUser(IUser user) {
+		// TODO implement removeMonitoredUser
+		logger.error("nie zaimplementowano");
 	}
 
 }

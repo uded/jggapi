@@ -2,6 +2,7 @@ package pl.mn.communicator;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.util.Collection;
 
 /**
  * Po³¹czenie z serwerem gg.<BR>
@@ -101,4 +102,28 @@ public interface IConnection {
 	 */
 	public void changeStatus(IStatus status)
 		throws IOException;
+
+	/**
+	 * Wyœlij listê monitorowanych u¿ytkowników.<br>
+	 * Lista zawiera u¿ytkowników dla których serwer
+	 * przesy³a informacje o zmianie statusu
+	 * @param userList
+	 */
+	public void sendMonitoredUserList(Collection userList);
+	
+	/**
+	 * Dodaj u¿ytkownika dla którego do u¿ytkowników monitorowanych.<br>
+	 * Dla dodanego u¿ytkownika bêdzie przesy³ana informacja o zmianie
+	 * statusu.
+	 * @param user
+	 */
+	public void addMonitoredUser(IUser user);
+	
+	/**
+	 * Usuñ u¿ytkownika z listy u¿ytkowników monitorowanych.<br>
+	 * Dla podanego u¿ytkownika nie bêdzie przesy³ana informacja
+	 * o zmianie statusu.
+	 * @param user
+	 */
+	public void removeMonitoredUser(IUser user);
 }
