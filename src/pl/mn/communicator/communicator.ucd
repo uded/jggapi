@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<editmodel:ClassDiagramEditModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:editmodel="editmodel.xmi" size="494,1498" id="gremlinmnaplmncommunicatorgui0" metadata="nsuml-1.4" initialized="true" showWireOptions="1">
+  <children xsi:type="editmodel:InterfaceEditModel" location="292,622" size="100,92" id="gremlinmnaplmncommunicatorgui82" runTimeClassModel="gremlinmnaplmncommunicatorgui84;gremlinmnaplmncommunicatorgui87">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="80,32">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui84"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui87"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" connectionRouterKind="Manual" source="//@children.0" target="//@children.10" targetEnd="//@children.0/@sourceConnections.0/@children.1" sourceEnd="//@children.0/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,12" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="170,166"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="407,522" size="149,108" id="gremlinmnaplmncommunicatorgui91" runTimeClassModel="gremlinmnaplmncommunicatorgui93;gremlinmnaplmncommunicatorgui95;gremlinmnaplmncommunicatorgui97">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="129,48">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui97"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui93"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui95"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" connectionRouterKind="Manual" source="//@children.1" target="//@children.10" targetEnd="//@children.1/@sourceConnections.0/@children.1" sourceEnd="//@children.1/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,18" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="170,150"/>
+      <bendpoints secondRelativeDimension="202,81" firstRelativeDimension="-142,-38"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="571,477" size="127,76" id="gremlinmnaplmncommunicatorgui174" runTimeClassModel="gremlinmnaplmncommunicatorgui363">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="101,16">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui363"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:DependencyEditModel" connectionRouterKind="Manual" source="//@children.2" target="//@children.10" targetEnd="//@children.2/@sourceConnections.0/@children.1" sourceEnd="//@children.2/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" location="0,30" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel" location="170,168"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="429,52" size="106,124" targetConnections="//@children.4/@sourceConnections.0" id="gremlinmnaplmncommunicatorgui322" runTimeClassModel="gremlinmnaplmncommunicatorgui328;gremlinmnaplmncommunicatorgui326;gremlinmnaplmncommunicatorgui331;gremlinmnaplmncommunicatorgui324">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="86,64">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui324"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui326"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui328"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui331"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" location="416,226" size="133,126" id="gremlinmnaplmncommunicatorgui337" runTimeClassModel="gremlinmnaplmncommunicatorgui341;gremlinmnaplmncommunicatorgui348;gremlinmnaplmncommunicatorgui346;gremlinmnaplmncommunicatorgui340;gremlinmnaplmncommunicatorgui342;gremlinmnaplmncommunicatorgui353;gremlinmnaplmncommunicatorgui338;gremlinmnaplmncommunicatorgui350">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="112,80">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui342"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui346"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui348"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui350"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui353"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" connectionRouterKind="Manual" source="//@children.4" target="//@children.3" targetEnd="//@children.4/@sourceConnections.0/@children.1" sourceEnd="//@children.4/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="796,47" size="98,124" targetConnections="//@children.6/@sourceConnections.0" id="gremlinmnaplmncommunicatorgui277" runTimeClassModel="gremlinmnaplmncommunicatorgui286;gremlinmnaplmncommunicatorgui279;gremlinmnaplmncommunicatorgui281;gremlinmnaplmncommunicatorgui283">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="78,64">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui279"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui281"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui283"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui286"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" location="787,221" size="116,142" id="gremlinmnaplmncommunicatorgui292" runTimeClassModel="gremlinmnaplmncommunicatorgui297;gremlinmnaplmncommunicatorgui303;gremlinmnaplmncommunicatorgui301;gremlinmnaplmncommunicatorgui296;gremlinmnaplmncommunicatorgui305;gremlinmnaplmncommunicatorgui307;gremlinmnaplmncommunicatorgui293;gremlinmnaplmncommunicatorgui310;gremlinmnaplmncommunicatorgui295">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="96,96">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui297"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui301"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui303"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui307"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui310"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui305"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" connectionRouterKind="Manual" source="//@children.6" target="//@children.5" targetEnd="//@children.6/@sourceConnections.0/@children.1" sourceEnd="//@children.6/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="624,49" size="80,124" targetConnections="//@children.8/@sourceConnections.0" id="gremlinmnaplmncommunicatorgui185" runTimeClassModel="gremlinmnaplmncommunicatorgui245;gremlinmnaplmncommunicatorgui242;gremlinmnaplmncommunicatorgui240;gremlinmnaplmncommunicatorgui238">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="59,64">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui240"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui238"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui242"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui245"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" location="601,223" size="127,126" id="gremlinmnaplmncommunicatorgui251" runTimeClassModel="gremlinmnaplmncommunicatorgui267;gremlinmnaplmncommunicatorgui256;gremlinmnaplmncommunicatorgui264;gremlinmnaplmncommunicatorgui254;gremlinmnaplmncommunicatorgui260;gremlinmnaplmncommunicatorgui252;gremlinmnaplmncommunicatorgui255;gremlinmnaplmncommunicatorgui262">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="107,80">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui256"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui262"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui260"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui264"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui267"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" connectionRouterKind="Manual" source="//@children.8" target="//@children.7" targetEnd="//@children.8/@sourceConnections.0/@children.1" sourceEnd="//@children.8/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" location="52,617" size="170,142" id="gremlinmnaplmncommunicatorgui203" runTimeClassModel="gremlinmnaplmncommunicatorgui225;gremlinmnaplmncommunicatorgui210;gremlinmnaplmncommunicatorgui204;gremlinmnaplmncommunicatorgui215;gremlinmnaplmncommunicatorgui217;gremlinmnaplmncommunicatorgui206;gremlinmnaplmncommunicatorgui222;gremlinmnaplmncommunicatorgui208;gremlinmnaplmncommunicatorgui220;gremlinmnaplmncommunicatorgui212">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="150,96">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui217"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui222"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui212"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui220"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui225"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui215"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" connectionRouterKind="Manual" source="//@children.9" target="//@children.10" targetEnd="//@children.9/@sourceConnections.0/@children.1" sourceEnd="//@children.9/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="52,347" size="170,220" targetConnections="//@children.9/@sourceConnections.0 //@children.1/@sourceConnections.0 //@children.2/@sourceConnections.0 //@children.0/@sourceConnections.0" id="gremlinmnaplmncommunicatorgui161" runTimeClassModel="gremlinmnaplmncommunicatorgui171;gremlinmnaplmncommunicatorgui178;gremlinmnaplmncommunicatorgui189;gremlinmnaplmncommunicatorgui173;gremlinmnaplmncommunicatorgui180;gremlinmnaplmncommunicatorgui182;gremlinmnaplmncommunicatorgui168;gremlinmnaplmncommunicatorgui163;gremlinmnaplmncommunicatorgui184;gremlinmnaplmncommunicatorgui166">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="150,160">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui168"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui173"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui163"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui189"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui180"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui182"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui171"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui178"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui166"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui184"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="930,43" size="141,108" targetConnections="//@children.12/@sourceConnections.0" id="gremlinmnaplmncommunicatorgui103" runTimeClassModel="gremlinmnaplmncommunicatorgui111;gremlinmnaplmncommunicatorgui105;gremlinmnaplmncommunicatorgui109;gremlinmnaplmncommunicatorgui107;gremlinmnaplmncommunicatorgui114">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="121,48">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui114"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui109"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui111"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" location="930,201" size="141,110" id="gremlinmnaplmncommunicatorgui122" runTimeClassModel="gremlinmnaplmncommunicatorgui131;gremlinmnaplmncommunicatorgui126;gremlinmnaplmncommunicatorgui125;gremlinmnaplmncommunicatorgui134;gremlinmnaplmncommunicatorgui123;gremlinmnaplmncommunicatorgui129">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="121,64">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui126"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui134"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui129"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui131"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" connectionRouterKind="Manual" source="//@children.12" target="//@children.11" targetEnd="//@children.12/@sourceConnections.0/@children.1" sourceEnd="//@children.12/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:InterfaceEditModel" location="277,50" size="93,156" targetConnections="//@children.14/@sourceConnections.0" id="gremlinmnaplmncommunicatorgui1" runTimeClassModel="gremlinmnaplmncommunicatorgui3;gremlinmnaplmncommunicatorgui7;gremlinmnaplmncommunicatorgui9;gremlinmnaplmncommunicatorgui12;gremlinmnaplmncommunicatorgui17;gremlinmnaplmncommunicatorgui15">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="73,96">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui3"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui7"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui15"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui9"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui12"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui17"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <children xsi:type="editmodel:ClassEditModel" location="270,256" size="106,206" id="gremlinmnaplmncommunicatorgui23" runTimeClassModel="gremlinmnaplmncommunicatorgui36;gremlinmnaplmncommunicatorgui40;gremlinmnaplmncommunicatorgui29;gremlinmnaplmncommunicatorgui51;gremlinmnaplmncommunicatorgui38;gremlinmnaplmncommunicatorgui31;gremlinmnaplmncommunicatorgui55;gremlinmnaplmncommunicatorgui46;gremlinmnaplmncommunicatorgui30;gremlinmnaplmncommunicatorgui48;gremlinmnaplmncommunicatorgui24;gremlinmnaplmncommunicatorgui28;gremlinmnaplmncommunicatorgui43;gremlinmnaplmncommunicatorgui57">
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <children xsi:type="editmodel:CompartmentEditModel" size="86,160">
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui31"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui51"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui36"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui38"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui55"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui46"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui40"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui43"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui48"/>
+      <children xsi:type="editmodel:MethodEditModel" id="gremlinmnaplmncommunicatorgui57"/>
+    </children>
+    <children xsi:type="editmodel:CompartmentEditModel"/>
+    <sourceConnections xsi:type="editmodel:GeneralizationEditModel" connectionRouterKind="Manual" source="//@children.14" target="//@children.13" targetEnd="//@children.14/@sourceConnections.0/@children.1" sourceEnd="//@children.14/@sourceConnections.0/@children.0">
+      <children xsi:type="editmodel:AssociationEndEditModel" attachSource="true"/>
+      <children xsi:type="editmodel:AssociationEndEditModel"/>
+    </sourceConnections>
+    <classifierPreferences xsi:type="editmodel:UMLClassDiagramClassifierPreference" showStereotype="true" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true"/>
+  </children>
+  <classDiagramPreferences xsi:type="editmodel:UMLClassDiagramPreference" attributeSorter="Natural" methodSorter="Natural" innerClassSorter="Natural" showPublicAttributes="true" showPackageAttributes="true" showPublicMethods="true" showPackageMethods="true" showPublicInnerClasses="true" showPackageInnerClasses="true" showInterfaceStereotype="true" showClassStereotype="true" showPackageStereotype="true"/>
+</editmodel:ClassDiagramEditModel>
