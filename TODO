@@ -12,9 +12,17 @@ PRIORITY
 OK - implementacja GGNotify 
 NOW - implementacja GGNotifyReply
 - implementacja GGListEmpty
+- implementacja dodanie do monitorowania,
+  usuniecia z monitorowania
+  reakcji na zmiane statusu uzytkownika
+- pooprawienie pinga
 - statusy z opisem i czasem powrotu
 - implementacja importu i eksportu uzytkownikow
 - implementacja katalogu publicznego (wyszukiwania)
+- wprowadzenie wzorca chain of responsibility w rozpoznawaniu
+  pakietow i rozszerzenie interfejsu IncomingPackage o getType
+- moze zlozona notyfikacja o statusie uzytkownikow po zalogowaniu
+  zamiast informacji dla kazdego uzytkownika osobno
 
 INNE
 ----
@@ -22,5 +30,3 @@ z user usuwam online/ofline
 bedzie to trzymane po stronie aplikacji tak samo jak
 statusy z opisem
 name tez jest usuniety - po stronie aplikacji
-
-Dodana klasa UserState opisujaca aktualny satus uzytkownika.
