@@ -36,12 +36,13 @@
             <p>
 			The new version of the library (1.0) will allow:
 				<ul>
-					<li>1. Sending and receiving messages.</li>
-					<li>2. Exporting and importing of the contact list.</li>
-					<li>3. Setting status and notification of user's changing status.</li>
-					<li>4. Notification of changing statuses.</li>
-					<li>5. Ability to read and write personal information to the public directory.</li>
-					<li>6. Possibility to search public directory based on user defined criteria.</li>
+					<li>Sending and receiving messages.</li>
+					<li>Possibility to retrieve message delivery confirmation</li>
+					<li>Exporting and importing of the contact list.</li>
+					<li>Setting status and notification of user's changing status.</li>
+					<li>Notification of changing statuses.</li>
+					<li>Ability to read and write personal information to the public directory.</li>
+					<li>Possibility to search public directory based on user defined criteria.</li>
 				</ul>
             </p>
         </section>
@@ -53,11 +54,6 @@
 				<li>
 					Initial status that is set in <code>LoginContext</code> does not work out.
 					It seems that Gadu-Gadu server is ignoring it.
-				</li>
-				<li>
-					<p>
-					The library is not yet thread safe.
-					</p>
 				</li>
 			</ul>
         </section>
