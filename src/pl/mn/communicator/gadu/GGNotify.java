@@ -20,7 +20,10 @@ package pl.mn.communicator.gadu;
 import pl.mn.communicator.IUser;
 
 /**
- * @version $Revision: 1.6 $
+ * Pakiet informuj±cy serwer rozmów o monitorowanym u¿ytkowniku.
+ * 
+ * @see pl.mn.communicator.gadu.GGNotifyReply
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 class GGNotify implements GGOutgoingPackage {

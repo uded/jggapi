@@ -22,9 +22,9 @@ import org.apache.log4j.Logger;
 import pl.mn.communicator.ILocalUser;
 
 /**
- * Wiadomosc wysylana w czasie logowania
+ * Wiadomo¶æ wysy³ana w czasie logowania.
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {

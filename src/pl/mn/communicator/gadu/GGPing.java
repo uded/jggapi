@@ -18,7 +18,9 @@
 package pl.mn.communicator.gadu;
 
 /**
- * @version $Revision: 1.3 $
+ * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
+ * 
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 class GGPing implements GGOutgoingPackage {
@@ -49,6 +51,10 @@ class GGPing implements GGOutgoingPackage {
 		return new byte[0];
 	}
 
+	/**
+	 * Pobierz instancje tego obiektu.
+	 * @return instancja <code>GGPing</code>
+	 */
 	public static GGPing getPing() {
 		return ggPing;
 	}

@@ -24,11 +24,19 @@ import pl.mn.communicator.AbstractUser;
 /**
  * U퓓tkownik gg.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public class User extends AbstractUser {
 	private static Logger logger = Logger.getLogger(User.class);
+	
+	/**
+	 * Tworz u퓓tkownika na podstawie numeru i nazwy.
+	 * 
+	 * @param number numer u퓓tkownika
+	 * @param name nazwa u퓓tkownika
+	 * @param onLine status u퓓tkownika
+	 */
 	public User(int number, String name, boolean onLine) {
 		super(number,name,onLine);
 	}
