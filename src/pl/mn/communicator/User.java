@@ -21,28 +21,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Gadu-Gadu user.
+ * The class represents Gadu-Gadu user.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: User.java,v 1.2 2004-12-11 16:25:57 winnetou25 Exp $
+ * @version $Id: User.java,v 1.3 2004-12-11 17:22:33 winnetou25 Exp $
  */
 public class User extends AbstractUser {
 	
     private static Log logger = LogFactory.getLog(User.class);
 
-    /**
-     * Tworz u¿ytkownika na podstawie numeru i nazwy.
-     * @param number numer u¿ytkownika
-     */
-    public User(int number) {
-        super(number);
+    public User(int uin) {
+        super(uin);
     }
 
     /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return "Number: " + number;
+        return "Uin: " + m_uin;
     }
     
 }

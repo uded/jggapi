@@ -25,7 +25,7 @@ import pl.mn.communicator.gadu.GGUtils;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncommingMessage.java,v 1.1 2004-12-11 16:25:57 winnetou25 Exp $
+ * @version $Id: IncommingMessage.java,v 1.2 2004-12-11 17:22:33 winnetou25 Exp $
  */
 public class IncommingMessage extends AbstractMessage {
 
@@ -36,8 +36,8 @@ public class IncommingMessage extends AbstractMessage {
 	 * @param toUser
 	 * @param text
 	 */
-	public IncommingMessage(int fromUser, String text, int messageID, long messageDate, int protocolMessageClass) {
-		super(fromUser, text, GGUtils.getClientMessageClass(protocolMessageClass));
+	public IncommingMessage(int uin, String text, int messageID, long messageDate, int protocolMessageClass) {
+		super(uin, text, GGUtils.getClientMessageClass(protocolMessageClass));
 		m_messageDate = new Date(messageDate);
 		m_messageID = messageID;
 	}

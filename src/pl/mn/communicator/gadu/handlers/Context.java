@@ -1,8 +1,19 @@
 /*
- * Created on 2004-11-27
+ * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 package pl.mn.communicator.gadu.handlers;
 
@@ -10,6 +21,8 @@ import pl.mn.communicator.gadu.GGHeader;
 import pl.mn.communicator.gadu.handlers.Session.SessionAccessor;
 
 /**
+ * Created on 2004-11-27
+ * 
  * @author mateusz
  *
  * TODO To change the template for this generated type comment go to
@@ -17,9 +30,9 @@ import pl.mn.communicator.gadu.handlers.Session.SessionAccessor;
  */
 public class Context {
 
-	private Session m_session;
-	private GGHeader m_header;
-	private byte[] m_packageContent;
+	private Session m_session = null;
+	private GGHeader m_header = null;
+	private byte[] m_packageContent = null;
 	
 	public Context(Session session, GGHeader header, byte[] packageContent) {
 		if (packageContent == null) throw new NullPointerException("packageContent cannot be null");

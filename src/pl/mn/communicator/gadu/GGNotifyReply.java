@@ -28,13 +28,11 @@ import pl.mn.communicator.IStatus;
 import pl.mn.communicator.User;
 
 /**
- * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
- * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.20 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGNotifyReply.java,v 1.21 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGNotifyReply implements GGIncomingPackage {
 
@@ -46,11 +44,11 @@ public class GGNotifyReply implements GGIncomingPackage {
     private Map m_statuses = new HashMap();
 
     /**
-     * Tworz pakiet odpowiedzi na listê u¿ytkonwików dostêpnych.
+     * Tworz pakiet odpowiedzi na listï¿½ uï¿½ytkonwikï¿½w dostï¿½pnych.
      * @param m_data dane do utworzenia pakietu
      */
     public GGNotifyReply(byte[] data) {
-        logger.debug("Pakiet zmiany stanu u¿ytkownika");
+        logger.debug("Pakiet zmiany stanu uï¿½ytkownika");
         m_data = data;
         analize();
     }
@@ -60,9 +58,9 @@ public class GGNotifyReply implements GGIncomingPackage {
     }
     
     /**
-     * Zwróc mapê statusów u¿ytkowników.
-     * Kluczem jest <code>User</code> a warto¶ci± <code>Status</code>.
-     * @return statusy u¿ytkowników
+     * Zwrï¿½c mapï¿½ statusï¿½w uï¿½ytkownikï¿½w.
+     * Kluczem jest <code>User</code> a wartoï¿½ciï¿½ <code>Status</code>.
+     * @return statusy uï¿½ytkownikï¿½w
      */
     public Map getUsersStatus() {
         return m_statuses;
@@ -82,7 +80,7 @@ public class GGNotifyReply implements GGIncomingPackage {
             logger.debug("Nr usera zmieniajacego status: " + nr);
 
             int status = GGUtils.unsignedByteToInt(m_data[przesuniecie + 4]);
-            logger.debug("Status u¿ytkownika to: " + status);
+            logger.debug("Status uï¿½ytkownika to: " + status);
 
             // dla statusow opisowych pobierz opis
             String description = null;
@@ -94,7 +92,7 @@ public class GGNotifyReply implements GGIncomingPackage {
                     (status == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
                 int descriptionSize = GGUtils.unsignedByteToInt(m_data[przesuniecie + 14]);
 
-                logger.debug("U¿ytkownik ma status opisowy o dlugosci " +
+                logger.debug("Uï¿½ytkownik ma status opisowy o dlugosci " +
                     descriptionSize);
 
                 boolean jestCzas = m_data[(przesuniecie + 15 + descriptionSize) - 5] == 0;
@@ -126,7 +124,7 @@ public class GGNotifyReply implements GGIncomingPackage {
                     przesuniecie += 5;
                 }
             } else {
-                logger.debug("U¿ytkownik NIE ma statusu opisowego");
+                logger.debug("Uï¿½ytkownik NIE ma statusu opisowego");
                 przesuniecie += 14; // pakiet bez opisu ma dlugosc 14 bajtow
             }
             

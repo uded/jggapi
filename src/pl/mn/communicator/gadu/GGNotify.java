@@ -20,50 +20,38 @@ package pl.mn.communicator.gadu;
 import pl.mn.communicator.IUser;
 
 /**
- * Pakiet informuj±cy serwer rozmów o monitorowanym u¿ytkowniku.
- * Zawiera do 409 struktur jak poni¿ej:
  * 
  *  struct gg_notify {
  *      int uin;    // numerek danej osoby
- *      char type;  // rodzaj u¿ytkownika
+ *      char type;  // rodzaj uï¿½ytkownika
  *     };
  *
  * @see pl.mn.communicator.gadu.GGNotifyReply
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotify.java,v 1.13 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGNotify.java,v 1.14 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGNotify implements GGOutgoingPackage {
 	
 	public static final int GG_NOTIFY = 0x10;
 
-    /** U¿ytkownik dla którego bêdziemy niedostêpni */
     public static final int GG_USER_OFFLINE = 0x01;
 
-    /** Zwyk³y u¿ytkownik w naszej li¶cie kontaktów */
     public static final int GG_USER_NORMAL = 0x03;
 
-    /** U¿ytkownik, którego wiadomo¶ci nie chcemy otrzymywaæ */
     public static final int GG_USER_BLOCKED = 0x04;
     
-    private IUser[] users;
+    private IUser[] m_users;
 
-    /**
-     * Tworzy pakiet <code>GGNotify</code> na podstawie listy u¿ytkowników.
-     * @param users lista u¿ytkowników
-     */
     public GGNotify(IUser[] users) {
-        this.users = users;
+        if (users == null) throw new NullPointerException("users cannot be null");
+    	m_users = users;
     }
 
-    /**
-     * Tworzy pakiet <code>GGNotyfy</code> na podstawie u¿ytkownika.
-     * @param users u¿ytkownik
-     */
     GGNotify(IUser users) {
-        this.users = new IUser[1];
-        this.users[0] = users;
+        m_users = new IUser[1];
+        m_users[0] = users;
     }
 
     /**
@@ -77,7 +65,7 @@ public class GGNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        return users.length * 5;
+        return m_users.length * 5;
     }
 
     /**
@@ -85,10 +73,10 @@ public class GGNotify implements GGOutgoingPackage {
      */
     public byte[] getContents() {
         //      4 dla int'a i jeden dla char'a
-        byte[] data = new byte[users.length * 5];
+        byte[] data = new byte[m_users.length * 5];
 
-        for (int i = 0; i < users.length; i++) {
-            byte[] userNo = GGUtils.intToByte(users[i].getNumber());
+        for (int i = 0; i < m_users.length; i++) {
+            byte[] userNo = GGUtils.intToByte(m_users[i].getUin());
 
             for (int j = 0; j < userNo.length; j++) {
                 // skopiuj nr uzytkownika do data

@@ -21,13 +21,27 @@ package pl.mn.communicator.gadu;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGListEmpty.java,v 1.6 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGListEmpty.java,v 1.7 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGListEmpty implements GGOutgoingPackage {
 	
 	public static final int GG_EMPTY_LIST = 0x0012;
 	
-	private final static byte[] DATA = new byte[0];
+	private static GGListEmpty m_instance = null;
+	
+	private byte[] m_data = null;
+	
+	private GGListEmpty() {
+		m_data = new byte[0];
+		//private constructor
+	}
+	
+    public static GGListEmpty getInstance() {
+    	if (m_instance == null) {
+    		m_instance = new GGListEmpty();
+    	}
+    	return m_instance;
+    }
 	
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
@@ -40,14 +54,14 @@ public class GGListEmpty implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        return DATA.length;
+        return m_data.length;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-    	return DATA;
+    	return m_data;
     }
-
+    
 }

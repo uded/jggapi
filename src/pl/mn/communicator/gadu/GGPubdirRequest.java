@@ -18,11 +18,10 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.3 2004-10-27 00:29:47 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.4 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGPubdirRequest implements GGOutgoingPackage {
 

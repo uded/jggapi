@@ -21,12 +21,12 @@ package pl.mn.communicator.gadu;
  * Gadu-Gadu packet header.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGHeader.java,v 1.9 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGHeader.java,v 1.10 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGHeader {
 
-    private int m_type;
-    private int m_length;
+    private int m_type = -1;
+    private int m_length = -1;
 
     /**
      * Constructor for Header.

@@ -20,10 +20,9 @@ package pl.mn.communicator;
 import java.util.EventListener;
 
 /**
- * Listener zwi±zany ze zdarzeniami u¿ytkowników.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: UserListener.java,v 1.9 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: UserListener.java,v 1.10 2004-12-11 17:22:33 winnetou25 Exp $
  */
 public interface UserListener extends EventListener {
 

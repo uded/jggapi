@@ -21,6 +21,7 @@ package pl.mn.communicator.gadu;
  * Acknowledgment of successuly delivered message that is recieved from Gadu-Gadu server.
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGSendMsgAck.java,v 1.3 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGSendMsgAck implements GGIncomingPackage {
 

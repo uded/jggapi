@@ -25,7 +25,7 @@ import pl.mn.communicator.gadu.GGLogin;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.1 2004-12-11 16:25:57 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.2 2004-12-11 17:22:33 winnetou25 Exp $
  */
 public final class LoginContext {
 	
@@ -57,11 +57,6 @@ public final class LoginContext {
 	
     private int m_imageSize = 64;
 
-	/**
-     * Tworz u�ytkownika lokalnego.
-     * @param userNo numer u�ytkownika
-     * @param password has�o u�ytkownika
-     */
     public LoginContext(int uin, String password) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
     	if (password == null) throw new NullPointerException("password cannot be null");
@@ -69,9 +64,7 @@ public final class LoginContext {
     	m_password = password;
     }
     
-   /**
-     * Pobierz has�o u�ytkownika.<BR>
-     * Has�o jest w postaci niezaszyfrowanej.
+    /**
      * @return String password
      */
     public String getPassword() {
@@ -79,24 +72,17 @@ public final class LoginContext {
     }
 
     /**
-     * Pobierz nr u�ytkownika.
      * @return int uin
      */
     public int getUin() {
         return m_uin;
     }
 
-    /**
-     * @param password has�o do ustawienia
-     */
     public void setPassword(String password) {
     	if (password == null) throw new NullPointerException("password cannot be null");
         m_password = password;
     }
 
-    /**
-     * @param uin numer u�ytkownika do ustawienia.
-     */
     public void setUin(int uin) {
     	if (uin < 0) throw new IllegalArgumentException("userNo must be a positive number");
         m_uin = uin;

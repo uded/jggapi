@@ -23,7 +23,7 @@ package pl.mn.communicator.gadu;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcome.java,v 1.11 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGWelcome.java,v 1.12 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGWelcome implements GGIncomingPackage {
     
@@ -36,6 +36,7 @@ public class GGWelcome implements GGIncomingPackage {
      * @param data dane pakietu
      */
     public GGWelcome(byte[] data) {
+    	if (data == null) throw new NullPointerException("data cannot be null");
         m_seed = GGUtils.byteToInt(data);
     }
     

@@ -21,62 +21,51 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * U¿ytkownik serwera rozmów.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractUser.java,v 1.14 2004-12-11 16:25:57 winnetou25 Exp $
+ * @version $Id: AbstractUser.java,v 1.15 2004-12-11 17:22:33 winnetou25 Exp $
  */
 public abstract class AbstractUser implements IUser {
 	
     private static Log logger = LogFactory.getLog(AbstractUser.class);
     
-    protected int number;
-    protected boolean onLine;
-    protected String name;
+    protected int m_uin;
 
-    /**
-     * Tworz u¿ytkownika.
-     * @param number numer u¿ykownika
-     */
-    public AbstractUser(int number) {
-        this.number = number;
+    public AbstractUser(int uin) {
+    	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+        m_uin = uin;
     }
 
     /**
-     * Zwróæ numer u¿ytkownika.
      * @return int
      */
-    public int getNumber() {
-        return number;
+    public int getUin() {
+        return m_uin;
     }
 
     /**
-     * Zmieñ numer u¿ytkownika.
-     * @param number nowy numer u¿ytkownika
+     * @param uin 
      */
-    public void setNumber(int number) {
-        this.number = number;
+    public void setUin(int uin) {
+        m_uin = uin;
     }
 
     /**
      * @see java.lang.Object#equals(java.lang.Object)
      */
     public boolean equals(Object o) {
-        return (o instanceof IUser) && (number == ((IUser) o).getNumber());
+        if (o instanceof IUser) {
+        	IUser user = (IUser) o;
+        	if (user.getUin() == m_uin) return true;
+        }
+        return false;
     }
 
     /**
      * @see java.lang.Object#hashCode()
      */
     public int hashCode() {
-        return number;
+        return m_uin;
     }
 
-    /**
-     * @see java.lang.Object#toString()
-     */
-    public String toString() {
-        return "[" + name + ":" + number + ":" + onLine + "]";
-    }
-    
 }

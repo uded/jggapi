@@ -24,7 +24,7 @@ import java.util.EventListener;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageListener.java,v 1.12 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.13 2004-12-11 17:22:33 winnetou25 Exp $
  */
 public interface MessageListener extends EventListener {
 	
@@ -34,12 +34,6 @@ public interface MessageListener extends EventListener {
      */
 	void messageArrived(MessageArrivedEvent messageArrivedEvent);
 
-//	/**
-//	 * Notification that the message was sent.<BR>
-//	 * @param <code>OutgoingMessage</code> object
-//	 */
-//	void messageSent(OutgoingMessage outgoingMessage);
-	
 	/**
 	 * Notification that the message was delivered to the recipient.<BR>
 	 * @param MessageDeliveredEvent object
@@ -52,11 +46,6 @@ public interface MessageListener extends EventListener {
 		 * @see pl.mn.communicator.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
 		 */
 		public void messageArrived(MessageArrivedEvent arrivedEvent) { }
-
-//		/**
-//		 * @see pl.mn.communicator.MessageListener#messageSent(pl.mn.communicator.MessageSentEvent)
-//		 */
-//		public void messageSent(OutgoingMessage outgoingMessage) { }
 
 		/**
 		 * @see pl.mn.communicator.MessageListener#messageDelivered(pl.mn.communicator.MessageDeliveredEvent)

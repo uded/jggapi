@@ -18,12 +18,12 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Pakiet dodaj�cy konkretnego u�ytkownika do listy montorowancyh u�ytkownik�w.
+ * 
  * @see pl.mn.communicator.gadu.GGNotifyReply
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGAddNotify.java,v 1.12 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGAddNotify.java,v 1.13 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGAddNotify implements GGOutgoingPackage {
 

@@ -28,18 +28,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Klasa z danymi dotycz±cymi serwera gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Server.java,v 1.2 2004-12-11 16:25:58 winnetou25 Exp $* @version $Revision: 1.2 $
+ * @version $Id: Server.java,v 1.3 2004-12-11 17:22:33 winnetou25 Exp $* @version $Revision: 1.3 $
  */
 public final class Server implements IServer {
 	
     private static Log logger = LogFactory.getLog(Server.class);
 
-    /**
-     * Adres ip, lub tekstowy serwera rozmów
-     */
     protected String m_address;
 
     /**
@@ -48,7 +44,6 @@ public final class Server implements IServer {
     protected int m_port;
 
     /**
-     * Twórz obiekt serwera.
      * @param address adres serwera
      * @param port port serwera
      */
@@ -59,7 +54,6 @@ public final class Server implements IServer {
 
     
     /**
-     * Zwróæ adres serwera rozmów.
      * @return String
      */
     public String getAddress() {
@@ -67,7 +61,6 @@ public final class Server implements IServer {
     }
 
     /**
-     * Zwróæ port serwera rozmów.
      *  @return int
      */
     public int getPort() {
@@ -96,10 +89,7 @@ public final class Server implements IServer {
     }
 
     /**
-     * Pobierz serwera gg ze strony www udostêpnionej na serwerze www gg.
-     * @param user u¿ytkownik (potrzebny do stworzenia adresu)
      * @return Server serwer
-     * @throws IOException b³±d pobierania domy¶lnego serwera
      */
     public static Server getDefaultServer(LoginContext loginContext) throws GGException {
     	try {

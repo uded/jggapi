@@ -22,12 +22,11 @@ import java.util.Random;
 import pl.mn.communicator.IMessage;
 
 /**
- * 
  * Class representing packet that will send Gadu-Gadu message.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.12 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.13 2004-12-11 17:22:49 winnetou25 Exp $
  */
 public class GGSendMsg implements GGOutgoingPackage, GGMessage {
 	

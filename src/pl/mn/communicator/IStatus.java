@@ -24,33 +24,9 @@ import java.util.Date;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IStatus.java,v 1.9 2004-12-11 16:25:57 winnetou25 Exp $
+ * @version $Id: IStatus.java,v 1.10 2004-12-11 17:22:33 winnetou25 Exp $
  */
 public interface IStatus {
-
-//	/** Status online */
-//    int ONLINE = 1;
-//
-//	/** Status online with description */
-//    int ONLINE_WITH_DESCRIPTION = 2;
-//
-//    /** Status offline */
-//    int OFFLINE = 3;
-//
-//    /** Status offline with description */
-//    int OFFLINE_WITH_DESCRIPTION = 4;
-//
-//    /** Status busy */
-//    int BUSY = 5;
-//
-//    /** Status busy with description */
-//    int BUSY_WITH_DESCRIPTION = 6;
-//
-//    /** Status invisible */
-//    int INVISIBLE = 7;
-//
-//    /** Status invisible with description */
-//    int INVISIBLE_WITH_DESCRIPTION = 8;
 
 //    /** friends mask */
 //    int FRIENDS_MASK = 10;

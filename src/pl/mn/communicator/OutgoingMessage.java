@@ -20,12 +20,11 @@ package pl.mn.communicator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-
 /**
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.1 2004-12-11 16:25:57 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.2 2004-12-11 17:22:33 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
 

@@ -1,12 +1,25 @@
 /*
- * Created on 2004-11-30
+ * Copyright (c) 2003 Marcin Naglik (mnaglik@gazeta.pl)
  *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * This program is free software; you can redistribute it and/or modify it
+ * under the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your option)
+ * any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program; if not, write to the Free Software Foundation, Inc.,
+ * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 package pl.mn.communicator;
 
 /**
+ * Created on 2004-11-30
+ * 
  * @author mateusz
  *
  * TODO To change the template for this generated type comment go to
@@ -24,15 +37,5 @@ public interface QA {
 	int FAVOURITE_MOVIE = 7;
 	int FAVOURITE_ACTOR = 8;
 	int FAVOURITE_BAND = 9;
-	
-//	1	Twoja ulubiona potrawa?
-//	2	Imiê/nazwisko Twojej sympatii z lat szkolnych?
-//	3	Imiê/nazwisko osoby, z któr¹ siedzia³eœ w szkolnej ³awie?
-//	4	Imiê Twojego dziadka?
-//	5	Imiê Twojej babci?
-//	6	Nazwisko panieñskie Twojej matki?
-//	7	Tytu³ Twojego ulubionego filmu?
-//	8	Ulubiony aktor?
-//	9	Ulubiony solista/zespó³ muzyczny?
 	
 }
