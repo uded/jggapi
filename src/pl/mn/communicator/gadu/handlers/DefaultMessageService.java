@@ -36,7 +36,7 @@ import pl.mn.communicator.gadu.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.5 2004-12-13 23:44:02 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.6 2004-12-13 23:53:42 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
@@ -53,15 +53,13 @@ public class DefaultMessageService implements IMessageService {
 	 * @see pl.mn.communicator.IMessageService#sendMessage(pl.mn.communicator.OutgoingMessage)
 	 */
 	public void sendMessage(OutgoingMessage outgoingMessage) throws GGException {
-		if (m_session.getSessionState() == SessionState.LOGGED_IN) {
-			try {
-				GGSendMsg messageOut = new GGSendMsg(outgoingMessage);
-				m_session.getSessionAccessor().sendPackage(messageOut);
-			} catch (IOException ex) {
-				throw new GGException("Error occured while sending message: "+outgoingMessage, ex);
-			}
-		} else {
-			throw new GGSessionException("Incorrect session state: "+m_session.getSessionState());
+		if (outgoingMessage == null) throw new NullPointerException("outgoingMessage cannot be null");
+		checkSessionState();
+		try {
+			GGSendMsg messageOut = new GGSendMsg(outgoingMessage);
+			m_session.getSessionAccessor().sendPackage(messageOut);
+		} catch (IOException ex) {
+			throw new GGException("Error occured while sending message: "+outgoingMessage, ex);
 		}
 	}
 	
@@ -97,4 +95,10 @@ public class DefaultMessageService implements IMessageService {
 		}
 	}
 
+	private void checkSessionState() {
+		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
+			throw new GGSessionException("Incorrect session state: "+m_session.getSessionState());
+		}
+	}
+	
 }

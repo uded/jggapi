@@ -33,7 +33,7 @@ import pl.mn.communicator.gadu.out.GGUserListRequest;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultContactListService.java,v 1.3 2004-12-13 23:44:02 winnetou25 Exp $
+ * @version $Id: DefaultContactListService.java,v 1.4 2004-12-13 23:53:42 winnetou25 Exp $
  */
 public class DefaultContactListService implements IContactListService {
 
@@ -51,13 +51,10 @@ public class DefaultContactListService implements IContactListService {
 	 * @see pl.mn.communicator.IContactListService#clearUserListRequest()
 	 */
 	public void clearUserListRequest() throws GGException {
+		checkSessionState();
 		try {
-			if (m_session.getSessionState() == SessionState.LOGGED_IN) {
-				GGUserListRequest clearContactListRequest = GGUserListRequest.createClearUsetListRequest();
-				m_session.getSessionAccessor().sendPackage(clearContactListRequest);
-			} else {
-				throw new GGSessionException("Invalid session state: "+m_session.getSessionState());
-			}
+			GGUserListRequest clearContactListRequest = GGUserListRequest.createClearUsetListRequest();
+			m_session.getSessionAccessor().sendPackage(clearContactListRequest);
 		} catch (IOException ex) {
 			throw new GGException("Unable to clear contact list", ex);
 		}
@@ -67,13 +64,10 @@ public class DefaultContactListService implements IContactListService {
 	 * @see pl.mn.communicator.IContactListService#exportContacts(java.util.Collection)
 	 */
 	public void exportContacts(Collection localUsers) throws GGException {
+		checkSessionState();
 		try {
-			if (m_session.getSessionState() == SessionState.LOGGED_IN) {
-				GGUserListRequest putUserListRequest = GGUserListRequest.createPutUserListRequest(localUsers);
-				m_session.getSessionAccessor().sendPackage(putUserListRequest);
-			} else {
-				throw new GGSessionException("Invalid session state: "+m_session.getSessionState());
-			}
+			GGUserListRequest putUserListRequest = GGUserListRequest.createPutUserListRequest(localUsers);
+			m_session.getSessionAccessor().sendPackage(putUserListRequest);
 		} catch (IOException ex) {
 			throw new GGException("Unable to export contact list", ex);
 		}
@@ -83,15 +77,20 @@ public class DefaultContactListService implements IContactListService {
 	 * @see pl.mn.communicator.IContactListService#importContacts()
 	 */
 	public void importContacts() throws GGException {
+		checkSessionState();
 		try {
-			if (m_session.getSessionState() == SessionState.LOGGED_IN) {
-				GGUserListRequest getContactListRequest = GGUserListRequest.createGetUserListRequest();
-				m_session.getSessionAccessor().sendPackage(getContactListRequest);
-			}
+			GGUserListRequest getContactListRequest = GGUserListRequest.createGetUserListRequest();
+			m_session.getSessionAccessor().sendPackage(getContactListRequest);
 		} catch (IOException ex) {
 			throw new GGException("Unable to import contact list", ex);
 		}
-	}	
+	}
+	
+	private void checkSessionState() {
+		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
+			throw new GGSessionException("Incorrect session state: "+m_session.getSessionState());
+		}
+	}
 
 	/**
 	 * @see pl.mn.communicator.IContactListService#addContactListListener(pl.mn.communicator.event.ContactListListener)
