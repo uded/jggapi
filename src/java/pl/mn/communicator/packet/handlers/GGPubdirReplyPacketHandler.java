@@ -29,7 +29,7 @@ import pl.mn.communicator.packet.in.GGPubdirReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReplyPacketHandler.java,v 1.17 2005-01-25 23:55:58 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.16 2005-01-25 23:53:01 winnetou25 Exp $
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 
@@ -38,7 +38,7 @@ public class GGPubdirReplyPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(PacketContext context) {
+	public void handle(Context context) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Received GGPubdirReply packet.");
 			logger.debug("PacketHeader: "+context.getHeader());

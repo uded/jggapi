@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.in.GGRecvMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGMessageReceivedPacketHandler.java,v 1.12 2005-01-25 23:55:58 winnetou25 Exp $
+ * @version $Id: GGMessageReceivedPacketHandler.java,v 1.11 2005-01-25 23:52:59 winnetou25 Exp $
  */
 public class GGMessageReceivedPacketHandler implements PacketHandler {
 
@@ -37,7 +37,7 @@ public class GGMessageReceivedPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(PacketContext context) {
+	public void handle(Context context) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("GGMessage packet received.");
 			logger.debug("PacketHeader: "+context.getHeader());

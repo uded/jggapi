@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.12 2005-01-25 23:56:01 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.11 2005-01-25 23:53:01 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -303,7 +303,7 @@ public class DefaultConnectionService implements IConnectionService {
 		private void decodePacket(GGHeader header) throws IOException {
 			byte[] keyBytes = new byte[header.getLength()];
 			m_dataInput.read(keyBytes);
-			PacketContext context = new PacketContext(m_session, header, keyBytes);
+			Context context = new Context(m_session, header, keyBytes);
 			m_packetChain.sendToChain(context);
 		}
 		

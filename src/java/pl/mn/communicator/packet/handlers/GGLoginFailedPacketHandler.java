@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.in.GGLoginFailed;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginFailedPacketHandler.java,v 1.10 2005-01-25 23:55:58 winnetou25 Exp $
+ * @version $Id: GGLoginFailedPacketHandler.java,v 1.9 2005-01-25 23:53:00 winnetou25 Exp $
  */
 public class GGLoginFailedPacketHandler implements PacketHandler {
 
@@ -36,7 +36,7 @@ public class GGLoginFailedPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(PacketContext context) {
+	public void handle(Context context) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("LoginFailed packet received.");
 			logger.debug("PacketHeader: "+context.getHeader());

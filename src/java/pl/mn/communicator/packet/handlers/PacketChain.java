@@ -41,7 +41,7 @@ import pl.mn.communicator.packet.in.GGWelcome;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PacketChain.java,v 1.8 2005-01-25 23:55:58 winnetou25 Exp $
+ * @version $Id: PacketChain.java,v 1.7 2005-01-25 23:53:01 winnetou25 Exp $
  */
 public class PacketChain {
 
@@ -63,7 +63,7 @@ public class PacketChain {
 		m_packetHandlers.remove(new Integer(packetType));
 	}
 	
-	public void sendToChain(PacketContext packageContent) {
+	public void sendToChain(Context packageContent) {
 		PacketHandler packetHandler = (PacketHandler) m_packetHandlers.get(new Integer(packageContent.getHeader().getType()));
 		if (packetHandler == null) {
 			logger.error("Unknown package.");
