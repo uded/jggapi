@@ -17,13 +17,15 @@
  */
 package pl.mn.communicator.event;
 
+import java.util.EventListener;
+
 /**
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginListener.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: LoginListener.java,v 1.2 2004-12-15 22:12:54 winnetou25 Exp $
  */
-public interface LoginListener {
+public interface LoginListener extends EventListener {
 	
 	/**
 	 * Messaged when user has successfully logged in to Gadu-Gadu server.

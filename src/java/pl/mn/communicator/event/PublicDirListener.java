@@ -18,6 +18,7 @@
 package pl.mn.communicator.event;
 
 import java.util.Collection;
+import java.util.EventListener;
 
 import pl.mn.communicator.PublicDirQuery;
 
@@ -25,9 +26,9 @@ import pl.mn.communicator.PublicDirQuery;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.1 2004-12-15 22:02:24 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.2 2004-12-15 22:12:54 winnetou25 Exp $
  */
-public interface PublicDirListener {
+public interface PublicDirListener extends EventListener {
 
 	/**
 	 * Messaged when information has been sucessfuly written
