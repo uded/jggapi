@@ -15,12 +15,12 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu.util;
+package pl.mn.communicator.util;
 
 
 
 /**
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.1 $
  * @author mnaglik
  */
 public final class Util {

@@ -18,13 +18,13 @@
 package pl.mn.communicator.gadu;
 
 import pl.mn.communicator.logger.Logger;
+import pl.mn.communicator.util.Util;
 
 import pl.mn.communicator.ILocalUser;
 import pl.mn.communicator.IMessage;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.gadu.util.Util;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -52,7 +52,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.33 $
+ * @version $Revision: 1.34 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {

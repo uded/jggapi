@@ -4,7 +4,7 @@ import junit.framework.TestCase;
 
 import org.apache.log4j.Logger;
 
-import pl.mn.communicator.gadu.util.Util;
+import pl.mn.communicator.util.Util;
 
 
 /**
