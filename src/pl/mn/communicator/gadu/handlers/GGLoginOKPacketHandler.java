@@ -17,6 +17,8 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
+import pl.mn.communicator.GGException;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.gadu.GGLoginOK;
 
 
@@ -37,6 +39,13 @@ public class GGLoginOKPacketHandler implements PacketHandler {
 		GGLoginOK loginOk = GGLoginOK.getInstance();
 		context.getSessionAccessor().notifyGGPacketReceived(loginOk);
 		context.getSessionAccessor().notifyLoginOK();
+		IStatus status = context.getSessionAccessor().getLoginContext().getStatus();
+		try {
+			context.getSessionAccessor().setStatus(status);
+		} catch (GGException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

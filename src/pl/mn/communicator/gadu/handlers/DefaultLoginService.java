@@ -26,7 +26,6 @@ import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.ILoginService;
 import pl.mn.communicator.IStatus;
-import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.LoginListener;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.Status;
@@ -55,18 +54,25 @@ public class DefaultLoginService implements ILoginService {
 	/**
 	 * @see pl.mn.communicator.ILoginService#login(pl.mn.communicator.LoginContext)
 	 */
-	public void login(LoginContext loginContext) throws GGException {
+	public void login() throws GGException {
 		if (m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING) {
 			try {
-				int uin = loginContext.getUin();
-				String password = loginContext.getPassword();
+				int uin = m_session.getLoginContext().getUin();
+				String password = m_session.getLoginContext().getPassword();
 				int seed = m_session.getIntegerAttribute("seed");
-				//how to access socket in order to get localAddress and localPort
+
 				GGLogin60 login = new GGLogin60(uin, password.toCharArray(), seed);
+				login.setImageSize(m_session.getLoginContext().getImageSize());
+				login.setStatus(m_session.getLoginContext().getStatus());
+				login.setLocalIP(m_session.getLoginContext().getLocalIP());
+				login.setLocalPort(m_session.getLoginContext().getLocalPort());
+				login.setExternalIP(m_session.getLoginContext().getExternalIP());
+				login.setExternalPort(m_session.getLoginContext().getExternalPort());
+
 				m_session.getSessionAccessor().sendPackage(login);
 			} catch (IOException ex) {
 				m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
-				throw new GGException("Unable to login, loginContext: "+loginContext, ex);
+				throw new GGException("Unable to login, loginContext: "+m_session.getLoginContext(), ex);
 			}
 		} else {
 			throw new GGSessionException("Unable to login, wrong session state: "+SessionState.getState(m_session.getSessionState()));

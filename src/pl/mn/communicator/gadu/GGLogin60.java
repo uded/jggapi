@@ -22,7 +22,7 @@ import pl.mn.communicator.IStatus;
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.3 2004-12-11 19:40:50 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.4 2004-12-11 20:08:59 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 
@@ -128,11 +128,6 @@ public class GGLogin60 implements GGOutgoingPackage {
 	public void setExternalPort(int externalPort) {
 		if (externalPort < 0) throw new IllegalArgumentException("port cannot be null");
 		m_externalPort = externalPort;
-	}
-	
-	public void setStatus(int protocolStatus) {
-		if (protocolStatus < 0) throw new IllegalArgumentException("protocolStatus cannot be less than 0");
-		m_status = protocolStatus;
 	}
 	
 	public void setImageSize(byte imageSize) {

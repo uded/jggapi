@@ -13,8 +13,6 @@ import pl.mn.communicator.MessageDeliveredEvent;
 import pl.mn.communicator.MessageListener;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.Server;
-import pl.mn.communicator.Status;
-import pl.mn.communicator.StatusConst;
 import pl.mn.communicator.UserListener;
 import pl.mn.communicator.gadu.handlers.Session;
 
@@ -36,14 +34,14 @@ public class Main2 {
 	public static void main(String args[]) throws IOException, GGException {
 		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
 		IServer server = Server.getDefaultServer(loginContext);
-		final ISession session = new Session(server);
+		final ISession session = new Session(server, loginContext);
 
 		session.getConnectionService().addConnectionListener(new ConnectionListener.Stub() {
 
 			public void connectionEstablished() {
 				System.out.println("Connection established.");
 				try {
-					session.getLoginService().login(loginContext);
+					session.getLoginService().login();
 				} catch (GGException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -63,20 +61,6 @@ public class Main2 {
 
 			public void loginOK() {
 				System.out.println("Login OK.");
-				IStatus status = new Status(StatusConst.ONLINE);
-				try {
-					session.getPresenceService().setStatus(status);
-//					status.setStatus(StatusConst.BUSY_WITH_DESCRIPTION);
-//					status.setDescription("busy with desc");
-//					Calendar cal = Calendar.getInstance();
-//					cal.set(2004, 2, 3);
-//					status.setReturnDate(cal.getTime());
-//					System.out.println("Time: "+status.getReturnDate());
-//					session.getPresenceService().setStatus(status);
-				} catch (GGException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 			}
 
 			public void loginFailed() {

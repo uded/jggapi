@@ -33,9 +33,9 @@ public interface IPresenceService {
 
 	IStatus getStatus();
 	
-	void addMonitoredUser(IUser user);
+	void addMonitoredUser(IUser user) throws GGException;
 
-	void removeMonitoredUser(IUser user);
+	void removeMonitoredUser(IUser user) throws GGException;
 	
 	Collection getMonitoredUsers();
 	

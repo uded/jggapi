@@ -23,7 +23,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.3 2004-12-11 19:40:36 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.4 2004-12-11 20:08:58 winnetou25 Exp $
  */
 public final class LoginContext {
 	
@@ -35,8 +35,13 @@ public final class LoginContext {
 
 	private IStatus m_status = new Status(StatusConst.ONLINE);
 	
-    private int m_imageSize = 64;
-
+    private byte m_imageSize = 64;
+    
+    private byte[] m_localIP = new byte[] {(byte) 0, (byte)0, (byte) 0, (byte) 0};
+    private int m_localPort = 1550;
+    private byte[] m_externalIP = new byte[] {(byte) 0, (byte)0, (byte) 0, (byte) 0};
+    private int m_externalPort = 1550;
+    
     public LoginContext(int uin, String password) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
     	if (password == null) throw new NullPointerException("password cannot be null");
@@ -77,13 +82,51 @@ public final class LoginContext {
     	return m_status;
     }
     
-    public void setImageSize(int imageSize) {
+    public void setImageSize(byte imageSize) {
     	if (imageSize < 0) throw new IllegalArgumentException("imageSize cannot be less than 0");
     	m_imageSize = imageSize;
     }
     
-    public int getImageSize() {
+    public byte getImageSize() {
     	return m_imageSize;
     }
     
+	public byte[] getExternalIP() {
+		return m_externalIP;
+	}
+
+	public void setExternalIP(byte[] externalIP) {
+		if (externalIP == null) throw new NullPointerException("externalIP cannot be null");
+		if (externalIP.length == 4) throw new IllegalArgumentException("Incorrect address.");
+		m_externalIP = externalIP;
+	}
+	
+	public void setExternalPort(int externalPort) {
+		if (externalPort < 0) throw new IllegalArgumentException("externalPort cannot be less than 0");
+		m_externalPort = externalPort;
+	}
+
+	public int getExternalPort() {
+		return m_externalPort;
+	}
+	
+	public byte[] getLocalIP() {
+		return m_localIP;
+	}
+
+	public void setLocalIP(byte[] localIP) {
+		if (localIP == null) throw new NullPointerException("localIP cannot be null");
+		m_localIP = localIP;
+		if (localIP.length == 4) throw new IllegalArgumentException("Incorrect address.");
+	}
+	
+	public void setLocalPort(int localPort) {
+		if (localPort < 0) throw new IllegalArgumentException("localPort cannot be less than 0");
+		m_localPort = localPort;
+	}
+	
+	public int getLocalPort() {
+		return m_localPort;
+	}
+	
 }

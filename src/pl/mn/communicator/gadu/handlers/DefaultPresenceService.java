@@ -85,23 +85,31 @@ public class DefaultPresenceService implements IPresenceService {
 	/**
 	 * @see pl.mn.communicator.IPresenceService#addMonitoredUser(pl.mn.communicator.IUser)
 	 */
-	public void addMonitoredUser(IUser user) {
+	public void addMonitoredUser(IUser user) throws GGException {
 		if (user == null) throw new NullPointerException("user cannot be null");
 		if (m_session.getSessionState() == SessionState.AUTHENTICATED) {
-			GGAddNotify addNotify = new GGAddNotify(user.getUin());
-			m_session.getSessionAccessor().sendPackage(addNotify);
-			m_monitoredUsers.add(user);
+			try {
+				GGAddNotify addNotify = new GGAddNotify(user.getUin());
+				m_session.getSessionAccessor().sendPackage(addNotify);
+				m_monitoredUsers.add(user);
+			} catch (IOException ex) {
+				throw new GGException("Unable to add monitored user.", ex);
+			}
 		}
 	}
 	
 	/**
 	 * @see pl.mn.communicator.IPresenceService#removeMonitoredUser(pl.mn.communicator.IUser)
 	 */
-	public void removeMonitoredUser(IUser user) {
+	public void removeMonitoredUser(IUser user) throws GGException {
 		if (m_session.getSessionState() == SessionState.AUTHENTICATED) {
-			GGRemoveNotify removeNotify = new GGRemoveNotify(user.getNumber());
-			m_session.getSessionAccessor().sendPackage(removeNotify);
-			m_monitoredUsers.remove(user);
+			try {
+				GGRemoveNotify removeNotify = new GGRemoveNotify(user.getUin());
+				m_session.getSessionAccessor().sendPackage(removeNotify);
+				m_monitoredUsers.remove(user);
+			} catch (IOException ex) {
+				throw new GGException("Unable to remove monitored user", ex);
+			}
 		}
 	}
 	

@@ -23,6 +23,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import pl.mn.communicator.GGException;
 import pl.mn.communicator.IConnectionService;
 import pl.mn.communicator.IContactListService;
 import pl.mn.communicator.IFileService;
@@ -35,6 +36,7 @@ import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageArrivedEvent;
 import pl.mn.communicator.MessageDeliveredEvent;
 import pl.mn.communicator.SessionState;
@@ -59,6 +61,8 @@ public class Session implements ISession {
 	private Set m_sessionStateListeners = null;
 	private HashMap m_sessionAttributes;
 	
+	private LoginContext m_loginContext = null;
+	
 	private DefaultConnectionService m_connectionService = null;
 	private DefaultLoginService m_loginService = null;
 	private DefaultPresenceService m_presenceService = null;
@@ -67,9 +71,11 @@ public class Session implements ISession {
 	
 	private IServer m_server = null;
 	
-	public Session(IServer server) {
+	public Session(IServer server, LoginContext loginContext) {
 		if (server == null) throw new NullPointerException("server cannot be null");
+		if (loginContext == null) throw new NullPointerException("loginContext cannot be null");
 		m_server = server;
+		m_loginContext = loginContext;
 		m_sessionAccessor = new SessionAccessor();
 		m_sessionAttributes = new HashMap();
 		m_sessionStateListeners = new HashSet();
@@ -88,11 +94,10 @@ public class Session implements ISession {
 		return m_server;
 	}
 	
-	public boolean getBooleanAttribute(String attributeName) {
-		Boolean booleanObject = (Boolean) m_sessionAttributes.get(attributeName);
-		return booleanObject.booleanValue();
+	public LoginContext getLoginContext() {
+		return m_loginContext;
 	}
-
+	
 	public int getIntegerAttribute(String attributeName) {
 		Integer intObject = (Integer) m_sessionAttributes.get(attributeName);
 		return intObject.intValue();
@@ -237,14 +242,18 @@ public class Session implements ISession {
 			m_connectionService.notifyPacketReceived(incomingPackage);
 		}
 
-		public void setBooleanAttribute(String attributeName, boolean bool) {
-			m_sessionAttributes.put(attributeName, new Boolean(bool));
-		}
-
 		public void setIntegerAttribute(String attributeName, int integer) {
 			m_sessionAttributes.put(attributeName, new Integer(integer));
 		}
+		
+		public void setStatus(IStatus status) throws GGException {
+			m_presenceService.setStatus(status);
+		}
 
+		public LoginContext getLoginContext() {
+			return m_loginContext;
+		}
+		
 	}
 	
 }

@@ -21,25 +21,20 @@ package pl.mn.communicator;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.10 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: IMessage.java,v 1.11 2004-12-11 20:13:10 winnetou25 Exp $
  */
 public interface IMessage {
 	
-//	public static final int MESSAGE_CLASS_QUEUED = 1;
-//
-//	public static final int MESSAGE_CLASS_IN_NEW_WINDOW = 2;
-//	
-//	public static final int MESSAGE_CLASS_CHAT = 3;
-//	
-//	public static final int MESSAGE_CLASS_DO_NOT_CONFIRM = 4;
-//	
-//	public static final int MESSAGE_CLASS_PING = 5;
-	
     /**
-     * Gadu=Gadu number of user to whom this message is addressed.<BR>
+     * Gadu-Gadu number of user to whom this message is addressed.
      * @return gg number
      */
     int getUin();
+
+    /**
+     * @param user number of Gadu-Gadu user.<BR>
+     */
+    void setUin(int uin);
 
     /**
      * Gets message body.<BR>
@@ -52,11 +47,6 @@ public interface IMessage {
      */
     void setText(String text);
 
-    /**
-     * @param user number of Gadu-Gadu user.<BR>
-     */
-    void setUin(int uin);
-    
     MessageClass getMessageClass();
     
 }

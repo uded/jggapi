@@ -29,10 +29,10 @@ public interface ILoginService {
 
 	/**
 	 * Login user to currently connected server.
-	 * @param loginContext to use while loggin.
+	 * 
 	 * @throws GGException if an error occurs while logging in.
 	 */
-	void login(LoginContext loginContext) throws GGException;
+	void login() throws GGException;
 	void logout() throws GGException;
 	void logout(String description) throws GGException;
 	void addLoginListener(LoginListener loginListener);

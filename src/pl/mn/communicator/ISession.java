@@ -20,11 +20,13 @@ package pl.mn.communicator;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISession.java,v 1.1 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: ISession.java,v 1.2 2004-12-11 20:08:58 winnetou25 Exp $
  */
 public interface ISession {
 
 	IServer getServer();
+	
+	LoginContext getLoginContext();
 	
 	int getSessionState();
 	
@@ -44,8 +46,6 @@ public interface ISession {
 
 	IContactListService getContactListService();
 	
-	boolean getBooleanAttribute(String attributeName);
-
 	int getIntegerAttribute(String attributeName);
 	
 	void addSessionStateListener(SessionStateListener sessionStateListener);
