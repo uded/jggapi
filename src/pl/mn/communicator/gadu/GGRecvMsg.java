@@ -20,7 +20,7 @@ package pl.mn.communicator.gadu;
 
 /**
  * Wiadomosc otrzymana z serwera gg (tekstowa)
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 class GGRecvMsg implements GGIncomingPackage {
@@ -37,12 +37,7 @@ class GGRecvMsg implements GGIncomingPackage {
         this.time = GGConversion.byteToInt(data, 8);
         this.msgClass = GGConversion.byteToInt(data, 12);
 
-        byte[] messageBytes = new byte[data.length - 17];
-
-        for (int i = 16, j = 0; i < (data.length - 1); i++) {
-            messageBytes[j++] = data[i];
-        }
-        message = new String(messageBytes);
+        message = GGConversion.byteToString(data,16);;
     }
 
     /**

@@ -52,7 +52,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.31 $
+ * @version $Revision: 1.32 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -155,7 +155,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      */
     private class ConnectionThread implements Runnable {
         private static final int HEADER_LENGTH = 8;
-        private static final int PING_COUNT = 200;
+        private static final int PING_COUNT = 1000;
         private static final int THREAD_SLEEP_TIME = 100;
         private static final int GG_PACKAGE_WELCOME = 1;
         private static final int GG_PACKAGE_LOGIN_OK = 3;
