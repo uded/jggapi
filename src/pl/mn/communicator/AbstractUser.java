@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 
 /**
  * U¿ytkownik serwera rozmów.
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public class AbstractUser implements IUser {
@@ -37,18 +37,8 @@ public class AbstractUser implements IUser {
      * @param name nazwa u¿ytkownika
      * @param onLine status u¿ytkownika
      */
-    public AbstractUser(int number, String name, boolean onLine) {
+    public AbstractUser(int number) {
         this.number = number;
-        this.onLine = onLine;
-        this.name = name;
-    }
-
-    /**
-     * Zwróæ nick u¿ytkownika.
-     * @return String
-     */
-    public String getName() {
-        return name;
     }
 
     /**
@@ -60,36 +50,11 @@ public class AbstractUser implements IUser {
     }
 
     /**
-     * Zmieñ nick u¿ytkownika
-     * @param name nowe nick u¿ytkownika
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
      * Zmieñ numer u¿ytkownika.
      * @param number nowy numer u¿ytkownika
      */
     public void setNumber(int number) {
         this.number = number;
-    }
-
-    /**
-     * Zwróæ status u¿ytkownika.
-     * True - u¿ytkownik online
-     * @return boolean
-     */
-    public boolean isOnLine() {
-        return onLine;
-    }
-
-    /**
-     * Zmieñ status u¿ytkownika.
-     * @param onLine nowy status u¿ytkownika
-     */
-    public void setOnLine(boolean onLine) {
-        this.onLine = onLine;
     }
 
     /**

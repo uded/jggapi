@@ -24,7 +24,7 @@ import pl.mn.communicator.AbstractUser;
 
 /**
  * U¿ytkownik gg.
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public class User extends AbstractUser {
@@ -36,7 +36,7 @@ public class User extends AbstractUser {
      * @param name nazwa u¿ytkownika
      * @param onLine status u¿ytkownika
      */
-    public User(int number, String name, boolean onLine) {
-        super(number, name, onLine);
+    public User(int number) {
+        super(number);
     }
 }
