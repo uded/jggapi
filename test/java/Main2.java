@@ -67,14 +67,17 @@ public class Main2 {
 			}
 
 		});
-		session.getLoginService().addLoginListener(new LoginListener() {
+		session.getLoginService().addLoginListener(new LoginListener.Stub() {
 
 			public void loginOK() throws GGException {
 				System.out.println("Login OK.");
 				IGroupChat groupChat = session.getMessageService().createGroupChat(new int[0]);
-				groupChat.addRecipient(376712);
 				groupChat.addRecipient(1136132);
-				groupChat.sendMessage("test1");
+				groupChat.addRecipient(376798);
+				groupChat.sendMessage("GroupChatMessageTest1");
+				groupChat.sendMessage("GroupChatMessageTest2");
+				
+				//session.getLoginService().logout();
 			}
 
 			public void loginFailed() throws GGException {
@@ -95,7 +98,7 @@ public class Main2 {
 		session.getMessageService().addMessageListener(new MessageListener.Stub() {
 
 			public void messageArrived(IncomingMessage incommingMessage) {
-				System.out.println("MessageArrived, from user: "+incommingMessage.getUin());
+				System.out.println("MessageArrived, fromUser: "+incommingMessage.getUin());
 				System.out.println("MessageBody: "+incommingMessage.getMessageBody());
 				System.out.println("MessageID: "+incommingMessage.getMessageID());
 				System.out.println("MessageStatus: "+incommingMessage.getMessageClass());
@@ -103,7 +106,7 @@ public class Main2 {
 			}
 
 			public void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus) {
-				System.out.println("MessageDelivered, fromUser: "+String.valueOf(uin));
+				System.out.println("MessageDelivered, toUser: "+String.valueOf(uin));
 				System.out.println("MessageDelivered, messageID: "+String.valueOf(messageID));
 				System.out.println("MessageDelivered, messageStatus: "+deliveryStatus);
 			}

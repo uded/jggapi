@@ -28,31 +28,31 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.11 2005-01-29 15:44:08 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.12 2005-01-29 15:56:19 winnetou25 Exp $
  */
 public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
 	
 	public static final int GG_SEND_MSG = 0x0B;
 	
     private static int m_seq = -1;
-    private ArrayList m_ricipients = new ArrayList();
+    private ArrayList m_recipients = new ArrayList();
     private String m_text = "";
     private	int m_protocolMessageClass = GG_CLASS_MSG;
 
     public GGSendMsg(OutgoingMessage outgoingMessage) {
     	if (outgoingMessage == null) throw new NullPointerException("outgoingMessage cannot be null");
-        m_ricipients.add(new Integer(outgoingMessage.getUin()));
+    	m_recipients.add(new Integer(outgoingMessage.getUin()));
         m_text = outgoingMessage.getMessageBody();
         m_seq = outgoingMessage.getMessageID();
         m_protocolMessageClass = GGUtils.getProtocolMessageClass(outgoingMessage.getMessageClass());
     }
 
     public void addRecipient(int uin) {
-    	m_ricipients.add(new Integer(uin));
+    	m_recipients.add(new Integer(uin));
     }
     
     public void removeRecipient(int uin) {
-    	m_ricipients.remove(new Integer(uin));
+    	m_recipients.remove(new Integer(uin));
     }
      
     /**
@@ -66,7 +66,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        return 4+4+4+m_text.length()+1+1+(m_ricipients.size()*4);
+        return 4+4+4+m_text.length()+1+1+(m_recipients.size()*4);
     }
 
     /**
@@ -75,7 +75,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
     public byte[] getContents() {
         byte[] toSend = new byte[getLength()];
 
-        int user = ((Integer)m_ricipients.get(0)).intValue();
+        int user = ((Integer) m_recipients.get(0)).intValue();
         
         toSend[0] = (byte) (user & 0xFF);
         toSend[1] = (byte) ((user >> 8) & 0xFF);
@@ -99,18 +99,18 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
             toSend[12+i] = textBytes[i];
         }
  
-        if (m_ricipients.size() > 1) {
+        if (m_recipients.size() > 1) {
         	toSend[12+m_text.length()] = 0x01;
         	
-        	int size = m_ricipients.size();
+        	int size = m_recipients.size()-1;
         	
         	toSend[12+m_text.length()+1] = (byte) (size & 0xFF);
         	toSend[12+m_text.length()+2] = (byte) (size >> 8 & 0xFF);
         	toSend[12+m_text.length()+3] = (byte) (size >> 16 & 0xFF);
         	toSend[12+m_text.length()+4] = (byte) (size >> 24 & 0xFF);
         	
-        	for (int i=0; i<m_ricipients.size(); i++) {
-        		int recipientUin = ((Integer)m_ricipients.get(i)).intValue();
+        	for (int i=1; i<m_recipients.size(); i++) {
+        		int recipientUin = ((Integer)m_recipients.get(i)).intValue();
             	toSend[12+m_text.length()+5+i] = (byte) (size  & 0xFF);
             	toSend[12+m_text.length()+6+i] = (byte) (size >> 8 & 0xFF);
             	toSend[12+m_text.length()+7+i] = (byte) (size >> 16 & 0xFF);
