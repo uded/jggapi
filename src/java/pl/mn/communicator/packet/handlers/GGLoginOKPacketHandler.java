@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
+ * Copyright (c) 2003-2005 <a href="http://jggapi.sourceforge.net/team-list.html">JGGApi Development Team</a> All Rights Reserved.
  *
  * This program is free software; you can redistribute it and/or modify it
  * under the terms of the GNU General Public License as published by the Free
@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.in.GGLoginOK;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginOKPacketHandler.java,v 1.3 2004-12-19 17:14:42 winnetou25 Exp $
+ * @version $Id: GGLoginOKPacketHandler.java,v 1.4 2004-12-19 18:50:51 winnetou25 Exp $
  */
 public class GGLoginOKPacketHandler implements PacketHandler {
 

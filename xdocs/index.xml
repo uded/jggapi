@@ -8,9 +8,12 @@
     </properties>
 
     <body>
-        <section name="JGGApi - implementacja protokolu gadu gadu.">
-            <p>GGApi jest implementacja protokolu gg w javie na podstawie specyfikacji z ekg.
-			Pozwala w latwy sposob tworzyc roznego rodzaju aplikacje do komunikacji z serwerem gg.
+        <section name="JGGApi - Gadu-Gadu protocol implementation.">
+            <p>
+			JGGApi is a Gadu-Gadu protocol implementation based on specification
+			from EKG. Thanks to it is very easy to create applications
+			that communicate with Gadu-Gadu server. It uses commonly used
+			design patterns (GoF) that minimizie the learnining curve for developers.
             </p>
         </section>
     </body>

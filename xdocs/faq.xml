@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<document>
+
+  <properties>
+    <author email="mati@sz.home.pl">Mateusz Szczap</author>
+    <title>FAQ</title>
+  </properties>
+
+  <body>
+    <title>Frequently Asked Questions</title>
+    
+    <section name="What is JGGApi?">
+      <p>
+      The <code>jggapi</code> is a Java Gadu-Gadu protocol implementation.
+	  <code>jggapi</code> uses that well-known design patterns that minimize learning curve.
+	  As a result developers can write Gadu-Gadu clients very fast.
+      </p>
+    </section>
+
+    <section name="What is the JGGApi license?">
+      <p>
+		We use GPL open source license, therefore if you want to write the Gadu-Gadu client
+		it must have GPL license as well.
+		To find more about open-source licenses go to:
+		<a href="http://www.opensource.org/licenses/">www.opensource.org/licenses/</a>
+      </p>
+    </section>
+	
+	<section name="Who develops jggapi?">
+		<p>
+		The project was founded by <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik (mnaglik@gazeta.pl)</a>
+		in 2003. After couple of months <a href="mailto:mati@sz.home.pl">Mateusz Szczap (mati@sz.home.pl)</a>
+		joined it and helped with the development process.
+		</p>
+	</section>
+	
+  </body>
+</document>
+
+
+
+
+
+
+
+
+
