@@ -32,7 +32,7 @@ import pl.mn.communicator.User;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.19 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.20 2004-12-11 19:40:50 winnetou25 Exp $
  */
 public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
 
@@ -90,7 +90,7 @@ public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
             }
         }
 
-        m_status = GGUtils.getClientStatus(status, description, returnTime);
+        m_status = GGUtils.getClientStatus(status, description, returnTime.getTime());
     }
 
     /**

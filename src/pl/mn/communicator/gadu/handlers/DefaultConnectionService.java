@@ -84,8 +84,9 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.mn.communicator.IConnectionService#disconnect()
 	 */
 	public void disconnect() {
-		if ((m_session.getSessionState() == SessionState.CONNECTED) ||
-				(m_session.getSessionState() == SessionState.AUTHENTICATED)) {
+		if ((m_session.getSessionState() == SessionState.CONNECTED)
+				|| (m_session.getSessionState() == SessionState.AUTHENTICATED)
+				|| (m_session.getSessionState() == SessionState.SESSION_INVALID)) {
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 			try {
 				m_connectionThread.closeConnection();

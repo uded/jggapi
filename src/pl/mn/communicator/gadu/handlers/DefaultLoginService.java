@@ -31,7 +31,7 @@ import pl.mn.communicator.LoginListener;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.Status;
 import pl.mn.communicator.StatusConst;
-import pl.mn.communicator.gadu.GGLogin;
+import pl.mn.communicator.gadu.GGLogin60;
 
 /**
  * Created on 2004-11-28
@@ -62,7 +62,7 @@ public class DefaultLoginService implements ILoginService {
 				String password = loginContext.getPassword();
 				int seed = m_session.getIntegerAttribute("seed");
 				//how to access socket in order to get localAddress and localPort
-				GGLogin login = new GGLogin(new byte[0], -1, uin, password.toCharArray(), seed);
+				GGLogin60 login = new GGLogin60(uin, password.toCharArray(), seed);
 				m_session.getSessionAccessor().sendPackage(login);
 			} catch (IOException ex) {
 				m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);

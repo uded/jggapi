@@ -25,7 +25,7 @@ import pl.mn.communicator.IStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNewStatus.java,v 1.5 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGNewStatus.java,v 1.6 2004-12-11 19:40:50 winnetou25 Exp $
  */
 public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
 	
@@ -80,8 +80,9 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
     	toSend[3] = (byte) ((statusToSend >> 24) & 0xFF);
     	if (m_status.getStatus().isDescriptionStatus() && m_status.isDescriptionSet()) {
     		String description = trimDescription(m_status.getDescription());
-    		for (int i=0; i<description.length(); i++) {
-    			toSend[4+i] = (byte) description.charAt(i);
+    		byte[] descBytes = description.getBytes();
+    		for (int i=0; i<descBytes.length; i++) {
+    			toSend[4+i] = (byte) descBytes[i];
     		}
     		if (m_status.isReturnDateSet()) {
     			int timeInSeconds = GGUtils.millisToSeconds(m_status.getReturnDate().getTime());

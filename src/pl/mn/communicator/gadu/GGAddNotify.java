@@ -23,7 +23,7 @@ package pl.mn.communicator.gadu;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGAddNotify.java,v 1.13 2004-12-11 17:22:49 winnetou25 Exp $
+ * @version $Id: GGAddNotify.java,v 1.14 2004-12-11 19:40:50 winnetou25 Exp $
  */
 public class GGAddNotify implements GGOutgoingPackage {
 
@@ -35,6 +35,10 @@ public class GGAddNotify implements GGOutgoingPackage {
     public GGAddNotify(int uin) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
         m_uin = uin;
+    }
+    
+    public int getUin(){
+    	return m_uin;
     }
 
     /**

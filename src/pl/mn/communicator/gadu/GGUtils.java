@@ -17,7 +17,6 @@
  */
 package pl.mn.communicator.gadu;
 
-import java.util.Calendar;
 import java.util.Date;
 
 import pl.mn.communicator.IStatus;
@@ -29,12 +28,11 @@ import pl.mn.communicator.StatusConst;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.1 2004-12-11 16:25:58 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.2 2004-12-11 19:40:50 winnetou25 Exp $
  */
 public class GGUtils {
 
-	//TODO return time
-	public static IStatus getClientStatus(int status, String description, Date returnTime) {
+	public static IStatus getClientStatus(int status, String description, long returnTimeInMillis) {
 		IStatus statusBiz = null;
 		
 		switch (status) {
@@ -75,8 +73,8 @@ public class GGUtils {
 			break;
 		}
 		
-		if (statusBiz != null && returnTime != null) {
-			statusBiz.setReturnDate(returnTime);
+		if (statusBiz != null && returnTimeInMillis != -1) {
+			statusBiz.setReturnDate(new Date(returnTimeInMillis));
 		}
 		
 		if (statusBiz == null) throw new RuntimeException("Conversion error");
@@ -252,30 +250,49 @@ public class GGUtils {
 	    return new String(desc);
 	}
 	
-	public static void main(String args[]) {
-//		long now = System.currentTimeMillis();
-//		int nowSeconds = GGUtils.millisToSeconds(now);
-//		System.out.println("NowMillis: "+now);
-//		System.out.println("NowSeconds: "+nowSeconds);
-//		System.out.println("Date: "+new Date(nowSeconds));
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, 2004);
-		cal.set(Calendar.MONTH, 06);
-		cal.set(Calendar.DATE, 03);
-		System.out.println(cal);
-		System.out.println(cal.getTime());
-	}
-	
-//	1102724043
-//
-//	acze (1:12)
-//	a to jest:
-//	acze (1:12)
-//	Sat Dec 11 01:14:09 CET 2004
-//
-//	acze (1:13)
-//	13 stycznia godzina 19:18:43, czyli tak jak interpretuje, to by bylo:
-//	acze (1:14)
-//	13*(3600*24)+18*60+19*3600+43	
+    public static int getLoginHash(char[] password, int seed) {
+        long x;
+        long y;
+        long z;
+
+        y = seed;
+
+        int i;
+
+        for (x = 0, i = 0; i < password.length; i++) {
+            x = (x & 0xffffff00) | password[i];
+            y ^= x;
+
+            int k = (int) y;
+            k += x;
+            y = GGUtils.unsignedIntToLong(k);
+
+            k = (int) x;
+            k <<= 8;
+            x = GGUtils.unsignedIntToLong(k);
+
+            y ^= x;
+
+            k = (int) x;
+            k <<= 8;
+            x = GGUtils.unsignedIntToLong(k);
+
+            k = (int) y;
+            k -= x;
+            y = GGUtils.unsignedIntToLong(k);
+
+            k = (int) x;
+            k <<= 8;
+            x = GGUtils.unsignedIntToLong(k);
+
+            y ^= x;
+
+            z = y & 0x1f;
+            y = GGUtils.unsignedIntToLong((int) ((y << z)
+                    | (y >> (32 - z))));
+        }
+
+        return (int) y;
+    }
 	
 }

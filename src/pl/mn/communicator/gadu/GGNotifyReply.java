@@ -32,7 +32,7 @@ import pl.mn.communicator.User;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.21 2004-12-11 17:22:49 winnetou25 Exp $
+ * @version $Id: GGNotifyReply.java,v 1.22 2004-12-11 19:40:50 winnetou25 Exp $
  */
 public class GGNotifyReply implements GGIncomingPackage {
 
@@ -44,7 +44,6 @@ public class GGNotifyReply implements GGIncomingPackage {
     private Map m_statuses = new HashMap();
 
     /**
-     * Tworz pakiet odpowiedzi na list� u�ytkonwik�w dost�pnych.
      * @param m_data dane do utworzenia pakietu
      */
     public GGNotifyReply(byte[] data) {
@@ -128,7 +127,7 @@ public class GGNotifyReply implements GGIncomingPackage {
                 przesuniecie += 14; // pakiet bez opisu ma dlugosc 14 bajtow
             }
             
-            IStatus statusBiz = GGUtils.getClientStatus(status, description, returnTime);
+            IStatus statusBiz = GGUtils.getClientStatus(status, description, returnTime.getTime());
             User uzytkownik = new User(nr);
             m_statuses.put(uzytkownik, statusBiz);
         }

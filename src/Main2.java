@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.Calendar;
 
 import pl.mn.communicator.ConnectionListener;
 import pl.mn.communicator.GGException;
@@ -67,13 +66,13 @@ public class Main2 {
 				IStatus status = new Status(StatusConst.ONLINE);
 				try {
 					session.getPresenceService().setStatus(status);
-					status.setStatus(StatusConst.BUSY_WITH_DESCRIPTION);
-					status.setDescription("busy with desc");
-					Calendar cal = Calendar.getInstance();
-					cal.set(2004, 2, 3);
-					status.setReturnDate(cal.getTime());
-					System.out.println("Time: "+status.getReturnDate());
-					session.getPresenceService().setStatus(status);
+//					status.setStatus(StatusConst.BUSY_WITH_DESCRIPTION);
+//					status.setDescription("busy with desc");
+//					Calendar cal = Calendar.getInstance();
+//					cal.set(2004, 2, 3);
+//					status.setReturnDate(cal.getTime());
+//					System.out.println("Time: "+status.getReturnDate());
+//					session.getPresenceService().setStatus(status);
 				} catch (GGException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -88,7 +87,7 @@ public class Main2 {
 		session.getPresenceService().addUserListener(new UserListener() {
 
 			public void userStatusChanged(IUser user, IStatus newStatus) {
-				System.out.println("User changed status: "+user.getNumber());
+				System.out.println("User changed status: "+user.getUin());
 				System.out.println("Status: "+newStatus.getStatus());
 				System.out.println("Description: "+newStatus.getDescription());
 				System.out.println("ReturnDate: "+newStatus.getReturnDate());
@@ -107,7 +106,7 @@ public class Main2 {
 
 			public void messageDelivered(MessageDeliveredEvent messageDeliveredEvent) {
 				System.out.println("MessageDelivered, messageID: "+messageDeliveredEvent.getMessageID());
-				System.out.println("MessageDelivered, fromUser: "+messageDeliveredEvent.getRecipient().getNumber());
+				System.out.println("MessageDelivered, fromUser: "+messageDeliveredEvent.getRecipient().getUin());
 				System.out.println("MessageDelivered, messageStatus: "+messageDeliveredEvent.getDeliveryStatus());
 			}
 			

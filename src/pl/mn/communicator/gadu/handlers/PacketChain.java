@@ -74,6 +74,7 @@ public class PacketChain {
 	public void sendToChain(Context packageContent) {
 		PacketHandler packetHandler = (PacketHandler) m_packetHandlers.get(new Integer(packageContent.getHeader().getType()));
 		if (packetHandler == null) {
+			System.out.println("Unknown package: "+GGUtils.bytesToString(packageContent.getPackageContent()));
 			logger.error("Unknown package: "+GGUtils.bytesToString(packageContent.getPackageContent()));
 		}
 		packetHandler.handle(packageContent);

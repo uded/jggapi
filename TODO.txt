@@ -17,5 +17,3 @@ GGLogin w ktorym adresy beda dzialaly (localIp, externalIP)
 
 -nie wiem czy to jest takie sprytne, ze jest GGSessionException. Wlasciwie z command line to nie mozna tej biblioteki uzywac.
 chyba ze zrobic sie jakies wiszenie i dopoki cos sie nie stanie to sie nie bedzie dalej probowalo.
-
--dodanie enumow do klas biznesowych

@@ -21,7 +21,7 @@ package pl.mn.communicator.gadu;
  * Gadu-Gadu packet header.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGHeader.java,v 1.10 2004-12-11 17:22:49 winnetou25 Exp $
+ * @version $Id: GGHeader.java,v 1.11 2004-12-11 19:40:50 winnetou25 Exp $
  */
 public class GGHeader {
 
@@ -38,14 +38,6 @@ public class GGHeader {
     }
 
     /**
-     * Returns the length of packet.
-     * @return int
-     */
-    public int getLength() {
-        return m_length;
-    }
-
-    /**
      * Returns the type.
      * @return int
      */
@@ -53,4 +45,12 @@ public class GGHeader {
         return m_type;
     }
     
+    /**
+     * Returns the length of packet.
+     * @return int
+     */
+    public int getLength() {
+        return m_length;
+    }
+
 }

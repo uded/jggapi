@@ -20,39 +20,19 @@ package pl.mn.communicator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.gadu.GGLogin;
-
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.2 2004-12-11 17:22:33 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.3 2004-12-11 19:40:36 winnetou25 Exp $
  */
 public final class LoginContext {
-	
-//	struct gg_login60 {
-//		int uin;              /* m�j numerek */ 4 bytes
-//	    int hash;             /* hash has�a */ 4 bytes
-//	    int status;           /* status na dzie� dobry */ 4 bytes
-//	    int version;          /* moja wersja klienta */ 4 bytes
-//	    char unknown1;        /* 0x00 */ 1 byte
-//	    int local_ip;         /* m�j adres ip */ 4 bytes
-//		short local_port;     /* port, na kt�rym s�ucham */ 2 bytes
-//	    int external_ip;      /* zewn�trzny adres ip */
-//	    short external_port;  /* zewn�trzny port */
-//		char image_size;      /* maksymalny rozmiar grafiki w KB */
-//	    char unknown2;        /* 0xbe */
-//		char description[];   /* opis, nie musi wyst�pi� */
-//		int time;             /* czas, nie musi wyst�pi� */
-//	};
 	
 	private static Log logger = LogFactory.getLog(LoginContext.class);
 
 	private int m_uin = -1;
 
-	private String m_password = "";
+	private String m_password = null;
 
-	private int m_version = GGLogin.VERSION_60; //TODO think of this version
-	
 	private IStatus m_status = new Status(StatusConst.ONLINE);
 	
     private int m_imageSize = 64;
@@ -95,14 +75,6 @@ public final class LoginContext {
     
     public IStatus getStatus() {
     	return m_status;
-    }
-    
-    public void setVersion(int version) {
-    	m_version = version;
-    }
-	
-    public int getVersion() {
-    	return m_version;
     }
     
     public void setImageSize(int imageSize) {
