@@ -21,9 +21,9 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirReply.java,v 1.1 2004-12-16 22:21:58 winnetou25 Exp $
+ * @version $Id: PublicDirInfo.java,v 1.1 2004-12-17 20:20:25 winnetou25 Exp $
  */
-public class PublicDirReply {
+public class PublicDirInfo {
 
 	private String m_firstName = null;
 	private String m_lastName = null;
@@ -34,6 +34,10 @@ public class PublicDirReply {
 	private String m_familyName = null;
 	private String m_familyCity = null;
 
+	public PublicDirInfo() {
+		
+	}
+	
 	public String getFirstName() {
 		return m_firstName;
 	}

@@ -19,6 +19,8 @@ package pl.mn.communicator.packet.out;
 
 import java.util.Random;
 
+import pl.mn.communicator.Gender;
+import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.PublicDirQuery;
 import pl.mn.communicator.packet.GGPubdirEnabled;
 import pl.mn.communicator.packet.PublicDirConstants;
@@ -27,20 +29,12 @@ import pl.mn.communicator.packet.PublicDirConstants;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.4 2004-12-16 22:22:50 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.5 2004-12-17 20:23:27 winnetou25 Exp $
  */
 public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
 
 	public static final int GG_PUBDIR50_REQUEST = 0x0014;
 	
-//#define GG_PUBDIR50_REQUEST 0x0014
-//	
-//struct gg_pubdir50 {
-//	char type;
-//	int seq;
-//	char request[];
-//};
-
 	private final static Random SEQUENCER = new Random();
 	
 	private byte m_requestType = -1;
@@ -112,8 +106,78 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
     	return pubdirRequest;
     }
     
-    public static GGPubdirRequest createWritePubdirRequest() {
-    	return null;
+    public static GGPubdirRequest createWritePubdirRequest(PublicDirInfo publicDirInfo) {
+    	if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
+    	GGPubdirRequest pubdirRequest = new GGPubdirRequest();
+    	pubdirRequest.m_requestType = GG_PUBDIR50_WRITE;
+    	pubdirRequest.m_request = prepareWriteRequest(publicDirInfo);
+    	return pubdirRequest;
+    }
+    
+    private static String prepareWriteRequest(PublicDirInfo publicDirInfo) {
+    	StringBuffer buffer = new StringBuffer();
+    	if (publicDirInfo.getFirstName() != null) {
+    		String firstName = publicDirInfo.getFirstName();
+        	buffer.append(PublicDirConstants.FIRST_NAME);
+        	buffer.append("\0");
+        	buffer.append(firstName);
+    		buffer.append("\0");
+    	}
+    	if (publicDirInfo.getLastName() != null) {
+    		String lastName = publicDirInfo.getLastName();
+    		buffer.append(PublicDirConstants.LAST_NAME);
+    		buffer.append("\0");
+    		buffer.append(lastName);
+    		buffer.append("\0");
+    	}
+    	if (publicDirInfo.getCity() != null) {
+    		String city = publicDirInfo.getCity();
+    		buffer.append(PublicDirConstants.CITY);
+    		buffer.append("\0");
+    		buffer.append(city);
+    		buffer.append("\0");
+    	}
+    	if (publicDirInfo.getNickName() != null) {
+    		String nickName = publicDirInfo.getNickName();
+    		buffer.append(PublicDirConstants.NICK_NAME);
+    		buffer.append("\0");
+    		buffer.append(nickName);
+    		buffer.append("\0");
+    	}
+    	if (publicDirInfo.getGender() == Gender.MALE) {
+    		Gender gender = publicDirInfo.getGender();
+    		buffer.append(PublicDirConstants.GENDER);
+    		buffer.append("\0");
+    		if (gender == Gender.MALE) {
+        		buffer.append("1");
+    		} else {
+    			buffer.append("0");
+    		}
+    		buffer.append("\0");
+    	}
+    	if (publicDirInfo.getFamilyName() != null) {
+    		String familyName = publicDirInfo.getFamilyName();
+    		buffer.append(PublicDirConstants.FAMILY_NAME);
+    		buffer.append("\0");
+    		buffer.append(familyName);
+    		buffer.append("\0");
+    	}
+    	if (publicDirInfo.getFamilyCity() != null) {
+    		String familyCity = publicDirInfo.getFamilyCity();
+    		buffer.append(PublicDirConstants.FAMILY_CITY);
+    		buffer.append("\0");
+    		buffer.append(familyCity);
+    		buffer.append("\0");
+    	}
+    	if (publicDirInfo.getBirthDate() != null) {
+    		String birthDate = publicDirInfo.getBirthDate();
+    		buffer.append(PublicDirConstants.BIRTH_YEAR);
+    		buffer.append("\0");
+    		buffer.append(birthDate);
+    		buffer.append("\0");
+    	}
+    	
+    	return buffer.toString();
     }
     
 }

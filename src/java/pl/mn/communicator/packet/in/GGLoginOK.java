@@ -17,12 +17,11 @@
  */
 package pl.mn.communicator.packet.in;
 
-
 /**
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginOK.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGLoginOK.java,v 1.2 2004-12-17 20:23:02 winnetou25 Exp $
  */
 public class GGLoginOK implements GGIncomingPackage {
 

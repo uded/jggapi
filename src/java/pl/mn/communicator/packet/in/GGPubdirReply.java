@@ -23,7 +23,7 @@ import java.util.Collections;
 import java.util.StringTokenizer;
 
 import pl.mn.communicator.Gender;
-import pl.mn.communicator.PublicDirReply;
+import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.packet.GGPubdirEnabled;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.PublicDirConstants;
@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.PublicDirConstants;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.4 2004-12-16 22:22:43 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.5 2004-12-17 20:23:02 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
@@ -90,7 +90,7 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	private void handlePubdirReadReply(byte[] data) {
 		String string = byteToString(data, 5);
 		StringTokenizer tokenizer = new StringTokenizer(string, "\0");
-		PublicDirReply pubDirReply = new PublicDirReply();
+		PublicDirInfo pubDirReply = new PublicDirInfo();
 		while (tokenizer.hasMoreTokens()) {
 			String token = (String) tokenizer.nextToken();
 			if (token.equals(PublicDirConstants.FIRST_NAME)) {

@@ -20,13 +20,13 @@ package pl.mn.communicator.event;
 import java.util.Collection;
 import java.util.EventListener;
 
-import pl.mn.communicator.PublicDirReply;
+import pl.mn.communicator.PublicDirInfo;
 
 /**
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.4 2004-12-16 22:22:04 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.5 2004-12-17 20:21:01 winnetou25 Exp $
  */
 public interface PublicDirListener extends EventListener {
 
@@ -49,7 +49,7 @@ public interface PublicDirListener extends EventListener {
 	 * Messaged when we have successfuly retrieved information about out uin from catalog.
 	 * @param pubDirReply
 	 */
-	void pubdirRead(PublicDirReply pubDirReply);
+	void pubdirRead(PublicDirInfo pubDirReply);
 
 	public static class Stub implements PublicDirListener {
 
@@ -66,7 +66,7 @@ public interface PublicDirListener extends EventListener {
 		/**
 		 * @see pl.mn.communicator.event.PublicDirListener#pubdirRead(pl.mn.communicator.PublicDirQuery)
 		 */
-		public void pubdirRead(PublicDirReply pubDirReply) { }
+		public void pubdirRead(PublicDirInfo pubDirReply) { }
 		
 	}
 	

@@ -24,7 +24,7 @@ import java.util.Iterator;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IPublicDirectoryService;
-import pl.mn.communicator.PublicDirReply;
+import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.PublicDirQuery;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.PublicDirListener;
@@ -34,7 +34,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.4 2004-12-16 22:22:21 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.5 2004-12-17 20:21:19 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -80,9 +80,17 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	/**
 	 * @see pl.mn.communicator.IPublicDirectoryService#write()
 	 */
-	public void write() throws GGException {
-		// TODO Auto-generated method stub
-
+	public void write(PublicDirInfo publicDirInfo) throws GGException {
+		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
+		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
+			throw new GGSessionException(m_session.getSessionState());
+		}
+		try {
+			GGPubdirRequest pubdirRequest = GGPubdirRequest.createWritePubdirRequest(publicDirInfo);
+			m_session.getSessionAccessor().sendPackage(pubdirRequest);
+		} catch (IOException ex) {
+			throw new GGException("Unable to write information to public directory.");
+		}
 	}
 	
 	/**
@@ -98,11 +106,18 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		m_directoryListeners.remove(publicDirListener);
 	}
 	
-	protected void notifyPubdirRead(PublicDirReply pubDirReply) {
-		if (pubDirReply == null) throw new NullPointerException("pubDirReply cannot be null");
+	protected void notifyPubdirRead(PublicDirInfo publicDirInfo) {
+		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
-			publicDirListener.pubdirRead(pubDirReply);
+			publicDirListener.pubdirRead(publicDirInfo);
+		}
+	}
+
+	protected void notifyPubdirUpdated() {
+		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
+			PublicDirListener publicDirListener = (PublicDirListener) it.next();
+			publicDirListener.pubdirUpdated();
 		}
 	}
 

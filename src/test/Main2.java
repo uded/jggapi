@@ -5,12 +5,13 @@ import java.util.Collection;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGUser;
 import pl.mn.communicator.GGUserMode;
+import pl.mn.communicator.Gender;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.OutgoingMessage;
-import pl.mn.communicator.PubDirReply;
+import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.SessionFactory;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.ConnectionListener;
@@ -125,16 +126,15 @@ public class Main2 {
 		session.getPublicDirectoryService().addPublicDirListener(new PublicDirListener() {
 
 			public void pubdirUpdated() {
-				// TODO Auto-generated method stub
-				
+				System.out.println("Updated pubDir");
 			}
 
 			public void pubdirGotSearchResults(Collection results) {
-				// TODO Auto-generated method stub
+				System.out.println("Got pubdir results");
 				
 			}
 
-			public void pubdirRead(PubDirReply pubDirReply) {
+			public void pubdirRead(PublicDirInfo pubDirReply) {
 				System.out.println("Got pubDir read reply");
 				System.out.println("FirstName: "+pubDirReply.getFirstName());
 				System.out.println("Surname: "+pubDirReply.getLastName());
@@ -146,6 +146,18 @@ public class Main2 {
 		session.getLoginService().login();
 		
 		session.getPublicDirectoryService().read();
+		PublicDirInfo publicDirInfo = new PublicDirInfo();
+		publicDirInfo.setFirstName("Piotr");
+		publicDirInfo.setLastName("Kowalczyk");
+		publicDirInfo.setCity("Poznań");
+		publicDirInfo.setGender(Gender.MALE);
+		publicDirInfo.setNickName("Kowal");
+		publicDirInfo.setBirthDate("1967");
+		publicDirInfo.setFamilyCity("Kraków");
+		publicDirInfo.setFamilyName("Kowalskis Family");
+		session.getPublicDirectoryService().write(publicDirInfo);
+		session.getPublicDirectoryService().read();
+
 		//		loginContext.setPassword("dupadupa");
 //		session.getLoginService().login();
 		
