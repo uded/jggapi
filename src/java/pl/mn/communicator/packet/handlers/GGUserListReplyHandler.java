@@ -29,7 +29,7 @@ import pl.mn.communicator.packet.in.GGUserListReply;
  * Created on 2004-12-11
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReplyHandler.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: GGUserListReplyHandler.java,v 1.2 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class GGUserListReplyHandler implements PacketHandler {
 
@@ -39,8 +39,11 @@ public class GGUserListReplyHandler implements PacketHandler {
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
-		logger.debug("PacketHeader: "+context.getHeader());
-		logger.debug("Got packet: "+GGUtils.bytesToString(context.getPackageContent()));
+		if (logger.isDebugEnabled()) {
+			logger.debug("GGUserlistReply packet received.");
+			logger.debug("PacketHeader: "+context.getHeader());
+			logger.debug("Got packet: "+GGUtils.bytesToString(context.getPackageContent()));
+		}
 
 		GGUserListReply userListReply = new GGUserListReply(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(userListReply);

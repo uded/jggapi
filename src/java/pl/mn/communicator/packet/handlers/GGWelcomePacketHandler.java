@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.in.GGWelcome;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcomePacketHandler.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: GGWelcomePacketHandler.java,v 1.2 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class GGWelcomePacketHandler implements PacketHandler {
 
@@ -37,9 +37,11 @@ public class GGWelcomePacketHandler implements PacketHandler {
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.PacketContext)
 	 */
 	public void handle(Context context) {
-		logger.debug("GGWelcome packet received.");
-		logger.debug("PacketHeader: "+context.getHeader());
-		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+		if (logger.isDebugEnabled()) {
+			logger.debug("GGWelcome packet received.");
+			logger.debug("PacketHeader: "+context.getHeader());
+			logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+		}
 
 		GGWelcome welcome = new GGWelcome(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(welcome);

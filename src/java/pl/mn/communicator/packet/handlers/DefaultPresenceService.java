@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.2 2004-12-14 22:52:04 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.3 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
@@ -58,6 +58,7 @@ public class DefaultPresenceService implements IPresenceService {
 	private Collection m_monitoredUsers = new HashSet();
 
 	public DefaultPresenceService(Session session) {
+		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		m_localStatus = session.getLoginContext().getStatus();
 		m_userListeners = new HashSet();

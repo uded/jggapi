@@ -17,11 +17,10 @@
  */
 package pl.mn.communicator.packet.in;
 
-
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGDisconnecting.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGDisconnecting.java,v 1.2 2004-12-18 16:47:14 winnetou25 Exp $
  */
 public class GGDisconnecting implements GGIncomingPackage {
 
@@ -32,19 +31,19 @@ public class GGDisconnecting implements GGIncomingPackage {
 	private GGDisconnecting() {
 		//private constructor
 	}
-	
-	/**
-	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_DISCONNECTING;
-	}
-	
+
 	public static GGDisconnecting getInstance() {
 		if (m_instance == null) {
 			m_instance = new GGDisconnecting();
 		}
 		return m_instance;
+	}
+
+	/**
+	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_DISCONNECTING;
 	}
 	
 }

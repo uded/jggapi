@@ -25,7 +25,7 @@ import pl.mn.communicator.packet.GGVersion;
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.2 2004-12-18 00:08:43 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.3 2004-12-18 16:47:21 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 
@@ -37,7 +37,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 	/** Password that will be used during logging */
 	private char[] m_password = null;
 
-	/** Computed login_hash based on seed retreived from Gadu-Gadu server */
+	/** Computed login hash based on seed retreived from Gadu-Gadu server */
 	private int m_loginHash = -1;
 
 	/** Initial status that will be set after logging */

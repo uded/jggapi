@@ -23,7 +23,7 @@ import pl.mn.communicator.packet.GGUtils;
  * Acknowledgment of successuly delivered message that is recieved from Gadu-Gadu server.
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsgAck.java,v 1.2 2004-12-18 15:35:05 winnetou25 Exp $
+ * @version $Id: GGSendMsgAck.java,v 1.3 2004-12-18 16:47:14 winnetou25 Exp $
  */
 public class GGSendMsgAck implements GGIncomingPackage {
 
@@ -48,12 +48,12 @@ public class GGSendMsgAck implements GGIncomingPackage {
 	
 	private int m_messageStatus = -1;
 	private int m_recipient = -1;
-	private int m_seq = -1;
+	private int m_messageSeq = -1;
 	
 	public GGSendMsgAck(byte[] data) {
 		m_messageStatus = GGUtils.byteToInt(data, 0);
 		m_recipient = GGUtils.byteToInt(data, 4);
-		m_seq = GGUtils.byteToInt(data, 8);
+		m_messageSeq = GGUtils.byteToInt(data, 8);
 	}
 	
 	/**
@@ -81,7 +81,7 @@ public class GGSendMsgAck implements GGIncomingPackage {
 	 * @return Sequence number of the message that has been sent.
 	 */
 	public int getMessageSeq() {
-		return m_seq;
+		return m_messageSeq;
 	}
 	
 }

@@ -34,13 +34,14 @@ import pl.mn.communicator.IRegistrationService;
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.2 2004-12-18 15:17:22 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.3 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 
 	private Session m_session;
 	
 	public DefaultRegistrationService(Session session) {
+		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 	}
 	

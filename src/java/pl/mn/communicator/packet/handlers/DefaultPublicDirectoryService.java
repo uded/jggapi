@@ -35,7 +35,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.9 2004-12-18 15:52:15 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.10 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -44,6 +44,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	private Session m_session;
 	
 	public DefaultPublicDirectoryService(Session session) {
+		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 	}
 	

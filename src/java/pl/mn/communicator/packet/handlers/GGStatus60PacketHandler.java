@@ -29,7 +29,7 @@ import pl.mn.communicator.packet.in.GGStatus60;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60PacketHandler.java,v 1.2 2004-12-15 22:03:01 winnetou25 Exp $
+ * @version $Id: GGStatus60PacketHandler.java,v 1.3 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class GGStatus60PacketHandler implements PacketHandler {
 
@@ -39,9 +39,11 @@ public class GGStatus60PacketHandler implements PacketHandler {
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
-		logger.debug("Received GGStatus60 packet");
-		logger.debug("PacketHeader: "+context.getHeader());
-		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+		if (logger.isDebugEnabled()) {
+			logger.debug("Received GGStatus60 packet.");
+			logger.debug("PacketHeader: "+context.getHeader());
+			logger.debug("PacketBody: "+GGUtils.bytesToString(context.getPackageContent()));
+		}
 		
 		GGStatus60 status60 = new GGStatus60(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(status60);

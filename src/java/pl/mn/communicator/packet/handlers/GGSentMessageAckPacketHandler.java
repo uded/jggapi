@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.in.GGSendMsgAck;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSentMessageAckPacketHandler.java,v 1.2 2004-12-18 15:35:06 winnetou25 Exp $
+ * @version $Id: GGSentMessageAckPacketHandler.java,v 1.3 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class GGSentMessageAckPacketHandler implements PacketHandler {
 
@@ -38,10 +38,11 @@ public class GGSentMessageAckPacketHandler implements PacketHandler {
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
-		logger.debug("GGSentMessageAck packet received.");
-		logger.debug("PacketHeader: "+context.getHeader());
-		logger.debug("PacketBody: "+GGUtils.bytesToString(context.getPackageContent()));
-
+		if (logger.isDebugEnabled()) {
+			logger.debug("GGSentMessageAck packet received.");
+			logger.debug("PacketHeader: "+context.getHeader());
+			logger.debug("PacketBody: "+GGUtils.bytesToString(context.getPackageContent()));
+		}
 		GGSendMsgAck sendMessageAck = new GGSendMsgAck(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(sendMessageAck);
 		int uin  = sendMessageAck.getRecipientUin();

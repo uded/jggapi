@@ -22,7 +22,7 @@ package pl.mn.communicator.packet.in;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginFailed.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGLoginFailed.java,v 1.2 2004-12-18 16:47:14 winnetou25 Exp $
  */
 public class GGLoginFailed implements GGIncomingPackage {
 
@@ -33,14 +33,7 @@ public class GGLoginFailed implements GGIncomingPackage {
 	private GGLoginFailed() {
 		//prevent instant
 	}
-	
-	/**
-	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_LOGIN_FAILED;
-	}
-	
+
 	public static GGLoginFailed getInstance() {
 		if (m_instance == null) {
 			m_instance = new GGLoginFailed();
@@ -48,4 +41,11 @@ public class GGLoginFailed implements GGIncomingPackage {
 		return m_instance;
 	}
 
+	/**
+	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_LOGIN_FAILED;
+	}
+	
 }

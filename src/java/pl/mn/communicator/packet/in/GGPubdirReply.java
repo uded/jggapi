@@ -25,13 +25,12 @@ import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.packet.GGPubdirEnabled;
 import pl.mn.communicator.packet.GGUtils;
-import pl.mn.communicator.packet.PublicDirConstants;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.7 2004-12-18 14:20:32 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.8 2004-12-18 16:47:14 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
@@ -99,22 +98,22 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 		m_pubDirInfo = new PublicDirInfo();
 		while (tokenizer.hasMoreTokens()) {
 			String token = (String) tokenizer.nextToken();
-			if (token.equals(PublicDirConstants.FIRST_NAME)) {
+			if (token.equals(FIRST_NAME)) {
 				String firstName = tokenizer.nextToken();
 				m_pubDirInfo.setFirstName(firstName);
-			} else if (token.equals(PublicDirConstants.LAST_NAME)) {
+			} else if (token.equals(LAST_NAME)) {
 				String lastName = tokenizer.nextToken();
 				m_pubDirInfo.setLastName(lastName);
-			} else if (token.equals(PublicDirConstants.BIRTH_YEAR)) {
+			} else if (token.equals(BIRTH_YEAR)) {
 				String birthDate = tokenizer.nextToken();
 				m_pubDirInfo.setBirthDate(birthDate);
-			} else if (token.equals(PublicDirConstants.CITY)) {
+			} else if (token.equals(CITY)) {
 				String city = tokenizer.nextToken();
 				m_pubDirInfo.setCity(city);
-			} else if (token.equals(PublicDirConstants.NICK_NAME)) {
+			} else if (token.equals(NICK_NAME)) {
 				String nickName = tokenizer.nextToken();
 				m_pubDirInfo.setNickName(nickName);
-			} else if (token.equals(PublicDirConstants.GENDER)) {
+			} else if (token.equals(GENDER)) {
 				String genderString = tokenizer.nextToken();
 				Gender gender = null;
 				if (genderString.equals("1")) {
@@ -123,10 +122,10 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 					gender = Gender.FEMALE;
 				}
 				m_pubDirInfo.setGender(gender);
-			} else if (token.equals(PublicDirConstants.FAMILY_NAME.toString())) {
+			} else if (token.equals(FAMILY_NAME)) {
 				String familyName = tokenizer.nextToken();
 				m_pubDirInfo.setFamilyName(familyName);
-			} else if (token.equals(PublicDirConstants.FAMILY_CITY.toString())) {
+			} else if (token.equals(FAMILY_CITY)) {
 				String familyCity = tokenizer.nextToken();
 				m_pubDirInfo.setFamilyCity(familyCity);
 			}
@@ -142,31 +141,31 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 		boolean processedUin = false;
 		while (tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken();
-			if (processedUin && token.equals(PublicDirConstants.UIN)) {
+			if (processedUin && token.equals(UIN)) {
 				processedUin = false;
 				entry = m_publicDirSearchReply.createSearchEntry();
 				String uin = tokenizer.nextToken();
 				entry.setUin(Integer.valueOf(uin));
 				processedUin = true;
-			} else if (token.equals(PublicDirConstants.FIRST_NAME)) {
+			} else if (token.equals(FIRST_NAME)) {
 				String firstName = tokenizer.nextToken();
 				entry.setFirstName(firstName);
-			} else if(token.equals(PublicDirConstants.UIN)) {
+			} else if(token.equals(UIN)) {
 				String uin = tokenizer.nextToken();
 				entry.setUin(Integer.valueOf(uin));
 				processedUin = true;
-			} else if (token.equals(PublicDirConstants.STATUS)) {
+			} else if (token.equals(STATUS)) {
 				String status = tokenizer.nextToken();
 				int protocolStatus = Integer.valueOf(status).intValue();
 				IStatus statusBiz = GGUtils.getClientStatus(protocolStatus, null, -1);
 				entry.setStatus(statusBiz);
-			} else if (token.equals(PublicDirConstants.BIRTH_YEAR)) {
+			} else if (token.equals(BIRTH_YEAR)) {
 				String birthYear = tokenizer.nextToken();
 				entry.setBirthYear(birthYear);
-			} else if (token.equals(PublicDirConstants.CITY)) {
+			} else if (token.equals(CITY)) {
 				String city = tokenizer.nextToken();
 				entry.setCity(city);
-			} else if (token.equals(PublicDirConstants.NICK_NAME)) {
+			} else if (token.equals(NICK_NAME)) {
 				String nickName = tokenizer.nextToken();
 				entry.setNickName(nickName);
 			} else if(token.equals("\0")) {

@@ -23,13 +23,12 @@ import pl.mn.communicator.Gender;
 import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.packet.GGPubdirEnabled;
-import pl.mn.communicator.packet.PublicDirConstants;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.6 2004-12-18 00:08:43 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.7 2004-12-18 16:47:21 winnetou25 Exp $
  */
 public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
 
@@ -86,45 +85,45 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
     	StringBuffer buffer = new StringBuffer();
     	if (publicDirQuery.getUin() != null) {
     		Integer uin = publicDirQuery.getUin();
-    		String uinEntry = getEntry(PublicDirConstants.UIN, String.valueOf(uin.intValue()));
+    		String uinEntry = getEntry(UIN, String.valueOf(uin.intValue()));
     		buffer.append(uinEntry);
     	}
     	if (publicDirQuery.getFirstName() != null) {
-    		String firstNameEntry = getEntry(PublicDirConstants.FIRST_NAME, publicDirQuery.getFirstName());
+    		String firstNameEntry = getEntry(FIRST_NAME, publicDirQuery.getFirstName());
     		buffer.append(firstNameEntry);
     	}
     	if (publicDirQuery.getLastName() != null) {
-    		String lastNameEntry = getEntry(PublicDirConstants.LAST_NAME, publicDirQuery.getLastName());
+    		String lastNameEntry = getEntry(LAST_NAME, publicDirQuery.getLastName());
     		buffer.append(lastNameEntry);
     	}
     	if (publicDirQuery.getCity() != null) {
-    		String cityEntry = getEntry(PublicDirConstants.CITY, publicDirQuery.getCity());
+    		String cityEntry = getEntry(CITY, publicDirQuery.getCity());
     		buffer.append(cityEntry);
     	}
     	if (publicDirQuery.getNickName() != null) {
-    		String nickNameEntry = getEntry(PublicDirConstants.NICK_NAME, publicDirQuery.getNickName());
+    		String nickNameEntry = getEntry(NICK_NAME, publicDirQuery.getNickName());
     		buffer.append(nickNameEntry);
     	}
     	if (publicDirQuery.getBirthYear() != null) {
-    		String birthEntry = getEntry(PublicDirConstants.BIRTH_YEAR, publicDirQuery.getBirthYear());
+    		String birthEntry = getEntry(BIRTH_YEAR, publicDirQuery.getBirthYear());
     		buffer.append(birthEntry);
     	}
     	if (publicDirQuery.getGender() != null) {
     		Gender gender = publicDirQuery.getGender();
-    		String genderEntry = getEntry(PublicDirConstants.GENDER, gender == Gender.MALE ? "2" : "1");
+    		String genderEntry = getEntry(GENDER, gender == Gender.MALE ? "2" : "1");
     		buffer.append(genderEntry);
     	}
     	if (publicDirQuery.getFamilyName() != null) {
-    		String familyNameEntry = getEntry(PublicDirConstants.FAMILY_NAME, publicDirQuery.getFamilyName());
+    		String familyNameEntry = getEntry(FAMILY_NAME, publicDirQuery.getFamilyName());
     		buffer.append(familyNameEntry);
     	}
     	if (publicDirQuery.getFamilyCity() != null) {
-    		String familyCityEntry = getEntry(PublicDirConstants.FAMILY_CITY, publicDirQuery.getFamilyCity());
+    		String familyCityEntry = getEntry(FAMILY_CITY, publicDirQuery.getFamilyCity());
     		buffer.append(familyCityEntry);
     	}
     	if (publicDirQuery.getStart() != null) {
     		Integer startInteger = publicDirQuery.getStart(); 
-    		String startEntry = getEntry(PublicDirConstants.START, String.valueOf(startInteger.intValue()));
+    		String startEntry = getEntry(START, String.valueOf(startInteger.intValue()));
     		buffer.append(startEntry);
     	}
     	pubdirRequest.m_request = buffer.toString();
@@ -149,36 +148,36 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
     private static String prepareWriteRequest(PublicDirInfo publicDirInfo) {
     	StringBuffer buffer = new StringBuffer();
     	if (publicDirInfo.getFirstName() != null) {
-    		String firstNameEntry = getEntry(PublicDirConstants.FIRST_NAME, publicDirInfo.getFirstName());
+    		String firstNameEntry = getEntry(FIRST_NAME, publicDirInfo.getFirstName());
     		buffer.append(firstNameEntry);
     	}
     	if (publicDirInfo.getLastName() != null) {
-    		String lastNameEntry = getEntry(PublicDirConstants.LAST_NAME, publicDirInfo.getLastName());
+    		String lastNameEntry = getEntry(LAST_NAME, publicDirInfo.getLastName());
     		buffer.append(lastNameEntry);
     	}
     	if (publicDirInfo.getCity() != null) {
-    		String cityEntry = getEntry(PublicDirConstants.CITY, publicDirInfo.getCity());
+    		String cityEntry = getEntry(CITY, publicDirInfo.getCity());
     		buffer.append(cityEntry);
     	}
     	if (publicDirInfo.getNickName() != null) {
-    		String nickNameEntry = getEntry(PublicDirConstants.NICK_NAME, publicDirInfo.getNickName());
+    		String nickNameEntry = getEntry(NICK_NAME, publicDirInfo.getNickName());
     		buffer.append(nickNameEntry);
     	}
     	if (publicDirInfo.getGender() != null) {
     		Gender gender = publicDirInfo.getGender();
-    		String genderEntry = getEntry(PublicDirConstants.GENDER, gender == Gender.MALE ? "1" : "2");
+    		String genderEntry = getEntry(GENDER, gender == Gender.MALE ? "1" : "2");
     		buffer.append(genderEntry);
     	}
     	if (publicDirInfo.getFamilyName() != null) {
-    		String familyNameEntry = getEntry(PublicDirConstants.FAMILY_NAME, publicDirInfo.getFamilyName());
+    		String familyNameEntry = getEntry(FAMILY_NAME, publicDirInfo.getFamilyName());
     		buffer.append(familyNameEntry);
     	}
     	if (publicDirInfo.getFamilyCity() != null) {
-    		String familyCityEntry = getEntry(PublicDirConstants.FAMILY_CITY, publicDirInfo.getFamilyCity());
+    		String familyCityEntry = getEntry(FAMILY_CITY, publicDirInfo.getFamilyCity());
     		buffer.append(familyCityEntry);
     	}
     	if (publicDirInfo.getBirthDate() != null) {
-    		String birthDateEntry = getEntry(PublicDirConstants.BIRTH_YEAR, publicDirInfo.getBirthDate());
+    		String birthDateEntry = getEntry(BIRTH_YEAR, publicDirInfo.getBirthDate());
     		buffer.append(birthDateEntry);
     	}
     	return buffer.toString();

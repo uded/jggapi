@@ -17,22 +17,33 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGStatus;
 
 /**
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatusPacketHandler.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: GGStatusPacketHandler.java,v 1.2 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class GGStatusPacketHandler implements PacketHandler {
 
+	private Log logger = LogFactory.getLog(GGStatusPacketHandler.class);
+	
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
+		if (logger.isDebugEnabled()) {
+			logger.debug("Received GGStatus packet.");
+			logger.debug("PacketHeader: "+context.getHeader());
+			logger.debug("PacketBody: "+GGUtils.bytesToString(context.getPackageContent()));
+		}
 		GGStatus status = new GGStatus(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(status);
 		IUser user = status.getUser();

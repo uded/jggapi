@@ -17,31 +17,28 @@
  */
 package pl.mn.communicator.packet.out;
 
-
 /**
  * Outgoing packet, ping type that is from time to time being send to Gadu-Gadu server.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPing.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGPing.java,v 1.2 2004-12-18 16:47:21 winnetou25 Exp $
  */
 public final class GGPing implements GGOutgoingPackage {
 	
 	public static final int GG_PING = 0x08;
 
-	private final static byte[] DATA = new byte[0];
+	private static byte[] m_data = null;
 	
     private static GGPing m_ping = null;
 
     /**
      * Prywatny konstruktor.
      */
-    private GGPing() { }
+    private GGPing() {
+    	m_data = new byte[0];
+    }
 
-    /**
-     * Pobierz instancje tego obiektu.
-     * @return instancja <code>GGPing</code>
-     */
     public static GGPing getPing() {
     	if (m_ping == null) {
     		m_ping = new GGPing();
@@ -60,14 +57,14 @@ public final class GGPing implements GGOutgoingPackage {
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        return DATA.length;
+        return m_data.length;
     }
 
     /**
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        return DATA;
+        return m_data;
     }
 
 }

@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.2 2004-12-15 22:02:56 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.3 2004-12-18 16:47:14 winnetou25 Exp $
  */
 public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 
@@ -132,7 +132,6 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
     	if (flag == 0x40) {
     		m_status60.setSupportsVoiceCommunication(true);
     	}
-    	
     }
 	
 }

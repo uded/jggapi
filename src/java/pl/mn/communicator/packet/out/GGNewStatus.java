@@ -26,18 +26,18 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNewStatus.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGNewStatus.java,v 1.2 2004-12-18 16:47:21 winnetou25 Exp $
  */
 public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
 	
 	public static final int GG_NEW_STATUS = 0x0002;
 
-    private static final int MAX_OPIS = 70;
+    private static final int MAX_DESCRIPTION = 70;
 
     private IStatus m_localStatus = null;
     
     /**
-     * The protocol status contructor.
+     * The protocol status constructor.
      */
     public GGNewStatus(IStatus localStatus) {
     	if (localStatus == null) throw new NullPointerException("status cannot be null");
@@ -99,8 +99,8 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
     
     private String trimDescription(String description) {
     	if (description == null) return null;
-        if (description.length() > MAX_OPIS) {
-        	description = description.substring(0, MAX_OPIS - 1);
+        if (description.length() > MAX_DESCRIPTION) {
+        	description = description.substring(0, MAX_DESCRIPTION - 1);
         }
         return description;
     }

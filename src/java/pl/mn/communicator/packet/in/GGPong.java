@@ -17,12 +17,11 @@
  */
 package pl.mn.communicator.packet.in;
 
-
 /**
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPong.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGPong.java,v 1.2 2004-12-18 16:47:14 winnetou25 Exp $
  */
 public class GGPong implements GGIncomingPackage {
 
@@ -33,14 +32,7 @@ public class GGPong implements GGIncomingPackage {
 	private GGPong() {
 		//private contructor
 	}
-	
-	/**
-	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_PONG;
-	}
-	
+
 	public static GGPong getInstance() {
 		if (m_instance == null) {
 			m_instance = new GGPong();
@@ -48,4 +40,11 @@ public class GGPong implements GGIncomingPackage {
 		return m_instance;
 	}
 
+	/**
+	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_PONG;
+	}
+	
 }

@@ -17,12 +17,11 @@
  */
 package pl.mn.communicator.packet.out;
 
-
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGListEmpty.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGListEmpty.java,v 1.2 2004-12-18 16:47:21 winnetou25 Exp $
  */
 public class GGListEmpty implements GGOutgoingPackage {
 	
@@ -30,7 +29,7 @@ public class GGListEmpty implements GGOutgoingPackage {
 	
 	private static GGListEmpty m_instance = null;
 	
-	private byte[] m_data = null;
+	private static byte[] m_data = null;
 	
 	private GGListEmpty() { //private constructor
 		m_data = new byte[0];

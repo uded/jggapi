@@ -24,7 +24,7 @@ import pl.mn.communicator.packet.handlers.Session.SessionAccessor;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Context.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: Context.java,v 1.2 2004-12-18 16:47:20 winnetou25 Exp $
  */
 public class Context {
 
@@ -33,6 +33,8 @@ public class Context {
 	private byte[] m_packageContent = null;
 	
 	public Context(Session session, GGHeader header, byte[] packageContent) {
+		if (session == null) throw new NullPointerException("session cannot be null");
+		if (header == null) throw new NullPointerException("header cannot be null");
 		if (packageContent == null) throw new NullPointerException("packageContent cannot be null");
 		m_session = session;
 		m_header = header;
@@ -44,14 +46,18 @@ public class Context {
 	}
 	
 	/**
-	 * @return Returns the gg header.
+	 * Returns the Gadu-Gadu packet header.
+	 * 
+	 * @return Gadu-Gadu packet header. 
 	 */
 	public GGHeader getHeader() {
 		return m_header;
 	}
 
 	/**
-	 * @return Returns the content of the package.
+	 * Returns the content of the Gadu-Gadu packet.
+	 * 
+	 * @return Gadu-Gadu packet content
 	 */
 	public byte[] getPackageContent() {
 		return m_packageContent;
