@@ -22,17 +22,17 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.StringTokenizer;
 
-import pl.mn.communicator.GGPubDir;
 import pl.mn.communicator.Gender;
-import pl.mn.communicator.PubDirReply;
+import pl.mn.communicator.PublicDirReply;
 import pl.mn.communicator.packet.GGPubdirEnabled;
 import pl.mn.communicator.packet.GGUtils;
+import pl.mn.communicator.packet.PublicDirConstants;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.3 2004-12-16 22:13:51 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.4 2004-12-16 22:22:43 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
@@ -90,25 +90,25 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	private void handlePubdirReadReply(byte[] data) {
 		String string = byteToString(data, 5);
 		StringTokenizer tokenizer = new StringTokenizer(string, "\0");
-		PubDirReply pubDirReply = new PubDirReply();
+		PublicDirReply pubDirReply = new PublicDirReply();
 		while (tokenizer.hasMoreTokens()) {
 			String token = (String) tokenizer.nextToken();
-			if (token.equals(GGPubDir.FIRST_NAME.toString())) {
+			if (token.equals(PublicDirConstants.FIRST_NAME)) {
 				String firstName = tokenizer.nextToken();
 				pubDirReply.setFirstName(firstName);
-			} else if (token.equals(GGPubDir.LAST_NAME.toString())) {
+			} else if (token.equals(PublicDirConstants.LAST_NAME)) {
 				String lastName = tokenizer.nextToken();
 				pubDirReply.setLastName(lastName);
-			} else if (token.equals(GGPubDir.BIRTH_YEAR.toString())) {
+			} else if (token.equals(PublicDirConstants.BIRTH_YEAR)) {
 				String birthDate = tokenizer.nextToken();
 				pubDirReply.setBirthDate(birthDate);
-			} else if (token.equals(GGPubDir.CITY.toString())) {
+			} else if (token.equals(PublicDirConstants.CITY)) {
 				String city = tokenizer.nextToken();
 				pubDirReply.setCity(city);
-			} else if (token.equals(GGPubDir.NICK_NAME.toString())) {
+			} else if (token.equals(PublicDirConstants.NICK_NAME)) {
 				String nickName = tokenizer.nextToken();
 				pubDirReply.setNickName(nickName);
-			} else if (token.equals(GGPubDir.GENDER.toString())) {
+			} else if (token.equals(PublicDirConstants.GENDER)) {
 				String genderString = tokenizer.nextToken();
 				Gender gender = null;
 				if (genderString.equals("2")) {
@@ -117,10 +117,10 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 					gender = Gender.MALE;
 				}
 				pubDirReply.setGender(gender);
-			} else if (token.equals(GGPubDir.FAMILY_NAME.toString())) {
+			} else if (token.equals(PublicDirConstants.FAMILY_NAME.toString())) {
 				String familyName = tokenizer.nextToken();
 				pubDirReply.setFamilyName(familyName);
-			} else if (token.equals(GGPubDir.FAMILY_CITY.toString())) {
+			} else if (token.equals(PublicDirConstants.FAMILY_CITY.toString())) {
 				String familyCity = tokenizer.nextToken();
 				pubDirReply.setFamilyCity(familyCity);
 			}

@@ -24,7 +24,7 @@ import java.util.Iterator;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IPublicDirectoryService;
-import pl.mn.communicator.PubDirReply;
+import pl.mn.communicator.PublicDirReply;
 import pl.mn.communicator.PublicDirQuery;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.PublicDirListener;
@@ -34,7 +34,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.3 2004-12-16 22:13:42 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.4 2004-12-16 22:22:21 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -98,7 +98,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		m_directoryListeners.remove(publicDirListener);
 	}
 	
-	protected void notifyPubdirRead(PubDirReply pubDirReply) {
+	protected void notifyPubdirRead(PublicDirReply pubDirReply) {
 		if (pubDirReply == null) throw new NullPointerException("pubDirReply cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();

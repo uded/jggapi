@@ -21,9 +21,9 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PubDirReply.java,v 1.1 2004-12-16 22:13:19 winnetou25 Exp $
+ * @version $Id: PublicDirReply.java,v 1.1 2004-12-16 22:21:58 winnetou25 Exp $
  */
-public class PubDirReply {
+public class PublicDirReply {
 
 	private String m_firstName = null;
 	private String m_lastName = null;

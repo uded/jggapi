@@ -19,15 +19,15 @@ package pl.mn.communicator.packet.out;
 
 import java.util.Random;
 
-import pl.mn.communicator.GGPubDir;
 import pl.mn.communicator.PublicDirQuery;
 import pl.mn.communicator.packet.GGPubdirEnabled;
+import pl.mn.communicator.packet.PublicDirConstants;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.3 2004-12-15 22:03:01 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.4 2004-12-16 22:22:50 winnetou25 Exp $
  */
 public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
 
@@ -91,12 +91,12 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
     	StringBuffer buffer = new StringBuffer();
     	
     	if (publicDirQuery.getFirstname()!=null) {
-    		buffer.append(GGPubDir.FIRST_NAME);
+    		buffer.append(PublicDirConstants.FIRST_NAME);
     		buffer.append('.');
     		buffer.append(publicDirQuery.getFirstname());
     	}
     	if (publicDirQuery.getSurname()!=null) {
-    		buffer.append(GGPubDir.LAST_NAME);
+    		buffer.append(PublicDirConstants.LAST_NAME);
     		buffer.append('.');
     		buffer.append(publicDirQuery.getSurname());
     	}
