@@ -27,7 +27,7 @@ import java.net.URL;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: HttpRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
+ * @version $Id: HttpRequest.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
  */
 public abstract class HttpRequest {
 
@@ -44,19 +44,18 @@ public abstract class HttpRequest {
 		if (wannaWrite()) {
 			m_huc.setDoOutput(true);
 		}
-		m_huc.setRequestProperty("Content-Length", String.valueOf(getRequestBody().length()));
 		m_huc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 		m_huc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)");
 	}
 	
 	public HttpURLConnection connect() throws IOException {
+		m_huc.setRequestProperty("Content-Length", String.valueOf(getRequestBody().length()));
 		m_huc.connect();
 
 		return m_huc;
 	}
 	
 	public HttpURLConnection sendRequest() throws IOException {
-		
 		if (wannaWrite()) {
 			PrintWriter out = new PrintWriter(m_huc.getOutputStream(), true);
 			

@@ -21,10 +21,12 @@ package pl.mn.communicator.packet.http;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: HttpResponse.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
+ * @version $Id: HttpResponse.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
  */
 public abstract class HttpResponse {
 
 	public abstract boolean isOKResponse();
+	
+	public abstract String getResponseMessage();
 
 }

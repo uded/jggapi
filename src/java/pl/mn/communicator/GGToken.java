@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2005-01-26
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGToken.java,v 1.1 2005-01-25 23:41:59 winnetou25 Exp $
+ * @version $Id: GGToken.java,v 1.2 2005-01-28 23:07:12 winnetou25 Exp $
  */
 public class GGToken {
 	
@@ -83,6 +83,15 @@ public class GGToken {
 	
 	public void setTokenLength(int tokenLength) {
 		m_length = tokenLength;
+	}
+	
+	public String getFullTokenURL() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(getTokenURL());
+		buffer.append("?tokenid=");
+		buffer.append(getTokenID());
+		
+		return buffer.toString();
 	}
 	
 }

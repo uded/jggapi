@@ -28,11 +28,15 @@ public class Main3 {
 		
 		GGToken token = session.getRegistrationService().getRegistrationToken();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+		System.out.println("TokenURL: "+token.getFullTokenURL());
+		System.out.print("Wpisz tokenVal: ");
 		String line = reader.readLine();
 		
-		//session.getRegistrationService().registerAccount("dupa@dupa.com", "dupka", token.getTokenID(), line, GGQuestions.FAVOURITE_ACTOR, "Willis");
-
-		session.getRegistrationService().remindAndSendPassword(376798, "mati@sz.home.pl", token.getTokenID(), line.toLowerCase().trim());
+//		int uin = session.getRegistrationService().registerAccount("mati@niak.infoman.com.pl", "dupka", token.getTokenID(), line);
+//		System.out.println("Nowy UIN: "+uin);
+//		session.getRegistrationService().changePassword(2862549, "mati@niak.infoman.com.pl", "dupka", "dupka1", token.getTokenID(), line);
+		session.getRegistrationService().unregisterAccount(2862549, "dupka1", token.getTokenID(), line);
+		session.getRegistrationService().sendPassword(376798, "mati@sz.home.pl", token.getTokenID(), line.toLowerCase().trim());
 	}
 	
 }

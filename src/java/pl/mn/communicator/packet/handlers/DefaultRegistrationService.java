@@ -28,6 +28,7 @@ import pl.mn.communicator.IRegistrationService;
 import pl.mn.communicator.packet.http.ChangePasswordRequest;
 import pl.mn.communicator.packet.http.CommonRegisterResponse;
 import pl.mn.communicator.packet.http.GGTokenRequest;
+import pl.mn.communicator.packet.http.HttpResponse;
 import pl.mn.communicator.packet.http.RegisterGGAccountRequest;
 import pl.mn.communicator.packet.http.SendAndRemindPasswordRequest;
 import pl.mn.communicator.packet.http.UnregisterGGPasswordRequest;
@@ -38,7 +39,7 @@ import pl.mn.communicator.packet.http.RegisterGGAccountRequest.RegisterGGAccount
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.15 2005-01-28 22:08:49 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.16 2005-01-28 23:07:39 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 	
@@ -67,7 +68,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 			GGTokenRequest.GGTokenResponse response = (GGTokenResponse) tokenRequest.getResponse();
 			
 			if (!response.isOKResponse()) {
-				throw new GGException("Error occured while requesting Gadu-Gadu token");
+				throw new GGException("Error occured while requesting Gadu-Gadu token, reason: "+response.getResponseMessage());
 			}
 			
 			return response.getGGToken();
@@ -99,7 +100,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 			
 			CommonRegisterResponse response = (CommonRegisterResponse) changePasswordRequest.getResponse();
 			if (!response.isOKResponse()) {
-				throw new GGException("Unexpected error occured while trying to change Gadu-Gadu password");
+				throw new GGException("Error occured while trying to change Gadu-Gadu password, reason: "+response.getResponseMessage());
 			}
 			
 		} catch (IOException ex) {
@@ -128,7 +129,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 			RegisterGGAccountRequest.RegisterGGAccountResponse response = (RegisterGGAccountResponse) request.getResponse();
 			
 			if (!response.isOKResponse()) {
-				throw new GGException("Unknown error occured while requesting to send password");
+				throw new GGException("Error occured while requesting to send password, reason: "+response.getResponseMessage());
 			}
 			
 			return response.getNewUin();
@@ -157,7 +158,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 			CommonRegisterResponse response = (CommonRegisterResponse) unregisterGGPasswordRequest.getResponse();
 			
 			if (!response.isOKResponse()) {
-				throw new GGException("Unexpected error occured while trying to unregister Gadu-Gadu account");
+				throw new GGException("Error occured while trying to unregister Gadu-Gadu account, reason: "+response.getResponseMessage());
 			}
 			
 		} catch (IOException ex) {
@@ -172,7 +173,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 	/**
 	 * @see pl.mn.communicator.IRegistrationService#remindAndSendPassword(int)
 	 */
-	public void remindAndSendPassword(int uin, String email, String tokenID, String tokenVal) throws GGException {
+	public void sendPassword(int uin, String email, String tokenID, String tokenVal) throws GGException {
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		if (email == null) throw new NullPointerException("email cannot be null");
 		if (tokenID == null) throw new NullPointerException("tokenID cannot be null");
@@ -183,8 +184,10 @@ public class DefaultRegistrationService implements IRegistrationService {
 			request = new SendAndRemindPasswordRequest(uin, email, tokenID, tokenVal);
 			request.connect();
 			request.sendRequest();
-			if (!request.getResponse().isOKResponse()) {
-				throw new GGException("Unknown error occured while requesting to send password");
+			
+			HttpResponse response = request.getResponse();
+			if (!response.isOKResponse()) {
+				throw new GGException("Error occured while requesting to send password, response: "+response.getResponseMessage());
 			}
 		} catch (IOException ex) {
 			throw new GGException("Unable to remind and send password", ex);

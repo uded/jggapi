@@ -29,7 +29,7 @@ import pl.mn.communicator.GGToken;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGTokenRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
+ * @version $Id: GGTokenRequest.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
  */
 public class GGTokenRequest extends HttpRequest {
 
@@ -113,6 +113,13 @@ public class GGTokenRequest extends HttpRequest {
 			token.setTokenURL(m_responseLine3.trim());
 			
 			return token;
+		}
+		
+		/**
+		 * @see pl.mn.communicator.packet.http.HttpResponse#getResponseMessage()
+		 */
+		public String getResponseMessage() {
+			return m_responseLine1+"\n"+m_responseLine2+"\n"+m_responseLine3;
 		}
 		
 	}

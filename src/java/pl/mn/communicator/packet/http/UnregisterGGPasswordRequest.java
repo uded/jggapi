@@ -23,12 +23,11 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: UnregisterGGPasswordRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
+ * @version $Id: UnregisterGGPasswordRequest.java,v 1.2 2005-01-28 23:07:32 winnetou25 Exp $
  */
 public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	

@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
  * Created on 2005-01-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: CommonRegisterResponse.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
+ * @version $Id: CommonRegisterResponse.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
  */
 public class CommonRegisterResponse extends HttpResponse {
 	
@@ -51,6 +51,13 @@ public class CommonRegisterResponse extends HttpResponse {
 			c2 = true;
 		}
 		return c1 && c2;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.packet.http.HttpResponse#getResponseMessage()
+	 */
+	public String getResponseMessage() {
+		return m_responseString;
 	}
 	
 }
