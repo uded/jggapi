@@ -25,7 +25,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {
@@ -58,7 +58,7 @@ class GGLogin implements GGOutgoingPackage {
         int i;
 
         for (x = 0, i = 0; i < password.length(); i++) {
-        	//Konrad Rodziewski implementation
+            //Konrad Rodziewski implementation
             //x = (x & 0xffffff00) | password.charAt(i);
             //y ^= x;
             //y += x;
