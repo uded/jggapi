@@ -18,14 +18,15 @@
 package pl.mn.communicator.packet.out;
 
 import pl.mn.communicator.ILocalStatus;
-import pl.mn.communicator.packet.GGStatusEnabled;
+import pl.mn.communicator.packet.GGConversion;
+import pl.mn.communicator.packet.GGStatuses;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.GGVersion;
 
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.10 2004-12-25 17:50:19 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.11 2005-01-31 21:22:13 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 
@@ -41,7 +42,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 	private int m_loginHash = -1;
 
 	/** Initial status that will be set after logging */
-	private int m_status = GGStatusEnabled.GG_STATUS_AVAIL;
+	private int m_status = GGStatuses.GG_STATUS_AVAIL;
 
 	/** Local IP */
 	private byte[] m_localIP = new byte[] {(byte)0, (byte)0, (byte)0, (byte)0};
@@ -77,7 +78,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 	
 	public void setStatus(ILocalStatus localStatus) {
 		if (localStatus == null) throw new NullPointerException("localStatus cannot be null");
-		m_status = GGUtils.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
+		m_status = GGConversion.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
 		if (localStatus.isDescriptionSet()) {
 			m_description = localStatus.getDescription();
 		}
@@ -85,15 +86,6 @@ public class GGLogin60 implements GGOutgoingPackage {
 			m_time = GGUtils.millisToSeconds(localStatus.getReturnDate().getTime());
 		}
 	}
-	
-//	public IStatus getStatus() {
-//		if (m_time > 0) {
-//			long timeInMillis = GGUtils.secondsToMillis(m_time);
-//			return GGUtils.getClientStatus(m_status, m_description, timeInMillis);
-//		} else {
-//			return GGUtils.getClientStatus(m_status, m_description, -1);
-//		}
-//	}
 	
 	public int getUin() {
 		return m_uin;

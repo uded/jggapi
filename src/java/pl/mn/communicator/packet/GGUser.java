@@ -18,30 +18,23 @@
 package pl.mn.communicator.packet;
 
 /**
- * Created on 2004-12-15
+ * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirEnabled.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGUser.java,v 1.1 2005-01-31 21:22:38 winnetou25 Exp $
  */
-public interface GGPubdirEnabled {
+public interface GGUser {
 
-	int GG_PUBDIR50_WRITE = 0x01;
-	int GG_PUBDIR50_READ = 0x02;
-	int GG_PUBDIR50_SEARCH = 0x03;
-	int GG_PUBDIR50_SEARCH_REPLY = 0x05;
-	
-	String UIN = "FmNumber";
-	String FIRST_NAME = "firstname";
-	String LAST_NAME = "lastname";
-	String NICK_NAME = "nickname";
-	String BIRTH_YEAR = "birthyear";
-	String CITY = "city";
-	String GENDER = "gender";
-	String ACTIVE = "ActiveOnly";
-	String FAMILY_NAME = "familyname";
-	String FAMILY_CITY = "familycity";
-	String START = "fmstart";
-	String STATUS = "FmStatus";
-	String NEXT_START = "nextstart";
+	/** Every user that is added to our contact list */
+    public static final int GG_USER_BUDDY = 0x01;
+
+    /** User to whom we are seen in friends only mode */
+    public static final int GG_USER_FRIEND = 0x02;
+
+//  /** Ordinary user that is added to contact list */
+//  public static final int GG_USER_NORMAL = 0x03;
+
+    /** The user from whom we do not want to receive messages */
+    public static final int GG_USER_BLOCKED = 0x04;
 
 }

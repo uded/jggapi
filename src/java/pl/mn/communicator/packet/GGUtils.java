@@ -17,169 +17,24 @@
  */
 package pl.mn.communicator.packet;
 
-import java.util.Date;
-
-import pl.mn.communicator.IStatus;
-import pl.mn.communicator.MessageClass;
-import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.RemoteStatus;
-import pl.mn.communicator.StatusType;
-import pl.mn.communicator.User;
-import pl.mn.communicator.packet.in.GGSendMsgAck;
-import pl.mn.communicator.packet.out.GGNotify;
-
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.15 2005-01-25 23:53:02 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.16 2005-01-31 21:22:38 winnetou25 Exp $
  */
 public class GGUtils {
 
-	public static User.UserMode getUserMode(int protocolStatus) {
-		if ((protocolStatus & GGStatusEnabled.GG_STATUS_FRIENDS_MASK) == GGStatusEnabled.GG_STATUS_FRIENDS_MASK) {
-			return User.UserMode.FRIEND;
-		}
-		if ((protocolStatus & GGStatusEnabled.GG_STATUS_BLOCKED) == GGStatusEnabled.GG_STATUS_BLOCKED) {
-			return User.UserMode.BLOCKED;
-		}
-		return User.UserMode.FRIEND;
-	}
-	
-	public static byte getProtocolUserMode(User.UserMode userMode) {
-		if (userMode == User.UserMode.BUDDY) return GGNotify.GG_USER_BUDDY;
-		if (userMode == User.UserMode.BLOCKED) return GGNotify.GG_USER_BLOCKED;
-		if (userMode == User.UserMode.FRIEND) return GGNotify.GG_USER_FRIEND;
-		throw new RuntimeException("Unable to convert userMode: "+userMode);
-	}
-	
-	public static RemoteStatus getClientRemoteStatus(int status, String description, long returnTimeInMillis) {
-		RemoteStatus remoteStatus = null;
-		
-		switch (status) {
-		case GGStatusEnabled.GG_STATUS_AVAIL: 
-			remoteStatus = new RemoteStatus(StatusType.ONLINE);
-			break;
-			
-		case GGStatusEnabled.GG_STATUS_AVAIL_DESCR:
-			remoteStatus = new RemoteStatus(StatusType.ONLINE_WITH_DESCRIPTION);
-			remoteStatus.setDescription(description);
-			break;
-			
-		case GGStatusEnabled.GG_STATUS_BUSY:
-			remoteStatus = new RemoteStatus(StatusType.BUSY);
-			break;
-			
-		case GGStatusEnabled.GG_STATUS_BUSY_DESCR:
-			remoteStatus = new RemoteStatus(StatusType.BUSY_WITH_DESCRIPTION);
-			remoteStatus.setDescription(description);
-			break;
-			
-		case GGStatusEnabled.GG_STATUS_INVISIBLE:
-			remoteStatus = new RemoteStatus(StatusType.INVISIBLE);
-			break;
-
-		case GGStatusEnabled.GG_STATUS_INVISIBLE_DESCR:
-			remoteStatus = new RemoteStatus(StatusType.INVISIBLE_WITH_DESCRIPTION);
-			remoteStatus.setDescription(description);
-			break;
-		
-		case GGStatusEnabled.GG_STATUS_NOT_AVAIL:
-			remoteStatus = new RemoteStatus(StatusType.OFFLINE);
-			break;
-
-		case GGStatusEnabled.GG_STATUS_NOT_AVAIL_DESCR:
-			remoteStatus = new RemoteStatus(StatusType.OFFLINE);
-			remoteStatus.setDescription(description);
-			break;
-		}
-		
-		if (remoteStatus != null && returnTimeInMillis != -1) {
-			remoteStatus.setReturnDate(new Date(returnTimeInMillis));
-		}
-		
-		if ((status & GGStatusEnabled.GG_STATUS_BLOCKED) == GGStatusEnabled.GG_STATUS_BLOCKED) {
-			remoteStatus.setBlocked(true);
-		} else {
-			remoteStatus.setBlocked(false);
-		}
-		
-		if (remoteStatus == null) throw new RuntimeException("Conversion error");
-		return remoteStatus;
-	}
-	
-	public static int getProtocolStatus(IStatus clientStatus, boolean isFriendsOnly, boolean isBlocked) {
-		if (clientStatus == null) throw new NullPointerException("clientStatus cannot be null.");
-
-		int protocolStatus = -1;
-		
-		if (clientStatus.getStatusType() == StatusType.ONLINE) {
-			protocolStatus = GGStatusEnabled.GG_STATUS_AVAIL;
-		} else if (clientStatus.getStatusType() == StatusType.ONLINE_WITH_DESCRIPTION) {
-			protocolStatus = GGStatusEnabled.GG_STATUS_AVAIL_DESCR;
-		} else if (clientStatus.getStatusType() == StatusType.BUSY) {
-			protocolStatus = GGStatusEnabled.GG_STATUS_BUSY;
-		} else if (clientStatus.getStatusType() == StatusType.BUSY_WITH_DESCRIPTION) {
-			protocolStatus = GGStatusEnabled.GG_STATUS_BUSY_DESCR;
-		} else if (clientStatus.getStatusType() == StatusType.OFFLINE) {
-			protocolStatus = GGStatusEnabled.GG_STATUS_NOT_AVAIL;
-		} else if (clientStatus.getStatusType() == StatusType.OFFLINE_WITH_DESCRIPTION) {
-			protocolStatus = GGStatusEnabled.GG_STATUS_NOT_AVAIL_DESCR;
-		} else if (clientStatus.getStatusType() == StatusType.INVISIBLE) {
-			protocolStatus = GGStatusEnabled.GG_STATUS_INVISIBLE;
-		} else if (clientStatus.getStatusType() == StatusType.INVISIBLE_WITH_DESCRIPTION) {
-			protocolStatus = GGStatusEnabled.GG_STATUS_INVISIBLE_DESCR;
-		}
-
-		if (protocolStatus != -1) {
-			if (isFriendsOnly) protocolStatus |= GGStatusEnabled.GG_STATUS_FRIENDS_MASK;
-			if (isBlocked) 	protocolStatus |= GGStatusEnabled.GG_STATUS_BLOCKED;
-			return protocolStatus;
-		}
-		throw new RuntimeException("Incorrect status: "+clientStatus);
-	}
-	
-	public static MessageStatus getClientMessageStatus(int protocolMessageStatus) {
-		switch (protocolMessageStatus) {
-			case GGSendMsgAck.GG_ACK_DELIVERED: return MessageStatus.DELIVERED;
-			case GGSendMsgAck.GG_ACK_NOT_DELIVERED: return MessageStatus.NOT_DELIVERED;
-			case GGSendMsgAck.GG_ACK_BLOCKED: return MessageStatus.BLOCKED;
-			case GGSendMsgAck.GG_ACK_MBOXFULL: return MessageStatus.BLOCKED_MBOX_FULL;
-			case GGSendMsgAck.GG_ACK_QUEUED: return MessageStatus.QUEUED;
-			default: throw new RuntimeException("Unable to convert protocol message status to client message status.");
-		}
-	}
-	
-	public static MessageClass getClientMessageClass(int protocolMessageClass) {
-		switch (protocolMessageClass) {
-			case GGMessageEnabled.GG_CLASS_ACK: return MessageClass.DO_NOT_CONFIRM;
-			case GGMessageEnabled.GG_CLASS_CHAT: return MessageClass.CHAT;
-			case GGMessageEnabled.GG_CLASS_CTCP: return MessageClass.PING;
-			case GGMessageEnabled.GG_CLASS_MSG: return MessageClass.IN_NEW_WINDOW;
-			case GGMessageEnabled.GG_CLASS_QUEUED: return MessageClass.QUEUED;
-			default: throw new RuntimeException("Unable to convert, messageClass: "+protocolMessageClass);
-		}
-	}
-	
-	public static int getProtocolMessageClass(MessageClass clientMessageClass) {
-		if (clientMessageClass == MessageClass.CHAT) return GGMessageEnabled.GG_CLASS_CHAT;
-		if (clientMessageClass == MessageClass.DO_NOT_CONFIRM) return GGMessageEnabled.GG_CLASS_ACK;
-		if (clientMessageClass == MessageClass.IN_NEW_WINDOW) return GGMessageEnabled.GG_CLASS_MSG;
-		if (clientMessageClass == MessageClass.QUEUED) return GGMessageEnabled.GG_CLASS_QUEUED;
-		if (clientMessageClass == MessageClass.PING) return GGMessageEnabled.GG_CLASS_CTCP;
-		throw new RuntimeException("Unable to convert, messageClass: "+clientMessageClass);
-	}
-
 	public static String prettyBytesToString(byte[] bytes) {
-	    StringBuffer odebrane = new StringBuffer();
-	    odebrane.append("{");
+	    StringBuffer received = new StringBuffer();
+	    received.append("{");
 	
-	    for (int i = 0; i < bytes.length; i++) {
-	        odebrane.append("'" + bytes[i] + "',");
+	    for (int i=0; i<bytes.length; i++) {
+	    	received.append("'" + bytes[i] + "',");
 	    }
 	
-	    odebrane.append("}");
+	    received.append("}");
 	
-	    return odebrane.toString();
+	    return received.toString();
 	}
 
 	public static int byteToInt(byte[] buf) {

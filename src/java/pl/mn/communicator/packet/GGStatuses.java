@@ -20,9 +20,9 @@ package pl.mn.communicator.packet;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatusEnabled.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGStatuses.java,v 1.1 2005-01-31 21:22:38 winnetou25 Exp $
  */
-public interface GGStatusEnabled {
+public interface GGStatuses {
 
     /** Status available */
     int GG_STATUS_AVAIL = 0x00000002;

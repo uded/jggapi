@@ -52,7 +52,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.21 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.22 2005-01-31 21:21:45 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -240,7 +240,11 @@ public class Session implements ISession {
 		public void notifyLoginOK() throws GGException {
 			m_loginService.notifyLoginOK();
 		}
-		
+
+		public void notifyLoggedOut() throws GGException {
+			m_loginService.notifyLoggedOut();
+		}
+
 		public void notifyLoginFailed() throws GGException {
 			m_loginService.notifyLoginFailed();
 		}

@@ -22,6 +22,7 @@ import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.MessageStatus;
+import pl.mn.communicator.packet.GGConversion;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGSendMsgAck;
 
@@ -29,7 +30,7 @@ import pl.mn.communicator.packet.in.GGSendMsgAck;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSentMessageAckPacketHandler.java,v 1.12 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: GGSentMessageAckPacketHandler.java,v 1.13 2005-01-31 21:21:45 winnetou25 Exp $
  */
 public class GGSentMessageAckPacketHandler implements PacketHandler {
 
@@ -44,11 +45,12 @@ public class GGSentMessageAckPacketHandler implements PacketHandler {
 			logger.debug("PacketHeader: "+context.getHeader());
 			logger.debug("PacketBody: "+GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
+		
 		GGSendMsgAck sendMessageAck = new GGSendMsgAck(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(sendMessageAck);
 		int uin = sendMessageAck.getRecipientUin();
 		int messageID = sendMessageAck.getMessageSeq();
-		MessageStatus messageStatus = GGUtils.getClientMessageStatus(sendMessageAck.getMessageStatus());
+		MessageStatus messageStatus = GGConversion.getClientMessageStatus(sendMessageAck.getMessageStatus());
 		context.getSessionAccessor().notifyMessageDelivered(uin, messageID, messageStatus);
 	}
 

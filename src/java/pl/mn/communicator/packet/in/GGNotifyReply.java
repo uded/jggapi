@@ -25,6 +25,7 @@ import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.RemoteStatus;
 import pl.mn.communicator.User;
+import pl.mn.communicator.packet.GGConversion;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.out.GGNewStatus;
 
@@ -32,7 +33,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.8 2004-12-21 21:27:05 winnetou25 Exp $
+ * @version $Id: GGNotifyReply.java,v 1.9 2005-01-31 21:22:36 winnetou25 Exp $
  */
 public class GGNotifyReply implements GGIncomingPackage {
 
@@ -109,13 +110,13 @@ public class GGNotifyReply implements GGIncomingPackage {
                 offset += 14; // the packet without description is 14 bytes long.
             }
             
-            RemoteStatus statusBiz = GGUtils.getClientRemoteStatus(status, description, timeInMillis);
+            RemoteStatus statusBiz = GGConversion.getClientRemoteStatus(status, description, timeInMillis);
             
             statusBiz.setRemoteIP(remoteIPByte);
             statusBiz.setRemotePort(remotePort);
             statusBiz.setGGVersion(version);
             
-            User.UserMode userMode = GGUtils.getUserMode(status);
+            User.UserMode userMode = GGConversion.getUserMode(status);
             User user = new User(uin, userMode);
             m_statuses.put(user, statusBiz);
         }

@@ -33,7 +33,7 @@ import pl.mn.communicator.IUser;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: UserListener.java,v 1.7 2004-12-21 21:24:41 winnetou25 Exp $
+ * @version $Id: UserListener.java,v 1.8 2005-01-31 21:22:40 winnetou25 Exp $
  */
 public interface UserListener extends EventListener {
 
@@ -44,5 +44,9 @@ public interface UserListener extends EventListener {
 	 * @param newStatus the new status of the user.
      */
     void userStatusChanged(IUser user, IRemoteStatus newStatus);
+    
+//    void addedMonitoredUser(IUser user);
+//    
+//    void removedMonitoredUser(IUser user);
     
 }

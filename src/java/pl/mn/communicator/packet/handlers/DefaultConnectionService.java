@@ -19,8 +19,13 @@ package pl.mn.communicator.packet.handlers;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.Socket;
+import java.net.URL;
+import java.util.StringTokenizer;
 
 import javax.swing.event.EventListenerList;
 
@@ -31,9 +36,11 @@ import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IConnectionService;
 import pl.mn.communicator.IServer;
+import pl.mn.communicator.Server;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.GGPacketListener;
+import pl.mn.communicator.event.PingListener;
 import pl.mn.communicator.packet.GGHeader;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGIncomingPackage;
@@ -46,9 +53,11 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.15 2005-01-30 18:36:50 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.16 2005-01-31 21:21:46 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
+
+	private final static String WINDOW_ENCODING = "windows-1250";
 
 	private final static Log logger = LogFactory.getLog(DefaultConnectionService.class);
 	
@@ -77,6 +86,31 @@ public class DefaultConnectionService implements IConnectionService {
 		m_packetChain = new PacketChain();
 	}
 	
+	/**
+	 * @see pl.mn.communicator.IConnectionService#getServer(int)
+	 */
+	public IServer lookupServer(int uin) throws GGException {
+    	try {
+        	URL url = new URL("http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber="+ String.valueOf(uin));
+        	
+        	HttpURLConnection con = (HttpURLConnection) url.openConnection();
+
+        	//con.setReadTimeout(120*1000); //JDK 1.5
+        	//con.setConnectTimeout(120*1000);	//JDK 1.5
+
+        	con.setDoInput(true);
+        	con.connect();
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), WINDOW_ENCODING));
+
+            String line = in.readLine();
+            in.close();
+
+            return parseAddress(line);
+    	} catch (IOException ex) {
+    		throw new GGException("Unable to get default server for uin: "+String.valueOf(uin), ex);
+    	}
+	}
+
 	/**
 	 * @see pl.mn.communicator.IConnectionService#connect()
 	 */
@@ -161,7 +195,21 @@ public class DefaultConnectionService implements IConnectionService {
 		if (packetListener == null) throw new NullPointerException("packetListener cannot be null");
 		m_listeners.remove(GGPacketListener.class, packetListener);
 	}
+	
+	/**
+	 * @see pl.mn.communicator.IConnectionService#addPingListener(pl.mn.communicator.event.PingListener)
+	 */
+	public void addPingListener(PingListener pingListener) {
+		m_listeners.add(PingListener.class, pingListener);
+	}
 
+	/**
+	 * @see pl.mn.communicator.IConnectionService#removePingListener(pl.mn.communicator.event.PingListener)
+	 */
+	public void removePingListener(PingListener pingListener) {
+		m_listeners.remove(PingListener.class, pingListener);
+	}
+	
 	//TODO clone the list of listeners
     protected void notifyConnectionEstablished() throws GGException {
     	m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
@@ -193,12 +241,20 @@ public class DefaultConnectionService implements IConnectionService {
     	m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
     }
 
+    protected void notifyPingSent() {
+    	PingListener[] pingListeners = (PingListener[]) m_listeners.getListeners(PingListener.class);
+    	for (int i=0; i<pingListeners.length; i++) {
+    		PingListener pingListener = pingListeners[i];
+    		pingListener.pingSent(m_server);
+    	}
+    }
+
 	//TODO clone the list of listeners
     protected void notifyPongReceived() {
-    	ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
-    	for (int i=0; i<connectionListeners.length; i++) {
-    		ConnectionListener connectionListener = connectionListeners[i];
-    		connectionListener.pongReceived();
+    	PingListener[] pingListeners = (PingListener[]) m_listeners.getListeners(PingListener.class);
+    	for (int i=0; i<pingListeners.length; i++) {
+    		PingListener pingListener = pingListeners[i];
+    		pingListener.pongReceived(m_server);
     	}
     }
 
@@ -244,7 +300,24 @@ public class DefaultConnectionService implements IConnectionService {
 			throw new GGSessionException(m_session.getSessionState());
 		}
     }
-    
+
+    /**
+     * Parses the server's address.
+     * @param line line to be parsed.
+     * @return <code>Server</code> the server object. 
+     */
+    private static Server parseAddress(String line) {
+        final int tokensNumber = 3;
+        StringTokenizer token = new StringTokenizer(line);
+
+        for (int i=0; i<tokensNumber; i++) {
+            token.nextToken();
+        }
+        StringTokenizer tokenizer = new StringTokenizer(token.nextToken(), ":");
+
+        return new Server(tokenizer.nextToken(), Integer.parseInt(tokenizer.nextToken()));
+    }
+
     private class ConnectionThread extends Thread {
     	
 		private static final int HEADER_LENGTH = 8;
@@ -329,6 +402,7 @@ public class DefaultConnectionService implements IConnectionService {
 					if (++m_pingCount > PING_COUNT) {
 						logger.debug("Pinging...");
 						DefaultConnectionService.this.sendPackage(GGPing.getPing());
+						DefaultConnectionService.this.notifyPingSent();
 						m_pingCount = 0;
 					}
 					Thread.sleep(THREAD_SLEEP_TIME);

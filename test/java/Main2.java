@@ -2,8 +2,9 @@ import java.io.IOException;
 import java.util.Collection;
 
 import pl.mn.communicator.GGException;
-import pl.mn.communicator.IGroupChat;
+import pl.mn.communicator.ILocalStatus;
 import pl.mn.communicator.IRemoteStatus;
+import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
@@ -11,8 +12,10 @@ import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
-import pl.mn.communicator.Server;
 import pl.mn.communicator.SessionState;
+import pl.mn.communicator.StatusType;
+import pl.mn.communicator.User;
+import pl.mn.communicator.User.UserMode;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.event.LoginListener;
@@ -72,19 +75,10 @@ public class Main2 {
 			public void loginOK() throws GGException {
 				System.out.println("Login OK.");
 				
-				IGroupChat groupChat = session.getMessageService().createGroupChat();
-				groupChat.addRecipient(376798);
-				groupChat.addRecipient(1136132);
-				//groupChat.addRecipient(1516253);
-				
-				groupChat.sendMessage("GroupChatMessageTest1");
-				
-//				try {
-//					Thread.sleep(1000*10);
-//					session.getLoginService().logout();
-//				} catch (InterruptedException e) {
-//					e.printStackTrace();
-//				}
+				ILocalStatus status = session.getPresenceService().getStatus();
+				status.setFriendsOnly(true);
+				status.setStatusType(StatusType.BUSY);
+				session.getPresenceService().setStatus(status);
 			}
 
 			public void loginFailed() throws GGException {
@@ -160,17 +154,17 @@ public class Main2 {
 			}
 			
 		});
-		
- 		session.getConnectionService().connect(Server.getDefaultServer(loginContext.getUin()));
 
-//		IUser acze = new User(1136132, UserMode.BUDDY);
-//		IUser jaffa = new User(1542863, UserMode.BUDDY);
-//		IUser mati = new User(376798, UserMode.BUDDY);
-//
+		IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
+ 		session.getConnectionService().connect(server);
+
+		IUser acze = new User(1136132, UserMode.BUDDY);
+		IUser jaffa = new User(1542863, UserMode.BUDDY);
+		IUser mati = new User(376798, UserMode.BUDDY);
 		
-//		loginContext.getMonitoredUsers().add(acze);
-//		loginContext.getMonitoredUsers().add(jaffa);
-//		loginContext.getMonitoredUsers().add(mati);
+		loginContext.getMonitoredUsers().add(acze);
+		loginContext.getMonitoredUsers().add(jaffa);
+		loginContext.getMonitoredUsers().add(mati);
 
 //		session.getPublicDirectoryService().readFromPublicDirectory();
 //		PublicDirInfo publicDirInfo = new PublicDirInfo();
@@ -195,10 +189,6 @@ public class Main2 {
 //		loginContext.setPassword("dupadupa");
 //		session.getLoginService().login();
 		
-//		IStatus status = session.getPresenceService().getStatus();
-//		status.setFriendsOnly(true);
-//		session.getPresenceService().setStatus(status);
-//		
 //		ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
 //		matiChat.sendMessage("body");
 //		matiChat.sendMessage("dupka");

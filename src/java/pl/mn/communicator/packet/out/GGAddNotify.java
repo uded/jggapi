@@ -18,7 +18,8 @@
 package pl.mn.communicator.packet.out;
 
 import pl.mn.communicator.User;
-import pl.mn.communicator.packet.GGNotifiable;
+import pl.mn.communicator.packet.GGConversion;
+import pl.mn.communicator.packet.GGUser;
 import pl.mn.communicator.packet.GGUtils;
 
 /**
@@ -27,9 +28,9 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGAddNotify.java,v 1.7 2004-12-25 17:40:00 winnetou25 Exp $
+ * @version $Id: GGAddNotify.java,v 1.8 2005-01-31 21:22:12 winnetou25 Exp $
  */
-public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
+public class GGAddNotify implements GGOutgoingPackage, GGUser {
 
 	public final int GG_ADD_NOTIFY = 0x000D;
 	
@@ -45,7 +46,7 @@ public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
         m_uin = uin;
         m_userMode = userMode;
-        m_userType = GGUtils.getProtocolUserMode(userMode);
+        m_userType = GGConversion.getProtocolUserMode(userMode);
     }
     
     public int getUin(){

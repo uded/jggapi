@@ -17,13 +17,6 @@
  */
 package pl.mn.communicator;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.StringTokenizer;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -31,13 +24,11 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Server.java,v 1.9 2005-01-25 23:51:42 winnetou25 Exp $
+ * @version $Id: Server.java,v 1.10 2005-01-31 21:22:15 winnetou25 Exp $
  */
 public final class Server implements IServer {
 	
     private final static Log logger = LogFactory.getLog(Server.class);
-
-	private final static String WINDOW_ENCODING = "windows-1250";
 
     /** The server's address */
     protected String m_address = null;
@@ -71,43 +62,4 @@ public final class Server implements IServer {
         return "[" + m_address + ":" + m_port + "]";
     }
 
-    public static Server getDefaultServer(int uin) throws GGException {
-    	try {
-        	URL url = new URL("http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber="+ String.valueOf(uin));
-        	
-        	HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-        	//con.setReadTimeout(120*1000); //JDK 1.5
-        	//con.setConnectTimeout(120*1000);	//JDK 1.5
-
-        	con.setDoInput(true);
-        	con.connect();
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), WINDOW_ENCODING));
-
-            String line = in.readLine();
-            in.close();
-
-            return parseAddress(line);
-    	} catch (IOException ex) {
-    		throw new GGException("Unable to get default server for uin: "+String.valueOf(uin), ex);
-    	}
-    }
-
-    /**
-     * Parses the server's address.
-     * @param line line to be parsed.
-     * @return <code>Server</code> the server object. 
-     */
-    private static Server parseAddress(String line) {
-        final int tokensNumber = 3;
-        StringTokenizer token = new StringTokenizer(line);
-
-        for (int i=0; i<tokensNumber; i++) {
-            token.nextToken();
-        }
-        StringTokenizer tokenizer = new StringTokenizer(token.nextToken(), ":");
-
-        return new Server(tokenizer.nextToken(), Integer.parseInt(tokenizer.nextToken()));
-    }
-    
 }

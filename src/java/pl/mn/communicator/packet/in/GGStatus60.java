@@ -24,16 +24,17 @@ import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.RemoteStatus;
 import pl.mn.communicator.User;
-import pl.mn.communicator.packet.GGStatusEnabled;
+import pl.mn.communicator.packet.GGConversion;
+import pl.mn.communicator.packet.GGStatuses;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.out.GGNewStatus;
 
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.11 2004-12-21 21:27:05 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.12 2005-01-31 21:22:33 winnetou25 Exp $
  */
-public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
+public class GGStatus60 implements GGIncomingPackage, GGStatuses {
 
 //	#define GG_STATUS60 0x000F
 	
@@ -85,7 +86,7 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
     	int uin = GGUtils.byteToInt(data);
     	data[3] = flag;
     	int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
-        User.UserMode userMode = GGUtils.getUserMode(protocolStatus);
+        User.UserMode userMode = GGConversion.getUserMode(protocolStatus);
         m_user =  new User(uin, userMode);
     }
     
@@ -112,7 +113,7 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
             }
     	}
 
-        m_status60 = GGUtils.getClientRemoteStatus(protocolStatus, description, timeInMillis);
+        m_status60 = GGConversion.getClientRemoteStatus(protocolStatus, description, timeInMillis);
     	m_status60.setRemoteIP(remoteIPArray);
     	m_status60.setImageSize(imageSize);
     	m_status60.setGGVersion(version);

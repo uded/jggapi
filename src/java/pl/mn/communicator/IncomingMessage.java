@@ -19,7 +19,7 @@ package pl.mn.communicator;
 
 import java.util.Date;
 
-import pl.mn.communicator.packet.GGUtils;
+import pl.mn.communicator.packet.GGConversion;
 
 /**
  * The class that represents message that is received from Gadu-Gadu server.
@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.GGUtils;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncomingMessage.java,v 1.9 2005-01-30 18:55:20 winnetou25 Exp $
+ * @version $Id: IncomingMessage.java,v 1.10 2005-01-31 21:22:26 winnetou25 Exp $
  */
 public class IncomingMessage extends AbstractMessage {
 
@@ -43,7 +43,7 @@ public class IncomingMessage extends AbstractMessage {
 	 * @throws NullPointerException if the messageBody is null.
 	 */
 	public IncomingMessage(int uin, String messageBody, int messageID, long messageDate, int protocolMessageClass) {
-		super(uin, messageBody, GGUtils.getClientMessageClass(protocolMessageClass));
+		super(uin, messageBody, GGConversion.getClientMessageClass(protocolMessageClass));
 		if (messageDate < 0) throw new IllegalArgumentException("messageDate cannot be less than 0");
 		if (messageID < 0) throw new IllegalArgumentException("messageID cannot be less than 0");
 		m_messageDate = new Date(messageDate);

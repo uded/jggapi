@@ -23,16 +23,17 @@ import pl.mn.communicator.Gender;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
-import pl.mn.communicator.packet.GGPubdirEnabled;
+import pl.mn.communicator.packet.GGConversion;
+import pl.mn.communicator.packet.GGPubdirConsts;
 import pl.mn.communicator.packet.GGUtils;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.16 2004-12-21 21:27:05 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.17 2005-01-31 21:22:36 winnetou25 Exp $
  */
-public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
+public class GGPubdirReply implements GGIncomingPackage, GGPubdirConsts {
 	
 	public static final int GG_PUBDIR50_REPLY = 0x000E;
 
@@ -161,7 +162,7 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 			} else if (token.equals(STATUS)) {
 				String status = tokenizer.nextToken();
 				int protocolStatus = Integer.valueOf(status).intValue();
-				IRemoteStatus statusBiz = GGUtils.getClientRemoteStatus(protocolStatus, null, -1);
+				IRemoteStatus statusBiz = GGConversion.getClientRemoteStatus(protocolStatus, null, -1);
 				entry.setStatus(statusBiz);
 			} else if (token.equals(BIRTH_YEAR)) {
 				String birthYear = tokenizer.nextToken();

@@ -33,7 +33,7 @@ import pl.mn.communicator.GGException;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ConnectionListener.java,v 1.9 2005-01-29 15:22:04 winnetou25 Exp $
+ * @version $Id: ConnectionListener.java,v 1.10 2005-01-31 21:22:38 winnetou25 Exp $
  */
 public interface ConnectionListener extends EventListener {
 	
@@ -55,11 +55,6 @@ public interface ConnectionListener extends EventListener {
      */
     void connectionError(Exception e);
    
-    /**
-     * Notification that Gadu-Gadu server sent us pong packet.
-     */
-    void pongReceived();
-    
     public static class Stub implements ConnectionListener {
 
 		/**
@@ -77,11 +72,6 @@ public interface ConnectionListener extends EventListener {
 		 */
 		public void connectionError(Exception e) { }
 		
-		/**
-		 * @see pl.mn.communicator.event.ConnectionListener#pongReceived()
-		 */
-		public void pongReceived() { }
-    	
     }
     
 }

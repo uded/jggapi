@@ -29,7 +29,7 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractChat.java,v 1.4 2005-01-30 18:36:35 winnetou25 Exp $
+ * @version $Id: AbstractChat.java,v 1.5 2005-01-31 21:21:45 winnetou25 Exp $
  */
 public abstract class AbstractChat implements IChat {
 
@@ -70,7 +70,7 @@ public abstract class AbstractChat implements IChat {
 
 	protected abstract boolean acceptsOutgoing(int uin, int messageID, MessageStatus deliveryStatus);
 
-	private class MessageHandler implements MessageListener {
+	private class MessageHandler extends MessageListener.Stub {
 		
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.IncomingMessage)

@@ -18,7 +18,8 @@
 package pl.mn.communicator.packet.out;
 
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.packet.GGNotifiable;
+import pl.mn.communicator.packet.GGConversion;
+import pl.mn.communicator.packet.GGUser;
 import pl.mn.communicator.packet.GGUtils;
 
 /**
@@ -27,9 +28,9 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotify.java,v 1.5 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: GGNotify.java,v 1.6 2005-01-31 21:22:13 winnetou25 Exp $
  */
-public class GGNotify implements GGOutgoingPackage, GGNotifiable {
+public class GGNotify implements GGOutgoingPackage, GGUser {
 
 	public static final int GG_NOTIFY_FIRST = 0x0F;
 	public static final int GG_NOTIFY_LAST = 0x10;
@@ -69,7 +70,7 @@ public class GGNotify implements GGOutgoingPackage, GGNotifiable {
             	toSend[(i * 5) + j] = uinByte[j];
             }
 
-            byte protocolUserMode = GGUtils.getProtocolUserMode(user.getUserMode());
+            byte protocolUserMode = GGConversion.getProtocolUserMode(user.getUserMode());
             
             toSend[(i * 5) + 4] = protocolUserMode;
         }

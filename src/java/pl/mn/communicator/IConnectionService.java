@@ -19,6 +19,7 @@ package pl.mn.communicator;
 
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.GGPacketListener;
+import pl.mn.communicator.event.PingListener;
 
 /**
  * The client should use this interface if there is a need
@@ -30,10 +31,12 @@ import pl.mn.communicator.event.GGPacketListener;
  * 
  * @see pl.mn.communicator.event.ConnectionListener
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IConnectionService.java,v 1.10 2005-01-30 18:24:29 winnetou25 Exp $
+ * @version $Id: IConnectionService.java,v 1.11 2005-01-31 21:22:15 winnetou25 Exp $
  */
 public interface IConnectionService {
 
+	IServer lookupServer(int uin) throws GGException;
+	
 	/**
 	 * Tries to connect to Gadu-Gadu server that has been previously
 	 * assigned to <code>Session</code> instance.
@@ -106,5 +109,9 @@ public interface IConnectionService {
      * @throws NullPointerException if the <code>GGPacketListener<code> instance is null.
      */
     void removePacketListener(GGPacketListener packetListener);
+    
+    void addPingListener(PingListener pingListener);
+    
+    void removePingListener(PingListener pingListener);
 
 }

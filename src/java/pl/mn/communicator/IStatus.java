@@ -25,7 +25,7 @@ import java.util.Date;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IStatus.java,v 1.9 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: IStatus.java,v 1.10 2005-01-31 21:22:32 winnetou25 Exp $
  */
 public interface IStatus {
 
@@ -36,13 +36,20 @@ public interface IStatus {
      */
     StatusType getStatusType();
 
+    void setStatusType(StatusType status);
+    
     /** 
      * Get the status description.
      * 
      * @return description of status.
      */
     String getDescription();
-    
+
+	/**
+	 * @param description the description to set.
+	 */
+	void setDescription(String description);
+
     /**
      * Get the return date.
      * 
@@ -50,6 +57,11 @@ public interface IStatus {
      */
     Date getReturnDate();
     
+	/**
+	 * @param returnTime The return time to set.
+	 */
+	void setReturnDate(Date returnTime);
+	
     /**
      * Tells if the description has been set on this status.
      * 

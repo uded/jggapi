@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageStatus.java,v 1.6 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: MessageStatus.java,v 1.7 2005-01-31 21:22:32 winnetou25 Exp $
  */
 public class MessageStatus {
 
@@ -31,7 +31,7 @@ public class MessageStatus {
 		m_messageStatus = messageStatus;
 	}
 	
-	/** Message has not been delivered. */
+	/** Message has not been blocked. */
 	public final static MessageStatus BLOCKED = new MessageStatus("message_status_blocked");
 
 	/** Message has been successfuly delivered. */

@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageClass.java,v 1.7 2004-12-27 13:58:05 winnetou25 Exp $
+ * @version $Id: MessageClass.java,v 1.8 2005-01-31 21:22:13 winnetou25 Exp $
  */
 public class MessageClass {
 
@@ -35,7 +35,7 @@ public class MessageClass {
 	public final static MessageClass QUEUED = new MessageClass("message_class_queued");
 	
 	/** The message will popup ip new window */
-	public final static MessageClass IN_NEW_WINDOW = new MessageClass("message_class_in_new_window");
+	public final static MessageClass MESSAGE = new MessageClass("message_class_message");
 	
 	/** the message is a part of conversation */
 	public final static MessageClass CHAT  = new MessageClass("message_class_chat");

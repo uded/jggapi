@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.14 2005-01-29 17:09:14 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.15 2005-01-31 21:22:28 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
 	
@@ -50,7 +50,7 @@ public class OutgoingMessage extends AbstractMessage {
 	 * @return OutgoingMessage outgoing message.
 	 */
 	public static OutgoingMessage createNewMessage(int uin, String messageBody) {
-		return new OutgoingMessage(uin, messageBody, MessageClass.IN_NEW_WINDOW);
+		return new OutgoingMessage(uin, messageBody, MessageClass.MESSAGE);
 	}
 	
 	/** 

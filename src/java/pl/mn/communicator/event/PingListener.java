@@ -15,21 +15,36 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
+package pl.mn.communicator.event;
+
+import java.util.EventListener;
+
+import pl.mn.communicator.IServer;
 
 /**
- * Created on 2004-11-30
- * 
- * Exception that is thrown when user tries to move from certain state 
- * to state that is not allowed at that moment. 
+ * Created on 2005-01-31
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSessionException.java,v 1.7 2005-01-31 21:22:15 winnetou25 Exp $
+ * @version $Id: PingListener.java,v 1.1 2005-01-31 21:22:40 winnetou25 Exp $
  */
-public class GGSessionException extends RuntimeException {
+public interface PingListener extends EventListener {
 
-	public GGSessionException(SessionState actualSessionState) {
-		super("Incorrect session state: " +actualSessionState);
+	void pingSent(IServer server);
+	
+	void pongReceived(IServer server);
+	
+	static class Stub implements PingListener {
+
+		/**
+		 * @see pl.mn.communicator.event.PingListener#pingSent()
+		 */
+		public void pingSent(IServer server) { }
+
+		/**
+		 * @see pl.mn.communicator.event.PingListener#pongReceived()
+		 */
+		public void pongReceived(IServer server) { }
+		
 	}
-
+	
 }

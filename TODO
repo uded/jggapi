@@ -22,7 +22,6 @@ Bugs or features for version 1.0
 konwersje robilby dekorator na inputstream i outputstream.
 
 16.BUG Odrejestrowanie uzytkownika sie zonkuje.
-17. GroupChat dzialal, a teraz juz nie dziala?
 18. Czy interval pingowania powinien byc konfiguralny? W klasie Session? Rozwazyc GGConfiguration,
 	jako klase konfigurujaca biblioteke i pozwalajaca ja customizowac.
 19.Deployment - wrzucic lib z commons-logging to dystrubucji.

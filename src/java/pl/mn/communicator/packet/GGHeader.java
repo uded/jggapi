@@ -22,12 +22,13 @@ package pl.mn.communicator.packet;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGHeader.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGHeader.java,v 1.7 2005-01-31 21:22:38 winnetou25 Exp $
  */
 public class GGHeader {
 
 	/** Gadu-Gadu packet type */
     private int m_type = -1;
+    
     /** Gadu-Gadu packet length */
     private int m_length = -1;
 

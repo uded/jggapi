@@ -21,18 +21,18 @@ package pl.mn.communicator.packet;
  * Constants specific for Gadu-Gadu messages.
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGMessageEnabled.java,v 1.5 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGMessageClass.java,v 1.1 2005-01-31 21:22:37 winnetou25 Exp $
  */
-public interface GGMessageEnabled {
+public interface GGMessageClass {
 
 	int GG_CLASS_QUEUED = 0x0001;
 	
-	int GG_CLASS_MSG = 0x0004;
+	int GG_CLASS_MSG 	= 0x0004;
 	
-	int GG_CLASS_CHAT = 0x0008;
+	int GG_CLASS_CHAT 	= 0x0008;
 	
-	int GG_CLASS_CTCP = 0x0010;
+	int GG_CLASS_CTCP 	= 0x0010;
 	
-	int GG_CLASS_ACK = 0x0020;
+	int GG_CLASS_ACK 	= 0x0020;
 	
 }

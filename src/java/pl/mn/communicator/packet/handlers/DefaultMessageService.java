@@ -40,7 +40,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.13 2005-01-29 17:09:48 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.14 2005-01-31 21:21:43 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
@@ -63,6 +63,7 @@ public class DefaultMessageService implements IMessageService {
 		try {
 			GGSendMsg messageOut = new GGSendMsg(outgoingMessage);
 			m_session.getSessionAccessor().sendPackage(messageOut);
+			notifyMessageSent(outgoingMessage);
 		} catch (IOException ex) {
 			throw new GGException("Error occured while sending message: "+outgoingMessage, ex);
 		}
@@ -72,21 +73,23 @@ public class DefaultMessageService implements IMessageService {
 	 * @see pl.mn.communicator.IMessageService#createSingleChat(int)
 	 */
 	public ISingleChat createSingleChat(int uin) {
+		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		return new SingleChat(m_session, uin);
 	}
-	
-	/**
-	 * @see pl.mn.communicator.IMessageService#createGroupChat(int[])
-	 */
-	public IGroupChat createGroupChat(int[] uins) {
-		return new GroupChat(m_session, uins);
-	}
-	
+
 	/**
 	 * @see pl.mn.communicator.IMessageService#createGroupChat()
 	 */
 	public IGroupChat createGroupChat() {
 		return new GroupChat(m_session, new int[0]);
+	}
+
+	/**
+	 * @see pl.mn.communicator.IMessageService#createGroupChat(int[])
+	 */
+	public IGroupChat createGroupChat(int[] uins) {
+		if (uins == null) throw new NullPointerException("uins cannot be null");
+		return new GroupChat(m_session, uins);
 	}
 	
 	/**
@@ -103,6 +106,15 @@ public class DefaultMessageService implements IMessageService {
 	public void removeMessageListener(MessageListener messageListener) {
 		if (messageListener == null) throw new NullPointerException("messageListener cannot be null");
 		m_messageListeners.remove(messageListener);
+	}
+
+	//TODO clone list before notifing
+	protected void notifyMessageSent(OutgoingMessage outgoingMessage) {
+		if (outgoingMessage == null) throw new NullPointerException("outgoingMessage cannot be null");
+		for (Iterator it = m_messageListeners.iterator(); it.hasNext();) {
+			MessageListener messageListener = (MessageListener) it.next();
+			messageListener.messageSent(outgoingMessage);
+		}
 	}
 
 	//TODO clone list before notifing

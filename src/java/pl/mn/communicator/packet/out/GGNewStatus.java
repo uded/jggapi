@@ -18,7 +18,8 @@
 package pl.mn.communicator.packet.out;
 
 import pl.mn.communicator.ILocalStatus;
-import pl.mn.communicator.packet.GGStatusEnabled;
+import pl.mn.communicator.packet.GGConversion;
+import pl.mn.communicator.packet.GGStatuses;
 import pl.mn.communicator.packet.GGUtils;
 
 /**
@@ -26,9 +27,9 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNewStatus.java,v 1.7 2004-12-21 21:27:40 winnetou25 Exp $
+ * @version $Id: GGNewStatus.java,v 1.8 2005-01-31 21:22:10 winnetou25 Exp $
  */
-public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
+public class GGNewStatus implements GGOutgoingPackage, GGStatuses {
 	
 	public static final int GG_NEW_STATUS = 0x0002;
 
@@ -71,7 +72,7 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-    	int statusToSend = GGUtils.getProtocolStatus(m_localStatus, m_localStatus.isFriendsOnly(), false);
+    	int statusToSend = GGConversion.getProtocolStatus(m_localStatus, m_localStatus.isFriendsOnly(), false);
     	
     	byte[] toSend = new byte[getLength()];
     	

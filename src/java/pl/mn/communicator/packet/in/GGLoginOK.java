@@ -21,13 +21,13 @@ package pl.mn.communicator.packet.in;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginOK.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGLoginOK.java,v 1.7 2005-01-31 21:22:35 winnetou25 Exp $
  */
 public class GGLoginOK implements GGIncomingPackage {
 
 	private static GGLoginOK m_instance = null;
 	
-	public final static int GG_LOGIN_OK = 3;
+	public final static int GG_LOGIN_OK = 0x03;
 
 	private GGLoginOK() {
 		//prevent instant

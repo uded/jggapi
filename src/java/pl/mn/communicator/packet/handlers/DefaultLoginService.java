@@ -42,7 +42,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.15 2005-01-30 18:20:26 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.16 2005-01-31 21:21:46 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -118,6 +118,7 @@ public class DefaultLoginService implements ILoginService {
 		m_session.getPresenceService().setStatus(localStatus);
 		m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
 		m_loginContext = null;
+		m_session.getSessionAccessor().notifyLoggedOut();
 	}
 	
 	/**

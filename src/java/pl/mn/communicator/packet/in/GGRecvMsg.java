@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.packet.in;
 
-import pl.mn.communicator.packet.GGMessageEnabled;
+import pl.mn.communicator.packet.GGMessageClass;
 import pl.mn.communicator.packet.GGUtils;
 
 /**
@@ -25,9 +25,9 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGRecvMsg.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGRecvMsg.java,v 1.7 2005-01-31 21:22:36 winnetou25 Exp $
  */
-public class GGRecvMsg implements GGIncomingPackage, GGMessageEnabled {
+public class GGRecvMsg implements GGIncomingPackage, GGMessageClass {
 
 	public static final int GG_RECV_MSG  = 0x000A;
 

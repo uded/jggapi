@@ -22,15 +22,15 @@ import java.util.Random;
 import pl.mn.communicator.Gender;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
-import pl.mn.communicator.packet.GGPubdirEnabled;
+import pl.mn.communicator.packet.GGPubdirConsts;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.12 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.13 2005-01-31 21:22:09 winnetou25 Exp $
  */
-public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
+public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 
 	public static final int GG_PUBDIR50_REQUEST = 0x0014;
 	

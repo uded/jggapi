@@ -20,17 +20,17 @@ package pl.mn.communicator.packet.out;
 import java.util.ArrayList;
 
 import pl.mn.communicator.OutgoingMessage;
-import pl.mn.communicator.packet.GGMessageEnabled;
-import pl.mn.communicator.packet.GGUtils;
+import pl.mn.communicator.packet.GGConversion;
+import pl.mn.communicator.packet.GGMessageClass;
 
 /**
  * Class representing packet that will send Gadu-Gadu message.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.16 2005-01-30 18:38:07 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.17 2005-01-31 21:22:08 winnetou25 Exp $
  */
-public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
+public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 	
 	public static final int GG_SEND_MSG = 0x0B;
 	
@@ -45,7 +45,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
         m_text = outgoingMessage.getMessageBody();
         m_seq = outgoingMessage.getMessageID();
         m_recipientUin = outgoingMessage.getRecipientUin();
-        m_protocolMessageClass = GGUtils.getProtocolMessageClass(outgoingMessage.getMessageClass());
+        m_protocolMessageClass = GGConversion.getProtocolMessageClass(outgoingMessage.getMessageClass());
     }
 
     public void addAdditionalRecipient(int uin) {

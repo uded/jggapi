@@ -24,16 +24,17 @@ import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.RemoteStatus;
 import pl.mn.communicator.User;
-import pl.mn.communicator.packet.GGStatusEnabled;
+import pl.mn.communicator.packet.GGConversion;
+import pl.mn.communicator.packet.GGStatuses;
 import pl.mn.communicator.packet.GGUtils;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.7 2004-12-21 21:27:05 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.8 2005-01-31 21:22:36 winnetou25 Exp $
  */
-public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
+public class GGStatus implements GGIncomingPackage, GGStatuses {
 
 	public static final int GG_STATUS = 0x02;
 
@@ -62,7 +63,7 @@ public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
     private void handleUser(byte[] data) {
     	int uin = GGUtils.byteToInt(data);
         int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
-        User.UserMode userMode = GGUtils.getUserMode(protocolStatus);
+        User.UserMode userMode = GGConversion.getUserMode(protocolStatus);
         m_user =  new User(uin, userMode);
     }
     
@@ -80,7 +81,7 @@ public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
                 timeInMillis = GGUtils.secondsToMillis(timeInSeconds);
             }
         }
-        m_status = GGUtils.getClientRemoteStatus(protocolStatus, description, timeInMillis);
+        m_status = GGConversion.getClientRemoteStatus(protocolStatus, description, timeInMillis);
     }
     
 }
