@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.14 2005-01-30 17:59:34 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.15 2005-01-30 18:36:50 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -98,22 +98,21 @@ public class DefaultConnectionService implements IConnectionService {
 	/**
 	 * @see pl.mn.communicator.IConnectionService#disconnect()
 	 */
-	public void disconnect() {
+	public void disconnect() throws GGException {
 		checkDisconnectionState();
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 		try {
-			m_connectionPinger.stopPinging();
 			m_connectionThread.closeConnection();
 			notifyConnectionClosed();
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 			m_server = null;
 		} catch (IOException ex) {
+			logger.error("IOException occured while trying to disconnect", ex);
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
-		} catch (GGException ex) {
-			logger.error("Unable to close connection", ex);
+			throw new GGException("Unable to close connection to server", ex);
 		}
 	}
-	
+
 	/**
 	 * @see pl.mn.communicator.IConnectionService#isConnected()
 	 */
@@ -249,7 +248,7 @@ public class DefaultConnectionService implements IConnectionService {
     private class ConnectionThread extends Thread {
     	
 		private static final int HEADER_LENGTH = 8;
-		private static final int THREAD_SLEEP_TIME = 500;
+		private static final int THREAD_SLEEP_TIME = 100;
     	
     	private Socket m_socket = null;
     	private BufferedInputStream m_dataInput = null;
@@ -316,7 +315,7 @@ public class DefaultConnectionService implements IConnectionService {
     
     private class PingerThread extends Thread {
     	
-    	private static final int PING_COUNT = 15;
+    	private static final int PING_COUNT = 10;
     	private int m_pingCount = 0;
     	private boolean m_active = true;
 		private static final int THREAD_SLEEP_TIME = 1000;
@@ -335,11 +334,11 @@ public class DefaultConnectionService implements IConnectionService {
 					Thread.sleep(THREAD_SLEEP_TIME);
 				} catch (IOException ex) {
 					m_active = false;
-					logger.error("Connection error: "+ex);
+					logger.error("PingerThreadError: "+ex);
 					notifyConnectionError(ex);
 				} catch (InterruptedException ex) {
 					m_active = false;
-					logger.debug("Someone interrupted pinger thread");
+					logger.debug("PingerThread was interruped");
 				}
 			}
 		}

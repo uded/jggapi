@@ -25,7 +25,7 @@ konwersje robilby dekorator na inputstream i outputstream.
 17. GroupChat dzialal, a teraz juz nie dziala?
 18. Czy interval pingowania powinien byc konfiguralny? W klasie Session? Rozwazyc GGConfiguration,
 	jako klase konfigurujaca biblioteke i pozwalajaca ja customizowac.
-19.Deployment - wrzucic lib z commons-logging to dystrubucji
+19.Deployment - wrzucic lib z commons-logging to dystrubucji.
 
 Bugs or features for 1.5 version.
 2. LOW - Implementacja wysylania plikow.

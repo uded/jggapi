@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.15 2005-01-30 17:59:29 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.16 2005-01-30 18:38:07 winnetou25 Exp $
  */
 public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
 	
@@ -71,8 +71,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-//      return 4+4+4+m_text.length()+1+5+(m_additionalRecipients.size()*4);
-    	return 4+4+4+m_text.length()+1;
+    	return 4+4+4+m_text.length()+1+5+(m_additionalRecipients.size()*4);
     }
 
     /**
@@ -105,22 +104,22 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
 
     	int recipientCount = m_additionalRecipients.size();
 
-//        if (recipientCount > 0) {
-//        	toSend[12+m_text.length()] = 0x01;
-//        	
-//        	toSend[12+m_text.length()+1] = (byte) (recipientCount & 0xFF);
-//        	toSend[12+m_text.length()+2] = (byte) (recipientCount >> 8 & 0xFF);
-//        	toSend[12+m_text.length()+3] = (byte) (recipientCount >> 16 & 0xFF);
-//        	toSend[12+m_text.length()+4] = (byte) (recipientCount >> 24 & 0xFF);
-//        	
-//        	for (int i=0; i<recipientCount; i++) {
-//        		int recipientUin = ((Integer) m_additionalRecipients.get(i)).intValue();
-//            	toSend[12+m_text.length()+5+i] = (byte) (recipientUin  & 0xFF);
-//            	toSend[12+m_text.length()+6+i] = (byte) (recipientUin >> 8 & 0xFF);
-//            	toSend[12+m_text.length()+7+i] = (byte) (recipientUin >> 16 & 0xFF);
-//            	toSend[12+m_text.length()+8+i] = (byte) (recipientUin >> 24 & 0xFF);
-//        	}
-//        }
+        if (recipientCount > 0) {
+        	toSend[12+m_text.length()+1] = 0x01;
+        	
+        	toSend[12+m_text.length()+2] = (byte) (recipientCount & 0xFF);
+        	toSend[12+m_text.length()+3] = (byte) (recipientCount >> 8 & 0xFF);
+        	toSend[12+m_text.length()+4] = (byte) (recipientCount >> 16 & 0xFF);
+        	toSend[12+m_text.length()+5] = (byte) (recipientCount >> 24 & 0xFF);
+        	
+        	for (int i=0; i<recipientCount; i++) {
+        		int recipientUin = ((Integer) m_additionalRecipients.get(i)).intValue();
+            	toSend[12+m_text.length()+6+i] = (byte) (recipientUin  & 0xFF);
+            	toSend[12+m_text.length()+7+i] = (byte) (recipientUin >> 8 & 0xFF);
+            	toSend[12+m_text.length()+8+i] = (byte) (recipientUin >> 16 & 0xFF);
+            	toSend[12+m_text.length()+9+i] = (byte) (recipientUin >> 24 & 0xFF);
+        	}
+        }
         
         return toSend;
     }

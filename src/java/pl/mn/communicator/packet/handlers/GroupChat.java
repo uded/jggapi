@@ -19,7 +19,6 @@ package pl.mn.communicator.packet.handlers;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Enumeration;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.IChat;
@@ -27,14 +26,13 @@ import pl.mn.communicator.IGroupChat;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
-import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.packet.out.GGSendMsg;
 
 /**
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GroupChat.java,v 1.5 2005-01-30 17:59:35 winnetou25 Exp $
+ * @version $Id: GroupChat.java,v 1.6 2005-01-30 18:37:16 winnetou25 Exp $
  */
 public class GroupChat extends AbstractChat implements IGroupChat {
 	
@@ -78,10 +76,12 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 	}
 
 	public void addRecipient(int recipientUin) {
+		if (recipientUin < 0) throw new IllegalArgumentException("recipientUin cannot be less than 0");
 		m_recipientUins.add(new Integer(recipientUin));
 	}
 	
 	public void removeRecipient(int recipientUin) {
+		if (recipientUin < 0) throw new IllegalArgumentException("recipientUin cannot be less than 0");
 		m_recipientUins.remove(new Integer(recipientUin));
 	}
 
@@ -92,66 +92,29 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		}
 		return recipientUins;
 	}
-
-	//	/**
-//	 * @see pl.mn.communicator.IChat#nextMessage()
-//	 */
-//	public IMessage nextMessage() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
+	
+	/**
+	 * @see pl.mn.communicator.packet.handlers.AbstractChat#acceptsIncoming(pl.mn.communicator.IncomingMessage)
+	 */
+	protected boolean acceptsIncoming(IncomingMessage incomingMessage) {
+		return isRegisteredRecipient(incomingMessage.getMessageID());
+	}
 
 	/**
-	 * @see pl.mn.communicator.packet.handlers.AbstractChat#getMessageHandler()
+	 * @see pl.mn.communicator.packet.handlers.AbstractChat#acceptsOutgoing(int, int, pl.mn.communicator.MessageStatus)
 	 */
-	protected MessageListener getMessageHandler() {
-		return new MessageHandler();
+	protected boolean acceptsOutgoing(int uin, int messageID, MessageStatus deliveryStatus) {
+		return isRegisteredRecipient(uin);
 	}
 	
-	protected void fireChatMessageArrived(IncomingMessage message) {
-		for (Enumeration e = m_listeners.elements(); e.hasMoreElements();) {
-			MessageListener listener = (MessageListener) e.nextElement();
-			listener.messageArrived(message);
-		}
-	}
-	
-	protected void fireChatMessageDelivered(int uin, int messageID, MessageStatus deliveryStatus) {
-		for (Enumeration e = m_listeners.elements(); e.hasMoreElements();) {
-			MessageListener listener = (MessageListener) e.nextElement();
-			listener.messageDelivered(uin, messageID, deliveryStatus);
-		}
-	}
-	
-	private class MessageHandler implements MessageListener {
-		
-		/**
-		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.IncomingMessage)
-		 */
-		public void messageArrived(IncomingMessage incommingMessage) {
-			if (isInThisGroupChat(incommingMessage.getRecipientUin())) {
-				fireChatMessageArrived(incommingMessage);
+	private boolean isRegisteredRecipient(int uin) {
+		for (int i=0; i<m_recipientUins.size(); i++) {
+			if (uin == ((Integer) m_recipientUins.get(i)).intValue()) {
+				return true;
 			}
 		}
 		
-		/**
-		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(int, int, pl.mn.communicator.MessageStatus)
-		 */
-		public void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus) {
-			if (isInThisGroupChat(uin)) {
-				fireChatMessageDelivered(uin, messageID, deliveryStatus);
-			}
-		}
-		
-		private boolean isInThisGroupChat(int uin) {
-			for (int i=0; i<m_recipientUins.size(); i++) {
-				if (uin == ((Integer) m_recipientUins.get(i)).intValue()) {
-					return true;
-				}
-			}
-			
-			return false;
-		}
-		
+		return false;
 	}
-	
+
 }

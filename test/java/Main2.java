@@ -79,12 +79,12 @@ public class Main2 {
 				
 				groupChat.sendMessage("GroupChatMessageTest1");
 				
-				try {
-					Thread.sleep(1000*10);
-					session.getLoginService().logout();
-				} catch (InterruptedException e) {
-					e.printStackTrace();
-				}
+//				try {
+//					Thread.sleep(1000*10);
+//					session.getLoginService().logout();
+//				} catch (InterruptedException e) {
+//					e.printStackTrace();
+//				}
 			}
 
 			public void loginFailed() throws GGException {

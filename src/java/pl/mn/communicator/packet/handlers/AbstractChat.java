@@ -17,16 +17,19 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+import java.util.Enumeration;
 import java.util.Vector;
 
 import pl.mn.communicator.IChat;
+import pl.mn.communicator.IncomingMessage;
+import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.event.MessageListener;
 
 /**
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractChat.java,v 1.3 2005-01-30 17:59:34 winnetou25 Exp $
+ * @version $Id: AbstractChat.java,v 1.4 2005-01-30 18:36:35 winnetou25 Exp $
  */
 public abstract class AbstractChat implements IChat {
 
@@ -36,7 +39,7 @@ public abstract class AbstractChat implements IChat {
 	protected AbstractChat(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
-		//session.getMessageService().addMessageListener(getMessageHandler());
+		session.getMessageService().addMessageListener(new MessageHandler());
 	}
 
 	public void addChatListener(MessageListener messageListener) {
@@ -49,6 +52,44 @@ public abstract class AbstractChat implements IChat {
 		m_listeners.remove(messageListener);
 	}
 	
-	protected abstract MessageListener getMessageHandler();
+	protected void fireChatMessageArrived(IncomingMessage message) {
+		for (Enumeration e = m_listeners.elements(); e.hasMoreElements();) {
+			MessageListener listener = (MessageListener) e.nextElement();
+			listener.messageArrived(message);
+		}
+	}
+	
+	protected void fireChatMessageDelivered(int uin, int messageID, MessageStatus deliveryStatus) {
+		for (Enumeration e = m_listeners.elements(); e.hasMoreElements();) {
+			MessageListener listener = (MessageListener) e.nextElement();
+			listener.messageDelivered(uin, messageID, deliveryStatus);
+		}
+	}
+	
+	protected abstract boolean acceptsIncoming(IncomingMessage incomingMessage);
 
+	protected abstract boolean acceptsOutgoing(int uin, int messageID, MessageStatus deliveryStatus);
+
+	private class MessageHandler implements MessageListener {
+		
+		/**
+		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.IncomingMessage)
+		 */
+		public void messageArrived(IncomingMessage incommingMessage) {
+			if (acceptsIncoming(incommingMessage)) {
+				fireChatMessageArrived(incommingMessage);
+			}
+		}
+		
+		/**
+		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(int, int, pl.mn.communicator.MessageStatus)
+		 */
+		public void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus) {
+			if (acceptsOutgoing(uin, messageID, deliveryStatus)) {
+				fireChatMessageDelivered(uin, messageID, deliveryStatus);
+			}
+		}
+		
+	}
+	
 }
