@@ -1,1 +1,0 @@
-java -cp .;swt.jar;boot.jar;runtime.jar;log4j-1.2.8.jar;jface.jar;jgg.jar pl.mn.communicator.gui.MainForm
