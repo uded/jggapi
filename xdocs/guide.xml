@@ -52,6 +52,65 @@ ISession session = SessionFactory.createSession(loginContext);
 				</p>
 			</subsection>
 			
+			<subsection name="Session lifecycle">
+				<p>
+				<code>Session</code> can be in various states. We can check actual <code>SessionState</code>
+				by invoking getSessionState method on <code>Session</code> object.
+				</p>
+				<source>
+<![CDATA[
+ISession session = ...
+SessionState sessionState = session.getSessionState();				
+]]>
+				</source>
+				<p>
+				List of all available session states:
+				<ul>
+					<li>SessionState.CONNECTION_AWAITING</li>
+					<li>SessionState.CONNECTING</li>
+					<li>SessionState.CONNECTED</li>
+					<li>SessionState.AUTHENTICATION_AWAITING</li>
+					<li>SessionState.LOGGED_IN</li>
+					<li>SessionState.DISCONNECTING</li>
+					<li>SessionState.DISCONNECTED</li>
+					<li>SessionState.LOGGED_OUT</li>
+					<li>SessionState.CONNECTION_ERROR</li>
+				</ul>
+				</p>
+				<p>
+				After creation session is in <code>SessionState.CONNECTION_AWAITING</code>.
+				When connect method is invoked session is in <code>SessionState.CONNECTING</code>.
+				When connection to Gadu-Gadu server is established the session state becomes <code>SessionState.CONNECTED</code>.
+				Next phase is the authentication of a user therefore session state is <code>SessionState.AUTHENTICATION_AWAITING</code>.
+				After logging in session is in <code>SessionState.LOGGED_IN</code>.
+				</p>
+				<p>
+				In <code>SessionState.LOGGED_IN</code> it is possible to send messages, to change status,
+				import, export contact list and search information in public directory.
+				</p>
+				<p>
+				When there is an unexpected error that occurs during interaction with Gadu-Gadu server session
+				state is in <code>SessionState.CONNECTION_ERROR</code> and this means one can disconnect from server.
+				</p>
+				<p>
+				If one wants to be notified of session state changes one has to register as <code>SessionStateLister</code>
+				in <code>Session</code> object.
+				</p>
+				<p>
+				Code snippet:
+				<source>
+<![CDATA[
+ISession session = ...
+session.addSessionStateListener(new SessionStateListener() {
+public void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState) {
+	//add handling here
+}
+});
+]]>
+				</source>
+				</p>
+			</subsection>
+			
 			<subsection name="Connecting and disconnecting from Gadu-Gadu server">
 				<p>
 				In order to connect to Gadu-Gadu server one has to use <code>ConnectionService</code>
@@ -126,23 +185,7 @@ connectionService.disconnect();
 	
 			<subsection name="Logging in and logging out">
 				<p>
-				In order to log in we already must be connected and state of the <code>Session</code> object must
-				be: <code>SessionState.AUTHENTICATION_AWAITING</code>. State of the <code>Session</code>
-				can be accessed by invoking <code>session.getSessionState()</code> method or also we can be notified
-				by registering as <code>SessionStateListener</code> in <code>Session</code> instance.
-				</p>
-				<p>
-				Code snippet:
-				<source>
-<![CDATA[
-ISession session = ...
-session.addSessionStateListener(new SessionStateListener() {
-public void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState) {
-	//add handling here
-}
-});
-]]>
-				</source>
+				In order to log in connection to Gadu-Gadu server must be established.
 				</p>
 				<p>
 				One can log in using <code>LoginService</code>. If the uin and password match Gadu-Gadu server

@@ -12,9 +12,10 @@
       <item name="Getting Started" href="/guide.html"/>
       <item name="FAQ" href="/faq.html"/>
 	  <item name="Java Docs" href="/apidocs/index.html"/>
-	  <item name="CVS Access" href="http://sourceforge.net/cvs/?group_id=79198"/>
+	  <item name="CVS Access" href="cvs-usage.html"/>
+      <item name="Development Team" href="/team-list.html"/>
       <item name="Source" href="/xref/index.html"/>
-      <item name="Downloads" href="http://sourceforge.net/projects/jggapi"/>   
+      <item name="Downloads" href="http://sourceforge.net/project/showfiles.php?group_id=79198"/>   
       <item name="Bugs" href="http://sourceforge.net/tracker/?group_id=79198"/>
     </menu>
   </body>

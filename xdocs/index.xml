@@ -27,19 +27,20 @@
 		</section>
 		<section name="News">
 			<ul>
-				<li>Released 1.0-dev version of JGGApi.</li>
-				<li>Written first part of JGGApi Getting Started Guide.</li>
+				<li>04-01-2005: Written "session lifecycle" section in <a href="guide.html">Getting Started</a> Guide.</li>
+				<li>03-01-2005: Released <a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-1.0-dev</a> version of <b>JGGApi</b>.</li>
+				<li>03-01-2005: Written first part of <b>JGGApi</b> <a href="guide.html">Getting Started</a> Guide.</li>
 			</ul>
 		</section>
 		<section name="Releases">
 			<p> There is an old version of the library that has already been 
-				released. It is <b>0.94</b> and you can download it here: <a 
-				href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-0.94</a>. 
+				released. It is <b>jggapi-0.94</b> and you can download it here:
+				<a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-0.94</a>. 
 				It works fine but it has limited functionality and does not 
 				have a support for searching in public directory, loading and 
 				storing information there and also it does not support contact 
 				list at all. </p>
-			<p> The new version of library <b>jggapi-1.0-dev</b> has many 
+			<p> The new version of library <a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-1.0-dev</a> has many 
 				improvements and clearer design. It is not compatible with the 
 				old version, interfaces have changed significantly but porting 
 				from an old version should not be a difficult task. It also has 
@@ -47,22 +48,12 @@
 				version. Note that this version has suffix <em>dev</em> because 
 				it has not been tested extensively. It would be very 
 				appreciated if users could provide feedback about the usage of 
-				this library. </p>
-			<p> It is strongly recommended that you use the newest version 
+				this library.
+			</p>
+			<p> 
+				It is strongly recommended that you use the newest version 
 				instead of an old one because support for 0.94 will no longer 
-				be provided. </p>
-			<p>
-				<b>Release 1.0-dev:</b>
-				<ul>
-					<li>
-						<a href="releases/jggapi-1.0-dev.zip">
-							jggapi-1.0-dev.zip</a>
-					</li>
-					<li>
-						<a href="releases/jggapi-1.0-dev-src.zip">
-							jggapi-1.0-dev-src.zip</a>
-					</li>
-				</ul>
+				be provided.
 			</p>
 		</section>
 		<section name="Features">
