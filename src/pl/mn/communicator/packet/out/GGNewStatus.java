@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.packet.out;
 
-import pl.mn.communicator.IStatus60;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.packet.GGStatusEnabled;
 import pl.mn.communicator.packet.GGUtils;
 
@@ -26,7 +26,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNewStatus.java,v 1.1 2004-12-14 19:29:57 winnetou25 Exp $
+ * @version $Id: GGNewStatus.java,v 1.2 2004-12-14 19:49:05 winnetou25 Exp $
  */
 public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
 	
@@ -34,12 +34,12 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
 
     private static final int MAX_OPIS = 70;
 
-    private IStatus60 m_localStatus = null;
+    private IStatus m_localStatus = null;
     
     /**
      * The protocol status contructor.
      */
-    public GGNewStatus(IStatus60 localStatus) {
+    public GGNewStatus(IStatus localStatus) {
     	if (localStatus == null) throw new NullPointerException("status cannot be null");
         m_localStatus = localStatus;
     }

@@ -22,9 +22,9 @@ import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.GGUser;
 import pl.mn.communicator.GGUserMode;
-import pl.mn.communicator.IStatus60;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.Status60;
+import pl.mn.communicator.Status;
 import pl.mn.communicator.packet.GGStatusEnabled;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.out.GGNewStatus;
@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.1 2004-12-14 19:29:55 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.2 2004-12-14 19:49:04 winnetou25 Exp $
  */
 public class GGStatus60 implements GGStatusEnabled {
 
@@ -56,7 +56,7 @@ public class GGStatus60 implements GGStatusEnabled {
 	private static Log logger = LogFactory.getLog(GGStatus60.class);
 
 	private IUser m_user = null;
-	private Status60 m_status60 = null;
+	private Status m_status60 = null;
 	
 	private byte m_flag = -1;
 	
@@ -69,7 +69,7 @@ public class GGStatus60 implements GGStatusEnabled {
 		return m_user;
 	}
 	
-	public IStatus60 getStatus60() {
+	public IStatus getStatus60() {
 		return m_status60;
 	}
 	

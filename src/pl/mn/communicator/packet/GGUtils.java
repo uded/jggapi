@@ -21,9 +21,9 @@ import java.util.Date;
 
 import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.IStatus;
-import pl.mn.communicator.Status60;
 import pl.mn.communicator.MessageClass;
 import pl.mn.communicator.MessageStatus;
+import pl.mn.communicator.Status;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.packet.in.GGSendMsgAck;
 import pl.mn.communicator.packet.out.GGNotify;
@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.1 2004-12-14 19:29:57 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.2 2004-12-14 19:49:06 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -52,43 +52,43 @@ public class GGUtils {
 		throw new RuntimeException("Unable to convert userMode: "+userMode);
 	}
 	
-	public static Status60 getClientStatus(int status, String description, long returnTimeInMillis) {
-		Status60 localStatus = null;
+	public static Status getClientStatus(int status, String description, long returnTimeInMillis) {
+		Status localStatus = null;
 		
 		switch (status) {
 		case GGStatusEnabled.GG_STATUS_AVAIL: 
-			localStatus = new Status60(StatusType.ONLINE);
+			localStatus = new Status(StatusType.ONLINE);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_AVAIL_DESCR:
-			localStatus = new Status60(StatusType.ONLINE_WITH_DESCRIPTION);
+			localStatus = new Status(StatusType.ONLINE_WITH_DESCRIPTION);
 		localStatus.setDescription(description);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_BUSY:
-			localStatus = new Status60(StatusType.BUSY);
+			localStatus = new Status(StatusType.BUSY);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_BUSY_DESCR:
-			localStatus = new Status60(StatusType.BUSY_WITH_DESCRIPTION);
+			localStatus = new Status(StatusType.BUSY_WITH_DESCRIPTION);
 			localStatus.setDescription(description);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_INVISIBLE:
-			localStatus = new Status60(StatusType.INVISIBLE);
+			localStatus = new Status(StatusType.INVISIBLE);
 			break;
 
 		case GGStatusEnabled.GG_STATUS_INVISIBLE_DESCR:
-			localStatus = new Status60(StatusType.INVISIBLE_WITH_DESCRIPTION);
+			localStatus = new Status(StatusType.INVISIBLE_WITH_DESCRIPTION);
 		localStatus.setDescription(description);
 			break;
 		
 		case GGStatusEnabled.GG_STATUS_NOT_AVAIL:
-			localStatus = new Status60(StatusType.OFFLINE);
+			localStatus = new Status(StatusType.OFFLINE);
 			break;
 
 		case GGStatusEnabled.GG_STATUS_NOT_AVAIL_DESCR:
-			localStatus = new Status60(StatusType.OFFLINE);
+			localStatus = new Status(StatusType.OFFLINE);
 			localStatus.setDescription(description);
 			break;
 		}

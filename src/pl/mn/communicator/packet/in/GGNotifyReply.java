@@ -25,17 +25,15 @@ import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.GGUser;
 import pl.mn.communicator.GGUserMode;
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.Status;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.out.GGNewStatus;
 
 /**
  * 
- * Dziwne, tak jakby NotifyReply w wersji poprzedniej zwracalo nam dziwne wartosci.
- * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.1 2004-12-14 19:29:55 winnetou25 Exp $
+ * @version $Id: GGNotifyReply.java,v 1.2 2004-12-14 19:49:04 winnetou25 Exp $
  */
 public class GGNotifyReply implements GGIncomingPackage {
 
@@ -79,6 +77,7 @@ public class GGNotifyReply implements GGIncomingPackage {
             int uin = GGUtils.byteToInt(data, offset);
             int status = GGUtils.unsignedByteToInt(data[offset+4]);
             int remoteIP = GGUtils.byteToInt(data, offset+5);
+            byte[] remoteIPByte = GGUtils.intToByte(remoteIP);
             short remotePort = GGUtils.byteToShort(data, offset+9);
             int version = GGUtils.byteToInt(data, offset+11);
 
@@ -111,7 +110,12 @@ public class GGNotifyReply implements GGIncomingPackage {
                 offset += 14; // the packet without description is 14 bytes long.
             }
             
-            IStatus statusBiz = GGUtils.getClientStatus(status, description, timeInMillis);
+            Status statusBiz = GGUtils.getClientStatus(status, description, timeInMillis);
+            
+            statusBiz.setRemoteIP(remoteIPByte);
+            statusBiz.setRemotePort(remotePort);
+            statusBiz.setGGVersion((byte)version);
+            
             GGUserMode userMode = GGUtils.getUserMode(status);
             GGUser user = new GGUser(uin, userMode);
             m_statuses.put(user, statusBiz);

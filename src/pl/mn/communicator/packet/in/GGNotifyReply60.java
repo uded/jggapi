@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 import pl.mn.communicator.GGUser;
 import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.Status60;
+import pl.mn.communicator.Status;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.out.GGNewStatus;
 
@@ -34,7 +34,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.1 2004-12-14 19:29:55 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.2 2004-12-14 19:49:04 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -120,7 +120,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
             	 offset += 14; // packet without description is only 14 bytes long            	
             }
         	IUser user = new GGUser(uin, userMode);
-            Status60 status60 = GGUtils.getClientStatus(status, description, timeInMillis);
+            Status status60 = GGUtils.getClientStatus(status, description, timeInMillis);
 
             if (remotePort == 0) {
             	status60.setSupportsDirectCommunication(false);

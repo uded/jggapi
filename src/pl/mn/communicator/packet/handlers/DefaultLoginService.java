@@ -26,7 +26,7 @@ import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.ILoginService;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.Status60;
+import pl.mn.communicator.Status;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.packet.out.GGLogin60;
@@ -35,7 +35,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.2 2004-12-14 19:49:05 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -81,7 +81,7 @@ public class DefaultLoginService implements ILoginService {
 	 */
 	public void logout() throws GGException {
 		checkSessionState();
-		m_session.getPresenceService().setStatus(new Status60(StatusType.OFFLINE));
+		m_session.getPresenceService().setStatus(new Status(StatusType.OFFLINE));
 		m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
 	}
 	
@@ -92,7 +92,7 @@ public class DefaultLoginService implements ILoginService {
 		if (description == null) throw new NullPointerException("description cannot be null");
 		checkSessionState();
 		if (description.length() > 0) {
-			Status60 localStatus = new Status60(StatusType.OFFLINE_WITH_DESCRIPTION);
+			Status localStatus = new Status(StatusType.OFFLINE_WITH_DESCRIPTION);
 			localStatus.setDescription(description);
 			m_session.getPresenceService().setStatus(localStatus);
 			m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);

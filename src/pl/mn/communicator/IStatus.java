@@ -20,11 +20,10 @@ package pl.mn.communicator;
 import java.util.Date;
 
 /**
- * This interface represents status of user.<BR>
+ * Created on 2004-12-12
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IStatus.java,v 1.12 2004-12-13 23:43:51 winnetou25 Exp $
+ * @version $Id: IStatus.java,v 1.13 2004-12-14 19:49:00 winnetou25 Exp $
  */
 public interface IStatus {
 
@@ -83,5 +82,15 @@ public interface IStatus {
     void setBlocked(boolean blocked);
     
     boolean isBlocked();
-    
+	
+	byte[] getRemoteIP();
+	int getRemotePort();
+	byte getGGVersion();
+	byte getImageSize();
+	boolean supportsVoiceCommunication();
+	boolean supportsDirectCommunication();
+	boolean areWeInRemoteUserBuddyList();
+	boolean isUserBehindFirewall();
+	int getDescriptionSize();
+	
 }

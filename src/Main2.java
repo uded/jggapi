@@ -7,7 +7,6 @@ import pl.mn.communicator.GGUser;
 import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
-import pl.mn.communicator.IStatus60;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.OutgoingMessage;
@@ -40,8 +39,8 @@ public class Main2 {
 
 		ArrayList users = new ArrayList();
 		
-		GGUser user1 = new GGUser(376798, GGUserMode.FRIEND);
-		IUser user2 = new GGUser(2040781, GGUserMode.BUDDY);
+		GGUser user1 = new GGUser(376798, GGUserMode.BUDDY);
+		GGUser user2 = new GGUser(1136132, GGUserMode.BUDDY);
 
 		users.add(user1);
 		users.add(user2);
@@ -88,7 +87,7 @@ public class Main2 {
 		});
 		session.getPresenceService().addUserListener(new UserListener() {
 
-			public void userStatusChanged(IUser user, IStatus60 newStatus) {
+			public void userStatusChanged(IUser user, IStatus newStatus) {
 				System.out.println("User changed status: "+user.getUin());
 				System.out.println("Status: "+newStatus.getStatusType());
 				System.out.println("Description: "+newStatus.getDescription());
@@ -155,9 +154,11 @@ public class Main2 {
 //		session.getContactListService().exportContacts(localUsers);
 //		session.getContactListService().importContacts();
 		
-//		GGUser user1 = new GGUser(376798, GGUserMode.BLOCKED);
-//		session.getPresenceService().addMonitoredUser(user1);
-//
+		GGUser user3 = new GGUser(2944956, GGUserMode.BUDDY);
+		session.getPresenceService().addMonitoredUser(user3);
+
+		session.getPresenceService().removeMonitoredUser(user1);
+		
 //		IUser user2 = new GGUser(2040781, GGUserMode.BUDDY);
 //		session.getPresenceService().addMonitoredUser(user2);
 

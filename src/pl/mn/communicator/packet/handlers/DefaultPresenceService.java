@@ -30,7 +30,7 @@ import org.apache.commons.logging.LogFactory;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IPresenceService;
-import pl.mn.communicator.IStatus60;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.LoginListener;
@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.2 2004-12-14 19:49:05 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
@@ -54,7 +54,7 @@ public class DefaultPresenceService implements IPresenceService {
 	
 	private Set m_userListeners = null;
 	private Session m_session = null;
-	private IStatus60 m_localStatus = null;
+	private IStatus m_localStatus = null;
 	private Collection m_monitoredUsers = new HashSet();
 
 	public DefaultPresenceService(Session session) {
@@ -70,7 +70,7 @@ public class DefaultPresenceService implements IPresenceService {
 	/**
 	 * @see pl.mn.communicator.IPresenceService#setStatus(pl.mn.communicator.IStatus)
 	 */
-	public void setStatus(IStatus60 localStatus) throws GGException {
+	public void setStatus(IStatus localStatus) throws GGException {
 		if (localStatus == null) throw new NullPointerException("status cannot be null");
 		checkSessionState();
 		try {
@@ -85,7 +85,7 @@ public class DefaultPresenceService implements IPresenceService {
 	/**
 	 * @see pl.mn.communicator.IPresenceService#getStatus()
 	 */
-	public IStatus60 getStatus() {
+	public IStatus getStatus() {
 		return m_localStatus;
 	}
 	
@@ -168,7 +168,7 @@ public class DefaultPresenceService implements IPresenceService {
 		m_userListeners.remove(userListener);
 	}
 	
-	protected void notifyUserChangedStatus(IUser user, IStatus60 status) {
+	protected void notifyUserChangedStatus(IUser user, IStatus status) {
 		if (user == null) throw new NullPointerException("user cannot be null");
 		if (status == null) throw new NullPointerException("status cannot be null");
 		for (Iterator it = m_userListeners.iterator(); it.hasNext();) {

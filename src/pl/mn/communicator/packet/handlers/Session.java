@@ -31,7 +31,7 @@ import pl.mn.communicator.IMessageService;
 import pl.mn.communicator.IPresenceService;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
-import pl.mn.communicator.IStatus60;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.SessionState;
@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.2 2004-12-14 19:49:05 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -217,7 +217,7 @@ public class Session implements ISession {
 			m_loginService.notifyLoginFailed();
 		}
 
-		public void notifyUserChangedStatus(IUser user, IStatus60 status) {
+		public void notifyUserChangedStatus(IUser user, IStatus status) {
 			m_presenceService.notifyUserChangedStatus(user, status);
 		}
 

@@ -18,14 +18,14 @@
 package pl.mn.communicator.packet.out;
 
 import pl.mn.communicator.GGVersion;
-import pl.mn.communicator.IStatus60;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.packet.GGStatusEnabled;
 import pl.mn.communicator.packet.GGUtils;
 
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.1 2004-12-14 19:29:57 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.2 2004-12-14 19:49:05 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 
@@ -75,7 +75,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 		m_loginHash = GGUtils.getLoginHash(password, seed);
 	}
 	
-	public void setStatus(IStatus60 localStatus) {
+	public void setStatus(IStatus localStatus) {
 		if (localStatus == null) throw new NullPointerException("localStatus cannot be null");
 		m_status = GGUtils.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
 		if (localStatus.isDescriptionSet()) {
@@ -86,7 +86,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 		}
 	}
 	
-	public IStatus60 getStatus() {
+	public IStatus getStatus() {
 		if (m_time > 0) {
 			long timeInMillis = GGUtils.secondsToMillis(m_time);
 			return GGUtils.getClientStatus(m_status, m_description, timeInMillis);

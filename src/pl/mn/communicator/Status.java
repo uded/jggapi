@@ -19,18 +19,13 @@ package pl.mn.communicator;
 
 import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Status.java,v 1.6 2004-12-13 23:43:51 winnetou25 Exp $
+ * @version $Id: Status.java,v 1.7 2004-12-14 19:49:00 winnetou25 Exp $
  */
-public abstract class Status implements IStatus {
-
-	private static Log logger = LogFactory.getLog(Status.class);
+public class Status implements IStatus {
 
 	private StatusType m_statusType = StatusType.ONLINE;
 	private boolean m_friendsOnly = false;
@@ -42,23 +37,30 @@ public abstract class Status implements IStatus {
 	/** Return time */
 	private Date m_returnTime = null;
 
-	/**
-	 * @param status the status of user
-	 */
-	protected Status(StatusType status) {
-		this(status, null, null);
-	}
+	private byte[] m_remoteIP = new byte[]{0,0,0,0};
+	private int m_remotePort = 1555;
+	
+	private byte m_imageSize = -1;
+	private byte m_version = -1;
+	private int m_descriptionSize = 0;
 
-	protected Status(StatusType status, String description) {
-		this(status, description, null);
-	}
-
-	protected Status(StatusType statusType, String description, Date returnDate) {
-		if (statusType == null)
-			throw new NullPointerException("statusType cannot be null");
+	private boolean m_supportsVoiceCommunication = false;
+	private boolean m_supportsDirectCommunication = false;
+	private boolean m_areWeInRemoteUserBuddyList = true;
+	private boolean m_isUserBehindFirewall = false;
+	
+	public Status(StatusType statusType, String description, Date returnDate) {
+		if (statusType == null) throw new NullPointerException("statusType cannot be null");
 		m_statusType = statusType;
 		m_description = description;
 		m_returnTime = returnDate;
+	}
+
+	public Status(StatusType statusType, String description) {
+		this(statusType, description, null);
+	}
+	public Status(StatusType statusType) {
+		this(statusType, null, null);
 	}
 
 	/**
@@ -148,10 +150,104 @@ public abstract class Status implements IStatus {
 	}
 
 	/**
-	 * @see java.lang.Object#toString()
+	 * @see pl.mn.communicator.IStatus#getRemoteIP()
 	 */
-	public String toString() {
-		return "[Status: " + m_statusType + ", description: " + m_description+ ", time: " + m_returnTime+"]";
+	public byte[] getRemoteIP() {
+		return m_remoteIP;
+	}
+	
+	public void setRemoteIP(byte[] remoteIP) {
+		if (remoteIP == null) throw new NullPointerException("remoteIP cannot be null");
+		if (remoteIP.length != 4) throw new IllegalArgumentException("remoteIP must contain 4 entries");
+		m_remoteIP = remoteIP;
 	}
 
+	/**
+	 * @see pl.mn.communicator.IStatus#getRemotePort()
+	 */
+	public int getRemotePort() {
+		return m_remotePort;
+	}
+
+	public void setRemotePort(int remotePort) {
+		if (remotePort < 0 || remotePort > 65535) throw new IllegalArgumentException("Incorrect remotePort number");
+		m_remotePort = remotePort;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#getGGVersion()
+	 */
+	public byte getGGVersion() {
+		return m_version;
+	}
+	
+	public void setGGVersion(byte version) {
+		m_version = version;
+	}
+
+	/**
+	 * @see pl.mn.communicator.IStatus#getImageSize()
+	 */
+	public byte getImageSize() {
+		return m_imageSize;
+	}
+
+	public void setImageSize(byte imageSize) {
+		if (imageSize < 0) throw new IllegalArgumentException("Illegal imageSize");
+		m_imageSize = imageSize;
+	}
+	
+	public boolean supportsVoiceCommunication() {
+		return m_supportsVoiceCommunication;
+	}
+	
+	public void setSupportsVoiceCommunication(boolean supportsVoiceCommunication) {
+		m_supportsVoiceCommunication = supportsVoiceCommunication;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#supportsDirectCommunication()
+	 */
+	public boolean supportsDirectCommunication() {
+		return m_supportsDirectCommunication;
+	}
+
+	public void setSupportsDirectCommunication(boolean supportsDirectCommunication) {
+		m_supportsDirectCommunication = supportsDirectCommunication;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#areWeInRemoteUserBuddyList()
+	 */
+	public boolean areWeInRemoteUserBuddyList() {
+		return m_areWeInRemoteUserBuddyList;
+	}
+
+	public void setAreWeInRemoteUserBuddyList(boolean areWeInRemoteUserBuddyList) {
+		m_areWeInRemoteUserBuddyList = areWeInRemoteUserBuddyList;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#getDescription()
+	 */
+	public int getDescriptionSize() {
+		return m_descriptionSize;
+	}
+	
+	public void setDescriptionSize(int descriptionSize) {
+		if (descriptionSize < 0) throw new IllegalArgumentException("descriptionSize cannot be less than 0");
+		m_descriptionSize = descriptionSize;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#isUserBehingFirewall()
+	 */
+	public boolean isUserBehindFirewall() {
+		return m_isUserBehindFirewall;
+	}
+	
+	public void setUserBehindFirewall(boolean userBehingFirewall) {
+		m_isUserBehindFirewall = true;
+	}
+	
 }

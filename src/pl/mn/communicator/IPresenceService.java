@@ -25,13 +25,13 @@ import pl.mn.communicator.event.UserListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IPresenceService.java,v 1.7 2004-12-13 23:43:53 winnetou25 Exp $
+ * @version $Id: IPresenceService.java,v 1.8 2004-12-14 19:49:00 winnetou25 Exp $
  */
 public interface IPresenceService {
 
-	void setStatus(IStatus60 status) throws GGException;
+	void setStatus(IStatus status) throws GGException;
 
-	IStatus60 getStatus();
+	IStatus getStatus();
 	
 	void addMonitoredUser(IUser user) throws GGException;
 

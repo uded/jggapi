@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.packet.handlers;
 
-import pl.mn.communicator.IStatus60;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.packet.in.GGStatus;
 
@@ -25,7 +25,7 @@ import pl.mn.communicator.packet.in.GGStatus;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatusPacketHandler.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
+ * @version $Id: GGStatusPacketHandler.java,v 1.2 2004-12-14 19:49:05 winnetou25 Exp $
  */
 public class GGStatusPacketHandler implements PacketHandler {
 
@@ -36,7 +36,7 @@ public class GGStatusPacketHandler implements PacketHandler {
 		GGStatus status = new GGStatus(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(status);
 		IUser user = status.getUser();
-		IStatus60 statusBiz = status.getStatus();
+		IStatus statusBiz = status.getStatus();
 		context.getSessionAccessor().notifyUserChangedStatus(user, statusBiz);
 	}
 
