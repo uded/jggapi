@@ -3,7 +3,7 @@
     <view uin="V-d9nhuoe2auxfks-romof3">
         <property name="$metaclass" value="StateDiagram20"/>
         <property name="$description" value=""/>
-        <property name="@__options" value="zoomFactor = 0.8264462809917354 &#xA;toolbar.group.Tools.expanded = true &#xA;toolbar.buttonRunCount = 2 &#xA;toolbar.group.#DEFAULT.expanded = true &#xA;toolbar.group.note.expanded = true &#xA;scrollX = 0 &#xA;scrollY = 59 &#xA;"/>
+        <property name="@__options" value="zoomFactor = 0.8264462809917354&#xA;toolbar.group.Tools.expanded = true&#xA;toolbar.buttonRunCount = 2&#xA;toolbar.group.#DEFAULT.expanded = true&#xA;toolbar.group.note.expanded = true&#xA;scrollX = 0&#xA;scrollY = 100&#xA;"/>
         <reference referencedUin="design:node:::N-3uf15de2avcpwvmexzw6">
             <property name="$shortcutReference" value=""/>
             <property name="@location_set_by_user" value="true"/>

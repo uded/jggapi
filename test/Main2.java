@@ -45,7 +45,7 @@ public class Main2 {
 		users.add(user1);
 		users.add(user2);
 		
-		final LoginContext loginContext = new LoginContext(1336843, "dupa");
+		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
 		loginContext.setMonitoredUsers(users);
 		
 		IStatus status = loginContext.getStatus();
@@ -125,8 +125,6 @@ public class Main2 {
  		session.getConnectionService().connect();
 		session.getLoginService().login();
 		
-		session.getConnectionService().disconnect();
-
 //		loginContext.setPassword("dupadupa");
 //		session.getLoginService().login();
 		
