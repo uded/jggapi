@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="Maven xdoc Plugin">
+
+  <title>Maven xdoc Plugin</title>
+
+  <body>
+    <links>
+      <item name="Maven"  href="http://maven.apache.org/"/>
+    </links>
+    <menu>
+      <item name="Main" href="/index.html"/>   
+      <item name="API javadocs" href="/apidocs/index.html"/>   
+      <item name="Downloads" href="http://sourceforge.net/projects/jggapi"/>   
+      <item name="Bugs" href="http://sourceforge.net/tracker/?group_id=79198"/>   
+    </menu>
+  </body>
+</project>
