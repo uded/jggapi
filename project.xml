@@ -20,12 +20,10 @@
   <distributionSite>shell1.jggapi.sf.net</distributionSite>
   <distributionDirectory>/home/groups/${pom.groupId.substring(0,1)}/${pom.groupId.substring(0,2)}/${pom.groupId}/htdocs/repository/</distributionDirectory>
 
-
-
- <repository>
-    <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</connection>
-    <developerConnection>scm:cvs:ssh:username@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</developerConnection>
-    <url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jggapi/jggapi/</url>
+	<repository>
+		<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</connection>
+    	<developerConnection>scm:cvs:ssh:username@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</developerConnection>
+    	<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jggapi/jggapi/</url>
 	</repository>
 	
 	<developers>
@@ -36,20 +34,21 @@
 		</developer>
 		<developer>
 			<name>Mateusz Szczap</name>
-			<id>winnetou25</id>
+			<id>mati</id>
 			<email>mati@sz.home.pl</email>
 		</developer>
 	</developers>
+	
 	<dependencies>
-<dependency>
-    <groupId>commons-logging</groupId>
-    <artifactId>commons-logging</artifactId>
-    <version>1.0.4</version>
-</dependency>
+		<dependency>
+    		<groupId>commons-logging</groupId>
+    		<artifactId>commons-logging</artifactId>
+    		<version>1.0.4</version>
+		</dependency>
 	</dependencies>
 
-  
 	<build>
 		<sourceDirectory>src/java</sourceDirectory>
 	</build>
+	
 </project>
