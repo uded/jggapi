@@ -59,7 +59,6 @@
     <roles>
       <role>Lead Developer</role>
     </roles>
-    <organization>NCDC</organization>
   </developers>
   <dependencies>
     <dependency>
