@@ -30,7 +30,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.8 2004-12-18 16:47:14 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.9 2004-12-18 21:51:11 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
@@ -168,10 +168,8 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 			} else if (token.equals(NICK_NAME)) {
 				String nickName = tokenizer.nextToken();
 				entry.setNickName(nickName);
-			} else if(token.equals("\0")) {
-				String tok = tokenizer.nextToken();
-				String[] split = tok.split("\0");
-				String nextNumber = split[1];
+			} else if(token.equals(NEXT_START)) {
+				String nextNumber = tokenizer.nextToken();
 				m_publicDirSearchReply.setNextStart(Integer.valueOf(nextNumber));
 				break;
 			}
