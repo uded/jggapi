@@ -33,7 +33,7 @@ import pl.mn.communicator.MessageStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageListener.java,v 1.3 2004-12-19 13:42:31 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.4 2004-12-19 16:10:42 winnetou25 Exp $
  */
 public interface MessageListener extends EventListener {
 	
@@ -50,7 +50,7 @@ public interface MessageListener extends EventListener {
 	 * 
 	 * @param uin the Gadu-Gadu number of the user to whom the message was addressed.
 	 * @param messageID the unique message id that was generated before sending message.
-	 * @param the status of delivery of the message.
+	 * @param deliveryStatus the delivery status of the message.
 	 */
     void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus);
     

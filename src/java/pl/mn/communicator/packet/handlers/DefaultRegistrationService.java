@@ -34,12 +34,13 @@ import pl.mn.communicator.IRegistrationService;
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.3 2004-12-18 16:47:20 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.4 2004-12-19 16:10:33 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 
 	private Session m_session;
 	
+	//friendly
 	public DefaultRegistrationService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
@@ -49,7 +50,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 	 * @see pl.mn.communicator.IRegistrationService#changePassword(java.lang.String, java.lang.String, int, java.lang.String)
 	 */
 	public void changePassword(String email, String password, int qa, String answer) {
-		
+		//TODO implement method
 	}
 
 	/**

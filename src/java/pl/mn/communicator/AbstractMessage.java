@@ -21,11 +21,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Abstract implementation of <code>IMessage</code> that
- * is common for incomming and outgoing messages.
+ * An abstract implementation of <code>IMessage</code> that
+ * is common for incoming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.3 2004-12-18 15:09:01 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.4 2004-12-19 16:10:42 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 
@@ -69,5 +69,12 @@ public abstract class AbstractMessage implements IMessage {
     public MessageClass getMessageClass() {
     	return m_messageClass;
     }
+    
+    /**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		return "[Uin: "+m_uin+", messageBody: "+m_messageBody+", messageClass: "+m_messageClass+"]";
+	}
 
 }

@@ -21,28 +21,50 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * The class that represents message that will be sent to the Gadu-Gadu server.
+ * <p>
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.2 2004-12-18 22:07:55 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.3 2004-12-19 16:10:42 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
 
 	private static Log logger = LogFactory.getLog(OutgoingMessage.class);
 
-    public OutgoingMessage(int uin, String text, MessageClass messageClass) {
+	//private constructor
+    private OutgoingMessage(int uin, String text, MessageClass messageClass) {
     	super(uin, text, messageClass);
     }
     
+    /** 
+     * Creates an outgoing message that will be poped up in a new window.
+     * 
+     * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
+     * @param messageBody the body of the message.
+     * @return OutgoingMessage outgoing message.
+     */
 	public static OutgoingMessage createMessage(int uin, String messageBody) {
 		return new OutgoingMessage(uin, messageBody, MessageClass.IN_NEW_WINDOW);
 	}
 
-	/**
-	 * Creates an outgoing message that is just a ping.
-	 * 
-	 * @param uin
-	 */
+    /** 
+     * Creates an outgoing message that is a part of a previous conversation
+     * 
+     * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
+     * @param messageBody the body of the message.
+     * @return OutgoingMessage outgoing message.
+     */
+	public static OutgoingMessage createChatMessage(int uin, String messageBody) {
+		return new OutgoingMessage(uin, messageBody, MessageClass.CHAT);
+	}
+
+    /** 
+     * Creates an outgoing message that only pings the user.
+     * 
+     * @param uin Gadu-Gadu number to of the user to whom this ping is addressed.
+     * @return OutgoingMessage outgoing message.
+     */
 	public static OutgoingMessage createPingMessage(int uin) {
 		return new OutgoingMessage(uin, "", MessageClass.PING);
 	}
@@ -55,15 +77,37 @@ public class OutgoingMessage extends AbstractMessage {
 	 * @param text
 	 * @return OutgoingMessage
 	 */
+    /** 
+     * Creates an outgoing message and sets a special flag
+     * that will notify Gadu-Gadu server that we do not want to receive the
+     * confirmation from the server that this message was delivered to the user
+     * it is addressed.
+     * 
+     * @param uin Gadu-Gadu number to of the user to whom this message is addressed.
+     * @param messageBody the body of the message.
+     * @return OutgoingMessage outgoing message.
+     */
 	public static OutgoingMessage createMessageWithoutConfirmation(int uin, String messageBody) {
 		return new OutgoingMessage(uin, messageBody, MessageClass.DO_NOT_CONFIRM);
 	}
 	
+	/**
+	 * Use this method if you want to set new message body on this message.
+	 * 
+	 * @param messageBody the new message body.
+	 * @throws NullPointerException if the messageBody object is null.
+	 */
 	public void setMessageBody(String messageBody) {
 		if (messageBody == null) throw new NullPointerException("messageBody cannot be null");
 		m_messageBody = messageBody;
 	}
-
+	
+	/**
+	 * Use this method if you want to set new uin on this message.
+	 * 
+	 * @param uin the new Gadu-Gadu number to whom this message will be addressed.
+	 * @throws IllegalArgumentException if the uin is a negative value.
+	 */
 	public void setUin(int uin) {
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		m_uin = uin;

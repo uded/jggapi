@@ -30,10 +30,12 @@ import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.packet.out.GGUserListRequest;
 
 /**
+ * The default implementation of <code>IContactListService</code>.
+ * <p>
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultContactListService.java,v 1.3 2004-12-18 15:17:00 winnetou25 Exp $
+ * @version $Id: DefaultContactListService.java,v 1.4 2004-12-19 16:10:33 winnetou25 Exp $
  */
 public class DefaultContactListService implements IContactListService {
 
@@ -41,7 +43,8 @@ public class DefaultContactListService implements IContactListService {
 	
 	private Session m_session = null;
 	
-	public DefaultContactListService(Session session) {
+	//friendly
+	DefaultContactListService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		m_contactListListeners = new HashSet();
@@ -108,6 +111,7 @@ public class DefaultContactListService implements IContactListService {
 		m_contactListListeners.add(contactListListener);
 	}
 	
+	//TODO clone the listeners list beforing notifing
 	protected void notifyContactListExported() {
 		for (Iterator it = m_contactListListeners.iterator(); it.hasNext();) {
 			ContactListListener contactListListener = (ContactListListener) it.next();
@@ -115,6 +119,7 @@ public class DefaultContactListService implements IContactListService {
 		}
 	}
 
+	//TODO clone the listeners list beforing notifing
 	protected void notifyContactListReceived(Collection users) {
 		for (Iterator it = m_contactListListeners.iterator(); it.hasNext();) {
 			ContactListListener contactListListener = (ContactListListener) it.next();

@@ -28,14 +28,15 @@ import pl.mn.communicator.event.ContactListListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IContactListService.java,v 1.3 2004-12-19 13:42:31 winnetou25 Exp $
+ * @version $Id: IContactListService.java,v 1.4 2004-12-19 16:10:42 winnetou25 Exp $
  */
 public interface IContactListService {
 
 	/**
 	 * Clears user's contact list from the Gadu-Gadu server.
 	 * 
-	 * @throws GGException if there is an error while exporting contact 
+	 * @throws GGException if there is an error while exporting contact.
+	 * @throws GGSessionException if we are currently not logged in.
 	 */
 	void clearContactList() throws GGException;
 	
@@ -44,6 +45,8 @@ public interface IContactListService {
 	 * 
 	 * @param users collection of <code>LocalUser</code> objects.
 	 * @throws GGException if where is an error while exporting contact list.
+	 * @throws GGSessionException if we are currently not logged in.
+	 * @throws NullPointerException if users collection is null.
 	 */
 	void exportContactList(Collection users) throws GGException;
 
@@ -51,11 +54,12 @@ public interface IContactListService {
 	 * Imports user's contact list from the Gadu-Gadu server.
 	 * 
 	 * @throws GGException if there is an error while importing contact list.
+	 * @throws GGSessionException if we are currently not logged in.
 	 */
 	void importContactList() throws GGException;
 	
 	/**
-	 * Adds <code>ContactListListener</code> to the list of listeners
+	 * Adds <code>ContactListListener</code> object to the list of listeners
 	 * to be notified of events such as successfuly importing or 
 	 * exporting contact list.
 	 * 
@@ -64,7 +68,7 @@ public interface IContactListService {
 	void addContactListListener(ContactListListener contactListListener);
 	
 	/**
-	 * Removes <code>ContactListListener</code> from the list of listeners
+	 * Removes <code>ContactListListener</code> object from the list of listeners
 	 * that are notified of events such as successfuly importing or exporting
 	 * contact list.
 	 * 

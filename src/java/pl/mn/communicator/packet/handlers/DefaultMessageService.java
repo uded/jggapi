@@ -33,17 +33,20 @@ import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.packet.out.GGSendMsg;
 
 /**
+ * The default implementation of <code>IMessageService</code>.
+ * <p>
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.4 2004-12-19 13:42:31 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.5 2004-12-19 16:10:34 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
 	private Session m_session = null;
 	private Set m_messageListeners = null;
 	
-	public DefaultMessageService(Session session) {
+	//friendly
+	DefaultMessageService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		m_messageListeners = new HashSet();
@@ -78,7 +81,8 @@ public class DefaultMessageService implements IMessageService {
 		if (messageListener == null) throw new NullPointerException("messageListener cannot be null");
 		m_messageListeners.remove(messageListener);
 	}
-	
+
+	//TODO clone list before notifing
 	protected void notifyMessageArrived(IncomingMessage incommingMessage) {
 		if (incommingMessage == null) throw new NullPointerException("incommingMessage cannot be null");
 		for (Iterator it = m_messageListeners.iterator(); it.hasNext();) {
@@ -87,6 +91,7 @@ public class DefaultMessageService implements IMessageService {
 		}
 	}
 
+	//TODO clone list before notifing
 	protected void notifyMessageDelivered(int uin, int messageID, MessageStatus messageStatus) {
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		if (messageID <0) throw new IllegalArgumentException("messageID cannot be less than 0");

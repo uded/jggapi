@@ -33,17 +33,23 @@ import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.packet.out.GGLogin60;
 
 /**
+ * The default implementation of <code>ILoginService</code>.
+ * <p>
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.2 2004-12-14 22:52:04 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.3 2004-12-19 16:10:31 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
+	/** The session associated with this service */
 	private Session m_session = null;
+
+	/** The set of <code>LoginListener</code>'s */
 	private Set m_loginListeners = null;
 	
-	public DefaultLoginService(Session session) {
+	//friendly
+	DefaultLoginService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		m_loginListeners = new HashSet();
@@ -133,6 +139,7 @@ public class DefaultLoginService implements ILoginService {
 		}
 	}
 	
+	//TODO clone list
 	protected void notifyLoginFailed() {
 		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 		for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {

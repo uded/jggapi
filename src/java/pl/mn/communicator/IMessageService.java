@@ -20,31 +20,44 @@ package pl.mn.communicator;
 import pl.mn.communicator.event.MessageListener;
 
 /**
+ * The client should use this interface if it is interested in sending message to
+ * Gadu-Gadu server or if it wants to be interested in message related events.
+ * <p>
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessageService.java,v 1.2 2004-12-18 15:12:13 winnetou25 Exp $
+ * @version $Id: IMessageService.java,v 1.3 2004-12-19 16:10:42 winnetou25 Exp $
  */
 public interface IMessageService {
 
-	/** 
-	 * Sends the message to Gadu-Gadu server.
+	/**
+	 * Invocation of this method sends the message
+	 * to the Gadu-Gadu server.
 	 * 
-	 * @param outgoingMessage
+	 * @param outgoingMessage the message that will be sent to the server.
+	 * @throws GGException if there is an error while sending message to server.
+	 * @throws GGSessionException if user is not logged in.
+	 * @throws NullPointerException if the outgoingMessage is null.
 	 */
 	void sendMessage(OutgoingMessage outgoingMessage) throws GGException;
 
 	/** 
-	 * Adds <code>MessageListener</code> to listen for message events.
+	 * Adds <code>MessageListener</code> object to the list
+	 * that will be notified of message related events.
 	 * 
-	 * @param messageListener
+	 * @see pl.mn.communicator.event.MessageListener
+	 * @param messageListener the <code>MessageListener</code> instance to be notified.
+	 * @throws NullPointerException if the messageListener is null.
 	 */
 	void addMessageListener(MessageListener messageListener);
 	
 	/**
-	 * Remove <code>MessageListener</code> that listened for message events.
+	 * Remove <code>MessageListener</code> from the list that
+	 * will be notified of message related events.
 	 * 
-	 * @param messageListener
+	 * @see pl.mn.communicator.event.MessageListener
+	 * @param messageListener the <code>MessageListener</code> instance that will no longer be notified.
+	 * @throws NullPointerException if the messageListener is null.
 	 */
 	void removeMessageListener(MessageListener messageListener);
 	

@@ -22,51 +22,66 @@ import java.util.Date;
 import pl.mn.communicator.event.LoginListener;
 
 /**
+ * The client should use this interface if it wants to log in
+ * to the Gadu-Gadu server.
+ * <p>
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ILoginService.java,v 1.2 2004-12-18 15:11:12 winnetou25 Exp $
+ * @version $Id: ILoginService.java,v 1.3 2004-12-19 16:10:42 winnetou25 Exp $
  */
 public interface ILoginService {
 
 	/**
-	 * Logins user to currently connected server.
+	 * Invocation of this method tries to log in user to currently connected server.
+	 * <p>
+	 * The uin and password that is used in logging in process
+	 * is retrieved from the <code>LoginContext</code> instance.
 	 * 
 	 * @throws GGException if an error occurs while logging in.
+	 * @throws GGSessionException if there is an incorrect session state.
 	 */
 	void login() throws GGException;
 
 	/**
-	 * Logsout user from the server that we are currently connected.
+	 * Invocation of this method tries to log out user from the
+	 * currently connected the server.
+	 * <p>
+	 * It sets user's status to inavailable.
 	 * 
 	 * @throws GGException if error occurs while logging out.
+	 * @throws GGSessionException if there is an incorrect session state.
 	 */
 	void logout() throws GGException;
 	
 	/**
-	 * Logs out user and sets the description.
-	 * Description cannot be null but returnTime can
-	 * be null.
+	 * Invocation of this method tries to log out user from the
+	 * currently connected server.
+	 * <p>
+	 * It sets user's status to inavailable with description.
+	 * Note that returnTime can be null.
 	 * 
-	 * @param description
-	 * @param returnTime
+	 * @param description the description that will be set.
+	 * @param returnTime the time the user will be back.
 	 * @throws GGException if error occurs while logging out.
+	 * @throws GGSessionException if there is an incorrect session state.
+	 * @throws NullPointerException if the description is null.
 	 */
 	void logout(String description, Date returnTime) throws GGException;
 	
 	/**
-	 * Adds <code>LoginListener</code> to be notified of loginOK
-	 * or loginFailed events.
+	 * Adds <code>LoginListener</code> instance to the list that
+	 * will be notified of login related events.
 	 * 
-	 * @param loginListener
+	 * @param loginListener the <code>LoginListener</code> instance to be notified.
 	 */
 	void addLoginListener(LoginListener loginListener);
 	
 	/**
-	 * Remove <code>LoginListener</code> that was being notified
-	 * of loginOK or loginFailed events.
+	 * Remove <code>LoginListener</code> instance from the list that
+	 * will be notified of login related events.
 	 * 
-	 * @param loginListener
+	 * @param loginListener the <code>LoginListener</code> instance that will no longer be notified.
 	 */
 	void removeLoginListener(LoginListener loginListener);
 	

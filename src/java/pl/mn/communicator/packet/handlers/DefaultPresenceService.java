@@ -43,28 +43,36 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
 import pl.mn.communicator.packet.out.GGRemoveNotify;
 
 /**
+ * The implementation of <code>IPresenceService</code>.
+ * <p>
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.3 2004-12-18 16:47:20 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.4 2004-12-19 16:10:34 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
 	private final static Log logger = LogFactory.getLog(DefaultPresenceService.class);
 	
+	/** Set of listeners that will be notified of user related events */
 	private Set m_userListeners = null;
+	
+	/** The session associated with this service */
 	private Session m_session = null;
+
+	/** The actual status */
 	private IStatus m_localStatus = null;
+
+	/** The set of users that are monitored */
 	private Collection m_monitoredUsers = new HashSet();
 
-	public DefaultPresenceService(Session session) {
+	//friendly
+	DefaultPresenceService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		m_localStatus = session.getLoginContext().getStatus();
 		m_userListeners = new HashSet();
-		if (session.getLoginContext().getMonitoredUsers() != null) {
-			m_monitoredUsers = session.getLoginContext().getMonitoredUsers();
-		}
+		m_monitoredUsers = session.getLoginContext().getMonitoredUsers();
 		m_session.getLoginService().addLoginListener(new LoginHandler());
 	}
 	
@@ -112,8 +120,11 @@ public class DefaultPresenceService implements IPresenceService {
 	public void removeMonitoredUser(IUser user) throws GGException {
 		if (user == null) throw new NullPointerException("user cannot be null");
 		checkSessionState();
+		if (!m_monitoredUsers.contains(user)) {
+			throw new GGException("User: "+user+"+ is not monitored");
+		}
+
 		try {
-			if (!m_monitoredUsers.contains(user)) return;
 			GGRemoveNotify removeNotify = new GGRemoveNotify(user.getUin(), user.getUserMode());
 			m_session.getSessionAccessor().sendPackage(removeNotify);
 			m_monitoredUsers.remove(user);
@@ -128,15 +139,17 @@ public class DefaultPresenceService implements IPresenceService {
 	public void changeMonitoredUserStatus(IUser user) throws GGException {
 		if (user == null) throw new NullPointerException("user cannot be null");
 		checkSessionState();
-		if (m_monitoredUsers.contains(user)) {
-			try {
-				GGRemoveNotify removeNotify = new GGRemoveNotify(user.getUin(), user.getUserMode());
-				m_session.getSessionAccessor().sendPackage(removeNotify);
-				GGAddNotify addNotify = new GGAddNotify(user.getUin(), user.getUserMode());
-				m_session.getSessionAccessor().sendPackage(addNotify);
-			} catch (IOException ex) {
-				throw new GGException("Unable to remove monitored user", ex);
-			}
+		if (!m_monitoredUsers.contains(user)) {
+			throw new GGException("User: "+user+"+ is not monitored");
+		}
+		
+		try {
+			GGRemoveNotify removeNotify = new GGRemoveNotify(user.getUin(), user.getUserMode());
+			m_session.getSessionAccessor().sendPackage(removeNotify);
+			GGAddNotify addNotify = new GGAddNotify(user.getUin(), user.getUserMode());
+			m_session.getSessionAccessor().sendPackage(addNotify);
+		} catch (IOException ex) {
+			throw new GGException("Unable to remove monitored user", ex);
 		}
 	}
 	
@@ -168,7 +181,8 @@ public class DefaultPresenceService implements IPresenceService {
 		if (userListener == null) throw new NullPointerException("userListener cannot be null");
 		m_userListeners.remove(userListener);
 	}
-	
+
+	//TODO clone list before iterating
 	protected void notifyUserChangedStatus(IUser user, IStatus status) {
 		if (user == null) throw new NullPointerException("user cannot be null");
 		if (status == null) throw new NullPointerException("status cannot be null");

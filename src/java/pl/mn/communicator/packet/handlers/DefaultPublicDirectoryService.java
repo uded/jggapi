@@ -32,18 +32,21 @@ import pl.mn.communicator.event.PublicDirListener;
 import pl.mn.communicator.packet.out.GGPubdirRequest;
 
 /**
+ * The default implementation of <code>IPublicDirectoryService</code>.
+ * <p>
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.12 2004-12-19 11:49:13 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.13 2004-12-19 16:10:34 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
 	private HashSet m_directoryListeners = new HashSet();
 	
-	private Session m_session;
+	private Session m_session = null;
 	
-	public DefaultPublicDirectoryService(Session session) {
+	//friendly
+	DefaultPublicDirectoryService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 	}
@@ -53,9 +56,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	 */
 	public void search(PublicDirSearchQuery publicDirQuery) throws GGException {
 		if (publicDirQuery == null) throw new NullPointerException("publicDirQuery cannot be null");
-		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
-			throw new GGSessionException(m_session.getSessionState());
-		}
+		checkSessionState();
 		try {
 			GGPubdirRequest pubdirRequest = GGPubdirRequest.createSearchPubdirRequest(publicDirQuery);
 			m_session.getSessionAccessor().sendPackage(pubdirRequest);
@@ -68,9 +69,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	 * * @see pl.mn.communicator.IPublicDirectoryService#readFromPublicDirectory()
 	 */
 	public void readFromPublicDirectory() throws GGException {
-		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
-			throw new GGSessionException(m_session.getSessionState());
-		}
+		checkSessionState();
 		try {
 			GGPubdirRequest pubdirRequest = GGPubdirRequest.createReadPubdirRequest();
 			m_session.getSessionAccessor().sendPackage(pubdirRequest);
@@ -84,14 +83,12 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	 */
 	public void writeToPublicDirectory(PersonalInfo publicDirInfo) throws GGException {
 		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
-		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
-			throw new GGSessionException(m_session.getSessionState());
-		}
+		checkSessionState();
 		try {
 			GGPubdirRequest pubdirRequest = GGPubdirRequest.createWritePubdirRequest(publicDirInfo);
 			m_session.getSessionAccessor().sendPackage(pubdirRequest);
 		} catch (IOException ex) {
-			throw new GGException("Unable to write information to public directory.");
+			throw new GGException("Unable to write or update information in public directory.");
 		}
 	}
 	
@@ -108,6 +105,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		m_directoryListeners.remove(publicDirListener);
 	}
 	
+	//TODO clone list before notifing.
 	protected void notifyPubdirRead(int queryID, PersonalInfo publicDirInfo) {
 		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
@@ -116,6 +114,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		}
 	}
 
+	//TODO clone list before notifing.
 	protected void notifyPubdirUpdated(int queryID) {
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
@@ -123,6 +122,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		}
 	}
 
+	//TODO clone list before notifing.
 	protected void notifyPubdirGotSearchResults(int queryID, PublicDirSearchReply publicDirSearchReply) {
 		if (publicDirSearchReply == null) throw new NullPointerException("publicDirSearchReply cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
@@ -131,4 +131,10 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		}
 	}
 
+	private void checkSessionState() {
+		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
+			throw new GGSessionException(m_session.getSessionState());
+		}
+	}
+	
 }

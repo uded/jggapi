@@ -41,10 +41,12 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
 import pl.mn.communicator.packet.out.GGPing;
 
 /**
+ * The default implementation of <code>IConnectionService</code>.
+ * <p>
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.3 2004-12-18 15:16:28 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.4 2004-12-19 16:10:34 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -57,7 +59,8 @@ public class DefaultConnectionService implements IConnectionService {
 	private PacketChain m_packetChain = null;
 	private ConnectionThread m_connectionThread = null;
 	
-	public DefaultConnectionService(Session session) {
+	//friendly
+	DefaultConnectionService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		m_connectionThread = new ConnectionThread();
@@ -68,18 +71,14 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.mn.communicator.IConnectionService#connect()
 	 */
 	public void connect() throws GGException {
-		if ((m_session.getSessionState() == SessionState.CONNECTION_AWAITING)
-				|| (m_session.getSessionState() == SessionState.DISCONNECTED)) {
-			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
-			try {
-				m_connectionThread.openConnection();
-				m_session.getSessionAccessor().setSessionState(SessionState.CONNECTED);
-			} catch (IOException ex) {
-				m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
-				throw new GGException("Unable to connect to Gadu-Gadu server: "+m_session.getServer(), ex);
-			}
-		} else {
-			throw new GGSessionException(m_session.getSessionState());
+		checkConnectionState();
+		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
+		try {
+			m_connectionThread.openConnection();
+			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTED);
+		} catch (IOException ex) {
+			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
+			throw new GGException("Unable to connect to Gadu-Gadu server: "+m_session.getServer(), ex);
 		}
 	}
 
@@ -87,21 +86,14 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.mn.communicator.IConnectionService#disconnect()
 	 */
 	public void disconnect() {
-		if ((m_session.getSessionState() == SessionState.CONNECTED)
-				|| (m_session.getSessionState() == SessionState.LOGGED_IN)
-				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)
-				|| (m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING)
-				|| (m_session.getSessionState() == SessionState.CONNECTION_ERROR)) {
-			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
-			try {
-				m_connectionThread.closeConnection();
-				notifyConnectionClosed();
-				m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
-			} catch (IOException ex) {
-				m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
-			}
-		} else {
-			throw new GGSessionException(m_session.getSessionState());
+		checkDisconnectionState();
+		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
+		try {
+			m_connectionThread.closeConnection();
+			notifyConnectionClosed();
+			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
+		} catch (IOException ex) {
+			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 		}
 	}
 	
@@ -146,7 +138,8 @@ public class DefaultConnectionService implements IConnectionService {
 		if (packetListener == null) throw new NullPointerException("packetListener cannot be null");
 		m_packetListeners.remove(packetListener);
 	}
-	
+
+	//TODO clone the list of listeners
     protected void notifyConnectionEstablished() {
     	m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
     	for (Iterator it = m_connectionListeners.iterator(); it.hasNext();) {
@@ -155,7 +148,8 @@ public class DefaultConnectionService implements IConnectionService {
     	}
     	// this could be also realized as a ConnectionHandler in session class
     }
-    
+
+	//TODO clone the list of listeners
     protected void notifyConnectionClosed() {
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
     	for (Iterator it = m_connectionListeners.iterator(); it.hasNext();) {
@@ -164,6 +158,7 @@ public class DefaultConnectionService implements IConnectionService {
     	}
     }
 
+	//TODO clone the list of listeners
     protected void notifyConnectionError(final Exception ex) {
     	for (Iterator it = m_connectionListeners.iterator(); it.hasNext();) {
     		final ConnectionListener connectionListener = (ConnectionListener) it.next();
@@ -171,14 +166,16 @@ public class DefaultConnectionService implements IConnectionService {
     	}
        	m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
     }
-    
+
+	//TODO clone the list of listeners
     protected void notifyPongReceived() {
     	for (Iterator it = m_connectionListeners.iterator(); it.hasNext();) {
     		final ConnectionListener connectionListener = (ConnectionListener) it.next();
     		connectionListener.pongReceived();
     	}
     }
-    
+
+	//TODO clone the list of listeners
     protected void notifyPacketReceived(GGIncomingPackage incomingPackage) {
     	for (Iterator it = m_packetListeners.iterator(); it.hasNext();) {
     		GGPacketListener packetListener = (GGPacketListener) it.next();
@@ -186,6 +183,7 @@ public class DefaultConnectionService implements IConnectionService {
     	}
     }
 
+	//TODO clone the list of listeners
     protected void notifyPacketSent(GGOutgoingPackage outgoingPackage) {
     	for (Iterator it = m_packetListeners.iterator(); it.hasNext();) {
     		GGPacketListener packetListener = (GGPacketListener) it.next();
@@ -201,6 +199,23 @@ public class DefaultConnectionService implements IConnectionService {
 		byte[] contents = outgoingPackage.getContents();
 		m_connectionThread.sendPackage(header, length, contents);
 		notifyPacketSent(outgoingPackage);
+    }
+    
+    private void checkDisconnectionState() {
+		if (!(m_session.getSessionState() == SessionState.CONNECTED)
+				|| (m_session.getSessionState() == SessionState.LOGGED_IN)
+				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)
+				|| (m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING)
+				|| (m_session.getSessionState() == SessionState.CONNECTION_ERROR)) {
+			throw new GGSessionException(m_session.getSessionState());
+		}
+    }
+
+    private void checkConnectionState() {
+		if (!(m_session.getSessionState() == SessionState.CONNECTION_AWAITING)
+			|| (m_session.getSessionState() == SessionState.DISCONNECTED)) {
+			throw new GGSessionException(m_session.getSessionState());
+		}
     }
     
     private class ConnectionThread extends Thread {
