@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import java.util.Collection;
 
@@ -38,7 +38,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @author mnaglik
  */
 public abstract class AbstractConnection implements IConnection {

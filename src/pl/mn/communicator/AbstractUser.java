@@ -17,12 +17,12 @@
  */
 package pl.mn.communicator;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 
 /**
  * U¿ytkownik serwera rozmów.
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @author mnaglik
  */
 public class AbstractUser implements IUser {

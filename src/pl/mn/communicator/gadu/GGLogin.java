@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import pl.mn.communicator.ILocalUser;
 
@@ -25,7 +25,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.16 $
+ * @version $Revision: 1.17 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {

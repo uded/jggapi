@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -28,7 +28,7 @@ import java.util.Map;
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.15 $
+ * @version $Revision: 1.16 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {

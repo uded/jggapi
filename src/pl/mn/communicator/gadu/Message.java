@@ -17,14 +17,14 @@
  */
 package pl.mn.communicator.gadu;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import pl.mn.communicator.AbstractMessage;
 
 
 /**
  * Wiadomo¶æ gg.
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public final class Message extends AbstractMessage {

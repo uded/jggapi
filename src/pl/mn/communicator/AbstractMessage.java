@@ -17,12 +17,12 @@
  */
 package pl.mn.communicator;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 
 /**
  * Wiadomo¶æ do serwera rozmów.
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 public abstract class AbstractMessage implements IMessage {

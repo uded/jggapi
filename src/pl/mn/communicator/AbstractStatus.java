@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ import java.util.Map;
  * Klasa reprezentuj±ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
  * mog± zostaæ dodane w podklasach.
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public abstract class AbstractStatus implements IStatus {

@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import pl.mn.communicator.AbstractStatus;
 
@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * Status u¿ytkownika gg.
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @author mnaglik
  */
 public class Status extends AbstractStatus {

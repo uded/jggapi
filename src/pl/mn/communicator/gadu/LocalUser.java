@@ -17,14 +17,14 @@
  */
 package pl.mn.communicator.gadu;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import pl.mn.communicator.AbstractLocalUser;
 
 
 /**
  * U¿ytkownik lokalny gg.
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public final class LocalUser extends AbstractLocalUser {

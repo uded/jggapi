@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import pl.mn.communicator.ILocalUser;
 import pl.mn.communicator.IMessage;
@@ -52,7 +52,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.32 $
+ * @version $Revision: 1.33 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {

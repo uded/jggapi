@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
@@ -27,7 +27,7 @@ import java.util.Date;
 
 /**
  * Pakiet powiadomienia u¿ytkownika o zmianie statusu u¿ytkownika z listy.
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  * @author mnaglik
  */
 class GGStatus implements GGIncomingPackage {

@@ -17,13 +17,13 @@
  */
 package pl.mn.communicator;
 
-import org.apache.log4j.Logger;
+import pl.mn.communicator.logger.Logger;
 
 
 /**
  * U¿ytkownik lokalny klienta rozmów.<BR>
  * Obiekt reprezentuje lokalnego u¿ytkownika.
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public abstract class AbstractLocalUser implements ILocalUser {
