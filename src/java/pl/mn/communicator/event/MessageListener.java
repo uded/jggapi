@@ -33,7 +33,7 @@ import pl.mn.communicator.MessageStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageListener.java,v 1.8 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.9 2004-12-25 14:52:27 winnetou25 Exp $
  */
 public interface MessageListener extends EventListener {
 	
@@ -54,7 +54,7 @@ public interface MessageListener extends EventListener {
 	 */
     void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus);
     
-    public final static class Stub implements MessageListener {
+    public static class Stub implements MessageListener {
 
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
