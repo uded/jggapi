@@ -20,7 +20,7 @@ package pl.mn.communicator;
 /**
  * U¿ytkownik serwera rozmów.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public interface IUser {
@@ -50,9 +50,8 @@ public interface IUser {
 	public void setNumber(int number);
 	/**
 	 * Zwróæ status u¿ytkownika.
-	 * True - u¿ytkownik online
 	 * 
-	 * @return boolean
+	 * @return boolean status u¿ytkownika <code>true</code>- online
 	 */
 	public boolean isOnLine();
 	/**
