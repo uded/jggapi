@@ -3,6 +3,8 @@ package pl.mn.communicator;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+import org.apache.log4j.Logger;
+
 /**
  * Po³¹czenie z serwerem gg.<BR>
  * S³u¿y do tworzenia po³¹czenia.
@@ -23,6 +25,7 @@ import java.net.UnknownHostException;
  * @author mnaglik
  */
 public abstract class AbstractConnection {
+	private static Logger logger = Logger.getLogger(AbstractConnection.class);
 	/**
 	 * Listener u¿ytkowników
 	 */

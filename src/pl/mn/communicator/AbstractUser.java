@@ -1,11 +1,15 @@
 package pl.mn.communicator;
 
+import org.apache.log4j.Logger;
+
 /**
  * U¿ytkownik serwera rozmów.
  *  
  * @author mnaglik
  */
 public class AbstractUser {
+	private static Logger logger = Logger.getLogger(AbstractUser.class);
+
 	protected int number;
 	protected boolean onLine;
 	protected String name;

@@ -1,5 +1,7 @@
 package pl.mn.communicator;
 
+import org.apache.log4j.Logger;
+
 /**
  * U¿ytkownik lokalny klienta rozmów.<BR>
  * Obiekt reprezentuje lokalnego u¿ytkownika.
@@ -7,6 +9,7 @@ package pl.mn.communicator;
  * @author mnaglik
  */
 public abstract class AbstractLocalUser {
+	private static Logger logger = Logger.getLogger(AbstractLocalUser.class);
 	/**
 	 * Numer u¿ytkownika
 	 */

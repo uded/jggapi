@@ -1,5 +1,7 @@
 package pl.mn.communicator;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * Klasa reprezentuj¹ca serwer rozmów.
@@ -7,6 +9,7 @@ package pl.mn.communicator;
  * @author mnaglik
  */
 public abstract class AbstractServer {
+	private static Logger logger = Logger.getLogger(AbstractServer.class);
 	/**
 	 * Adres ip, lub tekstowy serwera rozmów
 	 */

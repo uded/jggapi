@@ -3,6 +3,8 @@ package pl.mn.communicator;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 /**
  * Klasa reprezentuj¹ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
@@ -11,6 +13,8 @@ import java.util.Map;
  * @author mnaglik
  */
 public abstract class AbstractStatus {
+	private static Logger logger = Logger.getLogger(AbstractStatus.class);
+
 	/**
 	 * Status on-line
 	 */

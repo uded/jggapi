@@ -1,11 +1,14 @@
 package pl.mn.communicator;
 
+import org.apache.log4j.Logger;
+
 /**
  * Wiadomoœæ do serwera rozmów.
  * 
  * @author mnaglik
  */
 public abstract class AbstractMessage {
+	private static Logger logger = Logger.getLogger(AbstractMessage.class);
 	/**
 	 * Nr adresata wiadomoœci
 	 */
