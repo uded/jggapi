@@ -17,11 +17,13 @@
  */
 package pl.mn.communicator;
 
+import pl.mn.communicator.event.PublicDirListener;
+
 /**
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IPublicDirectoryService.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
+ * @version $Id: IPublicDirectoryService.java,v 1.3 2004-12-15 22:01:50 winnetou25 Exp $
  */
 public interface IPublicDirectoryService {
 
@@ -33,6 +35,12 @@ public interface IPublicDirectoryService {
 	 */
 	void search(PublicDirQuery publicDirQuery) throws GGException;
 	
-//	void addPublic
+	void read() throws GGException;
+	
+	void write() throws GGException;
+	
+	void addPublicDirListener(PublicDirListener publicDirListener);
+	
+	void removePublicDirListener(PublicDirListener publicDirListener);
 	
 }

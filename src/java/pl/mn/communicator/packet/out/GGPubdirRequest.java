@@ -19,23 +19,20 @@ package pl.mn.communicator.packet.out;
 
 import java.util.Random;
 
+import pl.mn.communicator.GGPubDir;
 import pl.mn.communicator.PublicDirQuery;
-import pl.mn.communicator.packet.GGPubDir;
+import pl.mn.communicator.packet.GGPubdirEnabled;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.3 2004-12-15 22:03:01 winnetou25 Exp $
  */
-public class GGPubdirRequest implements GGOutgoingPackage {
+public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
 
 	public static final int GG_PUBDIR50_REQUEST = 0x0014;
 	
-	private final static int GG_PUBDIR50_WRITE = 0x01;
-	private final static int GG_PUBDIR50_READ = 0x02;
-	private final static int GG_PUBDIR50_SEARCH = 0x03;
-
 //#define GG_PUBDIR50_REQUEST 0x0014
 //	
 //struct gg_pubdir50 {
@@ -106,6 +103,17 @@ public class GGPubdirRequest implements GGOutgoingPackage {
     	
     	pubdirRequest.m_request = buffer.toString();
     	return pubdirRequest;
+    }
+    
+    public static GGPubdirRequest createReadPubdirRequest() {
+    	GGPubdirRequest pubdirRequest = new GGPubdirRequest();
+    	pubdirRequest.m_requestType = GG_PUBDIR50_READ;
+    	pubdirRequest.m_request = "";
+    	return pubdirRequest;
+    }
+    
+    public static GGPubdirRequest createWritePubdirRequest() {
+    	return null;
     }
     
 }

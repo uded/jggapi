@@ -17,22 +17,44 @@
  */
 package pl.mn.communicator.packet.in;
 
+import pl.mn.communicator.packet.GGPubdirEnabled;
+import pl.mn.communicator.packet.GGUtils;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.2 2004-12-15 22:02:57 winnetou25 Exp $
  */
-public class GGPubdirReply implements GGIncomingPackage {
+public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
 	public static final int GG_PUBDIR50_REPLY = 0x000E;
 
+	private byte m_replyType = -1;
+	private int m_sequence = -1;
+	
+	public GGPubdirReply(byte[] data) {
+		m_replyType = data[0];
+		m_sequence = GGUtils.byteToInt(data, 1);
+	}
+	
 	/**
 	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_PUBDIR50_REPLY;
+	}
+	
+	public boolean isPubdirSearchReply() {
+		return m_replyType == GG_PUBDIR50_SEARCH_REPLY;
+	}
+	
+	public boolean isPubdirReadReply() {
+		return m_replyType == GG_PUBDIR50_READ;
+	}
+	
+	public boolean isPubdirWriteReply() {
+		return m_replyType == GG_PUBDIR50_WRITE;
 	}
 	
 	//TODO implement

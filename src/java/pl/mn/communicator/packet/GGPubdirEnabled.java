@@ -15,41 +15,19 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator;
-
-import pl.mn.communicator.event.SessionStateListener;
+package pl.mn.communicator.packet;
 
 /**
+ * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISession.java,v 1.2 2004-12-15 22:01:50 winnetou25 Exp $
+ * @version $Id: GGPubdirEnabled.java,v 1.1 2004-12-15 22:03:02 winnetou25 Exp $
  */
-public interface ISession {
+public interface GGPubdirEnabled {
 
-	IServer getServer();
-	
-	LoginContext getLoginContext();
-	
-	SessionState getSessionState();
-	
-	IConnectionService getConnectionService();
+	int GG_PUBDIR50_WRITE = 0x01;
+	int GG_PUBDIR50_READ = 0x02;
+	int GG_PUBDIR50_SEARCH = 0x03;
+	int GG_PUBDIR50_SEARCH_REPLY = 0x05;
 
-	ILoginService getLoginService();
-
-	IMessageService getMessageService();
-	
-	IPresenceService getPresenceService();
-
-	IContactListService getContactListService();
-
-	IPublicDirectoryService getPublicDirectoryService();
-	
-//	IRegistrationService getRegistrationService();
-//
-//	IFileService getFileService();
-
-	void addSessionStateListener(SessionStateListener sessionStateListener);
-	
-	void removeSessionStateListener(SessionStateListener sessionStateListener);
-	
 }

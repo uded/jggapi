@@ -18,6 +18,10 @@
 package pl.mn.communicator.packet.handlers;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -29,6 +33,7 @@ import pl.mn.communicator.IContactListService;
 import pl.mn.communicator.ILoginService;
 import pl.mn.communicator.IMessageService;
 import pl.mn.communicator.IPresenceService;
+import pl.mn.communicator.IPublicDirectoryService;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
@@ -46,7 +51,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.2 2004-12-15 22:03:01 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -64,6 +69,9 @@ public class Session implements ISession {
 	private DefaultMessageService m_messageService = null;
 	private DefaultRegistrationService m_registrationService = null;
 	private DefaultContactListService m_contactListService = null;
+	private DefaultPublicDirectoryService m_publicDirectoryService = null;
+	
+	private HashMap m_proxies = new HashMap();
 	
 	private IServer m_server = null;
 	
@@ -81,6 +89,7 @@ public class Session implements ISession {
 		m_presenceService = new DefaultPresenceService(this);
 		m_contactListService = new DefaultContactListService(this);
 		//m_registrationService = new DefaultRegistrationService(this);
+		m_publicDirectoryService = new DefaultPublicDirectoryService(this);
 	}
 
 	public SessionState getSessionState() {
@@ -109,58 +118,78 @@ public class Session implements ISession {
 	 * @see pl.mn.communicator.ISession#getConnectionService()
 	 */
 	public IConnectionService getConnectionService() {
-		return m_connectionService;
+		if (!m_proxies.containsKey(IConnectionService.class.getName())) {
+			ClassLoader classLoader = Session.class.getClassLoader();
+			SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_connectionService);
+			IConnectionService connectionServiceProxy = (IConnectionService) Proxy.newProxyInstance(classLoader, new Class[]{IConnectionService.class}, invocationHandler);
+			m_proxies.put(IConnectionService.class.getName(), connectionServiceProxy);
+		}
+		return (IConnectionService) m_proxies.get(IConnectionService.class.getName());
 	}
 
 	/**
 	 * @see pl.mn.communicator.ISession#getLoginService()
 	 */
 	public ILoginService getLoginService() {
-		return m_loginService;
+		if (!m_proxies.containsKey(ILoginService.class.getName())) {
+			ClassLoader classLoader = Session.class.getClassLoader();
+			SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_loginService);
+			ILoginService loginServiceProxy = (ILoginService) Proxy.newProxyInstance(classLoader, new Class[]{ILoginService.class}, invocationHandler);
+			m_proxies.put(ILoginService.class.getName(), loginServiceProxy);
+		}
+		return (ILoginService) m_proxies.get(ILoginService.class.getName());
 	}
 
 	/**
 	 * @see pl.mn.communicator.ISession#getMessageService()
 	 */
 	public IMessageService getMessageService() {
-		return m_messageService;
+		if (!m_proxies.containsKey(IMessageService.class.getName())) {
+			ClassLoader classLoader = Session.class.getClassLoader();
+			SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_messageService);
+			IMessageService messageServiceProxy = (IMessageService) Proxy.newProxyInstance(classLoader, new Class[]{IMessageService.class}, invocationHandler);
+			m_proxies.put(IMessageService.class.getName(), messageServiceProxy);
+		}
+		return (IMessageService) m_proxies.get(IMessageService.class.getName());
 	}
 
 	/**
 	 * @see pl.mn.communicator.ISession#getPresenceService()
 	 */
 	public IPresenceService getPresenceService() {
-		return m_presenceService;
+		if (!m_proxies.containsKey(IPresenceService.class.getName())) {
+			ClassLoader classLoader = Session.class.getClassLoader();
+			SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_presenceService);
+			IPresenceService presenceServiceProxy = (IPresenceService) Proxy.newProxyInstance(classLoader, new Class[]{IPresenceService.class}, invocationHandler);
+			m_proxies.put(IPresenceService.class.getName(), presenceServiceProxy);
+		}
+		return (IPresenceService) m_proxies.get(IPresenceService.class.getName());
 	}
-
-//	/**
-//	 * @see pl.mn.communicator.ISession#getFileService()
-//	 */
-//	public IFileService getFileService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	/**
-//	 * @see pl.mn.communicator.ISession#getPublicDirectoryService()
-//	 */
-//	public IPublicDirectoryService getPublicDirectoryService() {
-//		// TODO Auto-generated method stub
-//		return null;
-//	}
-//
-//	/**
-//	 * @see pl.mn.communicator.ISession#getRegistrationService()
-//	 */
-//	public IRegistrationService getRegistrationService() {
-//		return m_registrationService;
-//	}
+	
+	/**
+	 * @see pl.mn.communicator.ISession#getPublicDirectoryService()
+	 */
+	public IPublicDirectoryService getPublicDirectoryService() {
+		if (!m_proxies.containsKey(IPublicDirectoryService.class.getName())) {
+			ClassLoader classLoader = Session.class.getClassLoader();
+			SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_publicDirectoryService);
+			IPublicDirectoryService publicDirectoryServiceProxy = (IPublicDirectoryService) Proxy.newProxyInstance(classLoader, new Class[]{IPublicDirectoryService.class}, invocationHandler);
+			m_proxies.put(IPublicDirectoryService.class.getName(), publicDirectoryServiceProxy);
+		}
+		return (IPublicDirectoryService) m_proxies.get(IPublicDirectoryService.class.getName());
+	}
 
 	/**
 	 * @see pl.mn.communicator.ISession#getContactListService()
 	 */
 	public IContactListService getContactListService() {
-		return m_contactListService;
+		if (!m_proxies.containsKey(IContactListService.class.getName())) {
+			ClassLoader classLoader = Session.class.getClassLoader();
+			SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_contactListService);
+			IContactListService contactListServiceProxy = (IContactListService) Proxy.newProxyInstance(classLoader, new Class[]{IContactListService.class}, invocationHandler);
+			m_proxies.put(IContactListService.class.getName(), contactListServiceProxy);
+		}
+		return (IContactListService) m_proxies.get(IContactListService.class.getName());
 	}
 	
 	protected void notifySessionStateChanged(SessionState oldState, SessionState newState) {
@@ -253,6 +282,30 @@ public class Session implements ISession {
 
 		public LoginContext getLoginContext() {
 			return m_loginContext;
+		}
+		
+	}
+
+	
+	
+	private final static class SessionInvocationHandler implements InvocationHandler {
+
+		private Object m_delegate = null;
+		
+		private SessionInvocationHandler(Object delegate) {
+			if(delegate == null) throw new NullPointerException( "delegate cannot be null.");
+			m_delegate = delegate;
+		}
+		
+		/**
+		 * @see java.lang.reflect.InvocationHandler#invoke(java.lang.Object, java.lang.reflect.Method, java.lang.Object[])
+		 */
+		public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+	        try {
+	            return method.invoke(m_delegate, args);
+	        } catch(final InvocationTargetException ex) {
+	            throw ex.getTargetException();
+	        }
 		}
 		
 	}

@@ -20,35 +20,32 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.IStatus;
-import pl.mn.communicator.IUser;
 import pl.mn.communicator.packet.GGUtils;
-import pl.mn.communicator.packet.in.GGStatus60;
+import pl.mn.communicator.packet.in.GGPubdirReply;
 
 /**
- * Created on 2004-12-12
+ * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60PacketHandler.java,v 1.2 2004-12-15 22:03:01 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.1 2004-12-15 22:03:01 winnetou25 Exp $
  */
-public class GGStatus60PacketHandler implements PacketHandler {
+public class GGPubdirReplyPacketHandler implements PacketHandler {
 
-	private final static Log logger = LogFactory.getLog(GGStatus60PacketHandler.class);
+	private final static Log logger = LogFactory.getLog(GGPubdirReplyPacketHandler.class);
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
 	public void handle(Context context) {
-		logger.debug("Received GGStatus60 packet");
+		logger.debug("Received GGPubdirReply packet.");
 		logger.debug("PacketHeader: "+context.getHeader());
 		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
 		
-		GGStatus60 status60 = new GGStatus60(context.getPackageContent());
-		context.getSessionAccessor().notifyGGPacketReceived(status60);
+		GGPubdirReply pubdirReply = new GGPubdirReply(context.getPackageContent());
 		
-		IUser user = status60.getUser();
-		IStatus status = status60.getStatus60();
-		context.getSessionAccessor().notifyUserChangedStatus(user, status);
+		if (pubdirReply.isPubdirSearchReply()) {
+			//TODO
+		}
 	}
 
 }

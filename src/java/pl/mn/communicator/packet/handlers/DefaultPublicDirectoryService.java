@@ -18,22 +18,26 @@
 package pl.mn.communicator.packet.handlers;
 
 import java.io.IOException;
+import java.util.HashSet;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IPublicDirectoryService;
 import pl.mn.communicator.PublicDirQuery;
 import pl.mn.communicator.SessionState;
+import pl.mn.communicator.event.PublicDirListener;
 import pl.mn.communicator.packet.out.GGPubdirRequest;
 
 /**
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.1 2004-12-14 22:52:04 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.2 2004-12-15 22:03:01 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
+	private HashSet m_directoryListeners = new HashSet();
+	
 	private Session m_session;
 	
 	public DefaultPublicDirectoryService(Session session) {
@@ -54,6 +58,42 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		} catch (IOException ex) {
 			throw new GGException("Unable to perform search.", ex);
 		}
+	}
+	
+	/**
+	 * * @see pl.mn.communicator.IPublicDirectoryService#read()
+	 */
+	public void read() throws GGException {
+		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
+			throw new GGSessionException(m_session.getSessionState());
+		}
+		try {
+			GGPubdirRequest pubdirRequest = GGPubdirRequest.createReadPubdirRequest();
+			m_session.getSessionAccessor().sendPackage(pubdirRequest);
+		} catch (IOException ex) {
+			throw new GGException("Unable to read information from public directory.", ex);
+		}
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IPublicDirectoryService#write()
+	 */
+	public void write() throws GGException {
+		// TODO Auto-generated method stub
+
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IPublicDirectoryService#addPublicDirListener(pl.mn.communicator.event.PublicDirListener)
+	 */
+	public void addPublicDirListener(PublicDirListener publicDirListener) {
+		if (publicDirListener == null) throw new NullPointerException("publicDirListener cannot be null");
+		m_directoryListeners.add(publicDirListener);
+	}
+	
+	public void removePublicDirListener(PublicDirListener publicDirListener) {
+		if (publicDirListener == null) throw new NullPointerException("pubDirListener cannot be null");
+		m_directoryListeners.remove(publicDirListener);
 	}
 
 }

@@ -39,13 +39,11 @@ public class Main2 {
 
 		ArrayList users = new ArrayList();
 		
-		GGUser user1 = new GGUser(376798, GGUserMode.BUDDY);
 		GGUser user2 = new GGUser(1136132, GGUserMode.BUDDY);
 
-		users.add(user1);
 		users.add(user2);
 		
-		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
+		final LoginContext loginContext = new LoginContext(376798, "abcabc");
 		loginContext.setMonitoredUsers(users);
 		
 		IStatus status = loginContext.getStatus();
@@ -125,7 +123,8 @@ public class Main2 {
  		session.getConnectionService().connect();
 		session.getLoginService().login();
 		
-//		loginContext.setPassword("dupadupa");
+		session.getPublicDirectoryService().read();
+		//		loginContext.setPassword("dupadupa");
 //		session.getLoginService().login();
 		
 //		IStatus status = session.getPresenceService().getStatus();

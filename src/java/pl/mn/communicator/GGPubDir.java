@@ -15,13 +15,13 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet;
+package pl.mn.communicator;
 
 /**
  * Created on 2004-12-14
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubDir.java,v 1.1 2004-12-14 22:52:11 winnetou25 Exp $
+ * @version $Id: GGPubDir.java,v 1.1 2004-12-15 22:01:50 winnetou25 Exp $
  */
 public class GGPubDir {
 

@@ -32,9 +32,9 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.2 2004-12-15 22:02:56 winnetou25 Exp $
  */
-public class GGStatus60 implements GGStatusEnabled {
+public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 
 //	#define GG_STATUS60 0x000F
 	
@@ -50,7 +50,6 @@ public class GGStatus60 implements GGStatusEnabled {
 //	int time;		/* czas, nie musi wyst�pi� */ 1
 //};
 
-	
 	public static final int GG_STATUS60 = 0x0F;
 	
 	private static Log logger = LogFactory.getLog(GGStatus60.class);
@@ -63,6 +62,13 @@ public class GGStatus60 implements GGStatusEnabled {
 	public GGStatus60(byte[] data) {
 		handleUser(data);
 		handleStatus60(data);
+	}
+	
+	/**
+	 * @see pl.mn.communicator.packet.GGPacket#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_STATUS60;
 	}
 	
 	public IUser getUser() {
