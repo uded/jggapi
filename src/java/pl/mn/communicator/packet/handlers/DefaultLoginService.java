@@ -28,6 +28,7 @@ import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.ILocalStatus;
 import pl.mn.communicator.ILoginService;
 import pl.mn.communicator.LocalStatus;
+import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.LoginListener;
@@ -39,7 +40,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.9 2004-12-23 17:52:23 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.10 2004-12-25 17:35:23 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -68,15 +69,27 @@ public class DefaultLoginService implements ILoginService {
 			int uin = m_session.getLoginContext().getUin();
 			String password = m_session.getLoginContext().getPassword();
 			int seed = m_session.getSessionAccessor().getLoginSeed();
-			
+
 			GGLogin60 login = new GGLogin60(uin, password.toCharArray(), seed);
-			login.setImageSize(m_session.getLoginContext().getImageSize());
-			login.setStatus(m_session.getLoginContext().getStatus());
-			login.setLocalIP(m_session.getLoginContext().getLocalIP());
-			login.setLocalPort(m_session.getLoginContext().getLocalPort());
-			login.setExternalIP(m_session.getLoginContext().getExternalIP());
-			login.setExternalPort(m_session.getLoginContext().getExternalPort());
-			
+
+			LoginContext loginContext = m_session.getLoginContext();
+			login.setStatus(loginContext.getStatus());
+
+			if (loginContext.getImageSize() != -1) {
+				login.setImageSize(loginContext.getImageSize());
+			}
+			if (loginContext.getLocalIP() != null) {
+				login.setLocalIP(loginContext.getLocalIP());
+			}
+			if (loginContext.getLocalPort() != -1) {
+				login.setLocalPort(loginContext.getLocalPort());
+			}
+			if (loginContext.getExternalIP() != null) {
+				login.setExternalIP(loginContext.getExternalIP());
+			}
+			if (loginContext.getExternalPort() != -1) {
+				login.setExternalPort(loginContext.getExternalPort());
+			}
 			m_session.getSessionAccessor().sendPackage(login);
 		} catch (IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);

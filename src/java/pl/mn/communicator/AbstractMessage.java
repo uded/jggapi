@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * is common for incoming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.8 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.9 2004-12-25 17:31:15 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 
@@ -35,10 +35,12 @@ public abstract class AbstractMessage implements IMessage {
     protected int m_uin;
 
     /** The body of the message */
-    protected String m_messageBody;
+    protected String m_messageBody = null;
     
     /** The message class associated with this message */
-    protected MessageClass m_messageClass;
+    protected MessageClass m_messageClass = null;
+    
+    protected int m_messageID = -1;
 
     protected AbstractMessage(int uin, String messageBody, MessageClass messageClass) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
@@ -62,6 +64,13 @@ public abstract class AbstractMessage implements IMessage {
     public String getMessageBody() {
         return m_messageBody;
     }
+    
+    /**
+	 * @see pl.mn.communicator.IMessage#getMessageID()
+	 */
+	public int getMessageID() {
+		return m_messageID;
+	}
 
     /**
      * @see pl.mn.communicator.IMessage#getMessageClass();

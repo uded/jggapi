@@ -22,7 +22,7 @@ package pl.mn.communicator;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.8 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: IMessage.java,v 1.9 2004-12-25 17:32:07 winnetou25 Exp $
  */
 public interface IMessage {
 	
@@ -40,6 +40,13 @@ public interface IMessage {
      * @return String message body.
      */
     String getMessageBody();
+
+    /**
+     * Gets unique message id.
+     * 
+     * @return unique message id.
+     */
+	int getMessageID();
 
     /**
      * MessageClass associated with this message.

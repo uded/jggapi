@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGAddNotify.java,v 1.6 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: GGAddNotify.java,v 1.7 2004-12-25 17:40:00 winnetou25 Exp $
  */
 public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
 
@@ -74,13 +74,13 @@ public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
      * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        byte[] dane = new byte[getLength()];
+        byte[] data = new byte[getLength()];
 
         byte[] uin = GGUtils.intToByte(m_uin);
-        System.arraycopy(uin, 0, dane, 0, uin.length);
+        System.arraycopy(uin, 0, data, 0, uin.length);
 
-        dane[4] = m_userType;
-        return dane;
+        data[4] = m_userType;
+        return data;
     }
     
 }

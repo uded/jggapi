@@ -17,6 +17,8 @@
  */
 package pl.mn.communicator;
 
+import java.util.Random;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -26,15 +28,18 @@ import org.apache.commons.logging.LogFactory;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.8 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.9 2004-12-25 17:32:07 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
 
+	private final static Random RANDOM = new Random();
+	
 	private static Log logger = LogFactory.getLog(OutgoingMessage.class);
 
 	//private constructor
     private OutgoingMessage(int uin, String text, MessageClass messageClass) {
     	super(uin, text, messageClass);
+        m_uin = RANDOM.nextInt(999999);
     }
     
     /** 

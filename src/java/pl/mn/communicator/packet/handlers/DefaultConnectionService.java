@@ -21,8 +21,8 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Iterator;
+
+import javax.swing.event.EventListenerList;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,17 +46,21 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.8 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.9 2004-12-25 17:33:21 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
 	private final static Log logger = LogFactory.getLog(DefaultConnectionService.class);
 	
-	private ArrayList m_connectionListeners = new ArrayList();
-	private ArrayList m_packetListeners = new ArrayList();
+	private EventListenerList m_listeners = new EventListenerList();
 	
+	/** reference to session object */
 	private Session m_session = null;
+	
+	/** chain that handles packages */
 	private PacketChain m_packetChain = null;
+
+	/** thread that monitors connection */
 	private ConnectionThread m_connectionThread = null;
 	
 	//friendly
@@ -112,7 +116,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void addConnectionListener(ConnectionListener connectionListener) {
 		if (connectionListener == null) throw new NullPointerException("connectionListener cannot be null");
-		m_connectionListeners.add(connectionListener);
+		m_listeners.add(ConnectionListener.class, connectionListener);
 	}
 
 	/**
@@ -120,7 +124,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void removeConnectionListener(ConnectionListener connectionListener) {
 		if (connectionListener == null) throw new NullPointerException("connectionListener cannot be null");
-		m_connectionListeners.remove(connectionListener);
+		m_listeners.remove(ConnectionListener.class, connectionListener);
 	}
 	
 	/**
@@ -128,7 +132,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void addPacketListener(GGPacketListener packetListener) {
 		if (packetListener == null) throw new NullPointerException("packetListener cannot be null");
-		m_packetListeners.add(packetListener);
+		m_listeners.add(GGPacketListener.class, packetListener);
 	}
 	
 	/**
@@ -136,14 +140,15 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void removePacketListener(GGPacketListener packetListener) {
 		if (packetListener == null) throw new NullPointerException("packetListener cannot be null");
-		m_packetListeners.remove(packetListener);
+		m_listeners.remove(GGPacketListener.class, packetListener);
 	}
 
 	//TODO clone the list of listeners
     protected void notifyConnectionEstablished() {
     	m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
-    	for (Iterator it = m_connectionListeners.iterator(); it.hasNext();) {
-    		final ConnectionListener connectionListener = (ConnectionListener) it.next();
+    	ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
+    	for (int i=0; i<connectionListeners.length; i++) {
+    		ConnectionListener connectionListener = connectionListeners[i];
     		connectionListener.connectionEstablished();
     	}
     	// this could be also realized as a ConnectionHandler in session class
@@ -152,52 +157,55 @@ public class DefaultConnectionService implements IConnectionService {
 	//TODO clone the list of listeners
     protected void notifyConnectionClosed() {
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
-    	for (Iterator it = m_connectionListeners.iterator(); it.hasNext();) {
-    		final ConnectionListener connectionListener = (ConnectionListener) it.next();
-    		connectionListener.connectionClosed();
-    	}
+		ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
+		for (int i=0; i<connectionListeners.length; i++) {
+			ConnectionListener connectionListener = connectionListeners[i];
+			connectionListener.connectionClosed();
+		}
     }
 
 	//TODO clone the list of listeners
     protected void notifyConnectionError(final Exception ex) {
-    	for (Iterator it = m_connectionListeners.iterator(); it.hasNext();) {
-    		final ConnectionListener connectionListener = (ConnectionListener) it.next();
+    	ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
+    	for (int i=0; i<connectionListeners.length; i++) {
+    		ConnectionListener connectionListener = connectionListeners[i];
     		connectionListener.connectionError(ex);
     	}
-       	m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
+    	m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
     }
 
 	//TODO clone the list of listeners
     protected void notifyPongReceived() {
-    	for (Iterator it = m_connectionListeners.iterator(); it.hasNext();) {
-    		final ConnectionListener connectionListener = (ConnectionListener) it.next();
+    	ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
+    	for (int i=0; i<connectionListeners.length; i++) {
+    		ConnectionListener connectionListener = connectionListeners[i];
     		connectionListener.pongReceived();
     	}
     }
 
 	//TODO clone the list of listeners
     protected void notifyPacketReceived(GGIncomingPackage incomingPackage) {
-    	for (Iterator it = m_packetListeners.iterator(); it.hasNext();) {
-    		GGPacketListener packetListener = (GGPacketListener) it.next();
+    	GGPacketListener[] packetListeners = (GGPacketListener[]) m_listeners.getListeners(GGPacketListener.class);
+    	for (int i=0; i<packetListeners.length; i++) {
+    		GGPacketListener packetListener = packetListeners[i];
     		packetListener.receivedPacket(incomingPackage);
     	}
     }
 
 	//TODO clone the list of listeners
     protected void notifyPacketSent(GGOutgoingPackage outgoingPackage) {
-    	for (Iterator it = m_packetListeners.iterator(); it.hasNext();) {
-    		GGPacketListener packetListener = (GGPacketListener) it.next();
+    	GGPacketListener[] packetListeners = (GGPacketListener[]) m_listeners.getListeners(GGPacketListener.class);
+    	for (int i=0; i<packetListeners.length; i++) {
+    		GGPacketListener packetListener = packetListeners[i];
     		packetListener.sentPacket(outgoingPackage);
     	}
     }
 
     protected void sendPackage(GGOutgoingPackage outgoingPackage) throws IOException {
-    	logger.debug("Sending packet, packetType: "+outgoingPackage.getPacketType());
-    	logger.debug("PacketBody: "+GGUtils.bytesToString(outgoingPackage.getContents()));
-    	int header = outgoingPackage.getPacketType();
+    	int packetType = outgoingPackage.getPacketType();
 		int length = outgoingPackage.getLength();
 		byte[] contents = outgoingPackage.getContents();
-		m_connectionThread.sendPackage(header, length, contents);
+		m_connectionThread.sendPackage(packetType, length, contents);
 		notifyPacketSent(outgoingPackage);
     }
     
@@ -263,8 +271,8 @@ public class DefaultConnectionService implements IConnectionService {
     		m_socket.close();
     	}
     	
-    	private void sendPackage(int header, int length, byte[] packageContent) throws IOException {
-    		m_dataOutput.write(GGUtils.intToByte(header));
+    	private void sendPackage(int packetType, int length, byte[] packageContent) throws IOException {
+    		m_dataOutput.write(GGUtils.intToByte(packetType));
     		m_dataOutput.write(GGUtils.intToByte(length));
     		
     		if (length > 0) m_dataOutput.write(packageContent);
