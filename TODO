@@ -16,10 +16,10 @@ OK - implementacja w connection powiadamianie listenera o zmianie statusu
 OK - implementacja dodanie do monitorowania,
      usuniecia z monitorowania
 OK - reakcja na zmiane statusu uzytkownika podczas dzialania
-WORKING - statusy z opisem i czasem powrotu dla uzytkownika lokalnego
+LATER - statusy z opisem i czasem powrotu dla uzytkownika lokalnego
 	(implementacja klasy <code>GGNewStatus</code>
-- poprawienie pinga
-- rozmowy grupowe
+OK - poprawienie pinga
+LATER (obecnie mozna odpowiedziec nadawcy dla rozmowy grupowej) - rozmowy grupowe
 - implementacja importu i eksportu uzytkownikow
 - implementacja katalogu publicznego (wyszukiwania)
 - wprowadzenie wzorca chain of responsibility w rozpoznawaniu
