@@ -49,7 +49,7 @@ import java.net.Socket;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.23 $
+ * @version $Revision: 1.24 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -226,15 +226,17 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                 if (connectionListener != null) {
                     connectionListener.connectionEstablished();
                 }
+
                 logger.debug("Login OK");
 
-                // <test>
-                if (true || monitoredUsers != null) {
+                if (monitoredUsers != null) {
                     logger.debug("Wysylam liste uzytkownikow do serwera");
-                    sendPackage(new GGNotify(new User(1411367)));
+                    sendPackage(new GGNotify(
+                            (IUser[]) monitoredUsers.toArray(new IUser[0])));
                 }
-                // </test>
+
                 changeStatus(new Status(Status.ON_LINE));
+
                 break;
 
             case GG_PACKAGE_LOGIN_ERROR:
@@ -272,8 +274,11 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                 break;
 
             case GG_NOTIFY_REPLY:
-            	GGNotifyReply notify = new GGNotifyReply(keyBytes);
-            	break;
+
+                GGNotifyReply notify = new GGNotifyReply(keyBytes);
+
+                break;
+
             default:
                 logger.debug("Unknown package");
             }
@@ -282,12 +287,11 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
         /**
          * @param outgoingPackage pakiet wychodz±cy
          */
-        private synchronized void sendPackage(
-                GGOutgoingPackage outgoingPackage) {
-            int header = outgoingPackage.getHeader();
-            int length = outgoingPackage.getLength();
+        private synchronized void sendPackage(GGOutgoingPackage outgoing) {
+            int header = outgoing.getHeader();
+            int length = outgoing.getLength();
 
-            byte[] contents = outgoingPackage.getContents();
+            byte[] contents = outgoing.getContents();
 
             try {
                 dataOutput.write(GGConversion.intToByte(header));
