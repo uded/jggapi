@@ -19,8 +19,27 @@ package pl.mn.communicator.gadu;
 
 
 /**
- * @version $Revision: 1.5 $
+ * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
+ * W obecnej implementacji interesuj± nas tylko pola:
+ * numer, status, opis i czas
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
+    /*
+        #define GG_NOTIFY_REPLY 0x000c   tak, to samo co GG_LOGIN
+
+        struct gg_notify_reply {
+            int uin;         numerek
+            int status;     / status danej osoby
+            int remote_ip;      / adres ip delikwenta
+            short remote_port;  / port, na którym s³ucha klient
+            int version;        / wersja klienta
+            short unknown1;     / znowu port?
+            char description[]; / opis, nie musi wyst±piæ
+            int time;       / czas, nie musi wyst±piæ
+        };
+
+     */
+
 }
