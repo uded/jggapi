@@ -7,12 +7,12 @@ import org.apache.log4j.Logger;
  * 
  * @author mnaglik
  */
-public abstract class AbstractMessage {
+public abstract class AbstractMessage implements IMessage {
 	private static Logger logger = Logger.getLogger(AbstractMessage.class);
 	/**
 	 * Nr adresata wiadomoœci
 	 */
-	protected int toUser;
+	protected int user;
 	
 	/**
 	 * Treœæ wiadomoœci
@@ -26,7 +26,7 @@ public abstract class AbstractMessage {
 	 * @param text wiadomoœæ tekstowa
 	 */
 	public AbstractMessage(int toUser, String text) {
-		this.toUser = toUser;
+		this.user = toUser;
 		this.text = text;
 	}
 
@@ -36,7 +36,7 @@ public abstract class AbstractMessage {
 	 * @return User 
 	 */
 	public int getUser() {
-		return toUser;
+		return user;
 	}
 
 	/**
@@ -47,4 +47,18 @@ public abstract class AbstractMessage {
 	public String getText() {
 		return text;
 	}
+	/**
+	 * @param text
+	 */
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	/**
+	 * @param user
+	 */
+	public void setUser(int user) {
+		this.user = user;
+	}
+
 }

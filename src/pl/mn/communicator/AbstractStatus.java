@@ -12,24 +12,16 @@ import org.apache.log4j.Logger;
  * 
  * @author mnaglik
  */
-public abstract class AbstractStatus {
+public abstract class AbstractStatus implements IStatus {
 	private static Logger logger = Logger.getLogger(AbstractStatus.class);
 
 	/**
-	 * Status on-line
-	 */
-	public final static int ON_LINE = 1;
-	/**
-	 * Status off-line
-	 */
-	public final static int OFF_LINE = 0;
-	/**
 	 * Aktualny status 
 	 */
-	protected int actualStatus; 
+	protected int status; 
 
 	public AbstractStatus(int status) {
-		this.actualStatus = status;
+		this.status = status;
 	}
 	
 	/**
@@ -38,7 +30,16 @@ public abstract class AbstractStatus {
 	 * @return int
 	 */
 	public int getStatus() {
-		return actualStatus;
+		return status;
+	}
+	
+	/**
+	 * Ustaw aktualny status
+	 * 
+	 * @return int
+	 */
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	/**
@@ -52,8 +53,8 @@ public abstract class AbstractStatus {
 	public Map getAvaiableStatuses() {
 		HashMap map = new HashMap();
 
-		map.put(new Integer(AbstractStatus.ON_LINE),"On Line");
-		map.put(new Integer(AbstractStatus.OFF_LINE),"Off Line");
+		map.put(new Integer(IStatus.ON_LINE),"On Line");
+		map.put(new Integer(IStatus.OFF_LINE),"Off Line");
 	
 		return map;
 	}

@@ -7,7 +7,7 @@ import org.apache.log4j.Logger;
  *  
  * @author mnaglik
  */
-public class AbstractUser {
+public class AbstractUser implements IUser {
 	private static Logger logger = Logger.getLogger(AbstractUser.class);
 
 	protected int number;

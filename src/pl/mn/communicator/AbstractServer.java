@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
  * 
  * @author mnaglik
  */
-public abstract class AbstractServer {
+public abstract class AbstractServer implements IServer {
 	private static Logger logger = Logger.getLogger(AbstractServer.class);
 	/**
 	 * Adres ip, lub tekstowy serwera rozmów
@@ -54,4 +54,18 @@ public abstract class AbstractServer {
 	public String toString() {
 		return "[" + this.address + "-" + this.port + "]";
 	}
+	/**
+	 * @param address
+	 */
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	/**
+	 * @param port
+	 */
+	public void setPort(int port) {
+		this.port = port;
+	}
+
 }

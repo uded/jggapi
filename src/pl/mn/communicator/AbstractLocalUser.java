@@ -8,7 +8,7 @@ import org.apache.log4j.Logger;
  * 
  * @author mnaglik
  */
-public abstract class AbstractLocalUser {
+public abstract class AbstractLocalUser implements ILocalUser {
 	private static Logger logger = Logger.getLogger(AbstractLocalUser.class);
 	/**
 	 * Numer u¿ytkownika
@@ -47,6 +47,20 @@ public abstract class AbstractLocalUser {
 	 */
 	public int getUserNo() {
 		return userNo;
+	}
+
+	/**
+	 * @param password
+	 */
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	/**
+	 * @param userNo
+	 */
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
 	}
 
 }

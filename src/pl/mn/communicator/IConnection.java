@@ -1,16 +1,10 @@
-/*
- * Created on 2003-10-01
- *
- * To change the template for this generated file go to
- * Window - Preferences - Java - Code Generation - Code and Comments
- */
 package pl.mn.communicator;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
 
 /**
- * @author mna
+ * @author mnaglik
  *
  * To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Generation - Code and Comments
