@@ -24,28 +24,41 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * This class represents information that will be used during login process.
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.8 2004-12-21 21:23:34 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.9 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public final class LoginContext {
 	
 	private static Log logger = LogFactory.getLog(LoginContext.class);
 
+	/** the uin that will be used during login*/
 	private int m_uin = -1;
 
+	/** password that will be used during login */
 	private String m_password = null;
 
+	/** Initial status */
 	private ILocalStatus m_localStatus = new LocalStatus(StatusType.ONLINE);
 	
+	/** The list of users that we are intrested in */
 	private Collection m_monitoredUsers = new ArrayList();
-	
+
+	/** the max image size */
     private byte m_imageSize = 64;
     
-    private byte[] m_localIP = new byte[] {(byte) 0, (byte)0, (byte) 0, (byte) 0};
-    private int m_localPort = 1550;
-    private byte[] m_externalIP = new byte[] {(byte) 0, (byte)0, (byte) 0, (byte) 0};
-    private int m_externalPort = 1550;
+    /** the local IP of the user */
+    private byte[] m_localIP = null;
+    
+    /** the local port of the client */
+    private int m_localPort = -1;
+    
+    /** The external IP of the client */
+    private byte[] m_externalIP = null;
+    
+    /** the external port of the client */
+    private int m_externalPort = -1;
     
     public LoginContext(int uin, String password) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");

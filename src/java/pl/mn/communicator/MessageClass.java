@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageClass.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: MessageClass.java,v 1.6 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class MessageClass {
 
@@ -31,19 +31,30 @@ public class MessageClass {
 		m_messageClass = messageClass;
 	}
 	
+	/** the message has been queued because the user it not available */
 	public final static MessageClass QUEUED = new MessageClass("message_class_queued");
-	public final static MessageClass IN_NEW_WINDOW = new MessageClass("message_class_in_new_window");
-	public final static MessageClass CHAT  = new MessageClass("message_class_chat");
-	public final static MessageClass DO_NOT_CONFIRM = new MessageClass("message_class_do_not_confirm");
-	public final static MessageClass PING = new MessageClass("message_class_ping");
 	
+	/** The message will popup ip new window */
+	public final static MessageClass IN_NEW_WINDOW = new MessageClass("message_class_in_new_window");
+	
+	/** the message is a part of conversation */
+	public final static MessageClass CHAT  = new MessageClass("message_class_chat");
+	
+	/** this means that we do not want to receive confirmation from Gadu-Gadu server of delivery of this message */
+	public final static MessageClass DO_NOT_CONFIRM = new MessageClass("message_class_do_not_confirm");
+	
+	/** this means that message is ping only and the user will not see anyhow whether or not we are sending this message */
+	public final static MessageClass PING = new MessageClass("message_class_ping");
 	
     public String toString() {
         return m_messageClass;
     }
-
-    protected Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
-    }
+    
+    /**
+	 * @see java.lang.Object#hashCode()
+	 */
+	public int hashCode() {
+		return m_messageClass.hashCode();
+	}
 	
 }

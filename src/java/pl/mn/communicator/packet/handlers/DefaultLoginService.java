@@ -39,7 +39,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.8 2004-12-21 21:25:51 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.9 2004-12-23 17:52:23 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -101,7 +101,7 @@ public class DefaultLoginService implements ILoginService {
 		if (description == null) throw new NullPointerException("description cannot be null");
 		checkSessionState();
 		if (description.length() > 0) {
-			ILocalStatus localStatus = new LocalStatus(StatusType.OFFLINE_WITH_DESCRIPTION, description);
+			LocalStatus localStatus = new LocalStatus(StatusType.OFFLINE_WITH_DESCRIPTION, description);
 			if (returnTime != null) {
 				localStatus.setReturnDate(returnTime);
 			}

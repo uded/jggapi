@@ -20,10 +20,12 @@ package pl.mn.communicator;
 import java.util.Date;
 
 /**
+ * The default implementation of <code>ILocalStatus</code>.
+ * <p>
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LocalStatus.java,v 1.1 2004-12-21 21:23:34 winnetou25 Exp $
+ * @version $Id: LocalStatus.java,v 1.2 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class LocalStatus extends AbstractStatus implements ILocalStatus {
 

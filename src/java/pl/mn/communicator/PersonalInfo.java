@@ -24,17 +24,32 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PersonalInfo.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: PersonalInfo.java,v 1.6 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class PersonalInfo {
 
+	/** First name of the user */
 	private String m_firstName = null;
+	
+	/** Last name of the user */
 	private String m_lastName = null;
+	
+	/** Birth date of the user */
 	private String m_birthDate = null;
+
+	/** City of the user */
 	private String m_city = null;
+	
+	/** The handle that the user want to identify hisself/herself */
 	private String m_nickName = null;
+	
+	/** The gender of the user */
 	private Gender m_gender = null;
+	
+	/** The name of the user's family */
 	private String m_familyName = null;
+	
+	/** the name of the user's city */
 	private String m_familyCity = null;
 
 	public PersonalInfo() {

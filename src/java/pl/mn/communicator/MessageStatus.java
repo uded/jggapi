@@ -21,11 +21,11 @@ package pl.mn.communicator;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageStatus.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: MessageStatus.java,v 1.6 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class MessageStatus {
 
-	private String m_messageStatus;
+	private String m_messageStatus = null;
 	
 	private MessageStatus(String messageStatus) {
 		m_messageStatus = messageStatus;

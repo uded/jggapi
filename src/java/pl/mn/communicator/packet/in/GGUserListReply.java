@@ -28,7 +28,7 @@ import pl.mn.communicator.LocalUser;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReply.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGUserListReply.java,v 1.7 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class GGUserListReply implements GGIncomingPackage {
 
@@ -90,7 +90,7 @@ public class GGUserListReply implements GGIncomingPackage {
 		String email = (String) entries.get(7);
 
 		LocalUser localUser = new LocalUser();
-		localUser.setName(firstName);
+		localUser.setFirstName(firstName);
 		localUser.setLastName(surName);
 		localUser.setNickName(nickname);
 		localUser.setDisplayName(displayName);

@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.8 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
 
@@ -44,7 +44,7 @@ public class OutgoingMessage extends AbstractMessage {
      * @param messageBody the body of the message.
      * @return OutgoingMessage outgoing message.
      */
-	public static OutgoingMessage createMessage(int uin, String messageBody) {
+	public static OutgoingMessage createNewMessage(int uin, String messageBody) {
 		return new OutgoingMessage(uin, messageBody, MessageClass.IN_NEW_WINDOW);
 	}
 
@@ -69,14 +69,6 @@ public class OutgoingMessage extends AbstractMessage {
 		return new OutgoingMessage(uin, "", MessageClass.PING);
 	}
 
-	/**
-	 * Creates an outgoing message and sends information that we do not
-	 * want to receive confirmation whether this message was successfuly delivered or not.
-	 * 
-	 * @param uin
-	 * @param text
-	 * @return OutgoingMessage
-	 */
     /** 
      * Creates an outgoing message and sets a special flag
      * that will notify Gadu-Gadu server that we do not want to receive the

@@ -171,7 +171,7 @@ public class Main2 {
 //		status.setFriendsOnly(true);
 //		session.getPresenceService().setStatus(status);
 //		
-		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+		session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessageWithoutConfirmation(376798, String.valueOf(System.currentTimeMillis())));

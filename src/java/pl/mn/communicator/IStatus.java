@@ -20,57 +20,46 @@ package pl.mn.communicator;
 import java.util.Date;
 
 /**
+ * Interface that is common for all statuses, that is local and remote.
+ * <p>
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IStatus.java,v 1.8 2004-12-21 21:23:34 winnetou25 Exp $
+ * @version $Id: IStatus.java,v 1.9 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public interface IStatus {
 
     /**
      * Get the StatusType.
+     * 
      * @return StatusType
      */
     StatusType getStatusType();
 
-    /**
-     * Set the actual status.<BR>
-     * @param status status
-     */
-    void setStatusType(StatusType status);
-    
     /** 
-     * Set the description of status.<BR>
-     * @param description to be set
-     */
-    void setDescription(String description);
-    
-    /** 
-     * Get the status description.<BR>
+     * Get the status description.
+     * 
      * @return description of status.
      */
     String getDescription();
     
     /**
-     * Set the return date.
-     * @param date
-     */
-    void setReturnDate(Date date);
-    
-    /**
      * Get the return date.
+     * 
      * @return the return date.
      */
     Date getReturnDate();
     
     /**
      * Tells if the description has been set on this status.
+     * 
      * @return <code>true</code> if the description has been set, <code>false</code> otherwise.
      */
     boolean isDescriptionSet();
     
     /**
      * Tells if the return date has been set on this status instance.
+     * 
      * @return <code>true</code> if the return date has been set, <code>false</code> otherwise.
      */
     boolean isReturnDateSet();

@@ -18,15 +18,27 @@
 package pl.mn.communicator;
 
 /**
+ * Interface that represents Gadu-Gadu user.
+ * <p>
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IUser.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: IUser.java,v 1.8 2004-12-23 17:52:23 winnetou25 Exp $
  */
 public interface IUser {
 	
+	/**
+	 * Gets uin of the Gadu-Gadu user.
+	 * 
+	 * @return the uin of Gadu-Gadu user.
+	 */
 	int getUin();
 	
+	/**
+	 * Gets userMode of this Gadu-Gadu user.
+	 * 
+	 * @return the <code>User.UserMode</code> of this Gadu-Gadu user.
+	 */
 	User.UserMode getUserMode();
 	
 }

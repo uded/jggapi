@@ -26,7 +26,7 @@ import pl.mn.communicator.LocalUser;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListRequest.java,v 1.6 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: GGUserListRequest.java,v 1.7 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class GGUserListRequest implements GGOutgoingPackage {
  
@@ -49,7 +49,7 @@ public class GGUserListRequest implements GGOutgoingPackage {
 	   	StringBuffer buffer = new StringBuffer();
     	for (Iterator it = m_usersToExport.iterator(); it.hasNext();) {
     		LocalUser localUser = (LocalUser) it.next();
-	    	if (localUser.getName() != null) buffer.append(localUser.getName());
+	    	if (localUser.getFirstName() != null) buffer.append(localUser.getFirstName());
 	    	buffer.append(';');
 	    	if (localUser.getLastName() != null) buffer.append(localUser.getLastName());
 	    	buffer.append(';');

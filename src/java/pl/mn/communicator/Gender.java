@@ -18,14 +18,17 @@
 package pl.mn.communicator;
 
 /**
+ * The Gender of the Gadu-Gadu user.
+ * <p>
  * Created on 2004-12-16
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Gender.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: Gender.java,v 1.6 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class Gender {
 
-	private String m_gender;
+	/** String that represents a user's gender */
+	private String m_gender = null;
 		
 	private Gender(String gender) {
 		m_gender = gender;

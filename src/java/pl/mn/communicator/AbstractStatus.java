@@ -20,10 +20,13 @@ package pl.mn.communicator;
 import java.util.Date;
 
 /**
+ * The abstact status implementation that is common for
+ * LocalStatus and RemoteStatus.
+ * <p>
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractStatus.java,v 1.1 2004-12-21 21:23:34 winnetou25 Exp $
+ * @version $Id: AbstractStatus.java,v 1.2 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public abstract class AbstractStatus implements IStatus {
 

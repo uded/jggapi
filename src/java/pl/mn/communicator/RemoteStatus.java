@@ -20,25 +20,27 @@ package pl.mn.communicator;
 import java.util.Date;
 
 /**
+ * The default implementation of <code>IRemoteStatus</code>
+ * <p>
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: RemoteStatus.java,v 1.1 2004-12-21 21:23:34 winnetou25 Exp $
+ * @version $Id: RemoteStatus.java,v 1.2 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 
 	private boolean m_blocked = false;
 
-	private byte[] m_remoteIP = new byte[]{0,0,0,0};
-	private int m_remotePort = 1555;
+	private byte[] m_remoteIP = null;
+	private int m_remotePort = -1;
 	
 	private int m_imageSize = -1;
 	private int m_version = -1;
-	private int m_descriptionSize = 0;
+	private int m_descriptionSize = -1;
 
 	private boolean m_supportsVoiceCommunication = false;
 	private boolean m_supportsDirectCommunication = false;
-	private boolean m_areWeInRemoteUserBuddyList = true;
+	private boolean m_areWeInRemoteUserBuddyList = false;
 	private boolean m_isUserBehindFirewall = false;
 
 	public RemoteStatus(StatusType statusType) {
@@ -54,21 +56,21 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IStatus#setBlocked(boolean)
+	 * @see pl.mn.communicator.IRemoteStatus#setBlocked(boolean)
 	 */
 	public void setBlocked(boolean blocked) {
 		m_blocked = blocked;
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IStatus#isBlocked()
+	 * @see pl.mn.communicator.IRemoteStatus#isBlocked()
 	 */
 	public boolean isBlocked() {
 		return m_blocked;
 	}
 
 	/**
-	 * @see pl.mn.communicator.IStatus#getRemoteIP()
+	 * @see pl.mn.communicator.IRemoteStatus#getRemoteIP()
 	 */
 	public byte[] getRemoteIP() {
 		return m_remoteIP;
@@ -81,7 +83,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IStatus#getRemotePort()
+	 * @see pl.mn.communicator.IRemoteStatus#getRemotePort()
 	 */
 	public int getRemotePort() {
 		return m_remotePort;
@@ -93,7 +95,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IStatus#getGGVersion()
+	 * @see pl.mn.communicator.IRemoteStatus#getGGVersion()
 	 */
 	public int getGGVersion() {
 		return m_version;
@@ -104,7 +106,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IStatus#getImageSize()
+	 * @see pl.mn.communicator.IRemoteStatus#getImageSize()
 	 */
 	public int getImageSize() {
 		return m_imageSize;
@@ -124,7 +126,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IStatus#supportsDirectCommunication()
+	 * @see pl.mn.communicator.IRemoteStatus#supportsDirectCommunication()
 	 */
 	public boolean supportsDirectCommunication() {
 		return m_supportsDirectCommunication;
@@ -135,7 +137,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IStatus#areWeInRemoteUserBuddyList()
+	 * @see pl.mn.communicator.IRemoteStatus#areWeInRemoteUserBuddyList()
 	 */
 	public boolean areWeInRemoteUserBuddyList() {
 		return m_areWeInRemoteUserBuddyList;
@@ -146,7 +148,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IStatus#getDescription()
+	 * @see pl.mn.communicator.IRemoteStatus#getDescription()
 	 */
 	public int getDescriptionSize() {
 		return m_descriptionSize;
@@ -158,7 +160,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IStatus#isUserBehingFirewall()
+	 * @see pl.mn.communicator.IRemoteStatus#isUserBehingFirewall()
 	 */
 	public boolean isUserBehindFirewall() {
 		return m_isUserBehindFirewall;

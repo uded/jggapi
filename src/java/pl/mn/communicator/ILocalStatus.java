@@ -18,15 +18,20 @@
 package pl.mn.communicator;
 
 /**
+ * Class that represents local user status.
+ * <p>
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ILocalStatus.java,v 1.1 2004-12-21 21:23:34 winnetou25 Exp $
+ * @version $Id: ILocalStatus.java,v 1.2 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public interface ILocalStatus extends IStatus {
 
-    void setFriendsOnly(boolean friendsOnly);
-    
+	/**
+	 * Flag indicating whether or not we want to be visible only for friends
+	 * 
+	 * @return whether or not we want to be visible only for friends.
+	 */
     boolean isFriendsOnly();
 
 }

@@ -21,41 +21,44 @@ package pl.mn.communicator;
  * Created on 2004-11-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LocalUser.java,v 1.8 2004-12-21 21:23:34 winnetou25 Exp $
+ * @version $Id: LocalUser.java,v 1.9 2004-12-23 17:52:24 winnetou25 Exp $
  */
 public class LocalUser {
 
-//	private IStatus m_status = new Status(StatusType.OFFLINE);
-	
+	/** Gadu-Gadu user's uin */
 	private int m_uin = -1;
+	
+	/** the name of the user */
 	private String m_name = null;
+	
+	/** the last name of the user */
 	private String m_lastName = null;
+	
+	/** the nick name of the user */
 	private String m_nickName = null;
+	
+	/** the name that is an alias for the user */
 	private String m_displayName = null;
+	
+	/** the telehone of the user */
 	private String m_telephone = null;
+	
+	/** the group that the user belongs */
 	private String m_group = null;
+	
+	/** the e-mail address of the user */
 	private String m_emailAddress = null;
-	private int m_mode = -1;
 
 	public LocalUser() {
 		
 	}
 	
-//	public void setStatus(IStatus status) {
-//		if (status == null) throw new NullPointerException("status cannot be null");
-//		m_status = status;
-//	}
-//	
-//	public IStatus getStatus() {
-//		return m_status;
-//	}
-	
-	public void setName(String name) {
+	public void setFirstName(String name) {
 		if (name == null) throw new NullPointerException("name cannot be null");
 		m_name = name;
 	}
 	
-	public String getName() {
+	public String getFirstName() {
 		return m_name;
 	}
 	
