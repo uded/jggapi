@@ -8,94 +8,150 @@
 
   <body>
     <title>Frequently Asked Questions</title>
+
+	<section name="Frequently Asked Questions">
     
-    <section name="What is JGGApi?">
-      <p>
-      The <code>jggapi</code> is a Java Gadu-Gadu protocol implementation.
-	  <code>jggapi</code> uses that well-known design patterns that minimize learning curve.
-	  As a result developers can write Gadu-Gadu clients faster than before.
-      </p>
-    </section>
+		<subsection name="What is JGGApi?">
+		  <p>
+		  The <b>JGGApi</b> is a Java Gadu-Gadu protocol implementation.
+		  <b>JGGApi</b> uses that well-known design patterns that minimize learning curve.
+		  As a result developers can write Gadu-Gadu clients faster than before.
+		  </p>
+		</subsection>
 
-    <section name="What is the JGGApi license?">
-      <p>
-		We use GPL open source license, therefore if you want to write the Gadu-Gadu client
-		it must have GPL license as well.
-		To find out more about open-source licenses point your browser at:
-		<a href="http://www.opensource.org/licenses/">www.opensource.org/licenses/</a>
-      </p>
-    </section>
+		<subsection name="What is the JGGApi license?">
+		  <p>
+			We use <b>GPL open source license</b>, therefore if you want to write the Gadu-Gadu client
+			it must have <b>GPL license</b> as well.
+			To find out more about open-source licenses point your browser at:
+			<a href="http://www.opensource.org/licenses/">www.opensource.org/licenses/</a>
+		  </p>
+		</subsection>
 	
-	<section name="Who develops JGGApi?">
-		<p>
-		The project was founded by <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik (mnaglik@gazeta.pl)</a>
-		in 2003. In November 2004 <a href="mailto:mati@sz.home.pl">Mateusz Szczap (mati@sz.home.pl)</a>
-		joined the project and helped with the development and documentation process.
-		</p>
-	</section>
+		<subsection name="Who develops JGGApi?">
+			<p>
+			The project was founded by <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik (mnaglik@gazeta.pl)</a>
+			in 2003.
+			</p>
+			<p>
+			In November 2004 <a href="mailto:mati@sz.home.pl">Mateusz Szczap (mati@sz.home.pl)</a>
+			joined the project and helped with the development and documentation process.
+			</p>
+		</subsection>
 
-	<section name="What version of JVM (java virtual machine) can I use?">
-		<p>
-		The project was developed using JDK 1.5 (Tiger) but there should be no problem
-		running with with 1.4.1 virtual machine. Due to nested classes it is definately
-		not possible to use it with an old 1.1 java virtual machine.
-		</p>
-	</section>
+		<subsection name="What version of JVM (java virtual machine) can I use?">
+			<p>
+			The project was developed using JDK 1.4.2 but there should be no problem
+			running with with 1.2, 1.3 virtual machine. However it was not tested against these.
+			If anyone could report whether or not the library is compatible with 1.2 and 1.3 JVM it
+			would be appreciated. 
+			</p>
+			<p>
+			Due to nested classes it is definately not possible to use it with an old 1.1 java virtual machine.
+			</p>
+		</subsection>
+		
+		<subsection name="Who should use this library?">
+			<p>
+			This library can be used by anyone who wishes to write any kind of application
+			or module that will interact with Gadu-Gadu server and it's users.
+			</p>
+			<p>
+			For instance, client application can be written in SWT, Swing, or even an applet that
+			can be displayed in web page. Writing a simple servlet as a web gateway to Gadu-Gadu
+			is also possible. Also writing application as a command-line similiar to EKG should not
+			be problematic.
+			</p>
+			<p>
+			It is also possible that this library could become part of some CRM or workflow system
+			implemented as a module that would allow interaction between some corporate system and
+			IM users.
+			</p>
+			<p>
+			What is more, it is possible to write some kind of bot that could chat with users, such as very
+			famous <a href="http://www.alicebot.org/">Alice bot</a>.
+			</p>
+		</subsection>
+		
+		<subsection name="Is it legal to use this library?">
+			<p>
+			It is not since the company who developed Gadu-Gadu (SMS Express) states on their web page that
+			people can connect to their server only from the clients authorized by this company. However,
+			there are many open-source Gadu-Gadu applications that use this proprietary protocol, some of them
+			available in official linux distrubutions such as <b>EKG</b>.
+			</p>
+		</subsection>	
 
-	<section name="Is JGGApi better then libgadu from EKG project?">
-		<p>
-		Yes and no. Libgadu from EKG project is more tested since it has a huge open-source
-		community feedback. The disadvantage of the libgadu is that it is written in c language and
-		there are some porting issues. JGGApi is a library written in java
-		and will run on every computer that has at least JRE 1.2 (Java Runtime) installed.
-		</p>
-		<p>
-		In addition, the libgadu is an object-oriented and has a clear design. 
-		It should be relatively easy for a new developer to write a client Gadu-Gadu application
-		using this library.
-		</p>
-	</section>
+		<subsection name="Is JGGApi better then libgadu from EKG project?">
+			<p>
+			Yes and no. <b>Libgadu</b> from <b>EKG</b> project is more tested since it has a huge open-source
+			community feedback. The disadvantage of the <b>libgadu</b> is that it is written in c language and
+			there are some porting issues. <b>JGGApi</b> is a library written in Java
+			and will run on every computer that has <b>JRE (Java Runtime Environment)</b> installed.
+			</p>
+			<p>
+			In addition, the <b>JGGApi</b> is an object-oriented library and has a clear design. 
+			It should be relatively easy for a new developer to write a Gadu-Gadu application
+			using this library.
+			</p>
+		</subsection>
 
-	<section name="I want to write a Gadu-Gadu midlet for my cell phone, can I use your library?">
-		<p>
-		Unfortunately it is not supported at the moment. There are plans for a lite version
-		of the JGGApi library that will provide support for this. The reason for this
-		is that java micro edition vitual machine is very simple and does not support inner classes.
-		</p>
-	</section>
+		<subsection name="I want to write a Gadu-Gadu midlet for my cell phone, can I use your library?">
+			<p>
+			Yes, you could use it but the library is quite big (>100 KB) and has not been optimized for J2ME
+			virtual machine. Also it was not tested so please feel free to provide information about
+			whether or not you succeeded.
+			</p>
+		</subsection>
 
-	<section name="How can I contribute to this project?">
-		<p>
-		If you are a java developer that wants to write a Gadu-Gadu application you can
-		help by submiting bug reports and patches fixing found issues.
-		Also there is a TODO list that always has some issues on it. Please feel free to look at
-		it if you want to help us. If you convince us that you are valuable to the
-		project and that you have java skills we will be happy to include you on
-		the list of our developers.
-		</p>
-		<p>
-		You do not have to be a Java developer to contribute to this project or even
-		a developer at all. Some aspects include writing documentation, maintaing this site
-		and testing the current version of the JGGApi library.
-		</p>
-	</section>
+		<subsection name="How can I contribute to this project?">
+			<p>
+			If you are a Java developer that wants to write a Gadu-Gadu application you can
+			help by submiting bug reports and patches fixing found issues.
+			</p>
+			<p>
+			Also, there is a TODO list that always has some issues on it. Please feel free to look at
+			it if you want to help us. If you convince us that you are valuable to the
+			project and that you have Java skills we will be happy to include you on
+			the list of our developers.
+			</p>
+			<p>
+			You do not have to be a Java developer to contribute to this project or even
+			a developer at all. Some aspects include writing documentation, maintaing this site
+			and testing the current version of the <b>JGGApi</b> library.
+			</p>
+		</subsection>
 
-	<section name="Does JGGApi depend on any library?">
-		<p>
-		Yes, it depends on commons-logging framework that is a ultra-thin bridge
-		to the logging implementation. 
-		</p>
-		<p>
-		If you want to find out about commons-loggin framework take a look at:
-		<a href="http://jakarta.apache.org/commons/logging/">http://jakarta.apache.org/commons/logging/</a>
-		</p>
-	</section>
+		<subsection name="Does JGGApi depend on any library?">
+			<p>
+			Yes, it depends on commons-logging framework that is a ultra-thin bridge
+			to the logging implementation. 
+			</p>
+			<p>
+			If you want to find out more about commons-logging framework take a look at:
+			<a href="http://jakarta.apache.org/commons/logging/">http://jakarta.apache.org/commons/logging/</a>
+			</p>
+		</subsection>
 	
+		<subsection name="Where should I begin?">
+			<p>
+			First of all, you have to grab a fresh release of <b>JGGApi</b> from 
+			<a href="releases/">here</a>.
+			</p>
+			<p>
+			Second of all, please read our <a href="guide.html">Getting Started</a>.
+			</p>
+			<p>
+			Third of all, your can browse JGGApi's <a href="apidocs/index.html">Java Docs</a> and
+			<a href="xref/index.html">sources</a> online.
+			</p>
+			<p>
+			Last but not least, start writing your application or module and get some hands on.
+			</p>
+		</subsection>
+	</section>	
   </body>
 </document>
-
-
-
 
 
 

@@ -14,6 +14,7 @@ import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionFactory;
+import pl.mn.communicator.SessionState;
 import pl.mn.communicator.User;
 import pl.mn.communicator.User.UserMode;
 import pl.mn.communicator.event.ConnectionListener;
@@ -21,6 +22,7 @@ import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.event.PublicDirListener;
+import pl.mn.communicator.event.SessionStateListener;
 import pl.mn.communicator.event.UserListener;
 
 /*
@@ -52,6 +54,14 @@ public class Main2 {
 		loginContext.getMonitoredUsers().add(mati);
 		
 		final ISession session = SessionFactory.createSession(loginContext);
+		
+		session.addSessionStateListener(new SessionStateListener(){
+
+			public void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState) {
+				
+			}
+			
+		});
 		
 		session.getConnectionService().addConnectionListener(new ConnectionListener.Stub() {
 
@@ -89,7 +99,7 @@ public class Main2 {
 			}
 			
 		});
-		session.getMessageService().addMessageListener(new MessageListener() {
+		session.getMessageService().addMessageListener(new MessageListener.Stub() {
 
 			public void messageArrived(IncomingMessage incommingMessage) {
 				System.out.println("MessageArrived, from user: "+incommingMessage.getUin());
@@ -171,6 +181,7 @@ public class Main2 {
 //		status.setFriendsOnly(true);
 //		session.getPresenceService().setStatus(status);
 //		
+		OutgoingMessage.createNewMessage(376798, "body");
 		session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));

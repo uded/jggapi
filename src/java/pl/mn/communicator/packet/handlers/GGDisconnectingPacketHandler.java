@@ -26,14 +26,14 @@ import pl.mn.communicator.packet.in.GGDisconnecting;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGDisconnectingPacketHandler.java,v 1.7 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: GGDisconnectingPacketHandler.java,v 1.8 2005-01-02 15:16:29 winnetou25 Exp $
  */
 public class GGDisconnectingPacketHandler implements PacketHandler {
 
 	private final static Log logger = LogFactory.getLog(GGDisconnectingPacketHandler.class);
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.handlers.Context)
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
 	public void handle(Context context) {
 		if (logger.isDebugEnabled()) {

@@ -3,6 +3,7 @@
   <pomVersion>3</pomVersion>
   <artifactId>jggapi</artifactId>
   <groupId>jggapi</groupId>
+  <logo>/images/jggapi-logo.png</logo>
   <url>http://jggapi.sourceforge.net</url>
   <licenses>
     <license>
@@ -16,21 +17,21 @@
   <organization>
     <name>SourceForge.net</name>
     <url>http://sourceforge.net/projects/${pom.artifactId}/</url>
-    <logo>http://sourceforge.net/sflogo.php?group_id=79198&amp;type=5</logo>
+    <logo>http://sourceforge.net/sflogo.php?group_id=16035</logo>
   </organization>
   <package>pl.mn.communicator</package>
   <inceptionYear>2004</inceptionYear>
   <shortDescription>Java Gadu-Gadu protocol implementation</shortDescription>
   <description>
-       The jggapi project is implementation of proprietary Gadu-Gadu
-       protocol based on specification from EKG.
-       It is fully object oriented and uses common design patterns
-       that reduce the learning curve of the library.
+  The jggapi project is implementation of proprietary Gadu-Gadu
+  protocol based on specification from EKG.
+  It is fully object oriented and uses common design patterns
+  that reduce the learning curve of the library.
   </description>
   <issueTrackingUrl>http://sourceforge.net/tracker/?group_id=79198</issueTrackingUrl>
   <siteAddress>jggapi.sourceforge.net</siteAddress>
   <siteDirectory>/home/groups/${pom.groupId.substring(0,1)}/${pom.groupId.substring(0,2)}/${pom.artifactId}/htdocs/</siteDirectory>
-  <distributionSite>shell1.jggapi.sf.net</distributionSite>
+  <distributionSite>shell1.sf.net</distributionSite>
   <distributionDirectory>/home/groups/${pom.groupId.substring(0,1)}/${pom.groupId.substring(0,2)}/${pom.groupId}/htdocs/repository/</distributionDirectory>
   <repository>
     <connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</connection>

@@ -29,14 +29,14 @@ import pl.mn.communicator.packet.in.GGStatus;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatusPacketHandler.java,v 1.8 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: GGStatusPacketHandler.java,v 1.9 2005-01-02 15:16:29 winnetou25 Exp $
  */
 public class GGStatusPacketHandler implements PacketHandler {
 
 	private Log logger = LogFactory.getLog(GGStatusPacketHandler.class);
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.handlers.Context)
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
 	public void handle(Context context) {
 		if (logger.isDebugEnabled()) {

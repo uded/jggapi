@@ -34,7 +34,7 @@ import pl.mn.communicator.IRegistrationService;
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.9 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.10 2005-01-02 15:16:29 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 
@@ -55,7 +55,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IRegistrationService.registerAccount(java.lang.String email, java.lang.String password, int qa, String answer)
+	 * @see pl.mn.communicator.IRegistrationService#registerAccount(java.lang.String email, java.lang.String password, int qa, String answer)
 	 */
 	public int registerAccount(String email, String password, int qa, String answer) throws GGException {
 		if (email == null) throw new NullPointerException("email cannot be null");
@@ -175,14 +175,14 @@ public class DefaultRegistrationService implements IRegistrationService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IRegistrationService#unregisterGGUser(int, java.lang.String)
+	 * @see pl.mn.communicator.IRegistrationService#unregisterAccount(int, java.lang.String)
 	 */
 	public void unregisterAccount(int uin, String password) {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see pl.mn.communicator.IRegistrationService#sendPassword(int)
+	 * @see pl.mn.communicator.IRegistrationService#remindAndSendPassword(int)
 	 */
 	public void remindAndSendPassword(int uin) {
 		// TODO Auto-generated method stub

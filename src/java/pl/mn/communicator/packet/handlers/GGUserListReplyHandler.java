@@ -29,14 +29,14 @@ import pl.mn.communicator.packet.in.GGUserListReply;
  * Created on 2004-12-11
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReplyHandler.java,v 1.7 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: GGUserListReplyHandler.java,v 1.8 2005-01-02 15:16:29 winnetou25 Exp $
  */
 public class GGUserListReplyHandler implements PacketHandler {
 
 	private final static Log logger = LogFactory.getLog(GGUserListReplyHandler.class);
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.handlers.Context)
+	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
 	public void handle(Context context) {
 		if (logger.isDebugEnabled()) {
