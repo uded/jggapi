@@ -30,13 +30,12 @@ import pl.mn.communicator.event.GGPacketListener;
  * 
  * @see pl.mn.communicator.event.ConnectionListener
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IConnectionService.java,v 1.3 2004-12-19 16:10:42 winnetou25 Exp $
+ * @version $Id: IConnectionService.java,v 1.4 2004-12-19 16:51:37 winnetou25 Exp $
  */
 public interface IConnectionService {
 
 	/**
-	 * Tries to connects to Gadu-Gadu server.
-	 * It tries to connect to the server that has been previously
+	 * Tries to connect to Gadu-Gadu server that has been previously
 	 * assigned to <code>Session</code> instance.
 	 * 
 	 * @throws GGException if error occurs while connecting to Gadu-Gadu server.
@@ -45,7 +44,7 @@ public interface IConnectionService {
     void connect() throws GGException;
 
     /**
-     * Closes connection to the Gadu-Gadu server.
+     * Tries to close the connection to the Gadu-Gadu server.
      * 
      * @throws GGSessionException if there is an incorrect session state.
      */
