@@ -11,9 +11,14 @@
         <section name="JGGApi - Gadu-Gadu protocol implementation.">
             <p>
 			JGGApi is a Gadu-Gadu protocol implementation based on specification
-			from EKG. Thanks to it is very easy to create applications
+			from EKG. Gadu-Gadu is a very famous Instant Messanger in Poland. 
+			</p>
+			<p>
+			Thanks to the library it is very easy to create applications
 			that communicate with Gadu-Gadu server. It uses commonly used
-			design patterns (GoF) that minimizie the learnining curve for developers.
+			design patterns (GoF) that minimizie the learnining curve for
+			the developers that are going to contribute to this project as
+			well as write client applications such as Kadu.
             </p>
         </section>
 		<section name="Releases">
@@ -38,6 +43,11 @@
 					<li>5. Ability to read and write personal information to the public directory.</li>
 					<li>6. Possibility to search public directory based on user defined criteria.</li>
 				</ul>
+            </p>
+        </section>
+        <section name="Known Bugs">
+            <p>
+			The current version is not thread safe but the thread safety check will be perfomed soon.
             </p>
         </section>
     </body>
