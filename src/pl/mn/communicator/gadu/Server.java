@@ -30,9 +30,9 @@ import pl.mn.communicator.AbstractServer;
 import pl.mn.communicator.ILocalUser;
 
 /**
- * Klasa z danymi dotycz¹cymi serwera gg.
+ * Klasa z danymi dotycz±cymi serwera gg.
  * 
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public final class Server extends AbstractServer {

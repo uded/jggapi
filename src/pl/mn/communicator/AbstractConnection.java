@@ -20,8 +20,8 @@ package pl.mn.communicator;
 import org.apache.log4j.Logger;
 
 /**
- * Po³¹czenie z serwerem gg.<BR>
- * S³u¿y do tworzenia po³¹czenia.
+ * Po³±czenie z serwerem gg.<BR>
+ * S³u¿y do tworzenia po³±czenia.
  * <BR><BR>
  * <i>Przyk³ad u¿ycia:</i><BR><BR>
  * <code>
@@ -36,7 +36,7 @@ import org.apache.log4j.Logger;
  * }
  * </code>
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public abstract class AbstractConnection implements IConnection {
@@ -47,19 +47,19 @@ public abstract class AbstractConnection implements IConnection {
 	protected UserListener userListener = null;
 
 	/**
-	 * Listener po³¹czenia
+	 * Listener po³±czenia
 	 */
 	protected ConnectionListener connectionListener = null;
 
 	/**
-	 * Listener wiadomoœci
+	 * Listener wiadomo¶ci
 	 */
 	protected MessageListener messageListener = null;
 
 	/**
 	 * Dodaj listenera u¿ytkowników.<BR>
-	 * Obs³uguje odpowiednie zdarzenia zwi¹zane z u¿ytkownikami
-	 * takie jak pryjœcie i odejœcie u¿ytkownika
+	 * Obs³uguje odpowiednie zdarzenia zwi±zane z u¿ytkownikami
+	 * takie jak pryj¶cie i odej¶cie u¿ytkownika
 	 * 
 	 * @see UserListener
 	 * @param userListener obiekt listenera
@@ -78,9 +78,9 @@ public abstract class AbstractConnection implements IConnection {
 	}
 
 	/**
-	 * Dodaj listenera zwi¹zanego z po³¹czeniem.<BR>
-	 * Obs³uguje on takie zdarzenia jak nawi¹zanie po³¹czenia,
-	 * zerwanie po³¹czenia itp.
+	 * Dodaj listenera zwi±zanego z po³¹czeniem.<BR>
+	 * Obs³uguje on takie zdarzenia jak nawi±zanie po³±czenia,
+	 * zerwanie po³±czenia itp.
 	 * 
 	 * @see ConnectionListener
 	 * @param connectionListener obiekt listenera
@@ -89,7 +89,7 @@ public abstract class AbstractConnection implements IConnection {
 		this.connectionListener = connectionListener;
 	}
 	/**
-	 * Usuwa listenera zwi¹zanego z po³¹czeniem.<BR>
+	 * Usuwa listenera zwi±zanego z po³±czeniem.<BR>
 	 * Jê¿eli nie ma aktywnego listenera nic siê nie dzieje.
 	 * 
 	 * @see ConnectionListener
@@ -98,8 +98,8 @@ public abstract class AbstractConnection implements IConnection {
 		this.connectionListener = null;
 	}
 	/**
-	 * Dodaje listenera wiadomoœci.<BR>
-	 * Obs³uguje on takie zdarzenia jak nadejœcie wiadomoœci.
+	 * Dodaje listenera wiadomo¶ci.<BR>
+	 * Obs³uguje on takie zdarzenia jak nadej¶cie wiadomo¶ci.
 	 * 
 	 * @see MessageListener 
 	 * @param messageListener obiekt listenera
@@ -109,7 +109,7 @@ public abstract class AbstractConnection implements IConnection {
 	}
 
 	/**
-	 * Usuwa listenera wiadomoœci.<BR>
+	 * Usuwa listenera wiadomo¶ci.<BR>
 	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
 	 * 
 	 * @see MessageListener

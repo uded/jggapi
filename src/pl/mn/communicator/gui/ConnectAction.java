@@ -24,7 +24,7 @@ import pl.mn.communicator.gui.util.ResourceManager;
 
 
 /**
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 class ConnectAction extends Action {
@@ -45,7 +45,7 @@ class ConnectAction extends Action {
 	 * @see org.eclipse.jface.action.IAction#getText()
 	 */
 	public String getText() {
-		return "Po³¹cz";
+		return "Po³±cz";
 	}
 
 	/**
@@ -59,7 +59,7 @@ class ConnectAction extends Action {
 	 * @see org.eclipse.jface.action.IAction#getToolTipText()
 	 */
 	public String getToolTipText() {
-		return "Po³¹cz";
+		return "Po³±cz";
 	}
 
 }

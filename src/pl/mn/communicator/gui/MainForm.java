@@ -69,7 +69,7 @@ import pl.mn.communicator.gui.util.Config;
 import pl.mn.communicator.gui.util.ResourceManager;
 
 /**
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  * @author mnaglik
  */
 public class MainForm
@@ -322,11 +322,11 @@ public class MainForm
 			connection.connect();
 		} catch (UnknownHostException e) {
 			logger.error(e);
-			showErrorDialog("Nie moge znaleŸæ hosta");
+			showErrorDialog("Nie moge znale¼æ hosta");
 			connection = null;
 		} catch (IOException e) {
 			logger.error(e);
-			showErrorDialog("Nie moge siê po³¹czyæ");
+			showErrorDialog("Nie moge siê po³±czyæ");
 			connection = null;
 		}
 	}
@@ -359,7 +359,7 @@ public class MainForm
 			e.printStackTrace();
 		} catch (NullPointerException e) {
 			logger.error("You're not connected");
-			showErrorDialog("Nie jesteœ po³¹czony");
+			showErrorDialog("Nie jeste¶ po³±czony");
 		}
 	}
 
@@ -467,7 +467,7 @@ public class MainForm
 		MessageDialog dialog =
 			new MessageDialog(
 				getShell(),
-				"Bl¹d",
+				"Bl±d",
 				null,
 				error,
 				MessageDialog.ERROR,

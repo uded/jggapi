@@ -24,7 +24,7 @@ import pl.mn.communicator.gui.util.ResourceManager;
 
 
 /**
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 class ExitAction extends Action {
@@ -44,7 +44,7 @@ class ExitAction extends Action {
 	 * @see org.eclipse.jface.action.IAction#getText()
 	 */
 	public String getText() {
-		return "Wyjœcie";
+		return "Wyj¶cie";
 	}
 
 	/**

@@ -20,28 +20,28 @@ package pl.mn.communicator;
 import org.apache.log4j.Logger;
 
 /**
- * Wiadomoœæ do serwera rozmów.
+ * Wiadomo¶æ do serwera rozmów.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public abstract class AbstractMessage implements IMessage {
 	private static Logger logger = Logger.getLogger(AbstractMessage.class);
 	/**
-	 * Nr adresata wiadomoœci
+	 * Nr adresata wiadomo¶ci
 	 */
 	protected int user;
 	
 	/**
-	 * Treœæ wiadomoœci
+	 * Treœæ wiadomo¶ci
 	 */
 	protected String text;
 
 	/**
-	 * Tworzy wiadomoœæ do konkretnego u¿ytkownika.
+	 * Tworzy wiadomo¶æ do konkretnego u¿ytkownika.
 	 * 
 	 * @param toUser nr u¿ytkownika do którego wysy³amy
-	 * @param text wiadomoœæ tekstowa
+	 * @param text wiadomo¶æ tekstowa
 	 */
 	public AbstractMessage(int toUser, String text) {
 		this.user = toUser;

@@ -24,7 +24,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 /**
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public class ConfigSoundPage extends PreferencePage {
@@ -34,7 +34,7 @@ public class ConfigSoundPage extends PreferencePage {
 	protected Control createContents(Composite parent) {
 		Label label = new Label(parent, SWT.NONE);
 		label.setText(
-			"W przysz³oœci bêdzie mo¿na tutaj \nustawiæ dŸwiêki\nnp. przychodz¹cej wiadomoœci.");
+			"W przysz³o¶ci bêdzie mo¿na tutaj \nustawiæ d¼wiêki\nnp. przychodz±cej wiadomo¶ci.");
 		return label;
 	}
 
@@ -42,7 +42,7 @@ public class ConfigSoundPage extends PreferencePage {
 	 * @see org.eclipse.jface.dialogs.IDialogPage#getTitle()
 	 */
 	public String getTitle() {
-		return "DŸwiêki";
+		return "D¼wiêki";
 	}
 
 }

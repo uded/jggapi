@@ -36,7 +36,7 @@ import pl.mn.communicator.gadu.util.Util;
 
 /**
  * Implementacja klienta gg.<BR>
- * S³u¿y do tworzenia po³¹czenia.
+ * S³u¿y do tworzenia po³±czenia.
  * <BR><BR>
  * <i>Przyk³ad u¿ycia:</i><BR><BR>
  * <code>
@@ -51,7 +51,7 @@ import pl.mn.communicator.gadu.util.Util;
  * }
  * </code>
  * 
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -77,13 +77,13 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	}
 
 	/**
-	 * Pod³¹cz sie do serwera gg.<BR>
-	 * Próbuje ³¹czyæ siê z serwerem gg, na podstawie danych<BR>
+	 * Pod³±cz sie do serwera gg.<BR>
+	 * Próbuje ³±czyæ siê z serwerem gg, na podstawie danych<BR>
 	 * z konstruktora.<BR>
-	 * W wypadku niepowodzenie wyrzuca odpowiednie wyj¹tki
+	 * W wypadku niepowodzenie wyrzuca odpowiednie wyj±tki
 	 * 
 	 * @throws UnknownHostException nieznany serwer 
-	 * @throws IOException nie powiodla siê próba po³¹czenia - nie ma po³¹czenia sieciowego?
+	 * @throws IOException nie powiodla siê próba po³±czenia - nie ma po³±czenia sieciowego?
 	 */
 	public void connect() throws UnknownHostException, IOException {
 		connectionThread.openConnection();
@@ -91,9 +91,9 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	}
 
 	/**
-	 * Zamyka po³¹czenie z serwerem gg.
+	 * Zamyka po³±czenie z serwerem gg.
 	 * 
-	 * @throws IOException b³¹d przy zamykaniu po³¹czenia
+	 * @throws IOException b³±d przy zamykaniu po³±czenia
 	 */
 	public void disconnect() throws IOException {
 		changeStatus(new Status(Status.OFF_LINE));
@@ -102,10 +102,10 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	}
 
 	/**
-	 * Wyœlij wiadomoœæ do serwera gg.
+	 * Wy¶lij wiadomo¶æ do serwera gg.
 	 * 
 	 * @see Message
-	 * @param message wiadomoœæ do wys³ania.
+	 * @param message wiadomo¶æ do wys³ania.
 	 */
 	public void sendMessage(IMessage message) throws IOException {
 		if (isConnected){

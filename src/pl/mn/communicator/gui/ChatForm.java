@@ -39,7 +39,7 @@ import pl.mn.communicator.IMessage;
 import pl.mn.communicator.gadu.Message;
 
 /**
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public class ChatForm extends Window{
@@ -122,7 +122,7 @@ public class ChatForm extends Window{
 		panel.setLayout(layout);
 
 		Button sendButton = new Button(panel, SWT.NULL);
-		sendButton.setText("Wyœlij");
+		sendButton.setText("Wy¶lij");
 		sendButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent arg0) {
 				String toSend = text2.getText();
