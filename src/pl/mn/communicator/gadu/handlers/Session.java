@@ -31,7 +31,6 @@ import pl.mn.communicator.IMessageService;
 import pl.mn.communicator.IPresenceService;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
-import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IStatus60;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
@@ -220,12 +219,8 @@ public class Session implements ISession {
 			m_loginService.notifyLoginFailed();
 		}
 
-		public void notifyUserChangedStatus(IUser user, IStatus status) {
+		public void notifyUserChangedStatus(IUser user, IStatus60 status) {
 			m_presenceService.notifyUserChangedStatus(user, status);
-		}
-
-		public void notifyUserChangedStatus60(IUser user, IStatus60 status) {
-			m_presenceService.notifyUserChangedStatus60(user, status);
 		}
 
 		public void notifyMessageArrived(MessageArrivedEvent messageArrivedEvent) {

@@ -35,7 +35,7 @@ import pl.mn.communicator.gadu.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.3 2004-12-12 23:20:40 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.4 2004-12-13 23:00:59 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -66,11 +66,6 @@ public class GGNotifyReply60 implements GGIncomingPackage {
     	return GG_NOTIFY_REPLY60;
     }
     
-    /**
-     * Zwr�c map� status�w u�ytkownik�w.
-     * Kluczem jest <code>User</code> a warto�ci� <code>Status</code>.
-     * @return statusy u�ytkownik�w
-     */
     public Map getUsersStatus() {
         return m_statuses;
     }
@@ -98,9 +93,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
         		
         	String description = null;
         	int descriptionSize = -1;
-        	int timeInSeconds = -1;
             long timeInMillis = -1;
-
             if ((status == GGNewStatus.GG_STATUS_AVAIL_DESCR)
             	|| (status == GGNewStatus.GG_STATUS_BUSY_DESCR)
 				|| (status == GGNewStatus.GG_STATUS_INVISIBLE_DESCR)
@@ -114,7 +107,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
                 boolean isTimeSet = data[(offset+15+descriptionSize)-5]==0;
 
                 if (isTimeSet) {
-                    timeInSeconds = GGUtils.byteToInt(data, (offset+15+descriptionSize)-4);
+                	int timeInSeconds = GGUtils.byteToInt(data, (offset+15+descriptionSize)-4);
                     timeInMillis = GGUtils.secondsToMillis(timeInSeconds);
                     descriptionSize -= 5;
                 }

@@ -32,10 +32,25 @@ import pl.mn.communicator.gadu.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.2 2004-12-12 23:20:40 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.3 2004-12-13 23:00:59 winnetou25 Exp $
  */
 public class GGStatus60 implements GGStatusEnabled {
 
+//	#define GG_STATUS60 0x000F
+	
+//struct gg_status60 {
+//	int uin;	        /* numer plus flagi w najstarszym bajcie */ 4
+//	char status;	    /* nowy stan */ 1
+//	int remote_ip;		/* adres IP bezpo�rednich po��cze� */ 4
+//	short remote_port;	/* port bezpo�rednich po��cze� */ 2
+//	char version;		/* wersja klienta */ 1
+//	char image_size;	/* maksymalny rozmiar grafiki */ 1
+//	char unknown1;		/* 0x00 * 1
+//	char description[];	/* opis, nie musi wyst�pi� */ n
+//	int time;		/* czas, nie musi wyst�pi� */ 1
+//};
+
+	
 	public static final int GG_STATUS60 = 0x0F;
 	
 	private static Log logger = LogFactory.getLog(GGStatus60.class);
@@ -59,8 +74,8 @@ public class GGStatus60 implements GGStatusEnabled {
 	}
 	
     private void handleUser(byte[] data) {
-    	byte flag = data[3];
-    	data[3] = GGUtils.intToByte(0)[0]; //usun flage
+    	byte flag = data[3]; //cache flag
+    	data[3] = GGUtils.intToByte(0)[0]; //remove flag
     	int uin = GGUtils.byteToInt(data);
     	data[3] = flag;
     	int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
@@ -69,60 +84,49 @@ public class GGStatus60 implements GGStatusEnabled {
     }
     
     private void handleStatus60(byte[] data) {
-    	byte flag = data[3];
+    	byte flag = data[3]; //cache flag
 
     	int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
+    	//TODO remoteIP is wrongly converted
     	int remoteIP = GGUtils.byteToInt(data, 5);
     	int remotePort = GGUtils.byteToShort(data, 9);
     	byte imageSize = data[10];
     	byte version = data[11];
     	
-    	//TODO implement description and time
-        m_status60 = GGUtils.getClientStatus(protocolStatus, null, -1);
+    	String description = null;
+    	long timeInMillis = -1;
+    	if ((protocolStatus == GGNewStatus.GG_STATUS_AVAIL_DESCR)
+            	|| (protocolStatus == GGNewStatus.GG_STATUS_BUSY_DESCR)
+				|| (protocolStatus == GGNewStatus.GG_STATUS_INVISIBLE_DESCR)
+				|| (protocolStatus == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
+    		description = GGUtils.byteToString(data, 14);
+            if (data.length > (14 + description.length())) {
+                int timeInSeconds = GGUtils.byteToInt(data, data.length - 4);
+                timeInMillis = GGUtils.secondsToMillis(timeInSeconds); 
+            }
+    	}
+
+        m_status60 = GGUtils.getClientStatus(protocolStatus, description, timeInMillis);
+    	byte[] remoteIPBytes = GGUtils.intToByte(remoteIP);
+
+    	m_status60.setRemoteIP(remoteIPBytes);
+    	m_status60.setImageSize(imageSize);
+    	m_status60.setGGVersion(version);
+
+        if (remotePort == 0) {
+        	m_status60.setSupportsDirectCommunication(false);
+        } else if (remotePort == 1) {
+        	m_status60.setUserBehindFirewall(true);
+        } else  if (remotePort == 2) {
+        	m_status60.setAreWeInRemoteUserBuddyList(false);
+        } else {
+        	m_status60.setRemotePort(remotePort);
+        }
 
     	if (flag == 0x40) {
     		m_status60.setSupportsVoiceCommunication(true);
     	}
     	
-    	byte[] remoteIPBytes = GGUtils.intToByte(remoteIP);
-    	m_status60.setRemoteIP(remoteIPBytes);
-    	m_status60.setRemotePort(remotePort);
-    	m_status60.setImageSize(imageSize);
-    	m_status60.setGGVersion(version);
-    	
-        if ((protocolStatus == GGNewStatus.GG_STATUS_AVAIL_DESCR)
-            	|| (protocolStatus == GGNewStatus.GG_STATUS_BUSY_DESCR)
-				|| (protocolStatus == GGNewStatus.GG_STATUS_INVISIBLE_DESCR)
-				|| (protocolStatus == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
-
-//                boolean isTimeSet = data[(offset+15+descriptionSize)-5]==0;
-//
-//                if (isTimeSet) {
-//                    timeInSeconds = GGUtils.byteToInt(data, (offset+15+descriptionSize)-4);
-//                    timeInMillis = GGUtils.secondsToMillis(timeInSeconds);
-//                    descriptionSize -= 5;
-//                }
-//
-//                offset+=(15+descriptionSize);
-//
-//                if (isTimeSet) {
-//                    offset += 5;
-//                }
-            }
     }
-	
-//	#define GG_STATUS60 0x000F
-	
-//struct gg_status60 {
-//	int uin;	        /* numer plus flagi w najstarszym bajcie */ 4
-//	char status;	    /* nowy stan */ 1
-//	int remote_ip;		/* adres IP bezpo�rednich po��cze� */ 4
-//	short remote_port;	/* port bezpo�rednich po��cze� */ 2
-//	char version;		/* wersja klienta */ 1
-//	char image_size;	/* maksymalny rozmiar grafiki */ 1
-//	char unknown1;		/* 0x00 * 1
-//	char description[];	/* opis, nie musi wyst�pi� */ n
-//	int time;		/* czas, nie musi wyst�pi� */ 1
-//};
 	
 }

@@ -17,7 +17,7 @@ import org.apache.commons.logging.LogFactory;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class Status implements IStatus {
+public abstract class Status implements IStatus {
 
 	private static Log logger = LogFactory.getLog(Status.class);
 
@@ -34,15 +34,15 @@ public class Status implements IStatus {
 	/**
 	 * @param status the status of user
 	 */
-	public Status(StatusType status) {
+	protected Status(StatusType status) {
 		this(status, null, null);
 	}
 
-	public Status(StatusType status, String description) {
+	protected Status(StatusType status, String description) {
 		this(status, description, null);
 	}
 
-	public Status(StatusType statusType, String description, Date returnDate) {
+	protected Status(StatusType statusType, String description, Date returnDate) {
 		if (statusType == null)
 			throw new NullPointerException("statusType cannot be null");
 		m_statusType = statusType;

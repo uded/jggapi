@@ -28,7 +28,7 @@ import pl.mn.communicator.gadu.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGAddNotify.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
+ * @version $Id: GGAddNotify.java,v 1.2 2004-12-13 23:00:52 winnetou25 Exp $
  */
 public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
 
@@ -37,12 +37,15 @@ public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
     /** Gadu-Gadu uin number */
     private int m_uin = -1;
 
+    private GGUserMode m_userMode = GGUserMode.BUDDY;
+    
     private byte m_userType = GG_USER_BUDDY;
 
     public GGAddNotify(int uin, GGUserMode userMode) {
     	if (userMode == null) throw new NullPointerException("userMode cannot be null");
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
         m_uin = uin;
+        m_userMode = userMode;
         m_userType = GGUtils.getProtocolUserMode(userMode);
     }
     
@@ -51,8 +54,7 @@ public class GGAddNotify implements GGOutgoingPackage, GGNotifiable {
     }
     
     public GGUserMode getUserMode() {
-    	//TODO implement this
-    	return null;
+    	return m_userMode;
     }
 
     /**

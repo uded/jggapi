@@ -55,7 +55,7 @@ public class GGNotifyReply60PacketHandler implements PacketHandler {
 		for (Iterator it = usersStatuses.keySet().iterator();it.hasNext();) {
 			IUser user = (IUser) it.next();
 			IStatus60 status = (IStatus60) usersStatuses.get(user);
-			context.getSessionAccessor().notifyUserChangedStatus60(user, status);
+			context.getSessionAccessor().notifyUserChangedStatus(user, status);
 		}
 	}
 

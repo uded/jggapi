@@ -23,7 +23,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IStatus60;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.in.GGNotifyReply;
@@ -53,7 +53,7 @@ public class GGNotifyReplyPacketHandler implements PacketHandler {
 		Map usersStatuses = notifyReply.getUsersStatus();
 		for (Iterator it = usersStatuses.keySet().iterator();it.hasNext();) {
 			IUser user = (IUser) it.next();
-			IStatus status = (IStatus) usersStatuses.get(user);
+			IStatus60 status = (IStatus60) usersStatuses.get(user);
 			context.getSessionAccessor().notifyUserChangedStatus(user, status);
 		}
 	}

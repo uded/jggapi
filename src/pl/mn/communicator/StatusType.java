@@ -36,28 +36,28 @@ public class StatusType {
 	public final static StatusType ONLINE = new StatusType("online");
 	
 	/** Status online with description */
-	public final static StatusType ONLINE_WITH_DESCRIPTION = new StatusType("online_with_desc");
+	public final static StatusType ONLINE_WITH_DESCRIPTION = new StatusType("online_with_description");
 	
 	/** Status offline */
 	public final static StatusType OFFLINE = new StatusType("offline");
 	
 	/** Status offline with description */
-	public final static StatusType OFFLINE_WITH_DESCRIPTION = new StatusType("offline_with_desc");
+	public final static StatusType OFFLINE_WITH_DESCRIPTION = new StatusType("offline_with_description");
 	
 	/** Status busy */
 	public final static StatusType BUSY = new StatusType("busy");
 	
 	/** Status busy with description */
-	public final static StatusType BUSY_WITH_DESCRIPTION = new StatusType("busy_with_desc");
+	public final static StatusType BUSY_WITH_DESCRIPTION = new StatusType("busy_with_description");
 	
 	/** Status invisible */
 	public final static StatusType INVISIBLE = new StatusType("invisible");
 	
 	/** Status invisible with description */
-	public final static StatusType INVISIBLE_WITH_DESCRIPTION = new StatusType("invisible_with_desc");
+	public final static StatusType INVISIBLE_WITH_DESCRIPTION = new StatusType("invisible_with_description");
 	
 	public boolean isDescriptionStatus() {
-		return m_status.endsWith("desc");
+		return m_status.endsWith("description");
 	}
 	
     public String toString() {

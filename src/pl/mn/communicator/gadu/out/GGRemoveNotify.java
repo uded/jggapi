@@ -27,7 +27,7 @@ import pl.mn.communicator.gadu.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGRemoveNotify.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
+ * @version $Id: GGRemoveNotify.java,v 1.2 2004-12-13 23:00:52 winnetou25 Exp $
  */
 public class GGRemoveNotify implements GGOutgoingPackage, GGNotifiable {
 	
@@ -36,12 +36,9 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGNotifiable {
     /** Gadu-Gadu uin */
     private int m_uin = -1;
 
+    private GGUserMode m_userMode = null;
     private byte m_userType = GG_USER_BUDDY;
     
-    /**
-     * Tw�rz pakiet do usuni�cia u�ytkownika z listy monitorowanych
-     * @param userNo numer u�ytkownika do usuni�cia
-     */
     public GGRemoveNotify(int uin, GGUserMode userMode) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
     	if (userMode == null) throw new NullPointerException("userMode cannot be null");
@@ -51,6 +48,10 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGNotifiable {
 
     public int getUin(){
     	return m_uin;
+    }
+    
+    public GGUserMode getUserMode() {
+    	return m_userMode;
     }
     
     /**

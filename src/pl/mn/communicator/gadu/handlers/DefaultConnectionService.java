@@ -212,7 +212,7 @@ public class DefaultConnectionService implements IConnectionService {
     private class ConnectionThread extends Thread {
     	
 		private static final int HEADER_LENGTH = 8;
-		private static final int PING_COUNT = 10;
+		private static final int PING_COUNT = 25;
 		private static final int THREAD_SLEEP_TIME = 500;
     	
     	private Socket m_socket = null;
@@ -269,6 +269,7 @@ public class DefaultConnectionService implements IConnectionService {
     	
 		private void ping() throws IOException {
 			if (++m_pingCount > PING_COUNT) {
+				logger.debug("Pinging...");
 				DefaultConnectionService.this.sendPackage(GGPing.getPing());
 				m_pingCount = 0;
 			}

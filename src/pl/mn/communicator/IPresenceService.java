@@ -31,13 +31,15 @@ import pl.mn.communicator.event.UserListener;
  */
 public interface IPresenceService {
 
-	void setStatus(Status60 status) throws GGException;
+	void setStatus(IStatus60 status) throws GGException;
 
-	Status60 getStatus();
+	IStatus60 getStatus();
 	
 	void addMonitoredUser(IUser user) throws GGException;
 
 	void removeMonitoredUser(IUser user) throws GGException;
+
+	void changeMonitoredUserStatus(IUser user) throws GGException;
 	
 	Collection getMonitoredUsers();
 	

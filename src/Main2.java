@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import pl.mn.communicator.GGException;
@@ -36,7 +37,18 @@ import pl.mn.communicator.event.UserListener;
 public class Main2 {
 
 	public static void main(String args[]) throws IOException, GGException {
+
+		ArrayList users = new ArrayList();
+		
+		GGUser user1 = new GGUser(376798, GGUserMode.FRIEND);
+		IUser user2 = new GGUser(2040781, GGUserMode.BUDDY);
+
+		users.add(user1);
+		users.add(user2);
+		
 		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
+		loginContext.setMonitoredUsers(users);
+		
 		IStatus status = loginContext.getStatus();
 		status.setStatusType(StatusType.BUSY);
 		
@@ -76,15 +88,8 @@ public class Main2 {
 		});
 		session.getPresenceService().addUserListener(new UserListener() {
 
-			public void userStatusChanged(IUser user, IStatus newStatus) {
+			public void userStatusChanged(IUser user, IStatus60 newStatus) {
 				System.out.println("User changed status: "+user.getUin());
-				System.out.println("Status: "+newStatus.getStatusType());
-				System.out.println("Description: "+newStatus.getDescription());
-				System.out.println("ReturnDate: "+newStatus.getReturnDate());
-			}
-			
-			public void userStatus60Changed(IUser user, IStatus60 newStatus) {
-				System.out.println("User changed status60: "+user.getUin());
 				System.out.println("Status: "+newStatus.getStatusType());
 				System.out.println("Description: "+newStatus.getDescription());
 				System.out.println("ReturnDate: "+newStatus.getReturnDate());
@@ -150,9 +155,15 @@ public class Main2 {
 //		session.getContactListService().exportContacts(localUsers);
 //		session.getContactListService().importContacts();
 		
-		IUser user1 = new GGUser(376798, GGUserMode.BUDDY);
-		session.getPresenceService().addMonitoredUser(user1);
-		
+//		GGUser user1 = new GGUser(376798, GGUserMode.BLOCKED);
+//		session.getPresenceService().addMonitoredUser(user1);
+//
+//		IUser user2 = new GGUser(2040781, GGUserMode.BUDDY);
+//		session.getPresenceService().addMonitoredUser(user2);
+
+//		user1.setUserMode(GGUserMode.FRIEND);
+//		session.getPresenceService().changeMonitoredUserStatus(user1);
+
 		session.getLoginService().logout();
 		session.getConnectionService().disconnect();
 	}

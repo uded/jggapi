@@ -17,7 +17,7 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IStatus60;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.gadu.in.GGStatus;
 
@@ -38,7 +38,7 @@ public class GGStatusPacketHandler implements PacketHandler {
 		GGStatus status = new GGStatus(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(status);
 		IUser user = status.getUser();
-		IStatus statusBiz = status.getStatus();
+		IStatus60 statusBiz = status.getStatus();
 		context.getSessionAccessor().notifyUserChangedStatus(user, statusBiz);
 	}
 

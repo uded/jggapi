@@ -19,22 +19,19 @@ package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
-import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IStatus60;
 import pl.mn.communicator.IUser;
 
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: UserListener.java,v 1.2 2004-12-12 16:21:55 winnetou25 Exp $
+ * @version $Id: UserListener.java,v 1.3 2004-12-13 23:01:00 winnetou25 Exp $
  */
 public interface UserListener extends EventListener {
 
 	/**
 	 * The notification that user changed the status.
      */
-    void userStatusChanged(IUser user, IStatus newStatus);
-    
-    void userStatus60Changed(IUser user, IStatus60 newStatus);
+    void userStatusChanged(IUser user, IStatus60 newStatus);
     
 }
