@@ -448,6 +448,12 @@ public class MainForm
 			usersData.removeUser(first);
 			usersViewer.refresh();
 			usersData.saveUsers();
+			try {
+				if (connection != null)
+					connection.removeMonitoredUser(first);
+			} catch (IOException e) {
+				logger.error("Error removing user from monitored user");
+			}
 		}
 	}
 
@@ -475,6 +481,12 @@ public class MainForm
 			usersData.addUser(userForm.getUser());
 			usersViewer.refresh();
 			usersData.saveUsers();
+			try {
+				if (connection != null)
+					connection.addMonitoredUser(userForm.getUser());
+			} catch (IOException e) {
+				logger.error("Error adding user to monitored user");
+			}
 		}
 	}
 
