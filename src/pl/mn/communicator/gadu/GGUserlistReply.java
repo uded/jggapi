@@ -19,8 +19,9 @@ package pl.mn.communicator.gadu;
 
 /**
  * Pakiet odpowied¼ na importowanie listy u¿ytkowników.
- * @version $Revision: 1.1 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGUserlistReply.java,v 1.2 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGUserlistReply implements GGIncomingPackage {
 }

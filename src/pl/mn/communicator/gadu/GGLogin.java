@@ -17,15 +17,14 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.logger.Logger;
-
 import pl.mn.communicator.ILocalUser;
+import pl.mn.communicator.logger.Logger;
 
 
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.17 $
+ * @version $Revision: 1.18 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {

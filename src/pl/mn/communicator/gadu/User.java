@@ -17,17 +17,17 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.logger.Logger;
-
 import pl.mn.communicator.AbstractUser;
-
+import pl.mn.communicator.logger.Logger;
 
 /**
  * U¿ytkownik gg.
- * @version $Revision: 1.13 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: User.java,v 1.14 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public class User extends AbstractUser {
+	
     private static Logger logger = Logger.getLogger(User.class);
 
     /**
@@ -44,4 +44,5 @@ public class User extends AbstractUser {
     public String toString() {
         return "numer: " + number;
     }
+    
 }

@@ -17,25 +17,22 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.logger.Logger;
-
-import pl.mn.communicator.AbstractServer;
-import pl.mn.communicator.ILocalUser;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
 import java.net.URL;
-
 import java.util.StringTokenizer;
 
+import pl.mn.communicator.AbstractServer;
+import pl.mn.communicator.ILocalUser;
+import pl.mn.communicator.logger.Logger;
 
 /**
  * Klasa z danymi dotycz±cymi serwera gg.
- * @version $Revision: 1.13 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: Server.java,v 1.14 2004-10-26 23:56:40 winnetou25 Exp $* @version $Revision: 1.14 $
  */
 public final class Server extends AbstractServer {
     private static Logger logger = Logger.getLogger(Server.class);

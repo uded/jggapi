@@ -19,17 +19,17 @@ package pl.mn.communicator.logger;
 
 import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.Properties;
-
 
 /**
  * Klasa fabrykujaca logger.
  *
- * @author mnaglik
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: Logger.java,v 1.11 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public abstract class Logger implements ILogger {
-    private static NullLogger nullLogger = new NullLogger();
+    
+	private static NullLogger nullLogger = new NullLogger();
     private static boolean log;
 
     static {

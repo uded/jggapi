@@ -17,20 +17,20 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.logger.Logger;
-
-import pl.mn.communicator.AbstractStatus;
-
 import java.util.Date;
 import java.util.Map;
 
+import pl.mn.communicator.AbstractStatus;
+import pl.mn.communicator.logger.Logger;
 
 /**
  * Status u¿ytkownika gg.
- * @version $Revision: 1.12 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: Status.java,v 1.13 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public class Status extends AbstractStatus {
+	
     private static Logger logger = Logger.getLogger(Status.class);
 
     /** Status niewidoczny. */
@@ -150,4 +150,5 @@ public class Status extends AbstractStatus {
         return "status: " + status + " opis: " + description + " czas: " +
         returnTime;
     }
+    
 }

@@ -17,14 +17,15 @@
  */
 package pl.mn.communicator;
 
-
 /**
  * U¿ytkownik lokalny klienta rozmów.<BR>
  * Obiekt reprezentuje lokalnego u¿ytkownika.
- * @version $Revision: 1.6 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: ILocalUser.java,v 1.7 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public interface ILocalUser {
+	
     /**
      * Pobierz has³o u¿ytkownika.<BR>
      * Has³o jest w postaci niezaszyfrowanej.

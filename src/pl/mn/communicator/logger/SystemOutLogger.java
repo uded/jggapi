@@ -18,7 +18,9 @@
 package pl.mn.communicator.logger;
 
 /**
- * @author Marcin Naglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: SystemOutLogger.java,v 1.2 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public class SystemOutLogger extends Logger{
 
@@ -36,8 +38,7 @@ public class SystemOutLogger extends Logger{
 	 * @see pl.mn.communicator.logger.ILogger#debug(java.lang.Object)
 	 */
 	public void debug(Object arg0) {
-		if (arg0 != null)
-			System.out.println("DEBUG: "+arg0.toString());
+		if (arg0 != null) System.out.println("DEBUG: "+arg0.toString());
 	}
 
 	/**

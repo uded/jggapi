@@ -17,12 +17,12 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Pakiet dodaj±cy konkretnego u¿ytkownika do listy montorowancyh u¿ytkowników.
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.9 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGAddNotify.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGAddNotify implements GGOutgoingPackage {
     /** Numer u¿ytkownika */

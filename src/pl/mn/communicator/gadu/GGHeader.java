@@ -17,14 +17,15 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Naglowek wiadomosci gg.
- * @version $Revision: 1.6 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGHeader.java,v 1.7 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGHeader {
-    private byte[] data;
+    
+	private byte[] data;
     private int type;
     private int length;
 
@@ -52,4 +53,5 @@ class GGHeader {
     public int getType() {
         return type;
     }
+    
 }

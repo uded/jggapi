@@ -17,10 +17,9 @@
  */
 package pl.mn.communicator;
 
-import pl.mn.communicator.logger.Logger;
-
 import java.util.Collection;
 
+import pl.mn.communicator.logger.Logger;
 
 /**
  * Po³±czenie z serwerem gg.<BR>
@@ -38,8 +37,9 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.11 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $
  */
 public abstract class AbstractConnection implements IConnection {
     private static Logger logger = Logger.getLogger(AbstractConnection.class);

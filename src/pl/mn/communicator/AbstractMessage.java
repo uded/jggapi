@@ -19,11 +19,11 @@ package pl.mn.communicator;
 
 import pl.mn.communicator.logger.Logger;
 
-
 /**
  * Wiadomo¶æ do serwera rozmów.
- * @version $Revision: 1.10 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $
  */
 public abstract class AbstractMessage implements IMessage {
     private static Logger logger = Logger.getLogger(AbstractMessage.class);

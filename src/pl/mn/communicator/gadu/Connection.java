@@ -33,7 +33,6 @@ import pl.mn.communicator.IUser;
 import pl.mn.communicator.logger.Logger;
 import pl.mn.communicator.util.Util;
 
-
 /**
  * Implementacja klienta gg.<BR>
  * S³u¿y do tworzenia po³±czenia.
@@ -50,11 +49,13 @@ import pl.mn.communicator.util.Util;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.35 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: Connection.java,v 1.36 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
-    private static Logger logger = Logger.getLogger(Connection.class);
+
+	private static Logger logger = Logger.getLogger(Connection.class);
     private IServer server;
     private ILocalUser localUser;
     private ConnectionThread connectionThread;
@@ -161,7 +162,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 
     /**
      * Watek polaczenia
-     * @author mnaglik
      */
     private class ConnectionThread implements Runnable {
         private static final int HEADER_LENGTH = 8;
@@ -382,4 +382,5 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
             socket.close();
         }
     }
+
 }

@@ -17,11 +17,14 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Pakiet przychodz±cy gg.
- * @version $Revision: 1.3 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGIncomingPackage.java,v 1.4 2004-10-26 23:56:40 winnetou25 Exp $ 
  */
 interface GGIncomingPackage {
+	
+	int getPacketType();
+	
 }

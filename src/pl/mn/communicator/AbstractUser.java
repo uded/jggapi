@@ -19,14 +19,16 @@ package pl.mn.communicator;
 
 import pl.mn.communicator.logger.Logger;
 
-
 /**
  * U¿ytkownik serwera rozmów.
- * @version $Revision: 1.11 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: AbstractUser.java,v 1.12 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public class AbstractUser implements IUser {
+	
     private static Logger logger = Logger.getLogger(AbstractUser.class);
+    
     protected int number;
     protected boolean onLine;
     protected String name;

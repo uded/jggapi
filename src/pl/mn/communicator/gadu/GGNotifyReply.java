@@ -17,22 +17,23 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.logger.Logger;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import pl.mn.communicator.logger.Logger;
 
 /**
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
- * numer, status, opis i czas
- * @version $Revision: 1.16 $
- * @author mnaglik
+ * numer, status, opis i czas.
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGNotifyReply.java,v 1.17 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGNotifyReply implements GGIncomingPackage {
-    private static Logger logger = Logger.getLogger(GGNotifyReply.class);
+    
+	private static Logger logger = Logger.getLogger(GGNotifyReply.class);
     private byte[] dane;
     private Map statusy = new HashMap();
 
@@ -46,6 +47,10 @@ class GGNotifyReply implements GGIncomingPackage {
         analize();
     }
 
+    public int getPacketType() {
+    	return -1;
+    }
+    
     /**
      * Zwróc mapê statusów u¿ytkowników.
      * Kluczem jest <code>User</code> a warto¶ci± <code>Status</code>.

@@ -20,12 +20,14 @@ package pl.mn.communicator.gadu;
 
 /**
  * Wiadomosc otrzymywana zaraz po polaczeniu z serwerem gg
- * zawiera seed (int) potrzebny do zakodowania hasla
- * @version $Revision: 1.8 $
- * @author mnaglik
+ * zawiera seed (int) potrzebny do zakodowania hasla.
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGWelcome.java,v 1.9 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGWelcome implements GGIncomingPackage {
-    private int seed;
+    
+	private int seed;
 
     /**
      * Constructor for Welcome.

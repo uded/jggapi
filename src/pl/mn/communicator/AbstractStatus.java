@@ -17,21 +17,22 @@
  */
 package pl.mn.communicator;
 
-import pl.mn.communicator.logger.Logger;
-
 import java.util.HashMap;
 import java.util.Map;
 
+import pl.mn.communicator.logger.Logger;
 
 /**
  * Klasa reprezentuj±ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
  * mog± zostaæ dodane w podklasach.
- * @version $Revision: 1.9 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: AbstractStatus.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public abstract class AbstractStatus implements IStatus {
-    private static Logger logger = Logger.getLogger(AbstractStatus.class);
+    
+	private static Logger logger = Logger.getLogger(AbstractStatus.class);
 
     /**
      * Aktualny status

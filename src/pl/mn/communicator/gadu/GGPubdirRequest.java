@@ -17,14 +17,15 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
- * @version $Revision: 1.1 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGPubdirRequest.java,v 1.2 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGPubdirRequest implements GGOutgoingPackage {
-    /* (non-Javadoc)
+
+	/* (non-Javadoc)
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
     public int getHeader() {
@@ -47,4 +48,5 @@ class GGPubdirRequest implements GGOutgoingPackage {
         // TODO Auto-generated method stub
         return null;
     }
+    
 }

@@ -19,10 +19,10 @@ package pl.mn.communicator.gadu;
 
 import pl.mn.communicator.IMessage;
 
-
 /**
- * @version $Revision: 1.9 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGSendMsg.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGSendMsg implements GGOutgoingPackage {
     private static int seqNo;

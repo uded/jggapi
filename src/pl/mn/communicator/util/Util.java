@@ -17,13 +17,13 @@
  */
 package pl.mn.communicator.util;
 
-
-
 /**
- * @version $Revision: 1.1 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: Util.java,v 1.2 2004-10-26 23:56:41 winnetou25 Exp $
  */
 public final class Util {
+	
     /**
      * Prywatny konstruktor - nie twórz instancji.
      */
@@ -55,4 +55,5 @@ public final class Util {
             return i;
         }
     }
+    
 }

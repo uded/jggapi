@@ -20,13 +20,14 @@ package pl.mn.communicator.logger;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  * Przykladowy most do loggera log4j.
  *
- * @author mnaglik
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: Logger4J.java,v 1.7 2004-10-26 23:56:41 winnetou25 Exp $
  */
 public class Logger4J extends Logger {
+	
     private static Map loggers = new HashMap();
     private org.apache.log4j.Logger rootLogger;
 
@@ -128,4 +129,5 @@ public class Logger4J extends Logger {
 
         return l;
     }
+    
 }

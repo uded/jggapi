@@ -17,10 +17,10 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
- * @version $Revision: 1.1 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGPubdirReply.java,v 1.2 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGPubdirReply implements GGIncomingPackage {
 }

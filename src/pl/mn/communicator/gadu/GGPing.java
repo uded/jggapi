@@ -17,11 +17,11 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
- * @version $Revision: 1.6 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGPing.java,v 1.7 2004-10-26 23:56:40 winnetou25 Exp $
  */
 final class GGPing implements GGOutgoingPackage {
     private static GGPing ggPing = new GGPing();

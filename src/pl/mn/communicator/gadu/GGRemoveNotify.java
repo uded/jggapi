@@ -17,13 +17,14 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Pakiet usuwaj±cy konkretnego u¿ytkownika z listy monitorowanych u¿ytkowników.
- * @version $Revision: 1.8 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGRemoveNotify.java,v 1.9 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGRemoveNotify implements GGOutgoingPackage {
+	
     /** Numer u¿ytkownika */
     private int userNo;
 
@@ -61,4 +62,5 @@ class GGRemoveNotify implements GGOutgoingPackage {
 
         return dane;
     }
+    
 }

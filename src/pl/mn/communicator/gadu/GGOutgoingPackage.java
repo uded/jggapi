@@ -17,13 +17,14 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Pakiet wychodz±cy gg.
- * @version $Revision: 1.6 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGOutgoingPackage.java,v 1.7 2004-10-26 23:56:40 winnetou25 Exp $
  */
 interface GGOutgoingPackage {
+	
     /**
      * Zwróæ nag³ówek pakietu
      * @return int
@@ -42,4 +43,5 @@ interface GGOutgoingPackage {
      * @return byte[] zawarto¶æ pakietu
      */
     byte[] getContents();
+    
 }

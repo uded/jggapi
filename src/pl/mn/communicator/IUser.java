@@ -17,14 +17,15 @@
  */
 package pl.mn.communicator;
 
-
 /**
  * U¿ytkownik serwera rozmów.
- * @version $Revision: 1.8 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: IUser.java,v 1.9 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public interface IUser {
-    /**
+
+	/**
      * Zwróæ numer u¿ytkownika.
      * @return int
      */
@@ -35,4 +36,5 @@ public interface IUser {
      * @param number nowy numer u¿ytkownika
      */
     void setNumber(int number);
+    
 }

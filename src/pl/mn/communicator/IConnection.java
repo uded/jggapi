@@ -18,9 +18,7 @@
 package pl.mn.communicator;
 
 import java.io.IOException;
-
 import java.util.Collection;
-
 
 /**
  * Po³±czenie z serwerem gg.<BR>
@@ -38,10 +36,12 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.16 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: IConnection.java,v 1.17 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public interface IConnection {
+	
     /**
      * Dodaj listenera u¿ytkowników.<BR>
      * Obs³uguje odpowiednie zdarzenia zwi¹zane z u¿ytkownikami

@@ -17,18 +17,18 @@
  */
 package pl.mn.communicator.gadu;
 
+import pl.mn.communicator.AbstractMessage;
 import pl.mn.communicator.logger.Logger;
 
-import pl.mn.communicator.AbstractMessage;
-
-
 /**
- * Wiadomo¶æ gg.
- * @version $Revision: 1.9 $
- * @author mnaglik
+ * Wiadomosc gg.
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: Message.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public final class Message extends AbstractMessage {
-    private static Logger logger = Logger.getLogger(Message.class);
+    
+	private static Logger logger = Logger.getLogger(Message.class);
 
     /**
      * Tworz wiadomo¶æ na podstawie adresata i tre¶ci.
@@ -38,4 +38,5 @@ public final class Message extends AbstractMessage {
     public Message(int toUser, String text) {
         super(toUser, text);
     }
+    
 }

@@ -20,7 +20,8 @@ package pl.mn.communicator.logger;
 /**
  * Interfejs dla implementacji loggerów.
  * 
- * @author mnaglik
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: ILogger.java,v 1.5 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public interface ILogger {
     /**

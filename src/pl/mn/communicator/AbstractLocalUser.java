@@ -19,12 +19,12 @@ package pl.mn.communicator;
 
 import pl.mn.communicator.logger.Logger;
 
-
 /**
  * U¿ytkownik lokalny klienta rozmów.<BR>
  * Obiekt reprezentuje lokalnego u¿ytkownika.
- * @version $Revision: 1.8 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $
  */
 public abstract class AbstractLocalUser implements ILocalUser {
     private static Logger logger = Logger.getLogger(AbstractLocalUser.class);
@@ -79,4 +79,5 @@ public abstract class AbstractLocalUser implements ILocalUser {
     public void setUserNo(int userNo) {
         this.userNo = userNo;
     }
+    
 }

@@ -17,11 +17,11 @@
  */
 package pl.mn.communicator;
 
-
 /**
  * Wiadomo¶æ do serwera rozmów.
- * @version $Revision: 1.7 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: IMessage.java,v 1.8 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public interface IMessage {
     /**

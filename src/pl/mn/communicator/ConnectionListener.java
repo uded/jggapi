@@ -17,11 +17,11 @@
  */
 package pl.mn.communicator;
 
-
 /**
  * Listener ze zdarzeniami po³±czenia.
- * @version $Revision: 1.6 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: ConnectionListener.java,v 1.7 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public interface ConnectionListener {
     /**

@@ -17,11 +17,11 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Pakiet zlecaj±cy import u¿ytkowników z serwera.
- * @version $Revision: 1.2 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGUserlistRequest.java,v 1.3 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGUserlistRequest implements GGOutgoingPackage {
     /* (non-Javadoc)

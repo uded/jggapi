@@ -20,13 +20,16 @@ package pl.mn.communicator;
 /**
  * Listener wiadomo¶ci.<BR>
  * Obs³uguje zdarzenia zwi±zane z wiadomo¶ciami.<BR>
- * @version $Revision: 1.9 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: MessageListener.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public interface MessageListener {
+	
     /**
      * Nadesz³a wiadomo¶æ.
      * @param message wiadomo¶æ z serwera rozmów
      */
     void messageArrived(IMessage message);
+    
 }

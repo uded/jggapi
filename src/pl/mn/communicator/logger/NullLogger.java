@@ -21,7 +21,8 @@ package pl.mn.communicator.logger;
  * Pusty logger.
  * Dane przekazane do loggera nie s± nigdzie logowane.
  * 
- * @author mnaglik
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: NullLogger.java,v 1.3 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public class NullLogger extends Logger {
     /**

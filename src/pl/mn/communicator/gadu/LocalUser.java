@@ -17,17 +17,17 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.logger.Logger;
-
 import pl.mn.communicator.AbstractLocalUser;
-
+import pl.mn.communicator.logger.Logger;
 
 /**
  * U¿ytkownik lokalny gg.
- * @version $Revision: 1.8 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: LocalUser.java,v 1.9 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public final class LocalUser extends AbstractLocalUser {
+	
     private static Logger logger = Logger.getLogger(LocalUser.class);
 
     /**
@@ -38,4 +38,5 @@ public final class LocalUser extends AbstractLocalUser {
     public LocalUser(int userNo, String password) {
         super(userNo, password);
     }
+    
 }

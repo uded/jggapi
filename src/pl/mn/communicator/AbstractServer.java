@@ -22,8 +22,9 @@ import pl.mn.communicator.logger.Logger;
 
 /**
  * Klasa reprezentuj±ca serwer rozmów.
- * @version $Revision: 1.10 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: AbstractServer.java,v 1.11 2004-10-26 23:56:40 winnetou25 Exp $
  */
 public abstract class AbstractServer implements IServer {
     private static Logger logger = Logger.getLogger(AbstractServer.class);

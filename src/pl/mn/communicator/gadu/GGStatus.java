@@ -17,20 +17,20 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.logger.Logger;
+import java.util.Date;
 
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-
-import java.util.Date;
-
+import pl.mn.communicator.logger.Logger;
 
 /**
  * Pakiet powiadomienia u¿ytkownika o zmianie statusu u¿ytkownika z listy.
- * @version $Revision: 1.15 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGStatus.java,v 1.16 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGStatus implements GGIncomingPackage {
+	
     private static Logger logger = Logger.getLogger(GGStatus.class);
     private IUser user;
     private Status statusBiz;
@@ -43,8 +43,8 @@ class GGStatus implements GGIncomingPackage {
     }
 
     /**
-         * Analizuj pakiet przychodz±cy.
-         */
+     * Analizuj pakiet przychodz±cy.
+     */
     private void analize() {
         Date returnTime = null;
         String description = null;

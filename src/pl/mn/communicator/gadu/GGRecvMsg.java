@@ -17,13 +17,14 @@
  */
 package pl.mn.communicator.gadu;
 
-
 /**
  * Wiadomosc otrzymana z serwera gg (tekstowa)
- * @version $Revision: 1.9 $
- * @author mnaglik
+ * 
+ * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
+ * @version $Id: GGRecvMsg.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
  */
 class GGRecvMsg implements GGIncomingPackage {
+	
     private long sender;
     private int seq;
     private int time;
