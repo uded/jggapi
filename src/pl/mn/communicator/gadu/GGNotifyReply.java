@@ -17,46 +17,66 @@
  */
 package pl.mn.communicator.gadu;
 
-import java.util.Map;
 import org.apache.log4j.Logger;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
-	private static Logger logger = Logger.getLogger(GGNotifyReply.class);
-	
-	GGNotifyReply(byte[] dane) {
-    	logger.debug("Pakiet zmiany stanu u¿ytkownika");
-	}
-	
-	/**
-	 * Zwróc mapê statusów u¿ytkowników.
-	 * Kluczem jest <code>User</code> a warto¶ci± <code>UserState</code>.
-	 * @return
-	 */
-	Map getUsersState() {
-		return null;
-	}
-	/*
-        #define GG_NOTIFY_REPLY 0x000c   tak, to samo co GG_LOGIN
-
-        struct gg_notify_reply {
-            int uin;         numerek
-            int status;     / status danej osoby
-            int remote_ip;      / adres ip delikwenta
-            short remote_port;  / port, na którym s³ucha klient
-            int version;        / wersja klienta
-            short unknown1;     / znowu port?
-            char description[]; / opis, nie musi wyst±piæ
-            int time;       / czas, nie musi wyst±piæ
-        };
-
+    private static Logger logger = Logger.getLogger(GGNotifyReply.class);
+    private byte[] dane;
+    private Map statusy = new HashMap();
+    
+    /**
+     * 
+     * @param dane
      */
+    GGNotifyReply(byte[] dane) {
+        logger.debug("Pakiet zmiany stanu u¿ytkownika");
+        this.dane = dane;
+    }
 
+    /**
+     * Zwróc mapê statusów u¿ytkowników.
+     * Kluczem jest <code>User</code> a warto¶ci± <code>Status</code>.
+     * @return statusy u¿ytkowników
+     */
+    Map getUsersState() {
+        return statusy;
+    }
+
+    /**
+     * Analizuj dane pakietu
+     */
+    private void analize() {
+        // sprawdz: 
+        // - numer
+        // - status
+        // - description
+        // - time
+        
+    }
+    /*
+    #define GG_NOTIFY_REPLY 0x000c   tak, to samo co GG_LOGIN
+
+    struct gg_notify_reply {
+      4  int uin;         numerek
+      4  int status;     / status danej osoby
+      4  int remote_ip;      / adres ip delikwenta
+        short remote_port;  / port, na którym s³ucha klient
+      4  int version;        / wersja klienta
+        short unknown1;     / znowu port?
+        char description[]; / opis, nie musi wyst±piæ
+      4  int time;       / czas, nie musi wyst±piæ
+    };
+
+    */
 }
