@@ -24,6 +24,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IConnectionService;
@@ -47,6 +50,8 @@ import pl.mn.communicator.gadu.out.GGPing;
  */
 public class DefaultConnectionService implements IConnectionService {
 
+	private final static Log logger = LogFactory.getLog(DefaultConnectionService.class);
+	
 	private ArrayList m_connectionListeners = new ArrayList();
 	private ArrayList m_packetListeners = new ArrayList();
 	
@@ -195,7 +200,9 @@ public class DefaultConnectionService implements IConnectionService {
     }
 
     protected void sendPackage(GGOutgoingPackage outgoingPackage) throws IOException {
-		int header = outgoingPackage.getPacketType();
+    	logger.debug("Sending packet, PacketType: "+outgoingPackage.getPacketType());
+    	logger.debug("PacketBody: "+GGUtils.bytesToString(outgoingPackage.getContents()));
+    	int header = outgoingPackage.getPacketType();
 		int length = outgoingPackage.getLength();
 		byte[] contents = outgoingPackage.getContents();
 		m_connectionThread.sendPackage(header, length, contents);
@@ -205,8 +212,8 @@ public class DefaultConnectionService implements IConnectionService {
     private class ConnectionThread extends Thread {
     	
 		private static final int HEADER_LENGTH = 8;
-		private static final int PING_COUNT = 100000;
-		private static final int THREAD_SLEEP_TIME = 1000;
+		private static final int PING_COUNT = 10;
+		private static final int THREAD_SLEEP_TIME = 500;
     	
     	private Socket m_socket = null;
     	private BufferedInputStream m_dataInput = null;

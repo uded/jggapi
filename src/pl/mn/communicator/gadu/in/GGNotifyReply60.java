@@ -35,7 +35,7 @@ import pl.mn.communicator.gadu.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.2 2004-12-12 18:02:55 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.3 2004-12-12 23:20:40 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -46,21 +46,20 @@ public class GGNotifyReply60 implements GGIncomingPackage {
     private Map m_statuses = new HashMap();
 
 //  struct gg_notify_reply60 {
-//	int uin;		/* numerek plus flagi w najstarszym bajcie */
-//	char status;		/* status danej osoby */
-//	int remote_ip;		/* adres IP bezpośrednich połączeń */
-//	short remote_port;	/* port bezpośrednich połączeń */
-//	char version;		/* wersja klienta */
-//	char image_size;	/* maksymalny rozmiar obrazków w KB */
-//	char unknown1;		/* 0x00 */
-//	char description_size;	/* rozmiar opisu i czasu, nie musi wystąpić */
-//	char description[];	/* opis, nie musi wystąpić */
-//	int time;		/* czas, nie musi wystąpić */
+//	int uin;		/* numerek plus flagi w najstarszym bajcie */  - 4
+//	char status;		/* status danej osoby */ - 1
+//	int remote_ip;		/* adres IP bezpośrednich połączeń */ - 4
+//	short remote_port;	/* port bezpośrednich połączeń */ - 2
+//	char version;		/* wersja klienta */ - 1
+//	char image_size;	/* maksymalny rozmiar obrazków w KB */ -1
+//	char unknown1;		/* 0x00 */ -1
+//	char description_size;	/* rozmiar opisu i czasu, nie musi wystąpić */ -1
+//	char description[];	/* opis, nie musi wystąpić */ 
+//	int time;		/* czas, nie musi wystąpić */ 4
 //};
     
     public GGNotifyReply60(byte[] data) {
     	handlePacket(data);
-    	//analize(data);
     }
 
     public int getPacketType() {
@@ -79,10 +78,24 @@ public class GGNotifyReply60 implements GGIncomingPackage {
     private void handlePacket(byte[] data) {
         int offset = 0;
         while (offset < data.length) {
+        	int flag = data[offset+3];
+        	data[offset+3] = GGUtils.intToByte(0)[0];
+
         	int uin = GGUtils.byteToInt(data, offset);
         	int status = GGUtils.unsignedByteToInt(data[offset+4]);
         	GGUserMode userMode = GGUtils.getUserMode(status);
 
+        	//TODO remoteIP is wrongly converted
+        	byte[] remoteIP = new byte[4];
+        	remoteIP[0] = data[offset+5];
+        	remoteIP[1] = data[offset+6];
+        	remoteIP[2] = data[offset+7];
+        	remoteIP[3] = data[offset+8];
+        	
+        	short remotePort = GGUtils.byteToShort(data, offset+9);
+        	byte version = data[offset+11];
+        	byte imageSize = data[offset+12];
+        		
         	String description = null;
         	int descriptionSize = -1;
         	int timeInSeconds = -1;
@@ -92,7 +105,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
             	|| (status == GGNewStatus.GG_STATUS_BUSY_DESCR)
 				|| (status == GGNewStatus.GG_STATUS_INVISIBLE_DESCR)
 				|| (status == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
-                descriptionSize = GGUtils.unsignedByteToInt(data[offset + 14]);
+                descriptionSize = GGUtils.unsignedByteToInt(data[offset+14]);
 
                 byte[] descBytes = new byte[descriptionSize];
                 System.arraycopy(data, offset+15, descBytes, 0, descriptionSize);
@@ -111,15 +124,29 @@ public class GGNotifyReply60 implements GGIncomingPackage {
                 if (isTimeSet) {
                     offset += 5;
                 }
+            } else {
+            	 offset += 14; // packet without description is only 14 bytes long            	
             }
         	IUser user = new GGUser(uin, userMode);
             Status60 status60 = GGUtils.getClientStatus(status, description, timeInMillis);
 
+            if (remotePort == 0) {
+            	status60.setSupportsDirectCommunication(false);
+            } else if (remotePort == 1) {
+            	status60.setUserBehindFirewall(true);
+            } else  if (remotePort == 2) {
+            	status60.setAreWeInRemoteUserBuddyList(false);
+            } else {
+            	status60.setRemotePort(remotePort);
+            }
+
+            status60.setRemoteIP(remoteIP);
+            
             if (descriptionSize != -1) {
             	status60.setDescriptionSize(descriptionSize);
             }
             
-        	if (data[offset+3] == 0x40) {
+        	if (flag == 0x40) {
         		status60.setSupportsVoiceCommunication(true);
         	}
         	
@@ -127,73 +154,4 @@ public class GGNotifyReply60 implements GGIncomingPackage {
         }
     }
 
-//    /**
-//     * Analizuj m_data pakietu
-//     */
-//    private void analize(byte[] data) {
-//        // usun flagi z najstarszego bajtu
-//        int przesuniecie = 0;
-//
-//        while (przesuniecie < data.length) {
-//        	data[przesuniecie + 3] = GGUtils.intToByte(0)[0];
-//
-//            int nr = GGUtils.byteToInt(data, przesuniecie);
-//            logger.debug("Nr usera zmieniajacego status: " + nr);
-//
-//            int status = GGUtils.unsignedByteToInt(data[przesuniecie + 4]);
-//            logger.debug("Status u�ytkownika to: " + status);
-//
-//            // dla statusow opisowych pobierz opis
-//            String description = null;
-//            Date returnTime = null;
-//
-//            if ((status == GGNewStatus.GG_STATUS_AVAIL_DESCR) ||
-//                    (status == GGNewStatus.GG_STATUS_BUSY_DESCR) ||
-//                    (status == GGNewStatus.GG_STATUS_INVISIBLE_DESCR) ||
-//                    (status == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
-//                int descriptionSize = GGUtils.unsignedByteToInt(data[przesuniecie + 14]);
-//
-//                
-//                logger.debug("U�ytkownik ma status opisowy o dlugosci: " +descriptionSize);
-//
-//                boolean jestCzas = data[(przesuniecie + 15 + descriptionSize) - 5] == 0;
-//
-//                if (jestCzas) {
-//                    logger.debug("Ustawiony czas powrotu: " +data[(przesuniecie + 15 + descriptionSize) - 4]);
-//
-//                    long czas = GGUtils.byteToInt(data, (przesuniecie + 15 + descriptionSize) - 4);
-//                    czas *= 1000;
-//                    returnTime = new Date();
-//                    returnTime.setTime(czas);
-//                    descriptionSize -= 5;
-//                    logger.debug("Czas: " + czas + ":" + returnTime);
-//                }
-//
-//                
-//                byte[] opis = new byte[descriptionSize];
-//                System.arraycopy(data, przesuniecie + 15, opis, 0,
-//                    descriptionSize);
-//                description = new String(opis);
-//                
-//                logger.debug("Opis[" + description + "]");
-//
-//                przesuniecie += (15 + descriptionSize);
-//
-//                if (jestCzas) {
-//                    przesuniecie += 5;
-//                }
-//            } else {
-//                logger.debug("U�ytkownik NIE ma statusu opisowego");
-//                przesuniecie += 14; // pakiet bez opisu ma dlugosc 14 bajtow
-//            }
-//            
-//            IStatus statusBiz = GGUtils.getClientStatus(status, description, returnTime.getTime());
-//            GGUser uzytkownik = new GGUser(nr, GGUserMode.BUDDY);
-//            m_statuses.put(uzytkownik, statusBiz);
-//        }
-//    }
-
-
-//    #define GG_NOTIFY_REPLY60 0x0011
-	
 }

@@ -25,7 +25,8 @@ public class Status60 extends Status implements IStatus60 {
 
 	private boolean m_supportsVoiceCommunication = false;
 	private boolean m_supportsDirectCommunication = false;
-	private boolean m_areWeInRemoteUserBuddyList = false;
+	private boolean m_areWeInRemoteUserBuddyList = true;
+	private boolean m_isUserBehindFirewall = false;
 	
 	public Status60(StatusType statusType, String description, Date returnDate) {
 		super(statusType, description, returnDate);
@@ -126,6 +127,17 @@ public class Status60 extends Status implements IStatus60 {
 	public void setDescriptionSize(int descriptionSize) {
 		if (descriptionSize < 0) throw new IllegalArgumentException("descriptionSize cannot be less than 0");
 		m_descriptionSize = descriptionSize;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus60#isUserBehingFirewall()
+	 */
+	public boolean isUserBehindFirewall() {
+		return m_isUserBehindFirewall;
+	}
+	
+	public void setUserBehindFirewall(boolean userBehingFirewall) {
+		m_isUserBehindFirewall = true;
 	}
 	
 }
