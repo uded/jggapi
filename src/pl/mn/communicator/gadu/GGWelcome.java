@@ -21,7 +21,7 @@ package pl.mn.communicator.gadu;
  * Wiadomosc otrzymywana zaraz po polaczeniu z serwerem gg
  * zawiera seed (int) potrzebny do zakodowania hasla
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 class GGWelcome implements GGIncomingPackage {
@@ -29,11 +29,16 @@ class GGWelcome implements GGIncomingPackage {
 
 	/**
 	 * Constructor for Welcome.
+	 * @param data 
 	 */
 	public GGWelcome(byte[] data) {
 		this.seed = GGConversion.byteToInt(data);
 	}
 
+	/**
+	 * Pobierz warto¶æ seed pobran± z serwera.
+	 * @return numer seed u¿ywany do szyfrowania has³a.
+	 */
 	public int getSeed() {
 		return seed;
 	}

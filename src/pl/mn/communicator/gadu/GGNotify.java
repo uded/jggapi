@@ -23,7 +23,7 @@ import pl.mn.communicator.IUser;
  * Pakiet informuj±cy serwer rozmów o monitorowanym u¿ytkowniku.
  * 
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 class GGNotify implements GGOutgoingPackage {
@@ -33,10 +33,18 @@ class GGNotify implements GGOutgoingPackage {
 	
 	private IUser[] users;
 	
+	/**
+	 * Tworzy pakiet <code>GGNotify</code> na podstawie listy u¿ytkowników.
+	 * @param users lista u¿ytkowników
+	 */
 	GGNotify(IUser[] users) {
 		this.users = users;
 	}
 
+	/**
+	 * Tworzy pakiet <code>GGNotyfy</code> na podstawie u¿ytkownika.
+	 * @param users u¿ytkownik
+	 */
 	GGNotify(IUser users) {
 		this.users = new IUser[1];
 		this.users[0] = users;
