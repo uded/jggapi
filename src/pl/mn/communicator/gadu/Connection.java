@@ -51,7 +51,7 @@ import java.util.Collection;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.20 $
+ * @version $Revision: 1.21 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -127,7 +127,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      */
     public void setMonitoredUserList(Collection userList)
         throws IOException {
-    	this.monitoredUsers = userList;
+        this.monitoredUsers = userList;
     }
 
     /**
