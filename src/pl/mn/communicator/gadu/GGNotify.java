@@ -8,12 +8,17 @@ class GGNotify implements GGOutgoingPackage {
 	public static final int GG_USER_NORMAL = 0x03;
 	public static final int GG_USER_BLOCKED = 0x04;
 	
+	private int userNo;
+	
+	GGNotify(int userNo) {
+		this.userNo = userNo;
+	}
+	
 	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
 	 */
 	public int getHeader() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 0x10;
 	}
 
 	/**

@@ -7,6 +7,7 @@
             nodeprecated="false"
             packagenames="pl.mn.communicator.gadu,pl.mn.communicator"
             sourcepath="src"
+			charset="iso-8559-2"
             classpath="bin;lib\jface.jar;lib\runtime.jar;lib\workbench.jar;lib\swt.jar;lib\boot.jar;lib\log4j-1.2.8.jar" doctitle="JGGAPI"/>
     </target>
 </project>

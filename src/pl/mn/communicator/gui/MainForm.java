@@ -23,7 +23,6 @@ import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -44,6 +43,7 @@ import pl.mn.communicator.gadu.LocalUser;
 import pl.mn.communicator.gadu.Server;
 import pl.mn.communicator.gadu.User;
 import pl.mn.communicator.gui.util.Config;
+import pl.mn.communicator.gui.util.ResourceManager;
 
 /**
  * @author mnaglik
@@ -90,11 +90,8 @@ public class MainForm
 		private Image on, off;
 
 		public UsersLabelProvider() {
-			ImageData dataOn = new ImageData("img//on.bmp");
-			ImageData dataOff = new ImageData("img//off.bmp");
-			Display display = Display.getCurrent();
-			on = new Image(display, dataOn);
-			off = new Image(display, dataOff);
+			on = ResourceManager.getImage(MainForm.class,"icons/on.bmp"); 
+			off = ResourceManager.getImage(MainForm.class,"icons/off.bmp"); 
 		}
 		/**
 		 * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
@@ -206,8 +203,6 @@ public class MainForm
 		menuManager.add(createUserMenu());
 		return menuManager;
 	}
-	
-	
 
 	/**
 	 * @see org.eclipse.jface.window.Window#close()
@@ -229,11 +224,10 @@ public class MainForm
 				Integer.parseInt(Config.getPreferenceStore().getString("user")),
 				Config.getPreferenceStore().getString("password"));
 
-
 		try {
-			if (Config.getPreferenceStore().getBoolean("standard")){
+			if (Config.getPreferenceStore().getBoolean("standard")) {
 				server = Server.getDefaultServer(localUser);
-			}else{
+			} else {
 				server =
 					new Server(
 						Config.getPreferenceStore().getString("host"),
@@ -330,20 +324,34 @@ public class MainForm
 	 * @see pl.mn.gadu.MessageListener#messageArrived(pl.mn.gadu.Message)
 	 */
 	public void messageArrived(final IMessage message) {
-		logger.debug("Message arrived: " + message.getUser() + ":" + message.getText());
+		logger.debug(
+			"Message arrived: " + message.getUser() + ":" + message.getText());
 		getShell().getDisplay().syncExec(new Runnable() {
-		   public void run() {
-				ChatForm form = (ChatForm)usersChatForms.get(new User(message.getUser(),""+message.getUser(),false));
-		   		if (form != null)
-		   			form.messageArrived(message);
-		   		else{
-		   			User user = new User(message.getUser(),""+message.getUser(),false);
-		   			form = new ChatForm(MainForm.this.getShell(),MainForm.this,user);	
-		   			usersChatForms.put(user,form);
-		   			form.open();
-		   			form.messageArrived(message);
-		   		}
-		   }
+			public void run() {
+				ChatForm form =
+					(ChatForm) usersChatForms.get(
+						new User(
+							message.getUser(),
+							"" + message.getUser(),
+							false));
+				if (form != null)
+					form.messageArrived(message);
+				else {
+					User user =
+						new User(
+							message.getUser(),
+							"" + message.getUser(),
+							false);
+					form =
+						new ChatForm(
+							MainForm.this.getShell(),
+							MainForm.this,
+							user);
+					usersChatForms.put(user, form);
+					form.open();
+					form.messageArrived(message);
+				}
+			}
 		});
 	}
 
@@ -373,7 +381,7 @@ public class MainForm
 		menu.add(new ExitAction(this));
 		return menu;
 	}
-	
+
 	/**
 	 * @param table
 	 */
@@ -409,7 +417,7 @@ public class MainForm
 		});
 	}
 
-	void editSelectedUser(){
+	void editSelectedUser() {
 		IStructuredSelection sel =
 			(IStructuredSelection) usersViewer.getSelection();
 		IUser first = (IUser) sel.getFirstElement();
@@ -423,8 +431,8 @@ public class MainForm
 			}
 		}
 	}
-	
-	void deleteSelectedUser(){
+
+	void deleteSelectedUser() {
 		IStructuredSelection sel =
 			(IStructuredSelection) usersViewer.getSelection();
 		User first = (User) sel.getFirstElement();
@@ -434,8 +442,8 @@ public class MainForm
 			usersData.saveUsers();
 		}
 	}
-	
-	void startChatWithSelectedUser(){
+
+	void startChatWithSelectedUser() {
 		IStructuredSelection sel =
 			(IStructuredSelection) usersViewer.getSelection();
 		User first = (User) sel.getFirstElement();
@@ -444,8 +452,7 @@ public class MainForm
 
 			if (chatForm == null) {
 				// nie ma jeszcze takiej rozmowy	
-				ChatForm form =
-					new ChatForm(getShell(), MainForm.this, first);
+				ChatForm form = new ChatForm(getShell(), MainForm.this, first);
 				usersChatForms.put(first, form);
 				form.open();
 			} else {
