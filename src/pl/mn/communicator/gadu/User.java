@@ -24,7 +24,7 @@ import pl.mn.communicator.AbstractUser;
 
 /**
  * U¿ytkownik gg.
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @author mnaglik
  */
 public class User extends AbstractUser {
@@ -37,10 +37,11 @@ public class User extends AbstractUser {
     public User(int number) {
         super(number);
     }
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return "numer: "+number;
-	}
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "numer: " + number;
+    }
 }

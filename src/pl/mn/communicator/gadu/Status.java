@@ -27,7 +27,7 @@ import java.util.Map;
 
 /**
  * Status u¿ytkownika gg.
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @author mnaglik
  */
 public class Status extends AbstractStatus {
@@ -142,12 +142,12 @@ public class Status extends AbstractStatus {
     public void setVersion(int version) {
         this.version = version;
     }
-    
-    
-	/**
-	 * @see java.lang.Object#toString()
-	 */
-	public String toString() {
-		return "status: "+status+" opis: "+description+" czas: "+returnTime;
-	}
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "status: " + status + " opis: " + description + " czas: " +
+        returnTime;
+    }
 }

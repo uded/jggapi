@@ -17,18 +17,18 @@
  */
 package pl.mn.communicator.gadu;
 
+import org.apache.log4j.Logger;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.apache.log4j.Logger;
 
 
 /**
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
@@ -64,77 +64,86 @@ class GGNotifyReply implements GGIncomingPackage {
 
         while (przesuniecie < dane.length) {
             dane[przesuniecie + 3] = GGConversion.intToByte(0)[0];
-            int nr = GGConversion.byteToInt(dane,przesuniecie);
-            logger.debug("Nr usera zmieniajacego status: "+nr);
-    
+
+            int nr = GGConversion.byteToInt(dane, przesuniecie);
+            logger.debug("Nr usera zmieniajacego status: " + nr);
+
             int status = GGConversion.unsignedByteToInt(dane[przesuniecie + 4]);
-            logger.debug("Status u¿ytkownika to: "+status);
+            logger.debug("Status u¿ytkownika to: " + status);
+
             // dla statusow opisowych pobierz opis
-           	String description = null;
-           	Date returnTime = null;
-            if (status == GGStatus.GG_STATUS_AVAIL_DESCR
-    				|| status == GGStatus.GG_STATUS_BUSY_DESCR
-    				|| status == GGStatus.GG_STATUS_INVISIBLE_DESCR
-    				|| status == GGStatus.GG_STATUS_NOT_AVAIL_DESCR) {
-            	int descriptionSize = GGConversion.unsignedByteToInt(dane[przesuniecie + 14]);
+            String description = null;
+            Date returnTime = null;
 
-            	logger.debug("U¿ytkownik ma status opisowy o dlugosci "+descriptionSize);
-            	
-            	boolean jestCzas = dane[przesuniecie+15+descriptionSize-5] == 0;
+            if ((status == GGStatus.GG_STATUS_AVAIL_DESCR) ||
+                    (status == GGStatus.GG_STATUS_BUSY_DESCR) ||
+                    (status == GGStatus.GG_STATUS_INVISIBLE_DESCR) ||
+                    (status == GGStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
+                int descriptionSize = GGConversion.unsignedByteToInt(dane[przesuniecie +
+                        14]);
 
-            	if (jestCzas) {
-            		logger.debug("Ustawiony czas powrotu "+dane[przesuniecie+15+descriptionSize-4]);
-            		
-            		long czas = GGConversion.byteToInt(dane,przesuniecie+15+descriptionSize-4);
-            		czas *= 1000;
-            		returnTime = new Date();
-            		returnTime.setTime(czas);
-            		descriptionSize -= 5;
-            		logger.debug("Czas: "+czas+":"+returnTime);
-            	}
-            	
-            	byte[] opis = new byte[descriptionSize];
-            	System.arraycopy(dane,przesuniecie+15,opis,0,descriptionSize);
-            	description = new String(opis);
+                logger.debug("U¿ytkownik ma status opisowy o dlugosci " +
+                    descriptionSize);
 
-            	
-            	logger.debug("Opis["+description+"]");
+                boolean jestCzas = dane[(przesuniecie + 15 + descriptionSize) -
+                    5] == 0;
 
-
-                przesuniecie += 15 + descriptionSize; 
                 if (jestCzas) {
-                	przesuniecie += 5;
+                    logger.debug("Ustawiony czas powrotu " +
+                        dane[(przesuniecie + 15 + descriptionSize) - 4]);
+
+                    long czas = GGConversion.byteToInt(dane,
+                            (przesuniecie + 15 + descriptionSize) - 4);
+                    czas *= 1000;
+                    returnTime = new Date();
+                    returnTime.setTime(czas);
+                    descriptionSize -= 5;
+                    logger.debug("Czas: " + czas + ":" + returnTime);
                 }
-            }else{
-            	logger.debug("U¿ytkownik NIE ma statusu opisowego");
-            	przesuniecie += 14; // pakiet bez opisu ma dlugosc 14 bajtow
+
+                byte[] opis = new byte[descriptionSize];
+                System.arraycopy(dane, przesuniecie + 15, opis, 0,
+                    descriptionSize);
+                description = new String(opis);
+
+                logger.debug("Opis[" + description + "]");
+
+                przesuniecie += (15 + descriptionSize);
+
+                if (jestCzas) {
+                    przesuniecie += 5;
+                }
+            } else {
+                logger.debug("U¿ytkownik NIE ma statusu opisowego");
+                przesuniecie += 14; // pakiet bez opisu ma dlugosc 14 bajtow
             }
 
-			Status statusUzytkownika = new Status(dajStatusBiz(status));			
-			statusUzytkownika.setDescription(description);
-			statusUzytkownika.setReturnTime(returnTime);
-        
-			User uzytkownik = new User(nr);
-			statusy.put(uzytkownik,statusUzytkownika);
+            Status statusUzytkownika = new Status(dajStatusBiz(status));
+            statusUzytkownika.setDescription(description);
+            statusUzytkownika.setReturnTime(returnTime);
+
+            User uzytkownik = new User(nr);
+            statusy.put(uzytkownik, statusUzytkownika);
         }
     }
 
+    private int dajStatusBiz(int ggStatus) {
+        switch (ggStatus) {
+        case GGStatus.GG_STATUS_AVAIL:
+        case GGStatus.GG_STATUS_AVAIL_DESCR:
+            return Status.ON_LINE;
 
-	private int dajStatusBiz(int ggStatus) {
-		switch (ggStatus) {
-			case GGStatus.GG_STATUS_AVAIL:
-			case GGStatus.GG_STATUS_AVAIL_DESCR:
-				return Status.ON_LINE;
-			case GGStatus.GG_STATUS_BUSY:
-			case GGStatus.GG_STATUS_BUSY_DESCR:
-				return Status.BUSY;
-			case GGStatus.GG_STATUS_INVISIBLE:
-			case GGStatus.GG_STATUS_INVISIBLE_DESCR:
-				return Status.NOT_VISIBLE;
-			case GGStatus.GG_STATUS_NOT_AVAIL:
-			case GGStatus.GG_STATUS_NOT_AVAIL_DESCR:
-			default:
-				return Status.OFF_LINE;
-		}
-	}
+        case GGStatus.GG_STATUS_BUSY:
+        case GGStatus.GG_STATUS_BUSY_DESCR:
+            return Status.BUSY;
+
+        case GGStatus.GG_STATUS_INVISIBLE:
+        case GGStatus.GG_STATUS_INVISIBLE_DESCR:
+            return Status.NOT_VISIBLE;
+
+        case GGStatus.GG_STATUS_NOT_AVAIL:
+        case GGStatus.GG_STATUS_NOT_AVAIL_DESCR:default:
+            return Status.OFF_LINE;
+        }
+    }
 }

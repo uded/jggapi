@@ -20,21 +20,21 @@ package pl.mn.communicator.gadu;
 
 /**
  * Pakiet usuwaj±cy konkretnego u¿ytkownika z listy monitorowanych u¿ytkowników.
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 class GGRemoveNotify implements GGOutgoingPackage {
     /** Numer u¿ytkownika */
-	private int userNo;
-	
-	/**
-	 * Twórz pakiet do usuniêcia u¿ytkownika z listy monitorowanych
-	 * @param userNo numer u¿ytkownika do usuniêcia
-	 */
-	GGRemoveNotify(int userNo) {
-    	this.userNo = userNo;
+    private int userNo;
+
+    /**
+     * Twórz pakiet do usuniêcia u¿ytkownika z listy monitorowanych
+     * @param userNo numer u¿ytkownika do usuniêcia
+     */
+    GGRemoveNotify(int userNo) {
+        this.userNo = userNo;
     }
-    
+
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
@@ -53,12 +53,12 @@ class GGRemoveNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-    	byte[] dane = new byte[5];
+        byte[] dane = new byte[5];
 
         byte[] userNo = GGConversion.intToByte(this.userNo);
-        System.arraycopy(userNo,0,dane,0,userNo.length);
+        System.arraycopy(userNo, 0, dane, 0, userNo.length);
         dane[4] = GGNotify.GG_USER_NORMAL;
 
-    	return dane;
+        return dane;
     }
 }

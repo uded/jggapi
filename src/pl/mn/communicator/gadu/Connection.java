@@ -31,6 +31,7 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 
 import java.net.Socket;
+
 import java.util.Iterator;
 import java.util.Map;
 
@@ -51,7 +52,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.27 $
+ * @version $Revision: 1.28 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -126,8 +127,10 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      */
     public void addMonitoredUser(IUser user) throws IOException {
         if (isConnected) {
-        	logger.debug("dodaje monitorowanego uzytkownika: "+user.getNumber());
-        	GGAddNotify addNotify = new GGAddNotify(user.getNumber());
+            logger.debug("dodaje monitorowanego uzytkownika: " +
+                user.getNumber());
+
+            GGAddNotify addNotify = new GGAddNotify(user.getNumber());
             connectionThread.sendPackage(addNotify);
         }
     }
@@ -138,8 +141,10 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
      */
     public void removeMonitoredUser(IUser user) throws IOException {
         if (isConnected) {
-        	logger.debug("usuwam monitorowanego uzytkownika: "+user.getNumber());
-        	GGRemoveNotify removeNotify = new GGRemoveNotify(user.getNumber());
+            logger.debug("usuwam monitorowanego uzytkownika: " +
+                user.getNumber());
+
+            GGRemoveNotify removeNotify = new GGRemoveNotify(user.getNumber());
             connectionThread.sendPackage(removeNotify);
         }
     }
@@ -216,8 +221,8 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
         private void decodePocket(GGHeader ggHeader) throws IOException {
             byte[] keyBytes = new byte[ggHeader.getLength()];
             dataInput.read(keyBytes);
-            logger.debug("Pakiet przychodzacy: "
-                    + Util.bytesToString(keyBytes));
+            logger.debug("Pakiet przychodzacy: " +
+                Util.bytesToString(keyBytes));
 
             switch (ggHeader.getType()) {
             case GG_PACKAGE_WELCOME:
@@ -287,14 +292,17 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                 GGNotifyReply notify = new GGNotifyReply(keyBytes);
                 Map usersStatus = notify.getUsersState();
                 Iterator i = usersStatus.keySet().iterator();
-                if (userListener != null) { 
-	                while (i.hasNext()) {
-	                	IUser user = (User) i.next();
-	                	IStatus status = (Status) usersStatus.get(user);
-	                	userListener.userStatusChanged(user,status);
-	        			logger.debug("Uzytkownik "+user+" zmienil status: "+status);
-	                }
+
+                if (userListener != null) {
+                    while (i.hasNext()) {
+                        IUser user = (User) i.next();
+                        IStatus status = (Status) usersStatus.get(user);
+                        userListener.userStatusChanged(user, status);
+                        logger.debug("Uzytkownik " + user +
+                            " zmienil status: " + status);
+                    }
                 }
+
                 break;
 
             default:

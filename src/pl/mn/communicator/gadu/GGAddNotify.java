@@ -21,21 +21,21 @@ package pl.mn.communicator.gadu;
 /**
  * Pakiet dodaj±cy konkretnego u¿ytkownika do listy montorowancyh u¿ytkowników.
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 class GGAddNotify implements GGOutgoingPackage {
     /** Numer u¿ytkownika */
-	private int userNo;
-    
+    private int userNo;
+
     /**
      * Tworz pakiet dodanie do monitorowania dla konkretnego u¿ytkownika.
      * @param userNo numer u¿ytkownika
      */
     GGAddNotify(int userNo) {
-    	this.userNo = userNo;
+        this.userNo = userNo;
     }
-    
+
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
      */
@@ -54,12 +54,12 @@ class GGAddNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-    	byte[] dane = new byte[5];
+        byte[] dane = new byte[5];
 
         byte[] userNo = GGConversion.intToByte(this.userNo);
-        System.arraycopy(userNo,0,dane,0,userNo.length);
+        System.arraycopy(userNo, 0, dane, 0, userNo.length);
         dane[4] = GGNotify.GG_USER_NORMAL;
 
-    	return dane;
+        return dane;
     }
 }
