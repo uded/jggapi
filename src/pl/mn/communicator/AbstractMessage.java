@@ -77,4 +77,5 @@ public abstract class AbstractMessage implements IMessage {
     public void setUser(int user) {
         this.user = user;
     }
+    
 }

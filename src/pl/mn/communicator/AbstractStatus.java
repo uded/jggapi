@@ -28,7 +28,7 @@ import pl.mn.communicator.logger.Logger;
  * mog± zostaæ dodane w podklasach.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractStatus.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: AbstractStatus.java,v 1.11 2004-11-11 18:39:29 winnetou25 Exp $
  */
 public abstract class AbstractStatus implements IStatus {
     
@@ -78,4 +78,5 @@ public abstract class AbstractStatus implements IStatus {
 
         return map;
     }
+    
 }

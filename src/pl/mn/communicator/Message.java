@@ -23,10 +23,15 @@ import pl.mn.communicator.logger.Logger;
  * Wiadomosc gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Message.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: Message.java,v 1.2 2004-11-11 18:41:19 winnetou25 Exp $
  */
 public final class Message extends AbstractMessage {
     
+	private final int SEQ = 0;
+	
+	private int seq = SEQ;
+	
 	private static Logger logger = Logger.getLogger(Message.class);
 
     /**
@@ -36,6 +41,11 @@ public final class Message extends AbstractMessage {
      */
     public Message(int toUser, String text) {
         super(toUser, text);
+        this.seq++;
     }
-    
+
+	public int getMessageID() {
+		return this.seq;
+	}
+	
 }

@@ -22,14 +22,45 @@ package pl.mn.communicator;
  * Obs³uguje zdarzenia zwi±zane z wiadomo¶ciami.<BR>
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: MessageListener.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.11 2004-11-11 18:42:26 winnetou25 Exp $
  */
 public interface MessageListener {
 	
-    /**
-     * Nadesz³a wiadomo¶æ.
-     * @param message wiadomo¶æ z serwera rozmów
+	/**
+     * Message arrived
+     * @param MessageArrivedEvent
      */
-    void messageArrived(IMessage message);
+	void messageArrived(MessageArrivedEvent arrivedEvent);
+
+	/**
+	 * Message sent.
+	 * @param sentEvent
+	 */
+	void messageSent(MessageSentEvent sentEvent);
+	
+	/**
+	 * Message delivered
+	 * @param event object 
+	 */
+    void messageDelivered(MessageDeliveredEvent sentEvent);
     
+    public final static class MessageStub implements MessageListener {
+
+		/**
+		 * @see pl.mn.communicator.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
+		 */
+		public void messageArrived(MessageArrivedEvent arrivedEvent) { }
+
+		/**
+		 * @see pl.mn.communicator.MessageListener#messageSent(pl.mn.communicator.MessageSentEvent)
+		 */
+		public void messageSent(MessageSentEvent sentEvent) { }
+
+		/**
+		 * @see pl.mn.communicator.MessageListener#messageDelivered(pl.mn.communicator.MessageDeliveredEvent)
+		 */
+		public void messageDelivered(MessageDeliveredEvent sentEvent) { }
+
+    }
+        
 }

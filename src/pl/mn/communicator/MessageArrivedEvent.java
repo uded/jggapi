@@ -17,40 +17,45 @@
  */
 package pl.mn.communicator;
 
+import java.util.Date;
+import java.util.EventObject;
+
 /**
- * Wiadomo¶æ do serwera rozmów.
+ * Arrived message event.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.9 2004-11-11 18:40:53 winnetou25 Exp $
+ * @version $Id: MessageArrivedEvent.java,v 1.1 2004-11-11 18:41:40 winnetou25 Exp $
  */
-public interface IMessage {
+public class MessageArrivedEvent extends EventObject {
+
+	private IMessage m_message = null;
+	private Date m_arrivalDate = null;
+	private int m_messageClass = -1;
 	
-    /**
-     * Pobierz u¿ytkownika do którego jest wiadomo¶æ
-     * @return User
-     */
-    int getUser();
-
-    /**
-     * Pobierz tre¶æ wiadomo¶æi
-     * @return String
-     */
-    String getText();
-
-    /**
-     * @param text tre¶æ wiadomo¶ci
-     */
-    void setText(String text);
-
-    /**
-     * @param user u¿ytkownik
-     */
-    void setUser(int user);
+//    private long sender;
+//    private int seq;
+//    private int time;
+//    private int msgClass;
+//    private String message = "";
     
-    /**
-     * Gets unique message id
-     */
-    int getMessageID();
-    
+	public MessageArrivedEvent(Object source, IMessage message, Date arrivalDate, int messageClass) {
+		super(source);
+		m_message = message;
+		m_arrivalDate = arrivalDate;
+		m_messageClass = messageClass;
+	}
+
+	public IMessage getMessage() {
+		return m_message;
+	}
+	
+	public Date getArrivalDate() {
+		return m_arrivalDate;
+	}
+	
+	public int getMessageClass() {
+		return m_messageClass;
+	}
+	
 }

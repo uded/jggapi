@@ -23,7 +23,7 @@ import pl.mn.communicator.logger.Logger;
  * U¿ytkownik serwera rozmów.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractUser.java,v 1.12 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: AbstractUser.java,v 1.13 2004-11-11 18:39:49 winnetou25 Exp $
  */
 public class AbstractUser implements IUser {
 	
@@ -77,4 +77,5 @@ public class AbstractUser implements IUser {
     public String toString() {
         return "[" + name + ":" + number + ":" + onLine + "]";
     }
+    
 }

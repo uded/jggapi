@@ -42,6 +42,7 @@ import pl.mn.communicator.logger.Logger;
  * @version $
  */
 public abstract class AbstractConnection implements IConnection {
+	
     private static Logger logger = Logger.getLogger(AbstractConnection.class);
 
     /**
@@ -130,4 +131,5 @@ public abstract class AbstractConnection implements IConnection {
     public void setMonitoredUserList(Collection userList) {
         this.monitoredUsers = userList;
     }
+    
 }

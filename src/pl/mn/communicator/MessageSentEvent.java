@@ -17,40 +17,32 @@
  */
 package pl.mn.communicator;
 
+import java.util.Date;
+import java.util.EventObject;
+
 /**
- * Wiadomo¶æ do serwera rozmów.
+ * Message sent event.
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.9 2004-11-11 18:40:53 winnetou25 Exp $
+ * @version $Id: MessageSentEvent.java,v 1.1 2004-11-11 18:42:47 winnetou25 Exp $
  */
-public interface IMessage {
+public class MessageSentEvent extends EventObject {
+
+	private IMessage m_message = null;
+	private Date m_sentDate = null;
 	
-    /**
-     * Pobierz u¿ytkownika do którego jest wiadomo¶æ
-     * @return User
-     */
-    int getUser();
+	public MessageSentEvent(Object source, IMessage message, Date sentDate) {
+		super(source);
+		m_message = message;
+		m_sentDate = sentDate;
+	}
 
-    /**
-     * Pobierz tre¶æ wiadomo¶æi
-     * @return String
-     */
-    String getText();
-
-    /**
-     * @param text tre¶æ wiadomo¶ci
-     */
-    void setText(String text);
-
-    /**
-     * @param user u¿ytkownik
-     */
-    void setUser(int user);
-    
-    /**
-     * Gets unique message id
-     */
-    int getMessageID();
-    
+	public IMessage getMessage() {
+		return m_message;
+	}
+	
+	public Date getSentDate() {
+		return m_sentDate;
+	}
+	
 }
