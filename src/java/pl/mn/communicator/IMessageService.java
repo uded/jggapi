@@ -26,7 +26,7 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessageService.java,v 1.9 2005-01-29 15:22:04 winnetou25 Exp $
+ * @version $Id: IMessageService.java,v 1.10 2005-01-29 17:09:14 winnetou25 Exp $
  */
 public interface IMessageService {
 
@@ -48,6 +48,8 @@ public interface IMessageService {
 	 * @return chat object that represents chat with some user.
 	 */
 	ISingleChat createSingleChat(int recipientUin);
+	
+	IGroupChat createGroupChat();
 	
 	IGroupChat createGroupChat(int[] recipientUins);
 	

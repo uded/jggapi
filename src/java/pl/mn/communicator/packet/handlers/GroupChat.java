@@ -34,7 +34,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GroupChat.java,v 1.3 2005-01-29 15:44:17 winnetou25 Exp $
+ * @version $Id: GroupChat.java,v 1.4 2005-01-29 17:09:48 winnetou25 Exp $
  */
 public class GroupChat extends AbstractChat implements IGroupChat {
 	
@@ -63,8 +63,8 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		GGSendMsg sendMsg = new GGSendMsg(OutgoingMessage.createChatMessage(recipientUin, messageBody));
 
 		for (int i=1; i<m_recipientUins.size(); i++) {
-			int recipient = ((Integer)m_recipientUins.get(i)).intValue();
-			sendMsg.addRecipient(recipient);
+			int recipient = ((Integer) m_recipientUins.get(i)).intValue();
+			sendMsg.addAdditionalRecipient(recipient);
 		}
 		
 		try {
@@ -127,7 +127,7 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.IncomingMessage)
 		 */
 		public void messageArrived(IncomingMessage incommingMessage) {
-			if (isInThisGroupChat(incommingMessage.getUin())) {
+			if (isInThisGroupChat(incommingMessage.getRecipientUin())) {
 				fireChatMessageArrived(incommingMessage);
 			}
 		}
@@ -143,7 +143,7 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		
 		private boolean isInThisGroupChat(int uin) {
 			for (int i=0; i<m_recipientUins.size(); i++) {
-				if (uin == ((Integer)m_recipientUins.get(i)).intValue()) {
+				if (uin == ((Integer) m_recipientUins.get(i)).intValue()) {
 					return true;
 				}
 			}

@@ -71,9 +71,9 @@ public class Main2 {
 
 			public void loginOK() throws GGException {
 				System.out.println("Login OK.");
-				IGroupChat groupChat = session.getMessageService().createGroupChat(new int[0]);
-				groupChat.addRecipient(1136132);
+				IGroupChat groupChat = session.getMessageService().createGroupChat();
 				groupChat.addRecipient(376798);
+				groupChat.addRecipient(1136132);
 				groupChat.sendMessage("GroupChatMessageTest1");
 				groupChat.sendMessage("GroupChatMessageTest2");
 				
@@ -98,7 +98,7 @@ public class Main2 {
 		session.getMessageService().addMessageListener(new MessageListener.Stub() {
 
 			public void messageArrived(IncomingMessage incommingMessage) {
-				System.out.println("MessageArrived, fromUser: "+incommingMessage.getUin());
+				System.out.println("MessageArrived, fromUser: "+incommingMessage.getRecipientUin());
 				System.out.println("MessageBody: "+incommingMessage.getMessageBody());
 				System.out.println("MessageID: "+incommingMessage.getMessageID());
 				System.out.println("MessageStatus: "+incommingMessage.getMessageClass());

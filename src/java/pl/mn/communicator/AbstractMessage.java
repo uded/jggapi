@@ -25,14 +25,14 @@ import org.apache.commons.logging.LogFactory;
  * is common for incoming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.10 2004-12-26 22:07:35 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.11 2005-01-29 17:09:14 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 
 	private static Log logger = LogFactory.getLog(AbstractMessage.class);
 
     /** Uin of the Gadu-Gadu user */
-    protected int m_uin;
+    protected int m_recipientUin = -1;
 
     /** The body of the message */
     protected String m_messageBody = null;
@@ -42,20 +42,20 @@ public abstract class AbstractMessage implements IMessage {
     
     protected int m_messageID = -1;
 
-    protected AbstractMessage(int uin, String messageBody, MessageClass messageClass) {
-    	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+    protected AbstractMessage(int recepientUin, String messageBody, MessageClass messageClass) {
+    	if (recepientUin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
     	if (messageBody == null) throw new NullPointerException("messageBody cannot be null");
     	if (messageClass == null) throw new NullPointerException("messageClass cannot be null");
-    	m_uin = uin;
+    	m_recipientUin = recepientUin;
     	m_messageBody = messageBody;
         m_messageClass = messageClass;
     }
 
     /**
-     * @see pl.mn.communicator.IMessage#getUin()
+     * @see pl.mn.communicator.IMessage#getRecipientUin()
      */
-    public int getUin() {
-        return m_uin;
+    public int getRecipientUin() {
+        return m_recipientUin;
     }
 
     /**
@@ -83,7 +83,7 @@ public abstract class AbstractMessage implements IMessage {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "[Uin: "+m_uin+", messageBody: "+m_messageBody+", messageClass: "+m_messageClass+"]";
+		return "[RecipientUin: "+m_recipientUin+", messageBody: "+m_messageBody+", messageClass: "+m_messageClass+"]";
 	}
 
 }

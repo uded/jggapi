@@ -31,7 +31,7 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SingleChat.java,v 1.3 2005-01-29 15:44:17 winnetou25 Exp $
+ * @version $Id: SingleChat.java,v 1.4 2005-01-29 17:09:48 winnetou25 Exp $
  */
 public class SingleChat extends AbstractChat implements ISingleChat {
 	
@@ -102,7 +102,7 @@ public class SingleChat extends AbstractChat implements ISingleChat {
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.IncomingMessage)
 		 */
 		public void messageArrived(IncomingMessage incommingMessage) {
-			if (incommingMessage.getUin() == m_recipientUin) {
+			if (incommingMessage.getRecipientUin() == m_recipientUin) {
 				fireChatMessageArrived(incommingMessage);
 			}
 		}

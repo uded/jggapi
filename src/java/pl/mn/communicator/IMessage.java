@@ -22,7 +22,7 @@ package pl.mn.communicator;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.9 2004-12-25 17:32:07 winnetou25 Exp $
+ * @version $Id: IMessage.java,v 1.10 2005-01-29 17:09:14 winnetou25 Exp $
  */
 public interface IMessage {
 	
@@ -32,7 +32,7 @@ public interface IMessage {
      * 
      * @return int Gadu-Gadu uin.
      */
-    int getUin();
+    int getRecipientUin();
 
     /**
      * Gets message body.

@@ -40,7 +40,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.12 2005-01-29 13:20:05 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.13 2005-01-29 17:09:48 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
@@ -80,6 +80,13 @@ public class DefaultMessageService implements IMessageService {
 	 */
 	public IGroupChat createGroupChat(int[] uins) {
 		return new GroupChat(m_session, uins);
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IMessageService#createGroupChat()
+	 */
+	public IGroupChat createGroupChat() {
+		return new GroupChat(m_session, new int[0]);
 	}
 	
 	/**

@@ -28,7 +28,7 @@ import org.apache.commons.logging.LogFactory;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.13 2005-01-25 23:54:01 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.14 2005-01-29 17:09:14 winnetou25 Exp $
  */
 public class OutgoingMessage extends AbstractMessage {
 	
@@ -105,9 +105,9 @@ public class OutgoingMessage extends AbstractMessage {
 	 * @param uin the new Gadu-Gadu number to whom this message will be addressed.
 	 * @throws IllegalArgumentException if the uin is a negative value.
 	 */
-	public void setUin(int uin) {
-		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
-		m_uin = uin;
+	public void setRecipientUin(int recipientUin) {
+		if (recipientUin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+		m_recipientUin = recipientUin;
 	}
 	
 }
