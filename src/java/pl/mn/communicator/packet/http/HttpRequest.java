@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator.packet.http;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,10 +27,12 @@ import java.net.URL;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: HttpRequest.java,v 1.1 2005-01-27 23:56:43 winnetou25 Exp $
+ * @version $Id: HttpRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
  */
 public abstract class HttpRequest {
 
+	public final static String WINDOW_ENCODING = "windows-1250";
+	
 	protected HttpURLConnection m_huc = null;
 	
 	protected HttpRequest() throws IOException {
@@ -39,7 +41,9 @@ public abstract class HttpRequest {
 		
 		m_huc.setRequestMethod("POST");
 		m_huc.setDoInput(true);
-		m_huc.setDoOutput(true);
+		if (wannaWrite()) {
+			m_huc.setDoOutput(true);
+		}
 		m_huc.setRequestProperty("Content-Length", String.valueOf(getRequestBody().length()));
 		m_huc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
 		m_huc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)");
@@ -52,15 +56,18 @@ public abstract class HttpRequest {
 	}
 	
 	public HttpURLConnection sendRequest() throws IOException {
-		PrintWriter out = new PrintWriter(m_huc.getOutputStream(), true);
 		
-		out.println(getRequestBody());
-		out.close();
+		if (wannaWrite()) {
+			PrintWriter out = new PrintWriter(m_huc.getOutputStream(), true);
+			
+			out.println(getRequestBody());
+			out.close();
+		}
 		
 		return m_huc;
 	}
 
-	public HttpURLConnection disconnect() throws IOException {
+	public HttpURLConnection disconnect() {
 		if (m_huc == null) throw new IllegalStateException("must call prepare request and connect first");
 		m_huc.disconnect();
 		
@@ -72,5 +79,7 @@ public abstract class HttpRequest {
 	protected abstract String getURL();
 	
 	protected abstract String getRequestBody() throws UnsupportedEncodingException; 
+	
+	protected abstract boolean wannaWrite();
 	
 }

@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator.packet.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,31 +24,30 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.StringTokenizer;
 
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: RegisterGGAccountRequest.java,v 1.1 2005-01-27 23:56:43 winnetou25 Exp $
+ * @version $Id: RegisterGGAccountRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
  */
-public class RegisterGGAccountRequest extends GGHttpRequest {
+public class RegisterGGAccountRequest extends AbstractTokenRequest {
 
 	private String m_email = null;
 	private String m_password = null;
 	
 	public RegisterGGAccountRequest(String email, String password, String tokenID, String tokenVal) throws IOException {
-		super();
+		super(tokenID, tokenVal);
 		if (email == null) throw new NullPointerException("email cannot be null");
 		if (password == null) throw new NullPointerException("password cannot be null");
 		m_email = email;
 		m_password = password;
-		setTokenID(tokenID);
-		setTokenValue(tokenVal);
 	}
 	
 	/**
 	 * @throws IOException
 	 * @throws UnsupportedEncodingException
-	 * @see pl.mn.communicator.packet.handlers.HttpRequest#getResponse()
+	 * @see pl.mn.communicator.packet.http.HttpRequest#getResponse()
 	 */
 	public HttpResponse getResponse() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), WINDOW_ENCODING));
@@ -58,7 +57,7 @@ public class RegisterGGAccountRequest extends GGHttpRequest {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.HttpRequest#getURL()
+	 * @see pl.mn.communicator.packet.http.HttpRequest#getURL()
 	 */
 	protected String getURL() {
 		return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
@@ -66,7 +65,7 @@ public class RegisterGGAccountRequest extends GGHttpRequest {
 
 	/**
 	 * @throws UnsupportedEncodingException
-	 * @see pl.mn.communicator.packet.handlers.HttpRequest#getRequestBody()
+	 * @see pl.mn.communicator.packet.http.HttpRequest#getRequestBody()
 	 */
 	protected String getRequestBody() throws UnsupportedEncodingException {
 		StringBuffer buffer = new StringBuffer();
@@ -86,6 +85,13 @@ public class RegisterGGAccountRequest extends GGHttpRequest {
 		buffer.append(getHashCode(m_email, m_password));
 		
 		return buffer.toString(); 
+	}
+	
+	/**
+	 * @see pl.mn.communicator.packet.http.HttpRequest#wannaWrite()
+	 */
+	protected boolean wannaWrite() {
+		return true;
 	}
 	
 	private int getHashCode(String uin) {
@@ -113,7 +119,7 @@ public class RegisterGGAccountRequest extends GGHttpRequest {
 		}
 
 		/**
-		 * @see pl.mn.communicator.packet.handlers.HttpResponse#isErrorResponse()
+		 * @see pl.mn.communicator.packet.http.HttpResponse#isErrorResponse()
 		 */
 		public boolean isOKResponse() {
 			return m_responseString.startsWith("reg_success");

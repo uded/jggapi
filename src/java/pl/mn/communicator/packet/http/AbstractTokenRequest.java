@@ -15,35 +15,30 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator.packet.http;
 
 import java.io.IOException;
+
 
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGHttpRequest.java,v 1.1 2005-01-27 23:56:43 winnetou25 Exp $
+ * @version $Id: AbstractTokenRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
  */
-public abstract class GGHttpRequest extends HttpRequest {
+public abstract class AbstractTokenRequest extends HttpRequest {
 
-	public final static String WINDOW_ENCODING = "windows-1250";
+	private String m_tokenID = null;
+	private String m_tokenVal = null;
 
-	private String m_tokenID;
-	private String m_tokenVal;
-
-	protected GGHttpRequest() throws IOException {
+	protected AbstractTokenRequest(String tokenID, String tokenVal) throws IOException {
 		super();
-	}
-
-	public void setTokenID(String tokenID) {
+		if (tokenID == null) throw new NullPointerException("tokenID cannot be null");
+		if (tokenVal == null) throw new NullPointerException("tokenVal cannot be null");
 		m_tokenID = tokenID;
-	}
-	
-	public void setTokenValue(String tokenVal) {
 		m_tokenVal = tokenVal;
 	}
-	
+
 	public String getTokenID() {
 		return m_tokenID;
 	}

@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.util.Collection;
 
 import pl.mn.communicator.GGException;
-import pl.mn.communicator.Gender;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IUser;
@@ -11,7 +10,6 @@ import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.PersonalInfo;
-import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.Server;
 import pl.mn.communicator.SessionState;

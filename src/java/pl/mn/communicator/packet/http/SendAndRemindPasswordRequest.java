@@ -15,26 +15,27 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator.packet.http;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SendAndRemindPasswordRequest.java,v 1.1 2005-01-27 23:56:43 winnetou25 Exp $
+ * @version $Id: SendAndRemindPasswordRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
  */
-public class SendAndRemindPasswordRequest extends GGHttpRequest {
+public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 
 	private int m_uin = -1;
 	private String m_email = null;
 
 	public SendAndRemindPasswordRequest(int uin, String email, String tokenID, String tokenVal) throws IOException {
-		super();
+		super(tokenID, tokenVal);
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		if (email == null) throw new NullPointerException("email cannot be null");
 		m_uin = uin;
@@ -44,7 +45,7 @@ public class SendAndRemindPasswordRequest extends GGHttpRequest {
 	/**
 	 * @throws IOException
 	 * @throws UnsupportedEncodingException
-	 * @see pl.mn.communicator.packet.handlers.HttpRequest#getResponse()
+	 * @see pl.mn.communicator.packet.http.HttpRequest#getResponse()
 	 */
 	public HttpResponse getResponse() throws IOException {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), WINDOW_ENCODING));
@@ -54,14 +55,14 @@ public class SendAndRemindPasswordRequest extends GGHttpRequest {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.HttpRequest#getURL()
+	 * @see pl.mn.communicator.packet.http.HttpRequest#getURL()
 	 */
 	protected String getURL() {
 		return "http://retr.gadu-gadu.pl/appsvc/fmsendpwd3.asp";
 	}
 
 	/**
-	 * @see pl.mn.communicator.packet.handlers.HttpRequest#getRequestBody()
+	 * @see pl.mn.communicator.packet.http.HttpRequest#getRequestBody()
 	 */
 	protected String getRequestBody() {
 		StringBuffer buffer = new StringBuffer();
@@ -81,6 +82,13 @@ public class SendAndRemindPasswordRequest extends GGHttpRequest {
 		buffer.append(getHashCode(String.valueOf(m_uin)));
 		
 		return buffer.toString();
+	}
+	
+	/**
+	 * @see pl.mn.communicator.packet.http.HttpRequest#wannaWrite()
+	 */
+	protected boolean wannaWrite() {
+		return true;
 	}
 	
 	private int getHashCode(String uin) {
@@ -108,7 +116,7 @@ public class SendAndRemindPasswordRequest extends GGHttpRequest {
 		}
 
 		/**
-		 * @see pl.mn.communicator.packet.handlers.HttpResponse#isErrorResponse()
+		 * @see pl.mn.communicator.packet.http.HttpResponse#isErrorResponse()
 		 */
 		public boolean isOKResponse() {
 			return m_responseString.equals("pwdsend_success");
