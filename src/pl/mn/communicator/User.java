@@ -15,16 +15,15 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator;
 
-import pl.mn.communicator.AbstractUser;
 import pl.mn.communicator.logger.Logger;
 
 /**
  * U¿ytkownik gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: User.java,v 1.14 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: User.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $
  */
 public class User extends AbstractUser {
 	

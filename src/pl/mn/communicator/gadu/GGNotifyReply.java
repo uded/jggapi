@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import pl.mn.communicator.Status;
+import pl.mn.communicator.User;
 import pl.mn.communicator.logger.Logger;
 
 /**
@@ -30,7 +32,7 @@ import pl.mn.communicator.logger.Logger;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.18 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGNotifyReply.java,v 1.19 2004-10-27 00:52:15 winnetou25 Exp $
  */
 public class GGNotifyReply implements GGIncomingPackage {
     
@@ -60,7 +62,7 @@ public class GGNotifyReply implements GGIncomingPackage {
      * Kluczem jest <code>User</code> a warto¶ci± <code>Status</code>.
      * @return statusy u¿ytkowników
      */
-    Map getUsersState() {
+    public Map getUsersState() {
         return statusy;
     }
 

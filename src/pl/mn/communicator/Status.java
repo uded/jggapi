@@ -15,19 +15,18 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator;
 
 import java.util.Date;
 import java.util.Map;
 
-import pl.mn.communicator.AbstractStatus;
 import pl.mn.communicator.logger.Logger;
 
 /**
  * Status u¿ytkownika gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Status.java,v 1.13 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: Status.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $
  */
 public class Status extends AbstractStatus {
 	

@@ -17,12 +17,14 @@
  */
 package pl.mn.communicator.gadu;
 
+import pl.mn.communicator.Status;
+
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGConversion.java,v 1.11 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: GGConversion.java,v 1.12 2004-10-27 00:52:15 winnetou25 Exp $
  */
-final class GGConversion {
+public final class GGConversion {
 	
     /**
      * Prywatny konstruktor.

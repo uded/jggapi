@@ -15,43 +15,27 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator;
+
+import pl.mn.communicator.logger.Logger;
 
 /**
- * Naglowek wiadomosci gg.
+ * U¿ytkownik lokalny gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGHeader.java,v 1.8 2004-10-27 00:52:15 winnetou25 Exp $
+ * @version $Id: LocalUser.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $
  */
-public class GGHeader {
-    
-	private byte[] data;
-    private int type;
-    private int length;
+public final class LocalUser extends AbstractLocalUser {
+	
+    private static Logger logger = Logger.getLogger(LocalUser.class);
 
     /**
-     * Constructor for Header.
-     * @param data dane naglowka
+     * Tworz u¿ytkownika lokalnego.
+     * @param userNo numer u¿ytkownika
+     * @param password has³o u¿ytkownika
      */
-    public GGHeader(byte[] data) {
-        this.type = GGConversion.byteToInt(data, 0);
-        this.length = GGConversion.byteToInt(data, 4);
-    }
-
-    /**
-     * Returns the length.
-     * @return int
-     */
-    public int getLength() {
-        return length;
-    }
-
-    /**
-     * Returns the type.
-     * @return int
-     */
-    public int getType() {
-        return type;
+    public LocalUser(int userNo, String password) {
+        super(userNo, password);
     }
     
 }

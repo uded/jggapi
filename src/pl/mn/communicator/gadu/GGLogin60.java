@@ -17,26 +17,37 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.AbstractMessage;
-import pl.mn.communicator.logger.Logger;
-
 /**
- * Wiadomosc gg.
- * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Message.java,v 1.10 2004-10-26 23:56:40 winnetou25 Exp $
+ * Wiadomo¶æ wysy³ana w czasie logowania.
+ *
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGLogin60.java,v 1.1 2004-10-27 00:52:15 winnetou25 Exp $
  */
-public final class Message extends AbstractMessage {
-    
-	private static Logger logger = Logger.getLogger(Message.class);
+public class GGLogin60 implements GGOutgoingPackage {
 
-    /**
-     * Tworz wiadomo¶æ na podstawie adresata i tre¶ci.
-     * @param toUser adresat wiadomo¶ci
-     * @param text tre¶c wiadomo¶ci
-     */
-    public Message(int toUser, String text) {
-        super(toUser, text);
-    }
-    
+	public final static int GG_LOGIN60 = 0x0015;
+
+	/**
+	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
+	 */
+	public int getHeader() {
+		return GG_LOGIN60;
+	}
+
+	/**
+	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
+	 */
+	public int getLength() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/**
+	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
+	 */
+	public byte[] getContents() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

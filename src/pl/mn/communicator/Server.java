@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -24,15 +24,13 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.StringTokenizer;
 
-import pl.mn.communicator.AbstractServer;
-import pl.mn.communicator.ILocalUser;
 import pl.mn.communicator.logger.Logger;
 
 /**
  * Klasa z danymi dotycz±cymi serwera gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Server.java,v 1.14 2004-10-26 23:56:40 winnetou25 Exp $* @version $Revision: 1.14 $
+ * @version $Id: Server.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $* @version $Revision: 1.1 $
  */
 public final class Server extends AbstractServer {
     private static Logger logger = Logger.getLogger(Server.class);

@@ -21,6 +21,8 @@ import java.util.Date;
 
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.Status;
+import pl.mn.communicator.User;
 import pl.mn.communicator.logger.Logger;
 
 /**
@@ -28,7 +30,7 @@ import pl.mn.communicator.logger.Logger;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.17 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.18 2004-10-27 00:52:15 winnetou25 Exp $
  */
 public class GGStatus implements GGIncomingPackage {
 

@@ -19,13 +19,15 @@ package pl.mn.communicator.gadu;
 
 import java.util.Date;
 
+import pl.mn.communicator.Status;
+
 /**
  * Status uzytkownika gg
  * TODO implementacja trybu tylko dla przyjaciol
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNewStatus.java,v 1.3 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGNewStatus.java,v 1.4 2004-10-27 00:52:15 winnetou25 Exp $
  */
 public class GGNewStatus implements GGOutgoingPackage {
 	

@@ -15,43 +15,27 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator;
+
+import pl.mn.communicator.logger.Logger;
 
 /**
- * Naglowek wiadomosci gg.
+ * Wiadomosc gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGHeader.java,v 1.8 2004-10-27 00:52:15 winnetou25 Exp $
+ * @version $Id: Message.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $
  */
-public class GGHeader {
+public final class Message extends AbstractMessage {
     
-	private byte[] data;
-    private int type;
-    private int length;
+	private static Logger logger = Logger.getLogger(Message.class);
 
     /**
-     * Constructor for Header.
-     * @param data dane naglowka
+     * Tworz wiadomo¶æ na podstawie adresata i tre¶ci.
+     * @param toUser adresat wiadomo¶ci
+     * @param text tre¶c wiadomo¶ci
      */
-    public GGHeader(byte[] data) {
-        this.type = GGConversion.byteToInt(data, 0);
-        this.length = GGConversion.byteToInt(data, 4);
-    }
-
-    /**
-     * Returns the length.
-     * @return int
-     */
-    public int getLength() {
-        return length;
-    }
-
-    /**
-     * Returns the type.
-     * @return int
-     */
-    public int getType() {
-        return type;
+    public Message(int toUser, String text) {
+        super(toUser, text);
     }
     
 }

@@ -17,26 +17,27 @@
  */
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.AbstractLocalUser;
-import pl.mn.communicator.logger.Logger;
-
 /**
- * U¿ytkownik lokalny gg.
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: LocalUser.java,v 1.9 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGStatus60.java,v 1.1 2004-10-27 00:52:16 winnetou25 Exp $
  */
-public final class LocalUser extends AbstractLocalUser {
-	
-    private static Logger logger = Logger.getLogger(LocalUser.class);
+public class GGStatus60 {
 
-    /**
-     * Tworz u¿ytkownika lokalnego.
-     * @param userNo numer u¿ytkownika
-     * @param password has³o u¿ytkownika
-     */
-    public LocalUser(int userNo, String password) {
-        super(userNo, password);
-    }
-    
+	public static final int GG_STATUS60 = 0x0F;
+
+//	#define GG_STATUS60 0x000f
+	
+//struct gg_status60 {
+//	int uin;	        /* numer plus flagi w najstarszym bajcie */
+//	char status;	        /* nowy stan */
+//	int remote_ip;		/* adres IP bezpoœrednich po³¹czeñ */
+//	short remote_port;	/* port bezpoœrednich po³¹czeñ */
+//	char version;		/* wersja klienta */
+//	char image_size;	/* maksymalny rozmiar grafiki */
+//	char unknown1;		/* 0x00 *
+//	char description[];	/* opis, nie musi wyst¹piæ */
+//	int time;		/* czas, nie musi wyst¹piæ */
+//};
+	
 }

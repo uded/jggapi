@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.gadu;
+package pl.mn.communicator;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -25,11 +25,20 @@ import java.net.UnknownHostException;
 import java.util.Iterator;
 import java.util.Map;
 
-import pl.mn.communicator.ILocalUser;
-import pl.mn.communicator.IMessage;
-import pl.mn.communicator.IServer;
-import pl.mn.communicator.IStatus;
-import pl.mn.communicator.IUser;
+import pl.mn.communicator.gadu.GGAddNotify;
+import pl.mn.communicator.gadu.GGConversion;
+import pl.mn.communicator.gadu.GGHeader;
+import pl.mn.communicator.gadu.GGLogin;
+import pl.mn.communicator.gadu.GGNewStatus;
+import pl.mn.communicator.gadu.GGNotify;
+import pl.mn.communicator.gadu.GGNotifyReply;
+import pl.mn.communicator.gadu.GGOutgoingPackage;
+import pl.mn.communicator.gadu.GGPing;
+import pl.mn.communicator.gadu.GGRecvMsg;
+import pl.mn.communicator.gadu.GGRemoveNotify;
+import pl.mn.communicator.gadu.GGSendMsg;
+import pl.mn.communicator.gadu.GGStatus;
+import pl.mn.communicator.gadu.GGWelcome;
 import pl.mn.communicator.logger.Logger;
 import pl.mn.communicator.util.Util;
 
@@ -51,7 +60,7 @@ import pl.mn.communicator.util.Util;
  * </code>
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Connection.java,v 1.36 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: Connection.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
 
