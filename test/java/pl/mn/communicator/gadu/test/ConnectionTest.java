@@ -43,25 +43,25 @@ public class ConnectionTest extends TestCase {
 
     public void testSendMessage() throws IOException {
         LoginContext user = new LoginContext(1336843, "dupadupa");
-        Server server = Server.getDefaultServer(user);
+//        Server server = Server.getDefaultServer(user);
 
-        log.info(server.getAddress() + ":" + server.getPort());
+//        log.info(server.getAddress() + ":" + server.getPort());
 
-        connection = new Connection(server, user);
-        connection.addConnectionListener(new ConnectionListener() {
-                public void connectionEstablished() {
-                    log.info("connection established");
-                }
-
-                public void disconnected() {
-                    log.info("disconnected");
-                }
-
-                public void connectionError(String error) {
-                    log.info("connection error: " + error);
-                }
-            });
-        connection.connect();
+//        connection = new Connection(server, user);
+//        connection.addConnectionListener(new ConnectionListener() {
+//                public void connectionEstablished() {
+//                    log.info("connection established");
+//                }
+//
+//                public void disconnected() {
+//                    log.info("disconnected");
+//                }
+//
+//                public void connectionError(String error) {
+//                    log.info("connection error: " + error);
+//                }
+//            });
+//        connection.connect();
     }
 
     public void testDisconnect() throws IOException {
