@@ -25,7 +25,7 @@ import java.util.Date;
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: RemoteStatus.java,v 1.3 2004-12-26 22:07:35 winnetou25 Exp $
+ * @version $Id: RemoteStatus.java,v 1.4 2004-12-26 23:46:59 winnetou25 Exp $
  */
 public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 
@@ -157,7 +157,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IRemoteStatus#isUserBehingFirewall()
+	 * @see pl.mn.communicator.IRemoteStatus#isUserBehindFirewall()
 	 */
 	public boolean isUserBehindFirewall() {
 		return m_isUserBehindFirewall;
