@@ -52,7 +52,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.29 $
+ * @version $Revision: 1.30 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -163,6 +163,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
         private static final int GG_PACKAGE_MESSAGE = 10;
         private static final int GG_PACKAGE_CONNECTION_ERROR = 11;
         private static final int GG_NOTIFY_REPLY = 0x11;
+        private static final int GG_STATUS = 0x0f;
         private Socket socket;
         private Thread thread;
         private BufferedInputStream dataInput;
@@ -301,6 +302,19 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                         logger.debug("Uzytkownik " + user +
                             " zmienil status: " + status);
                     }
+                }
+
+                break;
+
+            case GG_STATUS:
+
+                GGStatus status = new GGStatus(keyBytes);
+
+                if (userListener != null) {
+                    userListener.userStatusChanged(status.getUser(),
+                        status.getStatus());
+                    logger.debug("Uzytkownik " + status.getUser() +
+                        " zmienil status: " + status.getStatus());
                 }
 
                 break;
