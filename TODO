@@ -18,6 +18,7 @@ OK - implementacja dodanie do monitorowania,
 - reakcja na zmiane statusu uzytkownika podczas dzialania
 - statusy z opisem i czasem powrotu dla uzytkownika lokalnego
 - poprawienie pinga
+- rozmowy grupowe
 - implementacja importu i eksportu uzytkownikow
 - implementacja katalogu publicznego (wyszukiwania)
 - wprowadzenie wzorca chain of responsibility w rozpoznawaniu
