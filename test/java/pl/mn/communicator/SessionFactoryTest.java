@@ -1,8 +1,5 @@
 /*
  * Created on 2004-12-18
- *
- * TODO To change the template for this generated file go to
- * Window - Preferences - Java - Code Style - Code Templates
  */
 package pl.mn.communicator;
 
@@ -19,10 +16,7 @@ import pl.mn.communicator.event.SessionStateListener;
 import junit.framework.TestCase;
 
 /**
- * @author Uzytkownik
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author Marcin Naglik
  */
 public class SessionFactoryTest extends TestCase {
 	private final static Log logger = LogFactory.getLog(SessionFactoryTest.class);
@@ -51,22 +45,18 @@ public class SessionFactoryTest extends TestCase {
 		session.getConnectionService().addConnectionListener(new ConnectionListener(){
 
 			public void connectionEstablished() {
-				// TODO Auto-generated method stub
 				logger.info("Connection established");
 			}
 
 			public void connectionClosed() {
-				// TODO Auto-generated method stub
 				logger.info("Connection closed");
 			}
 
 			public void connectionError(Exception e) {
-				// TODO Auto-generated method stub
 				logger.info("Connection error",e);
 			}
 
 			public void pongReceived() {
-				// TODO Auto-generated method stub
 				logger.info("Pong received");
 			}});
 		
@@ -79,6 +69,7 @@ public class SessionFactoryTest extends TestCase {
 		session.getConnectionService().connect();
 		Thread.sleep(10000);
 		
+		// FIXME dlaczego wyrzuca incorrectstate (auth awaiting)? mozlowosc rozlaczenia IMHO powinna byc zawsze!
 		
 		session.getConnectionService().disconnect();
 		Thread.sleep(10000);
