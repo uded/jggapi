@@ -11,4 +11,5 @@ PRIORITY
 --------
 - implementacja GGNotify
 - implementacja GGNotifyReply
+- implementacja GGListEmpty
 
