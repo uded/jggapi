@@ -11,7 +11,9 @@
             nodeprecated="false"
             packagenames="pl.mn.communicator.gadu,pl.mn.communicator"
             sourcepath="src"
-            classpath="bin;lib\jface.jar;lib\runtime.jar;lib\workbench.jar;lib\swt.jar;lib\boot.jar;lib\log4j-1.2.8.jar" doctitle="JGGAPI"/>
+            classpath="bin;lib\log4j-1.2.8.jar" doctitle="JGGAPI"
+            encoding="iso-8859-2" docencoding="iso-8859-2"
+            />
     </target>
 
 	<target name="init">
@@ -22,28 +24,18 @@
 
 	<target name="compile" depends="init" description="compile the source " >
 		<javac srcdir="${src}" destdir="${build}"
-		    classpath="lib\jface.jar;lib\runtime.jar;lib\workbench.jar;lib\swt.jar;lib\boot.jar;lib\log4j-1.2.8.jar"/>
-		<copy todir="${build}">
-		    <fileset dir="src">
-				<include name="**/*.bmp"/>
-				<include name="**/*.gif"/>
-		    </fileset>
-		</copy>
+		    classpath="lib\log4j-1.2.8.jar"/>
 	</target>
 
 	<target name="dist" depends="compile" description="generate the distribution" >
-	    <jar jarfile="${dist}/jgg-${DSTAMP}.jar" basedir="${build}">
+	    <jar jarfile="${dist}/jggapi-${DSTAMP}.jar" basedir="${build}">
+<!--
 			<manifest>
 				<attribute name="Main-class" value="pl.mn.communicator.gui.MainForm"/>
 				<attribute name="Classpath" value="jface.jar;runtime.jar;workbench.jar;swt.jar;boot.jar;log4j-1.2.8.jar"/>
 			</manifest>
+-->
 		</jar>
-		<copy todir="${dist}">
-		    <fileset dir="lib">
-		    </fileset>
-		</copy>
-		<copy file="swt-win32-3019.dll" todir="${dist}"/>
-		<copy file="config.cfg" todir="${dist}"/>
 	</target>
 
 	<target name="clean" description="clean up" >

@@ -32,7 +32,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Klasa z danymi dotycz±cymi serwera gg.
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public final class Server extends AbstractServer {
@@ -44,7 +44,7 @@ public final class Server extends AbstractServer {
 	/**
 	 * Pobierz serwera gg ze strony www udostêpnionej na serwerze www gg.
 	 * 
-	 * @param localUser u¿ytkownik (potrzebny do stworzenia adresu)
+	 * @param user u¿ytkownik (potrzebny do stworzenia adresu)
 	 * @return Server serwer
 	 * @throws IOException
 	 */
