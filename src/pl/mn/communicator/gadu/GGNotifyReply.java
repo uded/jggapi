@@ -17,16 +17,33 @@
  */
 package pl.mn.communicator.gadu;
 
+import java.util.Map;
+import org.apache.log4j.Logger;
+
 
 /**
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
-    /*
+	private static Logger logger = Logger.getLogger(GGNotifyReply.class);
+	
+	GGNotifyReply(byte[] dane) {
+    	logger.debug("Pakiet zmiany stanu u¿ytkownika");
+	}
+	
+	/**
+	 * Zwróc mapê statusów u¿ytkowników.
+	 * Kluczem jest <code>User</code> a warto¶ci± <code>UserState</code>.
+	 * @return
+	 */
+	Map getUsersState() {
+		return null;
+	}
+	/*
         #define GG_NOTIFY_REPLY 0x000c   tak, to samo co GG_LOGIN
 
         struct gg_notify_reply {
