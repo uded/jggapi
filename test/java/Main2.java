@@ -163,6 +163,7 @@ public class Main2 {
 		PublicDirSearchQuery publicDirQuery = new PublicDirSearchQuery();
 		publicDirQuery.setCity("Szczecin");
 		publicDirQuery.setGender(Gender.FEMALE);
+		publicDirQuery.setActiveOnly(new Boolean(true));
 		
 		session.getPublicDirectoryService().search(publicDirQuery);
 		
