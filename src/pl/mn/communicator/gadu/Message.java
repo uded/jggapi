@@ -22,9 +22,9 @@ import org.apache.log4j.Logger;
 import pl.mn.communicator.AbstractMessage;
 
 /**
- * Wiadomoœæ gg.
+ * Wiadomo¶æ gg.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public final class Message extends AbstractMessage {

@@ -22,9 +22,9 @@ import org.apache.log4j.Logger;
 import pl.mn.communicator.AbstractUser;
 
 /**
- * Uzytkownik gg.
+ * U¿ytkownik gg.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public class User extends AbstractUser {

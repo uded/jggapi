@@ -21,9 +21,9 @@ import org.apache.log4j.Logger;
 
 
 /**
- * Klasa reprezentuj¹ca serwer rozmów.
+ * Klasa reprezentuj±ca serwer rozmów.
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public abstract class AbstractServer implements IServer {

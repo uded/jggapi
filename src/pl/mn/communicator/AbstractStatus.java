@@ -23,11 +23,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 /**
- * Klasa reprezentuj¹ca status u¿ytkownika.
+ * Klasa reprezentuj±ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
  * mog¹ zostaæ dodane w podklasach.
  * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public abstract class AbstractStatus implements IStatus {
