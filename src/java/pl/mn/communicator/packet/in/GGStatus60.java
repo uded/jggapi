@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.8 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.9 2004-12-20 22:44:25 winnetou25 Exp $
  */
 public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 
@@ -43,7 +43,7 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 //	int remote_ip;		/* adres IP bezpo�rednich po��cze� */ 4
 //	short remote_port;	/* port bezpo�rednich po��cze� */ 2
 //	char version;		/* wersja klienta */ 1
-//	char image_size;	/* maksymalny rozmiar grafiki */ 1
+//	short image_size;	/* maksymalny rozmiar grafiki */ 2 // W OPISIE PROTOKOLU GG SA BLEDY!!!
 //	char unknown1;		/* 0x00 * 1
 //	char description[];	/* opis, nie musi wyst�pi� */ n
 //	int time;		/* czas, nie musi wyst�pi� */ 1
@@ -95,8 +95,8 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
     	//TODO remoteIP is wrongly converted
     	int remoteIP = GGUtils.byteToInt(data, 5);
     	int remotePort = GGUtils.byteToShort(data, 9);
-    	byte imageSize = data[10];
     	byte version = data[11];
+    	int imageSize = GGUtils.byteToShort(data, 12);
     	
     	String description = null;
     	long timeInMillis = -1;

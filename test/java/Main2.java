@@ -42,7 +42,7 @@ public class Main2 {
 
 		IUser acze = new User(1136132, UserMode.BUDDY);
 		IUser jaffa = new User(1542863, UserMode.BUDDY);
-		IUser mati = new User(376798, UserMode.FRIEND);
+		IUser mati = new User(376798, UserMode.BUDDY);
 
 		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
 		loginContext.getStatus().setFriendsOnly(true);

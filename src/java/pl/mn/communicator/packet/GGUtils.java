@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.11 2004-12-20 22:46:32 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.10 2004-12-20 22:43:16 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -223,7 +223,7 @@ public class GGUtils {
 	    tmp = unsignedByteToInt(buf[pos++]) << 8;
 	    i += tmp;
 	
-	    return i;
+	    return (short) i;
 	}
 	
 	public static long secondsToMillis(int seconds) {

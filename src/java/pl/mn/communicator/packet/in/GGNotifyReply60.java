@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.8 2004-12-20 22:47:41 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -85,9 +85,9 @@ public class GGNotifyReply60 implements GGIncomingPackage {
         	remoteIP[2] = data[offset+7];
         	remoteIP[3] = data[offset+8];
         	
-        	short remotePort = GGUtils.byteToShort(data, offset+9);
+        	int remotePort = GGUtils.byteToShort(data, offset+9);
         	byte version = data[offset+11];
-        	byte imageSize = data[offset+12];
+        	int imageSize = GGUtils.byteToShort(data, offset+12);
         		
         	String description = null;
         	int descriptionSize = -1;
@@ -132,6 +132,8 @@ public class GGNotifyReply60 implements GGIncomingPackage {
             }
 
             status60.setRemoteIP(remoteIP);
+            status60.setImageSize(imageSize);
+            status60.setGGVersion(version);
             
             if (descriptionSize != -1) {
             	status60.setDescriptionSize(descriptionSize);

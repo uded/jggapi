@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGNotifyReply.java,v 1.7 2004-12-20 22:43:45 winnetou25 Exp $
  */
 public class GGNotifyReply implements GGIncomingPackage {
 
@@ -77,7 +77,7 @@ public class GGNotifyReply implements GGIncomingPackage {
             int status = GGUtils.unsignedByteToInt(data[offset+4]);
             int remoteIP = GGUtils.byteToInt(data, offset+5);
             byte[] remoteIPByte = GGUtils.intToByte(remoteIP);
-            short remotePort = GGUtils.byteToShort(data, offset+9);
+            int remotePort = GGUtils.byteToShort(data, offset+9);
             int version = GGUtils.byteToInt(data, offset+11);
 
             String description = null;
