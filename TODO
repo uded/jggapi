@@ -3,13 +3,14 @@ Bugs or features for version 1.0
    Generalnie zrobione, ale  dzisiaj nie potrafimy monitorowac wiecej niz 2040 bytes long uzytkownikow. Jezeli taki jest pakiet
    trzeba uzywac GGRequestFirst i potem GGRequestLast a my dzisiaj tylko GGRequestLast pakietu uzywamy.
    Przynajmniej przy staracie, bo w trakcie dzialania mozemy zawsze AddNotify zrobic.
-2. HIGH - Implementacja trybu tylko dla przyjaciol
-3. HIGH - implementacja szukania i klasy LocalUser, SearchContext
+2. HIGH - Implementacja trybu tylko dla przyjaciol.
+3. HIGH - implementacja szukania w katalogu publicznym i pisania i czytania wlasnych danych z katalogu.
+	Czytanie i pisanie wlasnych informacji jest juz zrobione. Z szukaniem sa jeszcze problemy.
 4. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
 5. Audyt session states.
 6. PARTIALY-DONE - 7. MED - Export i import listy kontaktow , TODO. obsluga PUT_MORE i GET_MORE
 7. RemoteIP jest zle konwertowane do IP. O co chodzi?
-8. Podzielic kod na api i impl.
+8. Podzielic kod na api i impl?
 9. Maven POM i documentation (xdocs).
 10. Przejrzec jggapi w punktu widzenia watkow. Ta biblioteka moze byc teraz nie thread-safe.
 11. Zobaczyc czy nie da sie zastosowac dekoratora do InputStream'a przy
@@ -18,22 +19,24 @@ Bugs or features for version 1.0
 	void read() // wisimy na read.
 	//po odwieszeniu sie biezemy pakiet.
 	GGIncomingPacket getIncommingPacket(); //incomming packet ma juz GGHeader.
+12. Podzial statusu na local i remote.
+13. MED - Bardziej dokladna dokumentacja w java docs.
+14. Rozwazyc wprowadzenie socket.setTimeout();
 
 Bugs or features for 1.5 version.
 1. LOW - Obslugiwanie serwisow dostepnych przez www (RegistrationService) (rejestracja uzytkownika, zmiana danych itp...)
 2. LOW - Implementacja wysylania plikow.
-3. MED - Bardziej dokladna dokumentacja w java docs.
-4. LATER (obecnie mozna odpowiedziec nadawcy dla rozmowy grupowej) - rozmowy grupowe
-5. Czy interval pingowania powinien byc konfiguralny? W klasie Session?
-6. Do monitorowanych uzytkownikow chyba lepiej przekazywac LocalUsers, ale wtedy moze byc problem z blokowanymi.
-7. Dodac na starcie liste uzytkownikow do zablokowania. Wrzucic to do LoginContext, czy nazwa
+3. LATER (obecnie mozna odpowiedziec nadawcy dla rozmowy grupowej) - rozmowy grupowe
+4. Czy interval pingowania powinien byc konfiguralny? W klasie Session?
+5. Do monitorowanych uzytkownikow chyba lepiej przekazywac LocalUsers, ale wtedy moze byc problem z blokowanymi.
+6. Dodac na starcie liste uzytkownikow do zablokowania. Wrzucic to do LoginContext, czy nazwa
    monitored user w przypadku zablokowanych ma sens?
-8. Nie dziala odblokowywanie, jezeli zablokowalismy usera i potem metoda changeStatus w presence service
+7. Nie dziala odblokowywanie, jezeli zablokowalismy usera i potem metoda changeStatus w presence service
    to zmieniamy, to user jest nadal zablokowany.
-9. Napisac testy junit.
-10. Implementacja wysylania obrazkow i wiadomosci richtext.
-11. Wsparcie dla SSL.
-12.	Wysylanie plikow i polaczenia bezposrednie.
+8. Napisac testy junit.
+9. Implementacja wysylania obrazkow i wiadomosci richtext.
+10. Wsparcie dla SSL.
+11.	Wysylanie plikow i polaczenia bezposrednie.
 
 KnownBugs:
 status in LoginContext does not work out! Tak jakby serwer GG to ignorowal
