@@ -25,7 +25,7 @@ import java.util.Set;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IMessageService;
-import pl.mn.communicator.IncommingMessage;
+import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.SessionState;
@@ -36,7 +36,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.3 2004-12-18 15:35:06 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.4 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
@@ -79,7 +79,7 @@ public class DefaultMessageService implements IMessageService {
 		m_messageListeners.remove(messageListener);
 	}
 	
-	protected void notifyMessageArrived(IncommingMessage incommingMessage) {
+	protected void notifyMessageArrived(IncomingMessage incommingMessage) {
 		if (incommingMessage == null) throw new NullPointerException("incommingMessage cannot be null");
 		for (Iterator it = m_messageListeners.iterator(); it.hasNext();) {
 			MessageListener messageListener = (MessageListener) it.next();

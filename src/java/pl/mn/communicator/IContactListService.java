@@ -22,21 +22,54 @@ import java.util.Collection;
 import pl.mn.communicator.event.ContactListListener;
 
 /**
+ * Through this service client can either clear, export or import contact list
+ * to the Gadu-Gadu server.
+ * <p>
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IContactListService.java,v 1.2 2004-12-18 15:10:41 winnetou25 Exp $
+ * @version $Id: IContactListService.java,v 1.3 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public interface IContactListService {
 
+	/**
+	 * Clears user's contact list from the Gadu-Gadu server.
+	 * 
+	 * @throws GGException if there is an error while exporting contact 
+	 */
 	void clearContactList() throws GGException;
 	
+	/**
+	 * Exports user's contact list to the Gadu-Gadu server.
+	 * 
+	 * @param users collection of <code>LocalUser</code> objects.
+	 * @throws GGException if where is an error while exporting contact list.
+	 */
 	void exportContactList(Collection users) throws GGException;
 
+	/**
+	 * Imports user's contact list from the Gadu-Gadu server.
+	 * 
+	 * @throws GGException if there is an error while importing contact list.
+	 */
 	void importContactList() throws GGException;
 	
+	/**
+	 * Adds <code>ContactListListener</code> to the list of listeners
+	 * to be notified of events such as successfuly importing or 
+	 * exporting contact list.
+	 * 
+	 * @param contactListListener the listener to be notified of contact list events.
+	 */
 	void addContactListListener(ContactListListener contactListListener);
 	
+	/**
+	 * Removes <code>ContactListListener</code> from the list of listeners
+	 * that are notified of events such as successfuly importing or exporting
+	 * contact list.
+	 * 
+	 * @param contactListListener the listener object to be removed from contact list events notification.
+	 */
 	void removeContactListlistener(ContactListListener contactListListener);
 	
 }

@@ -1,15 +1,12 @@
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 
 import pl.mn.communicator.GGException;
-import pl.mn.communicator.User;
-import pl.mn.communicator.UserMode;
 import pl.mn.communicator.Gender;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.IncommingMessage;
+import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
@@ -17,7 +14,8 @@ import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionFactory;
-import pl.mn.communicator.StatusType;
+import pl.mn.communicator.User;
+import pl.mn.communicator.User.UserMode;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.event.LoginListener;
@@ -42,17 +40,16 @@ public class Main2 {
 
 	public static void main(String args[]) throws IOException, GGException {
 
-		ArrayList users = new ArrayList();
-		
-		User user2 = new User(1136132, UserMode.BUDDY);
+		IUser acze = new User(1136132, UserMode.BUDDY);
+		IUser jaffa = new User(1542863, UserMode.BUDDY);
+		IUser mati = new User(376798, UserMode.FRIEND);
 
-		users.add(user2);
-		
 		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
-		loginContext.setMonitoredUsers(users);
+		loginContext.getStatus().setFriendsOnly(true);
 		
-		IStatus status = loginContext.getStatus();
-		status.setStatusType(StatusType.BUSY);
+		loginContext.getMonitoredUsers().add(acze);
+		loginContext.getMonitoredUsers().add(jaffa);
+		loginContext.getMonitoredUsers().add(mati);
 		
 		final ISession session = SessionFactory.createSession(loginContext);
 		
@@ -94,7 +91,7 @@ public class Main2 {
 		});
 		session.getMessageService().addMessageListener(new MessageListener() {
 
-			public void messageArrived(IncommingMessage incommingMessage) {
+			public void messageArrived(IncomingMessage incommingMessage) {
 				System.out.println("MessageArrived, from user: "+incommingMessage.getUin());
 				System.out.println("MessageBody: "+incommingMessage.getMessageBody());
 				System.out.println("MessageID: "+incommingMessage.getMessageID());

@@ -21,20 +21,32 @@ import java.util.Collection;
 import java.util.EventListener;
 
 /**
+ * The listener interface for receiving contact list related events.
  * <p>
- * Contact list related events.
+ * The class that is interested in processing a contact list event implements
+ * this interface. Then the class that implements this interface has to register in
+ * <code>ContactListService</code>. When the contact list event occurs
+ * the object's (ContactListHandler) methods will be invoked.
  * <p>
  * Created on 2004-12-11
  * 
+ * @see pl.mn.communicator.IContactListService
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ContactListListener.java,v 1.2 2004-12-18 15:15:22 winnetou25 Exp $
+ * @version $Id: ContactListListener.java,v 1.3 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public interface ContactListListener extends EventListener {
 
-	/** Notification that contact list has been successfuly exported. */
+	/** 
+	 * Notification that contact list has been successfuly exported
+	 * to Gadu-Gadu server.
+	 */
 	void contactListExported();
 	
-	/** Notification that contact list has been successfuly received */
+	/**
+	 * Notification that contact list has been successfuly received
+	 * from Gadu-Gadu server.
+	 * @param users the collection of <code>LocalUser</code> objects.
+	 */
 	void contactListReceived(Collection users);
 
 	public static class Stub implements ContactListListener {

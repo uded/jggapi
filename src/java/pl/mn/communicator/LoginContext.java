@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.commons.logging.Log;
@@ -25,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.2 2004-12-18 22:07:54 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.3 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public final class LoginContext {
 	
@@ -37,7 +38,7 @@ public final class LoginContext {
 
 	private Status m_localStatus = new Status(StatusType.ONLINE);
 	
-	private Collection m_monitoredUsers = null;
+	private Collection m_monitoredUsers = new ArrayList();
 	
     private byte m_imageSize = 64;
     
@@ -126,11 +127,6 @@ public final class LoginContext {
 	public int getLocalPort() {
 		return m_localPort;
 	}
-	
-	public void setMonitoredUsers(Collection monitoredUsers) {
-		//if (monitoredUsers == null) throw new NullPointerException("monitoredUsers cannot be null");
-		m_monitoredUsers = monitoredUsers;
-	} 
 	
 	public Collection getMonitoredUsers() {
 		return m_monitoredUsers;

@@ -20,7 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.IncommingMessage;
+import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGRecvMsg;
 
@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.in.GGRecvMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGMessageReceivedPacketHandler.java,v 1.3 2004-12-18 16:47:20 winnetou25 Exp $
+ * @version $Id: GGMessageReceivedPacketHandler.java,v 1.4 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public class GGMessageReceivedPacketHandler implements PacketHandler {
 
@@ -46,7 +46,7 @@ public class GGMessageReceivedPacketHandler implements PacketHandler {
 
 		GGRecvMsg recvMsg = new GGRecvMsg(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(recvMsg);
-		IncommingMessage incommingMessage = new IncommingMessage(recvMsg.getSenderUin(), recvMsg.getMessage(), recvMsg.getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
+		IncomingMessage incommingMessage = new IncomingMessage(recvMsg.getSenderUin(), recvMsg.getMessage(), recvMsg.getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
 		context.getSessionAccessor().notifyMessageArrived(incommingMessage);
 	}
 

@@ -20,24 +20,42 @@ package pl.mn.communicator.event;
 import java.util.EventListener;
 
 /**
- * The listener that is connected with connection to Gadu-Gadu server events.
+ * The listener interface for receiving connection related events.
+ * It notifies whether connection is established, closed or an error
+ * occurs during connection.
+ * <p>
+ * This listener also notifies that pong has been received from 
+ * Gadu-Gadu server.
+ * <p>
+ * Created on 2004-12-11
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ConnectionListener.java,v 1.2 2004-12-18 15:14:56 winnetou25 Exp $
+ * @version $Id: ConnectionListener.java,v 1.3 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public interface ConnectionListener extends EventListener {
 	
-    /** The notification that connection to the server has been successfuly established. */
+    /** 
+     * The notification that connection to the server
+     * has been successfuly established.
+     */
     void connectionEstablished();
 
-    /** The notification that connection to the server has been delibately closed. */
+    /** 
+     * The notification that connection to the server
+     * has been delibately closed.
+     */
     void connectionClosed();
 
-    /** Notification that there was an unexpected error with the connection */
+    /**
+     * Notification that there was an unexpected error
+     * with the connection.
+     */
     void connectionError(Exception e);
    
-    /** Notification when server sends us pong packet */
+    /**
+     * Notification that Gadu-Gadu server sent us pong packet.
+     */
     void pongReceived();
     
     public static class Stub implements ConnectionListener {

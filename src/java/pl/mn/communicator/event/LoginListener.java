@@ -20,20 +20,27 @@ package pl.mn.communicator.event;
 import java.util.EventListener;
 
 /**
+ * The listener interface that is related with login related events.
+ * <p>
+ * The classes that implement this interface are notified of
+ * whether the client's attempt to login was successful or not.
+ * <p>   
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginListener.java,v 1.3 2004-12-18 15:35:05 winnetou25 Exp $
+ * @version $Id: LoginListener.java,v 1.4 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public interface LoginListener extends EventListener {
 	
 	/**
-	 * Messaged when user has successfully logged in to Gadu-Gadu server.
+	 * Messaged when user has successfully
+	 * logged in to Gadu-Gadu server.
 	 */
 	void loginOK();
 	
 	/** 
-	 * Messaged when there was an error while logging in, most probably because of an incorrect password.
+	 * Messaged when there was an error while logging in,
+	 * most probably because of an incorrect password.
 	 */
 	void loginFailed();
 	

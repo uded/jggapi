@@ -23,23 +23,33 @@ import pl.mn.communicator.packet.in.GGIncomingPackage;
 import pl.mn.communicator.packet.out.GGOutgoingPackage;
 
 /**
+ * The listener interface for receiving packet related events.
  * <p>
- * Gadu-Gadu packet related events.
+ * The class that implements this interface, so-called GGPacketHandler
+ * is notified of packet sent and received events.
  * <p>
- * Might occasionaly be used but it it highly encouraged that 
- * only experienced users use it.
+ * It is highly recommended that this listener is only used by
+ * an experienced developer that really knows how to handle events.
  * <p>
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPacketListener.java,v 1.3 2004-12-18 15:35:05 winnetou25 Exp $
+ * @version $Id: GGPacketListener.java,v 1.4 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public interface GGPacketListener extends EventListener {
 
-	/** Notification that Gadu-Gadu outgoing packet has been written to socket */
+	/**
+	 * Notification that Gadu-Gadu outgoing packet has been sent to the Gadu-Gadu server.
+	 * 
+	 * @param outgoingPacket the packet that has been sent to the Gadu-Gadu server.
+	 */
 	void sentPacket(GGOutgoingPackage outgoingPacket);
 
-	/** Notification that Gadu-Gadu incomming packet has been received */
+	/**
+	 * Notification that Gadu-Gadu incoming packet has been received.
+	 * 
+	 * @param incomingPacket the packet that has been received from the Gadu-Gadu server.
+	 */
 	void receivedPacket(GGIncomingPackage incomingPacket);
 	
 	public static class Stub implements GGPacketListener {

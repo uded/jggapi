@@ -23,33 +23,44 @@ import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 
 /**
+ * The listener interface that is related to Gadu-Gadu's
+ * public directory service.
+ * <p>
+ * The class that implement this interface, aka PublicDirHandler
+ * is notified whether the search request was received or the 
+ * Gadu-Gadu user's personal information has been successfully
+ * read from the public directory or written to public directory.
+ * <p> 
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.10 2004-12-19 11:49:14 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.11 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public interface PublicDirListener extends EventListener {
 
 	/**
-	 * <p>
 	 * Messaged when search results arrived from Gadu-Gadu
 	 * server after sending query.
-	 * <p>
-	 * The parameter contains collection of matched results.
+	 * 
+	 * @param queryID the id of the query that has been previously created.
+	 * @param publicDirSearchReply the object that represents Gadu-Gadu's server reply.
 	 */
 	void onPublicDirectorySearchReply(int queryID, PublicDirSearchReply publicDirSearchReply);
 
 	/**
-	 * Messaged when we have successfuly retrieved information about our
-	 * uin from the public directory.
+	 * Messaged when we have successfully retrieved our personal information
+	 * from the Gadu-Gadu's public directory.
 	 * 
-	 * @param pubDirReply
+	 * @param queryID the id of the query that has been previously created.
+	 * @param personalInfo the user's that is currently logged in personal information.
 	 */
-	void onPublicDirectoryRead(int queryID, PersonalInfo pubDirReply);
+	void onPublicDirectoryRead(int queryID, PersonalInfo personalInfo);
 
 	/**
-	 * Messaged when information has been successfuly written
-	 * to the public directory.
+	 * Messaged when user's personal information has been
+	 * successfully written to the Gadu-Gadu's public directory.
+	 * 
+	 * @param queryID the id of the query that has been previously created.
 	 */
 	void onPublicDirectoryUpdated(int queryID);
 

@@ -38,7 +38,7 @@ import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.IncommingMessage;
+import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.PersonalInfo;
@@ -52,7 +52,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.12 2004-12-19 11:49:13 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.13 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -252,7 +252,7 @@ public class Session implements ISession {
 			m_presenceService.notifyUserChangedStatus(user, status);
 		}
 
-		public void notifyMessageArrived(IncommingMessage incommingMessage) {
+		public void notifyMessageArrived(IncomingMessage incommingMessage) {
 			m_messageService.notifyMessageArrived(incommingMessage);
 		}
 

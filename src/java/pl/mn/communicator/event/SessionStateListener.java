@@ -22,14 +22,22 @@ import java.util.EventListener;
 import pl.mn.communicator.SessionState;
 
 /**
+ * The listener interface that is used by classes that want to be 
+ * notified of <code>SessionState</code> related events.
+ * <p>
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionStateListener.java,v 1.3 2004-12-18 15:52:15 winnetou25 Exp $
+ * @version $Id: SessionStateListener.java,v 1.4 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public interface SessionStateListener extends EventListener {
 
-	/** Notifies when session state changes */
+	/**
+	 * Messaged when session state changes.
+	 * 
+	 * @param oldSessionState the previous <code>SessionState</code> instance.
+	 * @param newSessionState the actual <code>SessionState</code> instance.
+	 */
 	void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState);
 	
 }

@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: User.java,v 1.1 2004-12-19 11:49:12 winnetou25 Exp $
+ * @version $Id: User.java,v 1.2 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public class User implements IUser {
 	
@@ -79,7 +79,7 @@ public class User implements IUser {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "[Uin: " + m_uin+",userMode: "+m_userMode+"]";
+		return "[Uin: " + m_uin+", userMode: "+m_userMode+"]";
 	}
 	
 	public static class UserMode {

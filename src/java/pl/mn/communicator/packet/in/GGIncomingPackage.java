@@ -20,10 +20,10 @@ package pl.mn.communicator.packet.in;
 import pl.mn.communicator.packet.GGPacket;
 
 /**
- * Incomming Gadu-Gadu packet.
+ * Incoming Gadu-Gadu packet.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGIncomingPackage.java,v 1.1 2004-12-14 21:53:52 winnetou25 Exp $ 
+ * @version $Id: GGIncomingPackage.java,v 1.2 2004-12-19 13:42:32 winnetou25 Exp $ 
  */
 public interface GGIncomingPackage extends GGPacket {
 	

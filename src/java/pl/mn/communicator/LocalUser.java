@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-11-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LocalUser.java,v 1.2 2004-12-19 11:49:12 winnetou25 Exp $
+ * @version $Id: LocalUser.java,v 1.3 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public class LocalUser {
 
@@ -114,20 +114,6 @@ public class LocalUser {
 	
 	public String getEmailAddress() {
 		return m_emailAddress;
-	}
-	
-	public void setUserMode(int userMode) {
-		m_mode = userMode;
-	}
-	
-	public int getUserMode() {
-		return m_mode;
-	}
-
-	public static interface UserMode {
-		int USER_NORMAL = 1;
-		int USER_BLOCKED = 2;
-		int USER_OFFLINE = 3;
 	}
 	
 }

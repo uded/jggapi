@@ -19,27 +19,38 @@ package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
-import pl.mn.communicator.IncommingMessage;
+import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.MessageStatus;
 
 /**
- * Listener associated with messages.
+ * The listener interface that is notified of message related events.
+ * <p>
+ * The classes that implement this interface are notified whether
+ * message has arrived from Gadu-Gadu server or if the message the client sent
+ * was successully delivered to the user to whom it was addressed.
+ * <p>
+ * Created on 2004-11-27
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageListener.java,v 1.2 2004-12-18 15:35:05 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.3 2004-12-19 13:42:31 winnetou25 Exp $
  */
 public interface MessageListener extends EventListener {
 	
 	/**
-     * Notification that a message arrived.
+     * Notification that a message arrived from
+     * Gadu-Gadu server.
      * 
-     * @param <code>IncommingMessage</code> object
+     * @param <code>IncomingMessage</code> object.
      */
-	void messageArrived(IncommingMessage incommingMessage);
+	void messageArrived(IncomingMessage incommingMessage);
 
 	/**
-	 * Notification that the message was delivered to the recipient.
+	 * Notification that the message was successfully delivered to the recipient.
+	 * 
+	 * @param uin the Gadu-Gadu number of the user to whom the message was addressed.
+	 * @param messageID the unique message id that was generated before sending message.
+	 * @param the status of delivery of the message.
 	 */
     void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus);
     
@@ -48,7 +59,7 @@ public interface MessageListener extends EventListener {
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
 		 */
-		public void messageArrived(IncommingMessage incommingMessage) { }
+		public void messageArrived(IncomingMessage incommingMessage) { }
 
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(pl.mn.communicator.MessageDeliveredEvent)
