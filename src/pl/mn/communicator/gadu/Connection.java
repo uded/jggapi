@@ -8,10 +8,10 @@ import java.net.UnknownHostException;
 
 import org.apache.log4j.Logger;
 
-import pl.mn.communicator.AbstractLocalUser;
-import pl.mn.communicator.AbstractMessage;
-import pl.mn.communicator.AbstractServer;
-import pl.mn.communicator.AbstractStatus;
+import pl.mn.communicator.ILocalUser;
+import pl.mn.communicator.IMessage;
+import pl.mn.communicator.IServer;
+import pl.mn.communicator.IStatus;
 
 
 /**
@@ -35,8 +35,8 @@ import pl.mn.communicator.AbstractStatus;
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
 	private static Logger logger = Logger.getLogger(Connection.class);
-	private AbstractServer server;
-	private AbstractLocalUser localUser;
+	private IServer server;
+	private ILocalUser localUser;
 
 	private ConnectionThread connectionThread;
 
@@ -48,7 +48,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	 * @param server serwer gg.
 	 * @param localUser uzytkownik gg.
 	 */
-	public Connection(AbstractServer server, AbstractLocalUser localUser) {
+	public Connection(IServer server, ILocalUser localUser) {
 		this.server = server;
 		this.localUser = localUser;
 		connectionThread = new ConnectionThread();
@@ -86,7 +86,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	 * @see Message
 	 * @param message wiadomoœæ do wys³ania.
 	 */
-	public void sendMessage(AbstractMessage message) throws IOException {
+	public void sendMessage(IMessage message) throws IOException {
 		if (isConnected){
 			GGSendMsg messageOut = new GGSendMsg(message);
 			connectionThread.sendPackage(messageOut);
@@ -98,7 +98,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	 * 
 	 * @param status - kolejny status
 	 */
-	public void changeStatus(AbstractStatus status) throws IOException{
+	public void changeStatus(IStatus status) throws IOException{
 		if (isConnected){
 			GGStatus newStatus = new GGStatus(status.getStatus());
 			connectionThread.sendPackage(newStatus);
@@ -195,7 +195,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 				case 10 :
 					GGRecvMsg message = new GGRecvMsg(keyBytes);
 					
-					AbstractMessage messageOut = new Message(message.getSender(),message.getMessage());
+					IMessage messageOut = new Message(message.getSender(),message.getMessage());
 					if (messageListener != null)
 						messageListener.messageArrived(messageOut);
 					break;

@@ -1,6 +1,6 @@
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.AbstractMessage;
+import pl.mn.communicator.IMessage;
 
 /**
  * @author mnaglik
@@ -13,7 +13,7 @@ class GGSendMsg implements GGOutgoingPackage {
 	private int seq;
 	private int msgClass = 0x0004;
 
-	public GGSendMsg(AbstractMessage message) {
+	public GGSendMsg(IMessage message) {
 		this.user = message.getUser();
 		this.text = message.getText();
 		seq = seqNo++;

@@ -15,7 +15,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import pl.mn.communicator.AbstractUser;
+import pl.mn.communicator.IUser;
 import pl.mn.communicator.gadu.User;
 
 /**
@@ -25,7 +25,7 @@ import pl.mn.communicator.gadu.User;
  * @author mnaglik
  */
 public class UserAddForm extends Dialog {
-	private AbstractUser user = null;
+	private IUser user = null;
 	private Text userName;
 	private Text userNumber;
 
@@ -40,14 +40,14 @@ public class UserAddForm extends Dialog {
 		setBlockOnOpen(true);
 	}
 
-	public UserAddForm(Shell shell, AbstractUser user) {
+	public UserAddForm(Shell shell, IUser user) {
 		super(shell);
 		this.user = user;
 		setShellStyle(SWT.CLOSE);
 		setBlockOnOpen(true);
 	}
 
-	public AbstractUser getUser() {
+	public IUser getUser() {
 		return this.user;
 	}
 

@@ -32,10 +32,10 @@ import org.eclipse.swt.widgets.Table;
 
 import pl.mn.communicator.AbstractConnection;
 import pl.mn.communicator.AbstractLocalUser;
-import pl.mn.communicator.AbstractMessage;
 import pl.mn.communicator.AbstractServer;
-import pl.mn.communicator.AbstractUser;
 import pl.mn.communicator.ConnectionListener;
+import pl.mn.communicator.IMessage;
+import pl.mn.communicator.IUser;
 import pl.mn.communicator.MessageListener;
 import pl.mn.communicator.UserListener;
 import pl.mn.communicator.gadu.Connection;
@@ -43,7 +43,7 @@ import pl.mn.communicator.gadu.LocalUser;
 import pl.mn.communicator.gadu.Message;
 import pl.mn.communicator.gadu.Server;
 import pl.mn.communicator.gadu.User;
-import pl.mn.communicator.gui.config.*;
+import pl.mn.communicator.gui.config.ConfigForm;
 
 /**
  * @author mnaglik
@@ -67,12 +67,12 @@ public class MainForm
 		public Object[] getElements(Object o) {
 			UsersData u = (UsersData) o;
 
-			AbstractUser[] users = new User[u.getUserCount()];
+			IUser[] users = new User[u.getUserCount()];
 
 			Iterator i = u.getIterator();
 			int j = 0;
 			while (i.hasNext()) {
-				users[j++] = (AbstractUser) i.next();
+				users[j++] = (IUser) i.next();
 			}
 			return users;
 		}
@@ -100,14 +100,14 @@ public class MainForm
 		 * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
 		 */
 		public Image getImage(Object element) {
-			if (((AbstractUser) element).isOnLine())
+			if (((IUser) element).isOnLine())
 				return on;
 			else
 				return off;
 		}
 
 		public String getText(Object element) {
-			return ((AbstractUser) element).getName();
+			return ((IUser) element).getName();
 		}
 
 	}
@@ -118,7 +118,7 @@ public class MainForm
 		 * @see org.eclipse.jface.viewers.ViewerSorter#compare(org.eclipse.jface.viewers.Viewer, java.lang.Object, java.lang.Object)
 		 */
 		public int compare(Viewer arg0, Object o1, Object o2) {
-			AbstractUser u1 = (AbstractUser) o1;
+			IUser u1 = (IUser) o1;
 			User u2 = (User) o2;
 
 			if (u1.isOnLine() && !u2.isOnLine())
@@ -267,11 +267,11 @@ public class MainForm
 	/*
 	 * CHAT FORMS METHODS 
 	 */
-	public void chatFormClosed(AbstractUser user) {
+	public void chatFormClosed(IUser user) {
 		usersChatForms.remove(user);
 	}
 
-	public void sendMessage(AbstractMessage message) {
+	public void sendMessage(IMessage message) {
 		try {
 			connection.sendMessage(message);
 		} catch (IOException e) {
@@ -320,7 +320,7 @@ public class MainForm
 	/**
 	 * @see pl.mn.gadu.MessageListener#messageArrived(pl.mn.gadu.Message)
 	 */
-	public void messageArrived(final AbstractMessage message) {
+	public void messageArrived(final IMessage message) {
 		System.out.println(
 			"Message arrived: " + message.getUser() + ":" + message.getText());
 		// TODO czemu to kurwa nie dziala?
@@ -460,7 +460,7 @@ public class MainForm
 			public void run() {
 				IStructuredSelection sel =
 					(IStructuredSelection) usersViewer.getSelection();
-				AbstractUser first = (AbstractUser) sel.getFirstElement();
+				IUser first = (IUser) sel.getFirstElement();
 				if (first != null) {
 					UserAddForm form = new UserAddForm(getShell(), first);
 					form.open();

@@ -12,5 +12,5 @@ public interface MessageListener {
 	 * 
 	 * @param message wiadomoœæ z serwera rozmów
 	 */
-	public void messageArrived(AbstractMessage message);
+	public void messageArrived(IMessage message);
 }

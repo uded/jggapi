@@ -79,13 +79,13 @@ public interface IConnection {
 	 * @see AbstractMessage
 	 * @param message wiadomoœæ do wys³ania.
 	 */
-	public void sendMessage(AbstractMessage message)
+	public void sendMessage(IMessage message)
 		throws IOException;
 	/**
 	 * Zmien aktualny status u¿ytkownika.<BR>
 	 * 
 	 * @param status - kolejny status
 	 */
-	public void changeStatus(AbstractStatus status)
+	public void changeStatus(IStatus status)
 		throws IOException;
 }

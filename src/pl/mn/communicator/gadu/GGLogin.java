@@ -1,6 +1,6 @@
 package pl.mn.communicator.gadu;
 
-import pl.mn.communicator.AbstractLocalUser;
+import pl.mn.communicator.ILocalUser;
 
 /**
  * Wiadomosc wysylana w czasie logowania
@@ -18,7 +18,7 @@ class GGLogin implements GGOutgoingPackage {
 	public GGLogin(
 		byte[] ip,
 		int port,
-		AbstractLocalUser user,
+		ILocalUser user,
 		GGWelcome welcome) {
 		this.local_ip = 0;
 		this.local_port = (short) port;

@@ -9,8 +9,8 @@ import java.util.StringTokenizer;
 
 import org.apache.log4j.Logger;
 
-import pl.mn.communicator.AbstractLocalUser;
 import pl.mn.communicator.AbstractServer;
+import pl.mn.communicator.ILocalUser;
 
 /**
  * Klasa z danymi dotycz¹cymi serwera gg.
@@ -30,7 +30,7 @@ public final class Server extends AbstractServer {
 	 * @return Server serwer
 	 * @throws IOException
 	 */
-	public static Server getDefaultServer(AbstractLocalUser user) throws IOException {
+	public static Server getDefaultServer(ILocalUser user) throws IOException {
 
 		URL url =
 			new URL(

@@ -79,7 +79,7 @@ public class AbstractUser implements IUser {
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	public boolean equals(Object o) {
-		return (o instanceof AbstractUser) && (number == ((AbstractUser) o).getNumber());
+		return (o instanceof IUser) && (number == ((IUser) o).getNumber());
 	}
 
 	/**
