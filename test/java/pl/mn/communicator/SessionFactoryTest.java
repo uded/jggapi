@@ -77,11 +77,10 @@ public class SessionFactoryTest extends TestCase {
 			}});
 		
 		session.getConnectionService().connect();
-
 		Thread.sleep(10000);
 		
-		session.getConnectionService().disconnect();
 		
+		session.getConnectionService().disconnect();
 		Thread.sleep(10000);
 		
 		logger.info("koniec");
