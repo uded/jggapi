@@ -52,7 +52,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.5 2004-12-17 20:21:19 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.6 2004-12-18 00:08:44 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -277,6 +277,10 @@ public class Session implements ISession {
 
 		public void notifyPubdirUpdated() {
 			m_publicDirectoryService.notifyPubdirUpdated();
+		}
+
+		public void notifyPubdirGotSearchResults(Collection searchResults) {
+			m_publicDirectoryService.notifyPubdirGotSearchResults(searchResults);
 		}
 
 		public void setLoginSeed(int seed) {

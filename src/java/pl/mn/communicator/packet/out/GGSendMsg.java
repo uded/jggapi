@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.2 2004-12-18 00:08:43 winnetou25 Exp $
  */
 public class GGSendMsg implements GGOutgoingPackage, GGMessage {
 	
@@ -36,7 +36,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessage {
 	
 	private final static Random RANDOM = new Random();
 	
-    private static int m_seq = RANDOM.nextInt(999999);
+    private static int m_seq = -1;
     private int m_user = -1;
     private String m_text = "";
     private	int m_protocolMessageClass = GG_CLASS_MSG;

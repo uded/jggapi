@@ -21,48 +21,36 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirQuery.java,v 1.3 2004-12-16 22:21:58 winnetou25 Exp $
+ * @version $Id: PublicDirSearchQuery.java,v 1.1 2004-12-18 00:08:43 winnetou25 Exp $
  */
-public class PublicDirQuery {
+public class PublicDirSearchQuery extends PubDirSearch {
 
-	private String m_uin = null;
-	private String m_firstName = null;
-	private String m_surName = null;
-	private String m_nickName = null;
-	private String m_birthYear = null;
-	private Gender m_gender = null;  //1-female, 0-male
+	private String m_lastName = null;
+	private Gender m_gender = null;
 	private Boolean m_activeOnly = null;
-	private String m_familyName = null;
-	private String m_familyCity = null;
 
-	public String getFirstname() {
-		return m_firstName;
+	public Gender getGender() {
+		return m_gender;
 	}
 	
-	public void setFirstname(String firstName) {
-		m_firstName = firstName;
+	public void setGender(Gender gender) {
+		m_gender = gender;
 	}
 	
-	public String getSurname() {
-		return m_surName;
+	public String getLastName() {
+		return m_lastName;
 	}
 	
-	public void setSurname(String surName) {
-		m_surName = surName;
+	public void setLastName(String lastName) {
+		m_lastName = lastName;
 	}
 	
-	/**
-	 * @param only The m_activeOnly to set.
-	 */
 	public void setActiveOnly(Boolean only) {
 		m_activeOnly = only;
 	}
 	
-	/**
-	 * @return Returns the m_activeOnly.
-	 */
 	public Boolean isActiveOnly() {
 		return m_activeOnly;
 	}
-	
+
 }

@@ -17,15 +17,15 @@
  */
 package pl.mn.communicator.packet.out;
 
-import pl.mn.communicator.GGVersion;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.packet.GGStatusEnabled;
 import pl.mn.communicator.packet.GGUtils;
+import pl.mn.communicator.packet.GGVersion;
 
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.2 2004-12-18 00:08:43 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 

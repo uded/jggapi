@@ -17,6 +17,8 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+import java.util.Collection;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -28,7 +30,7 @@ import pl.mn.communicator.packet.in.GGPubdirReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReplyPacketHandler.java,v 1.4 2004-12-17 20:21:19 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.5 2004-12-18 00:08:44 winnetou25 Exp $
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 
@@ -45,10 +47,13 @@ public class GGPubdirReplyPacketHandler implements PacketHandler {
 		GGPubdirReply pubdirReply = new GGPubdirReply(context.getPackageContent());
 		
 		if (pubdirReply.isPubdirReadReply()) {
-			PublicDirInfo publicDirInfo = (PublicDirInfo) pubdirReply.getPubdirReadReply().iterator().next();
+			PublicDirInfo publicDirInfo = (PublicDirInfo) pubdirReply.getPubdirReadReply();
 			context.getSessionAccessor().notifyPubdirRead(publicDirInfo);
 		} else if (pubdirReply.isPubdirWriteReply()) {
 			context.getSessionAccessor().notifyPubdirUpdated();
+		} else if (pubdirReply.isPubdirSearchReply()) {
+			Collection pubDirSearchResults = pubdirReply.getPubdirSearchReplies();
+			context.getSessionAccessor().notifyPubdirGotSearchResults(pubDirSearchResults);
 		}
 	}
 

@@ -23,7 +23,7 @@ import pl.mn.communicator.event.PublicDirListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IPublicDirectoryService.java,v 1.4 2004-12-17 20:20:25 winnetou25 Exp $
+ * @version $Id: IPublicDirectoryService.java,v 1.5 2004-12-18 00:08:43 winnetou25 Exp $
  */
 public interface IPublicDirectoryService {
 
@@ -33,16 +33,16 @@ public interface IPublicDirectoryService {
 	 * @param publicDirQuery the information provided to look for users.
 	 * @return the collection of users that matched the query.
 	 */
-	void search(PublicDirQuery publicDirQuery) throws GGException;
+	void search(PublicDirSearchQuery publicDirQuery) throws GGException;
 	
-	void read() throws GGException;
+	void readFromPublicDirectory() throws GGException;
 	
 	/**
 	 * Write information to the catalog.
 	 * @param publicDirInfo
 	 * @throws GGException
 	 */
-	void write(PublicDirInfo publicDirInfo) throws GGException;
+	void writeToPublicDirectory(PublicDirInfo publicDirInfo) throws GGException;
 	
 	/**
 	 * Adds <code>PublicDirListener</code> to the list of listeners.

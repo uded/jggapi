@@ -12,6 +12,7 @@ import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.SessionFactory;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.ConnectionListener;
@@ -130,7 +131,7 @@ public class Main2 {
 			}
 
 			public void pubdirGotSearchResults(Collection results) {
-				System.out.println("Got pubdir results");
+				System.out.println("Got pubdir search results.");
 				
 			}
 
@@ -145,20 +146,26 @@ public class Main2 {
  		session.getConnectionService().connect();
 		session.getLoginService().login();
 		
-		session.getPublicDirectoryService().read();
-		PublicDirInfo publicDirInfo = new PublicDirInfo();
-		publicDirInfo.setFirstName("Piotr");
-		publicDirInfo.setLastName("Kowalczyk");
-		publicDirInfo.setCity("Poznań");
-		publicDirInfo.setGender(Gender.MALE);
-		publicDirInfo.setNickName("Kowal");
-		publicDirInfo.setBirthDate("1967");
-		publicDirInfo.setFamilyCity("Kraków");
-		publicDirInfo.setFamilyName("Kowalskis Family");
-		session.getPublicDirectoryService().write(publicDirInfo);
-		session.getPublicDirectoryService().read();
-
-		//		loginContext.setPassword("dupadupa");
+//		session.getPublicDirectoryService().readFromPublicDirectory();
+//		PublicDirInfo publicDirInfo = new PublicDirInfo();
+//		publicDirInfo.setFirstName("Piotr");
+//		publicDirInfo.setLastName("Kowalczyk");
+//		publicDirInfo.setCity("Poznań");
+//		publicDirInfo.setGender(Gender.MALE);
+//		publicDirInfo.setNickName("Kowal");
+//		publicDirInfo.setBirthDate("1967");
+//		publicDirInfo.setFamilyCity("Kraków");
+//		publicDirInfo.setFamilyName("Kowalskis Family");
+//		session.getPublicDirectoryService().writeToPublicDirectory(publicDirInfo);
+//		session.getPublicDirectoryService().readFromPublicDirectory();
+//
+		PublicDirSearchQuery publicDirQuery = new PublicDirSearchQuery();
+		publicDirQuery.setCity("Szczecin");
+		publicDirQuery.setGender(Gender.FEMALE);
+		
+		session.getPublicDirectoryService().search(publicDirQuery);
+		
+//		loginContext.setPassword("dupadupa");
 //		session.getLoginService().login();
 		
 //		IStatus status = session.getPresenceService().getStatus();

@@ -23,7 +23,7 @@ import pl.mn.communicator.packet.handlers.Session;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionFactory.java,v 1.2 2004-12-16 21:09:52 winnetou25 Exp $
+ * @version $Id: SessionFactory.java,v 1.3 2004-12-18 00:08:43 winnetou25 Exp $
  */
 public class SessionFactory {
 
@@ -31,7 +31,12 @@ public class SessionFactory {
 		IServer server = Server.getDefaultServer(loginContext);
 		return new Session(server, loginContext);
 	}
-	
+
+	public static ISession createSession(LoginContext loginContext, String address, short port) {
+		IServer server = new Server(address, port);
+		return new Session (server, loginContext);
+	}
+
 	public static ISession createSession(LoginContext loginContext, IServer server) {
 		return new Session (server, loginContext);
 	}

@@ -21,7 +21,7 @@ package pl.mn.communicator.packet;
  * Created on 2004-12-14
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirConstants.java,v 1.1 2004-12-16 22:22:13 winnetou25 Exp $
+ * @version $Id: PublicDirConstants.java,v 1.2 2004-12-18 00:08:44 winnetou25 Exp $
  */
 public interface PublicDirConstants {
 
@@ -36,5 +36,7 @@ public interface PublicDirConstants {
 	String FAMILY_NAME = "familyname";
 	String FAMILY_CITY = "familycity";
 	String START = "fmstart";
-	
+	String STATUS = "FmStatus";
+	String NEXT_START = "nextstart";
+
 }

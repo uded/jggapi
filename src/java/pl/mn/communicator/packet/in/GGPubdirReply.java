@@ -19,11 +19,12 @@ package pl.mn.communicator.packet.in;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.StringTokenizer;
 
 import pl.mn.communicator.Gender;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.PublicDirInfo;
+import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.packet.GGPubdirEnabled;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.PublicDirConstants;
@@ -32,7 +33,7 @@ import pl.mn.communicator.packet.PublicDirConstants;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.5 2004-12-17 20:23:02 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.6 2004-12-18 00:08:45 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
@@ -41,20 +42,28 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	private byte m_replyType = -1;
 	private int m_sequence = -1;
 	
-	private Collection m_pubDirReplies = new ArrayList();
+	private PublicDirInfo m_pubDirInfo = null;
+	
+	private Collection m_pubDirSearchReplies = new ArrayList();
 	
 	public GGPubdirReply(byte[] data) {
 		m_replyType = data[0];
 		m_sequence = GGUtils.byteToInt(data, 1);
 		if (isPubdirReadReply()) {
 			handlePubdirReadReply(data);
+		} else if (isPubdirSearchReply()) {
+			handlePubdirSearchReply(data);
 		}
 	}
 	
-	public Collection getPubdirReadReply() {
-		return Collections.unmodifiableCollection(m_pubDirReplies);
+	public PublicDirInfo getPubdirReadReply() {
+		return m_pubDirInfo; 
 	}
-
+	
+	public Collection getPubdirSearchReplies() {
+		return m_pubDirSearchReplies;
+	}
+	
 	/**
 	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
 	 */
@@ -90,50 +99,103 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	private void handlePubdirReadReply(byte[] data) {
 		String string = byteToString(data, 5);
 		StringTokenizer tokenizer = new StringTokenizer(string, "\0");
-		PublicDirInfo pubDirReply = new PublicDirInfo();
+		m_pubDirInfo = new PublicDirInfo();
 		while (tokenizer.hasMoreTokens()) {
 			String token = (String) tokenizer.nextToken();
 			if (token.equals(PublicDirConstants.FIRST_NAME)) {
 				String firstName = tokenizer.nextToken();
-				pubDirReply.setFirstName(firstName);
+				m_pubDirInfo.setFirstName(firstName);
 			} else if (token.equals(PublicDirConstants.LAST_NAME)) {
 				String lastName = tokenizer.nextToken();
-				pubDirReply.setLastName(lastName);
+				m_pubDirInfo.setLastName(lastName);
 			} else if (token.equals(PublicDirConstants.BIRTH_YEAR)) {
 				String birthDate = tokenizer.nextToken();
-				pubDirReply.setBirthDate(birthDate);
+				m_pubDirInfo.setBirthDate(birthDate);
 			} else if (token.equals(PublicDirConstants.CITY)) {
 				String city = tokenizer.nextToken();
-				pubDirReply.setCity(city);
+				m_pubDirInfo.setCity(city);
 			} else if (token.equals(PublicDirConstants.NICK_NAME)) {
 				String nickName = tokenizer.nextToken();
-				pubDirReply.setNickName(nickName);
+				m_pubDirInfo.setNickName(nickName);
 			} else if (token.equals(PublicDirConstants.GENDER)) {
 				String genderString = tokenizer.nextToken();
 				Gender gender = null;
-				if (genderString.equals("2")) {
-					gender = Gender.FEMALE;
-				} else if (genderString.equals("1")){
+				if (genderString.equals("1")) {
 					gender = Gender.MALE;
+				} else if (genderString.equals("2")){
+					gender = Gender.FEMALE;
 				}
-				pubDirReply.setGender(gender);
+				m_pubDirInfo.setGender(gender);
 			} else if (token.equals(PublicDirConstants.FAMILY_NAME.toString())) {
 				String familyName = tokenizer.nextToken();
-				pubDirReply.setFamilyName(familyName);
+				m_pubDirInfo.setFamilyName(familyName);
 			} else if (token.equals(PublicDirConstants.FAMILY_CITY.toString())) {
 				String familyCity = tokenizer.nextToken();
-				pubDirReply.setFamilyCity(familyCity);
+				m_pubDirInfo.setFamilyCity(familyCity);
 			}
 		}
-		m_pubDirReplies.add(pubDirReply);
+		m_pubDirSearchReplies.add(m_pubDirInfo);
 	}
 	
-//	#define GG_PUBDIR50_REPLY 0x000e
-	
-//struct gg_pubdir50_reply {
-//	char type;
-//	int seq;
-//	char reply[];
-//};
+	private void handlePubdirSearchReply(byte[] data) {
+		String string = byteToString(data, 5);
+		PublicDirSearchReply publicDirSearchReply = new PublicDirSearchReply();
+		StringTokenizer tokenizer = new StringTokenizer(string, "\0");
+		int count = tokenizer.countTokens();
+		PublicDirSearchReply.Entry entry = publicDirSearchReply.createSearchEntry();
+
+		boolean processedUin = false;
+		boolean processedFirstName = false;
+		boolean processedStatus = false;
+		boolean processedBirthYear = false;
+		boolean processedCity = false;
+		boolean processedNickName = false;
+		
+		while (tokenizer.hasMoreTokens()) {
+			String token = tokenizer.nextToken();
+			boolean newEntry = processedUin && processedFirstName && processedStatus && processedBirthYear && processedCity || processedNickName;
+			if (newEntry) {
+				processedUin = false;
+				processedFirstName = false;
+				processedStatus = false;
+				processedBirthYear = false;
+				processedCity = false;
+				processedNickName = false;
+				entry = publicDirSearchReply.createSearchEntry();
+			} else if (token.equals(PublicDirConstants.FIRST_NAME)) {
+				String firstName = tokenizer.nextToken();
+				entry.setFirstName(firstName);
+				processedFirstName = true;
+			} else if(token.equals(PublicDirConstants.UIN)) {
+				String uin = tokenizer.nextToken();
+				entry.setUin(Integer.valueOf(uin));
+				processedUin = true;
+			} else if (token.equals(PublicDirConstants.STATUS)) {
+				String status = tokenizer.nextToken();
+				int protocolStatus = Integer.valueOf(status).intValue();
+				IStatus statusBiz = GGUtils.getClientStatus(protocolStatus, null, -1);
+				entry.setStatus(statusBiz);
+				processedStatus = true;
+			} else if (token.equals(PublicDirConstants.BIRTH_YEAR)) {
+				String birthYear = tokenizer.nextToken();
+				entry.setBirthYear(birthYear);
+				processedBirthYear = true;
+			} else if (token.equals(PublicDirConstants.CITY)) {
+				String city = tokenizer.nextToken();
+				entry.setCity(city);
+				processedCity = true;
+			} else if (token.equals(PublicDirConstants.NICK_NAME)) {
+				String nickName = tokenizer.nextToken();
+				entry.setNickName(nickName);
+				processedNickName = true;
+			} else if(token.equals("\0")) {
+				String tok = tokenizer.nextToken();
+				String[] split = tok.split("\0");
+				String nextNumber = split[1];
+				publicDirSearchReply.setNextStart(Integer.valueOf(nextNumber));
+				break;
+			}
+		}
+	}
 	
 }
