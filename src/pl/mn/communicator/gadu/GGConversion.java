@@ -19,7 +19,7 @@ package pl.mn.communicator.gadu;
 
 
 /**
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 final class GGConversion {
@@ -103,5 +103,25 @@ final class GGConversion {
     	System.arraycopy(data,startIndex,desc,0,counter);
     	
     	return new String(desc);
+    }
+    
+    public static int dajStatusBiz(int ggStatus) {
+        switch (ggStatus) {
+        case GGNewStatus.GG_STATUS_AVAIL:
+        case GGNewStatus.GG_STATUS_AVAIL_DESCR:
+            return Status.ON_LINE;
+
+        case GGNewStatus.GG_STATUS_BUSY:
+        case GGNewStatus.GG_STATUS_BUSY_DESCR:
+            return Status.BUSY;
+
+        case GGNewStatus.GG_STATUS_INVISIBLE:
+        case GGNewStatus.GG_STATUS_INVISIBLE_DESCR:
+            return Status.NOT_VISIBLE;
+
+        case GGNewStatus.GG_STATUS_NOT_AVAIL:
+        case GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR:default:
+            return Status.OFF_LINE;
+        }
     }
 }

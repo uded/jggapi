@@ -26,7 +26,7 @@ import pl.mn.communicator.IUser;
 
 /**
  * Pakiet powiadomienia u¿ytkownika o zmianie statusu u¿ytkownika z listy.
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * @author mnaglik
  */
 class GGStatus implements GGIncomingPackage {
@@ -77,7 +77,7 @@ class GGStatus implements GGIncomingPackage {
                 logger.debug("Czas: " + czas + ":" + returnTime);
         	}
         }
-        statusBiz = new Status(GGNotifyReply.dajStatusBiz(status));
+        statusBiz = new Status(GGConversion.dajStatusBiz(status));
         statusBiz.setDescription(description);
         statusBiz.setReturnTime(returnTime);
 	}

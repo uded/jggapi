@@ -3,7 +3,7 @@ TODO LIST
 
 DONE - wysylanie listy uzytkownikow do serwera
 - statusy z opisem i czasem powrotu
-- powiadomianie o zmianie statusow uzytkownikow
+DONE - powiadomianie o zmianie statusow uzytkownikow
 - obslugiwanie serwisow dostepnych przez www
 (rejestracja uzytkownika, zmiana danych itp...)
 
@@ -17,6 +17,7 @@ OK - implementacja dodanie do monitorowania,
      usuniecia z monitorowania
 OK - reakcja na zmiane statusu uzytkownika podczas dzialania
 - statusy z opisem i czasem powrotu dla uzytkownika lokalnego
+	(implementacja klasy <code>GGNewStatus</code>
 - poprawienie pinga
 - rozmowy grupowe
 - implementacja importu i eksportu uzytkownikow

@@ -28,7 +28,7 @@ import java.util.Map;
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
@@ -119,32 +119,12 @@ class GGNotifyReply implements GGIncomingPackage {
                 przesuniecie += 14; // pakiet bez opisu ma dlugosc 14 bajtow
             }
 
-            Status statusUzytkownika = new Status(dajStatusBiz(status));
+            Status statusUzytkownika = new Status(GGConversion.dajStatusBiz(status));
             statusUzytkownika.setDescription(description);
             statusUzytkownika.setReturnTime(returnTime);
 
             User uzytkownik = new User(nr);
             statusy.put(uzytkownik, statusUzytkownika);
-        }
-    }
-
-    public static int dajStatusBiz(int ggStatus) {
-        switch (ggStatus) {
-        case GGNewStatus.GG_STATUS_AVAIL:
-        case GGNewStatus.GG_STATUS_AVAIL_DESCR:
-            return Status.ON_LINE;
-
-        case GGNewStatus.GG_STATUS_BUSY:
-        case GGNewStatus.GG_STATUS_BUSY_DESCR:
-            return Status.BUSY;
-
-        case GGNewStatus.GG_STATUS_INVISIBLE:
-        case GGNewStatus.GG_STATUS_INVISIBLE_DESCR:
-            return Status.NOT_VISIBLE;
-
-        case GGNewStatus.GG_STATUS_NOT_AVAIL:
-        case GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR:default:
-            return Status.OFF_LINE;
         }
     }
 }
