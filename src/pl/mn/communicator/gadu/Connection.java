@@ -52,7 +52,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.30 $
+ * @version $Revision: 1.31 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -188,7 +188,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                         pingTimeCount++;
 
                         if (pingTimeCount > PING_COUNT) {
-                            //sendPackage(GGPing.getPing());
+                            sendPackage(GGPing.getPing());
                             logger.debug("Ping...");
                             pingTimeCount = 0;
                         }
@@ -336,8 +336,8 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
             try {
                 dataOutput.write(GGConversion.intToByte(header));
 
+                dataOutput.write(GGConversion.intToByte(length));
                 if (length > 0) {
-                    dataOutput.write(GGConversion.intToByte(length));
                     dataOutput.write(contents);
                 }
 
