@@ -27,7 +27,7 @@ import org.apache.commons.logging.LogFactory;
  * This class represents information that will be used during login process.
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.9 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.10 2005-01-30 18:24:17 winnetou25 Exp $
  */
 public final class LoginContext {
 	
@@ -143,6 +143,18 @@ public final class LoginContext {
 	
 	public Collection getMonitoredUsers() {
 		return m_monitoredUsers;
+	}
+	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
+	public String toString() {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append("LoginContext[");
+		buffer.append("uin="+m_uin);
+		buffer.append("password=xxx(masking)]");
+		
+		return buffer.toString();
 	}
 	
 }

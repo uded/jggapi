@@ -30,7 +30,7 @@ import pl.mn.communicator.event.GGPacketListener;
  * 
  * @see pl.mn.communicator.event.ConnectionListener
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IConnectionService.java,v 1.9 2005-01-25 23:42:59 winnetou25 Exp $
+ * @version $Id: IConnectionService.java,v 1.10 2005-01-30 18:24:29 winnetou25 Exp $
  */
 public interface IConnectionService {
 
@@ -48,7 +48,7 @@ public interface IConnectionService {
      * 
      * @throws GGSessionException if there is an incorrect session state.
      */
-    void disconnect();
+    void disconnect() throws GGException;
     
     /**
      * Method to check if we are connected or not.

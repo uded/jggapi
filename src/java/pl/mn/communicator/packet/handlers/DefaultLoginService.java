@@ -22,6 +22,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.ILocalStatus;
@@ -39,10 +42,12 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.14 2005-01-29 17:22:14 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.15 2005-01-30 18:20:26 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
+	private final static Log logger = LogFactory.getLog(DefaultLoginService.class);
+	
 	/** The session associated with this service */
 	private Session m_session = null;
 
@@ -62,13 +67,16 @@ public class DefaultLoginService implements ILoginService {
 	 * @see pl.mn.communicator.ILoginService#login()
 	 */
 	public void login(LoginContext loginContext) throws GGException {
+		logger.debug("Logging in, loginContext: "+loginContext);
+
 		if (loginContext == null) throw new NullPointerException("loginContext cannot be null");
 		m_loginContext = loginContext;
 		
 		if (m_session.getSessionState() != SessionState.AUTHENTICATION_AWAITING) {
 			throw new GGSessionException(m_session.getSessionState());
 		}
-		
+
+
 		try {
 			int uin = loginContext.getUin();
 			String password = loginContext.getPassword();
@@ -103,6 +111,8 @@ public class DefaultLoginService implements ILoginService {
 	 * @see pl.mn.communicator.ILoginService#logout()
 	 */
 	public void logout() throws GGException {
+		logger.debug("Logging out, loginContext: "+m_loginContext);
+
 		checkSessionState();
 		ILocalStatus localStatus = new LocalStatus(StatusType.OFFLINE);
 		m_session.getPresenceService().setStatus(localStatus);
