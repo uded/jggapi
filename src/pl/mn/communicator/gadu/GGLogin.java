@@ -25,7 +25,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {
@@ -33,7 +33,7 @@ class GGLogin implements GGOutgoingPackage {
     private int uin;
     private int hash;
     private int status = GGStatus.GG_STATUS_AVAIL;
-    private static final int VERSION = 0x40000019; //wersja 5.01
+    private static final int VERSION = 0x40000021; //wersja 6.00
     private int localIp;
     private short localPort;
 
