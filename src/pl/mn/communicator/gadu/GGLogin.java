@@ -25,7 +25,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {
@@ -33,13 +33,13 @@ class GGLogin implements GGOutgoingPackage {
     private int uin;
     private int hash;
     private int status = GGStatus.GG_STATUS_AVAIL;
-    private int version = 0x40000019; //wersja 5.01
-    private int local_ip;
-    private short local_port;
+    private static final int VERSION = 0x40000019; //wersja 5.01
+    private int localIp;
+    private short localPort;
 
     public GGLogin(byte[] ip, int port, ILocalUser user, GGWelcome welcome) {
-        this.local_ip = 0;
-        this.local_port = (short) port;
+        this.localIp = 0;
+        this.localPort = (short) port;
         this.uin = user.getUserNo();
         this.hash = gg_login_hash(user.getPassword(), welcome.getSeed());
 
@@ -145,18 +145,18 @@ class GGLogin implements GGOutgoingPackage {
         toSend[9] = (byte) ((status >> 8) & 0xFF);
         toSend[8] = (byte) (status & 0xFF);
 
-        toSend[15] = (byte) ((version >> 24) & 0xFF);
-        toSend[14] = (byte) ((version >> 16) & 0xFF);
-        toSend[13] = (byte) ((version >> 8) & 0xFF);
-        toSend[12] = (byte) (version & 0xFF);
+        toSend[15] = (byte) ((VERSION >> 24) & 0xFF);
+        toSend[14] = (byte) ((VERSION >> 16) & 0xFF);
+        toSend[13] = (byte) ((VERSION >> 8) & 0xFF);
+        toSend[12] = (byte) (VERSION & 0xFF);
 
         toSend[19] = (byte) 233;
         toSend[18] = (byte) 0;
         toSend[17] = (byte) 168;
         toSend[16] = (byte) 192;
 
-        toSend[21] = (byte) ((local_port >> 8) & 0xFF);
-        toSend[20] = (byte) (local_port & 0xFF);
+        toSend[21] = (byte) ((localPort >> 8) & 0xFF);
+        toSend[20] = (byte) (localPort & 0xFF);
 
         return toSend;
     }

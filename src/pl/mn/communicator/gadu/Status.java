@@ -26,7 +26,7 @@ import java.util.Map;
 
 /**
  * Status u¿ytkownika gg.
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public class Status extends AbstractStatus {
@@ -35,12 +35,12 @@ public class Status extends AbstractStatus {
     /**
      * Status niewidoczny.
      */
-    public final static int NOT_VISIBLE = 3;
+    public static final int NOT_VISIBLE = 3;
 
     /**
      * Status zajety.
      */
-    public final static int BUSY = 6;
+    public static final int BUSY = 6;
 
     /**
      * @param status status u¿ytkownika

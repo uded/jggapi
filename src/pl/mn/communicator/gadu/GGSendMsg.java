@@ -21,7 +21,7 @@ import pl.mn.communicator.IMessage;
 
 
 /**
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 class GGSendMsg implements GGOutgoingPackage {
@@ -29,7 +29,7 @@ class GGSendMsg implements GGOutgoingPackage {
     private int user;
     private String text;
     private int seq;
-    private int msgClass = 0x0004;
+    private static final int MSG_CLASS = 0x0004;
 
     public GGSendMsg(IMessage message) {
         this.user = message.getUser();
@@ -67,16 +67,16 @@ class GGSendMsg implements GGOutgoingPackage {
         toSend[5] = (byte) ((seq >> 8) & 0xFF);
         toSend[4] = (byte) (seq & 0xFF);
 
-        toSend[11] = (byte) ((msgClass >> 24) & 0xFF);
-        toSend[10] = (byte) ((msgClass >> 16) & 0xFF);
-        toSend[9] = (byte) ((msgClass >> 8) & 0xFF);
-        toSend[8] = (byte) (msgClass & 0xFF);
+        toSend[11] = (byte) ((MSG_CLASS >> 24) & 0xFF);
+        toSend[10] = (byte) ((MSG_CLASS >> 16) & 0xFF);
+        toSend[9] = (byte) ((MSG_CLASS >> 8) & 0xFF);
+        toSend[8] = (byte) (MSG_CLASS & 0xFF);
 
         byte[] textBytes = text.getBytes();
 
-        for (int i = 0; i < text.length(); i++)
+        for (int i = 0; i < text.length(); i++) {
             toSend[12 + i] = textBytes[i];
-
+        }
         return toSend;
     }
 }

@@ -22,39 +22,42 @@ import java.util.Date;
 
 /**
  * Status uzytkownika gg
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 class GGStatus implements GGOutgoingPackage {
     /** Status dostepny */
-    public final static int GG_STATUS_AVAIL = 0x00000002;
+    public static final int GG_STATUS_AVAIL = 0x00000002;
 
     /** Status dostepny z opisem */
-    public final static int GG_STATUS_AVAIL_DESCR = 0x00000004;
+    public static final int GG_STATUS_AVAIL_DESCR = 0x00000004;
 
     /** Status niedostepny */
-    public final static int GG_STATUS_NOT_AVAIL = 0x00000001;
+    public static final int GG_STATUS_NOT_AVAIL = 0x00000001;
 
     /** Status niedostepny z opisem */
-    public final static int GG_STATUS_NOT_AVAIL_DESCR = 0x00000015;
+    public static final int GG_STATUS_NOT_AVAIL_DESCR = 0x00000015;
 
     /** Status zajety */
-    public final static int GG_STATUS_BUSY = 0x00000003;
+    public static final int GG_STATUS_BUSY = 0x00000003;
 
     /** Status zajety z opisem */
-    public final static int GG_STATUS_BUSY_DESCR = 0x00000005;
+    public static final int GG_STATUS_BUSY_DESCR = 0x00000005;
 
     /** Status niewidoczny */
-    public final static int GG_STATUS_INVISIBLE = 0x00000014;
+    public static final int GG_STATUS_INVISIBLE = 0x00000014;
 
     /** Status niewidoczny z opisem */
-    public final static int GG_STATUS_INVISIBLE_DESCR = 0x00000016;
+    public static final int GG_STATUS_INVISIBLE_DESCR = 0x00000016;
 
     /** Status zablokowany */
-    public final static int GG_STATUS_BLOCKED = 0x00000006;
+    public static final int GG_STATUS_BLOCKED = 0x00000006;
 
     /** Maska bitowa oznaczajaca tryb tylko dla przyjaciol */
-    public final static int GG_STATUS_FRIENDS_MASK = 0x00008000;
+    public static final int GG_STATUS_FRIENDS_MASK = 0x00008000;
+
+    private static final int MAX_OPIS = 40;
+
     private int status;
     private byte[] opis;
     private int czas;
@@ -76,8 +79,8 @@ class GGStatus implements GGOutgoingPackage {
     public GGStatus(int status, String opis) {
         this.status = status;
 
-        if (opis.length() > 40) {
-            opis = opis.substring(0, 39);
+        if (opis.length() > MAX_OPIS) {
+            opis = opis.substring(0, MAX_OPIS - 1);
         }
 
         this.opis = opis.getBytes();
@@ -139,7 +142,7 @@ class GGStatus implements GGOutgoingPackage {
             break;
         }
 
-        int length = 4; // + opis.length + (opis.length > 0 ? 1 : 0);
+        final int length = 4; // + opis.length + (opis.length > 0 ? 1 : 0);
         byte[] toSend = new byte[length];
 
         /*

@@ -34,7 +34,7 @@ import java.util.StringTokenizer;
 
 /**
  * Klasa z danymi dotycz±cymi serwera gg.
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @author mnaglik
  */
 public final class Server extends AbstractServer {
@@ -58,8 +58,8 @@ public final class Server extends AbstractServer {
     public static Server getDefaultServer(ILocalUser user)
         throws IOException {
         URL url = new URL(
-                "http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber=" +
-                user.getUserNo());
+                "http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber="
+                + user.getUserNo());
 
         InputStream is = url.openStream();
         BufferedReader in = new BufferedReader(new InputStreamReader(is));
@@ -77,11 +77,12 @@ public final class Server extends AbstractServer {
      * @return Server
      */
     private static Server parseAddress(String line) {
+        final int nrOfTokens = 3;
         StringTokenizer token = new StringTokenizer(line);
 
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < nrOfTokens; i++) {
             token.nextToken();
-
+        }
         StringTokenizer token1 = new StringTokenizer(token.nextToken(), ":");
 
         return new Server(token1.nextToken(),
