@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 /**
  * Wiadomo¶æ do serwera rozmów.
  * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public abstract class AbstractMessage implements IMessage {
@@ -33,7 +33,7 @@ public abstract class AbstractMessage implements IMessage {
 	protected int user;
 	
 	/**
-	 * Treœæ wiadomo¶ci
+	 * Tre¶æ wiadomo¶ci
 	 */
 	protected String text;
 
@@ -58,7 +58,7 @@ public abstract class AbstractMessage implements IMessage {
 	}
 
 	/**
-	 * Pobierz treœæ wiadomoœæi
+	 * Pobierz tre¶æ wiadomoœæi
 	 * 
 	 * @return String
 	 */

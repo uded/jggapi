@@ -18,17 +18,17 @@
 package pl.mn.communicator;
 
 /**
- * Listener wiadomoœci.<BR>
- * Obs³uguje zdarzenia zwi¹zane z wiadomoœciami.<BR>
+ * Listener wiadomo¶ci.<BR>
+ * Obs³uguje zdarzenia zwi¹zane z wiadomo¶ciami.<BR>
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public interface MessageListener {
 	/**
-	 * Nadesz³a wiadomoœæ.
+	 * Nadesz³a wiadomo¶æ.
 	 * 
-	 * @param message wiadomoœæ z serwera rozmów
+	 * @param message wiadomo¶æ z serwera rozmów
 	 */
 	public void messageArrived(IMessage message);
 }

@@ -22,8 +22,8 @@ import java.net.UnknownHostException;
 import java.util.Collection;
 
 /**
- * Po³¹czenie z serwerem gg.<BR>
- * S³u¿y do tworzenia po³¹czenia.
+ * Po³±czenie z serwerem gg.<BR>
+ * S³u¿y do tworzenia po³±czenia.
  * <BR><BR>
  * <i>Przyk³ad u¿ycia:</i><BR><BR>
  * <code>
@@ -38,14 +38,14 @@ import java.util.Collection;
  * }
  * </code>
  * 
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public interface IConnection {
 	/**
 	 * Dodaj listenera u¿ytkowników.<BR>
 	 * Obs³uguje odpowiednie zdarzenia zwi¹zane z u¿ytkownikami
-	 * takie jak pryjœcie i odejœcie u¿ytkownika
+	 * takie jak pryj¶cie i odej¶cie u¿ytkownika
 	 * 
 	 * @see UserListener
 	 * @param userListener obiekt listenera
@@ -59,57 +59,57 @@ public interface IConnection {
 	 */
 	public void removeUserListener();
 	/**
-	 * Dodaj listenera zwi¹zanego z po³¹czeniem.<BR>
-	 * Obs³uguje on takie zdarzenia jak nawi¹zanie po³¹czenia,
-	 * zerwanie po³¹czenia itp.
+	 * Dodaj listenera zwi±zanego z po³±czeniem.<BR>
+	 * Obs³uguje on takie zdarzenia jak nawi¹zanie po³±czenia,
+	 * zerwanie po³±czenia itp.
 	 * 
 	 * @see ConnectionListener
 	 * @param connectionListener obiekt listenera
 	 */
 	public void addConnectionListener(ConnectionListener connectionListener);
 	/**
-	 * Usuwa listenera zwi¹zanego z po³¹czeniem.<BR>
+	 * Usuwa listenera zwi±zanego z po³±czeniem.<BR>
 	 * Jê¿eli nie ma aktywnego listenera nic siê nie dzieje.
 	 * 
 	 * @see ConnectionListener
 	 */
 	public void removeConnectionListener();
 	/**
-	 * Dodaje listenera wiadomoœci.<BR>
-	 * Obs³uguje on takie zdarzenia jak nadejœcie wiadomoœci.
+	 * Dodaje listenera wiadomo¶ci.<BR>
+	 * Obs³uguje on takie zdarzenia jak nadej¶cie wiadomo¶ci.
 	 * 
 	 * @see MessageListener 
 	 * @param messageListener obiekt listenera
 	 */
 	public void addMessageListener(MessageListener messageListener);
 	/**
-	 * Usuwa listenera wiadomoœci.<BR>
+	 * Usuwa listenera wiadomo¶ci.<BR>
 	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
 	 * 
 	 * @see MessageListener
 	 */
 	public void removeMessageListener();
 	/**
-	 * Pod³¹cz sie do serwera rozmów.<BR>
-	 * Próbuje ³¹czyæ siê z serwerem rozmów, na podstawie danych<BR>
+	 * Pod³±cz sie do serwera rozmów.<BR>
+	 * Próbuje ³±czyæ siê z serwerem rozmów, na podstawie danych<BR>
 	 * z konstruktora.<BR>
-	 * W wypadku niepowodzenie wyrzuca odpowiednie wyj¹tki
+	 * W wypadku niepowodzenie wyrzuca odpowiednie wyj±tki
 	 * 
 	 * @throws UnknownHostException nieznany serwer 
-	 * @throws IOException nie powiodla siê próba po³¹czenia - nie ma po³¹czenia sieciowego?
+	 * @throws IOException nie powiodla siê próba po³±czenia - nie ma po³±czenia sieciowego?
 	 */
 	public void connect() throws UnknownHostException, IOException;
 	/**
-	 * Zamyka po³¹czenie z serwerem rozmów.
+	 * Zamyka po³±czenie z serwerem rozmów.
 	 * 
-	 * @throws IOException b³¹d przy zamykaniu po³¹czenia
+	 * @throws IOException b³¹d przy zamykaniu po³±czenia
 	 */
 	public void disconnect() throws IOException;
 	/**
-	 * Wyœlij wiadomoœæ do serwera rozmów.
+	 * Wy¶lij wiadomo¶æ do serwera rozmów.
 	 * 
 	 * @see AbstractMessage
-	 * @param message wiadomoœæ do wys³ania.
+	 * @param message wiadomo¶æ do wys³ania.
 	 */
 	public void sendMessage(IMessage message)
 		throws IOException;
@@ -122,7 +122,7 @@ public interface IConnection {
 		throws IOException;
 		
 	/**
-	 * Wyœlij listê monitorowanych u¿ytkowników.<br>
+	 * Wy¶lij listê monitorowanych u¿ytkowników.<br>
 	 * Lista zawiera u¿ytkowników dla których serwer
 	 * przesy³a informacje o zmianie statusu
 	 * @param userList

@@ -18,28 +18,28 @@
 package pl.mn.communicator;
 
 /**
- * Listener ze zdarzeniami po³¹czenia.
+ * Listener ze zdarzeniami po³±czenia.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public interface ConnectionListener {
 	/**
-	 * Po³¹czenie zosta³o pomyœlnie nawi¹zane.
+	 * Po³¹czenie zosta³o pomy¶lnie nawi±zane.
 	 */
 	public void connectionEstablished();
 
 	/**
 	 * Roz³aczono z serwerem.<BR>
-	 * Wywo³ywane podczas celowego roz³¹czania z serwerem.
+	 * Wywo³ywane podczas celowego roz³±czania z serwerem.
 	 */
 	public void disconnected();
 
 	/**
-	 * Problem z po³¹czeniem.<BR>
-	 * Wyst¹pi³ b³¹d w po³¹czeniu.
+	 * Problem z po³±czeniem.<BR>
+	 * Wyst±pi³ b³±d w po³±czeniu.
 	 * 
-	 * @param error tekstowy opis b³êdu zwi¹zanego z po³¹czeniem 
+	 * @param error tekstowy opis b³êdu zwi±zanego z po³±czeniem 
 	 */
 	public void connectionError(String error);
 }

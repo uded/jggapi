@@ -18,21 +18,21 @@
 package pl.mn.communicator;
 
 /**
- * Listener zwi¹zany ze zdarzeniami u¿ytkowników.
+ * Listener zwi±zany ze zdarzeniami u¿ytkowników.
  * 
- * @version $Revision: 1.3 $
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public interface UserListener {
 	/**
-	 * U¿ytkownik pod³¹czy³ siê.
+	 * U¿ytkownik pod³±czy³ siê.
 	 * 
-	 * @param userNumber nr u¿ytkownika, który siê pod³¹czy³
+	 * @param userNumber nr u¿ytkownika, który siê pod³±czy³
 	 */
 	public void userEntered(int userNumber);
 
 	/**
-	 * U¿ytkownik od³¹czy³ siê.
+	 * U¿ytkownik od³±czy³ siê.
 	 * 
 	 * @param userNumber nr u¿ytkownika, który siê od³¹czy³
 	 */

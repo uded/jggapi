@@ -20,11 +20,11 @@ package pl.mn.communicator;
 import java.util.Map;
 
 /**
- * Klasa reprezentuj¹ca status u¿ytkownika.
+ * Klasa reprezentuj±ca status u¿ytkownika.
  * Dodatkowe statusy specyficzne dla serwerów rozmów
  * mog¹ zostaæ dodane w podklasach.
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public interface IStatus {
@@ -54,7 +54,7 @@ public interface IStatus {
 	 * Pobierz dostêpne statusy.
 	 * Zwraca mapê dostêpnych statusów.
 	 * Kluczem jest Integer z nr statusu,
-	 * a wartoscia String z nazw¹ statusu
+	 * a wartoscia String z nazw± statusu
 	 * 
 	 * @return Map
 	 */
