@@ -6,7 +6,8 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Display;
 /**
- * @author scheglov_ke
+ * @version $Revision: 1.2 $
+ * @author mnaglik
  */
 public class ResourceManager {
 	private static HashMap m_ClassImageMap = new HashMap();

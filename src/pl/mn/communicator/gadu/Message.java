@@ -7,6 +7,7 @@ import pl.mn.communicator.AbstractMessage;
 /**
  * Wiadomoœæ gg.
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public final class Message extends AbstractMessage {

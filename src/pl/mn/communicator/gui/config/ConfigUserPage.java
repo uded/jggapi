@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Text;
 import pl.mn.communicator.gui.util.Config;
 
 /**
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public class ConfigUserPage extends PreferencePage {

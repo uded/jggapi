@@ -21,6 +21,7 @@ import java.util.Collection;
  * }
  * </code>
  * 
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public interface IConnection {
@@ -102,7 +103,7 @@ public interface IConnection {
 	 */
 	public void changeStatus(IStatus status)
 		throws IOException;
-
+		
 	/**
 	 * Wyœlij listê monitorowanych u¿ytkowników.<br>
 	 * Lista zawiera u¿ytkowników dla których serwer

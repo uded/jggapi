@@ -3,6 +3,7 @@ package pl.mn.communicator.gadu;
 /**
  * Naglowek wiadomosci gg
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 class GGHeader {

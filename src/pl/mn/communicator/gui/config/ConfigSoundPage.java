@@ -7,6 +7,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 
 /**
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 public class ConfigSoundPage extends PreferencePage {

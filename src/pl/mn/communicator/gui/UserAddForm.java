@@ -22,6 +22,7 @@ import pl.mn.communicator.gadu.User;
  * Form to add new user
  * or edit existing user
  * 
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public class UserAddForm extends Dialog {

@@ -7,6 +7,7 @@ import pl.mn.communicator.gui.util.ResourceManager;
 
 
 /**
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 class DeleteUserAction extends Action {

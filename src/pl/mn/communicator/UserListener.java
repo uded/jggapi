@@ -3,6 +3,7 @@ package pl.mn.communicator;
 /**
  * Listener zwi¹zany ze zdarzeniami u¿ytkowników.
  * 
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 public interface UserListener {

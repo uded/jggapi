@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 /**
  * U¿ytkownik serwera rozmów.
  *  
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public class AbstractUser implements IUser {

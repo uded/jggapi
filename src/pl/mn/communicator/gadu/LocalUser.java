@@ -7,6 +7,7 @@ import pl.mn.communicator.AbstractLocalUser;
 /**
  * U¿ytkownik gg.
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public final class LocalUser extends AbstractLocalUser{

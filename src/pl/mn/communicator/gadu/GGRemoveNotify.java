@@ -1,11 +1,12 @@
 package pl.mn.communicator.gadu;
 
 /**
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 class GGRemoveNotify implements GGOutgoingPackage {
 
-	/* (non-Javadoc)
+	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
 	 */
 	public int getHeader() {
@@ -13,7 +14,7 @@ class GGRemoveNotify implements GGOutgoingPackage {
 		return 0;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
@@ -21,7 +22,7 @@ class GGRemoveNotify implements GGOutgoingPackage {
 		return 0;
 	}
 
-	/* (non-Javadoc)
+	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {

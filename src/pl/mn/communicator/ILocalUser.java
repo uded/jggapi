@@ -4,6 +4,7 @@ package pl.mn.communicator;
  * U¿ytkownik lokalny klienta rozmów.<BR>
  * Obiekt reprezentuje lokalnego u¿ytkownika.
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public interface ILocalUser {

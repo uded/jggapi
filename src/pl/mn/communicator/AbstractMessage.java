@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 /**
  * Wiadomoœæ do serwera rozmów.
  * 
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public abstract class AbstractMessage implements IMessage {

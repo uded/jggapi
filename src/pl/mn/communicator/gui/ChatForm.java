@@ -22,6 +22,7 @@ import pl.mn.communicator.IMessage;
 import pl.mn.communicator.gadu.Message;
 
 /**
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public class ChatForm extends Window{

@@ -14,9 +14,10 @@ import pl.mn.communicator.IUser;
 import pl.mn.communicator.gadu.User;
 
 /**
- * @author mnaglik
- *
  * Wszyscy uzytkownicy aktywni i nieaktywni
+ *
+ * @version $Revision: 1.7 $
+ * @author mnaglik
  */
 public class UsersData{
 	private static Logger logger = Logger.getLogger(UsersData.class);
@@ -63,8 +64,8 @@ public class UsersData{
 		}
 	}
 
-	public Collection getUsers() {
-		return users;
+	public Iterator getIterator() {
+		return users.iterator();
 	}
 
 	public int getUserCount() {

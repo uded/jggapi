@@ -1,9 +1,3 @@
-/*
- * Created on 2003-03-25
- *
- * To change this generated comment go to 
- * Window>Preferences>Java>Code Generation>Code Template
- */
 package pl.mn.communicator.gui.util;
 
 import java.io.IOException;
@@ -11,6 +5,7 @@ import java.io.IOException;
 import org.eclipse.jface.preference.PreferenceStore;
 
 /**
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 public class Config {

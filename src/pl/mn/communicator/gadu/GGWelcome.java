@@ -4,6 +4,7 @@ package pl.mn.communicator.gadu;
  * Wiadomosc otrzymywana zaraz po polaczeniu z serwerem gg
  * zawiera seed (int) potrzebny do zakodowania hasla
  * 
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 class GGWelcome {

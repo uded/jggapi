@@ -15,6 +15,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Klasa z danymi dotycz¹cymi serwera gg.
  * 
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 public final class Server extends AbstractServer {
@@ -43,7 +44,6 @@ public final class Server extends AbstractServer {
 		String line = in.readLine();
 		is.close();
 		in.close();
-		logger.debug("Address readed: "+line);
 		return parseAddress(line);
 	}
 

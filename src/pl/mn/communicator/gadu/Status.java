@@ -9,6 +9,7 @@ import pl.mn.communicator.AbstractStatus;
 /**
  * Status u¿ytkownika gg.
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public class Status extends AbstractStatus {
@@ -17,6 +18,11 @@ public class Status extends AbstractStatus {
 	 * Status niewidoczny.
 	 */
 	public final static int NOT_VISIBLE = 3;
+
+	/**
+	 * Status zajety.
+	 */
+	public final static int BUSY = 6;
 
 	/**
 	 * @param status

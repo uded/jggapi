@@ -3,6 +3,7 @@ package pl.mn.communicator.gadu;
 /**
  * Pakiet wychodz¹cy gg.
  * 
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 interface GGOutgoingPackage {

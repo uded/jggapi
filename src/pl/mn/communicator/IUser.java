@@ -2,7 +2,8 @@ package pl.mn.communicator;
 
 /**
  * U¿ytkownik serwera rozmów.
- *  
+ * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public interface IUser {

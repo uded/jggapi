@@ -6,6 +6,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import pl.mn.communicator.gui.util.ResourceManager;
 
 /**
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 class AddUserAction extends Action {

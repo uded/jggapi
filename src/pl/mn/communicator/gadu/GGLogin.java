@@ -7,6 +7,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Wiadomosc wysylana w czasie logowania
  * 
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {

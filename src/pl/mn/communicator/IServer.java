@@ -3,6 +3,7 @@ package pl.mn.communicator;
 /**
  * Klasa reprezentuj¹ca serwer rozmów.
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public interface IServer {

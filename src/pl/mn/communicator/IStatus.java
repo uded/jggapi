@@ -7,6 +7,7 @@ import java.util.Map;
  * Dodatkowe statusy specyficzne dla serwerów rozmów
  * mog¹ zostaæ dodane w podklasach.
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public interface IStatus {

@@ -3,6 +3,7 @@ package pl.mn.communicator.gadu;
 import pl.mn.communicator.IMessage;
 
 /**
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 class GGSendMsg implements GGOutgoingPackage {

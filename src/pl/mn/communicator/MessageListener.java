@@ -4,6 +4,7 @@ package pl.mn.communicator;
  * Listener wiadomoœci.<BR>
  * Obs³uguje zdarzenia zwi¹zane z wiadomoœciami.<BR>
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public interface MessageListener {

@@ -7,6 +7,7 @@ import pl.mn.communicator.AbstractUser;
 /**
  * Uzytkownik gg.
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public class User extends AbstractUser {

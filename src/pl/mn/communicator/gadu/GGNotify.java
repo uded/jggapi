@@ -3,6 +3,7 @@ package pl.mn.communicator.gadu;
 import pl.mn.communicator.IUser;
 
 /**
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 class GGNotify implements GGOutgoingPackage {

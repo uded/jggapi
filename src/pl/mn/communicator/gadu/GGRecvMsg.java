@@ -3,6 +3,7 @@ package pl.mn.communicator.gadu;
 /**
  * Wiadomosc otrzymana z serwera gg (tekstowa)
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 class GGRecvMsg {

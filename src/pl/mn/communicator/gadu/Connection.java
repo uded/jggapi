@@ -34,6 +34,7 @@ import pl.mn.communicator.gadu.util.Util;
  * }
  * </code>
  * 
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -188,6 +189,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 					if (connectionListener != null)
 						connectionListener.connectionEstablished();
 					logger.debug("Login OK");
+					changeStatus(new Status(Status.ON_LINE));
 					break;
 				case 9 :
 					if (connectionListener != null)
@@ -269,25 +271,24 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	 * @see pl.mn.communicator.IConnection#sendMonitoredUserList(java.util.Collection)
 	 */
 	public void sendMonitoredUserList(Collection userList) throws IOException {
-		IUser[] users = (IUser[]) userList.toArray();
-		GGNotify notify = new GGNotify(users);
-		connectionThread.sendPackage(notify);
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**
 	 * @see pl.mn.communicator.IConnection#addMonitoredUser(pl.mn.communicator.IUser)
 	 */
 	public void addMonitoredUser(IUser user) throws IOException {
-		GGNotify notify = new GGNotify(user);
-		connectionThread.sendPackage(notify);
+		// TODO Auto-generated method stub
+		
 	}
 
 	/**
 	 * @see pl.mn.communicator.IConnection#removeMonitoredUser(pl.mn.communicator.IUser)
 	 */
 	public void removeMonitoredUser(IUser user) throws IOException {
-		// TODO implement removeMonitoredUser
-		logger.error("nie zaimplementowano");
+		// TODO Auto-generated method stub
+		
 	}
 
 }

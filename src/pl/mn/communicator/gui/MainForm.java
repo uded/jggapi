@@ -22,7 +22,12 @@ import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.window.ApplicationWindow;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
@@ -47,6 +52,7 @@ import pl.mn.communicator.gui.util.Config;
 import pl.mn.communicator.gui.util.ResourceManager;
 
 /**
+ * @version $Revision: 1.12 $
  * @author mnaglik
  */
 public class MainForm
@@ -70,7 +76,7 @@ public class MainForm
 
 			IUser[] users = new User[u.getUserCount()];
 
-			Iterator i = u.getUsers().iterator();
+			Iterator i = u.getIterator();
 			int j = 0;
 			while (i.hasNext()) {
 				users[j++] = (IUser) i.next();
@@ -91,8 +97,8 @@ public class MainForm
 		private Image on, off;
 
 		public UsersLabelProvider() {
-			on = ResourceManager.getImage(MainForm.class,"icons/on.bmp"); 
-			off = ResourceManager.getImage(MainForm.class,"icons/off.bmp"); 
+			on = ResourceManager.getImage(MainForm.class,"icons/on.bmp");
+			off = ResourceManager.getImage(MainForm.class,"icons/off.bmp");
 		}
 		/**
 		 * @see org.eclipse.jface.viewers.ILabelProvider#getImage(java.lang.Object)
@@ -135,7 +141,7 @@ public class MainForm
 	 */
 	public static void main(String[] args) {
 		MainForm w = new MainForm();
-		w.setShellStyle(SWT.CLOSE ^ SWT.RESIZE);
+		w.setShellStyle(SWT.CLOSE | SWT.RESIZE);
 		w.setBlockOnOpen(true);
 		w.addToolBar(SWT.NONE);
 		w.addMenuBar();
@@ -179,8 +185,60 @@ public class MainForm
 	 * @see org.eclipse.jface.window.ApplicationWindow#createContents()
 	 */
 	protected Control createContents(Composite parent) {
+		Composite root = new Composite(parent,SWT.NONE);
+		GridLayout layout = new GridLayout();
+		layout.marginHeight = 1;
+		layout.marginWidth = 1;
+		layout.numColumns = 1;		
+		root.setLayout(layout);
+		Table usersTable = new Table(root, SWT.BORDER);
+		usersTable.setLayoutData(new GridData(GridData.FILL_BOTH));
+		
+		Combo status = new Combo(root,SWT.READ_ONLY);
+		status.add("Dostêpny");
+		status.add("Zaraz wracam");
+		status.add("Niewidoczny");
+		status.add("Niedostêpny");
+		status.addSelectionListener(new SelectionAdapter(){
 
-		Table usersTable = new Table(parent, SWT.BORDER);
+			public void widgetSelected(SelectionEvent event) {
+				switch(((Combo)event.getSource()).getSelectionIndex()){
+					case 0:
+						try {
+							// zaraz wracam
+							if (MainForm.this.connection == null){
+								MainForm.this.connect();
+							}else{
+								MainForm.this.connection.changeStatus(new Status(Status.ON_LINE));
+							}
+						} catch (IOException e) {
+						}
+						break;
+					case 1:
+						try {
+							// zaraz wracam
+							if (MainForm.this.connection != null)
+							MainForm.this.connection.changeStatus(new Status(Status.BUSY));
+						} catch (IOException e) {
+						}
+						break;
+					case 2:					
+						try {
+							// niewidoczny
+							if (MainForm.this.connection != null)
+							MainForm.this.connection.changeStatus(new Status(Status.NOT_VISIBLE));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						break;
+					case 3:
+						// off line
+						MainForm.this.disconnect();
+						break;
+				}
+			}
+		});
+
 		usersViewer = new TableViewer(usersTable);
 
 		usersViewer.setContentProvider(new UsersContentProvider());
@@ -204,6 +262,8 @@ public class MainForm
 		menuManager.add(createUserMenu());
 		return menuManager;
 	}
+	
+	
 
 	/**
 	 * @see org.eclipse.jface.window.Window#close()
@@ -225,10 +285,11 @@ public class MainForm
 				Integer.parseInt(Config.getPreferenceStore().getString("user")),
 				Config.getPreferenceStore().getString("password"));
 
+
 		try {
-			if (Config.getPreferenceStore().getBoolean("standard")) {
+			if (Config.getPreferenceStore().getBoolean("standard")){
 				server = Server.getDefaultServer(localUser);
-			} else {
+			}else{
 				server =
 					new Server(
 						Config.getPreferenceStore().getString("host"),
@@ -259,6 +320,7 @@ public class MainForm
 		try {
 			if (connection != null) {
 				connection.disconnect();
+				connection = null;
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -291,30 +353,20 @@ public class MainForm
 	 */
 	public void connectionEstablished() {
 		logger.debug("ConnectionEstablished");
-		try {
-			connection.changeStatus(new Status(Status.ON_LINE));
-			connection.sendMonitoredUserList(usersData.getUsers());
-//			IUser user = ((IUser)usersData.getUsers().iterator().next());
-//			user.setOnLine(true);
-//			logger.info("Status changed for user "+user.getName());
-		} catch (IOException e) {
-			logger.error("Error changing status",e);
-		}
-
 	}
 
 	/**
 	 * @see pl.mn.gadu.ConnectionListener#disconnected()
 	 */
 	public void disconnected() {
-		logger.debug("ConnectionDisconnected");
+
 	}
 
 	/**
 	 * @see pl.mn.gadu.ConnectionListener#connectionError(java.lang.String)
 	 */
 	public void connectionError(String error) {
-		logger.debug("ConnectionError: "+error);
+
 	}
 
 	/**
@@ -335,34 +387,20 @@ public class MainForm
 	 * @see pl.mn.gadu.MessageListener#messageArrived(pl.mn.gadu.Message)
 	 */
 	public void messageArrived(final IMessage message) {
-		logger.debug(
-			"Message arrived: " + message.getUser() + ":" + message.getText());
+		logger.debug("Message arrived: " + message.getUser() + ":" + message.getText());
 		getShell().getDisplay().syncExec(new Runnable() {
-			public void run() {
-				ChatForm form =
-					(ChatForm) usersChatForms.get(
-						new User(
-							message.getUser(),
-							"" + message.getUser(),
-							false));
-				if (form != null)
-					form.messageArrived(message);
-				else {
-					User user =
-						new User(
-							message.getUser(),
-							"" + message.getUser(),
-							false);
-					form =
-						new ChatForm(
-							MainForm.this.getShell(),
-							MainForm.this,
-							user);
-					usersChatForms.put(user, form);
-					form.open();
-					form.messageArrived(message);
-				}
-			}
+		   public void run() {
+				ChatForm form = (ChatForm)usersChatForms.get(new User(message.getUser(),""+message.getUser(),false));
+		   		if (form != null)
+		   			form.messageArrived(message);
+		   		else{
+		   			User user = new User(message.getUser(),""+message.getUser(),false);
+		   			form = new ChatForm(MainForm.this.getShell(),MainForm.this,user);	
+		   			usersChatForms.put(user,form);
+		   			form.open();
+		   			form.messageArrived(message);
+		   		}
+		   }
 		});
 	}
 
@@ -386,13 +424,13 @@ public class MainForm
 	 */
 	private MenuManager createFileMenu() {
 		MenuManager menu = new MenuManager("Plik", "Id01");
-		menu.add(new ConnectAction(this));
+		//menu.add(new ConnectAction(this));
 		menu.add(new ConfigAction(this));
 		menu.add(new AboutAction(this));
 		menu.add(new ExitAction(this));
 		return menu;
 	}
-
+	
 	/**
 	 * @param table
 	 */
@@ -428,7 +466,7 @@ public class MainForm
 		});
 	}
 
-	void editSelectedUser() {
+	void editSelectedUser(){
 		IStructuredSelection sel =
 			(IStructuredSelection) usersViewer.getSelection();
 		IUser first = (IUser) sel.getFirstElement();
@@ -442,8 +480,8 @@ public class MainForm
 			}
 		}
 	}
-
-	void deleteSelectedUser() {
+	
+	void deleteSelectedUser(){
 		IStructuredSelection sel =
 			(IStructuredSelection) usersViewer.getSelection();
 		User first = (User) sel.getFirstElement();
@@ -451,16 +489,10 @@ public class MainForm
 			usersData.removeUser(first);
 			usersViewer.refresh();
 			usersData.saveUsers();
-			try {
-				if (connection != null)
-					connection.removeMonitoredUser(first);
-			} catch (IOException e) {
-				logger.error("Error removing user from monitored user");
-			}
 		}
 	}
-
-	void startChatWithSelectedUser() {
+	
+	void startChatWithSelectedUser(){
 		IStructuredSelection sel =
 			(IStructuredSelection) usersViewer.getSelection();
 		User first = (User) sel.getFirstElement();
@@ -469,7 +501,8 @@ public class MainForm
 
 			if (chatForm == null) {
 				// nie ma jeszcze takiej rozmowy	
-				ChatForm form = new ChatForm(getShell(), MainForm.this, first);
+				ChatForm form =
+					new ChatForm(getShell(), MainForm.this, first);
 				usersChatForms.put(first, form);
 				form.open();
 			} else {
@@ -484,18 +517,12 @@ public class MainForm
 			usersData.addUser(userForm.getUser());
 			usersViewer.refresh();
 			usersData.saveUsers();
-			try {
-				if (connection != null)
-					connection.addMonitoredUser(userForm.getUser());
-			} catch (IOException e) {
-				logger.error("Error adding user to monitored user");
-			}
 		}
 	}
 
 	protected ToolBarManager createToolBarManager(int arg0) {
 		ToolBarManager toolBarManager = new ToolBarManager(SWT.FLAT | SWT.WRAP);
-		toolBarManager.add(new ConnectAction(this));
+		//toolBarManager.add(new ConnectAction(this));
 		toolBarManager.add(new ConfigAction(this));
 		toolBarManager.add(new AddUserAction(this));
 		toolBarManager.add(new ExitAction(this));

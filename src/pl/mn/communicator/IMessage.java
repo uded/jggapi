@@ -3,6 +3,7 @@ package pl.mn.communicator;
 /**
  * Wiadomoœæ do serwera rozmów.
  * 
+ * @version $Revision: 1.3 $
  * @author mnaglik
  */
 public interface IMessage {

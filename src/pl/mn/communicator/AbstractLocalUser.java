@@ -6,6 +6,7 @@ import org.apache.log4j.Logger;
  * U¿ytkownik lokalny klienta rozmów.<BR>
  * Obiekt reprezentuje lokalnego u¿ytkownika.
  * 
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public abstract class AbstractLocalUser implements ILocalUser {

@@ -1,6 +1,7 @@
 package pl.mn.communicator.gadu.util;
 
 /**
+ * @version $Revision: 1.2 $
  * @author Marcin
  */
 public class Util {

@@ -19,6 +19,7 @@ import org.apache.log4j.Logger;
  * }
  * </code>
  * 
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public abstract class AbstractConnection implements IConnection {

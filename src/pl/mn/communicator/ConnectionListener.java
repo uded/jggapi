@@ -3,6 +3,7 @@ package pl.mn.communicator;
 /**
  * Listener ze zdarzeniami po³¹czenia.
  * 
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 public interface ConnectionListener {

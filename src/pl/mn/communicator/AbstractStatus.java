@@ -10,6 +10,7 @@ import org.apache.log4j.Logger;
  * Dodatkowe statusy specyficzne dla serwerów rozmów
  * mog¹ zostaæ dodane w podklasach.
  * 
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 public abstract class AbstractStatus implements IStatus {
