@@ -15,7 +15,11 @@ class GGLogin implements GGOutgoingPackage {
 	private int local_ip;
 	private short local_port;
 
-	public GGLogin(byte[] ip, int port, AbstractLocalUser user, GGWelcome welcome) {
+	public GGLogin(
+		byte[] ip,
+		int port,
+		AbstractLocalUser user,
+		GGWelcome welcome) {
 		this.local_ip = 0;
 		this.local_port = (short) port;
 		this.uin = user.getUserNo();
@@ -30,38 +34,56 @@ class GGLogin implements GGOutgoingPackage {
 		int i;
 
 		for (x = 0, i = 0; i < password.length(); i++) {
+
+			// Konrad Rodziewski implementation
 			x = (x & 0xffffff00) | password.charAt(i);
 			y ^= x;
-
-			int k = (int) y;
-			k += x;
-			y = GGConversion.unsignedIntToLong(k);
-
-			k = (int) x;
-			k <<= 8;
-			x = GGConversion.unsignedIntToLong(k);
-
+			y += x;
+			x <<= 8;
 			y ^= x;
-
-			k = (int) x;
-			k <<= 8;
-			x = GGConversion.unsignedIntToLong(k);
-
-			k = (int) y;
-			k -= x;
-			y = GGConversion.unsignedIntToLong(k);
-
-			k = (int) x;
-			k <<= 8;
-			x = GGConversion.unsignedIntToLong(k);
-
+			x <<= 8;
+			y -= x;
+			x <<= 8;
 			y ^= x;
 
 			z = y & 0x1f;
-			y =
-				GGConversion.unsignedIntToLong(
-					(int) ((y << z) | (y >> (32 - z))));
+			y = (y << z) | (y >>> (32 - z));
+			// end
 
+			// old implementation
+			//			x = (x & 0xffffff00) | password.charAt(i);
+			//			y ^= x;
+			//
+			//			int k = (int) y;
+			//			k += x;
+			//			y = GGConversion.unsignedIntToLong(k);
+			//
+			//			k = (int) x;
+			//			k <<= 8;
+			//			x = GGConversion.unsignedIntToLong(k);
+			//
+			//			y ^= x;
+			//
+			//			k = (int) x;
+			//			k <<= 8;
+			//			x = GGConversion.unsignedIntToLong(k);
+			//
+			//			k = (int) y;
+			//			k -= x;
+			//			y = GGConversion.unsignedIntToLong(k);
+			//
+			//			k = (int) x;
+			//			k <<= 8;
+			//			x = GGConversion.unsignedIntToLong(k);
+			//
+			//			y ^= x;
+			//
+			//			z = y & 0x1f;
+			//			y =
+			//				GGConversion.unsignedIntToLong(
+			//					(int) ((y << z) | (y >> (32 - z))));
+			//
+			// end
 		}
 
 		return (int) y;
@@ -86,7 +108,6 @@ class GGLogin implements GGOutgoingPackage {
 	 */
 	public byte[] getContents() {
 		byte[] toSend = new byte[22];
-
 
 		toSend[3] = (byte) (uin >> 24 & 0xFF);
 		toSend[2] = (byte) (uin >> 16 & 0xFF);
