@@ -21,12 +21,13 @@ import org.apache.log4j.Logger;
 
 import pl.mn.communicator.AbstractStatus;
 
+import java.util.Date;
 import java.util.Map;
 
 
 /**
  * Status u¿ytkownika gg.
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 public class Status extends AbstractStatus {
@@ -41,6 +42,12 @@ public class Status extends AbstractStatus {
      * Status zajety.
      */
     public static final int BUSY = 6;
+
+    /** Opis w statusie */
+    private String description;
+
+    /** Czas powrotu u¿ytkownika */
+    private Date returnTime;
 
     /**
      * @param status status u¿ytkownika
@@ -59,5 +66,33 @@ public class Status extends AbstractStatus {
         map.put(new Integer(Status.NOT_VISIBLE), "NOT VISIBLE");
 
         return map;
+    }
+
+    /**
+     * @return Returns the description.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * @param description The description to set.
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * @return Returns the returnTime.
+     */
+    public Date getReturnTime() {
+        return returnTime;
+    }
+
+    /**
+     * @param returnTime The returnTime to set.
+     */
+    public void setReturnTime(Date returnTime) {
+        this.returnTime = returnTime;
     }
 }
