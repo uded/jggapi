@@ -13,7 +13,7 @@
       <p>
       The <code>jggapi</code> is a Java Gadu-Gadu protocol implementation.
 	  <code>jggapi</code> uses that well-known design patterns that minimize learning curve.
-	  As a result developers can write Gadu-Gadu clients very fast.
+	  As a result developers can write Gadu-Gadu clients faster than before.
       </p>
     </section>
 
@@ -74,7 +74,7 @@
 		the list of our developers.
 		</p>
 		<p>
-		You do not have to be a Java developer to contribute to this project or event
+		You do not have to be a Java developer to contribute to this project or even
 		a developer at all. Some aspects include writing documentation, maintaing this site
 		and testing the current version of the JGGApi library.
 		</p>

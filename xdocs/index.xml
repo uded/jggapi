@@ -14,27 +14,30 @@
 			from EKG. Gadu-Gadu is a very famous Instant Messanger in Poland. 
 			</p>
 			<p>
-			Thanks to the library it is very easy to create applications
+			Thanks to the libary it is very easy to create applications
 			that communicate with Gadu-Gadu server. It uses commonly used
 			design patterns (GoF) that minimizie the learnining curve for
-			the developers that are going to contribute to this project as
-			well as write client applications such as Kadu.
+			developers that are going to contribute to this project. It has a
+			good internal structure and realizes a paradigm of programming -  
+			<em>programming by extension</em> not by modification. What is more,
+			it will help developers that are going to write applications similar to Kadu, Gaim
+			or command-line EKG to fasten their development process.
             </p>
         </section>
 		<section name="Releases">
 			<p>
-			There is an old version of the library that has already been released. It works fine but has
-			limited functionality.
+			There is an old version of the library that has already been released.
+			It works fine but has limited functionality.
 			</p>
 			<p>
-			Currently we are preparing for the new release of the library (1.) that has many improvements
+			Currently, we are preparing for the new release of the library (1.0) that has many improvements
 			and clearer design. It is not compatible with the old version, interfaces have changed
 			significantly but porting from old version should not be a difficult task.
 			</p>
 		</section>
         <section name="Features">
             <p>
-			The new version of the library (1.0) will allow:
+			The upcoming version (1.0) will allow:
 				<ul>
 					<li>Sending and receiving messages.</li>
 					<li>Possibility to retrieve message delivery confirmation</li>
@@ -49,13 +52,26 @@
         <section name="Known Bugs">
 			<ul>
 				<li>
-					The current version is not thread safe but the thread safety check will be perfomed soon.
+				The current version is not thread safe but the thread safety check will be perfomed soon.
 				</li>
 				<li>
-					Initial status that is set in <code>LoginContext</code> does not work out.
-					It seems that Gadu-Gadu server is ignoring it.
+				Initial status that is set in <code>LoginContext</code> does not work.
+				At beginning we send <code>Login60</code> packet but the Gadu-Gadu server
+				is ignoring it. Therefore we have to sent status packet after connecting.
+				What is more, it is known that this is also done by a standard Gadu-Gadu client,
+				i.e. <i>explicite</i> setting status.
+				</li>
+				<li>
+				Write support for larger contact lists. Current implementation is limited to contact lists
+				that are not more than 2040 bytes long.
+				</li>
+				<li>
+				Add ability to send larger notify lists, i.e. list that is send at the beginning
+				to notify Gadu-Gadu server what users we want to monitor.
+				</li>
+				<li>
+				The libary is not tested enough therefore adding JUnit tests is of high importance.
 				</li>
 			</ul>
-        </section>
     </body>
 </document>
