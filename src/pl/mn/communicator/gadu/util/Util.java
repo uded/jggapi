@@ -18,8 +18,9 @@
 package pl.mn.communicator.gadu.util;
 
 
+
 /**
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public final class Util {
@@ -45,5 +46,13 @@ public final class Util {
         odebrane.append("}");
 
         return odebrane.toString();
+    }
+    
+    private static int unsignedByteToInt(byte i) {
+        if (i < 0) {
+            return (i & 0x7F) + 0x80;
+        } else {
+            return i;
+        }
     }
 }
