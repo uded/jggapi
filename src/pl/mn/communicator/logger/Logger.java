@@ -18,10 +18,7 @@ public abstract class Logger implements ILogger {
      * @return instancja loggera
      */
     public static synchronized Logger getLogger(Class clazz) {
-        if (instance == null) {
-            instance = Logger4J.getLogger(clazz);
-        }
-
+        instance = Logger4J.getLogger(clazz);
         return instance;
     }
 }
