@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageClass.java,v 1.6 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: MessageClass.java,v 1.7 2004-12-27 13:58:05 winnetou25 Exp $
  */
 public class MessageClass {
 
@@ -46,6 +46,9 @@ public class MessageClass {
 	/** this means that message is ping only and the user will not see anyhow whether or not we are sending this message */
 	public final static MessageClass PING = new MessageClass("message_class_ping");
 	
+	/**
+	 * @see java.lang.Object#toString()
+	 */
     public String toString() {
         return m_messageClass;
     }

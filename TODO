@@ -20,6 +20,7 @@ DONE-3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie 
 11. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
 12. Zastanowic sie czy to ma sens miec dwie oddzielne klasy reprezentujace uzytkownkow, GGUser i LocalUser.
 13. Zrobic porzadek w GGUtils.
+14. Apply immutable pattern to some classes.
 
 Bugs or features for 1.5 version.
 1. LOW - Obslugiwanie serwisow dostepnych przez www (RegistrationService) (rejestracja uzytkownika, zmiana danych itp...)

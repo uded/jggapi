@@ -20,11 +20,11 @@ package pl.mn.communicator;
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: StatusType.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: StatusType.java,v 1.6 2004-12-27 13:58:06 winnetou25 Exp $
  */
 public class StatusType {
 
-	private String m_status;
+	private String m_status = null;
 	
 	private StatusType(String status) {
 		m_status = status;
@@ -69,8 +69,4 @@ public class StatusType {
 		return m_status.hashCode();
 	}
 
-    protected Object clone() throws CloneNotSupportedException {
-        throw new CloneNotSupportedException();
-    }
-	
 }
