@@ -32,7 +32,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Server.java,v 1.7 2004-12-20 22:39:49 winnetou25 Exp $
+ * @version $Id: Server.java,v 1.8 2004-12-26 13:12:21 winnetou25 Exp $
  */
 public final class Server implements IServer {
 	
@@ -75,8 +75,8 @@ public final class Server implements IServer {
         	URL url = new URL("http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber="+ loginContext.getUin());
 
         	URLConnection con = url.openConnection();
-        	con.setReadTimeout(120*1000);
-        	con.setConnectTimeout(120*1000);
+        	//con.setReadTimeout(120*1000);
+        	//con.setConnectTimeout(120*1000);
         	con.connect();
         	
         	InputStream is = con.getInputStream();
