@@ -1,7 +1,7 @@
 TODO LIST
 ---------
 
-- wysylanie listy uzytkownikow do serwera
+DONE - wysylanie listy uzytkownikow do serwera
 - statusy z opisem i czasem powrotu
 - powiadomianie o zmianie statusow uzytkownikow
 - obslugiwanie serwisow dostepnych przez www
@@ -13,11 +13,10 @@ OK - implementacja GGNotify
 OK - implementacja GGNotifyReply
 OK - implementacja w connection powiadamianie listenera o zmianie statusu
      uzytkownika
-- implementacja GGListEmpty
 - implementacja dodanie do monitorowania,
   usuniecia z monitorowania
-  reakcji na zmiane statusu uzytkownika
-- pooprawienie pinga
+- reakcja na zmiane statusu uzytkownika podczas dzialania
+- poprawienie pinga
 - statusy z opisem i czasem powrotu
 - implementacja importu i eksportu uzytkownikow
 - implementacja katalogu publicznego (wyszukiwania)
@@ -25,6 +24,7 @@ OK - implementacja w connection powiadamianie listenera o zmianie statusu
   pakietow i rozszerzenie interfejsu IncomingPackage o getType
 - moze zlozona notyfikacja o statusie uzytkownikow po zalogowaniu
   zamiast informacji dla kazdego uzytkownika osobno
+- implementacja GGListEmpty
 
 INNE
 ----

@@ -51,7 +51,7 @@ import java.util.Map;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.25 $
+ * @version $Revision: 1.26 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -174,7 +174,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
                         pingTimeCount++;
 
                         if (pingTimeCount > PING_COUNT) {
-                            // TODO poprawne wysylanie pinga
                             //sendPackage(GGPing.getPing());
                             logger.debug("Ping...");
                             pingTimeCount = 0;
