@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import org.apache.log4j.Logger;
+
 import pl.mn.communicator.AbstractLocalUser;
 import pl.mn.communicator.AbstractMessage;
 import pl.mn.communicator.AbstractServer;
@@ -32,6 +34,7 @@ import pl.mn.communicator.AbstractStatus;
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
+	private static Logger logger = Logger.getLogger(Connection.class);
 	private AbstractServer server;
 	private AbstractLocalUser localUser;
 

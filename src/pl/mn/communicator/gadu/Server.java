@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.StringTokenizer;
 
+import org.apache.log4j.Logger;
+
 import pl.mn.communicator.AbstractLocalUser;
 import pl.mn.communicator.AbstractServer;
 
@@ -16,6 +18,7 @@ import pl.mn.communicator.AbstractServer;
  * @author mnaglik
  */
 public final class Server extends AbstractServer {
+	private static Logger logger = Logger.getLogger(Server.class);
 	public Server(String address, int port) {
 		super(address, port);
 	}
