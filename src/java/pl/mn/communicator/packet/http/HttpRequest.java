@@ -27,7 +27,7 @@ import java.net.URL;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: HttpRequest.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
+ * @version $Id: HttpRequest.java,v 1.3 2005-01-29 11:02:49 winnetou25 Exp $
  */
 public abstract class HttpRequest {
 
@@ -67,7 +67,7 @@ public abstract class HttpRequest {
 	}
 
 	public HttpURLConnection disconnect() {
-		if (m_huc == null) throw new IllegalStateException("must call prepare request and connect first");
+		if (m_huc == null) throw new IllegalStateException("must call connect() and sendRequest() first");
 		m_huc.disconnect();
 		
 		return m_huc;
