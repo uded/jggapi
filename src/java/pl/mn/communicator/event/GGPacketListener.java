@@ -34,7 +34,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPacketListener.java,v 1.8 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: GGPacketListener.java,v 1.9 2004-12-26 22:08:31 winnetou25 Exp $
  */
 public interface GGPacketListener extends EventListener {
 
@@ -55,12 +55,12 @@ public interface GGPacketListener extends EventListener {
 	public static class Stub implements GGPacketListener {
 
 		/**
-		 * @see pl.mn.communicator.event.GGPacketListener#sentPacket(pl.mn.communicator.gadu.GGOutgoingPackage)
+		 * @see pl.mn.communicator.event.GGPacketListener#receivedPacket(GGIncomingPackage)
 		 */
 		public void sentPacket(GGOutgoingPackage outgoingPacket) { }
 
 		/**
-		 * @see pl.mn.communicator.event.GGPacketListener#receivedPacket(pl.mn.communicator.gadu.GGIncomingPackage)
+		 * @see pl.mn.communicator.event.GGPacketListener#receivedPacket(GGIncomingPackage)
 		 */
 		public void receivedPacket(GGIncomingPackage incomingPacket) { }
 		

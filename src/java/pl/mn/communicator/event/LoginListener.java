@@ -28,7 +28,7 @@ import java.util.EventListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginListener.java,v 1.8 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: LoginListener.java,v 1.9 2004-12-26 22:08:31 winnetou25 Exp $
  */
 public interface LoginListener extends EventListener {
 	
@@ -47,12 +47,12 @@ public interface LoginListener extends EventListener {
 	public static class Stub implements LoginListener {
 		
 		/**
-		 * @see pl.mn.communicator.event.LoginListener#userLoggedIn()
+		 * @see pl.mn.communicator.event.LoginListener#loginOK()
 		 */
 		public void loginOK() { }
 		
 		/**
-		 * @see pl.mn.communicator.event.LoginListener#userLoggedOut()
+		 * @see pl.mn.communicator.event.LoginListener#loginFailed()
 		 */
 		public void loginFailed() { }
 

@@ -25,7 +25,7 @@ import java.util.Date;
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LocalStatus.java,v 1.2 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: LocalStatus.java,v 1.3 2004-12-26 22:07:35 winnetou25 Exp $
  */
 public class LocalStatus extends AbstractStatus implements ILocalStatus {
 
@@ -45,15 +45,12 @@ public class LocalStatus extends AbstractStatus implements ILocalStatus {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IStatus#isFriendsOnly()
+	 * @see pl.mn.communicator.ILocalStatus#isFriendsOnly()
 	 */
 	public boolean isFriendsOnly() {
 		return m_friendsOnly;
 	}
 	
-	/**
-	 * @see pl.mn.communicator.IStatus#setFriendsOnly(boolean)
-	 */
 	public void setFriendsOnly(boolean bool) {
 		m_friendsOnly = bool;
 	}

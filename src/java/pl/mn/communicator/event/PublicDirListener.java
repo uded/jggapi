@@ -34,7 +34,7 @@ import pl.mn.communicator.PublicDirSearchReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.15 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.16 2004-12-26 22:08:31 winnetou25 Exp $
  */
 public interface PublicDirListener extends EventListener {
 
@@ -67,17 +67,17 @@ public interface PublicDirListener extends EventListener {
 	public static class Stub implements PublicDirListener {
 
 		/**
-		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectoryUpdated()
+		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectoryUpdated(int)
 		 */
 		public void onPublicDirectoryUpdated(int queryID) { }
 
 		/**
-		 * @see pl.mn.communicator.event.PublicDirListener#gotSearchResults(java.util.Collection)
+		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectorySearchReply(int, PublicDirSearchReply)
 		 */
 		public void onPublicDirectorySearchReply(int queryID, PublicDirSearchReply publicDirSearchReply) { }
 
 		/**
-		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectoryRead(pl.mn.communicator.PublicDirQuery)
+		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectoryRead(int, PersonalInfo)
 		 */
 		public void onPublicDirectoryRead(int queryID, PersonalInfo pubDirReply) { }
 		

@@ -26,7 +26,7 @@ import java.util.Date;
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractStatus.java,v 1.2 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: AbstractStatus.java,v 1.3 2004-12-26 22:07:35 winnetou25 Exp $
  */
 public abstract class AbstractStatus implements IStatus {
 
@@ -60,40 +60,38 @@ public abstract class AbstractStatus implements IStatus {
 		return m_statusType;
 	}
 
-	/**
-	 * @see pl.mn.communicator.IStatus#setStatusType(int)
-	 */
 	public void setStatusType(StatusType status) {
 		m_statusType = status;
 	}
 
 	/**
-	 * @return Returns the description.
+	 * Returns the description.
+	 * 
+	 * @return <code>String</code> description as string.
 	 */
 	public String getDescription() {
 		return m_description;
 	}
 
 	/**
-	 * @param description The description to set.
+	 * @param description the description to set.
 	 */
 	public void setDescription(String description) {
 		m_description = description;
 	}
 
 	/**
-	 * @return Returns the returnTime.
+	 * @return <code>Date</code> the return time.
 	 */
 	public Date getReturnDate() {
 		return m_returnTime;
 	}
 
 	/**
-	 * @param returnTime The returnTime to set.
+	 * @param returnTime The return time to set.
 	 */
 	public void setReturnDate(Date returnTime) {
-		if (returnTime == null)
-			throw new NullPointerException("returnTime cannot be null");
+		if (returnTime == null) throw new NullPointerException("returnTime cannot be null");
 		m_returnTime = returnTime;
 	}
 

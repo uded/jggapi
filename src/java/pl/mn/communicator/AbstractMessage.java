@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * is common for incoming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.9 2004-12-25 17:31:15 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.10 2004-12-26 22:07:35 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 
@@ -73,7 +73,7 @@ public abstract class AbstractMessage implements IMessage {
 	}
 
     /**
-     * @see pl.mn.communicator.IMessage#getMessageClass();
+     * @see pl.mn.communicator.IMessage#getMessageClass()
      */
     public MessageClass getMessageClass() {
     	return m_messageClass;

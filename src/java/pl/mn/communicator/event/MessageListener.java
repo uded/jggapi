@@ -33,7 +33,7 @@ import pl.mn.communicator.MessageStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageListener.java,v 1.9 2004-12-25 14:52:27 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.10 2004-12-26 22:08:31 winnetou25 Exp $
  */
 public interface MessageListener extends EventListener {
 	
@@ -41,7 +41,7 @@ public interface MessageListener extends EventListener {
      * Notification that a message arrived from
      * Gadu-Gadu server.
      * 
-     * @param <code>IncomingMessage</code> object.
+     * @param incommingMessage the message that arrived from Gadu-Gadu user.
      */
 	void messageArrived(IncomingMessage incommingMessage);
 
@@ -57,12 +57,12 @@ public interface MessageListener extends EventListener {
     public static class Stub implements MessageListener {
 
 		/**
-		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
+		 * @see pl.mn.communicator.event.MessageListener#messageArrived(IncomingMessage)
 		 */
 		public void messageArrived(IncomingMessage incommingMessage) { }
 
 		/**
-		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(pl.mn.communicator.MessageDeliveredEvent)
+		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(int, int, MessageStatus)
 		 */
 		public void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus) { }
 

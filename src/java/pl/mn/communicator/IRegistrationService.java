@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IRegistrationService.java,v 1.6 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: IRegistrationService.java,v 1.7 2004-12-26 22:07:35 winnetou25 Exp $
  */
 public interface IRegistrationService {
 
@@ -43,7 +43,6 @@ public interface IRegistrationService {
 	 * @param answer to the qa question.
 	 * @return uin of new Gadu-Gadu account.
 	 * @throws <code>GGException</code> if error occurs while registering new Gadu-Gadu account.
-	 * @see 
 	 */
 	int registerAccount(String email, String password, int qa, String answer) throws GGException;
 

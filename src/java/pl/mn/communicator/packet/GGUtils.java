@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.13 2004-12-21 21:25:06 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.14 2004-12-26 22:11:48 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -169,11 +169,6 @@ public class GGUtils {
 		throw new RuntimeException("Unable to convert, messageClass: "+clientMessageClass);
 	}
 
-	/**
-	 * Konwertuj bajty do stringa w postaci czytelnej.
-	 * @param bytes bajty do konwersji
-	 * @return String
-	 */
 	public static String bytesToString(byte[] bytes) {
 	    StringBuffer odebrane = new StringBuffer();
 	    odebrane.append("{");
@@ -187,21 +182,10 @@ public class GGUtils {
 	    return odebrane.toString();
 	}
 
-	/**
-	 * Zamien tabice bajt�w na integer.
-	 * @param buf tablica bajt�w
-	 * @return int
-	 */
 	public static int byteToInt(byte[] buf) {
 	    return byteToInt(buf, 0);
 	}
 
-	/**
-	 * Zamien tablice bajt�w na integer zaczynaj�c od pozycji start.
-	 * @param buf tablica bajt�w
-	 * @param start pozycja od kt�rej tablica jest czytana
-	 * @return int
-	 */
 	public static int byteToInt(byte[] buf, int start) {
 	    int i = 0;
 	    int pos = start;
@@ -240,11 +224,6 @@ public class GGUtils {
 		return (int) (millis/1000L);
 	}
 
-	/**
-	 *
-	 * @param i
-	 * @return
-	 */
 	public static int unsignedByteToInt(byte i) {
 	    if (i < 0) {
 	        return (i & 0x7F) + 0x80;

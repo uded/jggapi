@@ -25,7 +25,7 @@ import java.util.Date;
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: RemoteStatus.java,v 1.2 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: RemoteStatus.java,v 1.3 2004-12-26 22:07:35 winnetou25 Exp $
  */
 public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 
@@ -55,9 +55,6 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 		super(statusType, description, returnDate);
 	}
 
-	/**
-	 * @see pl.mn.communicator.IRemoteStatus#setBlocked(boolean)
-	 */
 	public void setBlocked(boolean blocked) {
 		m_blocked = blocked;
 	}
