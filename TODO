@@ -1,8 +1,14 @@
 TODO LIST
 ---------
 
-- statusy z opisem i czasem powrotu
 - wysylanie listy uzytkownikow do serwera
+- statusy z opisem i czasem powrotu
 - powiadomianie o zmianie statusow uzytkownikow
 - obslugiwanie serwisow dostepnych przez www
 (rejestracja uzytkownika, zmiana danych itp...)
+
+PRIORITY
+--------
+- implementacja GGNotify
+- implementacja GGNotifyReply
+
