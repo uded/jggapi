@@ -27,21 +27,26 @@ import java.util.Map;
 
 /**
  * Status u¿ytkownika gg.
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public class Status extends AbstractStatus {
     private static Logger logger = Logger.getLogger(Status.class);
 
-    /**
-     * Status niewidoczny.
-     */
+    /** Status niewidoczny. */
     public static final int NOT_VISIBLE = 3;
 
-    /**
-     * Status zajety.
-     */
+    /** Status zajety. */
     public static final int BUSY = 6;
+
+    /** Adres IP bezpo¶rednich po³±czeñ */
+    private String remoteIp;
+
+    /** wersja klienta */
+    private int version;
+
+    /** maksymalny rozmiar obrazków w KB */
+    private int imageSize;
 
     /** Opis w statusie */
     private String description;
@@ -94,5 +99,47 @@ public class Status extends AbstractStatus {
      */
     public void setReturnTime(Date returnTime) {
         this.returnTime = returnTime;
+    }
+
+    /**
+     * @return Returns the imageSize.
+     */
+    public int getImageSize() {
+        return imageSize;
+    }
+
+    /**
+     * @param imageSize The imageSize to set.
+     */
+    public void setImageSize(int imageSize) {
+        this.imageSize = imageSize;
+    }
+
+    /**
+     * @return Returns the remoteIp.
+     */
+    public String getRemoteIp() {
+        return remoteIp;
+    }
+
+    /**
+     * @param remoteIp The remoteIp to set.
+     */
+    public void setRemoteIp(String remoteIp) {
+        this.remoteIp = remoteIp;
+    }
+
+    /**
+     * @return Returns the version.
+     */
+    public int getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version The version to set.
+     */
+    public void setVersion(int version) {
+        this.version = version;
     }
 }
