@@ -27,17 +27,17 @@ import java.util.Map;
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
     private static Logger logger = Logger.getLogger(GGNotifyReply.class);
     private byte[] dane;
     private Map statusy = new HashMap();
-    
+
     /**
-     * 
-     * @param dane
+     * Tworz pakiet odpowiedzi na listê u¿ytkonwików dostêpnych.
+     * @param dane dane do utworzenia pakietu
      */
     GGNotifyReply(byte[] dane) {
         logger.debug("Pakiet zmiany stanu u¿ytkownika");
@@ -62,7 +62,7 @@ class GGNotifyReply implements GGIncomingPackage {
         // - status
         // - description
         // - time
-        
+
     }
     /*
     #define GG_NOTIFY_REPLY 0x000c   tak, to samo co GG_LOGIN
