@@ -25,7 +25,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {
@@ -41,14 +41,14 @@ class GGLogin implements GGOutgoingPackage {
         this.localIp = 0;
         this.localPort = (short) port;
         this.uin = user.getUserNo();
-        this.hash = gg_login_hash(user.getPassword(), welcome.getSeed());
+        this.hash = ggLoginHash(user.getPassword(), welcome.getSeed());
 
-        logger.debug("user: " + user.getUserNo() + " pass: " +
-            user.getPassword());
+        logger.debug("user: " + user.getUserNo() + " pass: "
+                + user.getPassword());
         logger.debug("seed: " + welcome.getSeed() + " hash: " + hash);
     }
 
-    private int gg_login_hash(String password, int seed) {
+    private int ggLoginHash(String password, int seed) {
         long x;
         long y;
         long z;
@@ -58,21 +58,21 @@ class GGLogin implements GGOutgoingPackage {
         int i;
 
         for (x = 0, i = 0; i < password.length(); i++) {
-            // Konrad Rodziewski implementation
-            //			x = (x & 0xffffff00) | password.charAt(i);
-            //			y ^= x;
-            //			y += x;
-            //			x <<= 8;
-            //			y ^= x;
-            //			x <<= 8;
-            //			y -= x;
-            //			x <<= 8;
-            //			y ^= x;
+        	//Konrad Rodziewski implementation
+            //x = (x & 0xffffff00) | password.charAt(i);
+            //y ^= x;
+            //y += x;
+            //x <<= 8;
+            //y ^= x;
+            //x <<= 8;
+            //y -= x;
+            //x <<= 8;
+            //y ^= x;
             //
-            //			z = y & 0x1f;
-            //			y = (y << z) | (y >>> (32 - z));
-            // end
-            // old implementation
+            //z = y & 0x1f;
+            //y = (y << z) | (y >>> (32 - z));
+            //end
+            //old implementation
             x = (x & 0xffffff00) | password.charAt(i);
             y ^= x;
 
