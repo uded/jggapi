@@ -52,7 +52,7 @@ import pl.mn.communicator.gui.util.Config;
 import pl.mn.communicator.gui.util.ResourceManager;
 
 /**
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * @author mnaglik
  */
 public class MainForm
@@ -178,6 +178,7 @@ public class MainForm
 	protected void configureShell(Shell shell) {
 		super.configureShell(shell);
 		shell.setText("JavaGG");
+		shell.setImage(ResourceManager.getImage(MainForm.class,"icons/debug_exec.gif"));
 		shell.setSize(160, 600);
 	}
 
