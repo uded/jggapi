@@ -20,10 +20,13 @@ package pl.mn.communicator.gadu.handlers;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.in.GGNotifyReply;
-
 
 /**
  * Created on 2004-11-28
@@ -35,10 +38,16 @@ import pl.mn.communicator.gadu.in.GGNotifyReply;
  */
 public class GGNotifyReplyPacketHandler implements PacketHandler {
 
+	private final static Log logger = LogFactory.getLog(GGNotifyReplyPacketHandler.class);
+	
 	/**
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
+		logger.debug("NotifyPacketReply received.");
+		logger.debug("PacketHeader: "+context.getHeader());
+		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+
 		GGNotifyReply notifyReply = new GGNotifyReply(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(notifyReply);
 		Map usersStatuses = notifyReply.getUsersStatus();

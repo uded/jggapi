@@ -17,8 +17,12 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pl.mn.communicator.IncommingMessage;
 import pl.mn.communicator.event.MessageArrivedEvent;
+import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.in.GGRecvMsg;
 
 /**
@@ -31,10 +35,16 @@ import pl.mn.communicator.gadu.in.GGRecvMsg;
  */
 public class GGMessageReceivedPacketHandler implements PacketHandler {
 
+	private static final Log logger = LogFactory.getLog(GGMessageReceivedPacketHandler.class);
+
 	/**
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
+		logger.debug("GGMessageReceived packet received.");
+		logger.debug("PacketHeader: "+context.getHeader());
+		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+
 		GGRecvMsg recvMsg = new GGRecvMsg(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(recvMsg);
 		IncommingMessage incommingMessage = new IncommingMessage(recvMsg.getSender(), recvMsg.getMessage(), recvMsg.getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());

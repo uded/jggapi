@@ -27,6 +27,7 @@ import pl.mn.communicator.gadu.in.GGDisconnecting;
 import pl.mn.communicator.gadu.in.GGLoginFailed;
 import pl.mn.communicator.gadu.in.GGLoginOK;
 import pl.mn.communicator.gadu.in.GGNotifyReply;
+import pl.mn.communicator.gadu.in.GGNotifyReply60;
 import pl.mn.communicator.gadu.in.GGPong;
 import pl.mn.communicator.gadu.in.GGRecvMsg;
 import pl.mn.communicator.gadu.in.GGSendMsgAck;
@@ -78,22 +79,25 @@ public class PacketChain {
 			logger.error("Unknown package.");
 			logger.error("PacketHeader: "+packageContent.getHeader());
 			logger.error("PacketBody: "+GGUtils.bytesToString(packageContent.getPackageContent()));
+		} else {
+			packetHandler.handle(packageContent);
 		}
-		packetHandler.handle(packageContent);
 	}
 	
 	private void registerDefaultHandlers() {
+		registerGGPackageHandler(GGWelcome.GG_PACKAGE_WELCOME, new GGWelcomePacketHandler());
 		registerGGPackageHandler(GGLoginOK.GG_LOGIN_OK, new GGLoginOKPacketHandler());
 		registerGGPackageHandler(GGLoginFailed.GG_LOGIN_FAILED, new GGLoginFailedPacketHandler());
-		registerGGPackageHandler(GGWelcome.GG_PACKAGE_WELCOME, new GGWelcomePacketHandler());
-		registerGGPackageHandler(GGDisconnecting.GG_DISCONNECTING, new GGDisconnectingPacketHandler());
 		registerGGPackageHandler(GGStatus.GG_STATUS, new GGStatusPacketHandler());
+		registerGGPackageHandler(GGStatus60.GG_STATUS60, new GGStatus60PacketHandler());
 		registerGGPackageHandler(GGNotifyReply.GG_NOTIFY_REPLY, new GGNotifyReplyPacketHandler());
-		registerGGPackageHandler(GGPong.GG_PONG, new GGPongPacketHandler());
+		registerGGPackageHandler(GGNotifyReply60.GG_NOTIFY_REPLY60, new GGNotifyReply60PacketHandler());
 		registerGGPackageHandler(GGRecvMsg.GG_RECV_MSG, new GGMessageReceivedPacketHandler());
 		registerGGPackageHandler(GGSendMsgAck.GG_SEND_MSG_ACK, new GGSentMessageAckPacketHandler());
 		registerGGPackageHandler(GGUserListReply.GG_USERLIST_REPLY, new GGUserListReplyHandler());
-		registerGGPackageHandler(GGStatus60.GG_STATUS60, new GGStatus60PacketHandler());
+
+		registerGGPackageHandler(GGDisconnecting.GG_DISCONNECTING, new GGDisconnectingPacketHandler());
+		registerGGPackageHandler(GGPong.GG_PONG, new GGPongPacketHandler());
 	}
 
 }

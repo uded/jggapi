@@ -17,38 +17,46 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
+import java.util.Iterator;
+import java.util.Map;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.event.MessageDeliveredEvent;
+import pl.mn.communicator.IStatus60;
+import pl.mn.communicator.IUser;
 import pl.mn.communicator.gadu.GGUtils;
-import pl.mn.communicator.gadu.in.GGSendMsgAck;
+import pl.mn.communicator.gadu.in.GGNotifyReply60;
 
 /**
- * Created on 2004-11-28
+ * Created on 2004-12-12
  * 
  * @author mateusz
  *
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class GGSentMessageAckPacketHandler implements PacketHandler {
+public class GGNotifyReply60PacketHandler implements PacketHandler {
 
-	private final static Log logger = LogFactory.getLog(GGSentMessageAckPacketHandler.class);
-
+	private final static Log logger = LogFactory.getLog(GGNotifyReply60PacketHandler.class);
+	
 	/**
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
-		logger.debug("GGSentMessageAck packet received.");
+		logger.debug("NotifyPacketReply60 packet received.");
 		logger.debug("PacketHeader: "+context.getHeader());
 		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+		
+		GGNotifyReply60 notifyReply = new GGNotifyReply60(context.getPackageContent());
+		context.getSessionAccessor().notifyGGPacketReceived(notifyReply);
 
-		GGSendMsgAck sendMessageAck = new GGSendMsgAck(context.getPackageContent());
-		context.getSessionAccessor().notifyGGPacketReceived(sendMessageAck);
-		int uin  = sendMessageAck.getRecipientUin();
-		MessageDeliveredEvent messageDeliveredEvent = new MessageDeliveredEvent(this, uin, sendMessageAck.getMessageSeq(), sendMessageAck.getStatus());
-		context.getSessionAccessor().notifyMessageDelivered(messageDeliveredEvent);
+		Map usersStatuses = notifyReply.getUsersStatus();
+		for (Iterator it = usersStatuses.keySet().iterator();it.hasNext();) {
+			IUser user = (IUser) it.next();
+			IStatus60 status = (IStatus60) usersStatuses.get(user);
+			context.getSessionAccessor().notifyUserChangedStatus60(user, status);
+		}
 	}
 
 }

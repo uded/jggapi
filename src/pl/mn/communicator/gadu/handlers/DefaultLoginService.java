@@ -25,8 +25,8 @@ import java.util.Set;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.ILoginService;
-import pl.mn.communicator.Status60;
 import pl.mn.communicator.SessionState;
+import pl.mn.communicator.Status60;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.gadu.out.GGLogin60;
@@ -58,7 +58,7 @@ public class DefaultLoginService implements ILoginService {
 			try {
 				int uin = m_session.getLoginContext().getUin();
 				String password = m_session.getLoginContext().getPassword();
-				int seed = m_session.getIntegerAttribute("seed");
+				int seed = m_session.getSessionAccessor().getLoginSeed();
 
 				GGLogin60 login = new GGLogin60(uin, password.toCharArray(), seed);
 				login.setImageSize(m_session.getLoginContext().getImageSize());

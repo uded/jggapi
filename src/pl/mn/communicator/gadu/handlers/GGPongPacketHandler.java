@@ -17,6 +17,10 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.in.GGPong;
 
 /**
@@ -29,10 +33,16 @@ import pl.mn.communicator.gadu.in.GGPong;
  */
 public class GGPongPacketHandler implements PacketHandler {
 
+	private final static Log logger = LogFactory.getLog(GGPongPacketHandler.class);
+
 	/**
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
+		logger.debug("GGPoing packet received.");
+		logger.debug("PacketHeader: "+context.getHeader());
+		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+
 		GGPong pong = GGPong.getInstance();
 		context.getSessionAccessor().notifyGGPacketReceived(pong);
 		context.getSessionAccessor().notifyPongReceived();

@@ -17,6 +17,10 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.in.GGWelcome;
 
 /**
@@ -29,13 +33,19 @@ import pl.mn.communicator.gadu.in.GGWelcome;
  */
 public class GGWelcomePacketHandler implements PacketHandler {
 
+	private static final Log logger = LogFactory.getLog(GGWelcomePacketHandler.class);
+
 	/**
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.PacketContext)
 	 */
 	public void handle(Context context) {
+		logger.debug("GGWelcome packet received.");
+		logger.debug("PacketHeader: "+context.getHeader());
+		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+
 		GGWelcome welcome = new GGWelcome(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(welcome);
-		context.getSessionAccessor().setIntegerAttribute("seed", welcome.getSeed());
+		context.getSessionAccessor().setLoginSeed(welcome.getSeed());
 		context.getSessionAccessor().notifyConnectionEstablished();
 	}
 	

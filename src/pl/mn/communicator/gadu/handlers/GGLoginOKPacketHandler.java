@@ -17,6 +17,10 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.in.GGLoginOK;
 
 /**
@@ -29,10 +33,16 @@ import pl.mn.communicator.gadu.in.GGLoginOK;
  */
 public class GGLoginOKPacketHandler implements PacketHandler {
 
+	private static final Log logger = LogFactory.getLog(GGLoginOKPacketHandler.class);
+	
 	/**
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.PacketContext)
 	 */
 	public void handle(Context context) {
+		logger.debug("LoginOK packet received.");
+		logger.debug("PacketHeader: "+context.getHeader());
+		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+
 		GGLoginOK loginOk = GGLoginOK.getInstance();
 		context.getSessionAccessor().notifyGGPacketReceived(loginOk);
 		context.getSessionAccessor().notifyLoginOK();

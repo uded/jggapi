@@ -24,16 +24,11 @@ import pl.mn.communicator.gadu.GGUtils;
 
 /**
  * 
- *  struct gg_notify {
- *      int uin;    // numerek danej osoby
- *      char type;  // rodzaj u�ytkownika
- *     };
- *
  * @see pl.mn.communicator.gadu.in.GGNotifyReply
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotify.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
+ * @version $Id: GGNotify.java,v 1.2 2004-12-12 18:02:56 winnetou25 Exp $
  */
 public class GGNotify implements GGOutgoingPackage, GGNotifiable {
 

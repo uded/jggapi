@@ -22,7 +22,7 @@ import pl.mn.communicator.event.SessionStateListener;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISession.java,v 1.4 2004-12-12 16:21:55 winnetou25 Exp $
+ * @version $Id: ISession.java,v 1.5 2004-12-12 18:02:39 winnetou25 Exp $
  */
 public interface ISession {
 
@@ -48,8 +48,6 @@ public interface ISession {
 //
 //	IFileService getFileService();
 
-	int getIntegerAttribute(String attributeName);
-	
 	void addSessionStateListener(SessionStateListener sessionStateListener);
 	
 	void removeSessionStateListener(SessionStateListener sessionStateListener);

@@ -18,6 +18,7 @@
 package pl.mn.communicator.gadu.handlers;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -103,9 +104,10 @@ public class DefaultPresenceService implements IPresenceService {
 			try {
 				GGAddNotify addNotify = new GGAddNotify(user.getUin(), user.getUserMode());
 				m_session.getSessionAccessor().sendPackage(addNotify);
+				if (m_monitoredUsers == null) m_monitoredUsers = new ArrayList();
 				m_monitoredUsers.add(user);
 			} catch (IOException ex) {
-				throw new GGException("Unable to add monitored user.", ex);
+				throw new GGException("Error occured while adding user to be monitored.", ex);
 			}
 		}
 	}

@@ -17,6 +17,10 @@
  */
 package pl.mn.communicator.gadu.handlers;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.in.GGLoginFailed;
 
 /**
@@ -29,10 +33,16 @@ import pl.mn.communicator.gadu.in.GGLoginFailed;
  */
 public class GGLoginFailedPacketHandler implements PacketHandler {
 
+	private final static Log logger = LogFactory.getLog(GGLoginFailedPacketHandler.class);
+	
 	/**
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
+		logger.debug("LoginFailed packet received.");
+		logger.debug("PacketHeader: "+context.getHeader());
+		logger.debug("PacketLoad: "+GGUtils.bytesToString(context.getPackageContent()));
+
 		GGLoginFailed loginFailed = GGLoginFailed.getInstance();
 		context.getSessionAccessor().notifyGGPacketReceived(loginFailed);
 		context.getSessionAccessor().notifyLoginFailed();

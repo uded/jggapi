@@ -18,5 +18,9 @@ public interface IStatus60 extends IStatus {
 	int getRemotePort();
 	byte getGGVersion();
 	byte getImageSize();
+	boolean supportsVoiceCommunication();
+	boolean supportsDirectCommunication();
+	boolean areWeInRemoteUserBuddyList();
+	int getDescriptionSize();
 	
 }

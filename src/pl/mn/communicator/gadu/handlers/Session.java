@@ -98,11 +98,6 @@ public class Session implements ISession {
 		return m_loginContext;
 	}
 	
-	public int getIntegerAttribute(String attributeName) {
-		Integer intObject = (Integer) m_sessionAttributes.get(attributeName);
-		return intObject.intValue();
-	}
-	
 	public void addSessionStateListener(SessionStateListener sessionStateListener) {
 		if (sessionStateListener == null) throw new NullPointerException("sessionStateListener cannot be null.");
 		m_sessionStateListeners.add(sessionStateListener);
@@ -253,10 +248,16 @@ public class Session implements ISession {
 			m_contactListService.notifyContactListReceived(contacts);
 		}
 
-		public void setIntegerAttribute(String attributeName, int integer) {
-			m_sessionAttributes.put(attributeName, new Integer(integer));
+		public void setLoginSeed(int seed) {
+			m_sessionAttributes.put("seed", new Integer(seed));
 		}
-		
+
+		public int getLoginSeed() {
+			if (!m_sessionAttributes.containsKey("seed")) return -1;
+			Integer seedInteger = (Integer) m_sessionAttributes.get("seed");
+			return seedInteger.intValue();
+		}
+
 		public LoginContext getLoginContext() {
 			return m_loginContext;
 		}

@@ -24,8 +24,9 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.IStatus;
 import pl.mn.communicator.GGUser;
+import pl.mn.communicator.GGUserMode;
+import pl.mn.communicator.IStatus;
 import pl.mn.communicator.gadu.GGIncomingPackage;
 import pl.mn.communicator.gadu.GGUtils;
 import pl.mn.communicator.gadu.out.GGNewStatus;
@@ -35,7 +36,7 @@ import pl.mn.communicator.gadu.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
+ * @version $Id: GGNotifyReply.java,v 1.2 2004-12-12 18:02:56 winnetou25 Exp $
  */
 public class GGNotifyReply implements GGIncomingPackage {
 
@@ -57,10 +58,10 @@ public class GGNotifyReply implements GGIncomingPackage {
     private Map m_statuses = new HashMap();
 
     /**
-     * @param m_data dane do utworzenia pakietu
+     * @param data dane do utworzenia pakietu
      */
     public GGNotifyReply(byte[] data) {
-        analize();
+        analize(data);
     }
 
     public int getPacketType() {
@@ -79,17 +80,17 @@ public class GGNotifyReply implements GGIncomingPackage {
     /**
      * Analizuj m_data pakietu
      */
-    private void analize() {
+    private void analize(byte[] data) {
         // usun flagi z najstarszego bajtu
         int przesuniecie = 0;
 
-        while (przesuniecie < m_data.length) {
-        	m_data[przesuniecie + 3] = GGUtils.intToByte(0)[0];
+        while (przesuniecie < data.length) {
+        	data[przesuniecie + 3] = GGUtils.intToByte(0)[0];
 
-            int nr = GGUtils.byteToInt(m_data, przesuniecie);
+            int nr = GGUtils.byteToInt(data, przesuniecie);
             logger.debug("Nr usera zmieniajacego status: " + nr);
 
-            int status = GGUtils.unsignedByteToInt(m_data[przesuniecie + 4]);
+            int status = GGUtils.unsignedByteToInt(data[przesuniecie + 4]);
             logger.debug("Status u�ytkownika to: " + status);
 
             // dla statusow opisowych pobierz opis
@@ -100,19 +101,17 @@ public class GGNotifyReply implements GGIncomingPackage {
                     (status == GGNewStatus.GG_STATUS_BUSY_DESCR) ||
                     (status == GGNewStatus.GG_STATUS_INVISIBLE_DESCR) ||
                     (status == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
-                int descriptionSize = GGUtils.unsignedByteToInt(m_data[przesuniecie + 14]);
+                int descriptionSize = GGUtils.unsignedByteToInt(data[przesuniecie + 14]);
 
                 logger.debug("U�ytkownik ma status opisowy o dlugosci " +
                     descriptionSize);
 
-                boolean jestCzas = m_data[(przesuniecie + 15 + descriptionSize) - 5] == 0;
+                boolean jestCzas = data[(przesuniecie + 15 + descriptionSize) - 5] == 0;
 
                 if (jestCzas) {
-                    logger.debug("Ustawiony czas powrotu " +
-                    		m_data[(przesuniecie + 15 + descriptionSize) - 4]);
+                    logger.debug("Ustawiony czas powrotu " +data[(przesuniecie + 15 + descriptionSize) - 4]);
 
-                    long czas = GGUtils.byteToInt(m_data,
-                            (przesuniecie + 15 + descriptionSize) - 4);
+                    long czas = GGUtils.byteToInt(data, (przesuniecie + 15 + descriptionSize) - 4);
                     czas *= 1000;
                     returnTime = new Date();
                     returnTime.setTime(czas);
@@ -122,8 +121,7 @@ public class GGNotifyReply implements GGIncomingPackage {
 
                 
                 byte[] opis = new byte[descriptionSize];
-                System.arraycopy(m_data, przesuniecie + 15, opis, 0,
-                    descriptionSize);
+                System.arraycopy(data, przesuniecie + 15, opis, 0, descriptionSize);
                 description = new String(opis);
                 
                 logger.debug("Opis[" + description + "]");
@@ -139,29 +137,9 @@ public class GGNotifyReply implements GGIncomingPackage {
             }
             
             IStatus statusBiz = GGUtils.getClientStatus(status, description, returnTime.getTime());
-            GGUser uzytkownik = new GGUser(nr);
+            GGUser uzytkownik = new GGUser(nr, GGUserMode.BUDDY);
             m_statuses.put(uzytkownik, statusBiz);
         }
     }
 
-    //TODO
-    private int getUserNumber() {
-    	return -1;
-    }
-    
-    //TODO
-    private int getStatus() {
-    	return -1;
-    }
-    
-    //TODO
-    private String getStatusDescription() {
-    	return null;
-    }
-    
-    //TODO
-    private Date getReturnTime() {
-    	return null;
-    }
-    
 }

@@ -18,8 +18,7 @@ public class SessionFactory {
 
 	public static ISession createSession(LoginContext loginContext) throws GGException {
 		IServer server = Server.getDefaultServer(loginContext);
-		ISession session = new Session(server, loginContext);
-		return session;
+		return new Session(server, loginContext);
 	}
 	
 }

@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.util.Collection;
 
 import pl.mn.communicator.GGException;
+import pl.mn.communicator.GGUser;
+import pl.mn.communicator.GGUserMode;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IStatus60;
@@ -128,9 +130,9 @@ public class Main2 {
 //		session.getPresenceService().setStatus(status);
 //		
 		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
-		session.getMessageService().sendMessage(OutgoingMessage.createMessageWithoutConfirmation(376798, String.valueOf(System.currentTimeMillis())));
+//		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+//		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
+//		session.getMessageService().sendMessage(OutgoingMessage.createMessageWithoutConfirmation(376798, String.valueOf(System.currentTimeMillis())));
 
 //		LocalUser localUser1 = new LocalUser();
 //		localUser1.setDisplayName("ziom");
@@ -147,6 +149,9 @@ public class Main2 {
 //		session.getContactListService().clearUserListRequest();
 //		session.getContactListService().exportContacts(localUsers);
 //		session.getContactListService().importContacts();
+		
+		IUser user1 = new GGUser(376798, GGUserMode.BUDDY);
+		session.getPresenceService().addMonitoredUser(user1);
 		
 		session.getLoginService().logout();
 		session.getConnectionService().disconnect();
