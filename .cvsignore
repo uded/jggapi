@@ -1,4 +1,2 @@
-bin
-jggapi.log
-dist
-build
+target
+velocity.log
