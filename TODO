@@ -1,6 +1,7 @@
 TODO LIST
 ---------
 
+- statusy z opisem i czasem powrotu
 - wysylanie listy uzytkownikow do serwera
 - powiadomianie o zmianie statusow uzytkownikow
 - obslugiwanie serwisow dostepnych przez www
