@@ -13,11 +13,11 @@ OK - implementacja GGNotify
 OK - implementacja GGNotifyReply
 OK - implementacja w connection powiadamianie listenera o zmianie statusu
      uzytkownika
-- implementacja dodanie do monitorowania,
-  usuniecia z monitorowania
+OK - implementacja dodanie do monitorowania,
+     usuniecia z monitorowania
 - reakcja na zmiane statusu uzytkownika podczas dzialania
 - poprawienie pinga
-- statusy z opisem i czasem powrotu
+- statusy z opisem i czasem powrotu dla uzytkownika lokalnego
 - implementacja importu i eksportu uzytkownikow
 - implementacja katalogu publicznego (wyszukiwania)
 - wprowadzenie wzorca chain of responsibility w rozpoznawaniu
