@@ -24,6 +24,8 @@ class GGLogin implements GGOutgoingPackage {
 		this.local_port = (short) port;
 		this.uin = user.getUserNo();
 		this.hash = gg_login_hash(user.getPassword(), welcome.getSeed());
+		
+		System.err.println("user: " + user.getUserNo() + " pass: " + user.getPassword());
 		System.err.println("seed: " + welcome.getSeed() + " hash: " + hash);
 	}
 
@@ -36,53 +38,53 @@ class GGLogin implements GGOutgoingPackage {
 		for (x = 0, i = 0; i < password.length(); i++) {
 
 			// Konrad Rodziewski implementation
-			x = (x & 0xffffff00) | password.charAt(i);
-			y ^= x;
-			y += x;
-			x <<= 8;
-			y ^= x;
-			x <<= 8;
-			y -= x;
-			x <<= 8;
-			y ^= x;
-
-			z = y & 0x1f;
-			y = (y << z) | (y >>> (32 - z));
+//			x = (x & 0xffffff00) | password.charAt(i);
+//			y ^= x;
+//			y += x;
+//			x <<= 8;
+//			y ^= x;
+//			x <<= 8;
+//			y -= x;
+//			x <<= 8;
+//			y ^= x;
+//
+//			z = y & 0x1f;
+//			y = (y << z) | (y >>> (32 - z));
 			// end
 
 			// old implementation
-			//			x = (x & 0xffffff00) | password.charAt(i);
-			//			y ^= x;
-			//
-			//			int k = (int) y;
-			//			k += x;
-			//			y = GGConversion.unsignedIntToLong(k);
-			//
-			//			k = (int) x;
-			//			k <<= 8;
-			//			x = GGConversion.unsignedIntToLong(k);
-			//
-			//			y ^= x;
-			//
-			//			k = (int) x;
-			//			k <<= 8;
-			//			x = GGConversion.unsignedIntToLong(k);
-			//
-			//			k = (int) y;
-			//			k -= x;
-			//			y = GGConversion.unsignedIntToLong(k);
-			//
-			//			k = (int) x;
-			//			k <<= 8;
-			//			x = GGConversion.unsignedIntToLong(k);
-			//
-			//			y ^= x;
-			//
-			//			z = y & 0x1f;
-			//			y =
-			//				GGConversion.unsignedIntToLong(
-			//					(int) ((y << z) | (y >> (32 - z))));
-			//
+						x = (x & 0xffffff00) | password.charAt(i);
+						y ^= x;
+			
+						int k = (int) y;
+						k += x;
+						y = GGConversion.unsignedIntToLong(k);
+			
+						k = (int) x;
+						k <<= 8;
+						x = GGConversion.unsignedIntToLong(k);
+			
+						y ^= x;
+			
+						k = (int) x;
+						k <<= 8;
+						x = GGConversion.unsignedIntToLong(k);
+			
+						k = (int) y;
+						k -= x;
+						y = GGConversion.unsignedIntToLong(k);
+			
+						k = (int) x;
+						k <<= 8;
+						x = GGConversion.unsignedIntToLong(k);
+			
+						y ^= x;
+			
+						z = y & 0x1f;
+						y =
+							GGConversion.unsignedIntToLong(
+								(int) ((y << z) | (y >> (32 - z))));
+			
 			// end
 		}
 

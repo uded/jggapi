@@ -176,7 +176,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 							socket.getLocalPort(),
 							localUser,
 							ggWelcome);
-
 					sendPackage(ggLogin);
 					break;
 				case 3 :

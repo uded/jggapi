@@ -227,16 +227,17 @@ public class MainForm
 				Integer.parseInt(Config.getPreferenceStore().getString("user")),
 				Config.getPreferenceStore().getString("password"));
 
-		server =
-			new Server(
-				Config.getPreferenceStore().getString("host"),
-				Integer.parseInt(
-					Config.getPreferenceStore().getString("port")));
-		connection = new Connection(server, localUser);
-		connection.addConnectionListener(this);
-		connection.addMessageListener(this);
-		connection.addUserListener(this);
+//		server =
+//			new Server(
+//				Config.getPreferenceStore().getString("host"),
+//				Integer.parseInt(
+//					Config.getPreferenceStore().getString("port")));
 		try {
+			server = Server.getDefaultServer(localUser);
+			connection = new Connection(server, localUser);
+			connection.addConnectionListener(this);
+			connection.addMessageListener(this);
+			connection.addUserListener(this);
 			connection.connect();
 		} catch (UnknownHostException e) {
 			showErrorDialog("Nie moge znaleŸæ hosta");
