@@ -2,12 +2,9 @@ Bugs or features for version 1.0
 1. W przypadku monitorowania uzytkownikow obsluzyc sytuacje w ktorej
 	na poczatku wysylamy liste pakietow przekraczajaca 2048 bajtow.
 	W tym celu trzeba wyslac inny pakiet. GGRequestFirst a potem GGRequestLast
-DONE-2. HIGH - Implementacja trybu tylko dla przyjaciol.
-DONE-3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
 4. Audyt session states.
 5. Napisac obsluge wysylania listy kontaktow dla wiekszej ilosci kontaktow
 	w tym celu trzeba uzyc pakietow PUT_MORE i GET_MORE przy pobieraniu tej listy.
-6. Podzielic kod na api i impl?
 7. Przejrzec jggapi w punktu widzenia watkow. Ta biblioteka moze byc teraz nie thread-safe.
 8. Zobaczyc czy nie da sie zastosowac dekoratora do InputStream'a przy
 	czytaniu.
@@ -21,12 +18,17 @@ DONE-3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie 
 12. Zastanowic sie czy to ma sens miec dwie oddzielne klasy reprezentujace uzytkownkow, GGUser i LocalUser.
 13. Zrobic porzadek w GGUtils.
 14. Apply immutable pattern to some classes.
+15. Czy mozna zastosowac dekorator do little-endian tak zeby sie w ogole nie martwic konwersja, cala
+konwersje robilby dekorator na inputstream i outputstream.
+
+16.BUG Odrejestrowanie uzytkownika sie zonkuje.
+17. GroupChat dzialal, a teraz juz nie dziala?
+18. Czy interval pingowania powinien byc konfiguralny? W klasie Session? Rozwazyc GGConfiguration,
+	jako klase konfigurujaca biblioteke i pozwalajaca ja customizowac.
+19.Deployment - wrzucic lib z commons-logging to dystrubucji
 
 Bugs or features for 1.5 version.
-1. LOW - Obslugiwanie serwisow dostepnych przez www (RegistrationService) (rejestracja uzytkownika, zmiana danych itp...)
 2. LOW - Implementacja wysylania plikow.
-3. LATER (obecnie mozna odpowiedziec nadawcy dla rozmowy grupowej) - rozmowy grupowe
-4. Czy interval pingowania powinien byc konfiguralny? W klasie Session?
 5. Do monitorowanych uzytkownikow chyba lepiej przekazywac LocalUsers, ale wtedy moze byc problem z blokowanymi.
 6. Dodac na starcie liste uzytkownikow do zablokowania. Wrzucic to do LoginContext, czy nazwa
    monitored user w przypadku zablokowanych ma sens?
