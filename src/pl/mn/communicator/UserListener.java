@@ -17,22 +17,16 @@
  */
 package pl.mn.communicator;
 
-
 /**
  * Listener zwi±zany ze zdarzeniami u¿ytkowników.
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public interface UserListener {
     /**
-     * U¿ytkownik pod³±czy³ siê.
-     * @param userNumber nr u¿ytkownika, który siê pod³±czy³
+     * U¿ytkownik zmieni³ status.
+     * @param user nr u¿ytkownika, który siê pod³±czy³
+     * @param newStatus nowy status u¿ytkownika
      */
-    void userEntered(int userNumber);
-
-    /**
-     * U¿ytkownik od³±czy³ siê.
-     * @param userNumber nr u¿ytkownika, który siê od³¹czy³
-     */
-    void userLeaved(int userNumber);
+    void userStatusChanged(IUser user, IStatus newStatus);
 }
