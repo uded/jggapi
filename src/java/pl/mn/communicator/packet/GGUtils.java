@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.1 2004-12-14 21:53:53 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.2 2004-12-18 16:07:24 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -145,21 +145,21 @@ public class GGUtils {
 	
 	public static MessageClass getClientMessageClass(int protocolMessageClass) {
 		switch (protocolMessageClass) {
-			case GGMessage.GG_CLASS_ACK: return MessageClass.DO_NOT_CONFIRM;
-			case GGMessage.GG_CLASS_CHAT: return MessageClass.CHAT;
-			case GGMessage.GG_CLASS_CTCP: return MessageClass.PING;
-			case GGMessage.GG_CLASS_MSG: return MessageClass.IN_NEW_WINDOW;
-			case GGMessage.GG_CLASS_QUEUED: return MessageClass.QUEUED;
+			case GGMessageEnabled.GG_CLASS_ACK: return MessageClass.DO_NOT_CONFIRM;
+			case GGMessageEnabled.GG_CLASS_CHAT: return MessageClass.CHAT;
+			case GGMessageEnabled.GG_CLASS_CTCP: return MessageClass.PING;
+			case GGMessageEnabled.GG_CLASS_MSG: return MessageClass.IN_NEW_WINDOW;
+			case GGMessageEnabled.GG_CLASS_QUEUED: return MessageClass.QUEUED;
 			default: throw new RuntimeException("Unable to convert, messageClass: "+protocolMessageClass);
 		}
 	}
 	
 	public static int getProtocolMessageClass(MessageClass clientMessageClass) {
-		if (clientMessageClass == MessageClass.CHAT) return GGMessage.GG_CLASS_CHAT;
-		if (clientMessageClass == MessageClass.DO_NOT_CONFIRM) return GGMessage.GG_CLASS_ACK;
-		if (clientMessageClass == MessageClass.IN_NEW_WINDOW) return GGMessage.GG_CLASS_MSG;
-		if (clientMessageClass == MessageClass.QUEUED) return GGMessage.GG_CLASS_QUEUED;
-		if (clientMessageClass == MessageClass.PING) return GGMessage.GG_CLASS_CTCP;
+		if (clientMessageClass == MessageClass.CHAT) return GGMessageEnabled.GG_CLASS_CHAT;
+		if (clientMessageClass == MessageClass.DO_NOT_CONFIRM) return GGMessageEnabled.GG_CLASS_ACK;
+		if (clientMessageClass == MessageClass.IN_NEW_WINDOW) return GGMessageEnabled.GG_CLASS_MSG;
+		if (clientMessageClass == MessageClass.QUEUED) return GGMessageEnabled.GG_CLASS_QUEUED;
+		if (clientMessageClass == MessageClass.PING) return GGMessageEnabled.GG_CLASS_CTCP;
 		throw new RuntimeException("Unable to convert, messageClass: "+clientMessageClass);
 	}
 

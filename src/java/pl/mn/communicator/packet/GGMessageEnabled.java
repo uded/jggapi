@@ -18,25 +18,21 @@
 package pl.mn.communicator.packet;
 
 /**
- * Created on 2004-12-14
+ * Constants specific for Gadu-Gadu messages.
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirConstants.java,v 1.2 2004-12-18 00:08:44 winnetou25 Exp $
+ * @version $Id: GGMessageEnabled.java,v 1.1 2004-12-18 16:07:24 winnetou25 Exp $
  */
-public interface PublicDirConstants {
+public interface GGMessageEnabled {
 
-	String UIN = "FmNumber";
-	String FIRST_NAME = "firstname";
-	String LAST_NAME = "lastname";
-	String NICK_NAME = "nickname";
-	String BIRTH_YEAR = "birthyear";
-	String CITY = "city";
-	String GENDER = "gender";
-	String ACTIVE = "ActiveOnly";
-	String FAMILY_NAME = "familyname";
-	String FAMILY_CITY = "familycity";
-	String START = "fmstart";
-	String STATUS = "FmStatus";
-	String NEXT_START = "nextstart";
-
+	int GG_CLASS_QUEUED = 0x0001;
+	
+	int GG_CLASS_MSG = 0x0004;
+	
+	int GG_CLASS_CHAT = 0x0008;
+	
+	int GG_CLASS_CTCP = 0x0010;
+	
+	int GG_CLASS_ACK = 0x0020;
+	
 }

@@ -21,12 +21,14 @@ package pl.mn.communicator.packet;
  * Gadu-Gadu packet header.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @author <a href="mailto:mati@gazeta.pl">Mateusz Szczap</a>
- * @version $Id: GGHeader.java,v 1.1 2004-12-14 21:53:53 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGHeader.java,v 1.2 2004-12-18 16:07:24 winnetou25 Exp $
  */
 public class GGHeader {
 
+	/** Gadu-Gadu packet type */
     private int m_type = -1;
+    /** Gadu-Gadu packet length */
     private int m_length = -1;
 
     /**
@@ -40,7 +42,8 @@ public class GGHeader {
 
     /**
      * Returns the type.
-     * @return int
+     * 
+     * @return int packet type.
      */
     public int getType() {
         return m_type;
@@ -48,7 +51,8 @@ public class GGHeader {
     
     /**
      * Returns the length of packet.
-     * @return int
+     * 
+     * @return int packet length.
      */
     public int getLength() {
         return m_length;
@@ -58,7 +62,7 @@ public class GGHeader {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return "[PacketType: "+m_type+", PacketLength: "+m_length+"]";
+		return "[PacketType: "+m_type+", packetLength: "+m_length+"]";
 	}
 
 }

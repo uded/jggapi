@@ -21,11 +21,11 @@ package pl.mn.communicator.packet;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifiable.java,v 1.1 2004-12-14 21:53:53 winnetou25 Exp $
+ * @version $Id: GGNotifiable.java,v 1.2 2004-12-18 16:07:24 winnetou25 Exp $
  */
 public interface GGNotifiable {
 
-	/** Every user that is added to contact list */
+	/** Every user that is added to our contact list */
     public static final int GG_USER_BUDDY = 0x01;
 
     /** User to whom we are seen in friends only mode */

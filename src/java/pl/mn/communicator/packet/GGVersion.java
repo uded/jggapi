@@ -21,7 +21,7 @@ package pl.mn.communicator.packet;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGVersion.java,v 1.1 2004-12-18 00:08:44 winnetou25 Exp $
+ * @version $Id: GGVersion.java,v 1.2 2004-12-18 16:07:24 winnetou25 Exp $
  */
 public interface GGVersion {
 

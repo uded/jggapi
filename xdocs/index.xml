@@ -2,14 +2,15 @@
 <document>
 
     <properties>
-        <title>Maven Loom Plugin</title>
-        <author>Mauro Talevi</author>
+        <title>JGGApi</title>
+        <author>Marcin Naglik</author>
+        <author>Mateusz Szczap</author>
     </properties>
 
     <body>
         <section name="JGGApi - implementacja protokolu gadu gadu.">
             <p>GGApi jest implementacja protokolu gg w javie na podstawie specyfikacji z ekg.
-Pozwala w latwy sposob tworzyc roznego rodzaju aplikacje do komunikacji z serwerem gg.
+			Pozwala w latwy sposob tworzyc roznego rodzaju aplikacje do komunikacji z serwerem gg.
             </p>
         </section>
     </body>

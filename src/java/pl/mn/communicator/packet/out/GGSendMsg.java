@@ -20,7 +20,7 @@ package pl.mn.communicator.packet.out;
 import java.util.Random;
 
 import pl.mn.communicator.IMessage;
-import pl.mn.communicator.packet.GGMessage;
+import pl.mn.communicator.packet.GGMessageEnabled;
 import pl.mn.communicator.packet.GGUtils;
 
 /**
@@ -28,9 +28,9 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.3 2004-12-18 15:17:45 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.4 2004-12-18 16:07:31 winnetou25 Exp $
  */
-public class GGSendMsg implements GGOutgoingPackage, GGMessage {
+public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
 	
 	public static final int GG_SEND_MSG = 0x0B;
 	

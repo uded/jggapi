@@ -20,7 +20,7 @@ package pl.mn.communicator.packet;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatusEnabled.java,v 1.1 2004-12-14 21:53:53 winnetou25 Exp $
+ * @version $Id: GGStatusEnabled.java,v 1.2 2004-12-18 16:07:24 winnetou25 Exp $
  */
 public interface GGStatusEnabled {
 
@@ -30,10 +30,10 @@ public interface GGStatusEnabled {
     /** Status available with description */
     int GG_STATUS_AVAIL_DESCR = 0x00000004;
 
-    /** Status inavailable */
+    /** Status not available */
     int GG_STATUS_NOT_AVAIL = 0x00000001;
 
-    /** Status inavailable with description */
+    /** Status not available with description */
     int GG_STATUS_NOT_AVAIL_DESCR = 0x00000015;
 
     /** Status busy */
@@ -45,7 +45,7 @@ public interface GGStatusEnabled {
     /** Status invisible */
     int GG_STATUS_INVISIBLE = 0x00000014;
 
-    /** Status invidible with description */
+    /** Status invisible with description */
     int GG_STATUS_INVISIBLE_DESCR = 0x00000016;
 
     /** Bitmask for status blocked */
