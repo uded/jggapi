@@ -21,10 +21,12 @@ package pl.mn.communicator;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISingleChat.java,v 1.2 2005-01-29 15:22:04 winnetou25 Exp $
+ * @version $Id: ISingleChat.java,v 1.3 2005-01-29 15:44:17 winnetou25 Exp $
  */
 public interface ISingleChat extends IChat {
 	
 	int getRecipientUin();
+	
+	void setRecipientUin(int recipientUin);
 
 }

@@ -21,7 +21,6 @@ import java.util.Enumeration;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.IChat;
-import pl.mn.communicator.ISession;
 import pl.mn.communicator.ISingleChat;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.MessageStatus;
@@ -32,14 +31,14 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SingleChat.java,v 1.2 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: SingleChat.java,v 1.3 2005-01-29 15:44:17 winnetou25 Exp $
  */
 public class SingleChat extends AbstractChat implements ISingleChat {
 	
 	private int m_recipientUin = -1; //user with whom we chat
 	
 	//friendly
-	SingleChat(ISession session, int recipientUin) {
+	SingleChat(Session session, int recipientUin) {
 		super(session);
 		if (recipientUin < 0) throw new IllegalArgumentException("recipientUin cannot be less than 0");
 		m_recipientUin = recipientUin;
@@ -58,6 +57,11 @@ public class SingleChat extends AbstractChat implements ISingleChat {
 	 */
 	public int getRecipientUin() {
 		return m_recipientUin;
+	}
+	
+	public void setRecipientUin(int recipientUin) {
+		if (recipientUin < 0) throw new IllegalArgumentException("recipientUin cannot be null");
+		m_recipientUin = recipientUin;
 	}
 	
 //	/**

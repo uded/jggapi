@@ -20,21 +20,20 @@ package pl.mn.communicator.packet.handlers;
 import java.util.Vector;
 
 import pl.mn.communicator.IChat;
-import pl.mn.communicator.ISession;
 import pl.mn.communicator.event.MessageListener;
 
 /**
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractChat.java,v 1.1 2005-01-29 13:20:05 winnetou25 Exp $
+ * @version $Id: AbstractChat.java,v 1.2 2005-01-29 15:44:17 winnetou25 Exp $
  */
 public abstract class AbstractChat implements IChat {
 
 	protected Vector m_listeners = new Vector();
-	protected ISession m_session = null;
+	protected Session m_session = null;
 
-	protected AbstractChat(ISession session) {
+	protected AbstractChat(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		session.getMessageService().addMessageListener(getMessageHandler());

@@ -17,13 +17,13 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.IChat;
 import pl.mn.communicator.IGroupChat;
-import pl.mn.communicator.ISession;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
@@ -34,18 +34,18 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GroupChat.java,v 1.2 2005-01-29 15:22:04 winnetou25 Exp $
+ * @version $Id: GroupChat.java,v 1.3 2005-01-29 15:44:17 winnetou25 Exp $
  */
 public class GroupChat extends AbstractChat implements IGroupChat {
 	
 	private ArrayList m_recipientUins = new ArrayList(); //users with whom we chat
 	
 	//friendly
-	GroupChat(ISession session) {
+	GroupChat(Session session) {
 		this(session, new int[0]);
 	}
 
-	GroupChat(ISession session, int[] recipientUins) {
+	GroupChat(Session session, int[] recipientUins) {
 		super(session);
 		for (int i=0; i<recipientUins.length; i++) {
 			addRecipient(recipientUins[i]);
@@ -67,10 +67,15 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 			sendMsg.addRecipient(recipient);
 		}
 		
+		try {
+			m_session.getSessionAccessor().sendPackage(sendMsg);
+		} catch (IOException ex) {
+			throw new GGException("Unable to send group chat message");
+		}
+		
 		return this;
 	}
 
-	
 	public void addRecipient(int recipientUin) {
 		m_recipientUins.add(new Integer(recipientUin));
 	}

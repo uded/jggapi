@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.10 2005-01-29 15:21:57 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.11 2005-01-29 15:44:08 winnetou25 Exp $
  */
 public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
 	
@@ -100,21 +100,21 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageEnabled {
         }
  
         if (m_ricipients.size() > 1) {
-        	toSend[12+m_text.length()+1] = 0x01;
+        	toSend[12+m_text.length()] = 0x01;
         	
         	int size = m_ricipients.size();
         	
-        	toSend[12+m_text.length()+2] = (byte) (size & 0xFF);
-        	toSend[12+m_text.length()+3] = (byte) (size >> 8 & 0xFF);
-        	toSend[12+m_text.length()+4] = (byte) (size >> 16 & 0xFF);
-        	toSend[12+m_text.length()+5] = (byte) (size >> 24 & 0xFF);
+        	toSend[12+m_text.length()+1] = (byte) (size & 0xFF);
+        	toSend[12+m_text.length()+2] = (byte) (size >> 8 & 0xFF);
+        	toSend[12+m_text.length()+3] = (byte) (size >> 16 & 0xFF);
+        	toSend[12+m_text.length()+4] = (byte) (size >> 24 & 0xFF);
         	
         	for (int i=0; i<m_ricipients.size(); i++) {
         		int recipientUin = ((Integer)m_ricipients.get(i)).intValue();
-            	toSend[12+m_text.length()+6+i] = (byte) (size  & 0xFF);
-            	toSend[12+m_text.length()+7+i] = (byte) (size >> 8 & 0xFF);
-            	toSend[12+m_text.length()+8+i] = (byte) (size >> 16 & 0xFF);
-            	toSend[12+m_text.length()+9+i] = (byte) (size >> 24 & 0xFF);
+            	toSend[12+m_text.length()+5+i] = (byte) (size  & 0xFF);
+            	toSend[12+m_text.length()+6+i] = (byte) (size >> 8 & 0xFF);
+            	toSend[12+m_text.length()+7+i] = (byte) (size >> 16 & 0xFF);
+            	toSend[12+m_text.length()+8+i] = (byte) (size >> 24 & 0xFF);
         	}
         }
         
