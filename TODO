@@ -9,9 +9,18 @@ TODO LIST
 
 PRIORITY
 --------
-- implementacja GGNotify
-- implementacja GGNotifyReply
+OK - implementacja GGNotify 
+NOW - implementacja GGNotifyReply
 - implementacja GGListEmpty
 - statusy z opisem i czasem powrotu
 - implementacja importu i eksportu uzytkownikow
 - implementacja katalogu publicznego (wyszukiwania)
+
+INNE
+----
+z user usuwam online/ofline
+bedzie to trzymane po stronie aplikacji tak samo jak
+statusy z opisem
+name tez jest usuniety - po stronie aplikacji
+
+Dodana klasa UserState opisujaca aktualny satus uzytkownika.
