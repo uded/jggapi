@@ -23,7 +23,7 @@
   <inceptionYear>2004</inceptionYear>
   <shortDescription>Java Gadu-Gadu protocol implementation</shortDescription>
   <description>
-  The jggapi project is implementation of proprietary Gadu-Gadu
+  The JGGApi project is implementation of proprietary Gadu-Gadu
   protocol based on specification from EKG.
   It is fully object oriented and uses common design patterns
   that reduce the learning curve of the library.
