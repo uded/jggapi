@@ -1,4 +1,4 @@
-package pl.mn.communicator.gui;
+package pl.mn.communicator.gui.config;
 
 import java.io.IOException;
 
