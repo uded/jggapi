@@ -23,7 +23,7 @@ import pl.mn.communicator.packet.GGPacket;
  * Incoming Gadu-Gadu packet.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGIncomingPackage.java,v 1.5 2004-12-19 21:14:13 winnetou25 Exp $ 
+ * @version $Id: GGIncomingPackage.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $ 
  */
 public interface GGIncomingPackage extends GGPacket {
 	

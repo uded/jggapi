@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.6 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.7 2004-12-19 21:19:59 winnetou25 Exp $
  */
 public class GGUtils {
 

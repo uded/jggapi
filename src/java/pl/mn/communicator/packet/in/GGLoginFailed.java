@@ -22,7 +22,7 @@ package pl.mn.communicator.packet.in;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginFailed.java,v 1.5 2004-12-19 21:14:13 winnetou25 Exp $
+ * @version $Id: GGLoginFailed.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
  */
 public class GGLoginFailed implements GGIncomingPackage {
 

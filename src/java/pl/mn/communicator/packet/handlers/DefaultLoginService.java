@@ -38,7 +38,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.6 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.7 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 

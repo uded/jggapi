@@ -25,7 +25,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcome.java,v 1.4 2004-12-19 21:14:13 winnetou25 Exp $
+ * @version $Id: GGWelcome.java,v 1.5 2004-12-19 21:19:59 winnetou25 Exp $
  */
 public class GGWelcome implements GGIncomingPackage {
     

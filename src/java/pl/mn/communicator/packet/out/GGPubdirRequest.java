@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.GGPubdirEnabled;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirRequest.java,v 1.11 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: GGPubdirRequest.java,v 1.12 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirEnabled {
 

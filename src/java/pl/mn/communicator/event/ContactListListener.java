@@ -32,7 +32,7 @@ import java.util.EventListener;
  * 
  * @see pl.mn.communicator.IContactListService
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ContactListListener.java,v 1.6 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: ContactListListener.java,v 1.7 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public interface ContactListListener extends EventListener {
 

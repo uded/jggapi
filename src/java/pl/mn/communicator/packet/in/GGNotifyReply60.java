@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.5 2004-12-19 21:14:13 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 

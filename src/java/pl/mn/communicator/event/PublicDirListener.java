@@ -34,7 +34,7 @@ import pl.mn.communicator.PublicDirSearchReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.14 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.15 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public interface PublicDirListener extends EventListener {
 

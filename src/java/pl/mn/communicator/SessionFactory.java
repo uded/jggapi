@@ -23,7 +23,7 @@ import pl.mn.communicator.packet.handlers.Session;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionFactory.java,v 1.6 2004-12-19 21:14:06 winnetou25 Exp $
+ * @version $Id: SessionFactory.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
  */
 public class SessionFactory {
 

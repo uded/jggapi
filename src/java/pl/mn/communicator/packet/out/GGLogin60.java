@@ -25,7 +25,7 @@ import pl.mn.communicator.packet.GGVersion;
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.7 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.8 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 

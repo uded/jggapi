@@ -29,7 +29,7 @@ import pl.mn.communicator.packet.in.GGStatus60;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60PacketHandler.java,v 1.6 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: GGStatus60PacketHandler.java,v 1.7 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public class GGStatus60PacketHandler implements PacketHandler {
 

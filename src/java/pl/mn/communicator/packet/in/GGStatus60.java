@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.7 2004-12-19 21:14:13 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.8 2004-12-19 21:19:59 winnetou25 Exp $
  */
 public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 

@@ -31,7 +31,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Server.java,v 1.4 2004-12-19 21:14:06 winnetou25 Exp $
+ * @version $Id: Server.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
  */
 public final class Server implements IServer {
 	

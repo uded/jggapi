@@ -29,7 +29,7 @@ import pl.mn.communicator.packet.in.GGPubdirReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReplyPacketHandler.java,v 1.12 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.13 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 

@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.in.GGNotifyReply;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReplyPacketHandler.java,v 1.5 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: GGNotifyReplyPacketHandler.java,v 1.6 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public class GGNotifyReplyPacketHandler implements PacketHandler {
 

@@ -22,7 +22,7 @@ package pl.mn.communicator;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.7 2004-12-19 21:14:06 winnetou25 Exp $
+ * @version $Id: IMessage.java,v 1.8 2004-12-19 21:19:57 winnetou25 Exp $
  */
 public interface IMessage {
 	

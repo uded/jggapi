@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotify.java,v 1.4 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: GGNotify.java,v 1.5 2004-12-19 21:19:58 winnetou25 Exp $
  */
 public class GGNotify implements GGOutgoingPackage, GGNotifiable {
 

@@ -21,7 +21,7 @@ package pl.mn.communicator.packet;
  * Constants specific for Gadu-Gadu messages.
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGMessageEnabled.java,v 1.4 2004-12-19 21:14:12 winnetou25 Exp $
+ * @version $Id: GGMessageEnabled.java,v 1.5 2004-12-19 21:19:59 winnetou25 Exp $
  */
 public interface GGMessageEnabled {
 
