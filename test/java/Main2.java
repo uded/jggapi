@@ -71,17 +71,31 @@ public class Main2 {
 
 			public void loginOK() throws GGException {
 				System.out.println("Login OK.");
+				
 				IGroupChat groupChat = session.getMessageService().createGroupChat();
 				groupChat.addRecipient(376798);
 				groupChat.addRecipient(1136132);
-				groupChat.sendMessage("GroupChatMessageTest1");
-				groupChat.sendMessage("GroupChatMessageTest2");
+				groupChat.addRecipient(1516253);
 				
-				//session.getLoginService().logout();
+				groupChat.sendMessage("GroupChatMessageTest1");
+				
+				try {
+					Thread.sleep(1000*10);
+					session.getLoginService().logout();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 			}
 
 			public void loginFailed() throws GGException {
 				System.out.println("Login Failed.");
+			}
+			
+			/**
+			 * @see pl.mn.communicator.event.LoginListener.Stub#loggedOut()
+			 */
+			public void loggedOut() throws GGException {
+				session.getConnectionService().disconnect();
 			}
 			
 		});

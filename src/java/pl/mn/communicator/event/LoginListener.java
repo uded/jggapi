@@ -30,7 +30,7 @@ import pl.mn.communicator.GGException;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginListener.java,v 1.10 2005-01-29 15:22:04 winnetou25 Exp $
+ * @version $Id: LoginListener.java,v 1.11 2005-01-29 17:22:18 winnetou25 Exp $
  */
 public interface LoginListener extends EventListener {
 	
@@ -46,6 +46,8 @@ public interface LoginListener extends EventListener {
 	 */
 	void loginFailed() throws GGException;
 	
+	void loggedOut() throws GGException;
+	
 	public static class Stub implements LoginListener {
 		
 		/**
@@ -57,6 +59,11 @@ public interface LoginListener extends EventListener {
 		 * @see pl.mn.communicator.event.LoginListener#loginFailed()
 		 */
 		public void loginFailed() throws GGException { }
+		
+		/**
+		 * @see pl.mn.communicator.event.LoginListener#loggedOut()
+		 */
+		public void loggedOut() throws GGException { }
 
 	}
 	

@@ -19,9 +19,8 @@ package pl.mn.communicator.packet.handlers;
 
 import java.io.IOException;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Set;
+import java.util.Vector;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
@@ -40,7 +39,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.13 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.14 2005-01-29 17:22:14 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -48,7 +47,7 @@ public class DefaultLoginService implements ILoginService {
 	private Session m_session = null;
 
 	/** The set of <code>LoginListener</code>'s */
-	private Set m_loginListeners = null;
+	private Vector m_loginListeners = null;
 	
 	private LoginContext m_loginContext = null;
 	
@@ -56,7 +55,7 @@ public class DefaultLoginService implements ILoginService {
 	DefaultLoginService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
-		m_loginListeners = new HashSet();
+		m_loginListeners = new Vector();
 	}
 	
 	/**
@@ -138,6 +137,7 @@ public class DefaultLoginService implements ILoginService {
 			}
 			m_session.getPresenceService().setStatus(localStatus);
 			m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
+			notifyLoggedOut();
 		}
 	}
 	
@@ -177,6 +177,13 @@ public class DefaultLoginService implements ILoginService {
 		for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {
 			LoginListener loginListener = (LoginListener) it.next();
 			loginListener.loginFailed();
+		}
+	}
+	
+	protected void notifyLoggedOut() throws GGException {
+		for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {
+			LoginListener loginListener = (LoginListener) it.next();
+			loginListener.loggedOut();
 		}
 	}
 
