@@ -21,11 +21,11 @@ package pl.mn.communicator;
  * Created on 2004-11-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LocalUser.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: LocalUser.java,v 1.8 2004-12-21 21:23:34 winnetou25 Exp $
  */
 public class LocalUser {
 
-	private IStatus m_status = new Status(StatusType.OFFLINE);
+//	private IStatus m_status = new Status(StatusType.OFFLINE);
 	
 	private int m_uin = -1;
 	private String m_name = null;
@@ -41,14 +41,14 @@ public class LocalUser {
 		
 	}
 	
-	public void setStatus(IStatus status) {
-		if (status == null) throw new NullPointerException("status cannot be null");
-		m_status = status;
-	}
-	
-	public IStatus getStatus() {
-		return m_status;
-	}
+//	public void setStatus(IStatus status) {
+//		if (status == null) throw new NullPointerException("status cannot be null");
+//		m_status = status;
+//	}
+//	
+//	public IStatus getStatus() {
+//		return m_status;
+//	}
 	
 	public void setName(String name) {
 		if (name == null) throw new NullPointerException("name cannot be null");

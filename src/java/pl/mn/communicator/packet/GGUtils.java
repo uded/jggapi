@@ -22,7 +22,7 @@ import java.util.Date;
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.MessageClass;
 import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.Status;
+import pl.mn.communicator.RemoteStatus;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.User;
 import pl.mn.communicator.packet.in.GGSendMsgAck;
@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.12 2004-12-21 20:03:59 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.13 2004-12-21 21:25:06 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -52,53 +52,59 @@ public class GGUtils {
 		throw new RuntimeException("Unable to convert userMode: "+userMode);
 	}
 	
-	public static Status getClientStatus(int status, String description, long returnTimeInMillis) {
-		Status localStatus = null;
+	public static RemoteStatus getClientRemoteStatus(int status, String description, long returnTimeInMillis) {
+		RemoteStatus remoteStatus = null;
 		
 		switch (status) {
 		case GGStatusEnabled.GG_STATUS_AVAIL: 
-			localStatus = new Status(StatusType.ONLINE);
+			remoteStatus = new RemoteStatus(StatusType.ONLINE);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_AVAIL_DESCR:
-			localStatus = new Status(StatusType.ONLINE_WITH_DESCRIPTION);
-		localStatus.setDescription(description);
+			remoteStatus = new RemoteStatus(StatusType.ONLINE_WITH_DESCRIPTION);
+			remoteStatus.setDescription(description);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_BUSY:
-			localStatus = new Status(StatusType.BUSY);
+			remoteStatus = new RemoteStatus(StatusType.BUSY);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_BUSY_DESCR:
-			localStatus = new Status(StatusType.BUSY_WITH_DESCRIPTION);
-			localStatus.setDescription(description);
+			remoteStatus = new RemoteStatus(StatusType.BUSY_WITH_DESCRIPTION);
+			remoteStatus.setDescription(description);
 			break;
 			
 		case GGStatusEnabled.GG_STATUS_INVISIBLE:
-			localStatus = new Status(StatusType.INVISIBLE);
+			remoteStatus = new RemoteStatus(StatusType.INVISIBLE);
 			break;
 
 		case GGStatusEnabled.GG_STATUS_INVISIBLE_DESCR:
-			localStatus = new Status(StatusType.INVISIBLE_WITH_DESCRIPTION);
-		localStatus.setDescription(description);
+			remoteStatus = new RemoteStatus(StatusType.INVISIBLE_WITH_DESCRIPTION);
+			remoteStatus.setDescription(description);
 			break;
 		
 		case GGStatusEnabled.GG_STATUS_NOT_AVAIL:
-			localStatus = new Status(StatusType.OFFLINE);
+			remoteStatus = new RemoteStatus(StatusType.OFFLINE);
 			break;
 
 		case GGStatusEnabled.GG_STATUS_NOT_AVAIL_DESCR:
-			localStatus = new Status(StatusType.OFFLINE);
-			localStatus.setDescription(description);
+			remoteStatus = new RemoteStatus(StatusType.OFFLINE);
+			remoteStatus.setDescription(description);
 			break;
 		}
 		
-		if (localStatus != null && returnTimeInMillis != -1) {
-			localStatus.setReturnDate(new Date(returnTimeInMillis));
+		if (remoteStatus != null && returnTimeInMillis != -1) {
+			remoteStatus.setReturnDate(new Date(returnTimeInMillis));
 		}
 		
-		if (localStatus == null) throw new RuntimeException("Conversion error");
-		return localStatus;
+		if ((status & GGStatusEnabled.GG_STATUS_BLOCKED) == GGStatusEnabled.GG_STATUS_BLOCKED) {
+			remoteStatus.setBlocked(true);
+		} else {
+			remoteStatus.setBlocked(false);
+		}
+		
+		if (remoteStatus == null) throw new RuntimeException("Conversion error");
+		return remoteStatus;
 	}
 	
 	public static int getProtocolStatus(IStatus clientStatus, boolean isFriendsOnly, boolean isBlocked) {

@@ -3,8 +3,8 @@ import java.util.Collection;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.Gender;
+import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.ISession;
-import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LoginContext;
@@ -81,7 +81,7 @@ public class Main2 {
 		});
 		session.getPresenceService().addUserListener(new UserListener() {
 
-			public void userStatusChanged(IUser user, IStatus newStatus) {
+			public void userStatusChanged(IUser user, IRemoteStatus newStatus) {
 				System.out.println("User changed status: "+user.getUin());
 				System.out.println("Status: "+newStatus.getStatusType());
 				System.out.println("Description: "+newStatus.getDescription());

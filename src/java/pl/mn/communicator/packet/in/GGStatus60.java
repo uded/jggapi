@@ -20,9 +20,9 @@ package pl.mn.communicator.packet.in;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.Status;
+import pl.mn.communicator.RemoteStatus;
 import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGStatusEnabled;
 import pl.mn.communicator.packet.GGUtils;
@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.10 2004-12-21 20:04:20 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.11 2004-12-21 21:27:05 winnetou25 Exp $
  */
 public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 
@@ -54,7 +54,8 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 	private static Log logger = LogFactory.getLog(GGStatus60.class);
 
 	private IUser m_user = null;
-	private Status m_status60 = null;
+	
+	private RemoteStatus m_status60 = null;
 	
 	private byte m_flag = -1;
 	
@@ -74,7 +75,7 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 		return m_user;
 	}
 	
-	public IStatus getStatus60() {
+	public IRemoteStatus getStatus60() {
 		return m_status60;
 	}
 	
@@ -111,7 +112,7 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
             }
     	}
 
-        m_status60 = GGUtils.getClientStatus(protocolStatus, description, timeInMillis);
+        m_status60 = GGUtils.getClientRemoteStatus(protocolStatus, description, timeInMillis);
     	m_status60.setRemoteIP(remoteIPArray);
     	m_status60.setImageSize(imageSize);
     	m_status60.setGGVersion(version);

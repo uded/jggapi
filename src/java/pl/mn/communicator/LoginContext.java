@@ -26,7 +26,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.8 2004-12-21 21:23:34 winnetou25 Exp $
  */
 public final class LoginContext {
 	
@@ -36,7 +36,7 @@ public final class LoginContext {
 
 	private String m_password = null;
 
-	private Status m_localStatus = new Status(StatusType.ONLINE);
+	private ILocalStatus m_localStatus = new LocalStatus(StatusType.ONLINE);
 	
 	private Collection m_monitoredUsers = new ArrayList();
 	
@@ -72,12 +72,12 @@ public final class LoginContext {
         m_uin = uin;
     }
  
-    public void setStatus(Status localStatus) {
+    public void setStatus(ILocalStatus localStatus) {
     	if (localStatus == null) throw new NullPointerException("localStatus cannot be null");
     	m_localStatus = localStatus;
     }
     
-    public Status getStatus() {
+    public ILocalStatus getStatus() {
     	return m_localStatus;
     }
     

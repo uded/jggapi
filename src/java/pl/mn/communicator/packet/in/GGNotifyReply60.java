@@ -24,7 +24,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.Status;
+import pl.mn.communicator.RemoteStatus;
 import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.out.GGNewStatus;
@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.9 2004-12-21 20:04:09 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.10 2004-12-21 21:27:05 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -83,7 +83,6 @@ public class GGNotifyReply60 implements GGIncomingPackage {
         	int remotePort = GGUtils.byteToShort(data, offset+9);
         	int version = GGUtils.unsignedByteToInt(data[offset+11]);
         	int imageSize = GGUtils.unsignedByteToInt(data[offset+12]);
-        		
         	String description = null;
         	int descriptionSize = -1;
             long timeInMillis = -1;
@@ -114,7 +113,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
             	 offset += 14; // packet without description is only 14 bytes long            	
             }
         	IUser user = new User(uin, userMode);
-            Status status60 = GGUtils.getClientStatus(status, description, timeInMillis);
+            RemoteStatus status60 = GGUtils.getClientRemoteStatus(status, description, timeInMillis);
 
             if (remotePort == 0) {
             	status60.setSupportsDirectCommunication(false);

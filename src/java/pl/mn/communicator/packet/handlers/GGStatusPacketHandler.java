@@ -20,7 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGStatus;
@@ -29,7 +29,7 @@ import pl.mn.communicator.packet.in.GGStatus;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatusPacketHandler.java,v 1.6 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: GGStatusPacketHandler.java,v 1.7 2004-12-21 21:25:51 winnetou25 Exp $
  */
 public class GGStatusPacketHandler implements PacketHandler {
 
@@ -47,7 +47,7 @@ public class GGStatusPacketHandler implements PacketHandler {
 		GGStatus status = new GGStatus(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(status);
 		IUser user = status.getUser();
-		IStatus statusBiz = status.getStatus();
+		IRemoteStatus statusBiz = status.getStatus();
 		context.getSessionAccessor().notifyUserChangedStatus(user, statusBiz);
 	}
 

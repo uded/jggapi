@@ -20,8 +20,9 @@ package pl.mn.communicator.packet.in;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
+import pl.mn.communicator.RemoteStatus;
 import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGStatusEnabled;
 import pl.mn.communicator.packet.GGUtils;
@@ -30,7 +31,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.7 2004-12-21 21:27:05 winnetou25 Exp $
  */
 public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
 
@@ -39,7 +40,7 @@ public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
 	private static Log logger = LogFactory.getLog(GGStatus.class);
 
     private IUser m_user = null;
-    private IStatus m_status = null;
+    private RemoteStatus m_status = null;
 
     public GGStatus(byte[] data) {
     	handleUser(data);
@@ -54,7 +55,7 @@ public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
         return m_user;
     }
 
-    public IStatus getStatus() {
+    public IRemoteStatus getStatus() {
         return m_status;
     }
     
@@ -79,7 +80,7 @@ public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
                 timeInMillis = GGUtils.secondsToMillis(timeInSeconds);
             }
         }
-        m_status = GGUtils.getClientStatus(protocolStatus, description, timeInMillis);
+        m_status = GGUtils.getClientRemoteStatus(protocolStatus, description, timeInMillis);
     }
     
 }

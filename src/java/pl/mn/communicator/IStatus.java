@@ -23,7 +23,7 @@ import java.util.Date;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IStatus.java,v 1.7 2004-12-21 20:02:52 winnetou25 Exp $
+ * @version $Id: IStatus.java,v 1.8 2004-12-21 21:23:34 winnetou25 Exp $
  */
 public interface IStatus {
 
@@ -75,22 +75,4 @@ public interface IStatus {
      */
     boolean isReturnDateSet();
     
-    void setFriendsOnly(boolean friendsOnly);
-    
-    boolean isFriendsOnly();
-
-    void setBlocked(boolean blocked);
-    
-    boolean isBlocked();
-	
-	byte[] getRemoteIP();
-	int getRemotePort();
-	int getGGVersion();
-	int getImageSize();
-	boolean supportsVoiceCommunication();
-	boolean supportsDirectCommunication();
-	boolean areWeInRemoteUserBuddyList();
-	boolean isUserBehindFirewall();
-	int getDescriptionSize();
-	
 }

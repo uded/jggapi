@@ -20,22 +20,14 @@ package pl.mn.communicator;
 import java.util.Date;
 
 /**
- * Created on 2004-12-12
+ * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Status.java,v 1.7 2004-12-21 20:03:29 winnetou25 Exp $
+ * @version $Id: RemoteStatus.java,v 1.1 2004-12-21 21:23:34 winnetou25 Exp $
  */
-public class Status implements IStatus {
+public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 
-	private StatusType m_statusType = StatusType.ONLINE;
-	private boolean m_friendsOnly = false;
 	private boolean m_blocked = false;
-	
-	/** Status description */
-	private String m_description = null;
-
-	/** Return time */
-	private Date m_returnTime = null;
 
 	private byte[] m_remoteIP = new byte[]{0,0,0,0};
 	private int m_remotePort = 1555;
@@ -48,93 +40,19 @@ public class Status implements IStatus {
 	private boolean m_supportsDirectCommunication = false;
 	private boolean m_areWeInRemoteUserBuddyList = true;
 	private boolean m_isUserBehindFirewall = false;
-	
-	public Status(StatusType statusType, String description, Date returnDate) {
-		if (statusType == null) throw new NullPointerException("statusType cannot be null");
-		m_statusType = statusType;
-		m_description = description;
-		m_returnTime = returnDate;
+
+	public RemoteStatus(StatusType statusType) {
+		super(statusType);
 	}
 
-	public Status(StatusType statusType, String description) {
-		this(statusType, description, null);
-	}
-	public Status(StatusType statusType) {
-		this(statusType, null, null);
+	public RemoteStatus(StatusType statusType, String description) {
+		super(statusType, description);
 	}
 
-	/**
-	 * @see pl.mn.communicator.IStatus#getStatusType()
-	 */
-	public StatusType getStatusType() {
-		return m_statusType;
+	public RemoteStatus(StatusType statusType, String description, Date returnDate) {
+		super(statusType, description, returnDate);
 	}
 
-	/**
-	 * @see pl.mn.communicator.IStatus#setStatusType(int)
-	 */
-	public void setStatusType(StatusType status) {
-		m_statusType = status;
-	}
-
-	/**
-	 * @return Returns the description.
-	 */
-	public String getDescription() {
-		return m_description;
-	}
-
-	/**
-	 * @param description The description to set.
-	 */
-	public void setDescription(String description) {
-		m_description = description;
-	}
-
-	/**
-	 * @return Returns the returnTime.
-	 */
-	public Date getReturnDate() {
-		return m_returnTime;
-	}
-
-	/**
-	 * @param returnTime The returnTime to set.
-	 */
-	public void setReturnDate(Date returnTime) {
-		if (returnTime == null)
-			throw new NullPointerException("returnTime cannot be null");
-		m_returnTime = returnTime;
-	}
-
-	/**
-	 * @see pl.mn.communicator.IStatus#isDescriptionSet()
-	 */
-	public boolean isDescriptionSet() {
-		return m_description != null;
-	}
-
-	/**
-	 * @see pl.mn.communicator.IStatus#isReturnDateSet()
-	 */
-	public boolean isReturnDateSet() {
-		return m_returnTime != null;
-	}
-	
-	/**
-	 * @see pl.mn.communicator.IStatus#isFriendsOnly()
-	 */
-	public boolean isFriendsOnly() {
-		return m_friendsOnly;
-	}
-	
-	/**
-	 * @see pl.mn.communicator.IStatus#setFriendsOnly(boolean)
-	 */
-	public void setFriendsOnly(boolean bool) {
-		m_friendsOnly = bool;
-	}
-	
 	/**
 	 * @see pl.mn.communicator.IStatus#setBlocked(boolean)
 	 */
@@ -249,5 +167,5 @@ public class Status implements IStatus {
 	public void setUserBehindFirewall(boolean userBehingFirewall) {
 		m_isUserBehindFirewall = true;
 	}
-	
+
 }

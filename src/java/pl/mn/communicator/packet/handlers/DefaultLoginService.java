@@ -25,9 +25,10 @@ import java.util.Set;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
+import pl.mn.communicator.ILocalStatus;
 import pl.mn.communicator.ILoginService;
+import pl.mn.communicator.LocalStatus;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.Status;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.packet.out.GGLogin60;
@@ -38,7 +39,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.7 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.8 2004-12-21 21:25:51 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -88,7 +89,8 @@ public class DefaultLoginService implements ILoginService {
 	 */
 	public void logout() throws GGException {
 		checkSessionState();
-		m_session.getPresenceService().setStatus(new Status(StatusType.OFFLINE));
+		ILocalStatus localStatus = new LocalStatus(StatusType.OFFLINE);
+		m_session.getPresenceService().setStatus(localStatus);
 		m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
 	}
 	
@@ -99,8 +101,7 @@ public class DefaultLoginService implements ILoginService {
 		if (description == null) throw new NullPointerException("description cannot be null");
 		checkSessionState();
 		if (description.length() > 0) {
-			Status localStatus = new Status(StatusType.OFFLINE_WITH_DESCRIPTION);
-			localStatus.setDescription(description);
+			ILocalStatus localStatus = new LocalStatus(StatusType.OFFLINE_WITH_DESCRIPTION, description);
 			if (returnTime != null) {
 				localStatus.setReturnDate(returnTime);
 			}

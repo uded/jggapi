@@ -36,7 +36,7 @@ import pl.mn.communicator.event.UserListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IPresenceService.java,v 1.7 2004-12-21 20:21:24 winnetou25 Exp $
+ * @version $Id: IPresenceService.java,v 1.8 2004-12-21 21:23:34 winnetou25 Exp $
  */
 public interface IPresenceService {
 	
@@ -44,19 +44,19 @@ public interface IPresenceService {
 	 * Invocation of this method tries to set a new status
 	 * of the user that is currently logged in.
 	 * 
-	 * @param status the new status to be set.
+	 * @param localStatus the new status to be set.
 	 * @throws GGException if there is an error while setting status.
 	 * @throws GGSessionException if user is not logged in.
 	 * @throws NullPointerException if status is null.
 	 */
-	void setStatus(IStatus status) throws GGException;
+	void setStatus(ILocalStatus localStatus) throws GGException;
 	
 	/**
 	 * Returns the actual status of the user that is logged in.
 	 * 
 	 * @return the actual status of the user.
 	 */
-	IStatus getStatus();
+	ILocalStatus getStatus();
 	
 	/**
 	 * Adds the user to be monitored.

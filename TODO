@@ -7,7 +7,6 @@ DONE-3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie 
 4. Audyt session states.
 5. Napisac obsluge wysylania listy kontaktow dla wiekszej ilosci kontaktow
 	w tym celu trzeba uzyc pakietow PUT_MORE i GET_MORE przy pobieraniu tej listy.
-6. RemoteIP jest zle konwertowane do IP. O co chodzi?
 7. Podzielic kod na api i impl?
 8. Maven POM i documentation (xdocs).
 9. Przejrzec jggapi w punktu widzenia watkow. Ta biblioteka moze byc teraz nie thread-safe.
@@ -17,7 +16,6 @@ DONE-3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie 
 	void read() // wisimy na read.
 	//po odwieszeniu sie biezemy pakiet.
 	GGIncomingPacket getIncommingPacket(); //incomming packet ma juz GGHeader.
-11. Podzial statusu na local i remote.
 12. MED - Bardziej dokladna dokumentacja w java docs.
 13. Rozwazyc wprowadzenie socket.setTimeout();
 14. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.

@@ -23,7 +23,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.IStatus;
+import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGNotifyReply60;
@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.in.GGNotifyReply60;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60PacketHandler.java,v 1.7 2004-12-20 00:02:38 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60PacketHandler.java,v 1.8 2004-12-21 21:25:51 winnetou25 Exp $
  */
 public class GGNotifyReply60PacketHandler implements PacketHandler {
 
@@ -55,7 +55,7 @@ public class GGNotifyReply60PacketHandler implements PacketHandler {
 		Map usersStatuses = notifyReply.getUsersStatus();
 		for (Iterator it = usersStatuses.keySet().iterator();it.hasNext();) {
 			IUser user = (IUser) it.next();
-			IStatus status = (IStatus) usersStatuses.get(user);
+			IRemoteStatus status = (IRemoteStatus) usersStatuses.get(user);
 			context.getSessionAccessor().notifyUserChangedStatus(user, status);
 		}
 	}

@@ -15,34 +15,18 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.event;
-
-import java.util.EventListener;
-
-import pl.mn.communicator.IRemoteStatus;
-import pl.mn.communicator.IUser;
+package pl.mn.communicator;
 
 /**
- * The listener interface that is for classes that want to
- * be notified of user statuses events.
- * <p>
- * If the user changes status the class that implements this interface,
- * so called UserHandler is notified.
- * <p>
- * Created on 2004-11-28
+ * Created on 2004-12-21
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: UserListener.java,v 1.7 2004-12-21 21:24:41 winnetou25 Exp $
+ * @version $Id: ILocalStatus.java,v 1.1 2004-12-21 21:23:34 winnetou25 Exp $
  */
-public interface UserListener extends EventListener {
+public interface ILocalStatus extends IStatus {
 
-	/**
-	 * The notification that the user changed the status.
-	 * 
-	 * @param user the Gadu-Gadu user that changed the status.
-	 * @param newStatus the new status of the user.
-     */
-    void userStatusChanged(IUser user, IRemoteStatus newStatus);
+    void setFriendsOnly(boolean friendsOnly);
     
+    boolean isFriendsOnly();
+
 }
