@@ -27,23 +27,39 @@
 		<section name="Releases">
 			<p>
 			There is an old version of the library that has already been released.
-			It works fine but has limited functionality.
+			It is <b>0.94</b> and you can download it here:
+			<a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-0.94</a>.
+			It works fine but it has limited functionality and does not have a support for searching in public directory, loading
+			and storing information there and also it does not support contact list at all.
 			</p>
 			<p>
-			Currently, we are preparing for the new release of the library (1.0) that has many improvements
-			and clearer design. It is not compatible with the old version, interfaces have changed
-			significantly but porting from old version should not be a difficult task.
+			The new version of library <b>jggapi-1.0-dev</b> has many improvements and clearer design. It is
+			not compatible with the old version, interfaces have changed significantly but porting from an
+			old version should not be a difficult task. It also has the support for features that are not
+			available in previous version. Note that this version has suffix <em>dev</em> because it has not
+			been tested extensively. It would be very appreciated if users could provide feedback
+			about the usage of this library.
+			</p>
+			<p>
+			It is strongly recommended that you use the newest version instead of an old one because
+			support for 0.94 will no longer be provided.
+			</p>
+			<p>
+			<b>Release 1.0-dev:</b>
+			<ul>
+				<li><a href="/releases/jggapi-1.0-dev.zip">jggapi-1.0-dev.zip</a></li>
+				<li><a href="/releases/jggapi-1.0-dev-src.zip">jggapi-1.0-dev-src.zip</a></li>
+			</ul>
 			</p>
 		</section>
         <section name="Features">
             <p>
-			The upcoming version (1.0) will allow:
+			The version (1.0-dev) allows:
 				<ul>
 					<li>Sending and receiving messages.</li>
-					<li>Possibility to retrieve message delivery confirmation</li>
-					<li>Exporting and importing of the contact list.</li>
-					<li>Setting status and notification of user's changing status.</li>
-					<li>Notification of changing statuses.</li>
+					<li>Gives possibility to retrieve confirmation of message delivery.</li>
+					<li>Exporting and importing of the user's contact list.</li>
+					<li>Setting status and notification of statuses that are changed by monitored users.</li>
 					<li>Ability to read and write personal information to the public directory.</li>
 					<li>Possibility to search public directory based on user defined criteria.</li>
 				</ul>
@@ -63,7 +79,7 @@
 				</li>
 				<li>
 				Write support for larger contact lists. Current implementation is limited to contact lists
-				that are not more than 2040 bytes long.
+				that are not more than 2048 bytes long.
 				</li>
 				<li>
 				Add ability to send larger notify lists, i.e. list that is send at the beginning
