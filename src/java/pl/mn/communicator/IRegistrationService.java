@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IRegistrationService.java,v 1.10 2005-01-27 22:39:50 winnetou25 Exp $
+ * @version $Id: IRegistrationService.java,v 1.11 2005-01-27 23:56:36 winnetou25 Exp $
  */
 public interface IRegistrationService {
 	
@@ -44,20 +44,6 @@ public interface IRegistrationService {
 	 * @throws <code>GGException</code> if error occurs while registering new Gadu-Gadu account.
 	 */
 	int registerAccount(String email, String password, String tokenID, String tokenVal) throws GGException;
-
-	/**
-	 * Use this method if you want to create a new Gadu-Gadu account.
-	 * 
-	 * @param email e-mail address that is associated with the new account.
-	 * @param password password to access the new account.
-	 * @param tokenID the id of the token
-	 * @param tokenVal the value of the token
-	 * @param question the question type that is used to remind password.
-	 * @param answer the answer to the previous question.
-	 * @return uin of new Gadu-Gadu account.
-	 * @throws <code>GGException</code> if error occurs while registering new Gadu-Gadu account.
-	 */
-	int registerAccount(String email, String password, String tokenID, String tokenVal, int question, String answer) throws GGException;
 
 	/**
 	 * Use this method if you want to delete your current account from Gadu-Gadu server.

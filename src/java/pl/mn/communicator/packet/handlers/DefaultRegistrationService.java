@@ -33,12 +33,13 @@ import org.apache.commons.logging.LogFactory;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGToken;
 import pl.mn.communicator.IRegistrationService;
+import pl.mn.communicator.packet.handlers.RegisterGGAccountRequest.RegisterGGAccountResponse;
 
 /**
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.13 2005-01-27 22:39:54 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.14 2005-01-27 23:56:43 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 	
@@ -139,48 +140,25 @@ public class DefaultRegistrationService implements IRegistrationService {
 	/**
 	 * @see pl.mn.communicator.IRegistrationService#registerAccount(java.lang.String email, java.lang.String password, int qa, String answer)
 	 */
-	public int registerAccount(String email, String password, String tokenID, String tokenVal, int question, String answer) throws GGException {
+	public int registerAccount(String email, String password, String tokenID, String tokenVal) throws GGException {
 		if (email == null) throw new NullPointerException("email cannot be null");
 		if (password == null) throw new NullPointerException("password cannot be null");
 		if (tokenID == null) throw new NullPointerException("password cannot be null");
 		if (tokenVal == null) throw new NullPointerException("password cannot be null");
-		
-		try {
-			String registrationRequest = prepareRegistrationRequest(email, password, tokenID, tokenVal, question, answer);
-			
-			HttpURLConnection huc = createPostHttpRequest("http://register.gadu-gadu.pl/appsvc/fmregister3.asp", registrationRequest);
-			huc.connect();
-			PrintWriter out = new PrintWriter(huc.getOutputStream(), true);
-			
-			out.println(registrationRequest);
-			out.close();
-			
-			BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), WINDOW_ENCODING));
-			String line = reader.readLine();
-			
-			reader.close();
-			huc.disconnect();
-			
-			if (!line.startsWith("reg_success")) {
-				throw new GGException("Unknown error while trying to register new Gadu-Gadu account");
-			} else { //it means it begins with reg_success
-				StringTokenizer tokenizer = new StringTokenizer(line, ":");
-				String token1 = tokenizer.nextToken(); //reg_success string
-				String token2 = tokenizer.nextToken(); //new assigned uin
-				int uin = Integer.parseInt(token2);
-				return uin;
-			}
-			
-		} catch (IOException ex) {
-			throw new GGException("Unable to register new Gadu-Gadu account", ex);
-		}
-	}
 	
-	/**
-	 * @see pl.mn.communicator.IRegistrationService#registerAccount(java.lang.String, java.lang.String, java.lang.String, java.lang.String)
-	 */
-	public int registerAccount(String email, String password, String tokenID, String tokenVal) throws GGException {
-		return registerAccount(email, password, tokenID, tokenID, -1, tokenVal);
+		try {
+			RegisterGGAccountRequest request = new RegisterGGAccountRequest(email, password, tokenID, tokenVal);
+			request.connect();
+			request.sendRequest();
+			RegisterGGAccountRequest.RegisterGGAccountResponse response = (RegisterGGAccountResponse) request.getResponse();
+			if (!response.isOKResponse()) {
+				throw new GGException("Unknown error occured while requesting to send password");
+			}
+			request.disconnect();
+			return response.getNewUin();
+		} catch (IOException ex) {
+			throw new GGException("Unable to remind and send password", ex);
+		}
 	}
 	
 	/**
@@ -209,7 +187,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 			huc.disconnect();
 			
 			if (!line.startsWith("reg_success")) {
-				throw new GGException("Unregistration error");
+				throw new GGException("Unexpected error occured while trying to unresgiter: "+uin);
 			} else { //it means it begins with reg_success
 				StringTokenizer tokenizer = new StringTokenizer(line, ":");
 				String token1 = tokenizer.nextToken(); //reg_success string
@@ -233,32 +211,18 @@ public class DefaultRegistrationService implements IRegistrationService {
 		if (tokenVal == null) throw new NullPointerException("tokenVal cannot be null");
 
 		try {
-			String remindPasswordRequest = prepareRemindPasswordRequest(uin, email, tokenID, tokenVal);
-			HttpURLConnection huc = createPostHttpRequest("http://retr.gadu-gadu.pl/appsvc/fmsendpwd3.asp", remindPasswordRequest);
-			huc.connect();
-			
-			PrintWriter out = new PrintWriter(huc.getOutputStream(), true);
-			
-			out.println(remindPasswordRequest);
-			out.close();
-			
-			BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), WINDOW_ENCODING));
-			String line = reader.readLine();
-
-			if (line.equals("bademail")) {
-				throw new GGException("Incorrect e-mail passed while trying requesting to send password");
+			SendAndRemindPasswordRequest request = new SendAndRemindPasswordRequest(uin, email, tokenID, tokenVal);
+			request.connect();
+			request.sendRequest();
+			if (!request.getResponse().isOKResponse()) {
+				throw new GGException("Unknown error occured while requesting to send password");
 			}
+			request.disconnect();
 			
-			if (!line.equals("pwdsend_success")) {
-				throw new GGException("Unexpected error occured while trying requesting to send password");
-			}
-			
-			reader.close();
-			huc.disconnect();
-
 		} catch (IOException ex) {
 			throw new GGException("Unable to remind and send password", ex);
 		}
+
 	}
 	
 	private int getHashCode(String email, String password) {
@@ -300,7 +264,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 		return ( b < 0 ? -b : b);
 	}
 	
-	private String prepareRegistrationRequest(String email, String password, String tokenID, String tokenVal, int question, String answer) throws UnsupportedEncodingException {
+	private String prepareRegistrationRequest(String email, String password, String tokenID, String tokenVal) throws UnsupportedEncodingException {
 		StringBuffer buffer = new StringBuffer();
 		buffer.append("pwd=");
 		buffer.append(URLEncoder.encode(password, WINDOW_ENCODING));
@@ -313,13 +277,6 @@ public class DefaultRegistrationService implements IRegistrationService {
 		buffer.append('&');
 		buffer.append("tokenval=");
 		buffer.append(URLEncoder.encode(tokenVal, WINDOW_ENCODING));
-		if (question != -1 && answer != null) {
-			buffer.append('&');
-			buffer.append("qa=");
-			buffer.append(question);
-			buffer.append("~");
-			buffer.append(URLEncoder.encode(answer, WINDOW_ENCODING));
-		}
 		buffer.append('&');
 		buffer.append("code=");
 		buffer.append(getHashCode(email, password));
@@ -377,26 +334,6 @@ public class DefaultRegistrationService implements IRegistrationService {
 		buffer.append('&');
 		buffer.append("code=");
 		buffer.append(getHashCode(email, newPassword));
-		
-		return buffer.toString();
-	}
-
-	private String prepareRemindPasswordRequest(int uin, String email, String tokenID, String tokenVal) {
-		StringBuffer buffer = new StringBuffer();
-		buffer.append("userid=");
-		buffer.append(uin);
-		buffer.append('&');
-		buffer.append("email=");
-		buffer.append(email);
-		buffer.append('&');
-		buffer.append("tokenid=");
-		buffer.append(tokenID);
-		buffer.append('&');
-		buffer.append("tokenval=");
-		buffer.append(tokenVal);
-		buffer.append('&');
-		buffer.append("code=");
-		buffer.append(getHashCode(String.valueOf(uin)));
 		
 		return buffer.toString();
 	}
