@@ -17,6 +17,8 @@
  */
 package pl.mn.communicator.gadu;
 
+import java.util.Date;
+
 import org.apache.log4j.Logger;
 
 import pl.mn.communicator.IStatus;
@@ -24,13 +26,13 @@ import pl.mn.communicator.IUser;
 
 /**
  * Pakiet powiadomienia u¿ytkownika o zmianie statusu u¿ytkownika z listy.
- * @version $Revision: 1.11 $
+ * @version $Revision: 1.12 $
  * @author mnaglik
  */
 class GGStatus implements GGIncomingPackage {
 	private static Logger logger = Logger.getLogger(GGStatus.class);
     private IUser user;
-    private IStatus status;
+    private Status statusBiz;
     private byte[] dane;
     
     public GGStatus(byte[] dane) {
@@ -43,6 +45,11 @@ class GGStatus implements GGIncomingPackage {
 	 * Analizuj pakiet przychodz±cy.
 	 */
 	private void analize() {
+		Date returnTime = null;
+		String description = null;
+		// usun flage
+		dane[3] = GGConversion.intToByte(0)[0];
+
 		int userNo = GGConversion.byteToInt(dane);
         logger.debug("Nr uzytkownika zmieniajacego status: "+userNo);
         user = new User(userNo);
@@ -55,8 +62,25 @@ class GGStatus implements GGIncomingPackage {
                 (status == GGNewStatus.GG_STATUS_INVISIBLE_DESCR) ||
                 (status == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
         	logger.debug("U¿ytkownik ma status opisowy");
+        
+        	description = GGConversion.byteToString(dane,14);
+        	logger.debug("Opis:"+description);
+
+        	if (dane.length > 14+description.length()) {
+        		logger.debug("U¿ytkownik ma ustawiona date powrotu");
+        		
+                long czas = GGConversion.byteToInt(dane,
+                        dane.length - 4);
+                czas *= 1000;
+                returnTime = new Date();
+                returnTime.setTime(czas);
+                logger.debug("Czas: " + czas + ":" + returnTime);
+        	}
         }
-    }
+        statusBiz = new Status(GGNotifyReply.dajStatusBiz(status));
+        statusBiz.setDescription(description);
+        statusBiz.setReturnTime(returnTime);
+	}
 
 	/**
      * Pobierz u¿ytkonwika który zmieni³ status.
@@ -71,21 +95,7 @@ class GGStatus implements GGIncomingPackage {
      * @return nowy status u¿ytkownika
      */
     public IStatus getStatus() {
-    	return status;
+    	return statusBiz;
     }
-    
-    
-    /*
-    struct gg_status60 {
-       4 int uin;            // numer plus flagi w najstarszym bajcie //
-       1 char status;            // nowy stan //
-       4 int remote_ip;      // adres IP bezpo¶rednich po³±czeñ //
-       2 short remote_port;  // port bezpo¶rednich po³±czeñ //
-       1 char version;       // wersja klienta //
-       1 char image_size;    // maksymalny rozmiar grafiki //
-       1 char unknown1;      // 0x00 /
-       1+char description[]; // opis, nie musi wyst±piæ //
-       4 int time;       // czas, nie musi wyst±piæ //
-    };
-    */
+
 }

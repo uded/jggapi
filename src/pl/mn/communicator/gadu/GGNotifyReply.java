@@ -28,7 +28,7 @@ import java.util.Map;
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
@@ -101,11 +101,12 @@ class GGNotifyReply implements GGIncomingPackage {
                     logger.debug("Czas: " + czas + ":" + returnTime);
                 }
 
+                
                 byte[] opis = new byte[descriptionSize];
                 System.arraycopy(dane, przesuniecie + 15, opis, 0,
                     descriptionSize);
                 description = new String(opis);
-
+                
                 logger.debug("Opis[" + description + "]");
 
                 przesuniecie += (15 + descriptionSize);
@@ -127,7 +128,7 @@ class GGNotifyReply implements GGIncomingPackage {
         }
     }
 
-    private int dajStatusBiz(int ggStatus) {
+    public static int dajStatusBiz(int ggStatus) {
         switch (ggStatus) {
         case GGNewStatus.GG_STATUS_AVAIL:
         case GGNewStatus.GG_STATUS_AVAIL_DESCR:

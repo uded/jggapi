@@ -19,7 +19,7 @@ package pl.mn.communicator.gadu;
 
 
 /**
- * @version $Revision: 1.7 $
+ * @version $Revision: 1.8 $
  * @author mnaglik
  */
 final class GGConversion {
@@ -92,5 +92,16 @@ final class GGConversion {
         i &= 0x7FFFFFFF;
 
         return (long) (i + plus);
+    }
+    
+    public static String byteToString(byte[] data, int startIndex) {
+    	int counter = 0;
+    	while (counter+startIndex < data.length && data[counter+startIndex] != 0) {
+    		counter++;
+    	}
+    	byte[] desc = new byte[counter]; 
+    	System.arraycopy(data,startIndex,desc,0,counter);
+    	
+    	return new String(desc);
     }
 }
