@@ -18,8 +18,8 @@
 package pl.mn.communicator.gadu.util;
 
 /**
- * @version $Revision: 1.3 $
- * @author Marcin
+ * @version $Revision: 1.4 $
+ * @author mnaglik
  */
 public class Util {
 	public static String bytesToString(byte[] bytes){
