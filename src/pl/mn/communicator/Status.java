@@ -18,136 +18,147 @@
 package pl.mn.communicator;
 
 import java.util.Date;
-import java.util.Map;
 
-import pl.mn.communicator.logger.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * Status u¿ytkownika gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Status.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: Status.java,v 1.2 2004-12-11 16:25:57 winnetou25 Exp $
  */
-public class Status extends AbstractStatus {
+public class Status implements IStatus {
 	
-    private static Logger logger = Logger.getLogger(Status.class);
+    private static Log logger = LogFactory.getLog(Status.class);
 
-    /** Status niewidoczny. */
-    public static final int NOT_VISIBLE = 3;
+//    /** Adres IP bezpoï¿½rednich poï¿½ï¿½czeï¿½ */
+//    private String remoteIp;
 
-    /** Status zajety. */
-    public static final int BUSY = 6;
+//    /** wersja klienta */
+//    private int version;
 
-    /** Adres IP bezpo¶rednich po³±czeñ */
-    private String remoteIp;
+//    /** maksymalny rozmiar obrazkï¿½w w KB */
+//    private int imageSize;
 
-    /** wersja klienta */
-    private int version;
-
-    /** maksymalny rozmiar obrazków w KB */
-    private int imageSize;
-
+    private StatusConst m_status = StatusConst.ONLINE;
+    
     /** Opis w statusie */
-    private String description;
+    private String m_description = null;
 
-    /** Czas powrotu u¿ytkownika */
-    private Date returnTime;
+    private Date m_returnTime = null;
+    
+    private boolean m_friendsOnly = false;
+    
+    private boolean m_blocked = false;
 
     /**
-     * @param status status u¿ytkownika
+     * @param status the status of user
      */
-    public Status(int status) {
-        super(status);
+    public Status(StatusConst status) {
+    	this(status, null, null);
     }
-
-    /**
-     * Pobierz dostêpne statusy.
-     * @return Map mapa dostêpnych statusów
-     * @see pl.mn.communicator.AbstractStatus#getAvaiableStatuses()
-     */
-    public Map getAvaiableStatuses() {
-        Map map = super.getAvaiableStatuses();
-        map.put(new Integer(Status.NOT_VISIBLE), "NOT VISIBLE");
-
-        return map;
+    
+    public Status(StatusConst status, String description) {
+    	this(status, description, null);
     }
-
+    
+    public Status (StatusConst status, String description, Date returnDate) {
+    	m_status = status;
+    	m_description = description;
+    	m_returnTime = returnDate;
+    }
+    
     /**
+	 * @see pl.mn.communicator.IStatus#getStatus()
+	 */
+	public StatusConst getStatus() {
+		return m_status;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#setStatus(int)
+	 */
+	public void setStatus(StatusConst status) {
+		m_status = status;
+	}
+
+     /**
      * @return Returns the description.
      */
     public String getDescription() {
-        return description;
+        return m_description;
     }
 
     /**
      * @param description The description to set.
      */
     public void setDescription(String description) {
-        this.description = description;
+        m_description = description;
     }
-
+    
     /**
      * @return Returns the returnTime.
      */
-    public Date getReturnTime() {
-        return returnTime;
+    public Date getReturnDate() {
+        return m_returnTime;
     }
 
     /**
      * @param returnTime The returnTime to set.
      */
-    public void setReturnTime(Date returnTime) {
-        this.returnTime = returnTime;
+    public void setReturnDate(Date returnTime) {
+    	if (returnTime == null) throw new NullPointerException("returnTime cannot be null");
+        m_returnTime = returnTime;
     }
-
+    
     /**
-     * @return Returns the imageSize.
-     */
-    public int getImageSize() {
-        return imageSize;
-    }
-
+	 * @see pl.mn.communicator.IStatus#isDescriptionSet()
+	 */
+	public boolean isDescriptionSet() {
+		return m_description != null;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#isReturnDateSet()
+	 */
+	public boolean isReturnDateSet() {
+		return m_returnTime != null;
+	}
+	
     /**
-     * @param imageSize The imageSize to set.
-     */
-    public void setImageSize(int imageSize) {
-        this.imageSize = imageSize;
-    }
-
-    /**
-     * @return Returns the remoteIp.
-     */
-    public String getRemoteIp() {
-        return remoteIp;
-    }
-
-    /**
-     * @param remoteIp The remoteIp to set.
-     */
-    public void setRemoteIp(String remoteIp) {
-        this.remoteIp = remoteIp;
-    }
-
-    /**
-     * @return Returns the version.
-     */
-    public int getVersion() {
-        return version;
-    }
-
-    /**
-     * @param version The version to set.
-     */
-    public void setVersion(int version) {
-        this.version = version;
-    }
-
+	 * @see pl.mn.communicator.IStatus#isBlockedMask()
+	 */
+	public boolean isBlockedMask() {
+		return m_blocked;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#isFriendsOnly()
+	 */
+	public boolean isFriendsOnly() {
+		return m_friendsOnly;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#setBlockedMask(boolean)
+	 */
+	public void setBlockedMask(boolean bool) {
+		m_blocked = bool;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.IStatus#setFriendsOnly(boolean)
+	 */
+	public void setFriendsOnly(boolean bool) {
+		m_friendsOnly = bool;
+	}
+	
     /**
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return "status: " + status + " opis: " + description + " czas: " +
-        returnTime;
+        return "Status: " + m_status + ", description: " + m_description + ", time: " +m_returnTime;
     }
     
 }

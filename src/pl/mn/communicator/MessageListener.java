@@ -17,49 +17,51 @@
  */
 package pl.mn.communicator;
 
+import java.util.EventListener;
+
 /**
- * Listener wiadomo¶ci.<BR>
- * Obs³uguje zdarzenia zwi±zane z wiadomo¶ciami.<BR>
+ * Listener associated with messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: MessageListener.java,v 1.11 2004-11-11 18:42:26 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: MessageListener.java,v 1.12 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public interface MessageListener {
+public interface MessageListener extends EventListener {
 	
 	/**
-     * Message arrived
-     * @param MessageArrivedEvent
+     * Notification that a message arrived.<BR>
+     * @param <code>IncommingMessage</code> object
      */
-	void messageArrived(MessageArrivedEvent arrivedEvent);
+	void messageArrived(MessageArrivedEvent messageArrivedEvent);
 
-	/**
-	 * Message sent.
-	 * @param sentEvent
-	 */
-	void messageSent(MessageSentEvent sentEvent);
+//	/**
+//	 * Notification that the message was sent.<BR>
+//	 * @param <code>OutgoingMessage</code> object
+//	 */
+//	void messageSent(OutgoingMessage outgoingMessage);
 	
 	/**
-	 * Message delivered
-	 * @param event object 
+	 * Notification that the message was delivered to the recipient.<BR>
+	 * @param MessageDeliveredEvent object
 	 */
-    void messageDelivered(MessageDeliveredEvent sentEvent);
+    void messageDelivered(MessageDeliveredEvent messageDeliveredEvent);
     
-    public final static class MessageStub implements MessageListener {
+    public final static class Stub implements MessageListener {
 
 		/**
 		 * @see pl.mn.communicator.MessageListener#messageArrived(pl.mn.communicator.MessageArrivedEvent)
 		 */
 		public void messageArrived(MessageArrivedEvent arrivedEvent) { }
 
-		/**
-		 * @see pl.mn.communicator.MessageListener#messageSent(pl.mn.communicator.MessageSentEvent)
-		 */
-		public void messageSent(MessageSentEvent sentEvent) { }
+//		/**
+//		 * @see pl.mn.communicator.MessageListener#messageSent(pl.mn.communicator.MessageSentEvent)
+//		 */
+//		public void messageSent(OutgoingMessage outgoingMessage) { }
 
 		/**
 		 * @see pl.mn.communicator.MessageListener#messageDelivered(pl.mn.communicator.MessageDeliveredEvent)
 		 */
-		public void messageDelivered(MessageDeliveredEvent sentEvent) { }
+		public void messageDelivered(MessageDeliveredEvent messageDeliveredEvent) { }
 
     }
         

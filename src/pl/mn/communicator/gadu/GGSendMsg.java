@@ -17,28 +17,35 @@
  */
 package pl.mn.communicator.gadu;
 
+import java.util.Random;
+
 import pl.mn.communicator.IMessage;
 
 /**
  * 
+ * Class representing packet that will send Gadu-Gadu message.
+ * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.11 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.12 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public class GGSendMsg implements GGOutgoingPackage {
+public class GGSendMsg implements GGOutgoingPackage, GGMessage {
 	
 	public static final int GG_SEND_MSG = 0x0B;
-
-    private static int seqNo;
-    private int user;
-    private String text;
-    private int seq;
-    private static final int MSG_CLASS = 0x0004;
+	
+	private final static Random RANDOM = new Random();
+	
+    private static int m_seq = RANDOM.nextInt(999999);
+    private int m_user = -1;
+    private String m_text = "";
+    private	int m_protocolMessageClass = GG_CLASS_MSG;
 
     public GGSendMsg(IMessage message) {
-        this.user = message.getUser();
-        this.text = message.getText();
-        seq = seqNo++;
+    	if (message == null) throw new NullPointerException("message cannot be null");
+        m_user = message.getUin();
+        m_text = message.getText();
+        m_seq = RANDOM.nextInt(999999);
+        m_protocolMessageClass = GGUtils.getProtocolMessageClass(message.getMessageClass());
     }
 
     /**
@@ -52,34 +59,35 @@ public class GGSendMsg implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        return 12 + text.length() + 1;
+        return 4+4+4+m_text.length()+1;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        byte[] toSend = new byte[12 + text.length() + 1];
+        byte[] toSend = new byte[getLength()];
 
-        toSend[3] = (byte) ((user >> 24) & 0xFF);
-        toSend[2] = (byte) ((user >> 16) & 0xFF);
-        toSend[1] = (byte) ((user >> 8) & 0xFF);
-        toSend[0] = (byte) (user & 0xFF);
+        toSend[3] = (byte) ((m_user >> 24) & 0xFF);
+        toSend[2] = (byte) ((m_user >> 16) & 0xFF);
+        toSend[1] = (byte) ((m_user >> 8) & 0xFF);
+        toSend[0] = (byte) (m_user & 0xFF);
 
-        toSend[7] = (byte) ((seq >> 24) & 0xFF);
-        toSend[6] = (byte) ((seq >> 16) & 0xFF);
-        toSend[5] = (byte) ((seq >> 8) & 0xFF);
-        toSend[4] = (byte) (seq & 0xFF);
+        toSend[7] = (byte) ((m_seq >> 24) & 0xFF);
+        toSend[6] = (byte) ((m_seq >> 16) & 0xFF);
+        toSend[5] = (byte) ((m_seq >> 8) & 0xFF);
+        toSend[4] = (byte) (m_seq & 0xFF);
 
-        toSend[11] = (byte) ((MSG_CLASS >> 24) & 0xFF);
-        toSend[10] = (byte) ((MSG_CLASS >> 16) & 0xFF);
-        toSend[9] = (byte) ((MSG_CLASS >> 8) & 0xFF);
-        toSend[8] = (byte) (MSG_CLASS & 0xFF);
+        toSend[11] = (byte) ((m_protocolMessageClass >> 24) & 0xFF);
+        toSend[10] = (byte) ((m_protocolMessageClass >> 16) & 0xFF);
+        toSend[9] = (byte) ((m_protocolMessageClass >> 8) & 0xFF);
+        toSend[8] = (byte) (m_protocolMessageClass & 0xFF);
 
-        byte[] textBytes = text.getBytes();
+        //TODO check if this conversion needs charset
+        byte[] textBytes = m_text.getBytes();
 
-        for (int i = 0; i < text.length(); i++) {
-            toSend[12 + i] = textBytes[i];
+        for (int i = 0; i < m_text.length(); i++) {
+            toSend[12+i] = textBytes[i];
         }
         return toSend;
     }

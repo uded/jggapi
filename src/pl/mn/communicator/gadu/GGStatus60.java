@@ -20,9 +20,9 @@ package pl.mn.communicator.gadu;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.1 2004-10-27 00:52:16 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.2 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public class GGStatus60 {
+public class GGStatus60 implements GGStatusEnabled {
 
 	public static final int GG_STATUS60 = 0x0F;
 

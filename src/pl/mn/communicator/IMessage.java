@@ -18,39 +18,45 @@
 package pl.mn.communicator;
 
 /**
- * Wiadomo¶æ do serwera rozmów.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.9 2004-11-11 18:40:53 winnetou25 Exp $
+ * @version $Id: IMessage.java,v 1.10 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public interface IMessage {
 	
+//	public static final int MESSAGE_CLASS_QUEUED = 1;
+//
+//	public static final int MESSAGE_CLASS_IN_NEW_WINDOW = 2;
+//	
+//	public static final int MESSAGE_CLASS_CHAT = 3;
+//	
+//	public static final int MESSAGE_CLASS_DO_NOT_CONFIRM = 4;
+//	
+//	public static final int MESSAGE_CLASS_PING = 5;
+	
     /**
-     * Pobierz u¿ytkownika do którego jest wiadomo¶æ
-     * @return User
+     * Gadu=Gadu number of user to whom this message is addressed.<BR>
+     * @return gg number
      */
-    int getUser();
+    int getUin();
 
     /**
-     * Pobierz tre¶æ wiadomo¶æi
-     * @return String
+     * Gets message body.<BR>
+     * @return String message body
      */
     String getText();
 
     /**
-     * @param text tre¶æ wiadomo¶ci
+     * @param text message body.<BR>
      */
     void setText(String text);
 
     /**
-     * @param user u¿ytkownik
+     * @param user number of Gadu-Gadu user.<BR>
      */
-    void setUser(int user);
+    void setUin(int uin);
     
-    /**
-     * Gets unique message id
-     */
-    int getMessageID();
+    MessageClass getMessageClass();
     
 }

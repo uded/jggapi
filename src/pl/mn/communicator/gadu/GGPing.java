@@ -18,23 +18,34 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
+ * Outgoing packet, ping type that is from time to time being send to Gadu-Gadu server.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPing.java,v 1.8 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGPing.java,v 1.9 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public final class GGPing implements GGOutgoingPackage {
 	
 	public static final int GG_PING = 0x08;
 
-    private static GGPing ggPing = new GGPing();
-    private byte[] data;
+	private final static byte[] DATA = new byte[0];
+	
+    private static GGPing m_ping = null;
 
     /**
      * Prywatny konstruktor.
      */
-    private GGPing() {
+    private GGPing() { }
+
+    /**
+     * Pobierz instancje tego obiektu.
+     * @return instancja <code>GGPing</code>
+     */
+    public static GGPing getPing() {
+    	if (m_ping == null) {
+    		m_ping = new GGPing();
+    	}
+        return m_ping;
     }
 
     /**
@@ -48,22 +59,14 @@ public final class GGPing implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        return 0x00;
+        return DATA.length;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        return new byte[0];
+        return DATA;
     }
 
-    /**
-     * Pobierz instancje tego obiektu.
-     * @return instancja <code>GGPing</code>
-     */
-    public static GGPing getPing() {
-        return ggPing;
-    }
-    
 }

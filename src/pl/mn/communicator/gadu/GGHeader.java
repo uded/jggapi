@@ -18,32 +18,31 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Naglowek wiadomosci gg.
+ * Gadu-Gadu packet header.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGHeader.java,v 1.8 2004-10-27 00:52:15 winnetou25 Exp $
+ * @version $Id: GGHeader.java,v 1.9 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public class GGHeader {
-    
-	private byte[] data;
-    private int type;
-    private int length;
+
+    private int m_type;
+    private int m_length;
 
     /**
      * Constructor for Header.
      * @param data dane naglowka
      */
     public GGHeader(byte[] data) {
-        this.type = GGConversion.byteToInt(data, 0);
-        this.length = GGConversion.byteToInt(data, 4);
+        m_type = GGUtils.byteToInt(data, 0);
+        m_length = GGUtils.byteToInt(data, 4);
     }
 
     /**
-     * Returns the length.
+     * Returns the length of packet.
      * @return int
      */
     public int getLength() {
-        return length;
+        return m_length;
     }
 
     /**
@@ -51,7 +50,7 @@ public class GGHeader {
      * @return int
      */
     public int getType() {
-        return type;
+        return m_type;
     }
     
 }

@@ -18,8 +18,8 @@ public class GGConversionTest extends TestCase {
      */
     public void testByteToIntbyteArray() {
         byte[] bajty = new byte[] { 41, -54, 26, 0 };
-        int out = GGConversion.byteToInt(bajty);
-        logger.info("Bajty wejsciowe: " + Util.bytesToString(bajty));
+        int out = GGUtils.byteToInt(bajty);
+        logger.info("Bajty wejsciowe: " + GGUtils.bytesToString(bajty));
         logger.info("Wyjscie: " + out);
         assertEquals(out, 1755689);
     }

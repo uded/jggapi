@@ -9,7 +9,7 @@ DONE - powiadomianie o zmianie statusow uzytkownikow
 
 PRIORITY
 --------
-OK - implementacja GGNotify 
+OK - implementacja GGNotify
 OK - implementacja GGNotifyReply
 OK - implementacja w connection powiadamianie listenera o zmianie statusu
      uzytkownika

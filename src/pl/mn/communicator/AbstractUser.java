@@ -17,17 +17,18 @@
  */
 package pl.mn.communicator;
 
-import pl.mn.communicator.logger.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * U¿ytkownik serwera rozmów.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractUser.java,v 1.13 2004-11-11 18:39:49 winnetou25 Exp $
+ * @version $Id: AbstractUser.java,v 1.14 2004-12-11 16:25:57 winnetou25 Exp $
  */
-public class AbstractUser implements IUser {
+public abstract class AbstractUser implements IUser {
 	
-    private static Logger logger = Logger.getLogger(AbstractUser.class);
+    private static Log logger = LogFactory.getLog(AbstractUser.class);
     
     protected int number;
     protected boolean onLine;

@@ -18,25 +18,25 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Wiadomosc otrzymywana zaraz po polaczeniu z serwerem gg
- * zawiera seed (int) potrzebny do zakodowania hasla.
+ * The packet is retrieved from the Gadu-Gadu server just after we connect to it.
+ * The class parses package and gets seed from server.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcome.java,v 1.10 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGWelcome.java,v 1.11 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public class GGWelcome implements GGIncomingPackage {
     
 	public static final int GG_PACKAGE_WELCOME = 0x1;
 
-	private int seed;
+	private int m_seed = -1;
 
     /**
      * Constructor for Welcome.
      * @param data dane pakietu
      */
     public GGWelcome(byte[] data) {
-        this.seed = GGConversion.byteToInt(data);
+        m_seed = GGUtils.byteToInt(data);
     }
     
     /**
@@ -46,11 +46,8 @@ public class GGWelcome implements GGIncomingPackage {
 		return GG_PACKAGE_WELCOME;
 	}
 
-    /**
-     * Pobierz warto¶æ seed pobran± z serwera.
-     * @return numer seed u¿ywany do szyfrowania has³a.
-     */
     public int getSeed() {
-        return seed;
+        return m_seed;
     }
+    
 }

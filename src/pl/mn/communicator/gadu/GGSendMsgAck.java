@@ -18,10 +18,9 @@
 package pl.mn.communicator.gadu;
 
 /**
- *	Acknowledgment of successuly delivered message that is recieved from gg server.
+ * Acknowledgment of successuly delivered message that is recieved from Gadu-Gadu server.
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id¤
  */
 public class GGSendMsgAck implements GGIncomingPackage {
 
@@ -44,14 +43,14 @@ public class GGSendMsgAck implements GGIncomingPackage {
 	/** Message has not been delivered. This status is only in case of GG_CLASS_CTCP */
 	public final static int GG_ACK_NOT_DELIVERED = 0x0006;
 	
-	private int m_messageStatus;
-	private int m_recipient;
-	private int m_seq;
+	private int m_messageStatus = -1;
+	private int m_recipient = -1;
+	private int m_seq = -1;
 	
 	public GGSendMsgAck(byte[] data) {
-		m_messageStatus = GGConversion.byteToInt(data, 0);
-		m_recipient = GGConversion.byteToInt(data, 4);
-		m_seq = GGConversion.byteToInt(data, 8);
+		m_messageStatus = GGUtils.byteToInt(data, 0);
+		m_recipient = GGUtils.byteToInt(data, 4);
+		m_seq = GGUtils.byteToInt(data, 8);
 	}
 	
 	/**
@@ -69,16 +68,16 @@ public class GGSendMsgAck implements GGIncomingPackage {
 	}
 
 	/**
-	 * @return GG UID number of the person to whom message was sent.
+	 * @return Gadu-Gadu uin number of the person to whom message was sent.
 	 */
-	public int getRecipientUID() {
+	public int getRecipientUin() {
 		return m_recipient;
 	}
 
 	/**
 	 * @return Sequence number of the message that has been sent.
 	 */
-	public int getMessageID() {
+	public int getMessageSeq() {
 		return m_seq;
 	}
 	

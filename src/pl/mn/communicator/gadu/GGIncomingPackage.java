@@ -18,10 +18,10 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Pakiet przychodz±cy gg.
+ * Incomming Gadu-Gadu packet.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGIncomingPackage.java,v 1.5 2004-10-27 00:29:48 winnetou25 Exp $ 
+ * @version $Id: GGIncomingPackage.java,v 1.6 2004-12-11 16:25:58 winnetou25 Exp $ 
  */
 public interface GGIncomingPackage {
 	

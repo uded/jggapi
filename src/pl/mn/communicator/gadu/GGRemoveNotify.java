@@ -18,11 +18,11 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Packet that deletes certain user from the list of monitored users.
+ * Packet that deletes certain user from the list of monitored users.<BR>
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGRemoveNotify.java,v 1.10 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGRemoveNotify.java,v 1.11 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public class GGRemoveNotify implements GGOutgoingPackage {
 	
@@ -32,18 +32,19 @@ public class GGRemoveNotify implements GGOutgoingPackage {
 //		
 //		struct gg_remove_notify {
 //			int uin;	/* numerek */
-//			char type;	/* rodzaj u¿ytkownika */
+//			char type;	/* rodzaj uï¿½ytkownika */
 //		};
 	
-    /** Numer u¿ytkownika */
-    private int userNo;
+    /** Numer uï¿½ytkownika */
+    private int m_uin;
 
     /**
-     * Twórz pakiet do usuniêcia u¿ytkownika z listy monitorowanych
-     * @param userNo numer u¿ytkownika do usuniêcia
+     * Twï¿½rz pakiet do usuniï¿½cia uï¿½ytkownika z listy monitorowanych
+     * @param userNo numer uï¿½ytkownika do usuniï¿½cia
      */
-    public GGRemoveNotify(int userNo) {
-        this.userNo = userNo;
+    public GGRemoveNotify(int uin) {
+    	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+        m_uin = uin;
     }
 
     /**
@@ -64,10 +65,10 @@ public class GGRemoveNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        byte[] dane = new byte[5];
+        byte[] dane = new byte[getLength()];
 
-        byte[] userNo = GGConversion.intToByte(this.userNo);
-        System.arraycopy(userNo, 0, dane, 0, userNo.length);
+        byte[] uin = GGUtils.intToByte(m_uin);
+        System.arraycopy(uin, 0, dane, 0, uin.length);
         dane[4] = GGNotify.GG_USER_NORMAL;
 
         return dane;

@@ -20,10 +20,30 @@ package pl.mn.communicator.gadu;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGDisconnecting.java,v 1.1 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGDisconnecting.java,v 1.2 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public class GGDisconnecting {
+public class GGDisconnecting implements GGIncomingPackage {
 
 	public static final int GG_DISCONNECTING = 0x000B;
+
+	private static GGDisconnecting m_instance = null;
+	
+	private GGDisconnecting() {
+		//private constructor
+	}
+	
+	/**
+	 * @see pl.mn.communicator.gadu.GGIncomingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_DISCONNECTING;
+	}
+	
+	public static GGDisconnecting getInstance() {
+		if (m_instance == null) {
+			m_instance = new GGDisconnecting();
+		}
+		return m_instance;
+	}
 	
 }

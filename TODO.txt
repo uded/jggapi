@@ -1,0 +1,21 @@
+-taki logincontext w ktorym bylyby localIP, localPort, externalIP, externalPort
+dobrym pomyslem jest tutaj zastosowanie factory, albo statycznych metod fabrykujacych
+
+-implementacja trybu tylko dla przyjaciol
+-implementacja blokowania uzytkownikow
+
+- obslugiwanie serwisow dostepnych przez www
+(rejestracja uzytkownika, zmiana danych itp...)
+
+-eksport listy kontaktow
+
+-Initial status in LoginContext does not work out.
+
+GGLogin w ktorym adresy beda dzialaly (localIp, externalIP)
+
+-provide more accurate documentation.
+
+-nie wiem czy to jest takie sprytne, ze jest GGSessionException. Wlasciwie z command line to nie mozna tej biblioteki uzywac.
+chyba ze zrobic sie jakies wiszenie i dopoki cos sie nie stanie to sie nie bedzie dalej probowalo.
+
+-dodanie enumow do klas biznesowych

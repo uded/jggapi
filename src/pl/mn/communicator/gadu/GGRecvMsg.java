@@ -18,28 +18,28 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Wiadomosc otrzymana z serwera gg (tekstowa)
+ * Class representing Gadu-Gadu received message packet.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGRecvMsg.java,v 1.11 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGRecvMsg.java,v 1.12 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public class GGRecvMsg implements GGIncomingPackage {
+public class GGRecvMsg implements GGIncomingPackage, GGMessage {
 
 	public static final int GG_RECV_MSG  = 0x000A;
 
-    private long sender;
-    private int seq;
-    private int time;
-    private int msgClass;
-    private String message = "";
+    private int m_sender = -1;
+    private int m_seq = -1;
+    private long m_time = -1;
+    private int m_msgClass = -1;
+    private String m_message = "";
 
     public GGRecvMsg(byte[] data) {
-        this.sender = GGConversion.unsignedIntToLong(GGConversion.byteToInt(data));
-        this.seq = GGConversion.byteToInt(data, 4);
-        this.time = GGConversion.byteToInt(data, 8);
-        this.msgClass = GGConversion.byteToInt(data, 12);
-        message = GGConversion.byteToString(data,16);;
+        m_sender = GGUtils.byteToInt(data);
+        m_seq = GGUtils.byteToInt(data, 4);
+        m_time = GGUtils.secondsToMillis(GGUtils.byteToInt(data, 8));
+        m_msgClass = GGUtils.byteToInt(data, 12);
+        m_message = GGUtils.byteToString(data,16);
     }
     
     /**
@@ -54,7 +54,7 @@ public class GGRecvMsg implements GGIncomingPackage {
      * @return String
      */
     public String getMessage() {
-        return message;
+        return m_message;
     }
 
     /**
@@ -62,7 +62,7 @@ public class GGRecvMsg implements GGIncomingPackage {
      * @return int
      */
     public int getMsgClass() {
-        return msgClass;
+        return m_msgClass;
     }
 
     /**
@@ -70,23 +70,23 @@ public class GGRecvMsg implements GGIncomingPackage {
      * @return int
      */
     public int getSender() {
-        return (int) sender;
+        return m_sender;
     }
 
     /**
      * Returns the seq.
      * @return int
      */
-    public int getSeq() {
-        return seq;
+    public int getMessageSeq() {
+        return m_seq;
     }
 
     /**
      * Returns the time.
      * @return int
      */
-    public int getTime() {
-        return time;
+    public long getTime() {
+        return m_time;
     }
     
 }

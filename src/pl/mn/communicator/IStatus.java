@@ -17,45 +17,102 @@
  */
 package pl.mn.communicator;
 
-import java.util.Map;
+import java.util.Date;
 
 /**
- * Klasa reprezentuj±ca status u¿ytkownika.
- * Dodatkowe statusy specyficzne dla serwerów rozmów
- * mog± zostaæ dodane w podklasach.
+ * This interface represents status of user.<BR>
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: IStatus.java,v 1.8 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: IStatus.java,v 1.9 2004-12-11 16:25:57 winnetou25 Exp $
  */
 public interface IStatus {
-    /**
-     * Status on-line
-     */
-    int ON_LINE = 1;
 
-    /**
-     * Status off-line
-     */
-    int OFF_LINE = 0;
+//	/** Status online */
+//    int ONLINE = 1;
+//
+//	/** Status online with description */
+//    int ONLINE_WITH_DESCRIPTION = 2;
+//
+//    /** Status offline */
+//    int OFFLINE = 3;
+//
+//    /** Status offline with description */
+//    int OFFLINE_WITH_DESCRIPTION = 4;
+//
+//    /** Status busy */
+//    int BUSY = 5;
+//
+//    /** Status busy with description */
+//    int BUSY_WITH_DESCRIPTION = 6;
+//
+//    /** Status invisible */
+//    int INVISIBLE = 7;
+//
+//    /** Status invisible with description */
+//    int INVISIBLE_WITH_DESCRIPTION = 8;
 
+//    /** friends mask */
+//    int FRIENDS_MASK = 10;
+//    
+//    /** blocked mask */
+//    int BLOCKED_MASK = 20;
+    
     /**
-     * Pobierz aktualny status
+     * Get the actual status.<BR>
      * @return int
      */
-    int getStatus();
+    StatusConst getStatus();
 
     /**
-     * Ustaw aktualny status
+     * Set the actual status.<BR>
      * @param status status
      */
-    void setStatus(int status);
-
-    /**
-     * Pobierz dostêpne statusy.
-     * Zwraca mapê dostêpnych statusów.
-     * Kluczem jest Integer z nr statusu,
-     * a wartoscia String z nazw± statusu
-     * @return Map
+    void setStatus(StatusConst status);
+    
+    /** */
+    void setFriendsOnly(boolean bool);
+    
+    void setBlockedMask(boolean bool);
+    
+    boolean isFriendsOnly();
+    
+    boolean isBlockedMask();
+    
+    /** 
+     * Set the description of status.<BR>
+     * @param description to be set
      */
-    Map getAvaiableStatuses();
+    void setDescription(String description);
+    
+    /** 
+     * Get the status description.<BR>
+     * @return description of status.
+     */
+    String getDescription();
+    
+    /**
+     * Set the return date.
+     * @param date
+     */
+    void setReturnDate(Date date);
+    
+    /**
+     * Get the return date.
+     * @return the return date.
+     */
+    Date getReturnDate();
+    
+    /**
+     * Tells if the description has been set on this status.
+     * @return <code>true</code> if the description has been set, <code>false</code> otherwise.
+     */
+    boolean isDescriptionSet();
+    
+    /**
+     * Tells if the return date has been set on this status instance.
+     * @return <code>true</code> if the return date has been set, <code>false</code> otherwise.
+     */
+    boolean isReturnDateSet();
+    
 }

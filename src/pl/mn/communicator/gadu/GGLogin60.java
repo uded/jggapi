@@ -18,10 +18,9 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Wiadomo¶æ wysy³ana w czasie logowania.
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.1 2004-10-27 00:52:15 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.2 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 

@@ -17,9 +17,7 @@
  */
 package pl.mn.communicator.gadu;
 
-import java.util.Date;
-
-import pl.mn.communicator.Status;
+import pl.mn.communicator.IStatus;
 
 /**
  * Status uzytkownika gg
@@ -27,75 +25,22 @@ import pl.mn.communicator.Status;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNewStatus.java,v 1.4 2004-10-27 00:52:15 winnetou25 Exp $
+ * @version $Id: GGNewStatus.java,v 1.5 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public class GGNewStatus implements GGOutgoingPackage {
+public class GGNewStatus implements GGOutgoingPackage, GGStatusEnabled {
 	
 	public static final int GG_NEW_STATUS = 0x0002;
 
-    /** Status dostepny */
-    public static final int GG_STATUS_AVAIL = 0x00000002;
+    private static final int MAX_OPIS = 70;
 
-    /** Status dostepny z opisem */
-    public static final int GG_STATUS_AVAIL_DESCR = 0x00000004;
-
-    /** Status niedostepny */
-    public static final int GG_STATUS_NOT_AVAIL = 0x00000001;
-
-    /** Status niedostepny z opisem */
-    public static final int GG_STATUS_NOT_AVAIL_DESCR = 0x00000015;
-
-    /** Status zajety */
-    public static final int GG_STATUS_BUSY = 0x00000003;
-
-    /** Status zajety z opisem */
-    public static final int GG_STATUS_BUSY_DESCR = 0x00000005;
-
-    /** Status niewidoczny */
-    public static final int GG_STATUS_INVISIBLE = 0x00000014;
-
-    /** Status niewidoczny z opisem */
-    public static final int GG_STATUS_INVISIBLE_DESCR = 0x00000016;
-
-    /** Status zablokowany */
-    public static final int GG_STATUS_BLOCKED = 0x00000006;
-
-    /** Maska bitowa oznaczajaca tryb tylko dla przyjaciol */
-    public static final int GG_STATUS_FRIENDS_MASK = 0x00008000;
-
-    private static final int MAX_OPIS = 40;
-
-    private int status;
-    private String opis;
-    private Date czas;
-
+    private IStatus m_status = null;
+    
     /**
-     * Konstruktor statusu.
-     * @param status status
+     * The protocol status contructor.
      */
-    public GGNewStatus(int status) {
-        this(status, null, null);
-    }
-
-    /**
-     * Konstruktor statusu.
-     * @param status status
-     * @param opis opis tekstowy (maks. 40 znakow)
-     */
-    public GGNewStatus(int status, String opis) {
-        this(status, opis, null);
-    }
-
-    /**
-     * Konstruktor statusu.
-     * @param status status
-     * @param opis opis tekstowy (maks. 40 znakow)
-     * @param czas czas powrotu
-     */
-    public GGNewStatus(int status, String opis, Date czas) {
-        this.status = status;
-        this.opis = trimOpis(opis);
-        this.czas = czas;
+    public GGNewStatus(IStatus status) {
+    	if (status == null) throw new NullPointerException("status cannot be null");
+        m_status = status;
     }
 
     /**
@@ -109,103 +54,52 @@ public class GGNewStatus implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        //return opis.length == 0 ? 4 : 4 + opis.length + 1;
-        return 4;
+    	int length = 4;
+    	
+    	if (m_status.getStatus().isDescriptionStatus() && m_status.isDescriptionSet()) {
+    		length+=m_status.getDescription().length()+1;
+    		if (m_status.isReturnDateSet()) {
+    			length+=4;
+    		}
+    	}
+    	
+    	return length;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        int statusToSend = 0;
-
-        switch (status) {
-        case Status.BUSY:
-            statusToSend = GG_STATUS_BUSY;
-
-            break;
-
-        case Status.ON_LINE:
-            statusToSend = GG_STATUS_AVAIL;
-
-            break;
-
-        case Status.OFF_LINE:
-            statusToSend = GG_STATUS_NOT_AVAIL;
-
-            break;
-
-        case Status.NOT_VISIBLE:
-            statusToSend = GG_STATUS_INVISIBLE;
-
-            break;
-
-        default:
-            break;
-        }
-
-        final int length = 4; // + opis.length + (opis.length > 0 ? 1 : 0);
-        byte[] toSend = new byte[length];
-
-        /*
-                        for (int i = 0; i < opis.length; i++) {
-                                toSend[4+i] = opis[i];
-                        }
-        */
-        toSend[3] = (byte) ((statusToSend >> 24) & 0xFF);
-        toSend[2] = (byte) ((statusToSend >> 16) & 0xFF);
-        toSend[1] = (byte) ((statusToSend >> 8) & 0xFF);
-        toSend[0] = (byte) (statusToSend & 0xFF);
-
-        return toSend;
+    	int statusToSend = GGUtils.getProtocolStatus(m_status, m_status.isFriendsOnly(), m_status.isBlockedMask());
+    	
+    	byte[] toSend = new byte[getLength()];
+    	
+    	toSend[0] = (byte) (statusToSend & 0xFF);
+    	toSend[1] = (byte) ((statusToSend >> 8) & 0xFF);
+    	toSend[2] = (byte) ((statusToSend >> 16) & 0xFF);
+    	toSend[3] = (byte) ((statusToSend >> 24) & 0xFF);
+    	if (m_status.getStatus().isDescriptionStatus() && m_status.isDescriptionSet()) {
+    		String description = trimDescription(m_status.getDescription());
+    		for (int i=0; i<description.length(); i++) {
+    			toSend[4+i] = (byte) description.charAt(i);
+    		}
+    		if (m_status.isReturnDateSet()) {
+    			int timeInSeconds = GGUtils.millisToSeconds(m_status.getReturnDate().getTime());
+    			toSend[4+description.length()+1]= (byte) (timeInSeconds & 0xFF);
+    			toSend[4+description.length()+2]= (byte) (timeInSeconds >> 8 & 0xFF);
+    			toSend[4+description.length()+3]= (byte) (timeInSeconds >> 16 & 0xFF);
+    			toSend[4+description.length()+4]= (byte) (timeInSeconds >> 24 & 0xFF);
+    		}
+    	}
+    	return toSend;
     }
     
-    /**
-     * Je¿eli opis jest za d³ugi skraca go do odpowiedniej d³ugo¶ci.
-     * @param opis opis do ewentualnego skrócenia
-     * @return poprawny opis nie d³u¿szy ni¿ mo¿liwy
-     */
-    private String trimOpis(String opis) {
-        if (opis.length() > MAX_OPIS) {
-            opis = opis.substring(0, MAX_OPIS - 1);
+    private String trimDescription(String description) {
+    	if (description == null) return null;
+        if (description.length() > MAX_OPIS) {
+        	description = description.substring(0, MAX_OPIS - 1);
         }
-        return opis;
-    }
-    
-    /**
-     * Zamnienia status biznesowy na status pakietu gg.
-     * @param statusBiz status do zamiany
-     * @param desc opis (moze byc <code>null</code>)
-     * @param czas czas powrotu (moze byc <code>null</code>)
-     * @return status do pakietu gg
-     */
-    private int statusBizToStatus(int statusBiz, String desc, Date czas) {
-    	if (desc != null|| czas != null) {
-    		// poniewaz jest czas lub opis to status jest typu opisowego
-            switch(statusBiz){
-                case Status.ON_LINE:
-                    return GG_STATUS_AVAIL_DESCR;
-                case Status.NOT_VISIBLE:
-                    return GG_STATUS_INVISIBLE_DESCR;
-                case Status.BUSY:
-                    return GG_STATUS_BUSY_DESCR;
-                default:
-                case Status.OFF_LINE:
-                    return GG_STATUS_NOT_AVAIL_DESCR;
-            }
-        } else {
-            switch(statusBiz){
-                case Status.ON_LINE:
-                    return GG_STATUS_AVAIL;
-                case Status.NOT_VISIBLE:
-                    return GG_STATUS_INVISIBLE;
-                case Status.BUSY:
-                    return GG_STATUS_BUSY;
-                default:
-                case Status.OFF_LINE:
-                    return GG_STATUS_NOT_AVAIL;
-            }
-        }
+        return description;
     }
     
 }

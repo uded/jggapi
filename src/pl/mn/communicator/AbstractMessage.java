@@ -17,65 +17,59 @@
  */
 package pl.mn.communicator;
 
-import pl.mn.communicator.logger.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * Wiadomo¶æ do serwera rozmów.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $
+ * @version $Id: AbstractMessage.java,v 1.13 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
-    private static Logger logger = Logger.getLogger(AbstractMessage.class);
 
-    /**
-     * Nr adresata wiadomo¶ci
-     */
-    protected int user;
+	private static Log logger = LogFactory.getLog(AbstractMessage.class);
 
-    /**
-     * Tre¶æ wiadomo¶ci
-     */
-    protected String text;
+    /** Uin of the Gadu-Gadu user */
+    protected int m_uin;
 
-    /**
-     * Tworzy wiadomo¶æ do konkretnego u¿ytkownika.
-     * @param toUser nr u¿ytkownika do którego wysy³amy
-     * @param text wiadomo¶æ tekstowa
-     */
-    public AbstractMessage(int toUser, String text) {
-        this.user = toUser;
-        this.text = text;
+    /** The body of the message */
+    protected String m_text;
+    
+    protected MessageClass m_messageClass;
+
+    public AbstractMessage(int uin, String text, MessageClass messageClass) {
+        m_uin = uin;
+        m_text = text;
+        m_messageClass = messageClass;
+    }
+
+    public int getUin() {
+        return m_uin;
     }
 
     /**
-     * Pobierz u¿ytkownika do którego jest wiadomoœæ
-     * @return User numer u¿ytkownika
-     */
-    public int getUser() {
-        return user;
-    }
-
-    /**
-     * Pobierz tre¶æ wiadomo¶æi
      * @return String
      */
     public String getText() {
-        return text;
+        return m_text;
     }
 
-    /**
-     * @param text tre¶æ wiadomo¶ci
-     */
     public void setText(String text) {
-        this.text = text;
+    	if (text == null) throw new NullPointerException("text cannot be null");
+    	m_text = text;
     }
 
-    /**
-     * @param user numer u¿ytkownika
-     */
-    public void setUser(int user) {
-        this.user = user;
+    public void setUin(int uin) {
+    	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+    	m_uin = uin;
     }
     
+    /**
+     * Gets MessageClass of this message.
+     * @return messageClass attached to this message.
+     */
+    public MessageClass getMessageClass() {
+    	return m_messageClass;
+    }
+
 }

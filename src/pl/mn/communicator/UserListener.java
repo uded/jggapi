@@ -17,18 +17,18 @@
  */
 package pl.mn.communicator;
 
+import java.util.EventListener;
+
 /**
  * Listener zwi±zany ze zdarzeniami u¿ytkowników.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: UserListener.java,v 1.8 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: UserListener.java,v 1.9 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public interface UserListener {
+public interface UserListener extends EventListener {
 
 	/**
-     * U¿ytkownik zmieni³ status.
-     * @param user nr u¿ytkownika, który siê pod³±czy³
-     * @param newStatus nowy status u¿ytkownika
+	 * The notification that user changed the status.
      */
     void userStatusChanged(IUser user, IStatus newStatus);
     

@@ -21,10 +21,11 @@ package pl.mn.communicator;
  * Klasa reprezentuj±ca serwer rozmów.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: IServer.java,v 1.8 2004-10-26 23:56:40 winnetou25 Exp $
+ * @version $Id: IServer.java,v 1.9 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public interface IServer {
-    /**
+
+	/**
      * Zwróæ adres serwera rozmów.
      * @return String
      */
@@ -45,4 +46,5 @@ public interface IServer {
      * @param port port serwera
      */
     void setPort(int port);
+    
 }

@@ -17,28 +17,51 @@
  */
 package pl.mn.communicator;
 
+import java.util.EventListener;
+
 /**
- * Listener ze zdarzeniami po³±czenia.
+ * The listener that is connected with connection to gadu-gadu server events.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: ConnectionListener.java,v 1.7 2004-10-26 23:56:40 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: ConnectionListener.java,v 1.8 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public interface ConnectionListener {
-    /**
-     * Po³±czenie zosta³o pomy¶lnie nawi±zane.
-     */
+public interface ConnectionListener extends EventListener {
+	
+    /** The notification that connection has been successfuly established. */
     void connectionEstablished();
 
-    /**
-     * Roz³aczono z serwerem.<BR>
-     * Wywo³ywane podczas celowego roz³±czania z serwerem.
-     */
-    void disconnected();
+    /** The notification that connection has been delibately closed. */
+    void connectionClosed();
 
-    /**
-     * Problem z po³±czeniem.<BR>
-     * Wyst±pi³ b³±d w po³±czeniu.
-     * @param error tekstowy opis b³êdu zwi±zanego z po³±czeniem
-     */
-    void connectionError(String error);
+    /** Notification that there was an unexpected error with the connection */
+    void connectionError(Exception e);
+   
+    /** Notification when server sends us pong packet */
+    void pongReceived();
+    
+    public static class Stub implements ConnectionListener {
+
+		/**
+		 * @see pl.mn.communicator.ConnectionListener#connectionEstablished()
+		 */
+		public void connectionEstablished() { }
+
+		/**
+		 * @see pl.mn.communicator.ConnectionListener#disconnected()
+		 */
+		public void connectionClosed() { }
+
+		/**
+		 * @see pl.mn.communicator.ConnectionListener#connectionError(java.lang.Exception)
+		 */
+		public void connectionError(Exception e) { }
+		
+		/**
+		 * @see pl.mn.communicator.ConnectionListener#pongReceived()
+		 */
+		public void pongReceived() { }
+    	
+    }
+    
 }

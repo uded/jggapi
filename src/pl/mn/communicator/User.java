@@ -17,17 +17,18 @@
  */
 package pl.mn.communicator;
 
-import pl.mn.communicator.logger.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * U¿ytkownik gg.
+ * Gadu-Gadu user.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: User.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $
+ * @version $Id: User.java,v 1.2 2004-12-11 16:25:57 winnetou25 Exp $
  */
 public class User extends AbstractUser {
 	
-    private static Logger logger = Logger.getLogger(User.class);
+    private static Log logger = LogFactory.getLog(User.class);
 
     /**
      * Tworz u¿ytkownika na podstawie numeru i nazwy.
@@ -41,7 +42,7 @@ public class User extends AbstractUser {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return "numer: " + number;
+        return "Number: " + number;
     }
     
 }

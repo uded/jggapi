@@ -19,31 +19,34 @@ package pl.mn.communicator.gadu;
 
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.Status;
 import pl.mn.communicator.User;
-import pl.mn.communicator.logger.Logger;
 
 /**
- * Pakiet powiadomienia u¿ytkownika o zmianie statusu u¿ytkownika z listy.
+ * 
+ * TO REFACTOR
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.18 2004-10-27 00:52:15 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.19 2004-12-11 16:25:58 winnetou25 Exp $
  */
-public class GGStatus implements GGIncomingPackage {
+public class GGStatus implements GGIncomingPackage, GGStatusEnabled {
+
+	private static Log logger = LogFactory.getLog(GGStatus.class);
 
 	public static final int GG_STATUS = 0x02;
 
-	private static Logger logger = Logger.getLogger(GGStatus.class);
-    private IUser user;
-    private Status statusBiz;
-    private byte[] dane;
+    private IUser m_user = null;
+    private IStatus m_status = null;
+    private byte[] m_data;
 
     public GGStatus(byte[] dane) {
         logger.debug("Odebralem pakiet zmiany statusu uzytkownika");
-        this.dane = dane;
+        m_data = dane;
         analize();
     }
     
@@ -52,35 +55,34 @@ public class GGStatus implements GGIncomingPackage {
 	}
 
     /**
-     * Analizuj pakiet przychodz±cy.
+     * Analizuj pakiet przychodzï¿½cy.
      */
     private void analize() {
-        Date returnTime = null;
         String description = null;
+        Date returnTime = null;
 
         // usun flage
-        dane[3] = GGConversion.intToByte(0)[0];
+        m_data[3] = GGUtils.intToByte(0)[0];
 
-        int userNo = GGConversion.byteToInt(dane);
+        int userNo = GGUtils.byteToInt(m_data);
         logger.debug("Nr uzytkownika zmieniajacego status: " + userNo);
-        user = new User(userNo);
+        m_user = new User(userNo);
 
-        int status = GGConversion.unsignedByteToInt(dane[4]);
-        logger.debug("Status u¿ytkownika to: " + status);
+        int status = GGUtils.unsignedByteToInt(m_data[4]);
+        logger.debug("Status uï¿½ytkownika to: " + status);
 
-        if ((status == GGNewStatus.GG_STATUS_AVAIL_DESCR) ||
-                (status == GGNewStatus.GG_STATUS_BUSY_DESCR) ||
-                (status == GGNewStatus.GG_STATUS_INVISIBLE_DESCR) ||
-                (status == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
-            logger.debug("U¿ytkownik ma status opisowy");
+        if ((status == GGStatus.GG_STATUS_AVAIL_DESCR) ||
+                (status == GGStatus.GG_STATUS_BUSY_DESCR) ||
+                (status == GGStatus.GG_STATUS_INVISIBLE_DESCR) ||
+                (status == GGStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
+            logger.debug("Uï¿½ytkownik ma status opisowy");
 
-            description = GGConversion.byteToString(dane, 14);
+            description = GGUtils.byteToString(m_data, 14);
             logger.debug("Opis:" + description);
 
-            if (dane.length > (14 + description.length())) {
-                logger.debug("U¿ytkownik ma ustawiona date powrotu");
-
-                long czas = GGConversion.byteToInt(dane, dane.length - 4);
+            if (m_data.length > (14 + description.length())) {
+                logger.debug("Uï¿½ytkownik ma ustawiona date powrotu");
+                long czas = GGUtils.byteToInt(m_data, m_data.length - 4);
                 czas *= 1000;
                 returnTime = new Date();
                 returnTime.setTime(czas);
@@ -88,25 +90,23 @@ public class GGStatus implements GGIncomingPackage {
             }
         }
 
-        statusBiz = new Status(GGConversion.dajStatusBiz(status));
-        statusBiz.setDescription(description);
-        statusBiz.setReturnTime(returnTime);
+        m_status = GGUtils.getClientStatus(status, description, returnTime);
     }
 
     /**
-    * Pobierz u¿ytkonwika który zmieni³ status.
-    * @return u¿ytkownik który zmieni³ status
+    * Pobierz uï¿½ytkonwika ktï¿½ry zmieniï¿½ status.
+    * @return uï¿½ytkownik ktï¿½ry zmieniï¿½ status
     */
     public IUser getUser() {
-        return user;
+        return m_user;
     }
 
     /**
-     * Pobierz nowy status u¿ytkownika.
-     * @return nowy status u¿ytkownika
+     * Pobierz nowy status uï¿½ytkownika.
+     * @return nowy status uï¿½ytkownika
      */
     public IStatus getStatus() {
-        return statusBiz;
+        return m_status;
     }
     
 }

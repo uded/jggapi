@@ -19,45 +19,32 @@ package pl.mn.communicator;
 
 import java.util.EventObject;
 
+import pl.mn.communicator.gadu.GGUtils;
+
 /**
  * The event class that describes sent message ack.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageDeliveredEvent.java,v 1.1 2004-11-11 18:42:07 winnetou25 Exp $
+ * @version $Id: MessageDeliveredEvent.java,v 1.2 2004-12-11 16:25:57 winnetou25 Exp $
  */
 public class MessageDeliveredEvent extends EventObject {
 
-	/** Message has not been delivered. */
-	public final static int MESSAGE_BLOCKED = 1;
-
-	/** Message has been successfuly delivered. */
-	public final static int MESSAGE_DELIVERED = 2;
-
-	/** Message has been queued for later delivery. */
-	public final static int MESSAGE_QUEUED = 3;
-
-	/** Message has not been delivered because remote queue is full (max. 20 messages). */
-	public final static int MESSAGE_BLOCKED_MBOX_FULL = 4;
-
-	/** Message has not been delivered. This status is only in case of GG_CLASS_CTCP */
-	public final static int MESSAGE_NOT_DELIVERED = 6;
-
-	private User m_recipient = null;
-	private int m_messageStatus = -1;
+	private IUser m_recipient = null;
+	private MessageStatus m_messageStatus = null;
 	private int m_messageID = -1;
 	
-	public MessageDeliveredEvent(Object source, User recipient, int messageSeq, int messageStatus) {
+	public MessageDeliveredEvent(Object source, IUser recipient, int messageSeq, int protocolMessageStatus) {
 		super(source);
 		m_recipient = recipient;
-		m_messageStatus = messageStatus;
+		m_messageStatus = GGUtils.getClientMessageStatus(protocolMessageStatus);
 		m_messageID = messageSeq;
 	}
 	
 	/** 
 	 * @return the user to whom message was sucessfuly delivered.
 	 */
-	public User getRecipient() {
+	public IUser getRecipient() {
 		return m_recipient;
 	}
 	
@@ -68,7 +55,7 @@ public class MessageDeliveredEvent extends EventObject {
 	/**
 	 * @return message delivery status.
 	 */
-	public int getMessageDeliveryStatus() {
+	public MessageStatus getDeliveryStatus() {
 		return m_messageStatus;
 	}
 	

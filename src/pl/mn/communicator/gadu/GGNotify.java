@@ -32,7 +32,7 @@ import pl.mn.communicator.IUser;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotify.java,v 1.12 2004-10-27 00:29:48 winnetou25 Exp $
+ * @version $Id: GGNotify.java,v 1.13 2004-12-11 16:25:58 winnetou25 Exp $
  */
 public class GGNotify implements GGOutgoingPackage {
 	
@@ -88,7 +88,7 @@ public class GGNotify implements GGOutgoingPackage {
         byte[] data = new byte[users.length * 5];
 
         for (int i = 0; i < users.length; i++) {
-            byte[] userNo = GGConversion.intToByte(users[i].getNumber());
+            byte[] userNo = GGUtils.intToByte(users[i].getNumber());
 
             for (int j = 0; j < userNo.length; j++) {
                 // skopiuj nr uzytkownika do data

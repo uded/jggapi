@@ -24,16 +24,28 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.StringTokenizer;
 
-import pl.mn.communicator.logger.Logger;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * Klasa z danymi dotycz±cymi serwera gg.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Server.java,v 1.1 2004-10-27 00:51:54 winnetou25 Exp $* @version $Revision: 1.1 $
+ * @version $Id: Server.java,v 1.2 2004-12-11 16:25:58 winnetou25 Exp $* @version $Revision: 1.2 $
  */
-public final class Server extends AbstractServer {
-    private static Logger logger = Logger.getLogger(Server.class);
+public final class Server implements IServer {
+	
+    private static Log logger = LogFactory.getLog(Server.class);
+
+    /**
+     * Adres ip, lub tekstowy serwera rozmów
+     */
+    protected String m_address;
+
+    /**
+     * Numer portu serwera
+     */
+    protected int m_port;
 
     /**
      * Twórz obiekt serwera.
@@ -41,7 +53,46 @@ public final class Server extends AbstractServer {
      * @param port port serwera
      */
     public Server(String address, int port) {
-        super(address, port);
+        m_address = address;
+        m_port = port;
+    }
+
+    
+    /**
+     * Zwróæ adres serwera rozmów.
+     * @return String
+     */
+    public String getAddress() {
+        return m_address;
+    }
+
+    /**
+     * Zwróæ port serwera rozmów.
+     *  @return int
+     */
+    public int getPort() {
+        return m_port;
+    }
+    
+    /**
+     * @param address adres serwera
+     */
+    public void setAddress(String address) {
+        m_address = address;
+    }
+
+    /**
+     * @param port port serwera
+     */
+    public void setPort(int port) {
+        m_port = port;
+    }    
+
+    /**
+     * @see java.lang.Object#toString()
+     */
+    public String toString() {
+        return "[" + m_address + ":" + m_port + "]";
     }
 
     /**
@@ -50,20 +101,21 @@ public final class Server extends AbstractServer {
      * @return Server serwer
      * @throws IOException b³±d pobierania domy¶lnego serwera
      */
-    public static Server getDefaultServer(ILocalUser user)
-        throws IOException {
-        URL url = new URL(
-                "http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber="
-                + user.getUserNo());
+    public static Server getDefaultServer(LoginContext loginContext) throws GGException {
+    	try {
+        	URL url = new URL("http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber="+ loginContext.getUin());
 
-        InputStream is = url.openStream();
-        BufferedReader in = new BufferedReader(new InputStreamReader(is));
+            InputStream is = url.openStream();
+            BufferedReader in = new BufferedReader(new InputStreamReader(is));
 
-        String line = in.readLine();
-        is.close();
-        in.close();
+            String line = in.readLine();
+            is.close();
+            in.close();
 
-        return parseAddress(line);
+            return parseAddress(line);
+    	} catch (IOException ex) {
+    		throw new GGException("Unable to get default server: "+loginContext, ex);
+    	}
     }
 
     /**
@@ -80,7 +132,7 @@ public final class Server extends AbstractServer {
         }
         StringTokenizer token1 = new StringTokenizer(token.nextToken(), ":");
 
-        return new Server(token1.nextToken(),
-            Integer.parseInt(token1.nextToken()));
+        return new Server(token1.nextToken(), Integer.parseInt(token1.nextToken()));
     }
+    
 }
