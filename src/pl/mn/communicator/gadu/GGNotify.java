@@ -22,13 +22,24 @@ import pl.mn.communicator.IUser;
 
 /**
  * Pakiet informuj±cy serwer rozmów o monitorowanym u¿ytkowniku.
+ * Zawiera do 409 struktur jak poni¿ej:
+ *  struct gg_notify {
+ *      int uin;    // numerek danej osoby
+ *      char type;  // rodzaj u¿ytkownika
+ *     };
+ *
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @author mnaglik
  */
 class GGNotify implements GGOutgoingPackage {
+    /** U¿ytkownik dla którego bêdziemy niedostêpni */
     public static final int GG_USER_OFFLINE = 0x01;
+
+    /** Zwyk³y u¿ytkownik w naszej li¶cie kontaktów */
     public static final int GG_USER_NORMAL = 0x03;
+
+    /** U¿ytkownik, którego wiadomo¶ci nie chcemy otrzymywaæ */
     public static final int GG_USER_BLOCKED = 0x04;
     private IUser[] users;
 
@@ -60,15 +71,28 @@ class GGNotify implements GGOutgoingPackage {
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
      */
     public int getLength() {
-        // TODO Auto-generated method stub
-        return 0;
+        return users.length * 5;
     }
 
     /**
      * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
      */
     public byte[] getContents() {
-        // TODO Auto-generated method stub
-        return null;
+        //      4 dla int'a i jeden dla char'a
+        byte[] data = new byte[users.length * 5];
+
+        for (int i = 0; i < users.length; i++) {
+            byte[] userNo = GGConversion.intToByte(users[i].getNumber());
+
+            for (int j = 0; j < userNo.length; j++) {
+                // skopiuj nr uzytkownika do data
+                data[(i * 5) + j] = userNo[j];
+            }
+
+            // sprawdzic czy sie dobrze konwertuje z char do unsigned byte
+            data[(i * 5) + 4] = GG_USER_NORMAL;
+        }
+
+        return data;
     }
 }
