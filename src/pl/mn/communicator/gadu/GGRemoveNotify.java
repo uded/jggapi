@@ -18,7 +18,8 @@
 package pl.mn.communicator.gadu;
 
 /**
- * @version $Revision: 1.3 $
+ * Pakiet usuwaj±cy konkretnego u¿ytkownika z listy monitorowanych u¿ytkowników.
+ * @version $Revision: 1.4 $
  * @author mnaglik
  */
 class GGRemoveNotify implements GGOutgoingPackage {
