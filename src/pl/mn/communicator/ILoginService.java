@@ -22,10 +22,8 @@ import pl.mn.communicator.event.LoginListener;
 /**
  * Created on 2004-11-27
  * 
- * @author mateusz
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: ILoginService.java,v 1.5 2004-12-13 23:43:53 winnetou25 Exp $
  */
 public interface ILoginService {
 

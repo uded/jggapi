@@ -23,10 +23,8 @@ import pl.mn.communicator.gadu.handlers.Session.SessionAccessor;
 /**
  * Created on 2004-11-27
  * 
- * @author mateusz
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: Context.java,v 1.3 2004-12-13 23:44:02 winnetou25 Exp $
  */
 public class Context {
 

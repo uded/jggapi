@@ -22,10 +22,8 @@ import java.util.Collection;
 /**
  * Created on 2004-11-27
  * 
- * @author mateusz
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: IPublicDirectoryService.java,v 1.3 2004-12-13 23:43:52 winnetou25 Exp $
  */
 public interface IPublicDirectoryService {
 

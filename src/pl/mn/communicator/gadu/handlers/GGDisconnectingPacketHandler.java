@@ -25,10 +25,8 @@ import pl.mn.communicator.gadu.in.GGDisconnecting;
 /**
  * Created on 2004-11-28
  * 
- * @author mateusz
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGDisconnectingPacketHandler.java,v 1.5 2004-12-13 23:44:02 winnetou25 Exp $
  */
 public class GGDisconnectingPacketHandler implements PacketHandler {
 
@@ -38,7 +36,7 @@ public class GGDisconnectingPacketHandler implements PacketHandler {
 	 * @see pl.mn.communicator.gadu.handlers.PacketHandler#handle(pl.mn.communicator.gadu.handlers.Context)
 	 */
 	public void handle(Context context) {
-		logger.debug("Got disconnecting packet.");
+		logger.debug("GGDisconnecting packet received.");
 		GGDisconnecting disconnecting = GGDisconnecting.getInstance();
 		context.getSessionAccessor().notifyGGPacketReceived(disconnecting);
 		context.getSessionAccessor().notifyConnectionClosed();

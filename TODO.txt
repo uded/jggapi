@@ -18,6 +18,9 @@ PARTIALY-DONE - 7. MED - Export i import listy kontaktow , TODO. obsluga PUT_MOR
 16. Nie dziala odblokowywanie, jezeli zablokowalismy usera i potem metoda changeStatus w presence service
 	to zmieniamy, to user jest nadal zablokowany.
 
+17. Napisac ant-build.
+18. Napisac testy junit.
+
 Bugs:
 status in LoginContext does not work out! Tak jakby serwer GG to ignorowal
 na razie rozwiazalem to tak ze po dostaniu pakietu login ok ustawiam status recznie.

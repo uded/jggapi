@@ -26,7 +26,7 @@ import pl.mn.communicator.gadu.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGRecvMsg.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
+ * @version $Id: GGRecvMsg.java,v 1.2 2004-12-13 23:44:02 winnetou25 Exp $
  */
 public class GGRecvMsg implements GGIncomingPackage, GGMessage {
 
@@ -63,31 +63,31 @@ public class GGRecvMsg implements GGIncomingPackage, GGMessage {
 
     /**
      * Returns the msgClass.
-     * @return int
+     * @return int msgClass
      */
     public int getMsgClass() {
         return m_msgClass;
     }
 
     /**
-     * Returns the sender.
-     * @return int
+     * Returns the sender uin number.
+     * @return int the sender uin.
      */
-    public int getSender() {
+    public int getSenderUin() {
         return m_sender;
     }
 
     /**
-     * Returns the seq.
-     * @return int
+     * Returns the unique message sequence number.
+     * @return int message sequence number.
      */
     public int getMessageSeq() {
         return m_seq;
     }
 
     /**
-     * Returns the time.
-     * @return int
+     * Time in seconds.
+     * @return int the time in seconds.
      */
     public long getTime() {
         return m_time;

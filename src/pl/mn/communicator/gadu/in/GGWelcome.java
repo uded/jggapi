@@ -26,7 +26,7 @@ import pl.mn.communicator.gadu.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcome.java,v 1.1 2004-12-12 16:21:54 winnetou25 Exp $
+ * @version $Id: GGWelcome.java,v 1.2 2004-12-13 23:44:02 winnetou25 Exp $
  */
 public class GGWelcome implements GGIncomingPackage {
     
@@ -34,10 +34,6 @@ public class GGWelcome implements GGIncomingPackage {
 
 	private int m_seed = -1;
 
-    /**
-     * Constructor for Welcome.
-     * @param data dane pakietu
-     */
     public GGWelcome(byte[] data) {
     	if (data == null) throw new NullPointerException("data cannot be null");
         m_seed = GGUtils.byteToInt(data);

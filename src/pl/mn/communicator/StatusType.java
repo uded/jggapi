@@ -17,12 +17,10 @@
  */
 package pl.mn.communicator;
 
-
 /**
- * @author mateusz
  *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: StatusType.java,v 1.3 2004-12-13 23:43:51 winnetou25 Exp $
  */
 public class StatusType {
 

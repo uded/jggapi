@@ -22,7 +22,7 @@ import pl.mn.communicator.event.SessionStateListener;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISession.java,v 1.5 2004-12-12 18:02:39 winnetou25 Exp $
+ * @version $Id: ISession.java,v 1.6 2004-12-13 23:43:52 winnetou25 Exp $
  */
 public interface ISession {
 

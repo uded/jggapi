@@ -30,7 +30,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: Server.java,v 1.3 2004-12-11 17:22:33 winnetou25 Exp $* @version $Revision: 1.3 $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: Server.java,v 1.4 2004-12-13 23:43:52 winnetou25 Exp $
  */
 public final class Server implements IServer {
 	
@@ -48,6 +49,8 @@ public final class Server implements IServer {
      * @param port port serwera
      */
     public Server(String address, int port) {
+    	if (address == null) throw new NullPointerException("address cannot be null");
+    	//TODO checks for port.
         m_address = address;
         m_port = port;
     }

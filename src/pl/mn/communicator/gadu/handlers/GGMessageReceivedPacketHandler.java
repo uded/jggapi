@@ -28,10 +28,8 @@ import pl.mn.communicator.gadu.in.GGRecvMsg;
 /**
  * Created on 2004-11-28
  * 
- * @author mateusz
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGMessageReceivedPacketHandler.java,v 1.6 2004-12-13 23:44:02 winnetou25 Exp $
  */
 public class GGMessageReceivedPacketHandler implements PacketHandler {
 
@@ -47,7 +45,7 @@ public class GGMessageReceivedPacketHandler implements PacketHandler {
 
 		GGRecvMsg recvMsg = new GGRecvMsg(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(recvMsg);
-		IncommingMessage incommingMessage = new IncommingMessage(recvMsg.getSender(), recvMsg.getMessage(), recvMsg.getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
+		IncommingMessage incommingMessage = new IncommingMessage(recvMsg.getSenderUin(), recvMsg.getMessage(), recvMsg.getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
 		MessageArrivedEvent messageArrivedEvent = new MessageArrivedEvent(this, incommingMessage);
 		context.getSessionAccessor().notifyMessageArrived(messageArrivedEvent);
 	}

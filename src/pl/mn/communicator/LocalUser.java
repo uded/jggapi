@@ -20,10 +20,8 @@ package pl.mn.communicator;
 /**
  * Created on 2004-11-11
  * 
- * @author mateusz
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: LocalUser.java,v 1.6 2004-12-13 23:43:52 winnetou25 Exp $
  */
 public class LocalUser {
 

@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.11 2004-12-11 20:13:10 winnetou25 Exp $
+ * @version $Id: IMessage.java,v 1.12 2004-12-13 23:43:52 winnetou25 Exp $
  */
 public interface IMessage {
 	
@@ -37,13 +37,13 @@ public interface IMessage {
     void setUin(int uin);
 
     /**
-     * Gets message body.<BR>
+     * Gets message body.
      * @return String message body
      */
     String getText();
 
     /**
-     * @param text message body.<BR>
+     * @param text message body.
      */
     void setText(String text);
 

@@ -24,7 +24,8 @@ import org.apache.commons.logging.LogFactory;
  * The class represents Gadu-Gadu user.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: GGUser.java,v 1.2 2004-12-13 23:00:59 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGUser.java,v 1.3 2004-12-13 23:43:52 winnetou25 Exp $
  */
 public class GGUser implements IUser {
 	

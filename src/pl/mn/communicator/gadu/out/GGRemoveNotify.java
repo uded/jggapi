@@ -27,7 +27,7 @@ import pl.mn.communicator.gadu.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGRemoveNotify.java,v 1.2 2004-12-13 23:00:52 winnetou25 Exp $
+ * @version $Id: GGRemoveNotify.java,v 1.3 2004-12-13 23:44:02 winnetou25 Exp $
  */
 public class GGRemoveNotify implements GGOutgoingPackage, GGNotifiable {
 	

@@ -31,10 +31,8 @@ import pl.mn.communicator.gadu.in.GGNotifyReply;
 /**
  * Created on 2004-11-28
  * 
- * @author mateusz
- *
- * TODO To change the template for this generated type comment go to
- * Window - Preferences - Java - Code Style - Code Templates
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: GGNotifyReplyPacketHandler.java,v 1.6 2004-12-13 23:44:01 winnetou25 Exp $
  */
 public class GGNotifyReplyPacketHandler implements PacketHandler {
 

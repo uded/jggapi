@@ -24,7 +24,7 @@ import java.util.Date;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IStatus.java,v 1.11 2004-12-12 16:21:55 winnetou25 Exp $
+ * @version $Id: IStatus.java,v 1.12 2004-12-13 23:43:51 winnetou25 Exp $
  */
 public interface IStatus {
 

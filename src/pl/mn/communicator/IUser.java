@@ -20,7 +20,8 @@ package pl.mn.communicator;
 /**
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: IUser.java,v 1.11 2004-12-12 16:21:55 winnetou25 Exp $
+ * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @version $Id: IUser.java,v 1.12 2004-12-13 23:43:52 winnetou25 Exp $
  */
 public interface IUser {
 

@@ -31,7 +31,7 @@ import pl.mn.communicator.gadu.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.4 2004-12-12 16:21:54 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.5 2004-12-13 23:44:02 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -49,7 +49,7 @@ public class GGUtils {
 		if (userMode == GGUserMode.BUDDY) return GGNotify.GG_USER_BUDDY;
 		if (userMode == GGUserMode.BLOCKED) return GGNotify.GG_USER_BLOCKED;
 		if (userMode == GGUserMode.FRIEND) return GGNotify.GG_USER_FRIEND;
-		throw new RuntimeException("Unable to conver userMode: "+userMode);
+		throw new RuntimeException("Unable to convert userMode: "+userMode);
 	}
 	
 	public static Status60 getClientStatus(int status, String description, long returnTimeInMillis) {
