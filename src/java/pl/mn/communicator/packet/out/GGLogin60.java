@@ -25,7 +25,7 @@ import pl.mn.communicator.packet.GGVersion;
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLogin60.java,v 1.9 2004-12-21 21:27:40 winnetou25 Exp $
+ * @version $Id: GGLogin60.java,v 1.10 2004-12-25 17:50:19 winnetou25 Exp $
  */
 public class GGLogin60 implements GGOutgoingPackage {
 
@@ -56,7 +56,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 	private int m_externalPort = 1550;
 	
 	/** size of image in kilobytes */
-	private byte m_imageSize = 64; 
+	private byte m_imageSize = 64;
 
 	/** Description that will be set after successfuly logging */
 	private String m_description = null;
