@@ -17,12 +17,24 @@ class GGConversion {
 		int i = 0;
 		int pos = start;
 
-		i += buf[pos++] << 0;
-		i += buf[pos++] << 8;
-		i += buf[pos++] << 16;
-		i += buf[pos++] << 24;
+		int tmp,plus=0;
+		tmp = unsignedByteToInt(buf[pos++]) << 0;
+		i += tmp;
+		tmp = unsignedByteToInt(buf[pos++]) << 8;
+		i += tmp;
+		tmp = unsignedByteToInt(buf[pos++]) << 16;
+		i += tmp;
+		tmp = unsignedByteToInt(buf[pos++]) << 24;
+		i += tmp;
 
 		return i;
+	}
+
+	public static int unsignedByteToInt(byte i) {
+		if (i < 0)
+			return (i & 0x7F) + 0x80;
+		else
+			return i;
 	}
 
 	public static byte[] intToByte(int buf) {
@@ -39,7 +51,6 @@ class GGConversion {
 	public static long unsignedIntToLong(int i) {
 		long plus = 0;
 		plus -= (i & 0x80000000);
-		//		System.out.println("plus "+plus);
 		i &= 0x7FFFFFFF;
 		return (long) (i + plus);
 	}

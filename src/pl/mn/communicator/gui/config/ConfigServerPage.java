@@ -7,6 +7,8 @@ import org.eclipse.jface.preference.PreferenceStore;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
@@ -15,7 +17,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import pl.mn.communicator.gui.Config;
+import pl.mn.communicator.gui.util.Config;
 
 /**
  * @author mnaglik
@@ -23,7 +25,7 @@ import pl.mn.communicator.gui.Config;
 public class ConfigServerPage extends PreferencePage {
 	private String serverAddress;
 	private String serverPort;
-
+	private boolean serverStandard;
 	private Text serverAddressText;
 	private Text serverPortText;
 	public ConfigServerPage() throws IOException {
@@ -33,6 +35,7 @@ public class ConfigServerPage extends PreferencePage {
 
 		serverAddress = store.getString("host");
 		serverPort = store.getString("port");
+		serverStandard = store.getBoolean("standard");
 	}
 	/**
 	 * @see org.eclipse.jface.preference.PreferencePage#createContents(org.eclipse.swt.widgets.Composite)
@@ -76,7 +79,14 @@ public class ConfigServerPage extends PreferencePage {
 		});
 
 		Button button = new Button(comp, SWT.CHECK);
+		button.addSelectionListener(new SelectionListener(){
+			public void widgetSelected(SelectionEvent arg0) {
+				serverStandard = !serverStandard;				
+			}
 
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+			}});
+		button.setSelection(serverStandard);
 		Label label3 = new Label(comp, SWT.NORMAL);
 		label3.setText("U¿ywaj standardowego serwera");
 
@@ -98,6 +108,7 @@ public class ConfigServerPage extends PreferencePage {
 			PreferenceStore store = (PreferenceStore) getPreferenceStore();
 			store.setValue("host", serverAddress);
 			store.setValue("port", serverPort);
+			store.setValue("standard",serverStandard);
 			store.save();
 			return true;
 		} catch (IOException e) {

@@ -12,6 +12,7 @@ import pl.mn.communicator.ILocalUser;
 import pl.mn.communicator.IMessage;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.IStatus;
+import pl.mn.communicator.gadu.util.Util;
 
 
 /**
@@ -120,7 +121,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 		 * @see java.lang.Runnable#run()
 		 */
 		public void run() {
-			System.out.println("run..");
+			logger.debug("Run...");
 
 			byte[] headerData = new byte[8];
 
@@ -136,7 +137,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 						if (pingTimeCount > 200) {
 							// TODO poprawne wysylanie pinga
 							//sendPackage(GGPing.getPing());
-							System.out.println("ping...");
+							logger.debug("Ping...");
 							pingTimeCount = 0;
 						}
 
@@ -144,18 +145,18 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 					Thread.sleep(100);
 				}
 			} catch (IOException e) {
-				System.out.println("e" + e);
+				logger.error(e,e);
 			} catch (InterruptedException e) {
-				System.out.println("e" + e);
+				logger.error(e,e);
 			} finally {
-				System.out.println("doing finally..");
+				logger.debug("Doing finally");
 				try {
 					closeConnection();
 				} catch (IOException e) {
-					System.err.println(e);
+					logger.error(e);
 				}
 			}
-			System.out.println("run ended");
+			logger.debug("Run ended.");
 		}
 
 		/**
@@ -168,7 +169,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 		private void decodePocket(GGHeader ggHeader) throws IOException {
 			byte[] keyBytes = new byte[ggHeader.getLength()];
 			dataInput.read(keyBytes);
-
+			logger.debug("Pakiet przychodzacy: "+Util.bytesToString(keyBytes));
 			switch (ggHeader.getType()) {
 				case 1 :
 
@@ -184,12 +185,13 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 				case 3 :
 					if (connectionListener != null)
 						connectionListener.connectionEstablished();
-					System.err.println("Login ok");
+					logger.debug("Login OK");
+					changeStatus(new Status(Status.ON_LINE));
 					break;
 				case 9 :
 					if (connectionListener != null)
 						connectionListener.connectionError("9");
-					System.err.println("Error logging 9");
+					logger.debug("Loggin ERROR");
 					this.closeConnection();
 					break;
 				case 10 :
@@ -202,12 +204,12 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 				case 11 :
 					if (connectionListener != null)
 						connectionListener.connectionError("11");
-					System.err.println("Error logging 11");
+					logger.debug("Error logging 11");
 					this.closeConnection();
 					break;
 
 				default :
-					System.err.println("brak");
+					logger.debug("Unknown package");
 			}
 
 		}

@@ -16,7 +16,6 @@ class GGHeader {
 	public GGHeader(byte[] data) {
 		this.type = GGConversion.byteToInt(data, 0);
 		this.length = GGConversion.byteToInt(data, 4);
-		System.out.println("GGheader: " + type);
 	}
 
 	/**

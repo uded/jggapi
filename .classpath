@@ -2,12 +2,11 @@
 <classpath>
     <classpathentry kind="src" path="src"/>
     <classpathentry kind="lib" path="lib/jface.jar"/>
-    <classpathentry kind="lib" path="lib/runtime.jar"/>
-    <classpathentry kind="lib" path="lib/workbench.jar"/>
     <classpathentry kind="lib" path="lib/swt.jar"/>
-    <classpathentry kind="lib" path="lib/boot.jar"/>
     <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
     <classpathentry kind="var" path="JUNIT_HOME/junit.jar" sourcepath="JUNIT_HOME/junitsrc.zip"/>
     <classpathentry kind="lib" path="lib/log4j-1.2.8.jar"/>
+    <classpathentry kind="lib" path="lib/runtime.jar"/>
+    <classpathentry kind="lib" path="lib/boot.jar"/>
     <classpathentry kind="output" path="bin"/>
 </classpath>

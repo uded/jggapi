@@ -1,5 +1,7 @@
 package pl.mn.communicator.gadu;
 
+import org.apache.log4j.Logger;
+
 import pl.mn.communicator.ILocalUser;
 
 /**
@@ -8,6 +10,7 @@ import pl.mn.communicator.ILocalUser;
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {
+	private static Logger logger = Logger.getLogger(GGLogin.class);
 	private int uin;
 	private int hash;
 	private int status = GGStatus.GG_STATUS_AVAIL;
@@ -25,8 +28,8 @@ class GGLogin implements GGOutgoingPackage {
 		this.uin = user.getUserNo();
 		this.hash = gg_login_hash(user.getPassword(), welcome.getSeed());
 		
-		System.err.println("user: " + user.getUserNo() + " pass: " + user.getPassword());
-		System.err.println("seed: " + welcome.getSeed() + " hash: " + hash);
+		logger.debug("user: " + user.getUserNo() + " pass: " + user.getPassword());
+		logger.debug("seed: " + welcome.getSeed() + " hash: " + hash);
 	}
 
 	private int gg_login_hash(String password, int seed) {

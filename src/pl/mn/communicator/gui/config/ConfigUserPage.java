@@ -14,7 +14,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
-import pl.mn.communicator.gui.Config;
+import pl.mn.communicator.gui.util.Config;
 
 /**
  * @author mnaglik
@@ -69,6 +69,7 @@ public class ConfigUserPage extends PreferencePage {
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		userPasswordText = new Text(comp, SWT.BORDER);
 		userPasswordText.setLayoutData(gd);
+		userPasswordText.setEchoChar('*');
 		userPasswordText.setText(userPassword);
 		userPasswordText.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent arg0) {

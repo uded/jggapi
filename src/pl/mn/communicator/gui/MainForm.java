@@ -5,11 +5,12 @@ import java.net.UnknownHostException;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
-import org.eclipse.jface.preference.PreferenceManager;
 import org.eclipse.jface.viewers.DoubleClickEvent;
 import org.eclipse.jface.viewers.IDoubleClickListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -40,10 +41,9 @@ import pl.mn.communicator.MessageListener;
 import pl.mn.communicator.UserListener;
 import pl.mn.communicator.gadu.Connection;
 import pl.mn.communicator.gadu.LocalUser;
-import pl.mn.communicator.gadu.Message;
 import pl.mn.communicator.gadu.Server;
 import pl.mn.communicator.gadu.User;
-import pl.mn.communicator.gui.config.ConfigForm;
+import pl.mn.communicator.gui.util.Config;
 
 /**
  * @author mnaglik
@@ -139,11 +139,13 @@ public class MainForm
 		MainForm w = new MainForm();
 		w.setShellStyle(SWT.CLOSE ^ SWT.RESIZE);
 		w.setBlockOnOpen(true);
+		w.addToolBar(SWT.NONE);
 		w.addMenuBar();
 		w.open();
 		Display.getCurrent().dispose();
 	}
 
+	private static Logger logger = Logger.getLogger(MainForm.class);
 	private AbstractConnection connection;
 	private AbstractLocalUser localUser;
 	private AbstractServer server;
@@ -162,8 +164,8 @@ public class MainForm
 	 */
 	public MainForm() {
 		super(null);
-		usersData = new UsersData();
-		makeActions();
+		usersData = UsersData.getInstance();
+		logger.debug("Started");
 	}
 
 	/**
@@ -192,7 +194,6 @@ public class MainForm
 
 		addDoubleClick(usersViewer);
 		createContextMenu(usersTable);
-
 		return usersTable;
 	}
 
@@ -205,6 +206,8 @@ public class MainForm
 		menuManager.add(createUserMenu());
 		return menuManager;
 	}
+	
+	
 
 	/**
 	 * @see org.eclipse.jface.window.Window#close()
@@ -217,37 +220,40 @@ public class MainForm
 	/**
 	 * 
 	 */
-	private void connect() {
+	void connect() {
 		if (connection != null)
 			disconnect();
-		// inicjalizuj dane polaczenia
-		// TODO sprawdzanie parseInt przy parsowaniu
-		// TODO zmiana danych po edycji w menu
+
 		localUser =
 			new LocalUser(
 				Integer.parseInt(Config.getPreferenceStore().getString("user")),
 				Config.getPreferenceStore().getString("password"));
 
-//		server =
-//			new Server(
-//				Config.getPreferenceStore().getString("host"),
-//				Integer.parseInt(
-//					Config.getPreferenceStore().getString("port")));
+
 		try {
-			server = Server.getDefaultServer(localUser);
+			if (Config.getPreferenceStore().getBoolean("standard")){
+				server = Server.getDefaultServer(localUser);
+			}else{
+				server =
+					new Server(
+						Config.getPreferenceStore().getString("host"),
+						Integer.parseInt(
+							Config.getPreferenceStore().getString("port")));
+			}
+
 			connection = new Connection(server, localUser);
 			connection.addConnectionListener(this);
 			connection.addMessageListener(this);
 			connection.addUserListener(this);
 			connection.connect();
 		} catch (UnknownHostException e) {
+			logger.error(e);
 			showErrorDialog("Nie moge znaleŸæ hosta");
 			connection = null;
-			//e.printStackTrace();
 		} catch (IOException e) {
+			logger.error(e);
 			showErrorDialog("Nie moge siê po³¹czyæ");
 			connection = null;
-			//e.printStackTrace();
 		}
 	}
 
@@ -276,6 +282,9 @@ public class MainForm
 			connection.sendMessage(message);
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			logger.error("You're not connected");
+			showErrorDialog("Nie jesteœ po³¹czony");
 		}
 	}
 
@@ -286,7 +295,7 @@ public class MainForm
 	 * @see pl.mn.gadu.ConnectionListener#connectionEstablished()
 	 */
 	public void connectionEstablished() {
-		System.out.println("connectionEstablished");
+		logger.debug("ConnectionEstablished");
 	}
 
 	/**
@@ -321,55 +330,26 @@ public class MainForm
 	 * @see pl.mn.gadu.MessageListener#messageArrived(pl.mn.gadu.Message)
 	 */
 	public void messageArrived(final IMessage message) {
-		System.out.println(
-			"Message arrived: " + message.getUser() + ":" + message.getText());
-		// TODO czemu to kurwa nie dziala?
-		/*
-				Display.getCurrent().syncExec(new Runnable() {
-				   public void run() {
-						ChatForm form = (ChatForm)usersChatForms.get(new User(message.getUser(),""+message.getUser(),false));
-				   		if (form != null)
-				   			form.messageArrived(message);
-				   		else{
-				   			User user = new User(message.getUser(),""+message.getUser(),false);
-				   			form = new ChatForm(MainForm.this.getShell(),MainForm.this,user);	
-				   			usersChatForms.put(user,form);
-				   			form.open();
-				   			form.messageArrived(message);
-				   		}
-				   }
-				});
-		*/
+		logger.debug("Message arrived: " + message.getUser() + ":" + message.getText());
+		getShell().getDisplay().syncExec(new Runnable() {
+		   public void run() {
+				ChatForm form = (ChatForm)usersChatForms.get(new User(message.getUser(),""+message.getUser(),false));
+		   		if (form != null)
+		   			form.messageArrived(message);
+		   		else{
+		   			User user = new User(message.getUser(),""+message.getUser(),false);
+		   			form = new ChatForm(MainForm.this.getShell(),MainForm.this,user);	
+		   			usersChatForms.put(user,form);
+		   			form.open();
+		   			form.messageArrived(message);
+		   		}
+		   }
+		});
 	}
 
 	/*
 	 * GUI METHODS
 	 */
-	/**
-	 * Method createAboutAction.
-	 * @return Action
-	 */
-	private Action createAboutAction() {
-		return new Action() {
-			public String getText() {
-				return "O programie";
-			}
-
-			public void run() {
-				String[] tab = { IDialogConstants.OK_LABEL };
-				MessageDialog dialog =
-					new MessageDialog(
-						getShell(),
-						"Informacje o programie",
-						null,
-						"JavaGG (c) Marcin Naglik 2003",
-						MessageDialog.INFORMATION,
-						tab,
-						0);
-				dialog.open();
-			}
-		};
-	}
 
 	/**
 	 * Method createUserMenu.
@@ -377,38 +357,7 @@ public class MainForm
 	 */
 	private MenuManager createUserMenu() {
 		MenuManager menu = new MenuManager("U¿ytkownicy", "Id02");
-		menu.add(new Action() {
-			public String getText() {
-				return "Dodaj...";
-			}
-			public void run() {
-				UserAddForm userForm = new UserAddForm(getShell());
-				userForm.open();
-				if (userForm.getReturnCode() != Window.CANCEL) {
-					usersData.addUser(userForm.getUser());
-					usersViewer.refresh();
-				}
-			}
-
-		});
-
-		menu.add(new Action() {
-			public String getText() {
-				return "Wyœlij...";
-			}
-			public void run() {
-				try {
-					connection.sendMessage(
-						new Message(
-							2569522,
-							"Dupa blada. £¹ka jest piêkna dziœ."));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-
-		});
-
+		menu.add(new AddUserAction(this));
 		return menu;
 	}
 
@@ -418,83 +367,21 @@ public class MainForm
 	 */
 	private MenuManager createFileMenu() {
 		MenuManager menu = new MenuManager("Plik", "Id01");
-		menu.add(new Action() {
-			public String getText() {
-				return "Po³¹cz...";
-			}
-			public void run() {
-				connect();
-			}
-		});
-		menu.add(new Action() {
-			public String getText() {
-				return "Ustawienia";
-			}
-			public void run() {
-				ConfigForm config =
-					new ConfigForm(getShell(), new PreferenceManager());
-				config.open();
-			}
-		});
-		menu.add(createAboutAction());
-		menu.add(new Action() {
-			public String getText() {
-				return "Wyjœcie";
-			}
-			public void run() {
-				close();
-			}
-		});
+		menu.add(new ConnectAction(this));
+		menu.add(new ConfigAction(this));
+		menu.add(new AboutAction(this));
+		menu.add(new ExitAction(this));
 		return menu;
 	}
-
+	
 	/**
 	 * @param table
 	 */
 	private void createContextMenu(Table table) {
 		MenuManager menuMgr = new MenuManager("#context");
-		menuMgr.add(new Action() {
-			public String getText() {
-				return "Edytuj...";
-			}
-			public void run() {
-				IStructuredSelection sel =
-					(IStructuredSelection) usersViewer.getSelection();
-				IUser first = (IUser) sel.getFirstElement();
-				if (first != null) {
-					UserAddForm form = new UserAddForm(getShell(), first);
-					form.open();
-					if (form.getReturnCode() != Window.CANCEL) {
-						first = form.getUser();
-						usersViewer.refresh();
-					}
-				}
-			}
-		});
-
-		menuMgr.add(new Action() {
-			public String getText() {
-				return "Usuñ...";
-			}
-			public void run() {
-				IStructuredSelection sel =
-					(IStructuredSelection) usersViewer.getSelection();
-				User first = (User) sel.getFirstElement();
-				if (first != null) {
-					usersData.removeUser(first);
-					usersViewer.refresh();
-				}
-			}
-		});
-
-		menuMgr.add(new Action() {
-			public String getText() {
-				return "Rozmawiaj...";
-			}
-			public void run() {
-				chatStarted.run();
-			}
-		});
+		menuMgr.add(new EditUserAction(this));
+		menuMgr.add(new DeleteUserAction(this));
+		menuMgr.add(new ChatUserAction(this));
 
 		Menu menu = menuMgr.createContextMenu(table);
 		table.setMenu(menu);
@@ -517,31 +404,72 @@ public class MainForm
 	private void addDoubleClick(final TableViewer viewer) {
 		viewer.addDoubleClickListener(new IDoubleClickListener() {
 			public void doubleClick(DoubleClickEvent event) {
-				chatStarted.run();
+				startChatWithSelectedUser();
 			}
 		});
 	}
 
-	private void makeActions() {
-		chatStarted = new Action() {
-			public void run() {
-				IStructuredSelection sel =
-					(IStructuredSelection) usersViewer.getSelection();
-				User first = (User) sel.getFirstElement();
-				if (first != null) {
-					ChatForm chatForm = (ChatForm) usersChatForms.get(first);
-
-					if (chatForm == null) {
-						// nie ma jeszcze takiej rozmowy	
-						ChatForm form =
-							new ChatForm(getShell(), MainForm.this, first);
-						usersChatForms.put(first, form);
-						form.open();
-					} else {
-					}
-				}
+	void editSelectedUser(){
+		IStructuredSelection sel =
+			(IStructuredSelection) usersViewer.getSelection();
+		IUser first = (IUser) sel.getFirstElement();
+		if (first != null) {
+			UserAddForm form = new UserAddForm(getShell(), first);
+			form.open();
+			if (form.getReturnCode() != Window.CANCEL) {
+				first = form.getUser();
+				usersViewer.refresh();
+				usersData.saveUsers();
 			}
-		};
-
+		}
 	}
+	
+	void deleteSelectedUser(){
+		IStructuredSelection sel =
+			(IStructuredSelection) usersViewer.getSelection();
+		User first = (User) sel.getFirstElement();
+		if (first != null) {
+			usersData.removeUser(first);
+			usersViewer.refresh();
+			usersData.saveUsers();
+		}
+	}
+	
+	void startChatWithSelectedUser(){
+		IStructuredSelection sel =
+			(IStructuredSelection) usersViewer.getSelection();
+		User first = (User) sel.getFirstElement();
+		if (first != null) {
+			ChatForm chatForm = (ChatForm) usersChatForms.get(first);
+
+			if (chatForm == null) {
+				// nie ma jeszcze takiej rozmowy	
+				ChatForm form =
+					new ChatForm(getShell(), MainForm.this, first);
+				usersChatForms.put(first, form);
+				form.open();
+			} else {
+			}
+		}
+	}
+
+	void addUser() {
+		UserAddForm userForm = new UserAddForm(getShell());
+		userForm.open();
+		if (userForm.getReturnCode() != Window.CANCEL) {
+			usersData.addUser(userForm.getUser());
+			usersViewer.refresh();
+			usersData.saveUsers();
+		}
+	}
+
+	protected ToolBarManager createToolBarManager(int arg0) {
+		ToolBarManager toolBarManager = new ToolBarManager(SWT.FLAT | SWT.WRAP);
+		toolBarManager.add(new ConnectAction(this));
+		toolBarManager.add(new ConfigAction(this));
+		toolBarManager.add(new AddUserAction(this));
+		toolBarManager.add(new ExitAction(this));
+		return toolBarManager;
+	}
+
 }

@@ -30,14 +30,14 @@ class GGSendMsg implements GGOutgoingPackage {
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
-		return 12+text.length();
+		return 12+text.length()+1;
 	}
 
 	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
-		byte [] toSend = new byte[12+text.length()];
+		byte [] toSend = new byte[12+text.length()+1];
 
 		toSend[3] = (byte) (user >> 24 & 0xFF);
 		toSend[2] = (byte) (user >> 16 & 0xFF);

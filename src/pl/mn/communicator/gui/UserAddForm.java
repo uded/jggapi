@@ -104,12 +104,12 @@ public class UserAddForm extends Dialog {
 		layout.makeColumnsEqualWidth = true;
 		panel.setLayout(layout);
 
-		Button button0 = createButton(panel, 101, "Anuluj", false);
-		setGridData(button0, GridData.FILL, true, GridData.FILL, false);
-
 		String labelAdd = newUser ? "Dodaj" : "Zapisz";
 		button1 = createButton(panel, 102, labelAdd, false);
 		setGridData(button1, GridData.FILL, true, GridData.FILL, false);
+
+		Button button0 = createButton(panel, 101, "Anuluj", false);
+		setGridData(button0, GridData.FILL, true, GridData.FILL, false);
 
 		return panel;
 	}

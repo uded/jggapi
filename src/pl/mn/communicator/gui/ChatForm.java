@@ -1,5 +1,6 @@
 package pl.mn.communicator.gui;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.window.Window;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -16,32 +17,34 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
-import pl.mn.communicator.AbstractMessage;
 import pl.mn.communicator.AbstractUser;
+import pl.mn.communicator.IMessage;
 import pl.mn.communicator.gadu.Message;
 
 /**
  * @author mnaglik
  */
-public class ChatForm extends Window {
+public class ChatForm extends Window{
+	private static Logger logger = Logger.getLogger(ChatForm.class);
 	private MainForm mainForm;
 	private AbstractUser user;
 
 	private Text text1;
+	//private TextViewer text1;
 	private Text text2;
 
-
+	
 
 	public ChatForm(Shell shell, MainForm mainForm,AbstractUser user) {
 		super(shell);
 		this.mainForm = mainForm;
 		this.user = user;
 		setShellStyle(SWT.CLOSE ^ SWT.RESIZE);
-		setBlockOnOpen(true);
+		//setBlockOnOpen(true);
 	}
 	
-	public void messageArrived(AbstractMessage message) {
-		// TODO dopisywanie wiadomosci
+	public void messageArrived(IMessage message) {
+		text1.append("<"+UsersData.getInstance().getUserName(message.getUser())+"> "+message.getText()+"\n");
 	}
 	
 	/**
@@ -65,7 +68,7 @@ public class ChatForm extends Window {
 	 */
 	protected void configureShell(Shell shell) {
 		super.configureShell(shell);
-		shell.setText("Rozmowa z " + user.getName());
+		shell.setText("Rozmowa z " + UsersData.getInstance().getUserName(user.getNumber()));
 		shell.setSize(400, 400);
 	}
 
@@ -79,14 +82,17 @@ public class ChatForm extends Window {
 		SashForm sash = new SashForm(panel, SWT.VERTICAL | SWT.NULL);
 		sash.SASH_WIDTH = 5;
 
-		text1 = new Text(sash, SWT.BORDER^SWT.MULTI);
-		text2 = new Text(sash, SWT.BORDER^SWT.MULTI);
+		//TextViewer text1 = new TextViewer(sash,SWT.NORMAL);
+		//text1.addTextListener(this);
+		text1 = new Text(sash, SWT.BORDER | SWT.MULTI | SWT.V_SCROLL | SWT.WRAP);
+		text2 = new Text(sash, SWT.BORDER^SWT.MULTI | SWT.V_SCROLL | SWT.WRAP);
 
 		text1.addFocusListener(new FocusAdapter() {
 			public void focusGained(FocusEvent arg0) {
 				text2.forceFocus();
 			}
 		});
+
 
 		return panel;
 	}

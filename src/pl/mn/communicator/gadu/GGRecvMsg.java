@@ -6,14 +6,14 @@ package pl.mn.communicator.gadu;
  * @author mnaglik
  */
 class GGRecvMsg {
-	private int sender;
+	private long sender;
 	private int seq;
 	private int time;
 	private int msgClass;
 	private String message = "";
 
 	public GGRecvMsg(byte[] data) {
-		this.sender = GGConversion.byteToInt(data);
+		this.sender = GGConversion.unsignedIntToLong(GGConversion.byteToInt(data));
 		this.seq = GGConversion.byteToInt(data, 4);
 		this.time = GGConversion.byteToInt(data, 8);
 		this.msgClass = GGConversion.byteToInt(data, 12);
@@ -46,7 +46,7 @@ class GGRecvMsg {
 	 * @return int
 	 */
 	public int getSender() {
-		return sender;
+		return (int)sender;
 	}
 
 	/**

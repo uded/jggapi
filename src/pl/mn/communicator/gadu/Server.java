@@ -43,6 +43,7 @@ public final class Server extends AbstractServer {
 		String line = in.readLine();
 		is.close();
 		in.close();
+		logger.debug("Address readed: "+line);
 		return parseAddress(line);
 	}
 
