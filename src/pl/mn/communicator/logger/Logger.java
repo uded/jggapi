@@ -27,7 +27,6 @@ public abstract class Logger implements ILogger {
         }
 
         log = Boolean.valueOf(prop.getProperty("log", "true")).booleanValue();
-        System.out.println("LOG: " + log);
     }
 
     /**
