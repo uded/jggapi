@@ -44,7 +44,6 @@ import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.PublicDirInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.event.SessionStateEvent;
 import pl.mn.communicator.event.SessionStateListener;
 import pl.mn.communicator.packet.in.GGIncomingPackage;
 import pl.mn.communicator.packet.out.GGOutgoingPackage;
@@ -53,7 +52,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.8 2004-12-18 15:35:06 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.9 2004-12-18 15:46:01 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -69,7 +68,7 @@ public class Session implements ISession {
 	private DefaultLoginService m_loginService = null;
 	private DefaultPresenceService m_presenceService = null;
 	private DefaultMessageService m_messageService = null;
-	private DefaultRegistrationService m_registrationService = null;
+	//private DefaultRegistrationService m_registrationService = null;
 	private DefaultContactListService m_contactListService = null;
 	private DefaultPublicDirectoryService m_publicDirectoryService = null;
 	
@@ -90,8 +89,8 @@ public class Session implements ISession {
 		m_messageService = new DefaultMessageService(this);
 		m_presenceService = new DefaultPresenceService(this);
 		m_contactListService = new DefaultContactListService(this);
-		//m_registrationService = new DefaultRegistrationService(this);
 		m_publicDirectoryService = new DefaultPublicDirectoryService(this);
+		//m_registrationService = new DefaultRegistrationService(this);
 	}
 
 	public SessionState getSessionState() {
@@ -195,12 +194,13 @@ public class Session implements ISession {
 	}
 	
 	protected void notifySessionStateChanged(SessionState oldState, SessionState newState) {
+		if (oldState == null) throw new NullPointerException("oldState cannot be null");
+		if (newState == null) throw new NullPointerException("newState cannot be null");
 		
 		for (Iterator it = m_sessionStateListeners.iterator(); it.hasNext();) {
 			SessionStateListener sessionStateListener = (SessionStateListener) it.next();
 			if (oldState != newState) {
-				SessionStateEvent sessionStateEvent = new SessionStateEvent(this, oldState, newState);
-				sessionStateListener.sessionStateChanged(sessionStateEvent);
+				sessionStateListener.sessionStateChanged(oldState, newState);
 			}
 		}
 	}
@@ -300,8 +300,6 @@ public class Session implements ISession {
 		
 	}
 
-	
-	
 	private final static class SessionInvocationHandler implements InvocationHandler {
 
 		private Object m_delegate = null;

@@ -19,14 +19,17 @@ package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
+import pl.mn.communicator.SessionState;
+
 /**
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionStateListener.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: SessionStateListener.java,v 1.2 2004-12-18 15:46:02 winnetou25 Exp $
  */
 public interface SessionStateListener extends EventListener {
 
-	void sessionStateChanged(SessionStateEvent stateEvent);
+	/** Notifies when session state changes */
+	void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState);
 	
 }

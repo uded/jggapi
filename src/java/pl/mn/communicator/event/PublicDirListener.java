@@ -26,16 +26,10 @@ import pl.mn.communicator.PublicDirSearchReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.6 2004-12-18 14:19:08 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.7 2004-12-18 15:46:02 winnetou25 Exp $
  */
 public interface PublicDirListener extends EventListener {
 
-	/**
-	 * Messaged when information has been sucessfuly written
-	 * to the public directory.
-	 */
-	void pubdirUpdated();
-	
 	/**
 	 * <p>
 	 * Messaged when search results arrived from Gadu-Gadu
@@ -43,30 +37,38 @@ public interface PublicDirListener extends EventListener {
 	 * <p>
 	 * The parameter contains collection of matched results.
 	 */
-	void pubdirGotSearchResults(PublicDirSearchReply publicDirSearchReply);
+	void onPublicDirectorySearchReply(PublicDirSearchReply publicDirSearchReply);
 
 	/**
-	 * Messaged when we have successfuly retrieved information about out uin from catalog.
+	 * Messaged when we have successfuly retrieved information about our
+	 * uin from the public directory.
+	 * 
 	 * @param pubDirReply
 	 */
-	void pubdirRead(PublicDirInfo pubDirReply);
+	void onPublicDirectoryRead(PublicDirInfo pubDirReply);
+
+	/**
+	 * Messaged when information has been successfuly written
+	 * to the public directory.
+	 */
+	void onPublicDirectoryUpdated();
 
 	public static class Stub implements PublicDirListener {
 
 		/**
-		 * @see pl.mn.communicator.event.PublicDirListener#pubdirUpdated()
+		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectoryUpdated()
 		 */
-		public void pubdirUpdated() { }
+		public void onPublicDirectoryUpdated() { }
 
 		/**
 		 * @see pl.mn.communicator.event.PublicDirListener#gotSearchResults(java.util.Collection)
 		 */
-		public void pubdirGotSearchResults(PublicDirSearchReply publicDirSearchReply) { }
+		public void onPublicDirectorySearchReply(PublicDirSearchReply publicDirSearchReply) { }
 
 		/**
-		 * @see pl.mn.communicator.event.PublicDirListener#pubdirRead(pl.mn.communicator.PublicDirQuery)
+		 * @see pl.mn.communicator.event.PublicDirListener#onPublicDirectoryRead(pl.mn.communicator.PublicDirQuery)
 		 */
-		public void pubdirRead(PublicDirInfo pubDirReply) { }
+		public void onPublicDirectoryRead(PublicDirInfo pubDirReply) { }
 		
 	}
 	

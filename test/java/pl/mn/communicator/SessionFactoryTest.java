@@ -5,15 +5,14 @@ package pl.mn.communicator;
 
 import java.io.InputStream;
 import java.util.Properties;
-import java.util.logging.Logger;
+
+import junit.framework.TestCase;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.event.ConnectionListener;
-import pl.mn.communicator.event.SessionStateEvent;
 import pl.mn.communicator.event.SessionStateListener;
-import junit.framework.TestCase;
 
 /**
  * @author Marcin Naglik
@@ -62,8 +61,8 @@ public class SessionFactoryTest extends TestCase {
 		
 		session.addSessionStateListener(new SessionStateListener(){
 
-			public void sessionStateChanged(SessionStateEvent stateEvent) {
-				logger.info("session changed " + stateEvent);
+			public void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState) {
+				logger.info("session changed ");
 			}});
 		
 		session.getConnectionService().connect();

@@ -35,7 +35,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.7 2004-12-18 14:19:33 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.8 2004-12-18 15:46:01 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -111,14 +111,14 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
-			publicDirListener.pubdirRead(publicDirInfo);
+			publicDirListener.onPublicDirectoryRead(publicDirInfo);
 		}
 	}
 
 	protected void notifyPubdirUpdated() {
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
-			publicDirListener.pubdirUpdated();
+			publicDirListener.onPublicDirectoryUpdated();
 		}
 	}
 
@@ -126,7 +126,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		if (publicDirSearchReply == null) throw new NullPointerException("publicDirSearchReply cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
-			publicDirListener.pubdirGotSearchResults(publicDirSearchReply);
+			publicDirListener.onPublicDirectorySearchReply(publicDirSearchReply);
 		}
 	}
 

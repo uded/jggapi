@@ -127,16 +127,16 @@ public class Main2 {
 
 		session.getPublicDirectoryService().addPublicDirListener(new PublicDirListener() {
 
-			public void pubdirUpdated() {
+			public void onPublicDirectoryUpdated() {
 				System.out.println("Updated pubDir");
 			}
 
-			public void pubdirGotSearchResults(PublicDirSearchReply publicDirSearchReply) {
+			public void onPublicDirectorySearchReply(PublicDirSearchReply publicDirSearchReply) {
 				System.out.println("Got pubdir search results.");
 				
 			}
 
-			public void pubdirRead(PublicDirInfo pubDirReply) {
+			public void onPublicDirectoryRead(PublicDirInfo pubDirReply) {
 				System.out.println("Got pubDir read reply");
 				System.out.println("FirstName: "+pubDirReply.getFirstName());
 				System.out.println("Surname: "+pubDirReply.getLastName());
