@@ -41,6 +41,7 @@ import pl.mn.communicator.UserListener;
 import pl.mn.communicator.gadu.Connection;
 import pl.mn.communicator.gadu.LocalUser;
 import pl.mn.communicator.gadu.Server;
+import pl.mn.communicator.gadu.Status;
 import pl.mn.communicator.gadu.User;
 import pl.mn.communicator.gui.util.Config;
 import pl.mn.communicator.gui.util.ResourceManager;
@@ -290,20 +291,28 @@ public class MainForm
 	 */
 	public void connectionEstablished() {
 		logger.debug("ConnectionEstablished");
+		try {
+			connection.changeStatus(new Status(Status.ON_LINE));
+		} catch (IOException e) {
+			logger.error("Error changing status",e);
+		}
+
+		// TODO send user list
+		//connection.sendMonitoredUserList(usersData.);
 	}
 
 	/**
 	 * @see pl.mn.gadu.ConnectionListener#disconnected()
 	 */
 	public void disconnected() {
-
+		logger.debug("ConnectionDisconnected");
 	}
 
 	/**
 	 * @see pl.mn.gadu.ConnectionListener#connectionError(java.lang.String)
 	 */
 	public void connectionError(String error) {
-
+		logger.debug("ConnectionError: "+error);
 	}
 
 	/**

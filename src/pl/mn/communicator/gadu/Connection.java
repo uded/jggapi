@@ -188,7 +188,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 					if (connectionListener != null)
 						connectionListener.connectionEstablished();
 					logger.debug("Login OK");
-					changeStatus(new Status(Status.ON_LINE));
 					break;
 				case 9 :
 					if (connectionListener != null)
