@@ -24,7 +24,7 @@ import pl.mn.communicator.AbstractUser;
 
 /**
  * U퓓tkownik gg.
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 public class User extends AbstractUser {
@@ -33,8 +33,6 @@ public class User extends AbstractUser {
     /**
      * Tworz u퓓tkownika na podstawie numeru i nazwy.
      * @param number numer u퓓tkownika
-     * @param name nazwa u퓓tkownika
-     * @param onLine status u퓓tkownika
      */
     public User(int number) {
         super(number);
