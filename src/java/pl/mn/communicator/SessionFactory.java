@@ -26,7 +26,7 @@ import pl.mn.communicator.packet.handlers.Session;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionFactory.java,v 1.8 2004-12-19 23:53:54 winnetou25 Exp $
+ * @version $Id: SessionFactory.java,v 1.9 2004-12-19 23:57:14 winnetou25 Exp $
  */
 public class SessionFactory {
 	
@@ -48,6 +48,7 @@ public class SessionFactory {
 	/**
 	 * Create <code>ISession</code> instance based on <code>LoginContext</code> object.
 	 * Address is the IP address of the Gadu-Gadu server.
+	 * Port is the port of the Gadu-Gadu server.
 	 * 
 	 * @param loginContext the <code>LoginContext</code> instance to be used.
 	 * @param address IP address of the Gadu-Gadu server.
@@ -59,6 +60,14 @@ public class SessionFactory {
 		return new Session (server, loginContext);
 	}
 
+	/**
+	 * Create <code>ISession</code> instance based on <code>LoginContext</code> object
+	 * and on separately specified <code>IServer</code> object.
+	 * 
+	 * @param loginContext the <code>LoginContext</code> object that contains information necessary for authenticating a user.
+	 * @param server <code>IServer</code> object that referes to the Gadu-Gadu server.
+	 * @return <code>ISession</code> instance.
+	 */
 	public static ISession createSession(LoginContext loginContext, IServer server) {
 		return new Session (server, loginContext);
 	}
