@@ -22,7 +22,8 @@ import java.util.Date;
 
 /**
  * Status uzytkownika gg
- * @version $Revision: 1.1 $
+ * TODO implementacja trybu tylko dla przyjaciol
+ * @version $Revision: 1.2 $
  * @author mnaglik
  */
 class GGNewStatus implements GGOutgoingPackage {
@@ -59,16 +60,15 @@ class GGNewStatus implements GGOutgoingPackage {
     private static final int MAX_OPIS = 40;
 
     private int status;
-    private byte[] opis;
-    private int czas;
+    private String opis;
+    private Date czas;
 
     /**
      * Konstruktor statusu.
      * @param status status
      */
     public GGNewStatus(int status) {
-        this.status = status;
-        this.opis = new byte[0];
+        this(status, null, null);
     }
 
     /**
@@ -77,13 +77,7 @@ class GGNewStatus implements GGOutgoingPackage {
      * @param opis opis tekstowy (maks. 40 znakow)
      */
     public GGNewStatus(int status, String opis) {
-        this.status = status;
-
-        if (opis.length() > MAX_OPIS) {
-            opis = opis.substring(0, MAX_OPIS - 1);
-        }
-
-        this.opis = opis.getBytes();
+        this(status, opis, null);
     }
 
     /**
@@ -93,7 +87,9 @@ class GGNewStatus implements GGOutgoingPackage {
      * @param czas czas powrotu
      */
     public GGNewStatus(int status, String opis, Date czas) {
-        // TODO implement
+        this.status = status;
+        this.opis = trimOpis(opis);
+        this.czas = czas;
     }
 
     /**
@@ -156,5 +152,53 @@ class GGNewStatus implements GGOutgoingPackage {
         toSend[0] = (byte) (statusToSend & 0xFF);
 
         return toSend;
+    }
+    
+    /**
+     * Je¿eli opis jest za d³ugi skraca go do odpowiedniej d³ugo¶ci.
+     * @param opis opis do ewentualnego skrócenia
+     * @return poprawny opis nie d³u¿szy ni¿ mo¿liwy
+     */
+    private String trimOpis(String opis) {
+        if (opis.length() > MAX_OPIS) {
+            opis = opis.substring(0, MAX_OPIS - 1);
+        }
+        return opis;
+    }
+    
+    /**
+     * Zamnienia status biznesowy na status pakietu gg.
+     * @param statusBiz status do zamiany
+     * @param desc opis (moze byc <code>null</code>)
+     * @param czas czas powrotu (moze byc <code>null</code>)
+     * @return status do pakietu gg
+     */
+    private int statusBizToStatus(int statusBiz, String desc, Date czas) {
+    	if (desc != null|| czas != null) {
+    		// poniewaz jest czas lub opis to status jest typu opisowego
+            switch(statusBiz){
+                case Status.ON_LINE:
+                    return GG_STATUS_AVAIL_DESCR;
+                case Status.NOT_VISIBLE:
+                    return GG_STATUS_INVISIBLE_DESCR;
+                case Status.BUSY:
+                    return GG_STATUS_BUSY_DESCR;
+                default:
+                case Status.OFF_LINE:
+                    return GG_STATUS_NOT_AVAIL_DESCR;
+            }
+        } else {
+            switch(statusBiz){
+                case Status.ON_LINE:
+                    return GG_STATUS_AVAIL;
+                case Status.NOT_VISIBLE:
+                    return GG_STATUS_INVISIBLE;
+                case Status.BUSY:
+                    return GG_STATUS_BUSY;
+                default:
+                case Status.OFF_LINE:
+                    return GG_STATUS_NOT_AVAIL;
+            }
+        }
     }
 }

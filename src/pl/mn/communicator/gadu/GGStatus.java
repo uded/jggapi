@@ -17,43 +17,45 @@
  */
 package pl.mn.communicator.gadu;
 
-import java.util.Date;
-
 import org.apache.log4j.Logger;
 
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 
+import java.util.Date;
+
+
 /**
  * Pakiet powiadomienia u¿ytkownika o zmianie statusu u¿ytkownika z listy.
- * @version $Revision: 1.13 $
+ * @version $Revision: 1.14 $
  * @author mnaglik
  */
 class GGStatus implements GGIncomingPackage {
-	private static Logger logger = Logger.getLogger(GGStatus.class);
+    private static Logger logger = Logger.getLogger(GGStatus.class);
     private IUser user;
     private Status statusBiz;
     private byte[] dane;
-    
+
     public GGStatus(byte[] dane) {
-    	logger.debug("Odebralem pakiet zmiany statusu uzytkownika");
-    	this.dane = dane;
+        logger.debug("Odebralem pakiet zmiany statusu uzytkownika");
+        this.dane = dane;
         analize();
     }
-    
-    /**
-	 * Analizuj pakiet przychodz±cy.
-	 */
-	private void analize() {
-		Date returnTime = null;
-		String description = null;
-		// usun flage
-		dane[3] = GGConversion.intToByte(0)[0];
 
-		int userNo = GGConversion.byteToInt(dane);
-        logger.debug("Nr uzytkownika zmieniajacego status: "+userNo);
+    /**
+         * Analizuj pakiet przychodz±cy.
+         */
+    private void analize() {
+        Date returnTime = null;
+        String description = null;
+
+        // usun flage
+        dane[3] = GGConversion.intToByte(0)[0];
+
+        int userNo = GGConversion.byteToInt(dane);
+        logger.debug("Nr uzytkownika zmieniajacego status: " + userNo);
         user = new User(userNo);
-        
+
         int status = GGConversion.unsignedByteToInt(dane[4]);
         logger.debug("Status u¿ytkownika to: " + status);
 
@@ -61,41 +63,40 @@ class GGStatus implements GGIncomingPackage {
                 (status == GGNewStatus.GG_STATUS_BUSY_DESCR) ||
                 (status == GGNewStatus.GG_STATUS_INVISIBLE_DESCR) ||
                 (status == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
-        	logger.debug("U¿ytkownik ma status opisowy");
-        
-        	description = GGConversion.byteToString(dane,14);
-        	logger.debug("Opis:"+description);
+            logger.debug("U¿ytkownik ma status opisowy");
 
-        	if (dane.length > 14+description.length()) {
-        		logger.debug("U¿ytkownik ma ustawiona date powrotu");
-        		
-                long czas = GGConversion.byteToInt(dane,
-                        dane.length - 4);
+            description = GGConversion.byteToString(dane, 14);
+            logger.debug("Opis:" + description);
+
+            if (dane.length > (14 + description.length())) {
+                logger.debug("U¿ytkownik ma ustawiona date powrotu");
+
+                long czas = GGConversion.byteToInt(dane, dane.length - 4);
                 czas *= 1000;
                 returnTime = new Date();
                 returnTime.setTime(czas);
                 logger.debug("Czas: " + czas + ":" + returnTime);
-        	}
+            }
         }
+
         statusBiz = new Status(GGConversion.dajStatusBiz(status));
         statusBiz.setDescription(description);
         statusBiz.setReturnTime(returnTime);
-	}
-
-	/**
-     * Pobierz u¿ytkonwika który zmieni³ status.
-     * @return u¿ytkownik który zmieni³ status
-     */
-    public IUser getUser() {
-    	return user;
     }
-    
+
+    /**
+    * Pobierz u¿ytkonwika który zmieni³ status.
+    * @return u¿ytkownik który zmieni³ status
+    */
+    public IUser getUser() {
+        return user;
+    }
+
     /**
      * Pobierz nowy status u¿ytkownika.
      * @return nowy status u¿ytkownika
      */
     public IStatus getStatus() {
-    	return statusBiz;
+        return statusBiz;
     }
-
 }

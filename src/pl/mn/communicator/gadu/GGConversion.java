@@ -19,7 +19,7 @@ package pl.mn.communicator.gadu;
 
 
 /**
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 final class GGConversion {
@@ -93,18 +93,21 @@ final class GGConversion {
 
         return (long) (i + plus);
     }
-    
+
     public static String byteToString(byte[] data, int startIndex) {
-    	int counter = 0;
-    	while (counter+startIndex < data.length && data[counter+startIndex] != 0) {
-    		counter++;
-    	}
-    	byte[] desc = new byte[counter]; 
-    	System.arraycopy(data,startIndex,desc,0,counter);
-    	
-    	return new String(desc);
+        int counter = 0;
+
+        while (((counter + startIndex) < data.length) &&
+                (data[counter + startIndex] != 0)) {
+            counter++;
+        }
+
+        byte[] desc = new byte[counter];
+        System.arraycopy(data, startIndex, desc, 0, counter);
+
+        return new String(desc);
     }
-    
+
     public static int dajStatusBiz(int ggStatus) {
         switch (ggStatus) {
         case GGNewStatus.GG_STATUS_AVAIL:
