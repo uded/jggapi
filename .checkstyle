@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fileset-config file-format-version="1.0.0">
-    <fileset name="Sun Checks" enabled="true" check-config-name="Sun Checks">
-        <file-match-pattern match-pattern=".java$" include-pattern="true"/>
+    <fileset check-config-name="JGGAPI checkstyle" enabled="true" name="java">
+        <file-match-pattern include-pattern="true" match-pattern=".java$"/>
     </fileset>
 </fileset-config>
