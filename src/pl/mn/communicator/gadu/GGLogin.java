@@ -25,7 +25,7 @@ import pl.mn.communicator.ILocalUser;
 /**
  * Wiadomo¶æ wysy³ana w czasie logowania.
  *
- * @version $Revision: 1.12 $
+ * @version $Revision: 1.13 $
  * @author mnaglik
  */
 class GGLogin implements GGOutgoingPackage {
@@ -101,8 +101,8 @@ class GGLogin implements GGOutgoingPackage {
             y ^= x;
 
             z = y & 0x1f;
-            y = GGConversion.unsignedIntToLong((int) ((y << z) |
-                    (y >> (32 - z))));
+            y = GGConversion.unsignedIntToLong((int) ((y << z)
+                    | (y >> (32 - z))));
 
             // end
         }
