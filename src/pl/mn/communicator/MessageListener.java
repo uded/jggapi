@@ -17,11 +17,10 @@
  */
 package pl.mn.communicator;
 
-
 /**
  * Listener wiadomo¶ci.<BR>
  * Obs³uguje zdarzenia zwi±zane z wiadomo¶ciami.<BR>
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 public interface MessageListener {
