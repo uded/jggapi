@@ -10,6 +10,7 @@ import pl.mn.communicator.IStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.OutgoingMessage;
+import pl.mn.communicator.PubDirReply;
 import pl.mn.communicator.SessionFactory;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.ConnectionListener;
@@ -18,6 +19,7 @@ import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.MessageArrivedEvent;
 import pl.mn.communicator.event.MessageDeliveredEvent;
 import pl.mn.communicator.event.MessageListener;
+import pl.mn.communicator.event.PublicDirListener;
 import pl.mn.communicator.event.UserListener;
 
 /*
@@ -43,7 +45,7 @@ public class Main2 {
 
 		users.add(user2);
 		
-		final LoginContext loginContext = new LoginContext(376798, "abcabc");
+		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
 		loginContext.setMonitoredUsers(users);
 		
 		IStatus status = loginContext.getStatus();
@@ -120,6 +122,26 @@ public class Main2 {
 			
 		});
 
+		session.getPublicDirectoryService().addPublicDirListener(new PublicDirListener() {
+
+			public void pubdirUpdated() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void pubdirGotSearchResults(Collection results) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			public void pubdirRead(PubDirReply pubDirReply) {
+				System.out.println("Got pubDir read reply");
+				System.out.println("FirstName: "+pubDirReply.getFirstName());
+				System.out.println("Surname: "+pubDirReply.getLastName());
+			}
+			
+		});
+		
  		session.getConnectionService().connect();
 		session.getLoginService().login();
 		

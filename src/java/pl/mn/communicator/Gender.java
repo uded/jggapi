@@ -18,43 +18,34 @@
 package pl.mn.communicator;
 
 /**
- * Created on 2004-12-14
- *
+ * Created on 2004-12-16
+ * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubDir.java,v 1.2 2004-12-16 22:13:19 winnetou25 Exp $
+ * @version $Id: Gender.java,v 1.1 2004-12-16 22:12:28 winnetou25 Exp $
  */
-public class GGPubDir {
+public class Gender {
 
-	private String m_type;
-	
-	private GGPubDir(String type) {
-		m_type = type;
+	private String m_gender;
+		
+	private Gender(String gender) {
+		m_gender = gender;
 	}
-	
-	public final static GGPubDir UIN = new GGPubDir("FmNumber");
-	public final static GGPubDir FIRST_NAME = new GGPubDir("firstname");
-	public final static GGPubDir LAST_NAME = new GGPubDir("lastname");
-	public final static GGPubDir NICK_NAME = new GGPubDir("nickname");
-	public final static GGPubDir BIRTH_YEAR = new GGPubDir("birthyear");
-	public final static GGPubDir CITY = new GGPubDir("city");
-	public final static GGPubDir GENDER = new GGPubDir("gender");
-	public final static GGPubDir ACTIVE = new GGPubDir("ActiveOnly");
-	public final static GGPubDir FAMILY_NAME = new GGPubDir("familyname");
-	public final static GGPubDir FAMILY_CITY = new GGPubDir("familycity");
-	public final static GGPubDir START = new GGPubDir("fmstart");
-	
+		
+	public final static Gender FEMALE = new Gender("female");
+	public final static Gender MALE = new Gender("male");
+
 	/**
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return m_type.toString();
+		return m_gender;
 	}
-
+	
 	/**
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return m_type.hashCode();
+		return m_gender.hashCode();
 	}
 	
 }

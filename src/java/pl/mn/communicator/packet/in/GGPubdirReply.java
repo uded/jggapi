@@ -17,6 +17,14 @@
  */
 package pl.mn.communicator.packet.in;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.StringTokenizer;
+
+import pl.mn.communicator.GGPubDir;
+import pl.mn.communicator.Gender;
+import pl.mn.communicator.PubDirReply;
 import pl.mn.communicator.packet.GGPubdirEnabled;
 import pl.mn.communicator.packet.GGUtils;
 
@@ -24,7 +32,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReply.java,v 1.2 2004-12-15 22:02:57 winnetou25 Exp $
+ * @version $Id: GGPubdirReply.java,v 1.3 2004-12-16 22:13:51 winnetou25 Exp $
  */
 public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	
@@ -33,11 +41,20 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	private byte m_replyType = -1;
 	private int m_sequence = -1;
 	
+	private Collection m_pubDirReplies = new ArrayList();
+	
 	public GGPubdirReply(byte[] data) {
 		m_replyType = data[0];
 		m_sequence = GGUtils.byteToInt(data, 1);
+		if (isPubdirReadReply()) {
+			handlePubdirReadReply(data);
+		}
 	}
 	
+	public Collection getPubdirReadReply() {
+		return Collections.unmodifiableCollection(m_pubDirReplies);
+	}
+
 	/**
 	 * @see pl.mn.communicator.packet.in.GGIncomingPackage#getPacketType()
 	 */
@@ -50,14 +67,67 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirEnabled {
 	}
 	
 	public boolean isPubdirReadReply() {
-		return m_replyType == GG_PUBDIR50_READ;
+		return m_replyType == GG_PUBDIR50_SEARCH;
 	}
 	
 	public boolean isPubdirWriteReply() {
 		return m_replyType == GG_PUBDIR50_WRITE;
 	}
 	
-	//TODO implement
+	private String byteToString(byte[] data, int startIndex) {
+	    int counter = 0;
+	
+	    while (((counter + startIndex) < data.length)) {
+	        counter++;
+	    }
+	
+	    byte[] desc = new byte[counter];
+	    System.arraycopy(data, startIndex, desc, 0, counter);
+	
+	    return new String(desc);
+	}
+	
+	private void handlePubdirReadReply(byte[] data) {
+		String string = byteToString(data, 5);
+		StringTokenizer tokenizer = new StringTokenizer(string, "\0");
+		PubDirReply pubDirReply = new PubDirReply();
+		while (tokenizer.hasMoreTokens()) {
+			String token = (String) tokenizer.nextToken();
+			if (token.equals(GGPubDir.FIRST_NAME.toString())) {
+				String firstName = tokenizer.nextToken();
+				pubDirReply.setFirstName(firstName);
+			} else if (token.equals(GGPubDir.LAST_NAME.toString())) {
+				String lastName = tokenizer.nextToken();
+				pubDirReply.setLastName(lastName);
+			} else if (token.equals(GGPubDir.BIRTH_YEAR.toString())) {
+				String birthDate = tokenizer.nextToken();
+				pubDirReply.setBirthDate(birthDate);
+			} else if (token.equals(GGPubDir.CITY.toString())) {
+				String city = tokenizer.nextToken();
+				pubDirReply.setCity(city);
+			} else if (token.equals(GGPubDir.NICK_NAME.toString())) {
+				String nickName = tokenizer.nextToken();
+				pubDirReply.setNickName(nickName);
+			} else if (token.equals(GGPubDir.GENDER.toString())) {
+				String genderString = tokenizer.nextToken();
+				Gender gender = null;
+				if (genderString.equals("2")) {
+					gender = Gender.FEMALE;
+				} else if (genderString.equals("1")){
+					gender = Gender.MALE;
+				}
+				pubDirReply.setGender(gender);
+			} else if (token.equals(GGPubDir.FAMILY_NAME.toString())) {
+				String familyName = tokenizer.nextToken();
+				pubDirReply.setFamilyName(familyName);
+			} else if (token.equals(GGPubDir.FAMILY_CITY.toString())) {
+				String familyCity = tokenizer.nextToken();
+				pubDirReply.setFamilyCity(familyCity);
+			}
+		}
+		m_pubDirReplies.add(pubDirReply);
+	}
+	
 //	#define GG_PUBDIR50_REPLY 0x000e
 	
 //struct gg_pubdir50_reply {

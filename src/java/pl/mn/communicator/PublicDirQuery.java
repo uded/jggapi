@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirQuery.java,v 1.1 2004-12-14 22:52:11 winnetou25 Exp $
+ * @version $Id: PublicDirQuery.java,v 1.2 2004-12-16 22:13:19 winnetou25 Exp $
  */
 public class PublicDirQuery {
 
@@ -30,7 +30,7 @@ public class PublicDirQuery {
 	private String m_surName = null;
 	private String m_nickName = null;
 	private String m_birthYear = null;
-	private Integer m_gener = null;  //1-female, 0-male
+	private Integer m_gender = null;  //1-female, 0-male
 	private Boolean m_activeOnly = null;
 	private String m_familyName = null;
 	private String m_familyCity = null;
@@ -65,17 +65,4 @@ public class PublicDirQuery {
 		return m_activeOnly;
 	}
 	
-	public final static class Gender {
-		
-		private String m_gender;
-		
-		private Gender(String gender) {
-			m_gender = gender;
-		}
-		
-		public final static Gender FEMALE = new Gender("female");
-		public final static Gender MALE = new Gender("male");
-		
-	}
-
 }

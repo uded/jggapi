@@ -20,6 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.mn.communicator.PubDirReply;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGPubdirReply;
 
@@ -27,7 +28,7 @@ import pl.mn.communicator.packet.in.GGPubdirReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReplyPacketHandler.java,v 1.1 2004-12-15 22:03:01 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.2 2004-12-16 22:13:42 winnetou25 Exp $
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 
@@ -43,8 +44,9 @@ public class GGPubdirReplyPacketHandler implements PacketHandler {
 		
 		GGPubdirReply pubdirReply = new GGPubdirReply(context.getPackageContent());
 		
-		if (pubdirReply.isPubdirSearchReply()) {
-			//TODO
+		if (pubdirReply.isPubdirReadReply()) {
+			PubDirReply pubReply = (PubDirReply) pubdirReply.getPubdirReadReply().iterator().next();
+			context.getSessionAccessor().notifyPubdirRead(pubReply);
 		}
 	}
 

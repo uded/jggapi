@@ -10,6 +10,7 @@ Bugs or features for version 1.0
 6. PARTIALY-DONE - 7. MED - Export i import listy kontaktow , TODO. obsluga PUT_MORE i GET_MORE
 7. RemoteIP jest zle konwertowane do IP. O co chodzi?
 8. Podzielic kod na api i impl.
+9. Maven POM i documentation (xdocs).
 
 Bugs or features for 1.5 version.
 1. LOW - Obslugiwanie serwisow dostepnych przez www (RegistrationService) (rejestracja uzytkownika, zmiana danych itp...)

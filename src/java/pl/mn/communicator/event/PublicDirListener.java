@@ -20,13 +20,13 @@ package pl.mn.communicator.event;
 import java.util.Collection;
 import java.util.EventListener;
 
-import pl.mn.communicator.PublicDirQuery;
+import pl.mn.communicator.PubDirReply;
 
 /**
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PublicDirListener.java,v 1.2 2004-12-15 22:12:54 winnetou25 Exp $
+ * @version $Id: PublicDirListener.java,v 1.3 2004-12-16 22:13:30 winnetou25 Exp $
  */
 public interface PublicDirListener extends EventListener {
 
@@ -43,13 +43,13 @@ public interface PublicDirListener extends EventListener {
 	 * <p>
 	 * The parameter contains collection of matched results.
 	 */
-	void gotSearchResults(Collection results);
+	void pubdirGotSearchResults(Collection results);
 
 	/**
 	 * Messaged when we have successfuly retrieved information about out uin from catalog.
-	 * @param dirQuery
+	 * @param pubDirReply
 	 */
-	void pubdirRead(PublicDirQuery dirQuery);
+	void pubdirRead(PubDirReply pubDirReply);
 
 	public static class Stub implements PublicDirListener {
 
@@ -61,12 +61,12 @@ public interface PublicDirListener extends EventListener {
 		/**
 		 * @see pl.mn.communicator.event.PublicDirListener#gotSearchResults(java.util.Collection)
 		 */
-		public void gotSearchResults(Collection results) { }
+		public void pubdirGotSearchResults(Collection results) { }
 
 		/**
 		 * @see pl.mn.communicator.event.PublicDirListener#pubdirRead(pl.mn.communicator.PublicDirQuery)
 		 */
-		public void pubdirRead(PublicDirQuery dirQuery) { }
+		public void pubdirRead(PubDirReply pubDirReply) { }
 		
 	}
 	
