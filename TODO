@@ -11,6 +11,13 @@ Bugs or features for version 1.0
 7. RemoteIP jest zle konwertowane do IP. O co chodzi?
 8. Podzielic kod na api i impl.
 9. Maven POM i documentation (xdocs).
+10. Przejrzec jggapi w punktu widzenia watkow. Ta biblioteka moze byc teraz nie thread-safe.
+11. Zobaczyc czy nie da sie zastosowac dekoratora do InputStream'a przy
+	czytaniu.
+	np. GGInputStream extends BufferedInputStream
+	void read() // wisimy na read.
+	//po odwieszeniu sie biezemy pakiet.
+	GGIncomingPacket getIncommingPacket(); //incomming packet ma juz GGHeader.
 
 Bugs or features for 1.5 version.
 1. LOW - Obslugiwanie serwisow dostepnych przez www (RegistrationService) (rejestracja uzytkownika, zmiana danych itp...)
