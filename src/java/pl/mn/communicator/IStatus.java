@@ -23,7 +23,7 @@ import java.util.Date;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IStatus.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: IStatus.java,v 1.6 2004-12-20 22:36:51 winnetou25 Exp $
  */
 public interface IStatus {
 
@@ -86,7 +86,7 @@ public interface IStatus {
 	byte[] getRemoteIP();
 	int getRemotePort();
 	byte getGGVersion();
-	byte getImageSize();
+	int getImageSize();
 	boolean supportsVoiceCommunication();
 	boolean supportsDirectCommunication();
 	boolean areWeInRemoteUserBuddyList();

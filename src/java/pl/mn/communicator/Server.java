@@ -32,17 +32,17 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Server.java,v 1.6 2004-12-20 00:15:52 winnetou25 Exp $
+ * @version $Id: Server.java,v 1.7 2004-12-20 22:39:49 winnetou25 Exp $
  */
 public final class Server implements IServer {
 	
     private static Log logger = LogFactory.getLog(Server.class);
 
     /** The server's address */
-    protected String m_address;
+    protected String m_address = null;
 
     /** The server's port */
-    protected int m_port;
+    protected int m_port = -1;
 
     /**
      * @param address the server's address.
@@ -66,14 +66,6 @@ public final class Server implements IServer {
         return m_port;
     }
     
-    public void setAddress(String address) {
-        m_address = address;
-    }
-
-    public void setPort(int port) {
-        m_port = port;
-    }    
-
     public String toString() {
         return "[" + m_address + ":" + m_port + "]";
     }

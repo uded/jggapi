@@ -26,7 +26,7 @@ import pl.mn.communicator.packet.handlers.Session;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionFactory.java,v 1.9 2004-12-19 23:57:14 winnetou25 Exp $
+ * @version $Id: SessionFactory.java,v 1.10 2004-12-20 22:42:11 winnetou25 Exp $
  */
 public class SessionFactory {
 	
@@ -37,8 +37,9 @@ public class SessionFactory {
 	 * <code>LoginContext</code> object.
 	 * 
 	 * @param loginContext the login context that is used to retrieve server and is necessary for <code>session</code> instance.
-	 * @return <code>ISession</code> instance.
 	 * @throws GGException if there is an error during looking up of the Gadu-Gadu server.
+	 * @throws NullPointerException if the supplied loginContext is null.
+	 * @return <code>ISession</code> instance.
 	 */
 	public static ISession createSession(LoginContext loginContext) throws GGException {
 		IServer server = Server.getDefaultServer(loginContext);
@@ -53,9 +54,11 @@ public class SessionFactory {
 	 * @param loginContext the <code>LoginContext</code> instance to be used.
 	 * @param address IP address of the Gadu-Gadu server.
 	 * @param port port number of tha Gadu-Gadu server.
+	 * @throws NullPointerException if the address or loginContext is null.
+     * @throws IllegalArgumentException if the port is not value between 0 and 65535.
 	 * @return <code>ISession</code> instance.
 	 */
-	public static ISession createSession(LoginContext loginContext, String address, short port) {
+	public static ISession createSession(LoginContext loginContext, String address, int port) {
 		IServer server = new Server(address, port);
 		return new Session (server, loginContext);
 	}
@@ -66,10 +69,11 @@ public class SessionFactory {
 	 * 
 	 * @param loginContext the <code>LoginContext</code> object that contains information necessary for authenticating a user.
 	 * @param server <code>IServer</code> object that referes to the Gadu-Gadu server.
+	 * @throws NullPointerException if the server or loginContext is null.
 	 * @return <code>ISession</code> instance.
 	 */
 	public static ISession createSession(LoginContext loginContext, IServer server) {
-		return new Session (server, loginContext);
+		return new Session(server, loginContext);
 	}
 	
 }

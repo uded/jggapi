@@ -23,7 +23,7 @@ import java.util.Date;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Status.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: Status.java,v 1.6 2004-12-20 22:42:41 winnetou25 Exp $
  */
 public class Status implements IStatus {
 
@@ -40,7 +40,7 @@ public class Status implements IStatus {
 	private byte[] m_remoteIP = new byte[]{0,0,0,0};
 	private int m_remotePort = 1555;
 	
-	private byte m_imageSize = -1;
+	private int m_imageSize = -1;
 	private byte m_version = -1;
 	private int m_descriptionSize = 0;
 
@@ -188,11 +188,11 @@ public class Status implements IStatus {
 	/**
 	 * @see pl.mn.communicator.IStatus#getImageSize()
 	 */
-	public byte getImageSize() {
+	public int getImageSize() {
 		return m_imageSize;
 	}
 
-	public void setImageSize(byte imageSize) {
+	public void setImageSize(int imageSize) {
 		if (imageSize < 0) throw new IllegalArgumentException("Illegal imageSize");
 		m_imageSize = imageSize;
 	}

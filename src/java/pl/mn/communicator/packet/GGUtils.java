@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.9 2004-12-20 20:00:06 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.11 2004-12-20 22:46:32 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -213,7 +213,7 @@ public class GGUtils {
 	    return i;
 	}
 	
-	public static short byteToShort(byte[] buf, int start) {
+	public static int byteToShort(byte[] buf, int start) {
 	    int i = 0;
 	    int pos = start;
 	
@@ -223,7 +223,7 @@ public class GGUtils {
 	    tmp = unsignedByteToInt(buf[pos++]) << 8;
 	    i += tmp;
 	
-	    return (short) i;
+	    return i;
 	}
 	
 	public static long secondsToMillis(int seconds) {
