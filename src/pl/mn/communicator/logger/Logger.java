@@ -30,9 +30,6 @@ public abstract class Logger implements ILogger {
         System.out.println("LOG: " + log);
     }
 
-    protected Logger() {
-    }
-
     /**
      * Zwróc instancje loggera.
      * @param clazz klasa która loguje
