@@ -25,22 +25,15 @@ import pl.mn.communicator.event.ContactListListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IContactListService.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: IContactListService.java,v 1.2 2004-12-18 15:10:41 winnetou25 Exp $
  */
 public interface IContactListService {
 
-	void clearUserListRequest() throws GGException;
+	void clearContactList() throws GGException;
 	
-	/**
-	 * Exports the collection of local users to server.
-	 * @param localUsers 
-	 */
-	void exportContacts(Collection localUsers) throws GGException;
+	void exportContactList(Collection users) throws GGException;
 
-	/**
-	 * Imports the collection of localUsers from server.
-	 */
-	void importContacts() throws GGException;
+	void importContactList() throws GGException;
 	
 	void addContactListListener(ContactListListener contactListListener);
 	

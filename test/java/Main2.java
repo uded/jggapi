@@ -96,7 +96,7 @@ public class Main2 {
 
 			public void messageArrived(MessageArrivedEvent messageArrivedEvent) {
 				System.out.println("MessageArrived, from user: "+messageArrivedEvent.getMessage().getUin());
-				System.out.println("MessageBody: "+messageArrivedEvent.getMessage().getText());
+				System.out.println("MessageBody: "+messageArrivedEvent.getMessage().getMessageBody());
 				System.out.println("MessageID: "+messageArrivedEvent.getMessage().getMessageID());
 				System.out.println("MessageStatus: "+messageArrivedEvent.getMessage().getMessageClass());
 				System.out.println("MessageTime: "+messageArrivedEvent.getMessage().getMessageDate());

@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.out.GGUserListRequest;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultContactListService.java,v 1.2 2004-12-14 22:52:04 winnetou25 Exp $
+ * @version $Id: DefaultContactListService.java,v 1.3 2004-12-18 15:17:00 winnetou25 Exp $
  */
 public class DefaultContactListService implements IContactListService {
 
@@ -48,9 +48,9 @@ public class DefaultContactListService implements IContactListService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IContactListService#clearUserListRequest()
+	 * @see pl.mn.communicator.IContactListService#clearContactList()
 	 */
-	public void clearUserListRequest() throws GGException {
+	public void clearContactList() throws GGException {
 		checkSessionState();
 		try {
 			GGUserListRequest clearContactListRequest = GGUserListRequest.createClearUsetListRequest();
@@ -61,9 +61,9 @@ public class DefaultContactListService implements IContactListService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IContactListService#exportContacts(java.util.Collection)
+	 * @see pl.mn.communicator.IContactListService#exportContactList(java.util.Collection)
 	 */
-	public void exportContacts(Collection localUsers) throws GGException {
+	public void exportContactList(Collection localUsers) throws GGException {
 		checkSessionState();
 		try {
 			GGUserListRequest putUserListRequest = GGUserListRequest.createPutUserListRequest(localUsers);
@@ -74,9 +74,9 @@ public class DefaultContactListService implements IContactListService {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IContactListService#importContacts()
+	 * @see pl.mn.communicator.IContactListService#importContactList()
 	 */
-	public void importContacts() throws GGException {
+	public void importContactList() throws GGException {
 		checkSessionState();
 		try {
 			GGUserListRequest getContactListRequest = GGUserListRequest.createGetUserListRequest();

@@ -44,7 +44,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.2 2004-12-14 22:52:04 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.3 2004-12-18 15:16:28 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -90,6 +90,7 @@ public class DefaultConnectionService implements IConnectionService {
 		if ((m_session.getSessionState() == SessionState.CONNECTED)
 				|| (m_session.getSessionState() == SessionState.LOGGED_IN)
 				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)
+				|| (m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING)
 				|| (m_session.getSessionState() == SessionState.CONNECTION_ERROR)) {
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 			try {
@@ -193,7 +194,7 @@ public class DefaultConnectionService implements IConnectionService {
     }
 
     protected void sendPackage(GGOutgoingPackage outgoingPackage) throws IOException {
-    	logger.debug("Sending packet, PacketType: "+outgoingPackage.getPacketType());
+    	logger.debug("Sending packet, packetType: "+outgoingPackage.getPacketType());
     	logger.debug("PacketBody: "+GGUtils.bytesToString(outgoingPackage.getContents()));
     	int header = outgoingPackage.getPacketType();
 		int length = outgoingPackage.getLength();

@@ -18,39 +18,31 @@
 package pl.mn.communicator;
 
 /**
- * 
  * This is a basic interface for Gadu-Gadu messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessage.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
+ * @version $Id: IMessage.java,v 1.3 2004-12-18 15:11:36 winnetou25 Exp $
  */
 public interface IMessage {
 	
     /**
      * Gadu-Gadu number of user to whom this message is addressed.
+     * 
      * @return gg number
      */
     int getUin();
 
     /**
-     * @param uin Gadu-Gadu user.
-     */
-    void setUin(int uin);
-
-    /**
      * Gets message body.
+     * 
      * @return String message body as string.
      */
-    String getText();
-
-    /**
-     * @param text message body.
-     */
-    void setText(String text);
+    String getMessageBody();
 
     /**
      * MessageClass associated with this message.
+     * 
      * @return MessageClass
      */
     MessageClass getMessageClass();

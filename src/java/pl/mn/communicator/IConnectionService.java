@@ -24,18 +24,18 @@ import pl.mn.communicator.event.GGPacketListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IConnectionService.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: IConnectionService.java,v 1.2 2004-12-18 15:10:28 winnetou25 Exp $
  */
 public interface IConnectionService {
 
 	/**
 	 * Connects to Gadu-Gadu server.
-	 * @throws GGException if there is a error while connecting to Gadu-Gadu server.
+	 * @throws GGException if error occurs while connecting to Gadu-Gadu server.
 	 */
     void connect() throws GGException;
 
     /**
-     * Closes connection with Gadu-Gadu server.
+     * Closes connection to Gadu-Gadu server.
      */
     void disconnect();
     

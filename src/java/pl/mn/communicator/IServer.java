@@ -21,28 +21,12 @@ package pl.mn.communicator;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IServer.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: IServer.java,v 1.2 2004-12-18 15:13:50 winnetou25 Exp $
  */
 public interface IServer {
 
-	/**
-     * @return String
-     */
     String getAddress();
 
-    /**
-     * @return int
-     */
     int getPort();
 
-    /**
-     * @param address adres serwera
-     */
-    void setAddress(String address);
-
-    /**
-     * @param port port serwera
-     */
-    void setPort(int port);
-    
 }

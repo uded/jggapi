@@ -20,18 +20,18 @@ package pl.mn.communicator.event;
 import java.util.EventListener;
 
 /**
- * The listener that is connected with connection to gadu-gadu server events.
+ * The listener that is connected with connection to Gadu-Gadu server events.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ConnectionListener.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: ConnectionListener.java,v 1.2 2004-12-18 15:14:56 winnetou25 Exp $
  */
 public interface ConnectionListener extends EventListener {
 	
-    /** The notification that connection has been successfuly established. */
+    /** The notification that connection to the server has been successfuly established. */
     void connectionEstablished();
 
-    /** The notification that connection has been delibately closed. */
+    /** The notification that connection to the server has been delibately closed. */
     void connectionClosed();
 
     /** Notification that there was an unexpected error with the connection */

@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUser.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: GGUser.java,v 1.2 2004-12-18 15:09:43 winnetou25 Exp $
  */
 public class GGUser implements IUser {
 	
@@ -82,7 +82,7 @@ public class GGUser implements IUser {
      * @see java.lang.Object#toString()
      */
     public String toString() {
-        return "Uin: " + m_uin;
+        return "[Uin: " + m_uin+",userMode: "+m_userMode+"]";
     }
     
 }

@@ -25,7 +25,7 @@ import pl.mn.communicator.packet.GGUtils;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncommingMessage.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: IncommingMessage.java,v 1.2 2004-12-18 15:12:37 winnetou25 Exp $
  */
 public class IncommingMessage extends AbstractMessage {
 
@@ -33,11 +33,13 @@ public class IncommingMessage extends AbstractMessage {
 	private int m_messageID;
 	
     /**
-	 * @param toUser
-	 * @param text
+	 * @param uin
+	 * @param messageBody
 	 */
-	public IncommingMessage(int uin, String text, int messageID, long messageDate, int protocolMessageClass) {
-		super(uin, text, GGUtils.getClientMessageClass(protocolMessageClass));
+	public IncommingMessage(int uin, String messageBody, int messageID, long messageDate, int protocolMessageClass) {
+		super(uin, messageBody, GGUtils.getClientMessageClass(protocolMessageClass));
+		if (messageDate < 0) throw new IllegalArgumentException("messageDate cannot be less than 0");
+		if (messageID < 0) throw new IllegalArgumentException("messageID cannot be less than 0");
 		m_messageDate = new Date(messageDate);
 		m_messageID = messageID;
 	}

@@ -25,7 +25,7 @@ import pl.mn.communicator.event.LoginListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ILoginService.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: ILoginService.java,v 1.2 2004-12-18 15:11:12 winnetou25 Exp $
  */
 public interface ILoginService {
 
@@ -37,21 +37,37 @@ public interface ILoginService {
 	void login() throws GGException;
 
 	/**
-	 * Logs out user from the server we are currently conneced.
+	 * Logsout user from the server that we are currently connected.
 	 * 
-	 * @throws GGException if there is an error while logging out.
+	 * @throws GGException if error occurs while logging out.
 	 */
 	void logout() throws GGException;
 	
 	/**
 	 * Logs out user and sets the description.
-	 * Description cannot be null, but the second parameter the returnTime can
+	 * Description cannot be null but returnTime can
 	 * be null.
+	 * 
 	 * @param description
-	 * @throws GGException
+	 * @param returnTime
+	 * @throws GGException if error occurs while logging out.
 	 */
 	void logout(String description, Date returnTime) throws GGException;
+	
+	/**
+	 * Adds <code>LoginListener</code> to be notified of loginOK
+	 * or loginFailed events.
+	 * 
+	 * @param loginListener
+	 */
 	void addLoginListener(LoginListener loginListener);
+	
+	/**
+	 * Remove <code>LoginListener</code> that was being notified
+	 * of loginOK or loginFailed events.
+	 * 
+	 * @param loginListener
+	 */
 	void removeLoginListener(LoginListener loginListener);
 	
 }

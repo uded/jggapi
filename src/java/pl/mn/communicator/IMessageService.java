@@ -23,24 +23,27 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessageService.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: IMessageService.java,v 1.2 2004-12-18 15:12:13 winnetou25 Exp $
  */
 public interface IMessageService {
 
 	/** 
 	 * Sends the message to Gadu-Gadu server.
+	 * 
 	 * @param outgoingMessage
 	 */
 	void sendMessage(OutgoingMessage outgoingMessage) throws GGException;
 
 	/** 
 	 * Adds <code>MessageListener</code> to listen for message events.
+	 * 
 	 * @param messageListener
 	 */
 	void addMessageListener(MessageListener messageListener);
 	
 	/**
 	 * Remove <code>MessageListener</code> that listened for message events.
+	 * 
 	 * @param messageListener
 	 */
 	void removeMessageListener(MessageListener messageListener);

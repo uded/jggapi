@@ -21,21 +21,21 @@ package pl.mn.communicator;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IRegistrationService.java,v 1.1 2004-12-14 21:53:51 winnetou25 Exp $
+ * @version $Id: IRegistrationService.java,v 1.2 2004-12-18 15:13:33 winnetou25 Exp $
  */
 public interface IRegistrationService {
 
 	/**
 	 * 
 	 * @param email
-	 * @param passsord
+	 * @param password
 	 * @param qa
 	 * @param answer
 	 */
-	void changePassword(String email, String passsord, int qa, String answer);
+	void changePassword(String email, String password, int qa, String answer);
 	
 	/**
-	 * Use this method if you want to create a new Gadu-Gadu account.<BR>
+	 * Use this method if you want to create a new Gadu-Gadu account.
 	 * 
 	 * @param email Email address that is associated with the new account.
 	 * @param password Password to access the new account.
@@ -55,11 +55,11 @@ public interface IRegistrationService {
 	 * @return <code>true</code> if unregistration was successful, false otherwise.
 	 * @throws <code>GGException</code> if error occurs while unregistering Gadu-Gadu account.
 	 */
-	void unregisterAccount(long uin, String password) throws GGException;
+	void unregisterAccount(int uin, String password) throws GGException;
 	
 	/**
 	 * Sends user's current password to user's mailbox.
 	 */
-	void remindAndSendPassword(long uin);
+	void remindAndSendPassword(int uin);
 	
 }

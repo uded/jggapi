@@ -23,13 +23,20 @@ import pl.mn.communicator.packet.in.GGIncomingPackage;
 import pl.mn.communicator.packet.out.GGOutgoingPackage;
 
 /**
+ * <p>
+ * Gadu-Gadu packet related events.
+ * <p>
+ * Might occasionaly be used but it it highly encouraged that 
+ * only experienced users use it.
+ * <p>
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPacketListener.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: GGPacketListener.java,v 1.2 2004-12-18 15:15:46 winnetou25 Exp $
  */
 public interface GGPacketListener extends EventListener {
 
+	/** Notification that Gadu-Gadu outgoing packet has been written to socket */
 	void sentPacket(GGOutgoingPackage outgoingPacket);
 	
 	void receivedPacket(GGIncomingPackage incomingPacket);

@@ -34,7 +34,7 @@ import pl.mn.communicator.IRegistrationService;
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.1 2004-12-14 21:53:49 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.2 2004-12-18 15:17:22 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 
@@ -172,16 +172,16 @@ public class DefaultRegistrationService implements IRegistrationService {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.IRegistrationService#unregisterGGUser(long, char[], java.lang.String)
+	 * @see pl.mn.communicator.IRegistrationService#unregisterGGUser(int, char[], java.lang.String)
 	 */
-	public void unregisterAccount(long uin, String password) {
+	public void unregisterAccount(int uin, String password) {
 		// TODO Auto-generated method stub
 	}
 
 	/**
-	 * @see pl.mn.communicator.IRegistrationService#sendPassword(long)
+	 * @see pl.mn.communicator.IRegistrationService#sendPassword(int)
 	 */
-	public void remindAndSendPassword(long uin) {
+	public void remindAndSendPassword(int uin) {
 		// TODO Auto-generated method stub
 		
 	}

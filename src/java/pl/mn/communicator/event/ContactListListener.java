@@ -21,14 +21,20 @@ import java.util.Collection;
 import java.util.EventListener;
 
 /**
+ * <p>
+ * Contact list related events.
+ * <p>
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ContactListListener.java,v 1.1 2004-12-14 21:53:50 winnetou25 Exp $
+ * @version $Id: ContactListListener.java,v 1.2 2004-12-18 15:15:22 winnetou25 Exp $
  */
 public interface ContactListListener extends EventListener {
 
+	/** Notification that contact list has been successfuly exported. */
 	void contactListExported();
+	
+	/** Notification that contact list has been successfuly received */
 	void contactListReceived(Collection users);
 
 	public static class Stub implements ContactListListener {

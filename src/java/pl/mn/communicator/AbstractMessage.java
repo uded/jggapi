@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * is common for incomming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.2 2004-12-14 22:52:11 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.3 2004-12-18 15:09:01 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 
@@ -35,17 +35,17 @@ public abstract class AbstractMessage implements IMessage {
     protected int m_uin;
 
     /** The body of the message */
-    protected String m_text;
+    protected String m_messageBody;
     
     /** The message class associated with this message */
     protected MessageClass m_messageClass;
 
-    public AbstractMessage(int uin, String text, MessageClass messageClass) {
+    protected AbstractMessage(int uin, String messageBody, MessageClass messageClass) {
     	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
-    	if (text == null) throw new NullPointerException("text cannot be null");
+    	if (messageBody == null) throw new NullPointerException("messageBody cannot be null");
     	if (messageClass == null) throw new NullPointerException("messageClass cannot be null");
     	m_uin = uin;
-        m_text = text;
+    	m_messageBody = messageBody;
         m_messageClass = messageClass;
     }
 
@@ -57,26 +57,10 @@ public abstract class AbstractMessage implements IMessage {
     }
 
     /**
-     * @see pl.mn.communicator.IMessage#setText(java.lang.String)
+     * @see pl.mn.communicator.IMessage#getMessageBody()
      */
-    public void setUin(int uin) {
-    	if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
-    	m_uin = uin;
-    }
-
-    /**
-     * @see pl.mn.communicator.IMessage#getText()
-     */
-    public String getText() {
-        return m_text;
-    }
-
-    /**
-     * @see pl.mn.communicator.IMessage#setText(java.lang.String)
-     */
-    public void setText(String text) {
-    	if (text == null) throw new NullPointerException("text cannot be null");
-    	m_text = text;
+    public String getMessageBody() {
+        return m_messageBody;
     }
 
     /**

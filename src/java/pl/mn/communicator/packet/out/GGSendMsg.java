@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.2 2004-12-18 00:08:43 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.3 2004-12-18 15:17:45 winnetou25 Exp $
  */
 public class GGSendMsg implements GGOutgoingPackage, GGMessage {
 	
@@ -44,7 +44,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessage {
     public GGSendMsg(IMessage message) {
     	if (message == null) throw new NullPointerException("message cannot be null");
         m_user = message.getUin();
-        m_text = message.getText();
+        m_text = message.getMessageBody();
         m_seq = RANDOM.nextInt(999999);
         m_protocolMessageClass = GGUtils.getProtocolMessageClass(message.getMessageClass());
     }

@@ -23,7 +23,7 @@ import pl.mn.communicator.event.PublicDirListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IPublicDirectoryService.java,v 1.5 2004-12-18 00:08:43 winnetou25 Exp $
+ * @version $Id: IPublicDirectoryService.java,v 1.6 2004-12-18 15:13:06 winnetou25 Exp $
  */
 public interface IPublicDirectoryService {
 
@@ -38,20 +38,23 @@ public interface IPublicDirectoryService {
 	void readFromPublicDirectory() throws GGException;
 	
 	/**
-	 * Write information to the catalog.
-	 * @param publicDirInfo
-	 * @throws GGException
+	 * Write information to the public directory.
+	 * 
+	 * @param publicDirInfo the object that holds information to be written.
+	 * @throws GGException if an error occurs while writing to the public directory.
 	 */
 	void writeToPublicDirectory(PublicDirInfo publicDirInfo) throws GGException;
 	
 	/**
 	 * Adds <code>PublicDirListener</code> to the list of listeners.
+	 * 
 	 * @param publicDirListener to be added.
 	 */
 	void addPublicDirListener(PublicDirListener publicDirListener);
 	
 	/**
 	 * Remove <code>PublicDirListener</code> from the list of listeners.
+	 * 
 	 * @param publicDirListener to be removed.
 	 */
 	void removePublicDirListener(PublicDirListener publicDirListener);
