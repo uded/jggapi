@@ -15,7 +15,12 @@ class GGNotify implements GGOutgoingPackage {
 	GGNotify(IUser[] users) {
 		this.users = users;
 	}
-	
+
+	GGNotify(IUser users) {
+		this.users = new IUser[1];
+		this.users[0] = users;
+	}
+		
 	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
 	 */

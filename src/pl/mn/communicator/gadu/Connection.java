@@ -269,16 +269,17 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	 * @see pl.mn.communicator.IConnection#sendMonitoredUserList(java.util.Collection)
 	 */
 	public void sendMonitoredUserList(Collection userList) throws IOException {
-		// TODO implement sendMonitoredUserList
-		logger.error("nie zaimplementowano / rozmiar "+userList.size());
+		IUser[] users = (IUser[]) userList.toArray();
+		GGNotify notify = new GGNotify(users);
+		connectionThread.sendPackage(notify);
 	}
 
 	/**
 	 * @see pl.mn.communicator.IConnection#addMonitoredUser(pl.mn.communicator.IUser)
 	 */
 	public void addMonitoredUser(IUser user) throws IOException {
-		// TODO implement addMonitoredUser
-		logger.error("nie zaimplementowano");
+		GGNotify notify = new GGNotify(user);
+		connectionThread.sendPackage(notify);
 	}
 
 	/**
