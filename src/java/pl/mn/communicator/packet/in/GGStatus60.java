@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.9 2004-12-20 22:44:25 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.10 2004-12-21 20:04:20 winnetou25 Exp $
  */
 public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 
@@ -43,7 +43,7 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
 //	int remote_ip;		/* adres IP bezpo�rednich po��cze� */ 4
 //	short remote_port;	/* port bezpo�rednich po��cze� */ 2
 //	char version;		/* wersja klienta */ 1
-//	short image_size;	/* maksymalny rozmiar grafiki */ 2 // W OPISIE PROTOKOLU GG SA BLEDY!!!
+//	char image_size;	/* maksymalny rozmiar grafiki */ 2
 //	char unknown1;		/* 0x00 * 1
 //	char description[];	/* opis, nie musi wyst�pi� */ n
 //	int time;		/* czas, nie musi wyst�pi� */ 1
@@ -92,12 +92,12 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
     	byte flag = data[3]; //cache flag
 
     	int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
-    	//TODO remoteIP is wrongly converted
     	int remoteIP = GGUtils.byteToInt(data, 5);
+    	byte[] remoteIPArray = GGUtils.convertIntToByteArray(remoteIP);
     	int remotePort = GGUtils.byteToShort(data, 9);
-    	byte version = data[11];
-    	int imageSize = GGUtils.byteToShort(data, 12);
-    	
+    	int version = GGUtils.unsignedByteToInt(data[11]);
+    	int imageSize = GGUtils.unsignedByteToInt(data[12]);
+
     	String description = null;
     	long timeInMillis = -1;
     	if ((protocolStatus == GGNewStatus.GG_STATUS_AVAIL_DESCR)
@@ -112,9 +112,7 @@ public class GGStatus60 implements GGIncomingPackage, GGStatusEnabled {
     	}
 
         m_status60 = GGUtils.getClientStatus(protocolStatus, description, timeInMillis);
-    	byte[] remoteIPBytes = GGUtils.intToByte(remoteIP);
-
-    	m_status60.setRemoteIP(remoteIPBytes);
+    	m_status60.setRemoteIP(remoteIPArray);
     	m_status60.setImageSize(imageSize);
     	m_status60.setGGVersion(version);
 

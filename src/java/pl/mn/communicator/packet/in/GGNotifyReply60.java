@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.7 2004-12-20 22:44:10 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.9 2004-12-21 20:04:09 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -78,18 +78,11 @@ public class GGNotifyReply60 implements GGIncomingPackage {
         	int status = GGUtils.unsignedByteToInt(data[offset+4]);
         	User.UserMode userMode = GGUtils.getUserMode(status);
 
-        	//TODO remoteIP is wrongly converted
-        	byte[] remoteIP = new byte[4];
-        	remoteIP[0] = data[offset+5];
-        	remoteIP[1] = data[offset+6];
-        	remoteIP[2] = data[offset+7];
-        	remoteIP[3] = data[offset+8];
-        	
+        	int remoteIP = GGUtils.byteToInt(data, offset+5);
+            byte[] remoteIPArray = GGUtils.convertIntToByteArray(remoteIP);
         	int remotePort = GGUtils.byteToShort(data, offset+9);
-        	byte version = data[offset+11];
-        	System.out.println("version: "+version);
-        	int imageSize = GGUtils.byteToShort(data, offset+12);
-        	System.out.println("imageSize: "+imageSize);
+        	int version = GGUtils.unsignedByteToInt(data[offset+11]);
+        	int imageSize = GGUtils.unsignedByteToInt(data[offset+12]);
         		
         	String description = null;
         	int descriptionSize = -1;
@@ -133,7 +126,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
             	status60.setRemotePort(remotePort);
             }
 
-            status60.setRemoteIP(remoteIP);
+            status60.setRemoteIP(remoteIPArray);
             status60.setImageSize(imageSize);
             status60.setGGVersion(version);
             

@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGNotify;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.10 2004-12-20 22:43:16 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.12 2004-12-21 20:03:59 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -223,7 +223,7 @@ public class GGUtils {
 	    tmp = unsignedByteToInt(buf[pos++]) << 8;
 	    i += tmp;
 	
-	    return (short) i;
+	    return i;
 	}
 	
 	public static long secondsToMillis(int seconds) {
@@ -278,6 +278,16 @@ public class GGUtils {
 	    System.arraycopy(data, startIndex, desc, 0, counter);
 	
 	    return new String(desc);
+	}
+	
+	public static byte[] convertIntToByteArray(int i) {
+		byte[] bytes = new byte[4];
+		bytes[0] = (byte) ((i & 0xFF));
+		bytes[1] = (byte) ((i >> 8) & (0xFF));
+		bytes[2] = (byte) ((i >> 16) & (0xFF));
+		bytes[3] = (byte) ((i >>24 )& (0xFF));
+		
+		return bytes;
 	}
 	
     public static int getLoginHash(char[] password, int seed) {
