@@ -52,7 +52,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.9 2004-12-18 15:46:01 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.10 2004-12-18 15:52:15 winnetou25 Exp $
  */
 public class Session implements ISession {
 

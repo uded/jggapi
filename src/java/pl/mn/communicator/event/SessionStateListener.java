@@ -25,7 +25,7 @@ import pl.mn.communicator.SessionState;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionStateListener.java,v 1.2 2004-12-18 15:46:02 winnetou25 Exp $
+ * @version $Id: SessionStateListener.java,v 1.3 2004-12-18 15:52:15 winnetou25 Exp $
  */
 public interface SessionStateListener extends EventListener {
 

@@ -35,7 +35,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.8 2004-12-18 15:46:01 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.9 2004-12-18 15:52:15 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
