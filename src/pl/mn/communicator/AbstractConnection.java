@@ -1,0 +1,135 @@
+package pl.mn.communicator;
+
+import java.io.IOException;
+import java.net.UnknownHostException;
+
+/**
+ * Po³¹czenie z serwerem gg.<BR>
+ * S³u¿y do tworzenia po³¹czenia.
+ * <BR><BR>
+ * <i>Przyk³ad u¿ycia:</i><BR><BR>
+ * <code>
+ * AbstractLocalUser user = new XXXLocalUser(1234,"password");<BR>
+ * AbstractServer server = XXXServerAddress.getHost(user);<BR>
+ * AbstractServer s = new XXXServer(server.user);<BR>
+ * AcstractConnection c = new XXXConnection();<BR><BR>
+ * try{<BR>
+ * &nbsp; &nbsp; c.connect();<BR>
+ * }catch(Exception e){<BR>
+ * &nbsp; &nbsp; ...<BR>
+ * }
+ * </code>
+ * 
+ * @author mnaglik
+ */
+public abstract class AbstractConnection {
+	/**
+	 * Listener u¿ytkowników
+	 */
+	protected UserListener userListener = null;
+
+	/**
+	 * Listener po³¹czenia
+	 */
+	protected ConnectionListener connectionListener = null;
+
+	/**
+	 * Listener wiadomoœci
+	 */
+	protected MessageListener messageListener = null;
+
+	/**
+	 * Dodaj listenera u¿ytkowników.<BR>
+	 * Obs³uguje odpowiednie zdarzenia zwi¹zane z u¿ytkownikami
+	 * takie jak pryjœcie i odejœcie u¿ytkownika
+	 * 
+	 * @see UserListener
+	 * @param userListener obiekt listenera
+	 */
+	public void addUserListener(UserListener userListener) {
+		this.userListener = userListener;
+	}
+	/**
+	 * Usuwa listenera u¿ytkowników.<BR>
+	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
+	 * 
+	 * @see UserListener
+	 */
+	public void removeUserListener() {
+		this.userListener = null;
+	}
+
+	/**
+	 * Dodaj listenera zwi¹zanego z po³¹czeniem.<BR>
+	 * Obs³uguje on takie zdarzenia jak nawi¹zanie po³¹czenia,
+	 * zerwanie po³¹czenia itp.
+	 * 
+	 * @see ConnectionListener
+	 * @param connectionListener obiekt listenera
+	 */
+	public void addConnectionListener(ConnectionListener connectionListener) {
+		this.connectionListener = connectionListener;
+	}
+	/**
+	 * Usuwa listenera zwi¹zanego z po³¹czeniem.<BR>
+	 * Jê¿eli nie ma aktywnego listenera nic siê nie dzieje.
+	 * 
+	 * @see ConnectionListener
+	 */
+	public void removeConnectionListener() {
+		this.connectionListener = null;
+	}
+	/**
+	 * Dodaje listenera wiadomoœci.<BR>
+	 * Obs³uguje on takie zdarzenia jak nadejœcie wiadomoœci.
+	 * 
+	 * @see MessageListener 
+	 * @param messageListener obiekt listenera
+	 */
+	public void addMessageListener(MessageListener messageListener) {
+		this.messageListener = messageListener;
+	}
+
+	/**
+	 * Usuwa listenera wiadomoœci.<BR>
+	 * Je¿eli nie ma aktywnego listenera nic siê nie dzieje.
+	 * 
+	 * @see MessageListener
+	 */
+	public void removeMessageListener() {
+		this.messageListener = null;
+	}
+
+	/**
+	 * Pod³¹cz sie do serwera rozmów.<BR>
+	 * Próbuje ³¹czyæ siê z serwerem rozmów, na podstawie danych<BR>
+	 * z konstruktora.<BR>
+	 * W wypadku niepowodzenie wyrzuca odpowiednie wyj¹tki
+	 * 
+	 * @throws UnknownHostException nieznany serwer 
+	 * @throws IOException nie powiodla siê próba po³¹czenia - nie ma po³¹czenia sieciowego?
+	 */
+	public abstract void connect() throws UnknownHostException, IOException;
+
+	/**
+	 * Zamyka po³¹czenie z serwerem rozmów.
+	 * 
+	 * @throws IOException b³¹d przy zamykaniu po³¹czenia
+	 */
+	public abstract void disconnect() throws IOException;
+	
+	/**
+	 * Wyœlij wiadomoœæ do serwera rozmów.
+	 * 
+	 * @see AbstractMessage
+	 * @param message wiadomoœæ do wys³ania.
+	 */
+	public abstract void sendMessage(AbstractMessage message) throws IOException;
+
+	/**
+	 * Zmien aktualny status u¿ytkownika.<BR>
+	 * 
+	 * @param status - kolejny status
+	 */
+	public abstract void changeStatus(AbstractStatus status) throws IOException;
+}

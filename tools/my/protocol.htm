@@ -1,0 +1,720 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- (C) Copyright 2001-2002 by ekg team --><HTML><HEAD>
+<META http-equiv=Content-type content="text/html; charset=iso-8859-2">
+<META content="MSHTML 6.00.2600.0" name=GENERATOR></HEAD>
+<BODY text=black bgColor=white>
+<CENTER>
+<TABLE width=600>
+  <TBODY>
+  <TR>
+    <TD>
+      <CENTER>
+      <H1>Protokół Gadu-Gadu</H1>
+      <H3>&copy; Copyright 2001, 2002 <A 
+      href="file:///D:/tmp/doc/protocol.html#ch4">Autorzy</A></H3></CENTER>
+      <HR>
+
+      <H2>0. Informacje wstępne</H2>
+      <P>Opis protokołu używanego przez Gadu-Gadu bazuje na doświadczeniach 
+      przeprowadzonych przez autorów oraz informacjach nadsyłanych przez 
+      użytkowników. Żaden klient Gadu-Gadu nie został skrzywdzony podczas badań. 
+      Reverse-engineering opierał się głównie na analizie pakietów wysyłanych 
+      między klientem a serwerem. </P>
+      <HR>
+
+      <H2>1. Protokół Gadu-Gadu</H2>
+      <H3>1.1. Format pakietów</H3>
+      <P>Podobnie jak coraz większa ilość komunikatorów, Gadu-Gadu korzysta z 
+      protokołu TCP/IP. Każdy pakiet zawiera na początku dwa stałe pola: </P>
+      <P><PRE>        struct gg_header {
+		int type;	<I>/* typ pakietu */</I>
+		int length;	<I>/* długość reszty pakietu */</I>
+	};
+</PRE>
+      <P></P>
+      <P>Wszystkie zmienne liczbowe są zgodne z kolejnością bajtów maszyn 
+      Intela, czyli Little-Endian. </P>
+      <P>Przy opisie struktur, założono, że <TT>char</TT> ma rozmiar 1 bajtu, 
+      <TT>short</TT> 2 bajtów, <TT>int</TT> 4 bajtów. Używając innych 
+      architektur niż i386 należy zwrócić szczególną uwagę na rozmiar typów 
+      zmiennych i kolejność znaków. </P>
+      <P>Pola, który znaczenie jest nieznane, lub nie do końca jasne, oznaczono 
+      przedrostkiem <TT>unknown</TT>. </P>
+      <HR>
+
+      <H3>1.2. Zanim się połączymy</H3>
+      <P>Żeby wiedzieć, z jakim serwerem mamy się połączyć, należy poudawać 
+      przez chwilę przeglądarkę WWW i połączyć się z hostem 
+      <TT>appmsg.gadu-gadu.pl</TT>. 
+      <P>
+      <P><PRE>	GET /appsvc/appmsg.asp?fmnumber=<B>NUMER</B> HTTP/1.0
+	Host: appmsg.gadu-gadu.pl
+	User-Agent: Mozilla/4.7 [en] (Win98; I)
+	Pragma: no-cache
+</PRE>
+      <P></P>Oryginalny klient może wysłać jeden z podanych identyfikatorów 
+      przeglądarki: 
+      <P>
+      <P><PRE>	Mozilla/4.04 [en] (Win95; I ;Nav)
+	Mozilla/4.7 [en] (Win98; I)
+	Mozilla/4.0 (compatible; MSIE 5.0; Windows NT; DigExt)
+	Mozilla/4.0 (compatible; MSIE 5.0; Windows NT)
+	Mozilla/4.0 (compatible; MSIE 5.0; Windows 98; DigExt)
+	Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)
+</PRE>
+      <P></P>Nowsze wersje (od 4.6.2) korzystają z innego skryptu: 
+      <P>
+      <P><PRE>	GET /appsvc/appmsg2.asp?fmnumber=<B>NUMER</B>&amp;version=<B>WERSJA</B>&amp;fmt=<B>FORMAT</B>&amp;lastmsg=<B>WIADOMOŚĆ</B>
+	Host: appmsg.gadu-gadu.pl
+	User-Agent: ...
+	Pragma: no-cache
+</PRE>
+      <P></P>Gdzie <B>NUMER</B> jest numerem klienta, <B>WERSJA</B> jest wersją 
+      klienta, <B>FORMAT</B> określa czy wiadomość systemowa będzie przesyłana 
+      czystym tekstem (brak zmiennej "fmt") czy w HTMLu (jakakolwiek jej 
+      wartoś.), a <B>WIADOMOŚĆ</B> jest numerem ostatnio otrzymanej wiadomości 
+      systemowej. Na postawione w ten sposób zapytanie, serwer powinien 
+      odpowiedzieć na przykład tak: 
+      <P>
+      <P><PRE>	HTTP/1.0 200 OK
+	
+	0 217.17.41.84:8074 217.17.41.84
+</PRE>
+      <P></P>Pierwsze pole jest numerem wiadomości systemowej, a drugie i 
+      trzecie podają nam namiary na właściwy serwer. Jeśli serwer jest 
+      niedostępny, zamiast adresu IP jest zwracany tekst 
+      ,,<TT>notoperating</TT>''. Jeżeli połączenie z portem 8074 nie powiedzie 
+      się z jakichś powodów, można się łączyć na port 443. 
+      <P>Jeśli pierwsza liczba nie jest równa zero, zaraz po nagłówku znajduje 
+      się wiadomość systemowa, lub jeśli linia zaczyna się od znaku 
+      ,,<TT>@</TT>'', adres strony, którą należy otworzyć w przeglądarce. 
+      <HR>
+
+      <H3>1.3. Logowanie się</H3>
+      <P>Po połączeniu się portem 8074 lub 443 serwera Gadu-Gadu, dostajemy 
+      pakiet typu <TT>0x0001</TT>, który na potrzeby tego dokumentu nazwiemy: 
+      <P>
+      <P><PRE>	#define GG_WELCOME 0x0001
+</PRE>
+      <P></P>Reszta pakietu zawiera liczbę, na podstawie której liczony jest 
+      hash z hasła klienta: 
+      <P>
+      <P><PRE>	struct gg_welcome {
+		int seed;	<I>/* klucz szyfrowania hasła */</I>
+	};
+</PRE>
+      <P></P>Kiedy mamy już tą wartość możemy odesłać pakiet logowania 
+      <P>
+      <P><PRE>	#define GG_LOGIN 0x000c
+</PRE>
+      <P></P>Musimy podać kilka informacji: 
+      <P>
+      <P><PRE>	struct gg_login {
+		int uin;		<I>/* numer klienta */</I>
+		int hash;		<I>/* hash hasła */</I>
+		int status;		<I>/* początkowy stan */</I>
+		int version;		<I>/* wersja klienta */</I>
+		int local_ip;		<I>/* mój adres ip */</I>
+		short local_port;	<I>/* port, na którym słucham */</I>
+	};
+</PRE>
+      <P></P>Hash hasła w pierwszych wersjach był liczony w dość prosty sposób, 
+      ale niestety z którąś zmianą protokołu wprowadzono nowy algorytm: 
+      <P>
+      <P><PRE>	int gg_login_hash(char *password, int seed)
+	{
+		unsigned int x, y, z;
+
+		y = seed;
+
+		for (x = 0; *password; password++) {
+			x = (x &amp; 0xffffff00) | *password;
+			y ^= x;
+			y += x;
+			x &lt;&lt;= 8;
+			y ^= x;
+			x &lt;&lt;= 8;
+			y -= x;
+			x &lt;&lt;= 8;
+			y ^= x;
+
+			z = y &amp; 0x1f;
+			y = (y &lt;&lt; z) | (y &gt;&gt; (32 - z));
+		}
+
+		return y;
+	}
+</PRE>
+      <P></P>Liczba oznaczająca wersję może być jedną z poniższych: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Wartość<B></B></B></TD>
+          <TD><B>Wersje klientów</B></TD></TR>
+        <TR>
+          <TD><TT>0x18</TT></TD>
+          <TD>5.0.1, 4.9.3</TD></TR>
+        <TR>
+          <TD><TT>0x17</TT></TD>
+          <TD>4.9.2</TD></TR>
+        <TR>
+          <TD><TT>0x16</TT></TD>
+          <TD>4.9.1</TD></TR>
+        <TR>
+          <TD><TT>0x15</TT></TD>
+          <TD>4.8.9</TD></TR>
+        <TR>
+          <TD><TT>0x14</TT></TD>
+          <TD>4.8.3, 4.8.1</TD></TR>
+        <TR>
+          <TD><TT>0x11</TT></TD>
+          <TD>4.6.10, 4.6.1</TD></TR>
+        <TR>
+          <TD><TT>0x10</TT></TD>
+          <TD>4.5.22, 4.5.21, 4.5.19, 4.5.17, 4.5.15</TD></TR>
+        <TR>
+          <TD><TT>0x0f</TT></TD>
+          <TD>4.5.12</TD></TR>
+        <TR>
+          <TD><TT>0x0b</TT></TD>
+          <TD>4.0.30, 4.0.29, 4.0.28, 4.0.25</TD></TR></TBODY></TABLE></CENTER>
+      <P>Oczywiście nie są to wszystkie możliwe wersje klientów, lecz te, które 
+      udało się złapać na wolności. Najbezpieczniej będzie przedstawiać się jako 
+      ta wersja, której własności używamy. Wiadomo, że wersje 4.0 nie 
+      obsługiwały trybu ukrytego, tylko dla znajomych itd. 
+      <P>W najnowszej wersji protokołu jest dodatkowa maska na wersję: 
+      <P>
+      <P><PRE>	#define GG_HAS_AUDIO_MASK 0x40000000
+</PRE>
+      <P></P>która mówi nam, że dany klient może prowadzić rozmowy głosowe. 
+      <P>Jeśli wszystko się powiedzie, dostaniemy w odpowiedzi pakiet typu: 
+      <P>
+      <P><PRE>      #define GG_LOGIN_OK 0x0003
+</PRE>
+      <P></P>o zerowej długości, lub w przypadku błędu pakiet: 
+      <P>
+      <P><PRE>      #define GG_LOGIN_FAILED 0x0009
+</PRE>
+      <P></P>Od wersji 4.9.3 (protokół 0x18), możliwe jest również wykorzystanie 
+      przekierowania portów. Jeśli chcemy wykorzystać, należy zamiast pakietu 
+      GG_LOGIN wysłać następujący: 
+      <P>
+      <P><PRE>	#define GG_LOGIN_EXT 0x0013
+
+	struct gg_login_ext {
+		int uin;		<I>/* numer klienta */</I>
+		int hash;		<I>/* hash hasła */</I>
+		int status;		<I>/* początkowy stan */</I>
+		int version;		<I>/* wersja klienta */</I>
+		int local_ip;		<I>/* mój adres ip */</I>
+		short local_port;	<I>/* port, na którym słucham */</I>
+		int external_ip;	<I>/* zewnętrzny adres ip */</I>
+		short external_port;	<I>/* zewnętrzny port */</I>
+	};
+</PRE>
+      <P></P>
+      <HR>
+
+      <H3>1.4. Zmiana stanu</H3>
+      <P>Gadu-Gadu przewiduje kilka stanów klienta, które zmieniamy pakietem 
+      typu: 
+      <P>
+      <P><PRE>	#define GG_NEW_STATUS 0x0002
+
+	struct gg_new_status {
+		int status;		<I>/* na jaki zmienić? */</I>
+		char description[];	<I>/* opis, nie musi wystąpić */</I>
+		int time;		<I>/* czas, nie musi wystąpić */</I>
+	}
+</PRE>
+      <P></P>Możliwe stany to: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Etykieta</B></TD>
+          <TD><B>Wartość</B></TD>
+          <TD><B>Znaczenie</B></TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_NOT_AVAIL</TT></TD>
+          <TD><TT>0x0001</TT></TD>
+          <TD>Niedostępny</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_NOT_AVAIL_DESCR</TT></TD>
+          <TD><TT>0x0015</TT></TD>
+          <TD>Niedostępny (z opisem)</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_AVAIL</TT></TD>
+          <TD><TT>0x0002</TT></TD>
+          <TD>Dostępny</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_AVAIL_DESCR</TT></TD>
+          <TD><TT>0x0004</TT></TD>
+          <TD>Dostępny (z opisem)</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_BUSY</TT></TD>
+          <TD><TT>0x0003</TT></TD>
+          <TD>Zajęty</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_BUSY_DESCR</TT></TD>
+          <TD><TT>0x0005</TT></TD>
+          <TD>Zajęty (z opisem)</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_INVISIBLE</TT></TD>
+          <TD><TT>0x0014</TT></TD>
+          <TD>Niewidoczny</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_INVISIBLE_DESCR</TT></TD>
+          <TD><TT>0x0016</TT></TD>
+          <TD>Niewidoczny z opisem</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_BLOCKED</TT></TD>
+          <TD><TT>0x0006</TT></TD>
+          <TD>Zablokowany</TD></TR>
+        <TR>
+          <TD><TT>GG_STATUS_FRIENDS_MASK</TT></TD>
+          <TD><TT>0x8000</TT></TD>
+          <TD>Maska bitowa oznaczająca tryb tylko dla 
+      przyjaciół</TD></TR></TBODY></TABLE></CENTER>
+      <P>Należy pamiętać, żeby przed rozłączeniem się z serwerem należy zmienić 
+      stan na <TT>GG_STATUS_NOT_AVAIL</TT> lub 
+      <TT>GG_STATUS_NOT_AVAIL_DESCR</TT>. Jeśli ma być widoczny tylko dla 
+      przyjaciół, należy dodać <TT>GG_STATUS_FRIENDS_MASK</TT> do normalnej 
+      wartości stanu. 
+      <P>Jeśli wybieramy stan opisowy, należy dołączyć ciąg znaków zakończony 
+      zerem oraz ewentualny czas powrotu w postaci ilości sekund od 1 stycznia 
+      1970r (UTC). Maksymalna długość opisu wynosi 40 znaków plus zero plus 4 
+      bajty na godzinę powrotu, co razem daje 45 bajtów. 
+      <HR>
+
+      <H3>1.5. Ludzie przychodzą, ludzie odchodzą</H3>
+      <P>Zaraz po zalogowaniu możemy wysłać serwerowi naszą listę kontaktów, 
+      żeby dowiedzieć się, czy są w danej chwili dostępni. Pakiet zawiera 
+      maksymalnie 409 struktur <TT>gg_notify</TT>: 
+      <P><PRE>	#define GG_NOTIFY 0x0010
+	
+	struct gg_notify {
+		int uin;	<I>/* numerek danej osoby */</I>
+		char type;	<I>/* rodzaj użytkownika */</I>
+	};
+</PRE>
+      <P></P>Gdzie pole <TT>type</TT> przyjmuje następujące wartości: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Etykieta</B></TD>
+          <TD><B>Wartość</B></TD>
+          <TD><B>Znaczenie</B></TD></TR>
+        <TR>
+          <TD><TT>GG_USER_OFFLINE</TT></TD>
+          <TD><TT>0x01</TT></TD>
+          <TD>Użytkownik, dla którego będziemy niedostępni</TD></TR>
+        <TR>
+          <TD><TT>GG_USER_NORMAL</TT></TD>
+          <TD><TT>0x03</TT></TD>
+          <TD>Zwykły użytkownik dodany do listy kontkatów</TD></TR>
+        <TR>
+          <TD><TT>GG_USER_BLOCKED</TT></TD>
+          <TD><TT>0x04</TT></TD>
+          <TD>Użytkownik, którego wiadomości nie chcemy 
+        otrzymywać</TD></TR></TBODY></TABLE></CENTER><!-- Adam pisał, że jest to bitmapa, w której 0x01 znaczy otwarte okienko
+rozmowy z daną osobą, ale wyglądałoby to co najmniej dziwnie, więc
+uprościłem trochę całą sprawę. -->
+      <P>Jeśli nie mamy nikogo na liście wysyłamy pakiet: 
+      <P><PRE>	#define GG_LIST_EMPTY 0x0012
+</PRE>
+      <P></P>o zerowej długości. 
+      <P>Jeśli ktoś jest, serwer odpowie pakietem zawierającym jedną lub więcej 
+      struktur <TT>gg_notify_reply</TT>: 
+      <P>
+      <P><PRE>	#define GG_NOTIFY_REPLY 0x000c	/* tak, to samo co GG_LOGIN */
+	
+	struct gg_notify_reply {
+		int uin;		/* numerek */
+		int status;		/* status danej osoby */
+		int remote_ip;		/* adres ip delikwenta */
+		short remote_port;	/* port, na którym słucha klient */
+		int version;		/* wersja klienta */
+		short unknown1;		/* znowu port? */
+		char description[];	/* opis, nie musi wystąpić */
+		int time;		/* czas, nie musi wystąpić */
+	};
+</PRE>
+      <P></P>Większość pól powinna być zrozumiała. <TT>remote_port</TT> poza 
+      zwykłym portem może przyjmować również poniższe wartości: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Wartość</B></TD>
+          <TD><B>Znaczenie</B></TD></TR>
+        <TR>
+          <TD>0</TD>
+          <TD>Klient nie obsługuje bezpośrednich połączeń</TD></TR>
+        <TR>
+          <TD>1</TD>
+          <TD>Klient łączy się zza NAT lub innej formy maskarady</TD></TR>
+        <TR>
+          <TD>2</TD>
+          <TD>Klient nie ma nas w swojej liście 
+      kontaktów</TD></TR></TBODY></TABLE></CENTER>
+      <P>Zdarzają się też inne ,,nietypowe'' wartości, ale ich znaczenie nie 
+      jest jeszcze do końca znane. 
+      <P>Jeśli dany klient jest w stanie z podanym opisem, najpierw dostaniemy 
+      informację osobnym pakietem o nim, później paczkę struktur 
+      <TT>gg_notify_reply</TT> z ludźmi, którzy nie mają ustawionych opisów. 
+      <P>Żeby dodać kogoś do listy w trakcie pracy, trzeba wysłać niżej opisany 
+      pakiet. Jego format jest identyczny jak przy <TT>GG_NOTIFY</TT>. 
+      <P>
+      <P><PRE>	#define GG_ADD_NOTIFY 0x000d
+	
+	struct gg_add {
+		int uin;	<I>/* numerek */</I>
+		char type;	<I>/* rodzaj użytkownika */</I>
+	};
+</PRE>
+      <P></P>By usunąć z listy kontaktów, wysyła się podobny pakiet: 
+      <P>
+      <P><PRE>	#define GG_REMOVE_NOTIFY 0x000e
+	
+	struct gg_add {
+		int uin;	<I>/* numerek */</I>
+		char type;	<I>/* rodzaj użytkownika */</I>
+	};
+</PRE>
+      <P></P>Jeśli ktoś opuści Gadu-Gadu lub zmieni stan, otrzymamy pakiet: 
+      <P>
+      <P><PRE>	#define GG_STATUS 0x0002
+	
+	struct gg_status {
+		int uin;	<I>/* numerek */</I>
+		int status;	<I>/* nowy stan */</I>
+	};
+</PRE>
+      <P></P>
+      <HR>
+
+      <H3>1.6. Wysyłanie wiadomości</H3>
+      <P>Wiadomości wysyła się następującym typem pakietu: 
+      <P>
+      <P><PRE>	#define GG_SEND_MSG 0x000b
+
+	struct gg_send_msg {
+		int recipient;		<I>/* numer odbiorcy */</I>
+		int seq;		<I>/* numer sekwencyjny */</I>
+		int class;		<I>/* klasa wiadomości */</I>
+		char message[];		<I>/* treść */</I>
+	};
+</PRE>
+      <P></P>Numer sekwencyjny jest wykorzystywany przy potwierdzeniu 
+      dostarczenia lub zakolejkowania pakietu. Nie jest wykluczone, że w jakis 
+      sposób odróżnia się różne rozmowy za pomocą części bajtów, ale raczej nie 
+      powinno mieć to ma znaczenia. Klasa wiadomości pozwala odróżnić, czy 
+      wiadomość ma się pojawić w osobnym okienku czy jako kolejna linijka w 
+      okienku rozmowy. Jest to mapa bitowa, więc najlepiej ignorować te bity, 
+      których znaczenia nie znamy: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Etykieta</B></TD>
+          <TD><B>Wartość</B></TD>
+          <TD><B>Znaczenie</B></TD></TR>
+        <TR>
+          <TD><TT>GG_CLASS_QUEUED</TT></TD>
+          <TD><TT>0x0001</TT></TD>
+          <TD>Bit ustawiany wyłącznie przy odbiorze wiadomości, gdy wiadomość 
+            została wcześniej zakolejkowania z powodu nieobecności</TD></TR>
+        <TR>
+          <TD><TT>GG_CLASS_MSG</TT></TD>
+          <TD><TT>0x0004</TT></TD>
+          <TD>Wiadomość ma się pojawić w osobnym okienku</TD></TR>
+        <TR>
+          <TD><TT>GG_CLASS_CHAT</TT></TD>
+          <TD><TT>0x0008</TT></TD>
+          <TD>Wiadomość jest częścią toczącej się rozmowy i zostanie 
+            wyświetlona w istniejącym okienku</TD></TR>
+        <TR>
+          <TD><TT>GG_CLASS_CTCP</TT></TD>
+          <TD><TT>0x0010</TT></TD>
+          <TD>Wiadomość jest przeznaczona dla klienta Gadu-Gadu i nie powinna 
+            być wyświetlona użytkownikowi.</TD></TR>
+        <TR>
+          <TD><TT>GG_CLASS_ACK</TT></TD>
+          <TD><TT>0x0020</TT></TD>
+          <TD>Klient nie życzy sobie potwierdzenia 
+      wiadomości.</TD></TR></TBODY></TABLE></CENTER>
+      <P>Długość treści wiadomości nie powinna przekraczać 2000 znaków. 
+      <P>Oryginalny klient wysyłając wiadomość do kilku użytkowników, wysyła po 
+      kilka takich samych pakietów z różnymi numerkami odbiorców. Nie ma 
+      osobnego pakietu do tego. Natomiast jeśli chodzi o <I>połączenia 
+      konferencyjne</I> do pakietu doklejana jest następująca struktura: 
+      <P>
+      <P><PRE>	struct gg_msg_recipients {
+		char flag;		<I>/* == 1 */</I>
+		int count;		<I>/* ilość odbiorców */</I>
+		int recipients[];	<I>/* tablica odbiorców */</I>
+	};
+</PRE>
+      <P></P>Na przykład, by wysłać do dwóch osób, należy wysłać pakiet: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Offset</B></TD>
+          <TD><B>Wartość</B></TD></TR>
+        <TR>
+          <TD><I>n</I></TD>
+          <TD>Treść wiadomości</TD></TR>
+        <TR>
+          <TD><I>m</I></TD>
+          <TD><TT>0x01</TT></TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;1</TD>
+          <TD rowSpan=4><TT>0x02</TT></TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;2</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;3</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;4</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;5</TD>
+          <TD rowSpan=4>Numer pierwszego adresata</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;6</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;7</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;8</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;9</TD>
+          <TD rowSpan=4>Numer drugiego adresata</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;10</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;11</TD></TR>
+        <TR>
+          <TD><I>m</I>&nbsp;+&nbsp;12</TD></TR></TBODY></TABLE></CENTER>
+      <P>Od wersji 4.8.1 możliwe jest również dodawanie do wiadomości różnych 
+      atrybutów tekstu jak pogrubienie czy kolory. Niezbędne jest dołączenie 
+      następnującej struktury: 
+      <P>
+      <P><PRE>	struct gg_msg_richtext {
+		char flag;	<I>/* == 2 */</I>
+		short length;	<I>/* długość dalszej części */</I>
+	};
+</PRE>
+      <P></P>Dalsza część pakietu zawiera odpowiednią ilość struktur o łączej 
+      długości określonej polem <TT>length</TT>: 
+      <P>
+      <P><PRE>	struct gg_msg_richtext_format {
+		short position;	<I>/* pozycja atrybutu w tekście */</I>
+		char font;	<I>/* atrybuty czcionki */</I>
+		char rgb[3];	<I>/* kolor czcionki, nie musi wystąpić */</I>
+	};
+</PRE>
+      <P></P>Każda z tych struktur określa kawałek tekstu począwszy od znaku 
+      określonego przez pole <TT>position</TT> (liczone od zera) aż do 
+      następnego wpisu lub końca tekstu. Pole <TT>font</TT> jest mapą bitową i 
+      kolejne bity mają następujące znaczenie: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Etykieta</B></TD>
+          <TD><B>Wartość</B></TD>
+          <TD><B>Znaczenie</B></TD></TR>
+        <TR>
+          <TD><TT>GG_FONT_BOLD</TT></TD>
+          <TD><TT>0x01</TT></TD>
+          <TD>Pogrubiony tekst</TD></TR>
+        <TR>
+          <TD><TT>GG_FONT_ITALIC</TT></TD>
+          <TD><TT>0x02</TT></TD>
+          <TD>Kursywa</TD></TR>
+        <TR>
+          <TD><TT>GG_FONT_UNDERLINE</TT></TD>
+          <TD><TT>0x04</TT></TD>
+          <TD>Podkreślenie</TD></TR>
+        <TR>
+          <TD><TT>GG_FONT_COLOR</TT></TD>
+          <TD><TT>0x08</TT></TD>
+          <TD>Kolorowy tekst. Tylko w tym wypadku struktura 
+            <TT>gg_msg_richtext_format</TT> zawiera pole <TT>rgb[]</TT> będące 
+            opisem trzech składowych koloru, kolejno czerwonej, zielonej i 
+            niebieskiej.</TD></TR></TBODY></TABLE></CENTER>
+      <P>Dla przykładu, by przesłać tekst ,,ala <B>ma</B> kota'', należy 
+      dołączyć do wiadomości następującą sekwencję bajtów: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Offset</B></TD>
+          <TD><B>Wartość</B></TD>
+          <TD><B>Znaczenie</B></TD></TR>
+        <TR>
+          <TD><I>n</I></TD>
+          <TD><TT>0x02</TT></TD>
+          <TD>Opis atrybutów tekstu...</TD></TR>
+        <TR>
+          <TD><I>n</I> + 1</TD>
+          <TD rowSpan=2><TT>0x0006</TT></TD>
+          <TD rowSpan=2>...mający 6 bajtów długości</TD></TR>
+        <TR>
+          <TD><I>n</I> + 2</TD></TR>
+        <TR bgColor=#f0f0f0>
+          <TD><I>n</I> + 3</TD>
+          <TD rowSpan=2><TT>0x0004</TT></TD>
+          <TD rowSpan=2>Atrybut zaczyna się od pozycji 4...</TD></TR>
+        <TR bgColor=#f0f0f0>
+          <TD><I>n</I> + 4</TD></TR>
+        <TR bgColor=#f0f0f0>
+          <TD><I>n</I> + 5</TD>
+          <TD><TT>0x01</TT></TD>
+          <TD>...i jest to pogrubiony tekst</TD>
+        <TR>
+          <TD><I>n</I> + 6</TD>
+          <TD rowSpan=2><TT>0x0006</TT></TD>
+          <TD rowSpan=2>Atrybut zaczyna się od pozycji 6...</TD></TR>
+        <TR>
+          <TD><I>n</I> + 7</TD></TR>
+        <TR>
+          <TD><I>n</I> + 8</TD>
+          <TD><TT>0x00</TT></TD>
+          <TD>...i jest to zwykły tekst</TD></TR></TBODY></TABLE></CENTER>
+      <P>Serwer po otrzymaniu wiadomości odsyła potwierdzenie, które przy okazji 
+      mówi nam, czy wiadomość dotarła do odbiorcy czy została zakolejkowana z 
+      powodu nieobecności. Otrzymujemy je w postaci pakietu: 
+      <P>
+      <P><PRE>	#define GG_SEND_MSG_ACK 0x0005
+	
+	struct gg_send_msg_ack {
+		int status;	<I>/* stan wiadomości */</I>
+		int recipient;	<I>/* numer odbiorcy */</I>
+		int seq;	<I>/* numer sekwencyjny */</I>
+	};
+</PRE>
+      <P></P>Numer sekwencyjny i numer adresata są takie same jak podczas 
+      wysyłania, a stan wiadomości może być jednym z następujących: 
+      <P>
+      <CENTER>
+      <TABLE cellSpacing=0 cellPadding=2 border=1>
+        <TBODY>
+        <TR bgColor=silver>
+          <TD><B>Etykieta</B></TD>
+          <TD><B>Wartość</B></TD>
+          <TD><B>Znaczenie</B></TD></TR>
+        <TR>
+          <TD><TT>GG_ACK_DELIVERED</TT></TD>
+          <TD><TT>0x0002</TT></TD>
+          <TD>Wiadomość dostarczono</TD></TR>
+        <TR>
+          <TD><TT>GG_ACK_QUEUED</TT></TD>
+          <TD><TT>0x0003</TT></TD>
+          <TD>Wiadomość zakolejkowano</TD></TR>
+        <TR>
+          <TD><TT>GG_ACK_MBOXFULL</TT></TD>
+          <TD><TT>0x0004</TT></TD>
+          <TD>Wiadomości nie dostarczono. Skrzynka odbiorcza na serwerze jest 
+            pełna (20 wiadomości maks). Występuje tylko w trybie offline</TD></TR>
+        <TR>
+          <TD><TT>GG_ACK_NOT_DELIVERED</TT></TD>
+          <TD><TT>0x0006</TT></TD>
+          <TD>Wiadomości nie dostarczono. Odpowiedź ta występuje tylko w 
+            przypadku wiadomości klasy 
+      <TT>GG_CLASS_CTCP</TT></TD></TR></TBODY></TABLE></CENTER>
+      <P>
+      <HR>
+
+      <H3>1.7. Otrzymywanie wiadomości</H3>
+      <P>Wiadomości serwer przysyła za pomocą pakietu: 
+      <P>
+      <P><PRE>	#define GG_RECV_MSG 0x000a
+	
+	struct gg_recv_msg {
+		int sender;		<I>/* numer nadawcy */</I>
+		int seq;		<I>/* numer sekwencyjny */</I>
+		int time;		<I>/* czas nadania */</I>
+		int class;		<I>/* klasa wiadomości */</I>
+		char message[];		<I>/* treść wiadomości */</I>
+	};
+</PRE>
+      <P></P>Czas nadania jest zapisany w postaci UTC, jako ilości sekund od 1 
+      stycznie 1970r. W przypadku pakietów ,,konferencyjnych'' na końcu pakietu 
+      doklejona jest struktura identyczna z <TT>gg_msg_recipients</TT> 
+      zawierająca pozostałych rozmówców. 
+      <HR>
+
+      <H3>1.8. Ping, pong</H3>
+      <P>Od czasu do czasu klient wysyła pakiet do serwera, by oznajmić, że 
+      połączenie jeszcze jest utrzymywane. Jeśli serwer nie dostanie takiego 
+      pakietu w przeciągu 5 minut, zrywa połączenie. To, czy klient dostaje 
+      odpowiedź zmienia się z wersji na wersję, więc najlepiej nie polegać na 
+      tym. 
+      <P>
+      <P><PRE>	#define GG_PING 0x0008
+	
+	#define GG_PONG 0x0007
+</PRE>
+      <P></P>
+      <HR>
+
+      <H3>1.9. Rozłączenie</H3>
+      <P>Jeśli serwer zechce nas rozłączyć, wyśle wcześniej pusty pakiet: 
+      <P>
+      <P><PRE>	#define GG_DISCONNECTING 0x000b
+</PRE>
+      <P></P>Ma to miejsce, gdy próbowano zbyt wiele razy połączyć się z 
+      nieprawidłowym hasłem, lub gdy równocześnie połączy się drugi klient z tym 
+      samym numerem (nowe połączenie ma większy priorytet). 
+      <HR>
+
+      <H2>2. Usługi HTTP</H2>
+      <P>Opis znajduje się w pliku <A 
+      href="file:///D:/tmp/doc/http.txt">http.txt</A>. 
+      <HR>
+
+      <H2>3. Bezpośrednie połączenie</H2>
+      <P>Opis znajduje się w pliku <A 
+      href="file:///D:/tmp/doc/dcc-protocol.txt">dcc-protocol.txt</A>. <A 
+      name=ch4>
+      <HR>
+
+      <H2>4. Autorzy</H2>
+      <P>Autorami powyższego opisu są: 
+      <UL>
+        <LI>Wojtek Kaniewski (wojtekka%irc.pl): pierwsza wersja opisu, poprawki, 
+        utrzymanie wszystkiego w porządku. 
+        <LI>Robert J. Woźny (speedy%atman.pl): opis nowości w protokole GG 4.6, 
+        poprawki. 
+        <LI>Tomasz Jarzynka (tomee%cpi.pl): badanie timeoutów. 
+        <LI>Adam Ludwikowski (adam.ludwikowski%wp.pl): wiele poprawek, wersje 
+        klientów, rozszerzone wiadomości, powody nieobecności. 
+        <LI>Marek Kozina (klith%hybrid.art.pl): czas otrzymania wiadomości. 
+        <LI>Rafał Florek (raf%regionet.regionet.pl): opis połączeń 
+        konferencyjnych. 
+        <LI>Igor Popik (igipop%wsfiz.edu.pl): klasy wiadomości przy odbieraniu 
+        zakolejkowanej. 
+        <LI>Rafał Cyran (ajron%wp.pl): informacje o remote_port, rodzaje 
+        potwierdzeń przy ctcp, GG_LOGIN_EXT. 
+        <LI>Piotr Mach (pm%gadu-gadu.com): ilość kontaktow, pełna skrzynka, 
+        pusta lista, maska audio, usługi HTTP, GG_LOGIN_EXT. 
+        <LI>Adam Czyściak (acc%interia.pl): potwierdzenie wiadomości 
+        GG_CLASS_ACK. 
+        <LI>Kamil Dębski (kdebski%kki.net.pl): czas w stanach opisowych. 
+        <LI>Paweł Piwowar (alfapawel%go2.pl): format czasu. 
+        <LI>Tomasz Chiliński (chilek%chilan.com): nowości w 5.0.2. </LI></UL>
+      <HR>
+      <FONT color=silver>$Id: protocol.html,v 1.19 2002/12/26 14:31:52 wojtekka 
+      Exp $ </FONT></A></TD></TD></TR></TBODY></TABLE></CENTER></BODY></HTML>
