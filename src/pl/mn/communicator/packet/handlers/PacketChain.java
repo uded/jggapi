@@ -40,7 +40,7 @@ import pl.mn.communicator.packet.in.GGWelcome;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PacketChain.java,v 1.1 2004-12-14 19:29:56 winnetou25 Exp $
+ * @version $Id: PacketChain.java,v 1.2 2004-12-14 20:24:39 winnetou25 Exp $
  */
 public class PacketChain {
 
@@ -48,20 +48,11 @@ public class PacketChain {
 	
 	private HashMap m_packetHandlers;
 	
-	private static PacketChain m_instance;
-	
-	private PacketChain() {
+	public PacketChain() {
 		m_packetHandlers = new HashMap();
 		registerDefaultHandlers();
 	}
 	
-	public final static PacketChain getInstance() {
-		if (m_instance == null) {
-			m_instance = new PacketChain();
-		}
-		return m_instance;
-	}
-
 	public void registerGGPackageHandler(int packetType, PacketHandler packetHandler) {
 		if (packetHandler == null) throw new NullPointerException("packetHandler cannot be null");
 		m_packetHandlers.put(new Integer(packetType), packetHandler);

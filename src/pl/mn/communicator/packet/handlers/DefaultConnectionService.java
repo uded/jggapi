@@ -44,7 +44,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.2 2004-12-14 20:10:49 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.3 2004-12-14 20:23:21 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -54,13 +54,14 @@ public class DefaultConnectionService implements IConnectionService {
 	private ArrayList m_packetListeners = new ArrayList();
 	
 	private Session m_session = null;
-	private PacketChain m_packetChain = PacketChain.getInstance();
+	private PacketChain m_packetChain = null;
 	private ConnectionThread m_connectionThread = null;
 	
 	public DefaultConnectionService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		m_connectionThread = new ConnectionThread();
+		m_packetChain = new PacketChain();
 	}
 	
 	/**
@@ -167,13 +168,7 @@ public class DefaultConnectionService implements IConnectionService {
     		final ConnectionListener connectionListener = (ConnectionListener) it.next();
     		connectionListener.connectionError(ex);
     	}
-    	try {
-        	m_connectionThread.closeConnection();
-    	} catch (IOException e) {
-    		logger.error("Unable to close connection: "+e);
-    	} finally {
-        	m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
-    	}
+       	m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
     }
     
     protected void notifyPongReceived() {
@@ -232,12 +227,8 @@ public class DefaultConnectionService implements IConnectionService {
     				Thread.sleep(THREAD_SLEEP_TIME);
     			}
     		} catch (Exception ex) {
+    			logger.error("connection error: "+ex);
     			notifyConnectionError(ex);
-    			try {
-      				closeConnection();
-       			} catch (IOException ex2) {
-       				throw new RuntimeException("Unable to close connection: "+ex2.getMessage());
-       			}
     		}
     	}
 
