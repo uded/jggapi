@@ -17,18 +17,18 @@
  */
 package pl.mn.communicator.gadu;
 
-import org.apache.log4j.Logger;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.apache.log4j.Logger;
 
 
 /**
  * Pakiet z list± u¿ytkowników jako odpowied¼ na <code>GGNotify</code>.
  * W obecnej implementacji interesuj± nas tylko pola:
  * numer, status, opis i czas
- * @version $Revision: 1.10 $
+ * @version $Revision: 1.11 $
  * @author mnaglik
  */
 class GGNotifyReply implements GGIncomingPackage {
@@ -69,42 +69,72 @@ class GGNotifyReply implements GGIncomingPackage {
     
             int status = GGConversion.unsignedByteToInt(dane[przesuniecie + 4]);
             logger.debug("Status u¿ytkownika to: "+status);
-            // 2 to dostepny
-            // 3 to zaraz wracam
             // dla statusow opisowych pobierz opis
+           	String description = null;
+           	Date returnTime = null;
             if (status == GGStatus.GG_STATUS_AVAIL_DESCR
     				|| status == GGStatus.GG_STATUS_BUSY_DESCR
     				|| status == GGStatus.GG_STATUS_INVISIBLE_DESCR
     				|| status == GGStatus.GG_STATUS_NOT_AVAIL_DESCR) {
-            	logger.debug("U¿ytkownik ma status opisowy");
+            	int descriptionSize = GGConversion.unsignedByteToInt(dane[przesuniecie + 14]);
+
+            	logger.debug("U¿ytkownik ma status opisowy o dlugosci "+descriptionSize);
             	
-                
-                // TODO inkrementuj przesuniecie
-                String description = null;
-                Date returnTime = null;
+            	boolean jestCzas = dane[przesuniecie+15+descriptionSize-5] == 0;
+
+            	if (jestCzas) {
+            		logger.debug("Ustawiony czas powrotu "+dane[przesuniecie+15+descriptionSize-4]);
+            		
+            		long czas = GGConversion.byteToInt(dane,przesuniecie+15+descriptionSize-4);
+            		czas *= 1000;
+            		returnTime = new Date();
+            		returnTime.setTime(czas);
+            		descriptionSize -= 5;
+            		logger.debug("Czas: "+czas+":"+returnTime);
+            	}
+            	
+            	byte[] opis = new byte[descriptionSize];
+            	System.arraycopy(dane,przesuniecie+15,opis,0,descriptionSize);
+            	description = new String(opis);
+
+            	
+            	logger.debug("Opis["+description+"]");
+
+
+                przesuniecie += 15 + descriptionSize; 
+                if (jestCzas) {
+                	przesuniecie += 5;
+                }
             }else{
             	logger.debug("U¿ytkownik NIE ma statusu opisowego");
             	przesuniecie += 14; // pakiet bez opisu ma dlugosc 14 bajtow
             }
+
+			Status statusUzytkownika = new Status(dajStatusBiz(status));			
+			statusUzytkownika.setDescription(description);
+			statusUzytkownika.setReturnTime(returnTime);
+        
+			User uzytkownik = new User(nr);
+			statusy.put(uzytkownik,statusUzytkownika);
         }
     }
-    /*
-struct gg_notify_reply60 {
-  4   int uin;        / numerek plus flagi w najstarszym bajcie /
-  1   char status;        / status danej osoby /
-  4   int remote_ip;      / adres IP bezpo¶rednich po³±czeñ /
-  2   short remote_port;  / port bezpo¶rednich po³±czeñ /
-  1   char version;       / wersja klienta /
-  1   char image_size;    / maksymalny rozmiar obrazków w KB /
-  1   char unknown1;      / 0x00 /
-  1   char description_size;  / rozmiar opisu i czasu, nie musi wyst±piæ /
-  1+  char description[]; / opis, nie musi wyst±piæ /
-  4   int time;       / czas, nie musi wyst±piæ /
-};
 
-GG_UINFLAG_UNKNOWN1 0x10 Nieznane 
-GG_UINFLAG_UNKNOWN2 0x20 Flaga spotykana, gdy u¿ytkownik staje siê niedostêpny 
-GG_UINFLAG_VOICE 0x40 U¿ytkownik mo¿e prowadziæ rozmowy g³osowe 
 
-    */
+	private int dajStatusBiz(int ggStatus) {
+		switch (ggStatus) {
+			case GGStatus.GG_STATUS_AVAIL:
+			case GGStatus.GG_STATUS_AVAIL_DESCR:
+				return Status.ON_LINE;
+			case GGStatus.GG_STATUS_BUSY:
+			case GGStatus.GG_STATUS_BUSY_DESCR:
+				return Status.BUSY;
+			case GGStatus.GG_STATUS_INVISIBLE:
+			case GGStatus.GG_STATUS_INVISIBLE_DESCR:
+				return Status.NOT_VISIBLE;
+			case GGStatus.GG_STATUS_NOT_AVAIL:
+			case GGStatus.GG_STATUS_NOT_AVAIL_DESCR:
+			default:
+				return Status.OFF_LINE;
+		}
+	}
 }

@@ -31,6 +31,8 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 
 import java.net.Socket;
+import java.util.Iterator;
+import java.util.Map;
 
 
 /**
@@ -49,7 +51,7 @@ import java.net.Socket;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * @version $Revision: 1.24 $
+ * @version $Revision: 1.25 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -276,7 +278,16 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
             case GG_NOTIFY_REPLY:
 
                 GGNotifyReply notify = new GGNotifyReply(keyBytes);
-
+                Map usersStatus = notify.getUsersState();
+                Iterator i = usersStatus.keySet().iterator();
+                if (userListener != null) { 
+	                while (i.hasNext()) {
+	                	IUser user = (User) i.next();
+	                	IStatus status = (Status) usersStatus.get(user);
+	                	userListener.userStatusChanged(user,status);
+	        			logger.debug("Uzytkownik "+user+" zmienil status: "+status);
+	                }
+                }
                 break;
 
             default:
