@@ -51,7 +51,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.19 2005-01-25 23:52:48 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.20 2005-01-28 22:21:24 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -60,8 +60,6 @@ public class Session implements ISession {
 	private SessionAccessor m_sessionAccessor = null; 
 	private Set m_sessionStateListeners = null;
 	private HashMap m_sessionAttributes;
-	
-	//private LoginContext m_loginContext = null;
 	
 	private DefaultConnectionService m_connectionService = null;
 	private DefaultLoginService m_loginService = null;
@@ -73,13 +71,7 @@ public class Session implements ISession {
 	
 	private HashMap m_proxies = new HashMap();
 	
-	//private IServer m_server = null;
-	
 	public Session() {
-		//if (server == null) throw new NullPointerException("server cannot be null");
-		//if (loginContext == null) throw new NullPointerException("loginContext cannot be null");
-		//m_server = server;
-		//m_loginContext = loginContext;
 		m_sessionAccessor = new SessionAccessor();
 		m_sessionAttributes = new HashMap();
 		m_sessionStateListeners = new HashSet();
@@ -95,14 +87,6 @@ public class Session implements ISession {
 	public SessionState getSessionState() {
 		return m_sessionState;
 	}
-	
-//	public IServer getServer() {
-//		return m_server;
-//	}
-	
-//	public LoginContext getLoginContext() {
-//		return m_loginContext;
-//	}
 	
 	public void addSessionStateListener(SessionStateListener sessionStateListener) {
 		if (sessionStateListener == null) throw new NullPointerException("sessionStateListener cannot be null.");
@@ -196,7 +180,13 @@ public class Session implements ISession {
 	 * @see pl.mn.communicator.ISession#getRegistrationService()
 	 */
 	public IRegistrationService getRegistrationService() {
-		return m_registrationService;
+		if (!m_proxies.containsKey(IRegistrationService.class.getName())) {
+			ClassLoader classLoader = Session.class.getClassLoader();
+			SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_registrationService);
+			IRegistrationService registrationServiceProxy = (IRegistrationService) Proxy.newProxyInstance(classLoader, new Class[]{IRegistrationService.class}, invocationHandler);
+			m_proxies.put(IRegistrationService.class.getName(), registrationServiceProxy);
+		}
+		return (IRegistrationService) m_proxies.get(IRegistrationService.class.getName());
 	}
 	
 	protected void notifySessionStateChanged(SessionState oldState, SessionState newState) {

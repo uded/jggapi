@@ -19,12 +19,11 @@ package pl.mn.communicator.packet.http;
 
 import java.io.IOException;
 
-
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractTokenRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
+ * @version $Id: AbstractTokenRequest.java,v 1.2 2005-01-28 22:19:05 winnetou25 Exp $
  */
 public abstract class AbstractTokenRequest extends HttpRequest {
 
