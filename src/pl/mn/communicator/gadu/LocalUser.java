@@ -23,13 +23,17 @@ import pl.mn.communicator.AbstractLocalUser;
 
 /**
  * U¿ytkownik lokalny gg.
- * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
-public final class LocalUser extends AbstractLocalUser{
+public final class LocalUser extends AbstractLocalUser {
 	private static Logger logger = Logger.getLogger(LocalUser.class);
+	/**
+	 * Tworz u¿ytkownika lokalnego.
+	 * @param userNo numer u¿ytkownika
+	 * @param password has³o u¿ytkownika
+	 */
 	public LocalUser(int userNo, String password) {
-		super(userNo,password);
+		super(userNo, password);
 	}
 }

@@ -20,7 +20,7 @@ package pl.mn.communicator.gadu;
 import pl.mn.communicator.IMessage;
 
 /**
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 class GGSendMsg implements GGOutgoingPackage {
@@ -36,7 +36,7 @@ class GGSendMsg implements GGOutgoingPackage {
 		this.text = message.getText();
 		seq = seqNo++;
 	}
-	
+
 	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
 	 */

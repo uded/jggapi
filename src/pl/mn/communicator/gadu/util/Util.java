@@ -18,15 +18,26 @@
 package pl.mn.communicator.gadu.util;
 
 /**
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
-public class Util {
-	public static String bytesToString(byte[] bytes){
+public final class Util {
+	/**
+	 * Prywatny konstruktor - nie twórz instancji.
+	 */
+	private Util() {
+	}
+
+	/**
+	 * Konwertuj bajty do stringa w postaci czytelnej.
+	 * @param bytes bajty do konwersji
+	 * @return String
+	 */
+	public static String bytesToString(byte[] bytes) {
 		StringBuffer odebrane = new StringBuffer();
 		odebrane.append("{");
 		for (int i = 0; i < bytes.length; i++) {
-			odebrane.append("'"+bytes[i]+"',");
+			odebrane.append("'" + bytes[i] + "',");
 		}
 		odebrane.append("}");
 		return odebrane.toString();

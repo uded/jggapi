@@ -21,7 +21,7 @@ import java.util.Date;
 
 /**
  * Status uzytkownika gg
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 class GGStatus implements GGOutgoingPackage {
@@ -49,16 +49,16 @@ class GGStatus implements GGOutgoingPackage {
 	public final static int GG_STATUS_BLOCKED = 0x00000006;
 	/** Maska bitowa oznaczajaca tryb tylko dla przyjaciol */
 	public final static int GG_STATUS_FRIENDS_MASK = 0x00008000;
-	
+
 	/**
 	 * Konstruktor statusu.
 	 * @param status status
 	 */
-	public GGStatus(int status){
+	public GGStatus(int status) {
 		this.status = status;
 		this.opis = new byte[0];
 	}
-	
+
 	/**
 	 * Konstruktor statusu.
 	 * @param status status
@@ -67,10 +67,10 @@ class GGStatus implements GGOutgoingPackage {
 	public GGStatus(int status, String opis) {
 		this.status = status;
 		if (opis.length() > 40)
-			opis = opis.substring(0,39);
+			opis = opis.substring(0, 39);
 		this.opis = opis.getBytes();
 	}
-	
+
 	/**
 	 * Konstruktor statusu.
 	 * @param status status
@@ -92,7 +92,7 @@ class GGStatus implements GGOutgoingPackage {
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
-		//return opis.length == 0 ? 4 : 4 + opis.length + 1; 
+		//return opis.length == 0 ? 4 : 4 + opis.length + 1;
 		return 4;
 	}
 
@@ -101,7 +101,7 @@ class GGStatus implements GGOutgoingPackage {
 	 */
 	public byte[] getContents() {
 		int statusToSend = 0;
-		switch(status){
+		switch(status) {
 			case Status.BUSY:
 				statusToSend = GG_STATUS_BUSY;
 				break;
@@ -113,6 +113,8 @@ class GGStatus implements GGOutgoingPackage {
 				break;
 			case Status.NOT_VISIBLE:
 				statusToSend = GG_STATUS_INVISIBLE;
+				break;
+			default:
 				break;
 		}
 

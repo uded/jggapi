@@ -25,8 +25,7 @@ import pl.mn.communicator.AbstractStatus;
 
 /**
  * Status u¿ytkownika gg.
- * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 public class Status extends AbstractStatus {
@@ -42,7 +41,7 @@ public class Status extends AbstractStatus {
 	public final static int BUSY = 6;
 
 	/**
-	 * @param status
+	 * @param status status u¿ytkownika
 	 */
 	public Status(int status) {
 		super(status);
@@ -50,13 +49,12 @@ public class Status extends AbstractStatus {
 
 	/**
 	 * Pobierz dostêpne statusy.
-	 * @return Map 
+	 * @return Map mapa dostêpnych statusów
 	 * @see pl.mn.communicator.AbstractStatus#getAvaiableStatuses()
 	 */
 	public Map getAvaiableStatuses() {
 		Map map = super.getAvaiableStatuses();
-		map.put(new Integer(Status.NOT_VISIBLE),"NOT VISIBLE");
-
+		map.put(new Integer(Status.NOT_VISIBLE), "NOT VISIBLE");
 		return map;
 	}
 

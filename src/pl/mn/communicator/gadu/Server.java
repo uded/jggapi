@@ -31,22 +31,26 @@ import pl.mn.communicator.ILocalUser;
 
 /**
  * Klasa z danymi dotycz±cymi serwera gg.
- * 
- * @version $Revision: 1.9 $
+ * @version $Revision: 1.10 $
  * @author mnaglik
  */
 public final class Server extends AbstractServer {
 	private static Logger logger = Logger.getLogger(Server.class);
+
+	/**
+	 * Twórz obiekt serwera.
+	 * @param address adres serwera
+	 * @param port port serwera
+	 */
 	public Server(String address, int port) {
 		super(address, port);
 	}
 
 	/**
 	 * Pobierz serwera gg ze strony www udostêpnionej na serwerze www gg.
-	 * 
 	 * @param user u¿ytkownik (potrzebny do stworzenia adresu)
 	 * @return Server serwer
-	 * @throws IOException
+	 * @throws IOException b³±d pobierania domy¶lnego serwera
 	 */
 	public static Server getDefaultServer(ILocalUser user) throws IOException {
 
@@ -64,6 +68,11 @@ public final class Server extends AbstractServer {
 		return parseAddress(line);
 	}
 
+	/**
+	 * Parsuj adres serwera.
+	 * @param line linia do parsowania
+	 * @return Server
+	 */
 	private static Server parseAddress(String line) {
 		StringTokenizer token = new StringTokenizer(line);
 		for (int i = 0; i < 3; i++)

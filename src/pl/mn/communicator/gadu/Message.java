@@ -23,20 +23,18 @@ import pl.mn.communicator.AbstractMessage;
 
 /**
  * Wiadomo¶æ gg.
- * 
- * @version $Revision: 1.6 $
+ * @version $Revision: 1.7 $
  * @author mnaglik
  */
 public final class Message extends AbstractMessage {
 	private static Logger logger = Logger.getLogger(Message.class);
-	
+
 	/**
 	 * Tworz wiadomo¶æ na podstawie adresata i tre¶ci.
-	 * 
 	 * @param toUser adresat wiadomo¶ci
 	 * @param text tre¶c wiadomo¶ci
 	 */
 	public Message(int toUser, String text) {
-		super(toUser,text);
+		super(toUser, text);
 	}
 }
