@@ -20,10 +20,10 @@ package pl.mn.communicator.gadu;
 /**
  * Wiadomosc otrzymana z serwera gg (tekstowa)
  * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
-class GGRecvMsg {
+class GGRecvMsg implements GGIncomingPackage {
 	private long sender;
 	private int seq;
 	private int time;
