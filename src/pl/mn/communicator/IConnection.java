@@ -109,7 +109,7 @@ public interface IConnection {
 	 * przesy³a informacje o zmianie statusu
 	 * @param userList
 	 */
-	public void sendMonitoredUserList(Collection userList);
+	public void sendMonitoredUserList(Collection userList) throws IOException;
 	
 	/**
 	 * Dodaj u¿ytkownika dla którego do u¿ytkowników monitorowanych.<br>
@@ -117,7 +117,7 @@ public interface IConnection {
 	 * statusu.
 	 * @param user
 	 */
-	public void addMonitoredUser(IUser user);
+	public void addMonitoredUser(IUser user) throws IOException;
 	
 	/**
 	 * Usuñ u¿ytkownika z listy u¿ytkowników monitorowanych.<br>
@@ -125,5 +125,5 @@ public interface IConnection {
 	 * o zmianie statusu.
 	 * @param user
 	 */
-	public void removeMonitoredUser(IUser user);
+	public void removeMonitoredUser(IUser user) throws IOException;
 }

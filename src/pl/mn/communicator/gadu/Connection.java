@@ -268,15 +268,15 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	/**
 	 * @see pl.mn.communicator.IConnection#sendMonitoredUserList(java.util.Collection)
 	 */
-	public void sendMonitoredUserList(Collection userList) {
+	public void sendMonitoredUserList(Collection userList) throws IOException {
 		// TODO implement sendMonitoredUserList
-		logger.error("nie zaimplementowano");
+		logger.error("nie zaimplementowano / rozmiar "+userList.size());
 	}
 
 	/**
 	 * @see pl.mn.communicator.IConnection#addMonitoredUser(pl.mn.communicator.IUser)
 	 */
-	public void addMonitoredUser(IUser user) {
+	public void addMonitoredUser(IUser user) throws IOException {
 		// TODO implement addMonitoredUser
 		logger.error("nie zaimplementowano");
 	}
@@ -284,7 +284,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	/**
 	 * @see pl.mn.communicator.IConnection#removeMonitoredUser(pl.mn.communicator.IUser)
 	 */
-	public void removeMonitoredUser(IUser user) {
+	public void removeMonitoredUser(IUser user) throws IOException {
 		// TODO implement removeMonitoredUser
 		logger.error("nie zaimplementowano");
 	}

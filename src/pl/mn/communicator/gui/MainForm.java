@@ -70,7 +70,7 @@ public class MainForm
 
 			IUser[] users = new User[u.getUserCount()];
 
-			Iterator i = u.getIterator();
+			Iterator i = u.getUsers().iterator();
 			int j = 0;
 			while (i.hasNext()) {
 				users[j++] = (IUser) i.next();
@@ -293,12 +293,11 @@ public class MainForm
 		logger.debug("ConnectionEstablished");
 		try {
 			connection.changeStatus(new Status(Status.ON_LINE));
+			connection.sendMonitoredUserList(usersData.getUsers());
 		} catch (IOException e) {
 			logger.error("Error changing status",e);
 		}
 
-		// TODO send user list
-		//connection.sendMonitoredUserList(usersData.);
 	}
 
 	/**
@@ -449,6 +448,11 @@ public class MainForm
 			usersData.removeUser(first);
 			usersViewer.refresh();
 			usersData.saveUsers();
+			try {
+				connection.removeMonitoredUser(first);
+			} catch (IOException e) {
+				logger.error("Error removing user from monitored user");
+			}
 		}
 	}
 
@@ -476,6 +480,11 @@ public class MainForm
 			usersData.addUser(userForm.getUser());
 			usersViewer.refresh();
 			usersData.saveUsers();
+			try {
+				connection.addMonitoredUser(userForm.getUser());
+			} catch (IOException e) {
+				logger.error("Error adding user to monitored user");
+			}
 		}
 	}
 

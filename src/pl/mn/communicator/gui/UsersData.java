@@ -63,8 +63,8 @@ public class UsersData{
 		}
 	}
 
-	public Iterator getIterator() {
-		return users.iterator();
+	public Collection getUsers() {
+		return users;
 	}
 
 	public int getUserCount() {
