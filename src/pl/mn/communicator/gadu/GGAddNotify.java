@@ -19,9 +19,8 @@ package pl.mn.communicator.gadu;
 
 /**
  * Pakiet dodaj±cy konkretnego u¿ytkownika do listy montorowancyh u¿ytkowników.
- * 
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 class GGAddNotify implements GGOutgoingPackage {

@@ -19,8 +19,7 @@ package pl.mn.communicator.gadu;
 
 /**
  * Wiadomosc otrzymana z serwera gg (tekstowa)
- * 
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 class GGRecvMsg implements GGIncomingPackage {
@@ -64,7 +63,7 @@ class GGRecvMsg implements GGIncomingPackage {
 	 * @return int
 	 */
 	public int getSender() {
-		return (int)sender;
+		return (int) sender;
 	}
 
 	/**

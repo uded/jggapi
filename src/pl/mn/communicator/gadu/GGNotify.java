@@ -21,18 +21,17 @@ import pl.mn.communicator.IUser;
 
 /**
  * Pakiet informuj±cy serwer rozmów o monitorowanym u¿ytkowniku.
- * 
  * @see pl.mn.communicator.gadu.GGNotifyReply
- * @version $Revision: 1.8 $
+ * @version $Revision: 1.9 $
  * @author mnaglik
  */
 class GGNotify implements GGOutgoingPackage {
 	public static final int GG_USER_OFFLINE = 0x01;
 	public static final int GG_USER_NORMAL = 0x03;
 	public static final int GG_USER_BLOCKED = 0x04;
-	
+
 	private IUser[] users;
-	
+
 	/**
 	 * Tworzy pakiet <code>GGNotify</code> na podstawie listy u¿ytkowników.
 	 * @param users lista u¿ytkowników
@@ -49,7 +48,7 @@ class GGNotify implements GGOutgoingPackage {
 		this.users = new IUser[1];
 		this.users[0] = users;
 	}
-		
+
 	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
 	 */
@@ -72,5 +71,4 @@ class GGNotify implements GGOutgoingPackage {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

@@ -19,7 +19,6 @@ package pl.mn.communicator.gadu;
 
 /**
  * Pakiet wysy³any gdy nie mamy nikogo na li¶cie u¿ytkowników.
- * 
  * @author mnaglik
  */
 class GGListEmpty implements GGOutgoingPackage {

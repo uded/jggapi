@@ -18,24 +18,36 @@
 package pl.mn.communicator.gadu;
 
 /**
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
-class GGConversion {
+final class GGConversion {
+	/**
+	 * Prywatny konstruktor. 
+	 */
 	private GGConversion() {
-		// prywatny konstruktor po to,
-		// zeby nie tworzyc instancji klasy
 	}
-	
+
+	/**
+	 * Zamien tabice bajtów na integer.
+	 * @param buf tablica bajtów
+	 * @return int
+	 */
 	public static int byteToInt(byte[] buf) {
 		return byteToInt(buf, 0);
 	}
 
+	/**
+	 * Zamien tablice bajtów na integer zaczynaj±c od pozycji start.
+	 * @param buf tablica bajtów
+	 * @param start pozycja od której tablica jest czytana
+	 * @return int
+	 */
 	public static int byteToInt(byte[] buf, int start) {
 		int i = 0;
 		int pos = start;
 
-		int tmp,plus=0;
+		int tmp, plus = 0;
 		tmp = unsignedByteToInt(buf[pos++]) << 0;
 		i += tmp;
 		tmp = unsignedByteToInt(buf[pos++]) << 8;
@@ -48,6 +60,11 @@ class GGConversion {
 		return i;
 	}
 
+	/**
+	 * 
+	 * @param i
+	 * @return
+	 */
 	public static int unsignedByteToInt(byte i) {
 		if (i < 0)
 			return (i & 0x7F) + 0x80;

@@ -19,17 +19,19 @@ package pl.mn.communicator.gadu;
 
 /**
  * Pakiet wychodz±cy typu ping, okresowo wysy³any do serwera.
- * 
- * @version $Revision: 1.4 $
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
-class GGPing implements GGOutgoingPackage {
+final class GGPing implements GGOutgoingPackage {
 	private byte[] data;
 	private static GGPing ggPing = new GGPing();
 
-	private GGPing(){
-		// SINGLETON use getPing instead
+	/**
+	 * Prywatny konstruktor.
+	 */
+	private GGPing() {
 	}
+	
 	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getHeader()
 	 */
@@ -43,7 +45,7 @@ class GGPing implements GGOutgoingPackage {
 	public int getLength() {
 		return 0x00;
 	}
-	
+
 	/**
 	 * @see pl.mn.communicator.gadu.GGOutgoingPackage#getContents()
 	 */

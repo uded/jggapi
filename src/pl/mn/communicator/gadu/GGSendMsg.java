@@ -20,13 +20,13 @@ package pl.mn.communicator.gadu;
 import pl.mn.communicator.IMessage;
 
 /**
- * @version $Revision: 1.5 $
+ * @version $Revision: 1.6 $
  * @author mnaglik
  */
 class GGSendMsg implements GGOutgoingPackage {
 	private int user;
 	private String text;
-	
+
 	private static int seqNo;
 	private int seq;
 	private int msgClass = 0x0004;

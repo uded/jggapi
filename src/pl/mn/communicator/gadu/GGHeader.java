@@ -18,9 +18,8 @@
 package pl.mn.communicator.gadu;
 
 /**
- * Naglowek wiadomosci gg
- * 
- * @version $Revision: 1.4 $
+ * Naglowek wiadomosci gg.
+ * @version $Revision: 1.5 $
  * @author mnaglik
  */
 class GGHeader {
@@ -30,6 +29,7 @@ class GGHeader {
 
 	/**
 	 * Constructor for Header.
+	 * @param data dane naglowka
 	 */
 	public GGHeader(byte[] data) {
 		this.type = GGConversion.byteToInt(data, 0);

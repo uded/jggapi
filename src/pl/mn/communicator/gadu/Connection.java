@@ -21,7 +21,6 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
@@ -50,8 +49,7 @@ import pl.mn.communicator.gadu.util.Util;
  * &nbsp; &nbsp; ...<BR>
  * }
  * </code>
- * 
- * @version $Revision: 1.14 $
+ * @version $Revision: 1.15 $
  * @author mnaglik
  */
 public final class Connection extends pl.mn.communicator.AbstractConnection {
@@ -65,7 +63,6 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	private boolean isConnected = false;
 	/**
 	 * Konstruktor polaczenia z serwerem gg.
-	 * 
 	 * @param server serwer gg.
 	 * @param localUser uzytkownik gg.
 	 */
@@ -81,18 +78,16 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	 * Próbuje ³±czyæ siê z serwerem gg, na podstawie danych<BR>
 	 * z konstruktora.<BR>
 	 * W wypadku niepowodzenie wyrzuca odpowiednie wyj±tki
-	 * 
-	 * @throws UnknownHostException nieznany serwer 
-	 * @throws IOException nie powiodla siê próba po³±czenia - nie ma po³±czenia sieciowego?
+	 * @throws IOException nie powiodla siê próba po³±czenia
+	 * - nie ma po³±czenia sieciowego?
 	 */
-	public void connect() throws UnknownHostException, IOException {
+	public void connect() throws IOException {
 		connectionThread.openConnection();
 		isConnected = true;
 	}
 
 	/**
 	 * Zamyka po³±czenie z serwerem gg.
-	 * 
 	 * @throws IOException b³±d przy zamykaniu po³±czenia
 	 */
 	public void disconnect() throws IOException {
@@ -103,25 +98,26 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 
 	/**
 	 * Wy¶lij wiadomo¶æ do serwera gg.
-	 * 
 	 * @see Message
 	 * @param message wiadomo¶æ do wys³ania.
+	 * @throws IOException b³±d wysy³ania wiadomo¶ci
 	 */
 	public void sendMessage(IMessage message) throws IOException {
-		if (isConnected){
+		if (isConnected) {
 			GGSendMsg messageOut = new GGSendMsg(message);
 			connectionThread.sendPackage(messageOut);
 		}
 	}
-	
+
 	/**
 	 * Zmien aktualny status.<BR>
-	 * 
 	 * @param status - kolejny status
+	 * @throws IOException {@inheritDoc}
 	 */
-	public void changeStatus(IStatus status) throws IOException{
-		if (isConnected){
-			GGStatus newStatus = new GGStatus(status.getStatus(),"juz jestem");
+	public void changeStatus(IStatus status) throws IOException {
+		if (isConnected) {
+			GGStatus newStatus
+				= new GGStatus(status.getStatus(), "estem");
 			connectionThread.sendPackage(newStatus);
 		}
 	}
@@ -131,6 +127,15 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	 * @author mnaglik
 	 */
 	private class ConnectionThread implements Runnable {
+		private final static int HEADER_LENGTH = 8;
+		private final static int PING_COUNT = 200;
+		private final static int THREAD_SLEEP_TIME = 100;
+		
+		private final static int GG_PACKAGE_WELCOME = 1;
+		private final static int GG_PACKAGE_LOGIN_OK = 3;
+		private final static int GG_PACKAGE_LOGIN_ERROR = 9;
+		private final static int GG_PACKAGE_MESSAGE = 10;
+		private final static int GG_PACKAGE_CONNECTION_ERROR = 11;
 		private Socket socket;
 		private Thread thread;
 		private BufferedInputStream dataInput;
@@ -142,7 +147,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 		public void run() {
 			logger.debug("Run...");
 
-			byte[] headerData = new byte[8];
+			byte[] headerData = new byte[HEADER_LENGTH];
 
 			try {
 				while (thread != null) {
@@ -153,7 +158,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 					} else {
 
 						pingTimeCount++;
-						if (pingTimeCount > 200) {
+						if (pingTimeCount > PING_COUNT) {
 							// TODO poprawne wysylanie pinga
 							//sendPackage(GGPing.getPing());
 							logger.debug("Ping...");
@@ -161,12 +166,12 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 						}
 
 					}
-					Thread.sleep(100);
+					Thread.sleep(THREAD_SLEEP_TIME);
 				}
 			} catch (IOException e) {
-				logger.error(e,e);
+				logger.error(e, e);
 			} catch (InterruptedException e) {
-				logger.error(e,e);
+				logger.error(e, e);
 			} finally {
 				logger.debug("Doing finally");
 				try {
@@ -181,16 +186,15 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 		/**
 		 * Dekoduje pakiet i wywoluje odpowiednia metode
 		 * z konkretnego listenera
-		 * 
 		 * @param ggHeader naglowek wiadomosci
-		 * @throws IOException
+		 * @throws IOException b³±d dekodowania pakietu
 		 */
 		private void decodePocket(GGHeader ggHeader) throws IOException {
 			byte[] keyBytes = new byte[ggHeader.getLength()];
 			dataInput.read(keyBytes);
-			logger.debug("Pakiet przychodzacy: "+Util.bytesToString(keyBytes));
+			logger.debug("Pakiet przychodzacy: " + Util.bytesToString(keyBytes));
 			switch (ggHeader.getType()) {
-				case 1 :
+				case GG_PACKAGE_WELCOME :
 
 					GGWelcome ggWelcome = new GGWelcome(keyBytes);
 					GGLogin ggLogin =
@@ -201,28 +205,32 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 							ggWelcome);
 					sendPackage(ggLogin);
 					break;
-				case 3 :
-					if (connectionListener != null)
+				case GG_PACKAGE_LOGIN_OK :
+					if (connectionListener != null) {
 						connectionListener.connectionEstablished();
+					}
 					logger.debug("Login OK");
 					changeStatus(new Status(Status.ON_LINE));
 					break;
-				case 9 :
-					if (connectionListener != null)
+				case GG_PACKAGE_LOGIN_ERROR :
+					if (connectionListener != null) {
 						connectionListener.connectionError("9");
+					}
 					logger.debug("Loggin ERROR");
 					this.closeConnection();
 					break;
-				case 10 :
+				case GG_PACKAGE_MESSAGE :
 					GGRecvMsg message = new GGRecvMsg(keyBytes);
-					
-					IMessage messageOut = new Message(message.getSender(),message.getMessage());
-					if (messageListener != null)
+					IMessage messageOut = new Message(message.getSender(),
+							message.getMessage());
+					if (messageListener != null) {
 						messageListener.messageArrived(messageOut);
+					}
 					break;
-				case 11 :
-					if (connectionListener != null)
+				case GG_PACKAGE_CONNECTION_ERROR :
+					if (connectionListener != null) {
 						connectionListener.connectionError("11");
+					}
 					logger.debug("Error logging 11");
 					this.closeConnection();
 					break;
@@ -233,15 +241,19 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 
 		}
 
-		private synchronized void sendPackage(GGOutgoingPackage outgoingPackage) {
+		/**
+		 * @param outgoingPackage pakiet wychodz±cy
+		 */
+		private synchronized void sendPackage(
+				GGOutgoingPackage outgoingPackage) {
 			int header = outgoingPackage.getHeader();
 			int length = outgoingPackage.getLength();
-			
+
 			byte [] contents = outgoingPackage.getContents();
-		
+
 			try {
 				dataOutput.write(GGConversion.intToByte(header));
-				if (length>0){
+				if (length > 0) {
 					dataOutput.write(GGConversion.intToByte(length));
 					dataOutput.write(contents);
 				}
@@ -250,15 +262,13 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 				e.printStackTrace();
 			}
 		}
-		
+
 		/**
 		 * Otworz polaczenie
-		 * 
 		 * @throws UnknownHostException
-		 * @throws IOException
+		 * @throws IOException b³±d otwierania po³±czenia
 		 */
-		private void openConnection()
-			throws UnknownHostException, IOException {
+		private void openConnection() throws IOException {
 
 			socket = new Socket(server.getAddress(), server.getPort());
 
@@ -272,8 +282,7 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 
 		/**
 		 * Zamknij polaczenie
-		 * 
-		 * @throws IOException
+		 * @throws IOException b³±d zamykania po³±czenia
 		 */
 		private void closeConnection() throws IOException {
 			thread = null;
@@ -284,27 +293,26 @@ public final class Connection extends pl.mn.communicator.AbstractConnection {
 	}
 
 	/**
-	 * @see pl.mn.communicator.IConnection#sendMonitoredUserList(java.util.Collection)
+	 * @see pl.mn.communicator.IConnection
+	 * #sendMonitoredUserList(java.util.Collection)
 	 */
 	public void sendMonitoredUserList(Collection userList) throws IOException {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
-	 * @see pl.mn.communicator.IConnection#addMonitoredUser(pl.mn.communicator.IUser)
+	 * @see pl.mn.communicator.IConnection
+	 * #addMonitoredUser(pl.mn.communicator.IUser)
 	 */
 	public void addMonitoredUser(IUser user) throws IOException {
 		// TODO Auto-generated method stub
-		
 	}
 
 	/**
-	 * @see pl.mn.communicator.IConnection#removeMonitoredUser(pl.mn.communicator.IUser)
+	 * @see pl.mn.communicator.IConnection
+	 * #removeMonitoredUser(pl.mn.communicator.IUser)
 	 */
 	public void removeMonitoredUser(IUser user) throws IOException {
 		// TODO Auto-generated method stub
-		
 	}
-
 }
