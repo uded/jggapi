@@ -22,6 +22,7 @@ import java.util.HashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.mn.communicator.GGException;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGDisconnecting;
 import pl.mn.communicator.packet.in.GGLoginFailed;
@@ -41,7 +42,7 @@ import pl.mn.communicator.packet.in.GGWelcome;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PacketChain.java,v 1.7 2005-01-25 23:53:01 winnetou25 Exp $
+ * @version $Id: PacketChain.java,v 1.9 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class PacketChain {
 
@@ -63,7 +64,7 @@ public class PacketChain {
 		m_packetHandlers.remove(new Integer(packetType));
 	}
 	
-	public void sendToChain(Context packageContent) {
+	public void sendToChain(PacketContext packageContent) throws GGException {
 		PacketHandler packetHandler = (PacketHandler) m_packetHandlers.get(new Integer(packageContent.getHeader().getType()));
 		if (packetHandler == null) {
 			logger.error("Unknown package.");

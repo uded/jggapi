@@ -2,9 +2,9 @@ import java.io.IOException;
 import java.util.Collection;
 
 import pl.mn.communicator.GGException;
+import pl.mn.communicator.IGroupChat;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.ISession;
-import pl.mn.communicator.ISingleChat;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LoginContext;
@@ -13,8 +13,6 @@ import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.Server;
 import pl.mn.communicator.SessionState;
-import pl.mn.communicator.User;
-import pl.mn.communicator.User.UserMode;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.event.LoginListener;
@@ -42,19 +40,22 @@ public class Main2 {
 	public static void main(String args[]) throws IOException, GGException {
 
 		final ISession session = new Session();
-		
+
+		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
+
 		session.addSessionStateListener(new SessionStateListener(){
 
 			public void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState) {
-				System.out.println("session state changed, oldState: "+oldSessionState+",newState: "+newSessionState);
+				System.out.println("session state changed, oldState: "+oldSessionState+", newState: "+newSessionState);
 			}
 			
 		});
 		
 		session.getConnectionService().addConnectionListener(new ConnectionListener.Stub() {
 
-			public void connectionEstablished() {
+			public void connectionEstablished() throws GGException {
 				System.out.println("Connection established.");
+				session.getLoginService().login(loginContext);
 			}
 
 			public void connectionClosed() {
@@ -68,11 +69,15 @@ public class Main2 {
 		});
 		session.getLoginService().addLoginListener(new LoginListener() {
 
-			public void loginOK() {
+			public void loginOK() throws GGException {
 				System.out.println("Login OK.");
+				IGroupChat groupChat = session.getMessageService().createGroupChat(new int[0]);
+				groupChat.addRecipient(376712);
+				groupChat.addRecipient(1136132);
+				groupChat.sendMessage("test1");
 			}
 
-			public void loginFailed() {
+			public void loginFailed() throws GGException {
 				System.out.println("Login Failed.");
 			}
 			
@@ -139,20 +144,17 @@ public class Main2 {
 			
 		});
 		
-		IUser acze = new User(1136132, UserMode.BUDDY);
-		IUser jaffa = new User(1542863, UserMode.BUDDY);
-		IUser mati = new User(376798, UserMode.BUDDY);
-
-		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
-		loginContext.getStatus().setFriendsOnly(true);
-		
-		loginContext.getMonitoredUsers().add(acze);
-		loginContext.getMonitoredUsers().add(jaffa);
-		loginContext.getMonitoredUsers().add(mati);
-
  		session.getConnectionService().connect(Server.getDefaultServer(loginContext.getUin()));
-		session.getLoginService().login(loginContext);
+
+//		IUser acze = new User(1136132, UserMode.BUDDY);
+//		IUser jaffa = new User(1542863, UserMode.BUDDY);
+//		IUser mati = new User(376798, UserMode.BUDDY);
+//
 		
+//		loginContext.getMonitoredUsers().add(acze);
+//		loginContext.getMonitoredUsers().add(jaffa);
+//		loginContext.getMonitoredUsers().add(mati);
+
 //		session.getPublicDirectoryService().readFromPublicDirectory();
 //		PublicDirInfo publicDirInfo = new PublicDirInfo();
 //		publicDirInfo.setFirstName("Piotr");
@@ -180,10 +182,10 @@ public class Main2 {
 //		status.setFriendsOnly(true);
 //		session.getPresenceService().setStatus(status);
 //		
-		ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
-		matiChat.sendMessage("body");
-		matiChat.sendMessage("dupka");
-		
+//		ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
+//		matiChat.sendMessage("body");
+//		matiChat.sendMessage("dupka");
+
 //		OutgoingMessage.createNewMessage(376798, "body");
 //		session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
 //		session.getMessageService().sendMessage(OutgoingMessage.createMessage(376798, String.valueOf(System.currentTimeMillis())));
@@ -217,8 +219,8 @@ public class Main2 {
 //		user1.setUserMode(GGUserMode.FRIEND);
 //		session.getPresenceService().changeMonitoredUserStatus(user1);
 
-		session.getLoginService().logout();
-		session.getConnectionService().disconnect();
+//		session.getLoginService().logout();
+//		session.getConnectionService().disconnect();
 	}
 	
 }

@@ -28,6 +28,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import pl.mn.communicator.GGException;
 import pl.mn.communicator.IConnectionService;
 import pl.mn.communicator.IContactListService;
 import pl.mn.communicator.ILoginService;
@@ -51,7 +52,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.20 2005-01-28 22:21:24 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.21 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -220,11 +221,11 @@ public class Session implements ISession {
 			m_connectionService.sendPackage(outgoingPackage);
 		}
 		
-		public void notifyConnectionEstablished() {
+		public void notifyConnectionEstablished() throws GGException {
 			m_connectionService.notifyConnectionEstablished();
 		}
 
-		public void notifyConnectionClosed() {
+		public void notifyConnectionClosed() throws GGException {
 			m_connectionService.notifyConnectionClosed();
 		}
 
@@ -236,11 +237,11 @@ public class Session implements ISession {
 			m_connectionService.notifyPongReceived();
 		}
 
-		public void notifyLoginOK() {
+		public void notifyLoginOK() throws GGException {
 			m_loginService.notifyLoginOK();
 		}
 		
-		public void notifyLoginFailed() {
+		public void notifyLoginFailed() throws GGException {
 			m_loginService.notifyLoginFailed();
 		}
 
@@ -290,10 +291,6 @@ public class Session implements ISession {
 			return seedInteger.intValue();
 		}
 
-//		public LoginContext getLoginContext() {
-//			return m_loginContext;
-//		}
-		
 	}
 
 	private final static class SessionInvocationHandler implements InvocationHandler {

@@ -21,10 +21,14 @@ package pl.mn.communicator;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IGroupChat.java,v 1.1 2005-01-29 13:20:26 winnetou25 Exp $
+ * @version $Id: IGroupChat.java,v 1.2 2005-01-29 15:22:04 winnetou25 Exp $
  */
 public interface IGroupChat extends IChat {
 
-	int[] getUins();
+	void addRecipient(int recipientUin);
+	
+	void removeRecipient(int recipientUin);
+
+	int[] getRecipientUins();
 
 }

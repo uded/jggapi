@@ -46,7 +46,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.11 2005-01-25 23:53:01 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.13 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -63,6 +63,9 @@ public class DefaultConnectionService implements IConnectionService {
 	/** thread that monitors connection */
 	private ConnectionThread m_connectionThread = null;
 	
+	/** the thread that pings the connection to keep it alive */
+	private PingerThread m_connectionPinger = null;
+	
 	private IServer m_server = null;
 	
 	//friendly
@@ -70,6 +73,7 @@ public class DefaultConnectionService implements IConnectionService {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
 		m_connectionThread = new ConnectionThread();
+		m_connectionPinger = new PingerThread();
 		m_packetChain = new PacketChain();
 	}
 	
@@ -83,6 +87,7 @@ public class DefaultConnectionService implements IConnectionService {
 		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
 		try {
 			m_connectionThread.openConnection(server.getAddress(), server.getPort());
+			m_connectionPinger.startPinging();
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTED);
 		} catch (IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
@@ -97,12 +102,15 @@ public class DefaultConnectionService implements IConnectionService {
 		checkDisconnectionState();
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 		try {
+			m_connectionPinger.stopPinging();
 			m_connectionThread.closeConnection();
 			notifyConnectionClosed();
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 			m_server = null;
 		} catch (IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
+		} catch (GGException ex) {
+			logger.error("Unable to close connection", ex);
 		}
 	}
 	
@@ -156,7 +164,7 @@ public class DefaultConnectionService implements IConnectionService {
 	}
 
 	//TODO clone the list of listeners
-    protected void notifyConnectionEstablished() {
+    protected void notifyConnectionEstablished() throws GGException {
     	m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
     	ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
     	for (int i=0; i<connectionListeners.length; i++) {
@@ -167,7 +175,7 @@ public class DefaultConnectionService implements IConnectionService {
     }
 
 	//TODO clone the list of listeners
-    protected void notifyConnectionClosed() {
+    protected void notifyConnectionClosed() throws GGException {
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 		ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
 		for (int i=0; i<connectionListeners.length; i++) {
@@ -241,14 +249,12 @@ public class DefaultConnectionService implements IConnectionService {
     private class ConnectionThread extends Thread {
     	
 		private static final int HEADER_LENGTH = 8;
-		private static final int PING_COUNT = 25;
 		private static final int THREAD_SLEEP_TIME = 500;
     	
     	private Socket m_socket = null;
     	private BufferedInputStream m_dataInput = null;
     	private BufferedOutputStream m_dataOutput = null;
     	private boolean m_active = true;
-    	private int m_pingCount = 0;
     	
     	public void run() {
     		try {
@@ -257,13 +263,11 @@ public class DefaultConnectionService implements IConnectionService {
     		   		if (m_dataInput.available() > 0) {
        					m_dataInput.read(headerData);
        					decodePacket(new GGHeader(headerData));
-    		   		} else {
-    		   			ping();
     		   		}
     				Thread.sleep(THREAD_SLEEP_TIME);
     			}
     		} catch (Exception ex) {
-    			logger.error("connection error: "+ex);
+    			logger.error("Connection error: "+ex);
     			notifyConnectionError(ex);
     		}
     	}
@@ -287,26 +291,57 @@ public class DefaultConnectionService implements IConnectionService {
     		m_dataOutput.write(GGUtils.intToByte(packetType));
     		m_dataOutput.write(GGUtils.intToByte(length));
     		
-    		if (length > 0) m_dataOutput.write(packageContent);
+    		if (length > 0) {
+    			m_dataOutput.write(packageContent);
+    		}
 
     		m_dataOutput.flush();
     	}
     	
-		private void ping() throws IOException {
-			if (++m_pingCount > PING_COUNT) {
-				logger.debug("Pinging...");
-				DefaultConnectionService.this.sendPackage(GGPing.getPing());
-				m_pingCount = 0;
-			}
-		}
-		
-		private void decodePacket(GGHeader header) throws IOException {
+		private void decodePacket(GGHeader header) throws IOException, GGException {
 			byte[] keyBytes = new byte[header.getLength()];
 			m_dataInput.read(keyBytes);
-			Context context = new Context(m_session, header, keyBytes);
+			PacketContext context = new PacketContext(m_session, header, keyBytes);
 			m_packetChain.sendToChain(context);
 		}
 		
+    }
+    
+    private class PingerThread extends Thread {
+    	
+    	private static final int PING_COUNT = 10;
+    	private int m_pingCount = 0;
+    	private boolean m_active = true;
+		private static final int THREAD_SLEEP_TIME = 1000;
+    	
+    	/**
+    	 * @see java.lang.Thread#run()
+    	 */
+		public void run() {
+			while (m_active) {
+				try {
+					if (++m_pingCount > PING_COUNT) {
+						logger.debug("Pinging...");
+						DefaultConnectionService.this.sendPackage(GGPing.getPing());
+						m_pingCount = 0;
+					}
+					Thread.sleep(THREAD_SLEEP_TIME);
+				} catch (IOException ex) {
+					logger.error("Connection error: "+ex);
+					notifyConnectionError(ex);
+				} catch (InterruptedException ex) {
+					logger.debug("Someone interrupted pinger thread");
+				}
+			}
+		}
+    	
+    	private void startPinging() {
+    		start();
+    	}
+    	
+    	private void stopPinging() {
+    		m_active = false;
+    	}
     }
 
 }

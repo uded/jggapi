@@ -20,6 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.mn.communicator.GGException;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.packet.GGUtils;
@@ -29,7 +30,7 @@ import pl.mn.communicator.packet.in.GGPubdirReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReplyPacketHandler.java,v 1.16 2005-01-25 23:53:01 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.18 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 
@@ -38,7 +39,7 @@ public class GGPubdirReplyPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(Context context) {
+	public void handle(PacketContext context) throws GGException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Received GGPubdirReply packet.");
 			logger.debug("PacketHeader: "+context.getHeader());

@@ -23,6 +23,7 @@ import java.util.Map;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.mn.communicator.GGException;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.packet.GGUtils;
@@ -32,7 +33,7 @@ import pl.mn.communicator.packet.in.GGNotifyReply;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReplyPacketHandler.java,v 1.10 2005-01-25 23:53:01 winnetou25 Exp $
+ * @version $Id: GGNotifyReplyPacketHandler.java,v 1.12 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class GGNotifyReplyPacketHandler implements PacketHandler {
 
@@ -41,7 +42,7 @@ public class GGNotifyReplyPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(Context context) {
+	public void handle(PacketContext context) throws GGException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("NotifyPacketReply received.");
 			logger.debug("PacketHeader: "+context.getHeader());

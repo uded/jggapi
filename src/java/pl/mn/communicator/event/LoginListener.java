@@ -19,6 +19,8 @@ package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
+import pl.mn.communicator.GGException;
+
 /**
  * The listener interface that is related with login related events.
  * <p>
@@ -28,7 +30,7 @@ import java.util.EventListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginListener.java,v 1.9 2004-12-26 22:08:31 winnetou25 Exp $
+ * @version $Id: LoginListener.java,v 1.10 2005-01-29 15:22:04 winnetou25 Exp $
  */
 public interface LoginListener extends EventListener {
 	
@@ -36,25 +38,25 @@ public interface LoginListener extends EventListener {
 	 * Messaged when user has successfully
 	 * logged in to Gadu-Gadu server.
 	 */
-	void loginOK();
+	void loginOK() throws GGException;
 	
 	/** 
 	 * Messaged when there was an error while logging in,
 	 * most probably because of an incorrect password.
 	 */
-	void loginFailed();
+	void loginFailed() throws GGException;
 	
 	public static class Stub implements LoginListener {
 		
 		/**
 		 * @see pl.mn.communicator.event.LoginListener#loginOK()
 		 */
-		public void loginOK() { }
+		public void loginOK() throws GGException { }
 		
 		/**
 		 * @see pl.mn.communicator.event.LoginListener#loginFailed()
 		 */
-		public void loginFailed() { }
+		public void loginFailed() throws GGException { }
 
 	}
 	

@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import pl.mn.communicator.GGException;
@@ -27,46 +28,73 @@ import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.event.MessageListener;
+import pl.mn.communicator.packet.out.GGSendMsg;
 
 /**
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GroupChat.java,v 1.1 2005-01-29 13:20:05 winnetou25 Exp $
+ * @version $Id: GroupChat.java,v 1.2 2005-01-29 15:22:04 winnetou25 Exp $
  */
 public class GroupChat extends AbstractChat implements IGroupChat {
 	
-	private int[] m_uins = new int[0]; //users with whom we chat
+	private ArrayList m_recipientUins = new ArrayList(); //users with whom we chat
 	
 	//friendly
-	GroupChat(ISession session, int[] uins) {
-		super(session);
-		if (uins == null) throw new NullPointerException("uins cannot be null");
-		m_uins = uins;
+	GroupChat(ISession session) {
+		this(session, new int[0]);
 	}
-	
+
+	GroupChat(ISession session, int[] recipientUins) {
+		super(session);
+		for (int i=0; i<recipientUins.length; i++) {
+			addRecipient(recipientUins[i]);
+		}
+	}
+
 	public IChat sendMessage(String messageBody) throws GGException {
 		if (messageBody == null) throw new NullPointerException("messageBody cannot be less than 0");
-		for (int i=0; i<m_uins.length; i++) {
-			int uin = m_uins[i];
-			m_session.getMessageService().sendMessage(OutgoingMessage.createChatMessage(uin, messageBody));
+
+		if (m_recipientUins.isEmpty()) {
+			throw new GGException("Unable to send message, at least one recipient is required");
+		}
+		
+		int recipientUin = ((Integer)m_recipientUins.get(0)).intValue();
+		GGSendMsg sendMsg = new GGSendMsg(OutgoingMessage.createChatMessage(recipientUin, messageBody));
+
+		for (int i=1; i<m_recipientUins.size(); i++) {
+			int recipient = ((Integer)m_recipientUins.get(i)).intValue();
+			sendMsg.addRecipient(recipient);
 		}
 		
 		return this;
 	}
 
-//	/**
+	
+	public void addRecipient(int recipientUin) {
+		m_recipientUins.add(new Integer(recipientUin));
+	}
+	
+	public void removeRecipient(int recipientUin) {
+		m_recipientUins.remove(new Integer(recipientUin));
+	}
+
+	public int[] getRecipientUins() {
+		int[] recipientUins = new int[m_recipientUins.size()];
+		for (int i=0; i<m_recipientUins.size(); i++) {
+			recipientUins[i] = ((Integer)m_recipientUins.get(i)).intValue();
+		}
+		return recipientUins;
+	}
+
+	//	/**
 //	 * @see pl.mn.communicator.IChat#nextMessage()
 //	 */
 //	public IMessage nextMessage() {
 //		// TODO Auto-generated method stub
 //		return null;
 //	}
-	
-	public int[] getUins() {
-		return m_uins;
-	}
-	
+
 	/**
 	 * @see pl.mn.communicator.packet.handlers.AbstractChat#getMessageHandler()
 	 */
@@ -109,8 +137,8 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		}
 		
 		private boolean isInThisGroupChat(int uin) {
-			for (int i=0; i<m_uins.length; i++) {
-				if (uin == m_uins[i]) {
+			for (int i=0; i<m_recipientUins.size(); i++) {
+				if (uin == ((Integer)m_recipientUins.get(i)).intValue()) {
 					return true;
 				}
 			}

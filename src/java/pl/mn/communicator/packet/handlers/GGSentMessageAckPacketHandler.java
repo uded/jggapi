@@ -20,6 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.mn.communicator.GGException;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGSendMsgAck;
@@ -28,7 +29,7 @@ import pl.mn.communicator.packet.in.GGSendMsgAck;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSentMessageAckPacketHandler.java,v 1.10 2005-01-25 23:52:31 winnetou25 Exp $
+ * @version $Id: GGSentMessageAckPacketHandler.java,v 1.12 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class GGSentMessageAckPacketHandler implements PacketHandler {
 
@@ -37,7 +38,7 @@ public class GGSentMessageAckPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(Context context) {
+	public void handle(PacketContext context) throws GGException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("GGSentMessageAck packet received.");
 			logger.debug("PacketHeader: "+context.getHeader());
@@ -45,7 +46,7 @@ public class GGSentMessageAckPacketHandler implements PacketHandler {
 		}
 		GGSendMsgAck sendMessageAck = new GGSendMsgAck(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(sendMessageAck);
-		int uin  = sendMessageAck.getRecipientUin();
+		int uin = sendMessageAck.getRecipientUin();
 		int messageID = sendMessageAck.getMessageSeq();
 		MessageStatus messageStatus = GGUtils.getClientMessageStatus(sendMessageAck.getMessageStatus());
 		context.getSessionAccessor().notifyMessageDelivered(uin, messageID, messageStatus);

@@ -40,7 +40,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.12 2005-01-25 23:53:01 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.13 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -157,7 +157,7 @@ public class DefaultLoginService implements ILoginService {
 		m_loginListeners.remove(loginListener);
 	}
 	
-	protected void notifyLoginOK() {
+	protected void notifyLoginOK() throws GGException {
 		m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_IN);
 		for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {
 			LoginListener loginListener = (LoginListener) it.next();
@@ -165,14 +165,14 @@ public class DefaultLoginService implements ILoginService {
 		}
 	}
 	
-	private void checkSessionState() {
+	private void checkSessionState() throws GGException {
 		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
 			throw new GGSessionException(m_session.getSessionState());
 		}
 	}
 	
 	//TODO clone list
-	protected void notifyLoginFailed() {
+	protected void notifyLoginFailed() throws GGException {
 		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 		for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {
 			LoginListener loginListener = (LoginListener) it.next();

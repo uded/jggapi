@@ -19,6 +19,8 @@ package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
+import pl.mn.communicator.GGException;
+
 /**
  * The listener interface for receiving connection related events.
  * It notifies whether connection is established, closed or an error
@@ -31,7 +33,7 @@ import java.util.EventListener;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ConnectionListener.java,v 1.8 2004-12-26 22:08:31 winnetou25 Exp $
+ * @version $Id: ConnectionListener.java,v 1.9 2005-01-29 15:22:04 winnetou25 Exp $
  */
 public interface ConnectionListener extends EventListener {
 	
@@ -39,13 +41,13 @@ public interface ConnectionListener extends EventListener {
      * The notification that connection to the server
      * has been successfuly established.
      */
-    void connectionEstablished();
+    void connectionEstablished() throws GGException;
 
     /** 
      * The notification that connection to the server
      * has been delibately closed.
      */
-    void connectionClosed();
+    void connectionClosed() throws GGException;
 
     /**
      * Notification that there was an unexpected error
@@ -63,12 +65,12 @@ public interface ConnectionListener extends EventListener {
 		/**
 		 * @see pl.mn.communicator.event.ConnectionListener#connectionEstablished()
 		 */
-		public void connectionEstablished() { }
+		public void connectionEstablished() throws GGException { }
 
 		/**
 		 * @see pl.mn.communicator.event.ConnectionListener#connectionClosed()
 		 */
-		public void connectionClosed() { }
+		public void connectionClosed() throws GGException { }
 
 		/**
 		 * @see pl.mn.communicator.event.ConnectionListener#connectionError(Exception)

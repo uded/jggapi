@@ -20,6 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.mn.communicator.GGException;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.packet.GGUtils;
@@ -29,7 +30,7 @@ import pl.mn.communicator.packet.in.GGStatus60;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60PacketHandler.java,v 1.11 2005-01-25 23:53:01 winnetou25 Exp $
+ * @version $Id: GGStatus60PacketHandler.java,v 1.13 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class GGStatus60PacketHandler implements PacketHandler {
 
@@ -38,7 +39,7 @@ public class GGStatus60PacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(Context context) {
+	public void handle(PacketContext context) throws GGException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Received GGStatus60 packet.");
 			logger.debug("PacketHeader: "+context.getHeader());

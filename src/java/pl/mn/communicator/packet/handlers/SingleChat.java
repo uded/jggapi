@@ -32,29 +32,32 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SingleChat.java,v 1.1 2005-01-29 13:20:05 winnetou25 Exp $
+ * @version $Id: SingleChat.java,v 1.2 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class SingleChat extends AbstractChat implements ISingleChat {
 	
-	private int m_uin = -1; //user with whom we chat
+	private int m_recipientUin = -1; //user with whom we chat
 	
 	//friendly
-	SingleChat(ISession session, int uin) {
+	SingleChat(ISession session, int recipientUin) {
 		super(session);
-		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
-		m_uin = uin;
+		if (recipientUin < 0) throw new IllegalArgumentException("recipientUin cannot be less than 0");
+		m_recipientUin = recipientUin;
 	}
 	
 	public IChat sendMessage(String messageBody) throws GGException {
 		if (messageBody == null) throw new NullPointerException("messageBody cannot be less than 0");
 
-		m_session.getMessageService().sendMessage(OutgoingMessage.createChatMessage(m_uin, messageBody));
+		m_session.getMessageService().sendMessage(OutgoingMessage.createChatMessage(m_recipientUin, messageBody));
 		
 		return this;
 	}
 
-	public int getUin() {
-		return m_uin;
+	/**
+	 * @see pl.mn.communicator.ISingleChat#getRecipientUin()
+	 */
+	public int getRecipientUin() {
+		return m_recipientUin;
 	}
 	
 //	/**
@@ -95,7 +98,7 @@ public class SingleChat extends AbstractChat implements ISingleChat {
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.IncomingMessage)
 		 */
 		public void messageArrived(IncomingMessage incommingMessage) {
-			if (incommingMessage.getUin() == m_uin) {
+			if (incommingMessage.getUin() == m_recipientUin) {
 				fireChatMessageArrived(incommingMessage);
 			}
 		}
@@ -104,7 +107,7 @@ public class SingleChat extends AbstractChat implements ISingleChat {
 		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(int, int, pl.mn.communicator.MessageStatus)
 		 */
 		public void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus) {
-			if (uin == m_uin) {
+			if (uin == m_recipientUin) {
 				fireChatMessageDelivered(uin, messageID, deliveryStatus);
 			}
 		}

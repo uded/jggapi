@@ -20,6 +20,7 @@ package pl.mn.communicator.packet.handlers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.mn.communicator.GGException;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGLoginOK;
 
@@ -27,7 +28,7 @@ import pl.mn.communicator.packet.in.GGLoginOK;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginOKPacketHandler.java,v 1.9 2005-01-25 23:53:01 winnetou25 Exp $
+ * @version $Id: GGLoginOKPacketHandler.java,v 1.11 2005-01-29 15:22:03 winnetou25 Exp $
  */
 public class GGLoginOKPacketHandler implements PacketHandler {
 
@@ -36,7 +37,7 @@ public class GGLoginOKPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
-	public void handle(Context context) {
+	public void handle(PacketContext context) throws GGException {
 		if (logger.isDebugEnabled()) {
 			logger.debug("LoginOK packet received.");
 			logger.debug("PacketHeader: "+context.getHeader());
