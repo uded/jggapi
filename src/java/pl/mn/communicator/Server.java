@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.URLConnection;
 import java.util.StringTokenizer;
 
 import org.apache.commons.logging.Log;
@@ -31,74 +32,62 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Server.java,v 1.5 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: Server.java,v 1.6 2004-12-20 00:15:52 winnetou25 Exp $
  */
 public final class Server implements IServer {
 	
     private static Log logger = LogFactory.getLog(Server.class);
 
+    /** The server's address */
     protected String m_address;
 
-    /**
-     * Numer portu serwera
-     */
+    /** The server's port */
     protected int m_port;
 
     /**
-     * @param address adres serwera
-     * @param port port serwera
+     * @param address the server's address.
+     * @param port the server's port.
+     * @throws NullPointerException if the address is null.
+     * @throws IllegalArgumentException if the port is not value between 0 and 65535.
      */
     public Server(String address, int port) {
     	if (address == null) throw new NullPointerException("address cannot be null");
-    	//TODO checks for port.
+    	if (port < 0 || port > 65535) throw new IllegalArgumentException("port cannot be less than 0 and grather than 65535");
         m_address = address;
         m_port = port;
     }
 
     
-    /**
-     * @return String
-     */
     public String getAddress() {
         return m_address;
     }
 
-    /**
-     *  @return int
-     */
     public int getPort() {
         return m_port;
     }
     
-    /**
-     * @param address adres serwera
-     */
     public void setAddress(String address) {
         m_address = address;
     }
 
-    /**
-     * @param port port serwera
-     */
     public void setPort(int port) {
         m_port = port;
     }    
 
-    /**
-     * @see java.lang.Object#toString()
-     */
     public String toString() {
         return "[" + m_address + ":" + m_port + "]";
     }
 
-    /**
-     * @return Server serwer
-     */
     public static Server getDefaultServer(LoginContext loginContext) throws GGException {
     	try {
         	URL url = new URL("http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber="+ loginContext.getUin());
 
-            InputStream is = url.openStream();
+        	URLConnection con = url.openConnection();
+        	con.setReadTimeout(120*1000);
+        	con.setConnectTimeout(120*1000);
+        	con.connect();
+        	
+        	InputStream is = con.getInputStream();
             BufferedReader in = new BufferedReader(new InputStreamReader(is));
 
             String line = in.readLine();
@@ -112,9 +101,9 @@ public final class Server implements IServer {
     }
 
     /**
-     * Parsuj adres serwera.
-     * @param line linia do parsowania
-     * @return Server
+     * Parses the server's address.
+     * @param line line to be parsed.
+     * @return <code>Server</code> the server object. 
      */
     private static Server parseAddress(String line) {
         final int nrOfTokens = 3;
@@ -123,9 +112,9 @@ public final class Server implements IServer {
         for (int i = 0; i < nrOfTokens; i++) {
             token.nextToken();
         }
-        StringTokenizer token1 = new StringTokenizer(token.nextToken(), ":");
+        StringTokenizer tokenizer = new StringTokenizer(token.nextToken(), ":");
 
-        return new Server(token1.nextToken(), Integer.parseInt(token1.nextToken()));
+        return new Server(tokenizer.nextToken(), Integer.parseInt(tokenizer.nextToken()));
     }
     
 }

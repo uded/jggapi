@@ -2,10 +2,10 @@ Bugs or features for version 1.0
 1. W przypadku monitorowania uzytkownikow obsluzyc sytuacje w ktorej
 	na poczatku wysylamy liste pakietow przekraczajaca 2040 bajtow (chyba).
 	W tym celu trzeba wyslac inny pakiet. GGRequestFirst a potem GGRequestLast
-2. HIGH - Implementacja trybu tylko dla przyjaciol.
-3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
+DONE-2. HIGH - Implementacja trybu tylko dla przyjaciol.
+DONE-3. HIGH - Implementacje blokowania uzytkownikow, mysle, ze sprytnie bedzie to wrzucic do klasy LocalUser.
 4. Audyt session states.
-5. Napisac oblusge wysylania listy kontaktow dla wiekszej ilosci kontaktow
+5. Napisac obsluge wysylania listy kontaktow dla wiekszej ilosci kontaktow
 	w tym celu trzeba uzyc pakietow PUT_MORE i GET_MORE przy pobieraniu tej listy.
 6. RemoteIP jest zle konwertowane do IP. O co chodzi?
 7. Podzielic kod na api i impl?
