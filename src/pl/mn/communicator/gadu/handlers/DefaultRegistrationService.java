@@ -126,51 +126,51 @@ public class DefaultRegistrationService implements IRegistrationService {
 	}
 
 	private void getGGToken() {
-		URL url = new URL("http://register.gadu-gadu.pl/appsvc/fmregister3.asp");
-		HttpURLConnection huc = (HttpURLConnection) url.openConnection();
-
-		huc.setRequestMethod("GET");
-		huc.setDoInput(true);
-		huc.setDoOutput(true);
-		huc.setRequestProperty("Content-Length", String.valueOf(buffer.toString().length()));
-		huc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
-		huc.setRequestProperty("User-Agent","Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)");
-
-		huc.connect();
-		
-		PrintWriter out = new PrintWriter(huc.getOutputStream(), true);
-		//		pwd=sekret&email=moj@adres.email.pl&qa=5~Maria&code=1104465363
-
-		out.println(buffer.toString());
-		out.close();
-
-
-		//		struct gg_http *gg_token(int async)
-		//		{
-		//			struct gg_http *h;
-		//			const char *query;
-		//
-		//			query = "Host: " GG_REGISTER_HOST "\r\n"
-		//				"Content-Type: application/x-www-form-urlencoded\r\n"
-		//				"User-Agent: " GG_HTTP_USERAGENT "\r\n"
-		//				"Content-Length: 0\r\n"
-		//				"Pragma: no-cache\r\n"
-		//				"\r\n";
-		//
-		//			if (!(h = gg_http_connect(GG_APPMSG_HOST, GG_APPMSG_PORT, async, "POST", "/appsvc/regtoken.asp", query))) {
-		//				gg_debug(GG_DEBUG_MISC, "=> token, gg_http_connect() failed mysteriously\n");
-		//				return NULL;
-		//			}
-		//
-		//			h->type = GG_SESSION_TOKEN;
-		//
-		//			h->callback = gg_token_watch_fd;
-		//			h->destroy = gg_token_free;
-		//			
-		//			if (!async)
-		//				gg_token_watch_fd(h);
-		//			
-		//			return h;
+//		URL url = new URL("http://register.gadu-gadu.pl/appsvc/fmregister3.asp");
+//		HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+//
+//		huc.setRequestMethod("GET");
+//		huc.setDoInput(true);
+//		huc.setDoOutput(true);
+//		huc.setRequestProperty("Content-Length", String.valueOf(buffer.toString().length()));
+//		huc.setRequestProperty("Content-Type","application/x-www-form-urlencoded");
+//		huc.setRequestProperty("User-Agent","Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)");
+//
+//		huc.connect();
+//		
+//		PrintWriter out = new PrintWriter(huc.getOutputStream(), true);
+//		//		pwd=sekret&email=moj@adres.email.pl&qa=5~Maria&code=1104465363
+//
+//		out.println(buffer.toString());
+//		out.close();
+//
+//
+//		//		struct gg_http *gg_token(int async)
+//		//		{
+//		//			struct gg_http *h;
+//		//			const char *query;
+//		//
+//		//			query = "Host: " GG_REGISTER_HOST "\r\n"
+//		//				"Content-Type: application/x-www-form-urlencoded\r\n"
+//		//				"User-Agent: " GG_HTTP_USERAGENT "\r\n"
+//		//				"Content-Length: 0\r\n"
+//		//				"Pragma: no-cache\r\n"
+//		//				"\r\n";
+//		//
+//		//			if (!(h = gg_http_connect(GG_APPMSG_HOST, GG_APPMSG_PORT, async, "POST", "/appsvc/regtoken.asp", query))) {
+//		//				gg_debug(GG_DEBUG_MISC, "=> token, gg_http_connect() failed mysteriously\n");
+//		//				return NULL;
+//		//			}
+//		//
+//		//			h->type = GG_SESSION_TOKEN;
+//		//
+//		//			h->callback = gg_token_watch_fd;
+//		//			h->destroy = gg_token_free;
+//		//			
+//		//			if (!async)
+//		//				gg_token_watch_fd(h);
+//		//			
+//		//			return h;
 	}
 	
 	/**
