@@ -20,18 +20,40 @@ package pl.mn.communicator;
 import pl.mn.communicator.packet.handlers.Session;
 
 /**
+ * This is the factory class that helps developers
+ * to create a new instance of a session class.
+ * <p>
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionFactory.java,v 1.7 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: SessionFactory.java,v 1.8 2004-12-19 23:53:54 winnetou25 Exp $
  */
 public class SessionFactory {
-
+	
+	/**
+	 * Creates <code>ISession></code> instance based on <code>LoginContext</code> object.
+	 * <p>
+	 * It attempts to get default server based on user's uin that is inside
+	 * <code>LoginContext</code> object.
+	 * 
+	 * @param loginContext the login context that is used to retrieve server and is necessary for <code>session</code> instance.
+	 * @return <code>ISession</code> instance.
+	 * @throws GGException if there is an error during looking up of the Gadu-Gadu server.
+	 */
 	public static ISession createSession(LoginContext loginContext) throws GGException {
 		IServer server = Server.getDefaultServer(loginContext);
 		return new Session(server, loginContext);
 	}
 
+	/**
+	 * Create <code>ISession</code> instance based on <code>LoginContext</code> object.
+	 * Address is the IP address of the Gadu-Gadu server.
+	 * 
+	 * @param loginContext the <code>LoginContext</code> instance to be used.
+	 * @param address IP address of the Gadu-Gadu server.
+	 * @param port port number of tha Gadu-Gadu server.
+	 * @return <code>ISession</code> instance.
+	 */
 	public static ISession createSession(LoginContext loginContext, String address, short port) {
 		IServer server = new Server(address, port);
 		return new Session (server, loginContext);
