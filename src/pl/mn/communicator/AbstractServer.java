@@ -1,6 +1,5 @@
 package pl.mn.communicator;
 
-import java.io.IOException;
 
 /**
  * Klasa reprezentuj¹ca serwer rozmów.
@@ -52,14 +51,4 @@ public abstract class AbstractServer {
 	public String toString() {
 		return "[" + this.address + "-" + this.port + "]";
 	}
-	
-	/**
-	 * Pobierz domyœlny serwer rozmów
-	 * 
-	 * @param user u¿ytkownik
-	 * @return AbstractServer
-	 * @throws IOException
-	 */
-	public abstract AbstractServer getDefaultServer(AbstractLocalUser user) throws IOException;
-
 }

@@ -27,7 +27,7 @@ public final class Server extends AbstractServer {
 	 * @return Server serwer
 	 * @throws IOException
 	 */
-	public AbstractServer getDefaultServer(AbstractLocalUser user) throws IOException {
+	public static Server getDefaultServer(AbstractLocalUser user) throws IOException {
 
 		URL url =
 			new URL(
@@ -43,7 +43,7 @@ public final class Server extends AbstractServer {
 		return parseAddress(line);
 	}
 
-	private static AbstractServer parseAddress(String line) {
+	private static Server parseAddress(String line) {
 		StringTokenizer token = new StringTokenizer(line);
 		for (int i = 0; i < 3; i++)
 			token.nextToken();
@@ -52,7 +52,5 @@ public final class Server extends AbstractServer {
 		return new Server(
 			token1.nextToken(),
 			Integer.parseInt(token1.nextToken()));
-
-		//return new Server("127.0.0.1",8074);
 	}
 }
