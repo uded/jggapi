@@ -24,12 +24,19 @@ package pl.mn.communicator;
  * to state that is not allowed at that moment. 
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSessionException.java,v 1.7 2005-01-31 21:22:15 winnetou25 Exp $
+ * @version $Id: GGSessionException.java,v 1.8 2005-05-05 17:54:23 winnetou25 Exp $
  */
 public class GGSessionException extends RuntimeException {
 
+	private SessionState m_sessionState;
+	
 	public GGSessionException(SessionState actualSessionState) {
 		super("Incorrect session state: " +actualSessionState);
+		m_sessionState = actualSessionState;
+	}
+	
+	public SessionState getSessionState() {
+		return m_sessionState;
 	}
 
 }

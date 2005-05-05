@@ -26,7 +26,7 @@ import java.util.Date;
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractStatus.java,v 1.3 2004-12-26 22:07:35 winnetou25 Exp $
+ * @version $Id: AbstractStatus.java,v 1.4 2005-05-05 17:49:51 winnetou25 Exp $
  */
 public abstract class AbstractStatus implements IStatus {
 
@@ -49,6 +49,7 @@ public abstract class AbstractStatus implements IStatus {
 	protected AbstractStatus(StatusType statusType, String description) {
 		this(statusType, description, null);
 	}
+	
 	protected AbstractStatus(StatusType statusType) {
 		this(statusType, null, null);
 	}
