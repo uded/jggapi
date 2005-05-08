@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;
@@ -28,24 +28,6 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import pl.mn.communicator.GGConfiguration;
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.IConnectionService;
-import pl.mn.communicator.IContactListService;
-import pl.mn.communicator.IGGConfiguration;
-import pl.mn.communicator.ILoginService;
-import pl.mn.communicator.IMessageService;
-import pl.mn.communicator.IPresenceService;
-import pl.mn.communicator.IPublicDirectoryService;
-import pl.mn.communicator.IRegistrationService;
-import pl.mn.communicator.IRemoteStatus;
-import pl.mn.communicator.ISession;
-import pl.mn.communicator.IUser;
-import pl.mn.communicator.IncomingMessage;
-import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.PersonalInfo;
-import pl.mn.communicator.PublicDirSearchReply;
-import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.SessionStateListener;
 import pl.mn.communicator.packet.in.GGIncomingPackage;
 import pl.mn.communicator.packet.out.GGOutgoingPackage;
@@ -54,7 +36,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.23 2005-05-08 14:27:23 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -218,8 +200,9 @@ public class Session implements ISession {
 		}
 	}
 	
+	//TODO restrict accesss by AspectJ
 	//friendly
-	SessionAccessor getSessionAccessor() {
+	public SessionAccessor getSessionAccessor() {
 		return m_sessionAccessor;
 	}
 
@@ -311,10 +294,6 @@ public class Session implements ISession {
 			return seedInteger.intValue();
 		}
 		
-//		public IGGConfiguration getGGConfiguration() {
-//			return m_configuration;
-//		}
-
 	}
 
 	private final static class SessionInvocationHandler implements InvocationHandler {

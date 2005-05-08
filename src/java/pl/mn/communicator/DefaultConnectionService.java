@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -32,18 +32,13 @@ import javax.swing.event.EventListenerList;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGSessionException;
-import pl.mn.communicator.IConnectionService;
-import pl.mn.communicator.IGGConfiguration;
-import pl.mn.communicator.IServer;
-import pl.mn.communicator.Server;
-import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.GGPacketListener;
 import pl.mn.communicator.event.PingListener;
 import pl.mn.communicator.packet.GGHeader;
 import pl.mn.communicator.packet.GGUtils;
+import pl.mn.communicator.packet.handlers.PacketChain;
+import pl.mn.communicator.packet.handlers.PacketContext;
 import pl.mn.communicator.packet.in.GGIncomingPackage;
 import pl.mn.communicator.packet.out.GGOutgoingPackage;
 import pl.mn.communicator.packet.out.GGPing;
@@ -54,7 +49,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.17 2005-05-08 14:25:40 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.1 2005-05-08 14:49:26 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 

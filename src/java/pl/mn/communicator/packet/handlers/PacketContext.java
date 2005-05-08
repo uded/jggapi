@@ -17,14 +17,15 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+import pl.mn.communicator.Session;
+import pl.mn.communicator.Session.SessionAccessor;
 import pl.mn.communicator.packet.GGHeader;
-import pl.mn.communicator.packet.handlers.Session.SessionAccessor;
 
 /**
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PacketContext.java,v 1.1 2005-01-25 23:55:58 winnetou25 Exp $
+ * @version $Id: PacketContext.java,v 1.2 2005-05-08 14:49:26 winnetou25 Exp $
  */
 public class PacketContext {
 

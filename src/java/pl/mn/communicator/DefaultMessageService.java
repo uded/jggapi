@@ -15,22 +15,13 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGSessionException;
-import pl.mn.communicator.IGroupChat;
-import pl.mn.communicator.IMessageService;
-import pl.mn.communicator.ISingleChat;
-import pl.mn.communicator.IncomingMessage;
-import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.OutgoingMessage;
-import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.packet.out.GGSendMsg;
 
@@ -40,7 +31,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.15 2005-05-08 14:42:47 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 

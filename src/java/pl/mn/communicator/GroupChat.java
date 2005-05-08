@@ -15,24 +15,18 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.IChat;
-import pl.mn.communicator.IGroupChat;
-import pl.mn.communicator.IncomingMessage;
-import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.packet.out.GGSendMsg;
 
 /**
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GroupChat.java,v 1.6 2005-01-30 18:37:16 winnetou25 Exp $
+ * @version $Id: GroupChat.java,v 1.1 2005-05-08 14:49:26 winnetou25 Exp $
  */
 public class GroupChat extends AbstractChat implements IGroupChat {
 	
@@ -94,14 +88,14 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.AbstractChat#acceptsIncoming(pl.mn.communicator.IncomingMessage)
+	 * @see pl.mn.communicator.AbstractChat#acceptsIncoming(pl.mn.communicator.IncomingMessage)
 	 */
 	protected boolean acceptsIncoming(IncomingMessage incomingMessage) {
 		return isRegisteredRecipient(incomingMessage.getMessageID());
 	}
 
 	/**
-	 * @see pl.mn.communicator.packet.handlers.AbstractChat#acceptsOutgoing(int, int, pl.mn.communicator.MessageStatus)
+	 * @see pl.mn.communicator.AbstractChat#acceptsOutgoing(int, int, pl.mn.communicator.MessageStatus)
 	 */
 	protected boolean acceptsOutgoing(int uin, int messageID, MessageStatus deliveryStatus) {
 		return isRegisteredRecipient(uin);

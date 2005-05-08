@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.io.IOException;
 import java.util.Date;
@@ -25,14 +25,6 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGSessionException;
-import pl.mn.communicator.ILocalStatus;
-import pl.mn.communicator.ILoginService;
-import pl.mn.communicator.LocalStatus;
-import pl.mn.communicator.LoginContext;
-import pl.mn.communicator.SessionState;
-import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.packet.out.GGLogin60;
 
@@ -42,7 +34,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.17 2005-05-08 14:42:46 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 

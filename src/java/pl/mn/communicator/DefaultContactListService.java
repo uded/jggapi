@@ -15,17 +15,13 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.io.IOException;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Iterator;
 
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGSessionException;
-import pl.mn.communicator.IContactListService;
-import pl.mn.communicator.SessionState;
 import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.packet.out.GGUserListRequest;
 
@@ -35,7 +31,7 @@ import pl.mn.communicator.packet.out.GGUserListRequest;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultContactListService.java,v 1.8 2004-12-19 21:19:58 winnetou25 Exp $
+ * @version $Id: DefaultContactListService.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
  */
 public class DefaultContactListService implements IContactListService {
 

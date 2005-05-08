@@ -15,7 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -27,15 +27,6 @@ import java.util.Set;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGSessionException;
-import pl.mn.communicator.ILocalStatus;
-import pl.mn.communicator.IPresenceService;
-import pl.mn.communicator.IRemoteStatus;
-import pl.mn.communicator.IUser;
-import pl.mn.communicator.LocalStatus;
-import pl.mn.communicator.SessionState;
-import pl.mn.communicator.StatusType;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.UserListener;
 import pl.mn.communicator.packet.out.GGAddNotify;
@@ -51,7 +42,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.12 2005-05-08 14:42:47 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.1 2005-05-08 14:49:26 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 

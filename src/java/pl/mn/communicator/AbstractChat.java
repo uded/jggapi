@@ -15,21 +15,19 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.util.Enumeration;
 import java.util.Vector;
 
-import pl.mn.communicator.IChat;
-import pl.mn.communicator.IncomingMessage;
-import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.event.MessageListener;
+
 
 /**
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractChat.java,v 1.5 2005-01-31 21:21:45 winnetou25 Exp $
+ * @version $Id: AbstractChat.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
  */
 public abstract class AbstractChat implements IChat {
 

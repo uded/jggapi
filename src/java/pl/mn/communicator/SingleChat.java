@@ -15,20 +15,14 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.IChat;
-import pl.mn.communicator.ISingleChat;
-import pl.mn.communicator.IncomingMessage;
-import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.OutgoingMessage;
 
 /**
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SingleChat.java,v 1.5 2005-01-30 18:37:42 winnetou25 Exp $
+ * @version $Id: SingleChat.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
  */
 public class SingleChat extends AbstractChat implements ISingleChat {
 	
@@ -62,14 +56,14 @@ public class SingleChat extends AbstractChat implements ISingleChat {
 	}
 	
 	/**
-	 * @see pl.mn.communicator.packet.handlers.AbstractChat#acceptsIncoming(pl.mn.communicator.IncomingMessage)
+	 * @see pl.mn.communicator.AbstractChat#acceptsIncoming(pl.mn.communicator.IncomingMessage)
 	 */
 	protected boolean acceptsIncoming(IncomingMessage incomingMessage) {
 		return (incomingMessage.getRecipientUin() == m_recipientUin);
 	}
 
 	/**
-	 * @see pl.mn.communicator.packet.handlers.AbstractChat#acceptsOutgoing(int, int, pl.mn.communicator.MessageStatus)
+	 * @see pl.mn.communicator.AbstractChat#acceptsOutgoing(int, int, pl.mn.communicator.MessageStatus)
 	 */
 	protected boolean acceptsOutgoing(int uin, int messageID, MessageStatus deliveryStatus) {
 		return (uin == m_recipientUin);

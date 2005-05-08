@@ -15,16 +15,13 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
+package pl.mn.communicator;
 
 import java.io.IOException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGToken;
-import pl.mn.communicator.IRegistrationService;
 import pl.mn.communicator.packet.http.ChangePasswordRequest;
 import pl.mn.communicator.packet.http.CommonRegisterResponse;
 import pl.mn.communicator.packet.http.GGTokenRequest;
@@ -39,7 +36,7 @@ import pl.mn.communicator.packet.http.RegisterGGAccountRequest.RegisterGGAccount
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.17 2005-05-08 14:26:42 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 	
