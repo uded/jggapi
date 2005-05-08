@@ -13,6 +13,7 @@ import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
+import pl.mn.communicator.Session;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.User;
@@ -24,7 +25,6 @@ import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.event.PublicDirListener;
 import pl.mn.communicator.event.SessionStateListener;
 import pl.mn.communicator.event.UserListener;
-import pl.mn.communicator.packet.handlers.Session;
 
 /*
  * Created on 2004-11-28
@@ -161,9 +161,6 @@ public class Main2 {
 			
 		});
 
-		IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
- 		session.getConnectionService().connect(server);
-
 		IUser acze = new User(1136132, UserMode.BUDDY);
 		IUser jaffa = new User(1542863, UserMode.BUDDY);
 		IUser mati = new User(376798, UserMode.BUDDY);
@@ -171,6 +168,9 @@ public class Main2 {
 		loginContext.getMonitoredUsers().add(acze);
 		loginContext.getMonitoredUsers().add(jaffa);
 		loginContext.getMonitoredUsers().add(mati);
+
+		IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
+ 		session.getConnectionService().connect(server);
 
 //		session.getPublicDirectoryService().readFromPublicDirectory();
 //		PublicDirInfo publicDirInfo = new PublicDirInfo();

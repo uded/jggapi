@@ -49,7 +49,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.1 2005-05-08 14:49:26 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.2 2005-05-08 14:56:08 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -283,13 +283,13 @@ public class DefaultConnectionService implements IConnectionService {
     }
     
     private void checkDisconnectionState() {
-		if (!(m_session.getSessionState() == SessionState.CONNECTED)
-				|| (m_session.getSessionState() == SessionState.LOGGED_IN)
-				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)
-				|| (m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING)
-				|| (m_session.getSessionState() == SessionState.CONNECTION_ERROR)) {
-			throw new GGSessionException(m_session.getSessionState());
-		}
+//		if (!(m_session.getSessionState() == SessionState.CONNECTED)
+//				|| (m_session.getSessionState() == SessionState.LOGGED_IN)
+//				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)
+//				|| (m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING)
+//				|| (m_session.getSessionState() == SessionState.CONNECTION_ERROR)) {
+//			throw new GGSessionException(m_session.getSessionState());
+//		}
     }
 
     private void checkConnectionState() {

@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGToken;
 import pl.mn.communicator.ISession;
-import pl.mn.communicator.packet.handlers.Session;
+import pl.mn.communicator.Session;
 
 /*
  * Created on 2004-11-28

@@ -13,8 +13,8 @@ Bugs or features for version 1.0
 	//po odwieszeniu sie biezemy pakiet.
 	GGIncomingPacket getIncommingPacket(); //incomming packet ma juz GGHeader.
 9. MED - Bardziej dokladna dokumentacja w java docs.
-10. Rozwazyc wprowadzenie socket.setTimeout();
-11. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
+DONE 10. Rozwazyc wprowadzenie socket.setTimeout();
+DONE 11. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
 12. Zastanowic sie czy to ma sens miec dwie oddzielne klasy reprezentujace uzytkownkow, GGUser i LocalUser.
 13. Zrobic porzadek w GGUtils.
 14. Apply immutable pattern to some classes.
@@ -22,7 +22,7 @@ Bugs or features for version 1.0
 konwersje robilby dekorator na inputstream i outputstream.
 
 16.BUG Odrejestrowanie uzytkownika sie zonkuje.
-18. Czy interval pingowania powinien byc konfiguralny? W klasie Session? Rozwazyc GGConfiguration,
+18. DONE Czy interval pingowania powinien byc konfiguralny? W klasie Session? Rozwazyc GGConfiguration,
 	jako klase konfigurujaca biblioteke i pozwalajaca ja customizowac.
 19.Deployment - wrzucic lib z commons-logging to dystrubucji.
 
