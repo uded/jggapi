@@ -17,7 +17,7 @@ DONE 10. Rozwazyc wprowadzenie socket.setTimeout();
 DONE 11. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
 12. Zastanowic sie czy to ma sens miec dwie oddzielne klasy reprezentujace uzytkownkow, GGUser i LocalUser.
 13. Zrobic porzadek w GGUtils.
-14. Apply immutable pattern to some classes.
+14. Apply immutable pattern to some classes. Szczegolnie do Value Objects, ktore powinny byc immutable.
 15. Czy mozna zastosowac dekorator do little-endian tak zeby sie w ogole nie martwic konwersja, cala
 konwersje robilby dekorator na inputstream i outputstream.
 

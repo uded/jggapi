@@ -42,7 +42,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.1 2005-05-08 14:49:26 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.2 2005-05-08 21:43:49 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
@@ -55,7 +55,7 @@ public class DefaultPresenceService implements IPresenceService {
 	private Session m_session = null;
 
 	/** The actual status */
-	private ILocalStatus m_localStatus = new LocalStatus(StatusType.ONLINE);
+	private ILocalStatus m_localStatus = new LocalStatus(StatusType.OFFLINE);
 
 	/** The set of users that are monitored */
 	private Collection m_monitoredUsers = new HashSet();
@@ -64,10 +64,6 @@ public class DefaultPresenceService implements IPresenceService {
 	DefaultPresenceService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
-		if (m_session.getLoginService().isLoggedIn()) {
-			m_localStatus = session.getLoginService().getLoginContext().getStatus();
-			m_monitoredUsers = session.getLoginService().getLoginContext().getMonitoredUsers();
-		}
 		m_session.getLoginService().addLoginListener(new LoginHandler());
 	}
 	
@@ -201,6 +197,8 @@ public class DefaultPresenceService implements IPresenceService {
 		 */
 		public void loginOK() {
 			try {
+				m_localStatus = m_session.getLoginService().getLoginContext().getStatus();
+				m_monitoredUsers = m_session.getLoginService().getLoginContext().getMonitoredUsers();
 				setStatus(m_localStatus);
 				GGOutgoingPackage outgoingPackage = null;
 				if (m_monitoredUsers.size() == 0) {
