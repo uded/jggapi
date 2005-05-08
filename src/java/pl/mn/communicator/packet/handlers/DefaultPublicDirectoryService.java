@@ -37,7 +37,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.18 2004-12-26 22:19:56 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.19 2005-05-08 14:42:46 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -57,6 +57,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	public void search(PublicDirSearchQuery publicDirQuery) throws GGException {
 		if (publicDirQuery == null) throw new NullPointerException("publicDirQuery cannot be null");
 		checkSessionState();
+		
 		try {
 			GGPubdirRequest pubdirRequest = GGPubdirRequest.createSearchPubdirRequest(publicDirQuery);
 			m_session.getSessionAccessor().sendPackage(pubdirRequest);
@@ -70,6 +71,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	 */
 	public void readFromPublicDirectory() throws GGException {
 		checkSessionState();
+		
 		try {
 			GGPubdirRequest pubdirRequest = GGPubdirRequest.createReadPubdirRequest();
 			m_session.getSessionAccessor().sendPackage(pubdirRequest);

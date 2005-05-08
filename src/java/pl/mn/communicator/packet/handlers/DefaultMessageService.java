@@ -40,18 +40,17 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.14 2005-01-31 21:21:43 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.15 2005-05-08 14:42:47 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
 	private Session m_session = null;
-	private Set m_messageListeners = null;
+	private Set m_messageListeners = new HashSet();
 	
 	//friendly
 	DefaultMessageService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
-		m_messageListeners = new HashSet();
 	}
 	
 	/**

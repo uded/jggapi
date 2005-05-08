@@ -51,14 +51,14 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.11 2005-01-25 23:52:49 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.12 2005-05-08 14:42:47 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
 	private final static Log logger = LogFactory.getLog(DefaultPresenceService.class);
 	
 	/** Set of listeners that will be notified of user related events */
-	private Set m_userListeners = null;
+	private Set m_userListeners = new HashSet();
 	
 	/** The session associated with this service */
 	private Session m_session = null;
@@ -77,7 +77,6 @@ public class DefaultPresenceService implements IPresenceService {
 			m_localStatus = session.getLoginService().getLoginContext().getStatus();
 			m_monitoredUsers = session.getLoginService().getLoginContext().getMonitoredUsers();
 		}
-		m_userListeners = new HashSet();
 		m_session.getLoginService().addLoginListener(new LoginHandler());
 	}
 	
@@ -110,6 +109,7 @@ public class DefaultPresenceService implements IPresenceService {
 		if (user == null) throw new NullPointerException("user cannot be null");
 		checkSessionState();
 		if (m_monitoredUsers.contains(user)) return;
+		
 		try {
 			GGAddNotify addNotify = new GGAddNotify(user.getUin(), user.getUserMode());
 			m_session.getSessionAccessor().sendPackage(addNotify);

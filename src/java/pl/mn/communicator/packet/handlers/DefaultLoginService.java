@@ -42,7 +42,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.16 2005-01-31 21:21:46 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.17 2005-05-08 14:42:46 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService {
 
@@ -52,7 +52,7 @@ public class DefaultLoginService implements ILoginService {
 	private Session m_session = null;
 
 	/** The set of <code>LoginListener</code>'s */
-	private Vector m_loginListeners = null;
+	private Vector m_loginListeners = new Vector();
 	
 	private LoginContext m_loginContext = null;
 	
@@ -60,7 +60,6 @@ public class DefaultLoginService implements ILoginService {
 	DefaultLoginService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
-		m_loginListeners = new Vector();
 	}
 	
 	/**
@@ -75,7 +74,6 @@ public class DefaultLoginService implements ILoginService {
 		if (m_session.getSessionState() != SessionState.AUTHENTICATION_AWAITING) {
 			throw new GGSessionException(m_session.getSessionState());
 		}
-
 
 		try {
 			int uin = loginContext.getUin();
