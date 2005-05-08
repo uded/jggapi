@@ -23,21 +23,30 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import pl.mn.communicator.IGGConfiguration;
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: HttpRequest.java,v 1.3 2005-01-29 11:02:49 winnetou25 Exp $
+ * @version $Id: HttpRequest.java,v 1.4 2005-05-08 14:28:01 winnetou25 Exp $
  */
 public abstract class HttpRequest {
 
 	public final static String WINDOW_ENCODING = "windows-1250";
 	
-	protected HttpURLConnection m_huc = null;
+	protected final IGGConfiguration m_ggconfiguration;
 	
-	protected HttpRequest() throws IOException {
-		URL url = new URL(getURL());
+	protected final HttpURLConnection m_huc;
+	
+	protected HttpRequest(IGGConfiguration configuration) throws IOException {
+	    if (configuration == null) throw new IllegalArgumentException("configuration cannot be null");
+	    m_ggconfiguration = configuration;
+
+	    URL url = new URL(getURL());
 		m_huc = (HttpURLConnection) url.openConnection();
+		m_huc.setConnectTimeout(m_ggconfiguration.getSocketTimeoutInMiliseconds());
+		m_huc.setReadTimeout(m_ggconfiguration.getSocketTimeoutInMiliseconds());
 		
 		m_huc.setRequestMethod("POST");
 		m_huc.setDoInput(true);

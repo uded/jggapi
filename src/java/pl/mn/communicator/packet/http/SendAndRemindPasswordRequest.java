@@ -22,19 +22,21 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
+import pl.mn.communicator.IGGConfiguration;
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SendAndRemindPasswordRequest.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
+ * @version $Id: SendAndRemindPasswordRequest.java,v 1.3 2005-05-08 14:28:01 winnetou25 Exp $
  */
 public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 
 	private int m_uin = -1;
 	private String m_email = null;
 
-	public SendAndRemindPasswordRequest(int uin, String email, String tokenID, String tokenVal) throws IOException {
-		super(tokenID, tokenVal);
+	public SendAndRemindPasswordRequest(IGGConfiguration configuration, int uin, String email, String tokenID, String tokenVal) throws IOException {
+		super(configuration, tokenID, tokenVal);
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		if (email == null) throw new NullPointerException("email cannot be null");
 		m_uin = uin;
@@ -57,7 +59,8 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 	 * @see pl.mn.communicator.packet.http.HttpRequest#getURL()
 	 */
 	protected String getURL() {
-		return "http://retr.gadu-gadu.pl/appsvc/fmsendpwd3.asp";
+	    return m_ggconfiguration.getSendPasswordURL();
+		//return "http://retr.gadu-gadu.pl/appsvc/fmsendpwd3.asp";
 	}
 
 	/**

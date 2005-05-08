@@ -24,20 +24,21 @@ import java.io.UnsupportedEncodingException;
 import java.util.StringTokenizer;
 
 import pl.mn.communicator.GGToken;
+import pl.mn.communicator.IGGConfiguration;
 
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGTokenRequest.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
+ * @version $Id: GGTokenRequest.java,v 1.3 2005-05-08 14:28:01 winnetou25 Exp $
  */
 public class GGTokenRequest extends HttpRequest {
 
 	private String m_email = null;
 	private String m_password = null;
 	
-	public GGTokenRequest() throws IOException {
-		super();
+	public GGTokenRequest(IGGConfiguration configuration) throws IOException {
+		super(configuration);
 		m_huc.setRequestProperty("Accept", "image/gif, image/jpeg, */*");
 		m_huc.setRequestProperty("Accept-Language", "pl");
 	}
@@ -60,7 +61,8 @@ public class GGTokenRequest extends HttpRequest {
 	 * @see pl.mn.communicator.packet.http.HttpRequest#getURL()
 	 */
 	protected String getURL() {
-		return "http://register.gadu-gadu.pl/appsvc/regtoken.asp";
+	    return m_ggconfiguration.getTokenRequestURL();
+	    //return "http://register.gadu-gadu.pl/appsvc/regtoken.asp";
 	}
 	
 	/**

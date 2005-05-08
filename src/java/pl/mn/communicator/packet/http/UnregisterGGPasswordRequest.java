@@ -23,19 +23,21 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import pl.mn.communicator.IGGConfiguration;
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: UnregisterGGPasswordRequest.java,v 1.2 2005-01-28 23:07:32 winnetou25 Exp $
+ * @version $Id: UnregisterGGPasswordRequest.java,v 1.3 2005-05-08 14:28:01 winnetou25 Exp $
  */
 public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	
 	private int m_uin = -1;
 	private String m_password = null;
 	
-	public UnregisterGGPasswordRequest(int uin, String password, String tokenID, String tokenVal) throws IOException {
-		super(tokenID, tokenVal);
+	public UnregisterGGPasswordRequest(IGGConfiguration configuration, int uin, String password, String tokenID, String tokenVal) throws IOException {
+		super(configuration, tokenID, tokenVal);
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		if (password == null) throw new NullPointerException("password cannot be null");
 		m_uin = uin;
@@ -58,7 +60,8 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	 * @see pl.mn.communicator.packet.http.HttpRequest#getURL()
 	 */
 	protected String getURL() {
-		return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
+	    return m_ggconfiguration.getRegistrationURL();
+		//return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
 	}
 	
 	/**

@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: User.java,v 1.6 2004-12-19 21:19:57 winnetou25 Exp $
+ * @version $Id: User.java,v 1.7 2005-05-08 14:25:10 winnetou25 Exp $
  */
 public class User implements IUser {
 	
@@ -105,7 +105,7 @@ public class User implements IUser {
 		 * @see java.lang.Object#hashCode()
 		 */
 		public int hashCode() {
-			return m_type.hashCode();
+			return m_type.hashCode() * 37;
 		}
 	}
 	

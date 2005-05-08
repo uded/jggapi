@@ -10,6 +10,7 @@ import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
+import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionState;
@@ -79,6 +80,10 @@ public class Main2 {
 				status.setFriendsOnly(true);
 				status.setStatusType(StatusType.BUSY);
 				session.getPresenceService().setStatus(status);
+
+				OutgoingMessage.createNewMessage(376798, "body");
+				session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
+
 			}
 
 			public void loginFailed() throws GGException {
@@ -89,6 +94,7 @@ public class Main2 {
 			 * @see pl.mn.communicator.event.LoginListener.Stub#loggedOut()
 			 */
 			public void loggedOut() throws GGException {
+			    System.out.println("Logged out...");
 				session.getConnectionService().disconnect();
 			}
 			
@@ -226,8 +232,9 @@ public class Main2 {
 //		user1.setUserMode(GGUserMode.FRIEND);
 //		session.getPresenceService().changeMonitoredUserStatus(user1);
 
-//		session.getLoginService().logout();
-//		session.getConnectionService().disconnect();
+		session.getLoginService().logout();
+		System.out.println("Abandon ship...");
+		//session.getConnectionService().disconnect();
 	}
 	
 }

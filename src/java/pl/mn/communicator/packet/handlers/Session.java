@@ -28,9 +28,11 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import pl.mn.communicator.GGConfiguration;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.IConnectionService;
 import pl.mn.communicator.IContactListService;
+import pl.mn.communicator.IGGConfiguration;
 import pl.mn.communicator.ILoginService;
 import pl.mn.communicator.IMessageService;
 import pl.mn.communicator.IPresenceService;
@@ -52,7 +54,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.22 2005-01-31 21:21:45 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.23 2005-05-08 14:27:23 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -60,7 +62,8 @@ public class Session implements ISession {
 	
 	private SessionAccessor m_sessionAccessor = null; 
 	private Set m_sessionStateListeners = null;
-	private HashMap m_sessionAttributes;
+	private HashMap m_sessionAttributes = null;
+	private IGGConfiguration m_configuration = new GGConfiguration();
 	
 	private DefaultConnectionService m_connectionService = null;
 	private DefaultLoginService m_loginService = null;
@@ -71,6 +74,12 @@ public class Session implements ISession {
 	private DefaultPublicDirectoryService m_publicDirectoryService = null;
 	
 	private HashMap m_proxies = new HashMap();
+	
+	public Session(GGConfiguration configuration) {
+		this();
+		if (configuration == null) throw new IllegalArgumentException("configuration cannot be null");
+		m_configuration = configuration;
+	}
 	
 	public Session() {
 		m_sessionAccessor = new SessionAccessor();
@@ -87,6 +96,13 @@ public class Session implements ISession {
 
 	public SessionState getSessionState() {
 		return m_sessionState;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.ISession#getConfiguration()
+	 */
+	public IGGConfiguration getGGConfiguration() {
+		return m_configuration;
 	}
 	
 	public void addSessionStateListener(SessionStateListener sessionStateListener) {
@@ -294,6 +310,10 @@ public class Session implements ISession {
 			Integer seedInteger = (Integer) m_sessionAttributes.get("seed");
 			return seedInteger.intValue();
 		}
+		
+//		public IGGConfiguration getGGConfiguration() {
+//			return m_configuration;
+//		}
 
 	}
 

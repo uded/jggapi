@@ -39,7 +39,7 @@ import pl.mn.communicator.packet.http.RegisterGGAccountRequest.RegisterGGAccount
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.16 2005-01-28 23:07:39 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.17 2005-05-08 14:26:42 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 	
@@ -63,7 +63,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 		
 		GGTokenRequest tokenRequest = null;
 		try {
-			tokenRequest = new GGTokenRequest();
+			tokenRequest = new GGTokenRequest(m_session.getGGConfiguration());
 			tokenRequest.connect();
 			GGTokenRequest.GGTokenResponse response = (GGTokenResponse) tokenRequest.getResponse();
 			
@@ -94,7 +94,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 		
 		ChangePasswordRequest changePasswordRequest = null;
 		try {
-			changePasswordRequest = new ChangePasswordRequest(uin, email, oldPassword, newPassword, tokenID, tokenVal);
+			changePasswordRequest = new ChangePasswordRequest(m_session.getGGConfiguration(), uin, email, oldPassword, newPassword, tokenID, tokenVal);
 			changePasswordRequest.connect();
 			changePasswordRequest.sendRequest();
 			
@@ -123,7 +123,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 		
 		RegisterGGAccountRequest request = null;
 		try {
-			request = new RegisterGGAccountRequest(email, password, tokenID, tokenVal);
+			request = new RegisterGGAccountRequest(m_session.getGGConfiguration(), email, password, tokenID, tokenVal);
 			request.connect();
 			request.sendRequest();
 			RegisterGGAccountRequest.RegisterGGAccountResponse response = (RegisterGGAccountResponse) request.getResponse();
@@ -151,7 +151,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 		
 		UnregisterGGPasswordRequest unregisterGGPasswordRequest = null;
 		try {
-			unregisterGGPasswordRequest = new UnregisterGGPasswordRequest(uin, password, tokenID, tokenVal);
+			unregisterGGPasswordRequest = new UnregisterGGPasswordRequest(m_session.getGGConfiguration(), uin, password, tokenID, tokenVal);
 			unregisterGGPasswordRequest.connect();
 			unregisterGGPasswordRequest.sendRequest();
 			
@@ -181,7 +181,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 		
 		SendAndRemindPasswordRequest request = null;
 		try {
-			request = new SendAndRemindPasswordRequest(uin, email, tokenID, tokenVal);
+			request = new SendAndRemindPasswordRequest(m_session.getGGConfiguration(), uin, email, tokenID, tokenVal);
 			request.connect();
 			request.sendRequest();
 			

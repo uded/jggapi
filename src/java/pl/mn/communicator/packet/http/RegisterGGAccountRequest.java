@@ -24,20 +24,21 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.StringTokenizer;
 
+import pl.mn.communicator.IGGConfiguration;
 
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: RegisterGGAccountRequest.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
+ * @version $Id: RegisterGGAccountRequest.java,v 1.3 2005-05-08 14:28:01 winnetou25 Exp $
  */
 public class RegisterGGAccountRequest extends AbstractTokenRequest {
 
 	private String m_email = null;
 	private String m_password = null;
 	
-	public RegisterGGAccountRequest(String email, String password, String tokenID, String tokenVal) throws IOException {
-		super(tokenID, tokenVal);
+	public RegisterGGAccountRequest(IGGConfiguration configuration, String email, String password, String tokenID, String tokenVal) throws IOException {
+		super(configuration, tokenID, tokenVal);
 		if (email == null) throw new NullPointerException("email cannot be null");
 		if (password == null) throw new NullPointerException("password cannot be null");
 		m_email = email;
@@ -60,7 +61,8 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	 * @see pl.mn.communicator.packet.http.HttpRequest#getURL()
 	 */
 	protected String getURL() {
-		return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
+	    return m_ggconfiguration.getRegistrationURL();
+	    //return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
 	}
 
 	/**

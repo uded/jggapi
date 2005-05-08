@@ -35,6 +35,7 @@ import org.apache.commons.logging.LogFactory;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.GGSessionException;
 import pl.mn.communicator.IConnectionService;
+import pl.mn.communicator.IGGConfiguration;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.Server;
 import pl.mn.communicator.SessionState;
@@ -53,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.16 2005-01-31 21:21:46 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.17 2005-05-08 14:25:40 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -91,19 +92,20 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public IServer lookupServer(int uin) throws GGException {
     	try {
-        	URL url = new URL("http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp?fmnumber="+ String.valueOf(uin));
+        	IGGConfiguration configuration = m_session.getGGConfiguration();
+
+    		URL url = new URL(configuration.getServerLookupURL()+"?fmnumber="+String.valueOf(uin));
         	
         	HttpURLConnection con = (HttpURLConnection) url.openConnection();
-
-        	//con.setReadTimeout(120*1000); //JDK 1.5
-        	//con.setConnectTimeout(120*1000);	//JDK 1.5
-
+        	con.setConnectTimeout(configuration.getSocketTimeoutInMiliseconds());
+        	con.setReadTimeout(configuration.getSocketTimeoutInMiliseconds());
+        	
         	con.setDoInput(true);
         	con.connect();
-            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream(), WINDOW_ENCODING));
+            BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream(), WINDOW_ENCODING));
 
-            String line = in.readLine();
-            in.close();
+            String line = reader.readLine();
+            reader.close();
 
             return parseAddress(line);
     	} catch (IOException ex) {
@@ -136,6 +138,7 @@ public class DefaultConnectionService implements IConnectionService {
 		checkDisconnectionState();
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 		try {
+		    m_connectionPinger.stopPinging();
 			m_connectionThread.closeConnection();
 			notifyConnectionClosed();
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
@@ -321,7 +324,6 @@ public class DefaultConnectionService implements IConnectionService {
     private class ConnectionThread extends Thread {
     	
 		private static final int HEADER_LENGTH = 8;
-		private static final int THREAD_SLEEP_TIME = 100;
     	
     	private Socket m_socket = null;
     	private BufferedInputStream m_dataInput = null;
@@ -336,11 +338,12 @@ public class DefaultConnectionService implements IConnectionService {
        					m_dataInput.read(headerData);
        					decodePacket(new GGHeader(headerData));
     		   		}
-    				Thread.sleep(THREAD_SLEEP_TIME);
+    		   		int sleepTime = m_session.getGGConfiguration().getConnectionThreadSleepTimeInMiliseconds();
+    				Thread.sleep(sleepTime);
     			}
     		} catch (Exception ex) {
     			m_active = false;
-    			logger.error("Connection error: "+ex);
+    			logger.error("Connection error: ", ex);
     			notifyConnectionError(ex);
     		}
     	}
@@ -352,13 +355,17 @@ public class DefaultConnectionService implements IConnectionService {
     	private void openConnection(String host, int port) throws IOException {
     		//add runtime checking for port
     		m_socket = new Socket(host, port);
+    		m_socket.setKeepAlive(true);
+    		int socketTimeoutInMiliseconds = m_session.getGGConfiguration().getSocketTimeoutInMiliseconds();
+    		m_socket.setSoTimeout(socketTimeoutInMiliseconds);
    			m_dataInput = new BufferedInputStream(m_socket.getInputStream());
    			m_dataOutput = new BufferedOutputStream(m_socket.getOutputStream());
    			start();
     	}
     	
     	private void closeConnection() throws IOException {
-    		m_active = false;
+    	    logger.debug("Closing connection...");
+    	    m_active = false;
     		m_dataInput = null;
     		m_dataOutput = null;
     		m_socket.close();
@@ -388,10 +395,7 @@ public class DefaultConnectionService implements IConnectionService {
     
     private class PingerThread extends Thread {
     	
-    	private static final int PING_COUNT = 10;
-    	private int m_pingCount = 0;
-    	private boolean m_active = true;
-		private static final int THREAD_SLEEP_TIME = 1000;
+    	private boolean m_active = false;
     	
     	/**
     	 * @see java.lang.Thread#run()
@@ -399,30 +403,31 @@ public class DefaultConnectionService implements IConnectionService {
 		public void run() {
 			while (m_active && m_connectionThread.isActive()) {
 				try {
-					if (++m_pingCount > PING_COUNT) {
-						logger.debug("Pinging...");
-						DefaultConnectionService.this.sendPackage(GGPing.getPing());
-						DefaultConnectionService.this.notifyPingSent();
-						m_pingCount = 0;
-					}
-					Thread.sleep(THREAD_SLEEP_TIME);
+					logger.debug("Pinging...");
+					DefaultConnectionService.this.sendPackage(GGPing.getPing());
+					DefaultConnectionService.this.notifyPingSent();
+					int pingInterval = m_session.getGGConfiguration().getPingIntervalInMiliseconds();
+					Thread.sleep(pingInterval);
 				} catch (IOException ex) {
 					m_active = false;
-					logger.error("PingerThreadError: "+ex);
+					logger.error("PingerThreadError: ", ex);
 					notifyConnectionError(ex);
 				} catch (InterruptedException ex) {
 					m_active = false;
-					logger.debug("PingerThread was interruped");
+					logger.debug("PingerThread was interruped", ex);
 				}
 			}
 		}
     	
     	private void startPinging() {
-    		start();
+    	    logger.debug("Starting pinging...");
+    	    m_active = true;
+    	    start();
     	}
     	
     	private void stopPinging() {
-    		m_active = false;
+    	    logger.debug("Stopping pinging...");
+    	    m_active = false;
     	}
     }
 

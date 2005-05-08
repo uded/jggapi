@@ -17,40 +17,41 @@
  */
 package pl.mn.communicator;
 
-import pl.mn.communicator.event.SessionStateListener;
-
 /**
+ * Created on 2005-05-08
+ * 
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ISession.java,v 1.11 2005-05-08 14:23:10 winnetou25 Exp $
+ * @version $Id: IGGConfiguration.java,v 1.1 2005-05-08 14:22:46 winnetou25 Exp $
  */
-public interface ISession {
+public interface IGGConfiguration {
 
-	/**
-	 * Returns state of this session.
-	 * 
-	 * @return <code>SessionState</code>
-	 */
-	SessionState getSessionState();
-
-	IGGConfiguration getGGConfiguration();
-
-	IConnectionService getConnectionService();
-
-	ILoginService getLoginService();
-
-	IMessageService getMessageService();
+	int getPingIntervalInMiliseconds();
 	
-	IPresenceService getPresenceService();
-
-	IContactListService getContactListService();
-
-	IPublicDirectoryService getPublicDirectoryService();
+	int getSocketTimeoutInMiliseconds();
 	
-	IRegistrationService getRegistrationService();
-
-	void addSessionStateListener(SessionStateListener sessionStateListener);
+	int getConnectionThreadSleepTimeInMiliseconds();
 	
-	void removeSessionStateListener(SessionStateListener sessionStateListener);
+	String getServerLookupURL();
+	
+	String getRegistrationURL();
+	
+	String getTokenRequestURL();
+
+    String getSendPasswordURL();
+    
+    void setSendPasswordURL(String url);
+    
+	void setPingIntervalInMiliseconds(int intervalInMiliseconds);
+	
+	void setSocketTimeoutInMiliseconds(int timeoutInSeconds);
+	
+	void setServerLookupURL(String url);
+
+	void setRegistrationURL(String url);
+	
+	void setTokenRequestURL(String url);
+	
+	void setConnectionThreadSleepTimeInMiliseconds(int connectionThreadSleepTimeInMilis);
 	
 }

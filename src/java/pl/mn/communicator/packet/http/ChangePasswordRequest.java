@@ -23,11 +23,13 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import pl.mn.communicator.IGGConfiguration;
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ChangePasswordRequest.java,v 1.1 2005-01-28 22:08:49 winnetou25 Exp $
+ * @version $Id: ChangePasswordRequest.java,v 1.2 2005-05-08 14:28:01 winnetou25 Exp $
  */
 public class ChangePasswordRequest extends AbstractTokenRequest {
 	
@@ -36,8 +38,8 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	private String m_oldPassword = null;
 	private String m_newPassword = null;
 	
-	public ChangePasswordRequest(int uin, String email, String oldPassword, String newPassword, String tokenID, String tokenVal) throws IOException {
-		super(tokenID, tokenVal);
+	public ChangePasswordRequest(IGGConfiguration configuration, int uin, String email, String oldPassword, String newPassword, String tokenID, String tokenVal) throws IOException {
+		super(configuration, tokenID, tokenVal);
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		if (email == null) throw new NullPointerException("email cannot be null");
 		if (oldPassword == null) throw new NullPointerException("oldPassword cannot be null");
@@ -64,7 +66,8 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	 * @see pl.mn.communicator.packet.http.HttpRequest#getURL()
 	 */
 	protected String getURL() {
-		return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
+	    return m_ggconfiguration.getRegistrationURL();
+	    //return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
 	}
 	
 	/**

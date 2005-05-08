@@ -19,19 +19,21 @@ package pl.mn.communicator.packet.http;
 
 import java.io.IOException;
 
+import pl.mn.communicator.IGGConfiguration;
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractTokenRequest.java,v 1.3 2005-05-05 17:55:12 winnetou25 Exp $
+ * @version $Id: AbstractTokenRequest.java,v 1.4 2005-05-08 14:28:01 winnetou25 Exp $
  */
 public abstract class AbstractTokenRequest extends HttpRequest {
 	
 	private String m_tokenID = null;
 	private String m_tokenVal = null;
 	
-	protected AbstractTokenRequest(String tokenID, String tokenVal) throws IOException {
-		super();
+	protected AbstractTokenRequest(IGGConfiguration configuration, String tokenID, String tokenVal) throws IOException {
+		super(configuration);
 		if (tokenID == null) throw new NullPointerException("tokenID cannot be null");
 		if (tokenVal == null) throw new NullPointerException("tokenVal cannot be null");
 		m_tokenID = tokenID;

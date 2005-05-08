@@ -20,7 +20,7 @@ package pl.mn.communicator;
 /**
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: StatusType.java,v 1.6 2004-12-27 13:58:06 winnetou25 Exp $
+ * @version $Id: StatusType.java,v 1.7 2005-05-08 14:24:43 winnetou25 Exp $
  */
 public class StatusType {
 
@@ -66,7 +66,7 @@ public class StatusType {
 	 * @see java.lang.Object#hashCode()
 	 */
 	public int hashCode() {
-		return m_status.hashCode();
+		return m_status.hashCode() * 37;
 	}
 
 }
