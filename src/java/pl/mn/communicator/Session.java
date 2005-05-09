@@ -36,7 +36,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.2 2005-05-09 22:45:59 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -57,7 +57,7 @@ public class Session implements ISession {
 	
 	private HashMap m_proxies = new HashMap();
 	
-	public Session(GGConfiguration configuration) {
+	public Session(IGGConfiguration configuration) {
 		this();
 		if (configuration == null) throw new IllegalArgumentException("configuration cannot be null");
 		m_configuration = configuration;

@@ -17,41 +17,31 @@
  */
 package pl.mn.communicator;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
- * Created on 2005-05-08
- * 
+ * This is the factory class that helps developers
+ * to create a new instance of a session class.
+ * <p>
+ * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IGGConfiguration.java,v 1.2 2005-05-09 22:45:59 winnetou25 Exp $
+ * @version $Id: SessionFactory.java,v 1.13 2005-05-09 22:45:59 winnetou25 Exp $
  */
-public interface IGGConfiguration {
-
-	int getPingIntervalInMiliseconds();
+public class SessionFactory {
 	
-	int getSocketTimeoutInMiliseconds();
-	
-	int getConnectionThreadSleepTimeInMiliseconds();
-	
-	String getServerLookupURL();
-	
-	String getRegistrationURL();
-	
-	String getTokenRequestURL();
-
-    String getSendPasswordURL();
+    private final static Log LOGGER = LogFactory.getLog(SessionFactory.class);
     
-//    void setSendPasswordURL(String url);
-//    
-//	void setPingIntervalInMiliseconds(int intervalInMiliseconds);
-//	
-//	void setSocketTimeoutInMiliseconds(int timeoutInSeconds);
-//	
-//	void setServerLookupURL(String url);
-//
-//	void setRegistrationURL(String url);
-//	
-//	void setTokenRequestURL(String url);
-//	
-//	void setConnectionThreadSleepTimeInMiliseconds(int connectionThreadSleepTimeInMilis);
-	
+    public static ISession createSession() {
+        try {
+            PropertiesGGConfiguration configuration = PropertiesGGConfiguration.createDefaultPropertiesGGConfiguration();
+            return new Session(configuration);
+        } catch (Exception ex) {
+            LOGGER.warn("Unable to load jggapi xml properties!", ex);
+            LOGGER.warn("Falling back to default properties");
+            return new Session();
+        }
+    }
+    
 }

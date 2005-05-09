@@ -22,7 +22,7 @@ package pl.mn.communicator;
  * 
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGConfiguration.java,v 1.2 2005-05-09 20:59:08 winnetou25 Exp $
+ * @version $Id: GGConfiguration.java,v 1.3 2005-05-09 22:45:59 winnetou25 Exp $
  */
 public class GGConfiguration implements IGGConfiguration {
 
@@ -39,19 +39,8 @@ public class GGConfiguration implements IGGConfiguration {
 	private String m_tokenRequestURL = "http://register.gadu-gadu.pl/appsvc/regtoken.asp";
 	private String m_sendPasswordURL = "http://retr.gadu-gadu.pl/appsvc/fmsendpwd3.asp";
 	
-	public GGConfiguration() {
-	}
-
 	public int getPingIntervalInMiliseconds() {
 		return m_pingIntervalInMiliseconds;
-	}
-	
-	public void setPingIntervalInMiliseconds(int intervalInMiliseconds) {
-		m_pingIntervalInMiliseconds = intervalInMiliseconds;
-	}
-
-	public void setSocketTimeoutInMiliseconds(int timeoutInSeconds) {
-		m_socketTimeoutInSeconds = timeoutInSeconds;
 	}
 	
 	public int getSocketTimeoutInMiliseconds() {
@@ -70,13 +59,6 @@ public class GGConfiguration implements IGGConfiguration {
     }
     
     /**
-     * @see pl.mn.communicator.IGGConfiguration#setRegistrationURL(java.lang.String)
-     */
-    public void setRegistrationURL(String url) {
-        m_serverRegistrationURL = url;
-    }
-    
-    /**
      * @see pl.mn.communicator.IGGConfiguration#getTokenRequestURL()
      */
     public String getTokenRequestURL() {
@@ -87,21 +69,6 @@ public class GGConfiguration implements IGGConfiguration {
         return m_sendPasswordURL;
     }
     
-    public void setSendPasswordURL(String url) {
-        m_sendPasswordURL = url;
-    }
-    
-    /**
-     * @see pl.mn.communicator.IGGConfiguration#setTokenRequest(java.lang.String)
-     */
-    public void setTokenRequestURL(String url) {
-        m_tokenRequestURL = url;
-    }
-	
-	public void setServerLookupURL(String url) {
-		m_serverLookupURL = url;
-	}
-	
 	public int getConnectionThreadSleepTimeInMiliseconds() {
 		return m_connectionTimeOutInMiliseconds;
 	}
@@ -109,5 +76,29 @@ public class GGConfiguration implements IGGConfiguration {
 	public void setConnectionThreadSleepTimeInMiliseconds(int connectionThreadSleepTimeInMilis) {
 		m_connectionTimeOutInMiliseconds = connectionThreadSleepTimeInMilis;
 	}
-	
+
+	public void setPingIntervalInMiliseconds(int intervalInMiliseconds) {
+		m_pingIntervalInMiliseconds = intervalInMiliseconds;
+	}
+
+	public void setServerLookupURL(String url) {
+		m_serverLookupURL = url;
+	}
+
+    public void setTokenRequestURL(String url) {
+        m_tokenRequestURL = url;
+    }
+
+    public void setSendPasswordURL(String url) {
+        m_sendPasswordURL = url;
+    }
+
+    public void setRegistrationURL(String url) {
+        m_serverRegistrationURL = url;
+    }
+
+	public void setSocketTimeoutInMiliseconds(int timeoutInSeconds) {
+		m_socketTimeoutInSeconds = timeoutInSeconds;
+	}
+
 }

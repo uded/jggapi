@@ -14,7 +14,7 @@ import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
-import pl.mn.communicator.Session;
+import pl.mn.communicator.SessionFactory;
 import pl.mn.communicator.SessionState;
 import pl.mn.communicator.StatusType;
 import pl.mn.communicator.User;
@@ -44,7 +44,7 @@ public class Main2 {
 
 	public static void main(String args[]) throws IOException, GGException {
 
-		final ISession session = new Session();
+		final ISession session = SessionFactory.createSession();
 
 		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
 
