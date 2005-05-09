@@ -23,8 +23,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 import java.net.URL;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.StringTokenizer;
 
 import javax.swing.event.EventListenerList;
@@ -49,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.2 2005-05-08 14:56:08 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.3 2005-05-09 20:58:33 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -61,6 +66,8 @@ public class DefaultConnectionService implements IConnectionService {
 	
 	/** reference to session object */
 	private Session m_session = null;
+	
+	private Queue m_senderQueue = new LinkedList();
 	
 	/** chain that handles packages */
 	private PacketChain m_packetChain = null;
@@ -130,7 +137,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.mn.communicator.IConnectionService#disconnect()
 	 */
 	public void disconnect() throws GGException {
-		checkDisconnectionState();
+	    //checkDisconnectionState();
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 		try {
 		    m_connectionPinger.stopPinging();
@@ -275,23 +282,9 @@ public class DefaultConnectionService implements IConnectionService {
     }
 
     protected void sendPackage(GGOutgoingPackage outgoingPackage) throws IOException {
-    	int packetType = outgoingPackage.getPacketType();
-		int length = outgoingPackage.getLength();
-		byte[] contents = outgoingPackage.getContents();
-		m_connectionThread.sendPackage(packetType, length, contents);
-		notifyPacketSent(outgoingPackage);
+		m_senderQueue.add(outgoingPackage);
     }
     
-    private void checkDisconnectionState() {
-//		if (!(m_session.getSessionState() == SessionState.CONNECTED)
-//				|| (m_session.getSessionState() == SessionState.LOGGED_IN)
-//				|| (m_session.getSessionState() == SessionState.LOGGED_OUT)
-//				|| (m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING)
-//				|| (m_session.getSessionState() == SessionState.CONNECTION_ERROR)) {
-//			throw new GGSessionException(m_session.getSessionState());
-//		}
-    }
-
     private void checkConnectionState() {
 		if (!(m_session.getSessionState() == SessionState.CONNECTION_AWAITING)
 			|| (m_session.getSessionState() == SessionState.DISCONNECTED)) {
@@ -328,12 +321,9 @@ public class DefaultConnectionService implements IConnectionService {
     	public void run() {
     		try {
     			while (m_active) {
-    		   		final byte[] headerData = new byte[HEADER_LENGTH];
-    		   		if (m_dataInput.available() > 0) {
-       					m_dataInput.read(headerData);
-       					decodePacket(new GGHeader(headerData));
-    		   		}
-    		   		int sleepTime = m_session.getGGConfiguration().getConnectionThreadSleepTimeInMiliseconds();
+    			    handleInput();
+    			    handleOutput();
+    			    int sleepTime = m_session.getGGConfiguration().getConnectionThreadSleepTimeInMiliseconds();
     				Thread.sleep(sleepTime);
     			}
     		} catch (Exception ex) {
@@ -343,15 +333,33 @@ public class DefaultConnectionService implements IConnectionService {
     		}
     	}
     	
+    	private void handleInput() throws IOException, GGException {
+    	    final byte[] headerData = new byte[HEADER_LENGTH];
+    	    if (m_dataInput.available() > 0) {
+    	        m_dataInput.read(headerData);
+    	        decodePacket(new GGHeader(headerData));
+    	    }
+    	}
+
+    	private void handleOutput() throws IOException {
+    	    while (!m_senderQueue.isEmpty()) {
+    	        GGOutgoingPackage outgoingPackage = (GGOutgoingPackage) m_senderQueue.poll();
+    	        sendPackage(outgoingPackage);
+    			notifyPacketSent(outgoingPackage);
+    	    }
+    	}
+
     	private boolean isActive() {
     		return m_active;
     	}
 
     	private void openConnection(String host, int port) throws IOException {
     		//add runtime checking for port
-    		m_socket = new Socket(host, port);
-    		m_socket.setKeepAlive(true);
+    		m_socket = new Socket();
+    		SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(host), port);
     		int socketTimeoutInMiliseconds = m_session.getGGConfiguration().getSocketTimeoutInMiliseconds();
+    		m_socket.connect(socketAddress, socketTimeoutInMiliseconds);
+    		m_socket.setKeepAlive(true);
     		m_socket.setSoTimeout(socketTimeoutInMiliseconds);
    			m_dataInput = new BufferedInputStream(m_socket.getInputStream());
    			m_dataOutput = new BufferedOutputStream(m_socket.getOutputStream());
@@ -366,14 +374,14 @@ public class DefaultConnectionService implements IConnectionService {
     		m_socket.close();
     	}
     	
-    	private synchronized void sendPackage(int packetType, int length, byte[] packageContent) throws IOException {
-    		logger.debug("Sending packet: "+packetType+", packetPayLoad: "+GGUtils.prettyBytesToString(packageContent));
+    	private synchronized void sendPackage(GGOutgoingPackage outgoingPackage) throws IOException {
+    		logger.debug("Sending packet: "+outgoingPackage.getPacketType()+", packetPayLoad: "+GGUtils.prettyBytesToString(outgoingPackage.getContents()));
     		
-    		m_dataOutput.write(GGUtils.intToByte(packetType));
-    		m_dataOutput.write(GGUtils.intToByte(length));
+    		m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getPacketType()));
+    		m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getLength()));
     		
-    		if (length > 0) {
-    			m_dataOutput.write(packageContent);
+    		if (outgoingPackage.getLength() > 0) {
+    			m_dataOutput.write(outgoingPackage.getContents());
     		}
 
     		m_dataOutput.flush();
@@ -425,5 +433,5 @@ public class DefaultConnectionService implements IConnectionService {
     	    m_active = false;
     	}
     }
-
+    
 }

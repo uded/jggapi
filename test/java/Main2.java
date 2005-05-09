@@ -6,6 +6,7 @@ import pl.mn.communicator.ILocalStatus;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
+import pl.mn.communicator.ISingleChat;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LoginContext;
@@ -232,6 +233,10 @@ public class Main2 {
 //		user1.setUserMode(GGUserMode.FRIEND);
 //		session.getPresenceService().changeMonitoredUserStatus(user1);
 
+		ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
+		matiChat.sendMessage("body");
+		matiChat.sendMessage("dupka");
+		
 		session.getLoginService().logout();
 		System.out.println("Abandon ship...");
 		//session.getConnectionService().disconnect();

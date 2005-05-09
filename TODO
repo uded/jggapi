@@ -25,6 +25,9 @@ konwersje robilby dekorator na inputstream i outputstream.
 18. DONE Czy interval pingowania powinien byc konfiguralny? W klasie Session? Rozwazyc GGConfiguration,
 	jako klase konfigurujaca biblioteke i pozwalajaca ja customizowac.
 19.Deployment - wrzucic lib z commons-logging to dystrubucji.
+20. Uzyc GGOutputStream i GGInputStream z Javu-Javu.
+21. Podoba mi sie idea SendQueue.. odklada sie na kolejce pakiety do wyslania i watek 
+	sciaga z kolejki pakiety i wysyla jeden po drugim.
 
 Bugs or features for 1.5 version.
 2. LOW - Implementacja wysylania plikow.

@@ -22,13 +22,13 @@ package pl.mn.communicator;
  * 
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGConfiguration.java,v 1.1 2005-05-08 14:20:17 winnetou25 Exp $
+ * @version $Id: GGConfiguration.java,v 1.2 2005-05-09 20:59:08 winnetou25 Exp $
  */
 public class GGConfiguration implements IGGConfiguration {
 
-	public static final int DEFAULT_SOCKET_TIMEOUT = 10*1000;
+	public static final int DEFAULT_SOCKET_TIMEOUT = 25*1000;
 	public static final int DEFAULT_PING_INTERVAL = 10*1000;
-	public static final int DEFAULT_CONNECTION_THREAD_SLEEP_TIME = 500;
+	public static final int DEFAULT_CONNECTION_THREAD_SLEEP_TIME = 100;
 
 	private int m_pingIntervalInMiliseconds = DEFAULT_PING_INTERVAL;
 	private int m_socketTimeoutInSeconds = DEFAULT_SOCKET_TIMEOUT;
