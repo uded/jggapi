@@ -19,6 +19,8 @@ package pl.mn.communicator;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.security.AccessController;
+import java.security.PrivilegedAction;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
@@ -26,10 +28,10 @@ import java.util.Properties;
  * Created on 2005-05-09
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PropertiesGGConfiguration.java,v 1.1 2005-05-09 22:45:59 winnetou25 Exp $
+ * @version $Id: PropertiesGGConfiguration.java,v 1.2 2005-05-11 19:28:23 winnetou25 Exp $
  */
 public class PropertiesGGConfiguration implements IGGConfiguration {
-
+    
     private IGGConfiguration m_defaultGGConfiguration = new GGConfiguration();
     
     private Properties m_prop = null;
@@ -38,9 +40,11 @@ public class PropertiesGGConfiguration implements IGGConfiguration {
         this(fileName);
         m_defaultGGConfiguration = configuration;
     }
-
+    
     public PropertiesGGConfiguration(String fileName) throws IOException, InvalidPropertiesFormatException {
-        InputStream is = PropertiesGGConfiguration.class.getResourceAsStream(fileName);
+        ClassLoader cl = Thread.currentThread().getContextClassLoader();
+        InputStream is = getResourceAsStream(cl, fileName);
+        
         if (is == null) throw new IOException("Unable to find file: "+fileName);
         m_prop = new Properties();
         m_prop.loadFromXML(is);
@@ -61,7 +65,7 @@ public class PropertiesGGConfiguration implements IGGConfiguration {
         String pingInterval = String.valueOf(m_defaultGGConfiguration.getPingIntervalInMiliseconds());
         return new Integer(m_prop.getProperty("ping.interval", pingInterval)).intValue();
     }
-
+    
     /**
      * @see pl.mn.communicator.IGGConfiguration#getSocketTimeoutInMiliseconds()
      */
@@ -101,9 +105,22 @@ public class PropertiesGGConfiguration implements IGGConfiguration {
         String tokenRequestURL = m_defaultGGConfiguration.getServerLookupURL();
         return m_prop.getProperty("token.request.url", tokenRequestURL);
     }
-
+    
     public static PropertiesGGConfiguration createDefaultPropertiesGGConfiguration() throws IOException, InvalidPropertiesFormatException {
-        return new PropertiesGGConfiguration("jggapi.xml");
+        return new PropertiesGGConfiguration("jggapi.properties");
+    }
+    
+    private static InputStream getResourceAsStream(final ClassLoader loader, final String name) {
+        return (InputStream)AccessController.doPrivileged(
+                new PrivilegedAction() {
+                    public Object run() {
+                        if (loader != null) {
+                            return loader.getResourceAsStream(name);
+                        } else {
+                            return ClassLoader.getSystemResourceAsStream(name);
+                        }
+                    }
+                });
     }
     
 }
