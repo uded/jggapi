@@ -1,5 +1,7 @@
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.Collection;
+import java.util.Date;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.ILocalStatus;
@@ -78,8 +80,9 @@ public class Main2 {
 				System.out.println("Login OK.");
 				
 				ILocalStatus status = session.getPresenceService().getStatus();
-				status.setFriendsOnly(true);
-				status.setStatusType(StatusType.BUSY);
+				//status.setFriendsOnly(true);
+				status.setDescription("desc124253");
+				status.setStatusType(StatusType.BUSY_WITH_DESCRIPTION);
 				session.getPresenceService().setStatus(status);
 
 				OutgoingMessage.createNewMessage(376798, "body");
@@ -88,8 +91,6 @@ public class Main2 {
 				ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
 				matiChat.sendMessage("body");
 				matiChat.sendMessage("dupka");
-
-				session.getLoginService().logout();
 			}
 
 			public void loginFailed() throws GGException {
@@ -238,7 +239,38 @@ public class Main2 {
 //		user1.setUserMode(GGUserMode.FRIEND);
 //		session.getPresenceService().changeMonitoredUserStatus(user1);
 
-		//session.getLoginService().logout();
+		System.out.println("JGGApi simple console MENU");
+		System.out.println("[1] - Zakonczenie programu");
+		System.out.println("[2] - Wylogowanie uzytkownika");
+		System.out.println("[3] - Wyslij wiadomosc do uzytkownika 376798 z aktualna data.");
+		
+ 		boolean active = true;
+ 		while (active) {
+ 		    if (System.in.available() > 0) {
+ 		        int i = System.in.read();
+ 		        if (i == 49) {
+ 		            active = false;
+ 		        } else if (i == 50) {
+ 		    		session.getLoginService().logout();
+ 		        } else  if(i == 51) {
+ 		            OutgoingMessage outgoingMessage = OutgoingMessage.createNewMessage(376798, DateFormat.getDateTimeInstance().format(new Date()));
+ 		            session.getMessageService().sendMessage(outgoingMessage);
+ 		        } else if (i == 10 || i == 13) {
+ 		            //ignore
+ 		        } else {
+	 		   		System.out.println("JGGApi simple console MENU");
+	 				System.out.println("[1] - Zakonczenie programu");
+	 				System.out.println("[2] - Wylogowanie uzytkownika");
+	 				System.out.println("[3] - Wyslij wiadomosc do uzytkownika 376798 z aktualna data.");
+ 		        }
+ 		    }
+ 		    try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+         		session.getLoginService().logout();
+            }
+ 		}
+
 		System.out.println("Abandon ship...");
 		//session.getConnectionService().disconnect();
 	}
