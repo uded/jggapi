@@ -85,6 +85,11 @@ public class Main2 {
 				OutgoingMessage.createNewMessage(376798, "body");
 				session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
 
+				ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
+				matiChat.sendMessage("body");
+				matiChat.sendMessage("dupka");
+
+				session.getLoginService().logout();
 			}
 
 			public void loginFailed() throws GGException {
@@ -233,11 +238,7 @@ public class Main2 {
 //		user1.setUserMode(GGUserMode.FRIEND);
 //		session.getPresenceService().changeMonitoredUserStatus(user1);
 
-		ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
-		matiChat.sendMessage("body");
-		matiChat.sendMessage("dupka");
-		
-		session.getLoginService().logout();
+		//session.getLoginService().logout();
 		System.out.println("Abandon ship...");
 		//session.getConnectionService().disconnect();
 	}

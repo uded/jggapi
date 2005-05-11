@@ -1,3 +1,5 @@
+1.TimeUnit class.
+
 Bugs or features for version 1.0
 1. W przypadku monitorowania uzytkownikow obsluzyc sytuacje w ktorej
 	na poczatku wysylamy liste pakietow przekraczajaca 2048 bajtow.
