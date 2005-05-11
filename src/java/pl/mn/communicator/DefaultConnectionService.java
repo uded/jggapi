@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.3 2005-05-09 20:58:33 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.4 2005-05-11 18:19:47 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -342,7 +342,7 @@ public class DefaultConnectionService implements IConnectionService {
     	}
 
     	private void handleOutput() throws IOException {
-    	    while (!m_senderQueue.isEmpty()) {
+    	    while (!m_senderQueue.isEmpty() && !m_socket.isClosed() && m_dataOutput != null) {
     	        GGOutgoingPackage outgoingPackage = (GGOutgoingPackage) m_senderQueue.poll();
     	        sendPackage(outgoingPackage);
     			notifyPacketSent(outgoingPackage);

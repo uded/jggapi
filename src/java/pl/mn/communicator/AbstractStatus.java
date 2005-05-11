@@ -26,7 +26,7 @@ import java.util.Date;
  * Created on 2004-12-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractStatus.java,v 1.5 2005-05-10 18:28:41 winnetou25 Exp $
+ * @version $Id: AbstractStatus.java,v 1.6 2005-05-11 18:19:05 winnetou25 Exp $
  */
 public abstract class AbstractStatus implements IStatus {
 
@@ -85,6 +85,7 @@ public abstract class AbstractStatus implements IStatus {
 	 * @return <code>Date</code> the return time.
 	 */
 	public Date getReturnDate() {
+	    if (m_returnTime == null) return null;
 		return new Date(m_returnTime.getTime());
 	}
 
