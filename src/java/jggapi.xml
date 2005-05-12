@@ -5,7 +5,7 @@
 	<comment>JGGApi properties</comment>
 
 	<entry key="socket.timeout">25000</entry>
-	<entry key="ping.interval">10000</entry>
+	<entry key="ping.interval">30000</entry>
 	<entry key="connection.thread.sleep.time">100</entry>
 
 	<entry key="server.lookup.url">http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp</entry>

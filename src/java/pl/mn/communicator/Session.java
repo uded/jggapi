@@ -36,7 +36,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.2 2005-05-09 22:45:59 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.3 2005-05-12 21:50:25 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -228,7 +228,7 @@ public class Session implements ISession {
 			m_connectionService.notifyConnectionClosed();
 		}
 
-		public void notifyConnectionError(Exception exception) {
+		public void notifyConnectionError(Exception exception) throws GGException {
 			m_connectionService.notifyConnectionError(exception);
 		}
 		

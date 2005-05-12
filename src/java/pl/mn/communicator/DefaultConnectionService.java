@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.6 2005-05-12 17:53:42 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.7 2005-05-12 21:50:25 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -237,7 +237,7 @@ public class DefaultConnectionService implements IConnectionService {
     }
 
 	//TODO clone the list of listeners
-    protected void notifyConnectionError(final Exception ex) {
+    protected void notifyConnectionError(final Exception ex) throws GGException {
     	ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
     	for (int i=0; i<connectionListeners.length; i++) {
     		ConnectionListener connectionListener = connectionListeners[i];
@@ -335,7 +335,11 @@ public class DefaultConnectionService implements IConnectionService {
     		} catch (Exception ex) {
     			m_active = false;
     			logger.error("Connection error: ", ex);
-    			notifyConnectionError(ex);
+    			try {
+                    notifyConnectionError(ex);
+                } catch (GGException e) {
+                    e.printStackTrace();
+                }
     		}
     	}
     	
@@ -417,7 +421,11 @@ public class DefaultConnectionService implements IConnectionService {
 				} catch (IOException ex) {
 					m_active = false;
 					logger.error("PingerThreadError: ", ex);
-					notifyConnectionError(ex);
+					try {
+                        notifyConnectionError(ex);
+                    } catch (GGException e) {
+                        e.printStackTrace();
+                    }
 				} catch (InterruptedException ex) {
 					m_active = false;
 					logger.debug("PingerThread was interruped", ex);

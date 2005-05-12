@@ -69,8 +69,11 @@ public class Main2 {
 				System.out.println("Connection closed.");
 			}
 
-			public void connectionError(Exception ex) {
+			public void connectionError(Exception ex) throws GGException {
 				System.out.println("Connection Error: "+ex.getMessage());
+				session.getConnectionService().disconnect();
+				IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
+				session.getConnectionService().connect(server);
 			}
 
 		});
