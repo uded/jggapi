@@ -28,9 +28,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.URL;
-import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.swing.event.EventListenerList;
 
@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.5 2005-05-11 18:44:48 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.6 2005-05-12 17:53:42 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -67,7 +67,7 @@ public class DefaultConnectionService implements IConnectionService {
 	/** reference to session object */
 	private Session m_session = null;
 	
-	private Queue m_senderQueue = new LinkedList();
+	private Queue m_senderQueue = new ConcurrentLinkedQueue();
 	
 	/** chain that handles packages */
 	private PacketChain m_packetChain = null;
@@ -328,7 +328,7 @@ public class DefaultConnectionService implements IConnectionService {
     			    int sleepTime = m_session.getGGConfiguration().getConnectionThreadSleepTimeInMiliseconds();
     				Thread.sleep(sleepTime);
     			}
-    			System.out.println("Leaving while");
+    			//System.out.println("Leaving while");
     			m_dataInput = null;
         		m_dataOutput = null;
         		m_socket.close();

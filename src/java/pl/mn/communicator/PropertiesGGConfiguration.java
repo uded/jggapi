@@ -28,7 +28,7 @@ import java.util.Properties;
  * Created on 2005-05-09
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PropertiesGGConfiguration.java,v 1.2 2005-05-11 19:28:23 winnetou25 Exp $
+ * @version $Id: PropertiesGGConfiguration.java,v 1.3 2005-05-12 17:47:32 winnetou25 Exp $
  */
 public class PropertiesGGConfiguration implements IGGConfiguration {
     
@@ -107,7 +107,7 @@ public class PropertiesGGConfiguration implements IGGConfiguration {
     }
     
     public static PropertiesGGConfiguration createDefaultPropertiesGGConfiguration() throws IOException, InvalidPropertiesFormatException {
-        return new PropertiesGGConfiguration("jggapi.properties");
+        return new PropertiesGGConfiguration("jggapi.xml");
     }
     
     private static InputStream getResourceAsStream(final ClassLoader loader, final String name) {
