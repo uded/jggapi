@@ -246,6 +246,9 @@ public class Main2 {
 		System.out.println("[1] - Zakonczenie programu");
 		System.out.println("[2] - Wylogowanie uzytkownika");
 		System.out.println("[3] - Wyslij wiadomosc do uzytkownika 376798 z aktualna data.");
+		System.out.println("[4] - Zamiana statusu na dostepny.");
+		System.out.println("[5] - Zamiana statusu na niewidoczny z opisem.");
+		System.out.println("[6] - Zamiana statusu na zajety");
 		
  		boolean active = true;
  		while (active) {
@@ -260,12 +263,35 @@ public class Main2 {
  		            session.getMessageService().sendMessage(outgoingMessage);
  		        } else if (i == 10 || i == 13) {
  		            //ignore
- 		        } else {
-	 		   		System.out.println("JGGApi simple console MENU");
-	 				System.out.println("[1] - Zakonczenie programu");
-	 				System.out.println("[2] - Wylogowanie uzytkownika");
-	 				System.out.println("[3] - Wyslij wiadomosc do uzytkownika 376798 z aktualna data.");
- 		        }
+ 		        } else if (i == 52) {
+ 		           ILocalStatus status = session.getPresenceService().getStatus();
+ 		            if (status.getStatusType() != StatusType.ONLINE) {
+ 		                status.setStatusType(StatusType.ONLINE);
+ 		                session.getPresenceService().setStatus(status);
+ 		            }
+ 		        } else if (i == 53) {
+ 		            ILocalStatus status = session.getPresenceService().getStatus();
+ 		            if (status.getStatusType() != StatusType.INVISIBLE_WITH_DESCRIPTION) {
+ 		                status.setStatusType(StatusType.INVISIBLE_WITH_DESCRIPTION);
+ 		                status.setDescription("Invisible desc");
+ 		                session.getPresenceService().setStatus(status);
+ 		            }
+		        } else if (i == 54) {
+		            ILocalStatus status = session.getPresenceService().getStatus();
+ 		            if (status.getStatusType() != StatusType.BUSY) {
+ 		                status.setStatusType(StatusType.BUSY_WITH_DESCRIPTION);
+ 		                status.setDescription("busy desc");
+ 		                session.getPresenceService().setStatus(status);
+ 		            }
+		        } else {
+		    		System.out.println("JGGApi simple console MENU");
+		    		System.out.println("[1] - Zakonczenie programu");
+		    		System.out.println("[2] - Wylogowanie uzytkownika");
+		    		System.out.println("[3] - Wyslij wiadomosc do uzytkownika 376798 z aktualna data.");
+		    		System.out.println("[4] - Zamiana statusu na dostepny.");
+		    		System.out.println("[5] - Zamiana statusu na niewidoczny z opisem.");
+		    		System.out.println("[6] - Zamiana statusu na zajety");
+		        }
  		    }
  		    try {
                 Thread.sleep(100);
