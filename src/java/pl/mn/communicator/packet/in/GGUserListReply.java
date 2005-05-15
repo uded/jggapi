@@ -28,7 +28,7 @@ import pl.mn.communicator.LocalUser;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReply.java,v 1.7 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: GGUserListReply.java,v 1.8 2005-05-15 20:41:19 winnetou25 Exp $
  */
 public class GGUserListReply implements GGIncomingPackage {
 
@@ -96,7 +96,15 @@ public class GGUserListReply implements GGIncomingPackage {
 		localUser.setDisplayName(displayName);
 		localUser.setTelephone(telephone);
 		localUser.setGroup(group);
-		localUser.setUin(Integer.valueOf(uin).intValue());
+		int uinInt = -1;
+		try {
+		    uinInt = Integer.valueOf(uin).intValue();
+			if (uinInt != -1) {
+			    localUser.setUin(uinInt);
+			}
+		} catch (NumberFormatException ex) {
+		    //ignore
+		}
 		localUser.setEmailAddress(email);
 		
 		return localUser;

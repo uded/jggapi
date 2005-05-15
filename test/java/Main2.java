@@ -1,7 +1,9 @@
 import java.io.IOException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Iterator;
 
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.ILocalStatus;
@@ -11,6 +13,7 @@ import pl.mn.communicator.ISession;
 import pl.mn.communicator.ISingleChat;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
+import pl.mn.communicator.LocalUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
 import pl.mn.communicator.OutgoingMessage;
@@ -249,7 +252,9 @@ public class Main2 {
 		System.out.println("[4] - Zamiana statusu na dostepny.");
 		System.out.println("[5] - Zamiana statusu na niewidoczny z opisem.");
 		System.out.println("[6] - Zamiana statusu na zajety");
-		
+		System.out.println("[7] - Importowanie listy kontaktow");
+		System.out.println("[8] - Eksportowanie listy kontaktow");
+
  		boolean active = true;
  		while (active) {
  		    if (System.in.available() > 0) {
@@ -283,6 +288,34 @@ public class Main2 {
  		                status.setDescription("busy desc");
  		                session.getPresenceService().setStatus(status);
  		            }
+		        } else if (i == 55) {
+		            LocalUser localUser = new LocalUser();
+		            localUser.setDisplayName("mati");
+		            localUser.setEmailAddress("mati@sz.home.pl");
+		            localUser.setFirstName("Mateusz");
+		            localUser.setLastName("Szczap");
+		            
+		            Collection users = new ArrayList();
+		            users.add(localUser);
+		            session.getContactListService().exportContactList(users);
+		        } else if (i == 56){
+		            session.getContactListService().addContactListListener(new ContactListListener(){
+
+                        public void contactListExported() {
+                            // TODO Auto-generated method stub
+                            
+                        }
+
+                        public void contactListReceived(Collection users) {
+                            for (Iterator it = users.iterator(); it.hasNext();) {
+                                LocalUser localUser = (LocalUser) it.next();
+                                System.out.println(localUser.getFirstName());
+                                System.out.println(localUser.getLastName());
+                            }
+                        }
+		                
+		            });
+		            session.getContactListService().importContactList();
 		        } else {
 		    		System.out.println("JGGApi simple console MENU");
 		    		System.out.println("[1] - Zakonczenie programu");
@@ -291,6 +324,8 @@ public class Main2 {
 		    		System.out.println("[4] - Zamiana statusu na dostepny.");
 		    		System.out.println("[5] - Zamiana statusu na niewidoczny z opisem.");
 		    		System.out.println("[6] - Zamiana statusu na zajety");
+		    		System.out.println("[7] - Importowanie listy kontaktow");
+		    		System.out.println("[8] - Eksportowanie listy kontaktow");
 		        }
  		    }
  		    try {
