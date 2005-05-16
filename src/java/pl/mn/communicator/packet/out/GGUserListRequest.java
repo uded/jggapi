@@ -26,7 +26,7 @@ import pl.mn.communicator.LocalUser;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListRequest.java,v 1.7 2004-12-23 17:52:24 winnetou25 Exp $
+ * @version $Id: GGUserListRequest.java,v 1.8 2005-05-16 21:16:34 winnetou25 Exp $
  */
 public class GGUserListRequest implements GGOutgoingPackage {
  
@@ -49,27 +49,44 @@ public class GGUserListRequest implements GGOutgoingPackage {
 	   	StringBuffer buffer = new StringBuffer();
     	for (Iterator it = m_usersToExport.iterator(); it.hasNext();) {
     		LocalUser localUser = (LocalUser) it.next();
-	    	if (localUser.getFirstName() != null) buffer.append(localUser.getFirstName());
+	    	if (localUser.getFirstName() != null) {
+	    	    buffer.append(localUser.getFirstName());
+	    	}
 	    	buffer.append(';');
-	    	if (localUser.getLastName() != null) buffer.append(localUser.getLastName());
+	    	if (localUser.getLastName() != null) {
+	    	    buffer.append(localUser.getLastName());
+	    	}
 	    	buffer.append(';');
-	    	if (localUser.getNickName() != null) buffer.append(localUser.getNickName());
+	    	if (localUser.getNickName() != null) {
+	    	    buffer.append(localUser.getNickName());
+	    	}
 	    	buffer.append(';');
-	    	if (localUser.getDisplayName() != null) buffer.append(localUser.getDisplayName());
+	    	if (localUser.getDisplayName() != null) {
+	    	    buffer.append(localUser.getDisplayName());
+	    	}
 	    	buffer.append(';');
-	    	if (localUser.getTelephone() != null) buffer.append(localUser.getTelephone());
+	    	if (localUser.getTelephone() != null) {
+	    	    buffer.append(localUser.getTelephone());
+	    	}
 	    	buffer.append(';');
-	    	if (localUser.getGroup() != null) buffer.append(localUser.getGroup());
+	    	if (localUser.getGroup() != null) {
+	    	    buffer.append(localUser.getGroup());
+	    	}
 	    	buffer.append(';');
-	    	if (localUser.getUin() != -1) buffer.append(localUser.getUin());
+	    	if (localUser.getUin() != -1) {
+	    	    buffer.append(localUser.getUin());
+	    	}
 	    	buffer.append(';');
-	    	if (localUser.getEmailAddress() != null) buffer.append(localUser.getEmailAddress());
+	    	if (localUser.getEmailAddress() != null) {
+	    	    buffer.append(localUser.getEmailAddress());
+	    	}
 	    	buffer.append(';');
-	    	buffer.append(0);
-	    	buffer.append(';');
-	    	buffer.append(';');
-	    	buffer.append(0);
-	    	buffer.append(';');
+//	    	buffer.append(0);
+//	    	buffer.append(';');
+//	    	buffer.append(';');
+//	    	buffer.append(0);
+//	    	buffer.append(';');
+	    	buffer.append("\n");
     	}
     	return buffer.toString();
 	}	

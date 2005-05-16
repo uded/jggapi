@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import org.apache.commons.logging.Log;
@@ -30,7 +31,7 @@ import pl.mn.communicator.packet.in.GGUserListReply;
  * Created on 2004-12-11
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReplyHandler.java,v 1.11 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: GGUserListReplyHandler.java,v 1.12 2005-05-16 21:16:41 winnetou25 Exp $
  */
 public class GGUserListReplyHandler implements PacketHandler {
 
@@ -46,21 +47,26 @@ public class GGUserListReplyHandler implements PacketHandler {
 			logger.debug("Got packet: "+GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
-		GGUserListReply userListReply = new GGUserListReply(context.getPackageContent());
-		context.getSessionAccessor().notifyGGPacketReceived(userListReply);
-
-		if (userListReply.isPutReply()) {
-			logger.debug("GGUserListReply.PutReply");
-			context.getSessionAccessor().notifyContactListExported();
-		} else if (userListReply.isGetMoreReply()) {
-			logger.debug("GGUserListReply.GetMoreReply");
-			Collection contactList = userListReply.getContactList();
-			context.getSessionAccessor().notifyContactListReceived(contactList);
-		} else if (userListReply.isGetReply()) {
-			logger.debug("GGUserListReply.GetReply");
-			Collection contactList = userListReply.getContactList();
-			context.getSessionAccessor().notifyContactListReceived(contactList);
+		try {
+		    GGUserListReply userListReply = new GGUserListReply(context.getPackageContent());
+			context.getSessionAccessor().notifyGGPacketReceived(userListReply);
+			if (userListReply.isPutReply()) {
+				logger.debug("GGUserListReply.PutReply");
+				context.getSessionAccessor().notifyContactListExported();
+			} else if (userListReply.isGetMoreReply()) {
+				logger.debug("GGUserListReply.GetMoreReply");
+				Collection contactList = userListReply.getContactList();
+				context.getSessionAccessor().notifyContactListReceived(contactList);
+			} else if (userListReply.isGetReply()) {
+				logger.debug("GGUserListReply.GetReply");
+				Collection contactList = userListReply.getContactList();
+				context.getSessionAccessor().notifyContactListReceived(contactList);
+			}
+		} catch (IOException ex) {
+		    logger.error("Unable to handle incomming packet: "+GGUtils.prettyBytesToString(context.getPackageContent()), ex);
+		    throw new GGException("Unable to handle incoming user list packet.", ex);
 		}
+
 	}
 
 }

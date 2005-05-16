@@ -17,9 +17,13 @@
  */
 package pl.mn.communicator.packet.in;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import pl.mn.communicator.LocalUser;
@@ -28,7 +32,7 @@ import pl.mn.communicator.LocalUser;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReply.java,v 1.8 2005-05-15 20:41:19 winnetou25 Exp $
+ * @version $Id: GGUserListReply.java,v 1.9 2005-05-16 21:16:41 winnetou25 Exp $
  */
 public class GGUserListReply implements GGIncomingPackage {
 
@@ -44,7 +48,7 @@ public class GGUserListReply implements GGIncomingPackage {
 	
 	private Collection m_users = null;
 	
-	public GGUserListReply(byte[] data) {
+	public GGUserListReply(byte[] data) throws IOException {
 		m_type = (byte) data[0];
 		if (isGetMoreReply() || isGetReply()) {
 			m_users = createUsersCollection(data);
@@ -58,31 +62,35 @@ public class GGUserListReply implements GGIncomingPackage {
 		return GG_USERLIST_PUT_REPLY;
 	}
 	
-	private Collection createUsersCollection(byte[] data) {
-		ArrayList list = new ArrayList();
-		String contactListString = new String(data, 1, data.length-1);
+	private Collection createUsersCollection(byte[] data) throws IOException {
+		ArrayList localUsers = new ArrayList();
 
-		String[] contactListStrings = contactListString.split(";");
-		List contactList = Arrays.asList(contactListStrings);
-		
-		int count = contactListStrings.length/11;
-		
-		int index = 0;
-		for (int i=0; i<count; i++) {
-			List subList = contactList.subList(index, index+11);
-			index+=11;
-			LocalUser localUser = createLocalUser(subList);
-			list.add(localUser);
+		String contactListString = new String(data, 1, data.length-1, "windows-1250");
+		BufferedReader bufReader = new BufferedReader(new StringReader(contactListString));
+
+		ArrayList lines = new ArrayList();
+		String line = null; 
+		while ((line = bufReader.readLine()) != null) {
+		    lines.add(line);
+		}
+
+		for (Iterator it = lines.iterator(); it.hasNext();) {
+		    String subline = (String) it.next();
+		    String[] contactListStrings = subline.split(";");
+			List contactList = Arrays.asList(contactListStrings);
+			LocalUser localUser = createLocalUser(contactList);
+			localUsers.add(localUser);
 		}
 		
-		return list;
+		return localUsers;
 	}
 	
-//	imie;nazwisko;pseudo;wyswietlane;telefon;grupa;uin;adres@email;0;;0;
+//	imie;nazwisko;pseudo;wyswietlane;telefon;grupa;uin;adres@email;0;;0; //stara wersja
+//	imiê;nazwisko;pseudonim;wyœwietlane;telefon_komórkowy;grupa;uin;adres_email;dostêpny;œcie¿ka_dostêpny;wiadomoœæ;œcie¿ka_wiadomoœæ;ukrywanie;telefon_domowy
 	private LocalUser createLocalUser(List entries) {
 		String firstName = (String) entries.get(0);
-		String surName = (String) entries.get(1);
-		String nickname = (String) entries.get(2);
+		String lastName = (String) entries.get(1);
+		String nickName = (String) entries.get(2);
 		String displayName = (String) entries.get(3);
 		String telephone = (String) entries.get(4);
 		String group = (String) entries.get(5);
@@ -90,22 +98,36 @@ public class GGUserListReply implements GGIncomingPackage {
 		String email = (String) entries.get(7);
 
 		LocalUser localUser = new LocalUser();
-		localUser.setFirstName(firstName);
-		localUser.setLastName(surName);
-		localUser.setNickName(nickname);
-		localUser.setDisplayName(displayName);
-		localUser.setTelephone(telephone);
-		localUser.setGroup(group);
+		if (!firstName.equals("")) {
+			localUser.setFirstName(firstName);
+		}
+		if (!lastName.equals("")) {
+			localUser.setLastName(lastName);
+		}
+		if (!nickName.equals("")) {
+			localUser.setNickName(nickName);
+		}
+		if (!displayName.equals("")) {
+			localUser.setDisplayName(displayName);
+		}
+		if (!telephone.equals("")) {
+			localUser.setTelephone(telephone);
+		}
+		if (!group.equals("")) {
+			localUser.setGroup(group);
+		}
 		int uinInt = -1;
 		try {
 		    uinInt = Integer.valueOf(uin).intValue();
-			if (uinInt != -1) {
+			if (uinInt != -1 && !uin.equals("")) {
 			    localUser.setUin(uinInt);
 			}
 		} catch (NumberFormatException ex) {
 		    //ignore
 		}
-		localUser.setEmailAddress(email);
+		if (!email.equals("")) {
+			localUser.setEmailAddress(email);
+		}
 		
 		return localUser;
 	}
