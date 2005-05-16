@@ -252,8 +252,9 @@ public class Main2 {
 		System.out.println("[4] - Zamiana statusu na dostepny.");
 		System.out.println("[5] - Zamiana statusu na niewidoczny z opisem.");
 		System.out.println("[6] - Zamiana statusu na zajety");
-		System.out.println("[7] - Importowanie listy kontaktow");
-		System.out.println("[8] - Eksportowanie listy kontaktow");
+		System.out.println("[7] - Eksportowanie listy kontaktow");
+		System.out.println("[8] - Importowanie listy kontaktow");
+		System.out.println("[9] - Kasowanie listy kontaktow");
 
  		boolean active = true;
  		while (active) {
@@ -289,16 +290,40 @@ public class Main2 {
  		                session.getPresenceService().setStatus(status);
  		            }
 		        } else if (i == 55) {
-		            LocalUser localUser = new LocalUser();
-		            localUser.setDisplayName("mati");
-		            localUser.setEmailAddress("mati@sz.home.pl");
-		            localUser.setFirstName("Mateusz");
-		            localUser.setLastName("Szczap");
-		            
+		            LocalUser localUser1 = new LocalUser();
+		            localUser1.setDisplayName("mati");
+		            localUser1.setEmailAddress("mati@sz.home.pl");
+		            localUser1.setFirstName("Mateusz");
+		            localUser1.setLastName("Szczap");
+		            localUser1.setGroup("Przyjaciele");
+		            localUser1.setTelephone("(91) 4220549");
+		            //localUser1.setUin(376798);
+
+		            LocalUser localUser2 = new LocalUser();
+		            localUser2.setDisplayName("ziom");
+		            localUser2.setEmailAddress("ziom@sz.home.pl");
+		            localUser2.setFirstName("Jan");
+		            localUser2.setLastName("Kurek");
+		            localUser2.setGroup("Wrogowie");
+		            localUser2.setTelephone("(91) 4356456");
+		            //localUser2.setUin(1324545);
+
+		            LocalUser localUser3 = new LocalUser();
+		            localUser3.setDisplayName("siara");
+		            localUser3.setEmailAddress("siara@ncdc.pl");
+		            localUser3.setFirstName("Stefan");
+		            localUser3.setLastName("Siarzewski");
+		            localUser3.setGroup("Przyjaciele");
+		            localUser3.setTelephone("(95) 4220549");
+		            //localUser3.setUin();
+
 		            Collection users = new ArrayList();
-		            users.add(localUser);
+		            users.add(localUser1);
+		            users.add(localUser2);
+		            users.add(localUser3);
+
 		            session.getContactListService().exportContactList(users);
-		        } else if (i == 56){
+		        } else if (i == 56) {
 		            session.getContactListService().addContactListListener(new ContactListListener(){
 
                         public void contactListExported() {
@@ -309,13 +334,21 @@ public class Main2 {
                         public void contactListReceived(Collection users) {
                             for (Iterator it = users.iterator(); it.hasNext();) {
                                 LocalUser localUser = (LocalUser) it.next();
-                                System.out.println(localUser.getFirstName());
-                                System.out.println(localUser.getLastName());
+                                System.out.println("Uin: "+localUser.getUin());
+                                System.out.println("DisplayName: "+localUser.getDisplayName());
+                                System.out.println("FirstName: "+localUser.getFirstName());
+                                System.out.println("LastName: "+localUser.getLastName());
+                                System.out.println("Telephone: "+localUser.getTelephone());
+                                System.out.println("Email: "+localUser.getEmailAddress());
+                                System.out.println("Group: "+localUser.getGroup());
+                                System.out.println("--------------------------");
                             }
                         }
 		                
 		            });
 		            session.getContactListService().importContactList();
+		        } else if (i == 57) {
+		            session.getContactListService().clearContactList();
 		        } else {
 		    		System.out.println("JGGApi simple console MENU");
 		    		System.out.println("[1] - Zakonczenie programu");
@@ -324,8 +357,9 @@ public class Main2 {
 		    		System.out.println("[4] - Zamiana statusu na dostepny.");
 		    		System.out.println("[5] - Zamiana statusu na niewidoczny z opisem.");
 		    		System.out.println("[6] - Zamiana statusu na zajety");
-		    		System.out.println("[7] - Importowanie listy kontaktow");
-		    		System.out.println("[8] - Eksportowanie listy kontaktow");
+		    		System.out.println("[7] - Eksportowanie listy kontaktow");
+		    		System.out.println("[8] - Importowanie listy kontaktow");
+		    		System.out.println("[9] - Kasowanie listy kontaktow");
 		        }
  		    }
  		    try {
