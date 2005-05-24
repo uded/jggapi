@@ -22,7 +22,7 @@ package pl.mn.communicator;
  * 
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IGGConfiguration.java,v 1.2 2005-05-09 22:45:59 winnetou25 Exp $
+ * @version $Id: IGGConfiguration.java,v 1.3 2005-05-24 22:51:31 winnetou25 Exp $
  */
 public interface IGGConfiguration {
 
@@ -40,18 +40,4 @@ public interface IGGConfiguration {
 
     String getSendPasswordURL();
     
-//    void setSendPasswordURL(String url);
-//    
-//	void setPingIntervalInMiliseconds(int intervalInMiliseconds);
-//	
-//	void setSocketTimeoutInMiliseconds(int timeoutInSeconds);
-//	
-//	void setServerLookupURL(String url);
-//
-//	void setRegistrationURL(String url);
-//	
-//	void setTokenRequestURL(String url);
-//	
-//	void setConnectionThreadSleepTimeInMiliseconds(int connectionThreadSleepTimeInMilis);
-	
 }

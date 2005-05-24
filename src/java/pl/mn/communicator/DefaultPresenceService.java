@@ -42,7 +42,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.2 2005-05-08 21:43:49 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.3 2005-05-24 22:53:03 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
@@ -95,7 +95,9 @@ public class DefaultPresenceService implements IPresenceService {
 	public void addMonitoredUser(IUser user) throws GGException {
 		if (user == null) throw new NullPointerException("user cannot be null");
 		checkSessionState();
-		if (m_monitoredUsers.contains(user)) return;
+		if (m_monitoredUsers.contains(user)) {
+		    return;
+		}
 		
 		try {
 			GGAddNotify addNotify = new GGAddNotify(user.getUin(), user.getUserMode());

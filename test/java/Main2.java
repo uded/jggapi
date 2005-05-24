@@ -1,3 +1,4 @@
+import java.io.DataInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -10,7 +11,6 @@ import pl.mn.communicator.ILocalStatus;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
-import pl.mn.communicator.ISingleChat;
 import pl.mn.communicator.IUser;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LocalUser;
@@ -94,9 +94,12 @@ public class Main2 {
 				OutgoingMessage.createNewMessage(376798, "body");
 				session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
 
-				ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
-				matiChat.sendMessage("body");
-				matiChat.sendMessage("dupka");
+	    		IUser mati = new User(376798, UserMode.BUDDY);
+	            session.getPresenceService().addMonitoredUser(mati);
+
+//				ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
+//				matiChat.sendMessage("body");
+//				matiChat.sendMessage("dupka");
 			}
 
 			public void loginFailed() throws GGException {
@@ -176,11 +179,9 @@ public class Main2 {
 
 		IUser acze = new User(1136132, UserMode.BUDDY);
 		IUser jaffa = new User(1542863, UserMode.BUDDY);
-		IUser mati = new User(376798, UserMode.BUDDY);
 		
 		loginContext.getMonitoredUsers().add(acze);
 		loginContext.getMonitoredUsers().add(jaffa);
-		loginContext.getMonitoredUsers().add(mati);
 
 		IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
  		session.getConnectionService().connect(server);
@@ -255,43 +256,46 @@ public class Main2 {
 		System.out.println("[7] - Eksportowanie listy kontaktow");
 		System.out.println("[8] - Importowanie listy kontaktow");
 		System.out.println("[9] - Kasowanie listy kontaktow");
+		System.out.println("[10] - Dodaj 376798 do monitorowania o zmiane statusu");
+		System.out.println("[11] - Usun 376798 do monitorowania o zmiane statusu");
 
  		boolean active = true;
  		while (active) {
- 		    if (System.in.available() > 0) {
- 		        int i = System.in.read();
- 		        if (i == 49) {
+ 		    DataInputStream dis = new DataInputStream(System.in);
+ 		    String line = dis.readLine();
+ 		        if (line.startsWith("1")) {
  		            active = false;
- 		        } else if (i == 50) {
+ 		        } else if (line.startsWith("1")) {
  		    		session.getLoginService().logout();
- 		        } else  if(i == 51) {
+ 		        } else  if(line.startsWith("2")) {
  		            OutgoingMessage outgoingMessage = OutgoingMessage.createNewMessage(376798, DateFormat.getDateTimeInstance().format(new Date()));
  		            session.getMessageService().sendMessage(outgoingMessage);
- 		        } else if (i == 10 || i == 13) {
+ 		        } else if (line.startsWith("3")) {
  		            //ignore
- 		        } else if (i == 52) {
+ 		        } else if (line.startsWith("4")) {
  		           ILocalStatus status = session.getPresenceService().getStatus();
  		            if (status.getStatusType() != StatusType.ONLINE) {
  		                status.setStatusType(StatusType.ONLINE);
  		                session.getPresenceService().setStatus(status);
  		            }
- 		        } else if (i == 53) {
+ 		        } else if (line.startsWith("5")) {
  		            ILocalStatus status = session.getPresenceService().getStatus();
  		            if (status.getStatusType() != StatusType.INVISIBLE_WITH_DESCRIPTION) {
  		                status.setStatusType(StatusType.INVISIBLE_WITH_DESCRIPTION);
  		                status.setDescription("Invisible desc");
  		                session.getPresenceService().setStatus(status);
  		            }
-		        } else if (i == 54) {
+		        } else if (line.startsWith("6")) {
 		            ILocalStatus status = session.getPresenceService().getStatus();
  		            if (status.getStatusType() != StatusType.BUSY) {
  		                status.setStatusType(StatusType.BUSY_WITH_DESCRIPTION);
  		                status.setDescription("busy desc");
  		                session.getPresenceService().setStatus(status);
  		            }
-		        } else if (i == 55) {
+		        } else if (line.startsWith("7")) {
 		            LocalUser localUser1 = new LocalUser();
 		            localUser1.setDisplayName("mati");
+		            localUser1.setNickName("mati");
 		            localUser1.setEmailAddress("mati@sz.home.pl");
 		            localUser1.setFirstName("Mateusz");
 		            localUser1.setLastName("Szczap");
@@ -301,6 +305,7 @@ public class Main2 {
 
 		            LocalUser localUser2 = new LocalUser();
 		            localUser2.setDisplayName("ziom");
+		            localUser2.setNickName("ziom");
 		            localUser2.setEmailAddress("ziom@sz.home.pl");
 		            localUser2.setFirstName("Jan");
 		            localUser2.setLastName("Kurek");
@@ -311,6 +316,7 @@ public class Main2 {
 		            LocalUser localUser3 = new LocalUser();
 		            localUser3.setDisplayName("siara");
 		            localUser3.setEmailAddress("siara@ncdc.pl");
+		            localUser3.setNickName("siara");
 		            localUser3.setFirstName("Stefan");
 		            localUser3.setLastName("Siarzewski");
 		            localUser3.setGroup("Przyjaciele");
@@ -323,7 +329,7 @@ public class Main2 {
 		            users.add(localUser3);
 
 		            session.getContactListService().exportContactList(users);
-		        } else if (i == 56) {
+		        } else if (line.startsWith("8")) {
 		            session.getContactListService().addContactListListener(new ContactListListener(){
 
                         public void contactListExported() {
@@ -347,8 +353,14 @@ public class Main2 {
 		                
 		            });
 		            session.getContactListService().importContactList();
-		        } else if (i == 57) {
+		        } else if (line.startsWith("9")) {
 		            session.getContactListService().clearContactList();
+		        } else if (line.startsWith("10")) {
+		    		IUser mati = new User(376798, UserMode.BUDDY);
+		            session.getPresenceService().addMonitoredUser(mati);
+		        } else if (line.startsWith("11")) {
+		    		IUser mati = new User(376798, UserMode.BUDDY);
+		            session.getPresenceService().removeMonitoredUser(mati);
 		        } else {
 		    		System.out.println("JGGApi simple console MENU");
 		    		System.out.println("[1] - Zakonczenie programu");
@@ -360,8 +372,9 @@ public class Main2 {
 		    		System.out.println("[7] - Eksportowanie listy kontaktow");
 		    		System.out.println("[8] - Importowanie listy kontaktow");
 		    		System.out.println("[9] - Kasowanie listy kontaktow");
+		    		System.out.println("[10] - Dodaj 376798 do monitorowania o zmiane statusu");
+		    		System.out.println("[11] - Usun 376798 do monitorowania o zmiane statusu");
 		        }
- 		    }
  		    try {
                 Thread.sleep(100);
             } catch (InterruptedException e) {

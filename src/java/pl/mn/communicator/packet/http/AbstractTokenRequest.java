@@ -25,7 +25,7 @@ import pl.mn.communicator.IGGConfiguration;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractTokenRequest.java,v 1.4 2005-05-08 14:28:01 winnetou25 Exp $
+ * @version $Id: AbstractTokenRequest.java,v 1.5 2005-05-24 22:50:45 winnetou25 Exp $
  */
 public abstract class AbstractTokenRequest extends HttpRequest {
 	
@@ -62,7 +62,7 @@ public abstract class AbstractTokenRequest extends HttpRequest {
 			b = (a >>> 24 ) | (a << 8);
 		}
 		
-		for(int i=0; i<password.length(); i++){
+		for(int i=0; i<password.length(); i++) {
 			c = (int) password.charAt(i);
 			a = (c ^ b) + (c << 8);
 			b = (a >>> 24 ) | (a << 8);
