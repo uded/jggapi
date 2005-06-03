@@ -24,9 +24,9 @@ package pl.mn.communicator;
  * to state that is not allowed at that moment. 
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSessionException.java,v 1.8 2005-05-05 17:54:23 winnetou25 Exp $
+ * @version $Id: GGSessionException.java,v 1.9 2005-06-03 21:34:01 winnetou25 Exp $
  */
-public class GGSessionException extends RuntimeException {
+public class GGSessionException extends GGException {
 
 	private SessionState m_sessionState;
 	

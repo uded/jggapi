@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.7 2005-05-12 21:50:25 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.8 2005-06-03 21:34:00 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -285,7 +285,7 @@ public class DefaultConnectionService implements IConnectionService {
 		m_senderQueue.add(outgoingPackage);
     }
     
-    private void checkConnectionState() {
+    private void checkConnectionState() throws GGSessionException {
 		if (!(m_session.getSessionState() == SessionState.CONNECTION_AWAITING)
 			|| (m_session.getSessionState() == SessionState.DISCONNECTED)) {
 			throw new GGSessionException(m_session.getSessionState());

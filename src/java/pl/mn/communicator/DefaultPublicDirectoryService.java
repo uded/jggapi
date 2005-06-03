@@ -30,7 +30,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.2 2005-06-03 21:34:00 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -129,7 +129,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		}
 	}
 
-	private void checkSessionState() {
+	private void checkSessionState() throws GGSessionException {
 		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
 			throw new GGSessionException(m_session.getSessionState());
 		}
