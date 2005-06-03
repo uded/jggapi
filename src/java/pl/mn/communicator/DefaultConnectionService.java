@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.8 2005-06-03 21:34:00 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.9 2005-06-03 22:19:25 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -328,7 +328,6 @@ public class DefaultConnectionService implements IConnectionService {
     			    int sleepTime = m_session.getGGConfiguration().getConnectionThreadSleepTimeInMiliseconds();
     				Thread.sleep(sleepTime);
     			}
-    			//System.out.println("Leaving while");
     			m_dataInput = null;
         		m_dataOutput = null;
         		m_socket.close();
@@ -337,8 +336,9 @@ public class DefaultConnectionService implements IConnectionService {
     			logger.error("Connection error: ", ex);
     			try {
                     notifyConnectionError(ex);
-                } catch (GGException e) {
-                    e.printStackTrace();
+                } catch (GGException ex) {
+                    //TODO fail silently?
+                    ex.printStackTrace();
                 }
     		}
     	}

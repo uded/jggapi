@@ -53,7 +53,7 @@ public class Main2 {
 
 		final LoginContext loginContext = new LoginContext(1336843, "dupadupa");
 
-		session.addSessionStateListener(new SessionStateListener(){
+		session.addSessionStateListener(new SessionStateListener() {
 
 			public void sessionStateChanged(SessionState oldSessionState, SessionState newSessionState) {
 				System.out.println("session state changed, oldState: "+oldSessionState+", newState: "+newSessionState);
@@ -177,7 +177,7 @@ public class Main2 {
 			
 		});
 
-		IUser acze = new User(1136132, UserMode.BUDDY);
+		IUser acze = new User(1136132);
 		IUser jaffa = new User(1542863, UserMode.BUDDY);
 		
 		loginContext.getMonitoredUsers().add(acze);
@@ -265,13 +265,11 @@ public class Main2 {
  		    String line = dis.readLine();
  		        if (line.startsWith("1")) {
  		            active = false;
- 		        } else if (line.startsWith("1")) {
+ 		        } else if (line.startsWith("2")) {
  		    		session.getLoginService().logout();
- 		        } else  if(line.startsWith("2")) {
+ 		        } else if (line.startsWith("3")) {
  		            OutgoingMessage outgoingMessage = OutgoingMessage.createNewMessage(376798, DateFormat.getDateTimeInstance().format(new Date()));
  		            session.getMessageService().sendMessage(outgoingMessage);
- 		        } else if (line.startsWith("3")) {
- 		            //ignore
  		        } else if (line.startsWith("4")) {
  		           ILocalStatus status = session.getPresenceService().getStatus();
  		            if (status.getStatusType() != StatusType.ONLINE) {

@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: User.java,v 1.7 2005-05-08 14:25:10 winnetou25 Exp $
+ * @version $Id: User.java,v 1.8 2005-06-03 22:19:25 winnetou25 Exp $
  */
 public class User implements IUser {
 	
@@ -33,14 +33,18 @@ public class User implements IUser {
 	
 	private int m_uin = -1;
 	private UserMode m_userMode = null;
-	
+
+	public User(int uin) {
+	    this(uin, UserMode.BUDDY);
+	}
+
 	public User(int uin, UserMode userMode) {
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		if (userMode == null) throw new NullPointerException("userMode cannot be null");
 		m_uin = uin;
 		m_userMode = userMode;
 	}
-	
+
 	public int getUin() {
 		return m_uin;
 	}
@@ -105,7 +109,7 @@ public class User implements IUser {
 		 * @see java.lang.Object#hashCode()
 		 */
 		public int hashCode() {
-			return m_type.hashCode() * 37;
+			return (m_type.hashCode() * 37);
 		}
 	}
 	
