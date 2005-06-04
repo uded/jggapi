@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.9 2005-06-03 22:19:25 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.10 2005-06-04 11:09:12 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -336,9 +336,9 @@ public class DefaultConnectionService implements IConnectionService {
     			logger.error("Connection error: ", ex);
     			try {
                     notifyConnectionError(ex);
-                } catch (GGException ex) {
+                } catch (GGException ex2) {
                     //TODO fail silently?
-                    ex.printStackTrace();
+                    ex2.printStackTrace();
                 }
     		}
     	}
