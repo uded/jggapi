@@ -42,7 +42,7 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.4 2005-06-03 21:34:00 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.6 2005-06-05 14:50:42 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
@@ -71,13 +71,14 @@ public class DefaultPresenceService implements IPresenceService {
 	 * @see pl.mn.communicator.IPresenceService#setStatus(pl.mn.communicator.ILocalStatus)
 	 */
 	public void setStatus(ILocalStatus localStatus) throws GGException {
-		if (localStatus == null) throw new NullPointerException("status cannot be null");
-		checkSessionState();
-		try {
-			GGNewStatus newStatus = new GGNewStatus(localStatus);
-			m_session.getSessionAccessor().sendPackage(newStatus);
-			m_localStatus = localStatus;
-		} catch (IOException ex) {
+	    if (localStatus == null) throw new NullPointerException("status cannot be null");
+	    checkSessionState();
+	    try {
+	        GGNewStatus newStatus = new GGNewStatus(localStatus);
+	        m_session.getSessionAccessor().sendPackage(newStatus);
+	        m_localStatus = localStatus;
+	        notifyLocalUserChangedStatus(localStatus);
+	    } catch (IOException ex) {
 			throw new GGException("Unable to set status: "+localStatus, ex);
 		}
 	}
@@ -176,8 +177,7 @@ public class DefaultPresenceService implements IPresenceService {
 		m_userListeners.remove(userListener);
 	}
 
-	//TODO clone list before iterating
-	protected void notifyUserChangedStatus(IUser user, IRemoteStatus newStatus) {
+	protected void notifyUserChangedStatus(IUser user, IRemoteStatus newStatus) throws GGException {
 		if (user == null) throw new NullPointerException("user cannot be null");
 		if (newStatus == null) throw new NullPointerException("newStatus cannot be null");
 		for (Iterator it = m_userListeners.iterator(); it.hasNext();) {
@@ -185,7 +185,15 @@ public class DefaultPresenceService implements IPresenceService {
 			userListener.userStatusChanged(user, newStatus);
 		}
 	}
-	
+
+	protected void notifyLocalUserChangedStatus(ILocalStatus localStatus) throws GGException {
+		if (localStatus == null) throw new NullPointerException("localStatus cannot be null");
+		for (Iterator it = m_userListeners.iterator(); it.hasNext();) {
+			UserListener userListener = (UserListener) it.next();
+			userListener.localStatusChanged(localStatus);
+		}
+	}
+
 	private void checkSessionState() throws GGSessionException {
 		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
 			throw new GGSessionException(m_session.getSessionState());
@@ -197,26 +205,24 @@ public class DefaultPresenceService implements IPresenceService {
 		/**
 		 * @see pl.mn.communicator.event.LoginListener#loginOK()
 		 */
-		public void loginOK() {
-			try {
-				m_localStatus = m_session.getLoginService().getLoginContext().getStatus();
-				m_monitoredUsers = m_session.getLoginService().getLoginContext().getMonitoredUsers();
-				setStatus(m_localStatus);
-				GGOutgoingPackage outgoingPackage = null;
-				if (m_monitoredUsers.size() == 0) {
-					outgoingPackage = GGListEmpty.getInstance();
-				} else {
-					IUser[] users = (IUser[]) m_monitoredUsers.toArray(new IUser[0]);
-					outgoingPackage = new GGNotify(users);
-				}
-				m_session.getSessionAccessor().sendPackage(outgoingPackage);
-			} catch (GGException ex) {
-				logger.error("Unable to set initial status", ex);
-			} catch (IOException ex) {
-				logger.error("Unable to send users to notify", ex);
-			}
-		}
-
+	    public void loginOK() throws GGException {
+	        m_localStatus = m_session.getLoginService().getLoginContext().getStatus();
+	        m_monitoredUsers = m_session.getLoginService().getLoginContext().getMonitoredUsers();
+	        setStatus(m_localStatus);
+	        GGOutgoingPackage outgoingPackage = null;
+	        if (m_monitoredUsers.size() == 0) {
+	            outgoingPackage = GGListEmpty.getInstance();
+	        } else {
+	            IUser[] users = (IUser[]) m_monitoredUsers.toArray(IUser.EMPTY_ARRAY);
+	            outgoingPackage = new GGNotify(users);
+	        }
+	        try {
+		        m_session.getSessionAccessor().sendPackage(outgoingPackage);
+	        } catch (IOException ex) {
+	            throw new GGException("Unable to send initial list of users to monitor", ex);
+	        }
+	    }
+	    
 	}
 	
 }

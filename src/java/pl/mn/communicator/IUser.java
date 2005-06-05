@@ -23,10 +23,12 @@ package pl.mn.communicator;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IUser.java,v 1.8 2004-12-23 17:52:23 winnetou25 Exp $
+ * @version $Id: IUser.java,v 1.9 2005-06-05 14:48:18 winnetou25 Exp $
  */
 public interface IUser {
 	
+    IUser[] EMPTY_ARRAY = new IUser[0];
+    
 	/**
 	 * Gets uin of the Gadu-Gadu user.
 	 * 

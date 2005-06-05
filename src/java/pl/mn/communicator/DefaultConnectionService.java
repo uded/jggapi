@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.10 2005-06-04 11:09:12 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.12 2005-06-05 14:51:36 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -84,8 +84,6 @@ public class DefaultConnectionService implements IConnectionService {
 	DefaultConnectionService(Session session) {
 		if (session == null) throw new NullPointerException("session cannot be null");
 		m_session = session;
-		m_connectionThread = new ConnectionThread();
-		m_connectionPinger = new PingerThread();
 		m_packetChain = new PacketChain();
 	}
 	
@@ -124,9 +122,10 @@ public class DefaultConnectionService implements IConnectionService {
 		checkConnectionState();
 		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
 		try {
-			m_connectionThread.openConnection(server.getAddress(), server.getPort());
+			m_connectionThread = new ConnectionThread();
+			m_connectionPinger = new PingerThread();
+		    m_connectionThread.openConnection(server.getAddress(), server.getPort());
 			m_connectionPinger.startPinging();
-			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTED);
 		} catch (IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 			throw new GGException("Unable to connect to Gadu-Gadu server: "+server, ex);
@@ -142,9 +141,11 @@ public class DefaultConnectionService implements IConnectionService {
 		try {
 		    m_connectionPinger.stopPinging();
 			m_connectionThread.closeConnection();
-			notifyConnectionClosed();
-			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 			m_server = null;
+			m_connectionThread = null;
+			m_connectionPinger = null;
+			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
+			notifyConnectionClosed();
 		} catch (IOException ex) {
 			logger.error("IOException occured while trying to disconnect", ex);
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
@@ -159,7 +160,8 @@ public class DefaultConnectionService implements IConnectionService {
 		boolean authenticated = m_session.getSessionState() == SessionState.LOGGED_IN;
 		boolean authenticationAwaiting = m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING;
 		boolean connected = m_session.getSessionState() == SessionState.CONNECTED;
-		return authenticated || authenticationAwaiting || connected ;
+
+		return (authenticated || authenticationAwaiting || connected);
 	}
 	
 	/**
@@ -205,6 +207,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.mn.communicator.IConnectionService#addPingListener(pl.mn.communicator.event.PingListener)
 	 */
 	public void addPingListener(PingListener pingListener) {
+	    if (pingListener == null) throw new IllegalArgumentException("pingListener cannot be null");
 		m_listeners.add(PingListener.class, pingListener);
 	}
 
@@ -212,10 +215,10 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.mn.communicator.IConnectionService#removePingListener(pl.mn.communicator.event.PingListener)
 	 */
 	public void removePingListener(PingListener pingListener) {
-		m_listeners.remove(PingListener.class, pingListener);
+	    if (pingListener == null) throw new IllegalArgumentException("pingListener cannot be null");
+	    m_listeners.remove(PingListener.class, pingListener);
 	}
 	
-	//TODO clone the list of listeners
     protected void notifyConnectionEstablished() throws GGException {
     	m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
     	ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
@@ -226,7 +229,6 @@ public class DefaultConnectionService implements IConnectionService {
     	// this could be also realized as a ConnectionHandler in session class
     }
 
-	//TODO clone the list of listeners
     protected void notifyConnectionClosed() throws GGException {
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 		ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
@@ -236,7 +238,6 @@ public class DefaultConnectionService implements IConnectionService {
 		}
     }
 
-	//TODO clone the list of listeners
     protected void notifyConnectionError(final Exception ex) throws GGException {
     	ConnectionListener[] connectionListeners = (ConnectionListener[]) m_listeners.getListeners(ConnectionListener.class);
     	for (int i=0; i<connectionListeners.length; i++) {
@@ -254,7 +255,6 @@ public class DefaultConnectionService implements IConnectionService {
     	}
     }
 
-	//TODO clone the list of listeners
     protected void notifyPongReceived() {
     	PingListener[] pingListeners = (PingListener[]) m_listeners.getListeners(PingListener.class);
     	for (int i=0; i<pingListeners.length; i++) {
@@ -263,7 +263,6 @@ public class DefaultConnectionService implements IConnectionService {
     	}
     }
 
-	//TODO clone the list of listeners
     protected void notifyPacketReceived(GGIncomingPackage incomingPackage) {
     	GGPacketListener[] packetListeners = (GGPacketListener[]) m_listeners.getListeners(GGPacketListener.class);
     	for (int i=0; i<packetListeners.length; i++) {
@@ -272,7 +271,6 @@ public class DefaultConnectionService implements IConnectionService {
     	}
     }
 
-	//TODO clone the list of listeners
     protected void notifyPacketSent(GGOutgoingPackage outgoingPackage) {
     	GGPacketListener[] packetListeners = (GGPacketListener[]) m_listeners.getListeners(GGPacketListener.class);
     	for (int i=0; i<packetListeners.length; i++) {
@@ -286,12 +284,18 @@ public class DefaultConnectionService implements IConnectionService {
     }
     
     private void checkConnectionState() throws GGSessionException {
-		if (!(m_session.getSessionState() == SessionState.CONNECTION_AWAITING)
-			|| (m_session.getSessionState() == SessionState.DISCONNECTED)) {
-			throw new GGSessionException(m_session.getSessionState());
-		}
+        if (m_session.getSessionState() == SessionState.CONNECTION_AWAITING) {
+            return;
+        }
+        if (m_session.getSessionState() == SessionState.DISCONNECTED) {
+            return;
+        }
+        if (m_session.getSessionState() == SessionState.CONNECTION_ERROR) {
+            return;
+        }
+        throw new GGSessionException(m_session.getSessionState());
     }
-
+        
     /**
      * Parses the server's address.
      * @param line line to be parsed.
@@ -332,13 +336,11 @@ public class DefaultConnectionService implements IConnectionService {
         		m_dataOutput = null;
         		m_socket.close();
     		} catch (Exception ex) {
-    			m_active = false;
-    			logger.error("Connection error: ", ex);
     			try {
-                    notifyConnectionError(ex);
+        			m_active = false;
+    			    notifyConnectionError(ex);
                 } catch (GGException ex2) {
-                    //TODO fail silently?
-                    ex2.printStackTrace();
+                    logger.warn("Unable to notify listeners", ex);
                 }
     		}
     	}

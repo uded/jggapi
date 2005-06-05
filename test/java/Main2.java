@@ -1,9 +1,7 @@
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 import java.util.Iterator;
 
 import pl.mn.communicator.GGException;
@@ -75,8 +73,8 @@ public class Main2 {
 			public void connectionError(Exception ex) throws GGException {
 				System.out.println("Connection Error: "+ex.getMessage());
 				session.getConnectionService().disconnect();
-				IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
-				session.getConnectionService().connect(server);
+//				IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
+//				session.getConnectionService().connect(server);
 			}
 
 		});
@@ -123,6 +121,12 @@ public class Main2 {
 				System.out.println("Description: "+newStatus.getDescription());
 				System.out.println("ReturnDate: "+newStatus.getReturnDate());
 			}
+
+            public void localStatusChanged(ILocalStatus localStatus) {
+				System.out.println("LocalStatus changed: "+localStatus);
+				System.out.println("Description: "+localStatus.getDescription());
+				System.out.println("ReturnDate: "+localStatus.getReturnDate());
+            }
 			
 		});
 		session.getMessageService().addMessageListener(new MessageListener.Stub() {
@@ -185,7 +189,8 @@ public class Main2 {
 
 		IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
  		session.getConnectionService().connect(server);
-
+ 		//session.getLoginService().login(loginContext);
+ 		
 //		session.getPublicDirectoryService().readFromPublicDirectory();
 //		PublicDirInfo publicDirInfo = new PublicDirInfo();
 //		publicDirInfo.setFirstName("Piotr");
@@ -249,15 +254,16 @@ public class Main2 {
 		System.out.println("JGGApi simple console MENU");
 		System.out.println("[1] - Zakonczenie programu");
 		System.out.println("[2] - Wylogowanie uzytkownika");
-		System.out.println("[3] - Wyslij wiadomosc do uzytkownika 376798 z aktualna data.");
+		System.out.println("[3] - Connect to server.");
 		System.out.println("[4] - Zamiana statusu na dostepny.");
 		System.out.println("[5] - Zamiana statusu na niewidoczny z opisem.");
 		System.out.println("[6] - Zamiana statusu na zajety");
 		System.out.println("[7] - Eksportowanie listy kontaktow");
 		System.out.println("[8] - Importowanie listy kontaktow");
 		System.out.println("[9] - Kasowanie listy kontaktow");
-		System.out.println("[10] - Dodaj 376798 do monitorowania o zmiane statusu");
-		System.out.println("[11] - Usun 376798 do monitorowania o zmiane statusu");
+		System.out.println("[a0] - Dodaj 376798 do monitorowania o zmiane statusu");
+		System.out.println("[a1] - Usun 376798 do monitorowania o zmiane statusu");
+		System.out.println("[a2] - Zmien status na niedostepny");
 
  		boolean active = true;
  		while (active) {
@@ -268,14 +274,11 @@ public class Main2 {
  		        } else if (line.startsWith("2")) {
  		    		session.getLoginService().logout();
  		        } else if (line.startsWith("3")) {
- 		            OutgoingMessage outgoingMessage = OutgoingMessage.createNewMessage(376798, DateFormat.getDateTimeInstance().format(new Date()));
- 		            session.getMessageService().sendMessage(outgoingMessage);
+ 		            session.getConnectionService().connect(session.getConnectionService().lookupServer(1336843));
  		        } else if (line.startsWith("4")) {
  		           ILocalStatus status = session.getPresenceService().getStatus();
- 		            if (status.getStatusType() != StatusType.ONLINE) {
- 		                status.setStatusType(StatusType.ONLINE);
- 		                session.getPresenceService().setStatus(status);
- 		            }
+ 		           status.setStatusType(StatusType.ONLINE);
+ 		           session.getPresenceService().setStatus(status);
  		        } else if (line.startsWith("5")) {
  		            ILocalStatus status = session.getPresenceService().getStatus();
  		            if (status.getStatusType() != StatusType.INVISIBLE_WITH_DESCRIPTION) {
@@ -353,12 +356,21 @@ public class Main2 {
 		            session.getContactListService().importContactList();
 		        } else if (line.startsWith("9")) {
 		            session.getContactListService().clearContactList();
-		        } else if (line.startsWith("10")) {
-		    		IUser mati = new User(376798, UserMode.BUDDY);
+		        } else if (line.startsWith("a0")) {
+		    		IUser mati = new User(376798);
 		            session.getPresenceService().addMonitoredUser(mati);
-		        } else if (line.startsWith("11")) {
-		    		IUser mati = new User(376798, UserMode.BUDDY);
+		        } else if (line.startsWith("a1")) {
+		    		IUser mati = new User(376798);
 		            session.getPresenceService().removeMonitoredUser(mati);
+		        } else if (line.startsWith("a2")) {
+ 		            ILocalStatus status = session.getPresenceService().getStatus();
+	                status.setStatusType(StatusType.OFFLINE);
+	                session.getPresenceService().setStatus(status);
+		        } else if (line.startsWith("a3")) {
+ 		            ILocalStatus status = session.getPresenceService().getStatus();
+	                status.setStatusType(StatusType.OFFLINE_WITH_DESCRIPTION);
+	                status.setDescription("offline_with_desc");
+	                session.getPresenceService().setStatus(status);
 		        } else {
 		    		System.out.println("JGGApi simple console MENU");
 		    		System.out.println("[1] - Zakonczenie programu");

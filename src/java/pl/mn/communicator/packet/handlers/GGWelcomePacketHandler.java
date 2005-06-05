@@ -21,6 +21,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.GGException;
+import pl.mn.communicator.SessionState;
 import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGWelcome;
 
@@ -28,7 +29,7 @@ import pl.mn.communicator.packet.in.GGWelcome;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcomePacketHandler.java,v 1.11 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: GGWelcomePacketHandler.java,v 1.12 2005-06-05 14:47:39 winnetou25 Exp $
  */
 public class GGWelcomePacketHandler implements PacketHandler {
 
@@ -47,7 +48,8 @@ public class GGWelcomePacketHandler implements PacketHandler {
 		GGWelcome welcome = new GGWelcome(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(welcome);
 		context.getSessionAccessor().setLoginSeed(welcome.getSeed());
+		context.getSessionAccessor().setSessionState(SessionState.CONNECTED);
 		context.getSessionAccessor().notifyConnectionEstablished();
 	}
-	
+
 }

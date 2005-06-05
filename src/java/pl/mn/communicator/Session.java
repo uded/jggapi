@@ -36,7 +36,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.3 2005-05-12 21:50:25 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.4 2005-06-05 14:47:08 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -248,7 +248,7 @@ public class Session implements ISession {
 			m_loginService.notifyLoginFailed();
 		}
 
-		public void notifyUserChangedStatus(IUser user, IRemoteStatus newStatus) {
+		public void notifyUserChangedStatus(IUser user, IRemoteStatus newStatus) throws GGException {
 			m_presenceService.notifyUserChangedStatus(user, newStatus);
 		}
 

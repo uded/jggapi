@@ -30,7 +30,7 @@ import pl.mn.communicator.packet.out.GGPubdirRequest;
  * Created on 2004-12-14
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPublicDirectoryService.java,v 1.2 2005-06-03 21:34:00 winnetou25 Exp $
+ * @version $Id: DefaultPublicDirectoryService.java,v 1.3 2005-06-05 14:48:45 winnetou25 Exp $
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
@@ -103,7 +103,6 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		m_directoryListeners.remove(publicDirListener);
 	}
 	
-	//TODO clone list before notifing.
 	protected void notifyPubdirRead(int queryID, PersonalInfo publicDirInfo) {
 		if (publicDirInfo == null) throw new NullPointerException("publicDirInfo cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
@@ -112,7 +111,6 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		}
 	}
 
-	//TODO clone list before notifing.
 	protected void notifyPubdirUpdated(int queryID) {
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {
 			PublicDirListener publicDirListener = (PublicDirListener) it.next();
@@ -120,7 +118,6 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 		}
 	}
 
-	//TODO clone list before notifing.
 	protected void notifyPubdirGotSearchResults(int queryID, PublicDirSearchReply publicDirSearchReply) {
 		if (publicDirSearchReply == null) throw new NullPointerException("publicDirSearchReply cannot be null");
 		for (Iterator it = m_directoryListeners.iterator(); it.hasNext();) {

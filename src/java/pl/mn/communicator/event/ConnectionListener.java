@@ -33,7 +33,7 @@ import pl.mn.communicator.GGException;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ConnectionListener.java,v 1.11 2005-05-12 21:50:26 winnetou25 Exp $
+ * @version $Id: ConnectionListener.java,v 1.12 2005-06-05 14:47:53 winnetou25 Exp $
  */
 public interface ConnectionListener extends EventListener {
 	
@@ -70,7 +70,7 @@ public interface ConnectionListener extends EventListener {
 		/**
 		 * @see pl.mn.communicator.event.ConnectionListener#connectionError(Exception)
 		 */
-		public void connectionError(Exception e) throws GGException { }
+		public void connectionError(Exception ex) throws GGException { }
 		
     }
     
