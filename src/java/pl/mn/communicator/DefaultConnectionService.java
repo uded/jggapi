@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.12 2005-06-05 14:51:36 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.11 2005-06-05 14:49:46 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -160,8 +160,7 @@ public class DefaultConnectionService implements IConnectionService {
 		boolean authenticated = m_session.getSessionState() == SessionState.LOGGED_IN;
 		boolean authenticationAwaiting = m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING;
 		boolean connected = m_session.getSessionState() == SessionState.CONNECTED;
-
-		return (authenticated || authenticationAwaiting || connected);
+		return authenticated || authenticationAwaiting || connected ;
 	}
 	
 	/**

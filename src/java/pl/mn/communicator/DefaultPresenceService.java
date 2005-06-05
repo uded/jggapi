@@ -42,14 +42,14 @@ import pl.mn.communicator.packet.out.GGRemoveNotify;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultPresenceService.java,v 1.6 2005-06-05 14:50:42 winnetou25 Exp $
+ * @version $Id: DefaultPresenceService.java,v 1.5 2005-06-05 14:49:19 winnetou25 Exp $
  */
 public class DefaultPresenceService implements IPresenceService {
 
 	private final static Log logger = LogFactory.getLog(DefaultPresenceService.class);
 	
 	/** Set of listeners that will be notified of user related events */
-	private Set m_userListeners = new HashSet();
+	private Set m_userListeners = Collections.synchronizedSet(new HashSet());
 	
 	/** The session associated with this service */
 	private Session m_session = null;
