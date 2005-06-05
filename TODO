@@ -13,8 +13,6 @@ Bugs or features for version 1.0
 	//po odwieszeniu sie biezemy pakiet.
 	GGIncomingPacket getIncommingPacket(); //incomming packet ma juz GGHeader.
 9. MED - Bardziej dokladna dokumentacja w java docs.
-DONE 10. Rozwazyc wprowadzenie socket.setTimeout();
-DONE 11. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
 12. Zastanowic sie czy to ma sens miec dwie oddzielne klasy reprezentujace uzytkownkow, GGUser i LocalUser.
 13. Zrobic porzadek w GGUtils.
 14. Apply immutable pattern to some classes. Szczegolnie do Value Objects, ktore powinny byc immutable.
@@ -22,12 +20,10 @@ DONE 11. Rozwazyc wprowadzenie konfiguracji dla ping interval i socket timeout.
 konwersje robilby dekorator na inputstream i outputstream.
 
 16.BUG Odrejestrowanie uzytkownika sie zonkuje.
-18. DONE Czy interval pingowania powinien byc konfiguralny? W klasie Session? Rozwazyc GGConfiguration,
-	jako klase konfigurujaca biblioteke i pozwalajaca ja customizowac.
 19.Deployment - wrzucic lib z commons-logging to dystrubucji.
 20. Uzyc GGOutputStream i GGInputStream z Javu-Javu.
-21. Podoba mi sie idea SendQueue.. odklada sie na kolejce pakiety do wyslania i watek 
-	sciaga z kolejki pakiety i wysyla jeden po drugim.
+
+22. Czy logout powinien automatycznie wywolywac disconnect() na connection service.
 
 Bugs or features for 1.5 version.
 2. LOW - Implementacja wysylania plikow.
@@ -40,7 +36,3 @@ Bugs or features for 1.5 version.
 9. Implementacja wysylania obrazkow i wiadomosci richtext.
 10. Wsparcie dla SSL.
 11.	Wysylanie plikow i polaczenia bezposrednie.
-
-KnownBugs:
-status in LoginContext does not work out! Tak jakby serwer GG to ignorowal
-na razie rozwiazalem to tak ze po dostaniu pakietu login ok ustawiam status recznie.

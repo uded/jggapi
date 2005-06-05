@@ -83,16 +83,10 @@ public class Main2 {
 			public void loginOK() throws GGException {
 				System.out.println("Login OK.");
 				
-				ILocalStatus status = session.getPresenceService().getStatus();
-				//status.setFriendsOnly(true);
-				status.setDescription("desc124253");
-				status.setStatusType(StatusType.BUSY_WITH_DESCRIPTION);
-				session.getPresenceService().setStatus(status);
-
 				OutgoingMessage.createNewMessage(376798, "body");
 				session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
 
-	    		IUser mati = new User(376798, UserMode.BUDDY);
+	    		IUser mati = new User(376798);
 	            session.getPresenceService().addMonitoredUser(mati);
 
 //				ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
