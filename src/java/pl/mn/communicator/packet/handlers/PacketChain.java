@@ -42,7 +42,7 @@ import pl.mn.communicator.packet.in.GGWelcome;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PacketChain.java,v 1.9 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: PacketChain.java,v 1.10 2005-06-05 13:53:24 winnetou25 Exp $
  */
 public class PacketChain {
 
@@ -65,14 +65,15 @@ public class PacketChain {
 	}
 	
 	public void sendToChain(PacketContext packageContent) throws GGException {
-		PacketHandler packetHandler = (PacketHandler) m_packetHandlers.get(new Integer(packageContent.getHeader().getType()));
-		if (packetHandler == null) {
-			logger.error("Unknown package.");
-			logger.error("PacketHeader: "+packageContent.getHeader());
-			logger.error("PacketBody: "+GGUtils.prettyBytesToString(packageContent.getPackageContent()));
-		} else {
-			packetHandler.handle(packageContent);
-		}
+	    PacketHandler packetHandler = (PacketHandler) m_packetHandlers.get(new Integer(packageContent.getHeader().getType()));
+	    if (packetHandler == null) {
+	        logger.warn("Unknown package.");
+	        logger.warn("PacketHeader: "+packageContent.getHeader());
+	        logger.warn("PacketBody: "+GGUtils.prettyBytesToString(packageContent.getPackageContent()));
+	        return;
+	    }
+
+	    packetHandler.handle(packageContent);
 	}
 	
 	private void registerDefaultHandlers() {
