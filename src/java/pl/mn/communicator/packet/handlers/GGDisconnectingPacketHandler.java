@@ -27,7 +27,7 @@ import pl.mn.communicator.packet.in.GGDisconnecting;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGDisconnectingPacketHandler.java,v 1.10 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: GGDisconnectingPacketHandler.java,v 1.11 2005-06-08 18:01:44 winnetou25 Exp $
  */
 public class GGDisconnectingPacketHandler implements PacketHandler {
 
@@ -43,7 +43,7 @@ public class GGDisconnectingPacketHandler implements PacketHandler {
 
 		GGDisconnecting disconnecting = GGDisconnecting.getInstance();
 		context.getSessionAccessor().notifyGGPacketReceived(disconnecting);
-		context.getSessionAccessor().notifyConnectionClosed();
+		context.getSessionAccessor().disconnect();
 	}
 
 }

@@ -36,7 +36,7 @@ import pl.mn.communicator.packet.out.GGOutgoingPackage;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Session.java,v 1.4 2005-06-05 14:47:08 winnetou25 Exp $
+ * @version $Id: Session.java,v 1.5 2005-06-08 18:01:31 winnetou25 Exp $
  */
 public class Session implements ISession {
 
@@ -200,8 +200,7 @@ public class Session implements ISession {
 		}
 	}
 	
-	//TODO restrict accesss by AspectJ
-	//friendly
+	//TODO restrict accesss by AspectJ friendly
 	public SessionAccessor getSessionAccessor() {
 		return m_sessionAccessor;
 	}
@@ -292,6 +291,10 @@ public class Session implements ISession {
 			if (!m_sessionAttributes.containsKey("seed")) return -1;
 			Integer seedInteger = (Integer) m_sessionAttributes.get("seed");
 			return seedInteger.intValue();
+		}
+		
+		public void disconnect() throws GGException {
+		    m_connectionService.disconnect();
 		}
 		
 	}
