@@ -3,7 +3,12 @@ Bugs for 2.0beta1 version:
 i to jest ok, niestety nie udaje sie pozniej na tej samej sesji podlaczyc. Pytanie czy utworzenie nowej sesji pozwala sie podlaczyc, niezaleznie od tego to jest bug.
 
 2. Dodawanie uzytkownika do listy czasami powoduje, ze pozniej dostajemy notyfikacje o zmianie statusu przez tego uzytkownika, czasami jednak nie dostajemy tej notifikacji. Wlasciwie nie wiadomo dla jakich uzytkownikow dostajemy dla jakich nie dostajemy.
+To jest tak, ¿e po pod³¹czeniu i zg³oszeniu wszystkich u¿ytkowników,
+których chcê monitorowaæ informacje o zmianie stanu przychodz¹ tylko od
+niektórych u¿ytkowników, ale s¹ to ju¿ do koñca ci sami u¿ytkownicy.
 
+Dok³adnie taki sam efekt uzyska³bym gdybym po prostu kilku u¿ytkowników
+nie doda³ do listy u¿ytkowników monitorowanych.
 3. W przypadku GGStatus, a nie GGStatus60 opis jest czasami obciety o 5-7 znakow.
 
 4. Czasami jest wywolywane loggout albo disconnect dwa razy!. checkDisonnectionState powinien byc

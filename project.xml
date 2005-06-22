@@ -66,6 +66,19 @@
             <role>Lead Developer</role>
         </roles>
     </developers>
+  	<contributors>
+    	<contributor>
+      		<name>Maciej Sawitus</name>
+      		<email>ms189438@zodiac.mimuw.edu.pl</email>
+      		<url/>
+      		<organization>Uniwersytet Warszawski</organization>
+      		<organizationUrl>http://www.uw.edu.pl/</organizationUrl>
+      		<roles>
+      			<role>JGGApi tester and bug reporter</role>
+      		</roles>
+      		<timezone>GMT+1</timezone>
+    	</contributor>
+  	</contributors>
     <dependencies>
         <dependency>
             <groupId>commons-logging</groupId>
