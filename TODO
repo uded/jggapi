@@ -1,3 +1,16 @@
+Bugs for 2.0beta1 version:
+1. Po ustawieniu statusu na OFFLINE lub OFFLINE_WITH_DESCRIPTION, zostaje zerwane polaczenie przez GG server z nami
+i to jest ok, niestety nie udaje sie pozniej na tej samej sesji podlaczyc. Pytanie czy utworzenie nowej sesji pozwala sie podlaczyc, niezaleznie od tego to jest bug.
+
+2. Dodawanie uzytkownika do listy czasami powoduje, ze pozniej dostajemy notyfikacje o zmianie statusu przez tego uzytkownika, czasami jednak nie dostajemy tej notifikacji. Wlasciwie nie wiadomo dla jakich uzytkownikow dostajemy dla jakich nie dostajemy.
+
+3. W przypadku GGStatus, a nie GGStatus60 opis jest czasami obciety o 5-7 znakow.
+
+4. Czasami jest wywolywane loggout albo disconnect dwa razy!. checkDisonnectionState powinien byc
+odkomentowany w metodzie disconnect(). Jezeli jestemy juz w stanie disconnected to odlaczanie sie jest bez sensu.
+
+5. Zdaje sie, ze RegistrationService changePassword nie dziala.
+
 Bugs or features for version 1.0
 1. W przypadku monitorowania uzytkownikow obsluzyc sytuacje w ktorej
 	na poczatku wysylamy liste pakietow przekraczajaca 2048 bajtow.
