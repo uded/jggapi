@@ -282,9 +282,9 @@ public class Main2 {
  		            }
 		        } else if (line.startsWith("6")) {
 		            ILocalStatus status = session.getPresenceService().getStatus();
- 		            if (status.getStatusType() != StatusType.BUSY) {
- 		                status.setStatusType(StatusType.BUSY_WITH_DESCRIPTION);
- 		                status.setDescription("busy desc");
+ 		            if (status.getStatusType() != StatusType.OFFLINE_WITH_DESCRIPTION) {
+ 		                status.setStatusType(StatusType.OFFLINE_WITH_DESCRIPTION);
+ 		                status.setDescription("offline desc");
  		                session.getPresenceService().setStatus(status);
  		            }
 		        } else if (line.startsWith("7")) {

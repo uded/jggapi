@@ -70,7 +70,7 @@
     	<contributor>
       		<name>Maciej Sawitus</name>
       		<email>ms189438@zodiac.mimuw.edu.pl</email>
-      		<url/>
+			<id>maciej</id>
       		<organization>Uniwersytet Warszawski</organization>
       		<organizationUrl>http://www.uw.edu.pl/</organizationUrl>
       		<roles>

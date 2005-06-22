@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.13 2005-06-05 15:04:12 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.14 2005-06-22 12:34:13 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -136,14 +136,18 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.mn.communicator.IConnectionService#disconnect()
 	 */
 	public void disconnect() throws GGException {
-	    //checkDisconnectionState();
+	    checkDisconnectionState();
 		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 		try {
-		    m_connectionPinger.stopPinging();
-			m_connectionThread.closeConnection();
+		    if (m_connectionPinger != null) {
+			    m_connectionPinger.stopPinging();
+				m_connectionPinger = null;
+		    }
+		    if (m_connectionThread != null) {
+			    m_connectionThread.closeConnection();
+				m_connectionThread = null;
+		    }
 			m_server = null;
-			m_connectionThread = null;
-			m_connectionPinger = null;
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 			notifyConnectionClosed();
 		} catch (IOException ex) {
@@ -153,7 +157,13 @@ public class DefaultConnectionService implements IConnectionService {
 		}
 	}
 
-	/**
+    private void checkDisconnectionState() throws GGSessionException {
+        if (m_session.getSessionState() == SessionState.DISCONNECTED) {
+            throw new GGSessionException(SessionState.DISCONNECTED);
+        }
+    }
+
+    /**
 	 * @see pl.mn.communicator.IConnectionService#isConnected()
 	 */
 	public boolean isConnected() {
