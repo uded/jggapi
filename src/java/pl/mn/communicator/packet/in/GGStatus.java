@@ -32,13 +32,13 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.8 2005-01-31 21:22:36 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.9 2005-06-25 18:06:09 winnetou25 Exp $
  */
 public class GGStatus implements GGIncomingPackage, GGStatuses {
 
 	public static final int GG_STATUS = 0x02;
 
-	private static Log logger = LogFactory.getLog(GGStatus.class);
+	private static final Log LOGGER = LogFactory.getLog(GGStatus.class);
 
     private IUser m_user = null;
     private RemoteStatus m_status = null;
