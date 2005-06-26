@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.9 2005-06-25 18:06:09 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.10 2005-06-26 21:15:18 winnetou25 Exp $
  */
 public class GGStatus implements GGIncomingPackage, GGStatuses {
 
@@ -75,8 +75,8 @@ public class GGStatus implements GGIncomingPackage, GGStatuses {
         	|| (protocolStatus == GGStatus.GG_STATUS_BUSY_DESCR)
 			|| (protocolStatus == GGStatus.GG_STATUS_INVISIBLE_DESCR)
 			|| (protocolStatus == GGStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
-            description = GGUtils.byteToString(data, 14);
-            if (data.length > (14 + description.length())) {
+            description = GGUtils.byteToString(data, 8);
+            if (data.length > (8 + description.length())) {
                 int timeInSeconds = GGUtils.byteToInt(data, data.length-4);
                 timeInMillis = GGUtils.secondsToMillis(timeInSeconds);
             }
