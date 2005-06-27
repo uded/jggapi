@@ -26,7 +26,7 @@ import pl.mn.communicator.packet.out.GGSendMsg;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GroupChat.java,v 1.1 2005-05-08 14:49:26 winnetou25 Exp $
+ * @version $Id: GroupChat.java,v 1.2 2005-06-27 15:48:47 winnetou25 Exp $
  */
 public class GroupChat extends AbstractChat implements IGroupChat {
 	
@@ -90,7 +90,7 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 	/**
 	 * @see pl.mn.communicator.AbstractChat#acceptsIncoming(pl.mn.communicator.IncomingMessage)
 	 */
-	protected boolean acceptsIncoming(IncomingMessage incomingMessage) {
+	protected boolean acceptsIncoming(IIncommingMessage incomingMessage) {
 		return isRegisteredRecipient(incomingMessage.getMessageID());
 	}
 

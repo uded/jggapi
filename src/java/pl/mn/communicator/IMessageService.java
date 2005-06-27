@@ -26,7 +26,7 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IMessageService.java,v 1.10 2005-01-29 17:09:14 winnetou25 Exp $
+ * @version $Id: IMessageService.java,v 1.11 2005-06-27 15:48:47 winnetou25 Exp $
  */
 public interface IMessageService {
 
@@ -39,7 +39,7 @@ public interface IMessageService {
 	 * @throws GGSessionException if user is not logged in.
 	 * @throws NullPointerException if the outgoingMessage is null.
 	 */
-	void sendMessage(OutgoingMessage outgoingMessage) throws GGException;
+	void sendMessage(IOutgoingMessage outgoingMessage) throws GGException;
 
 	/**
 	 * Create chat with some Gadu-Gadu user.

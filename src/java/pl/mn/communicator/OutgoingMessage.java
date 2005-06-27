@@ -17,6 +17,8 @@
  */
 package pl.mn.communicator;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import org.apache.commons.logging.Log;
@@ -28,13 +30,15 @@ import org.apache.commons.logging.LogFactory;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: OutgoingMessage.java,v 1.15 2005-01-31 21:22:28 winnetou25 Exp $
+ * @version $Id: OutgoingMessage.java,v 1.16 2005-06-27 15:48:47 winnetou25 Exp $
  */
-public class OutgoingMessage extends AbstractMessage {
+public class OutgoingMessage extends AbstractMessage implements IOutgoingMessage {
 	
 	private final static Random RANDOM = new Random();
 	
-	private static Log logger = LogFactory.getLog(OutgoingMessage.class);
+	private static final Log LOGGER = LogFactory.getLog(OutgoingMessage.class);
+    
+    private ArrayList m_additionalRecipients = new ArrayList();
 	
 	//private constructor
 	private OutgoingMessage(int uin, String text, MessageClass messageClass) {
@@ -109,5 +113,38 @@ public class OutgoingMessage extends AbstractMessage {
 		if (recipientUin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		m_recipientUin = recipientUin;
 	}
+    
+    public void addAdditionalRecipient(int recipientUin) {
+        if (recipientUin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+        m_additionalRecipients.add(new Integer(recipientUin));
+    }
+    
+    public void removeAdditionalRecipient(int recipientUin) {
+        if (recipientUin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
+        m_additionalRecipients.remove(new Integer(recipientUin));
+    }
+
+    public int[] getAdditionalRecipients() {
+        int[] additionalRecipients = new int[m_additionalRecipients.size()];
+        
+        int i=0;
+        for (Iterator it = m_additionalRecipients.iterator(); it.hasNext();) {
+            additionalRecipients[i++] = ((Integer)it.next()).intValue();
+        }
+        
+        return additionalRecipients;
+    }
+
+    public int[] getAllRecipients() {
+        int[] allRecipients = new int[m_additionalRecipients.size()+1];
+        allRecipients[0] = m_recipientUin;
+        
+        int i=1;
+        for (Iterator it = m_additionalRecipients.iterator(); it.hasNext();) {
+            allRecipients[i++] = ((Integer)it.next()).intValue();
+        }
+        
+        return allRecipients;
+    }
 	
 }

@@ -19,7 +19,7 @@ package pl.mn.communicator.packet.out;
 
 import java.util.ArrayList;
 
-import pl.mn.communicator.OutgoingMessage;
+import pl.mn.communicator.IOutgoingMessage;
 import pl.mn.communicator.packet.GGConversion;
 import pl.mn.communicator.packet.GGMessageClass;
 
@@ -28,7 +28,7 @@ import pl.mn.communicator.packet.GGMessageClass;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGSendMsg.java,v 1.17 2005-01-31 21:22:08 winnetou25 Exp $
+ * @version $Id: GGSendMsg.java,v 1.18 2005-06-27 15:48:47 winnetou25 Exp $
  */
 public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 	
@@ -40,7 +40,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
     private String m_text = "";
     private	int m_protocolMessageClass = GG_CLASS_MSG;
 
-    public GGSendMsg(OutgoingMessage outgoingMessage) {
+    public GGSendMsg(IOutgoingMessage outgoingMessage) {
     	if (outgoingMessage == null) throw new NullPointerException("outgoingMessage cannot be null");
         m_text = outgoingMessage.getMessageBody();
         m_seq = outgoingMessage.getMessageID();

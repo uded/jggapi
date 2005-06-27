@@ -26,12 +26,13 @@ import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.packet.out.GGSendMsg;
 
 /**
- * The default implementation of <code>IMessageService</code>.
- * <p>
  * Created on 2004-11-28
  * 
+ * The default implementation of <code>IMessageService</code>.
+ * <p>
+ * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultMessageService.java,v 1.2 2005-06-03 21:34:00 winnetou25 Exp $
+ * @version $Id: DefaultMessageService.java,v 1.3 2005-06-27 15:48:47 winnetou25 Exp $
  */
 public class DefaultMessageService implements IMessageService {
 
@@ -47,11 +48,16 @@ public class DefaultMessageService implements IMessageService {
 	/**
 	 * @see pl.mn.communicator.IMessageService#sendMessage(pl.mn.communicator.OutgoingMessage)
 	 */
-	public void sendMessage(OutgoingMessage outgoingMessage) throws GGException {
+	public void sendMessage(IOutgoingMessage outgoingMessage) throws GGException {
 		if (outgoingMessage == null) throw new NullPointerException("outgoingMessage cannot be null");
 		checkSessionState();
 		try {
 			GGSendMsg messageOut = new GGSendMsg(outgoingMessage);
+			int[] additionalRecipients = outgoingMessage.getAdditionalRecipients();
+			for (int i = 0; i < additionalRecipients.length; i++) {
+                int uin = additionalRecipients[i];
+                messageOut.addAdditionalRecipient(uin);
+            }
 			m_session.getSessionAccessor().sendPackage(messageOut);
 			notifyMessageSent(outgoingMessage);
 		} catch (IOException ex) {
@@ -98,8 +104,7 @@ public class DefaultMessageService implements IMessageService {
 		m_messageListeners.remove(messageListener);
 	}
 
-	//TODO clone list before notifing
-	protected void notifyMessageSent(OutgoingMessage outgoingMessage) {
+	protected void notifyMessageSent(IOutgoingMessage outgoingMessage) {
 		if (outgoingMessage == null) throw new NullPointerException("outgoingMessage cannot be null");
 		for (Iterator it = m_messageListeners.iterator(); it.hasNext();) {
 			MessageListener messageListener = (MessageListener) it.next();
@@ -107,8 +112,7 @@ public class DefaultMessageService implements IMessageService {
 		}
 	}
 
-	//TODO clone list before notifing
-	protected void notifyMessageArrived(IncomingMessage incommingMessage) {
+	protected void notifyMessageArrived(IIncommingMessage incommingMessage) {
 		if (incommingMessage == null) throw new NullPointerException("incommingMessage cannot be null");
 		for (Iterator it = m_messageListeners.iterator(); it.hasNext();) {
 			MessageListener messageListener = (MessageListener) it.next();
@@ -116,7 +120,6 @@ public class DefaultMessageService implements IMessageService {
 		}
 	}
 
-	//TODO clone list before notifing
 	protected void notifyMessageDelivered(int uin, int messageID, MessageStatus messageStatus) {
 		if (uin < 0) throw new IllegalArgumentException("uin cannot be less than 0");
 		if (messageID < 0) throw new IllegalArgumentException("messageID cannot be less than 0");

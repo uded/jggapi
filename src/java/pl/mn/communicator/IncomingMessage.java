@@ -27,9 +27,9 @@ import pl.mn.communicator.packet.GGConversion;
  * Created on 2004-11-21
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IncomingMessage.java,v 1.10 2005-01-31 21:22:26 winnetou25 Exp $
+ * @version $Id: IncomingMessage.java,v 1.11 2005-06-27 15:48:47 winnetou25 Exp $
  */
-public class IncomingMessage extends AbstractMessage {
+public class IncomingMessage extends AbstractMessage implements IIncommingMessage {
 
 	/** The time the message was sent */
 	private Date m_messageDate = null;

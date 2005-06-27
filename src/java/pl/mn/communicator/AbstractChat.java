@@ -27,7 +27,7 @@ import pl.mn.communicator.event.MessageListener;
  * Created on 2005-01-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractChat.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
+ * @version $Id: AbstractChat.java,v 1.2 2005-06-27 15:48:47 winnetou25 Exp $
  */
 public abstract class AbstractChat implements IChat {
 
@@ -50,7 +50,7 @@ public abstract class AbstractChat implements IChat {
 		m_listeners.remove(messageListener);
 	}
 	
-	protected void fireChatMessageArrived(IncomingMessage message) {
+	protected void fireChatMessageArrived(IIncommingMessage message) {
 		for (Enumeration e = m_listeners.elements(); e.hasMoreElements();) {
 			MessageListener listener = (MessageListener) e.nextElement();
 			listener.messageArrived(message);
@@ -64,7 +64,7 @@ public abstract class AbstractChat implements IChat {
 		}
 	}
 	
-	protected abstract boolean acceptsIncoming(IncomingMessage incomingMessage);
+	protected abstract boolean acceptsIncoming(IIncommingMessage incomingMessage);
 
 	protected abstract boolean acceptsOutgoing(int uin, int messageID, MessageStatus deliveryStatus);
 
@@ -73,7 +73,7 @@ public abstract class AbstractChat implements IChat {
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(pl.mn.communicator.IncomingMessage)
 		 */
-		public void messageArrived(IncomingMessage incommingMessage) {
+		public void messageArrived(IIncommingMessage incommingMessage) {
 			if (acceptsIncoming(incommingMessage)) {
 				fireChatMessageArrived(incommingMessage);
 			}

@@ -25,11 +25,11 @@ import org.apache.commons.logging.LogFactory;
  * is common for incoming and outgoing messages.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @version $Id: AbstractMessage.java,v 1.11 2005-01-29 17:09:14 winnetou25 Exp $
+ * @version $Id: AbstractMessage.java,v 1.12 2005-06-27 15:48:47 winnetou25 Exp $
  */
 public abstract class AbstractMessage implements IMessage {
 
-	private static Log logger = LogFactory.getLog(AbstractMessage.class);
+	private static final Log LOGGER = LogFactory.getLog(AbstractMessage.class);
 
     /** Uin of the Gadu-Gadu user */
     protected int m_recipientUin = -1;

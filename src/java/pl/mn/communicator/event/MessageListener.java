@@ -19,9 +19,10 @@ package pl.mn.communicator.event;
 
 import java.util.EventListener;
 
+import pl.mn.communicator.IIncommingMessage;
+import pl.mn.communicator.IOutgoingMessage;
 import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.MessageStatus;
-import pl.mn.communicator.OutgoingMessage;
 
 /**
  * The listener interface that is notified of message related events.
@@ -34,11 +35,11 @@ import pl.mn.communicator.OutgoingMessage;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageListener.java,v 1.11 2005-01-31 21:22:40 winnetou25 Exp $
+ * @version $Id: MessageListener.java,v 1.12 2005-06-27 15:48:47 winnetou25 Exp $
  */
 public interface MessageListener extends EventListener {
 	
-	void messageSent(OutgoingMessage outgoingMessage);
+	void messageSent(IOutgoingMessage outgoingMessage);
 	
 	/**
      * Notification that a message arrived from
@@ -46,7 +47,7 @@ public interface MessageListener extends EventListener {
      * 
      * @param incommingMessage the message that arrived from Gadu-Gadu user.
      */
-	void messageArrived(IncomingMessage incommingMessage);
+	void messageArrived(IIncommingMessage incommingMessage);
 
 	/**
 	 * Notification that the message was successfully delivered to the recipient.
@@ -62,7 +63,7 @@ public interface MessageListener extends EventListener {
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageArrived(IncomingMessage)
 		 */
-		public void messageArrived(IncomingMessage incommingMessage) { }
+		public void messageArrived(IIncommingMessage incommingMessage) { }
 
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageDelivered(int, int, MessageStatus)
@@ -72,7 +73,7 @@ public interface MessageListener extends EventListener {
 		/**
 		 * @see pl.mn.communicator.event.MessageListener#messageSent(pl.mn.communicator.OutgoingMessage)
 		 */
-		public void messageSent(OutgoingMessage outgoingMessage) { }
+		public void messageSent(IOutgoingMessage outgoingMessage) { }
 		
     }
         

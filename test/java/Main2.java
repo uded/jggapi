@@ -5,12 +5,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import pl.mn.communicator.GGException;
+import pl.mn.communicator.IIncommingMessage;
 import pl.mn.communicator.ILocalStatus;
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
 import pl.mn.communicator.IUser;
-import pl.mn.communicator.IncomingMessage;
 import pl.mn.communicator.LocalUser;
 import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.MessageStatus;
@@ -87,7 +87,10 @@ public class Main2 {
 				session.getMessageService().sendMessage(OutgoingMessage.createNewMessage(376798, String.valueOf(System.currentTimeMillis())));
 
 	    		IUser mati = new User(376798);
-	            session.getPresenceService().addMonitoredUser(mati);
+                IUser andrzej = new User(2507261);
+
+                session.getPresenceService().addMonitoredUser(mati);
+                session.getPresenceService().addMonitoredUser(andrzej);
 
 //				ISingleChat matiChat = session.getMessageService().createSingleChat(376798);
 //				matiChat.sendMessage("body");
@@ -125,7 +128,7 @@ public class Main2 {
 		});
 		session.getMessageService().addMessageListener(new MessageListener.Stub() {
 
-			public void messageArrived(IncomingMessage incommingMessage) {
+			public void messageArrived(IIncommingMessage incommingMessage) {
 				System.out.println("MessageArrived, fromUser: "+incommingMessage.getRecipientUin());
 				System.out.println("MessageBody: "+incommingMessage.getMessageBody());
 				System.out.println("MessageID: "+incommingMessage.getMessageID());
