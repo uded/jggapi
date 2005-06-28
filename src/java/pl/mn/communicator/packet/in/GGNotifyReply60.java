@@ -33,13 +33,13 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.11 2005-01-31 21:22:33 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.12 2005-06-28 10:39:37 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
 	public static final int GG_NOTIFY_REPLY60 = 0x0011;
 
-    private static Log logger = LogFactory.getLog(GGNotifyReply60.class);
+    private static final Log LOGGER = LogFactory.getLog(GGNotifyReply60.class);
 
     private Map m_statuses = new HashMap();
 

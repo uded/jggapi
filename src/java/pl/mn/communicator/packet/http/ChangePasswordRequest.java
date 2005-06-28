@@ -29,7 +29,7 @@ import pl.mn.communicator.IGGConfiguration;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ChangePasswordRequest.java,v 1.2 2005-05-08 14:28:01 winnetou25 Exp $
+ * @version $Id: ChangePasswordRequest.java,v 1.3 2005-06-28 10:39:36 winnetou25 Exp $
  */
 public class ChangePasswordRequest extends AbstractTokenRequest {
 	
@@ -105,22 +105,6 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	 */
 	protected boolean wannaWrite() {
 		return true;
-	}
-	
-	private int getHashCode(String uin) {
-		if (uin == null) throw new NullPointerException("uin cannot be null");
-		
-		int a,b,c;
-		
-		b=-1;
-		
-		for(int i=0; i<uin.length(); i++) {
-			c = (int) uin.charAt(i);	
-			a = (c ^ b) + (c << 8);
-			b = (a >>> 24 ) | (a << 8);
-		}
-		
-		return ( b < 0 ? -b : b);
 	}
 	
 }

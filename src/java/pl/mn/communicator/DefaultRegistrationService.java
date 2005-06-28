@@ -36,13 +36,13 @@ import pl.mn.communicator.packet.http.RegisterGGAccountRequest.RegisterGGAccount
  * Created on 2004-11-29
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultRegistrationService.java,v 1.1 2005-05-08 14:49:27 winnetou25 Exp $
+ * @version $Id: DefaultRegistrationService.java,v 1.2 2005-06-28 10:39:36 winnetou25 Exp $
  */
 public class DefaultRegistrationService implements IRegistrationService {
 	
 	private final static String WINDOW_ENCODING = "windows-1250";
 	
-	private final static Log LOG = LogFactory.getLog(DefaultRegistrationService.class);
+	private final static Log LOGGER = LogFactory.getLog(DefaultRegistrationService.class);
 	
 	/** reference to session object */
 	private Session m_session = null;

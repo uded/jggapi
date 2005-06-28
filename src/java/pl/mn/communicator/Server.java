@@ -24,11 +24,11 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: Server.java,v 1.10 2005-01-31 21:22:15 winnetou25 Exp $
+ * @version $Id: Server.java,v 1.11 2005-06-28 10:39:36 winnetou25 Exp $
  */
 public final class Server implements IServer {
 	
-    private final static Log logger = LogFactory.getLog(Server.class);
+    private final static Log LOGGER = LogFactory.getLog(Server.class);
 
     /** The server's address */
     protected String m_address = null;

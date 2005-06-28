@@ -25,11 +25,11 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: User.java,v 1.8 2005-06-03 22:19:25 winnetou25 Exp $
+ * @version $Id: User.java,v 1.9 2005-06-28 10:39:36 winnetou25 Exp $
  */
 public class User implements IUser {
 	
-	private static Log logger = LogFactory.getLog(User.class);
+	private static final Log LOGGER = LogFactory.getLog(User.class);
 	
 	private int m_uin = -1;
 	private UserMode m_userMode = null;

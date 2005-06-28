@@ -26,14 +26,14 @@ import pl.mn.communicator.LocalUser;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListRequest.java,v 1.8 2005-05-16 21:16:34 winnetou25 Exp $
+ * @version $Id: GGUserListRequest.java,v 1.9 2005-06-28 10:39:37 winnetou25 Exp $
  */
 public class GGUserListRequest implements GGOutgoingPackage {
  
 	public static final int GG_USERLIST_REQUEST  = 0x0016;
 	
 	private static final byte GG_USER_LIST_PUT = 0x00;
-	private static final byte GG_USERLIST_PUT_MORE = 0x01;
+	//private static final byte GG_USERLIST_PUT_MORE = 0x01;
 	private static final int GG_USERLIST_GET = 0x02;
 
 	private Collection m_usersToExport = null;

@@ -27,11 +27,11 @@ import org.apache.commons.logging.LogFactory;
  * This class represents information that will be used during login process.
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginContext.java,v 1.11 2005-02-18 21:19:41 winnetou25 Exp $
+ * @version $Id: LoginContext.java,v 1.12 2005-06-28 10:39:36 winnetou25 Exp $
  */
 public final class LoginContext {
 	
-	private static Log logger = LogFactory.getLog(LoginContext.class);
+	private static final Log LOGGER = LogFactory.getLog(LoginContext.class);
 
 	/** the uin that will be used during login*/
 	private int m_uin = -1;

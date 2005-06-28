@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
  * Created on 2005-01-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: CommonRegisterResponse.java,v 1.2 2005-01-28 23:07:38 winnetou25 Exp $
+ * @version $Id: CommonRegisterResponse.java,v 1.3 2005-06-28 10:39:36 winnetou25 Exp $
  */
 public class CommonRegisterResponse extends HttpResponse {
 	
@@ -44,13 +44,15 @@ public class CommonRegisterResponse extends HttpResponse {
 		boolean c1 = m_responseString.startsWith("reg_success");
 		boolean c2 = false;
 		
-		StringTokenizer tokenizer = new StringTokenizer(m_responseString, ":");
-		String token1 = tokenizer.nextToken(); //reg_success string
-		String token2 = tokenizer.nextToken(); //uin
-		if (Integer.parseInt(token2) == m_uin) {
-			c2 = true;
-		}
-		return c1 && c2;
+        if (c1) {
+            StringTokenizer tokenizer = new StringTokenizer(m_responseString, ":");
+            String token1 = tokenizer.nextToken(); //reg_success string
+            String token2 = tokenizer.nextToken(); //uin
+            if (Integer.parseInt(token2) == m_uin) {
+                c2 = true;
+            }
+        }
+		return (c1 && c2);
 	}
 	
 	/**

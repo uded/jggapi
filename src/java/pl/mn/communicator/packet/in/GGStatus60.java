@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.out.GGNewStatus;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.12 2005-01-31 21:22:33 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.13 2005-06-28 10:39:37 winnetou25 Exp $
  */
 public class GGStatus60 implements GGIncomingPackage, GGStatuses {
 
@@ -52,13 +52,11 @@ public class GGStatus60 implements GGIncomingPackage, GGStatuses {
 
 	public static final int GG_STATUS60 = 0x0F;
 	
-	private static Log logger = LogFactory.getLog(GGStatus60.class);
+	private static final Log LOGGER = LogFactory.getLog(GGStatus60.class);
 
 	private IUser m_user = null;
 	
 	private RemoteStatus m_status60 = null;
-	
-	private byte m_flag = -1;
 	
 	public GGStatus60(byte[] data) {
 		handleUser(data);

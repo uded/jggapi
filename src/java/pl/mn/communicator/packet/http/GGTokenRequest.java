@@ -30,13 +30,10 @@ import pl.mn.communicator.IGGConfiguration;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGTokenRequest.java,v 1.3 2005-05-08 14:28:01 winnetou25 Exp $
+ * @version $Id: GGTokenRequest.java,v 1.4 2005-06-28 10:39:36 winnetou25 Exp $
  */
 public class GGTokenRequest extends HttpRequest {
 
-	private String m_email = null;
-	private String m_password = null;
-	
 	public GGTokenRequest(IGGConfiguration configuration) throws IOException {
 		super(configuration);
 		m_huc.setRequestProperty("Accept", "image/gif, image/jpeg, */*");
