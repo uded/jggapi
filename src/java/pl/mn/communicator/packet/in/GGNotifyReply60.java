@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.12 2005-06-28 10:39:37 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.13 2005-07-16 11:08:11 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -129,7 +129,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
             status60.setImageSize(imageSize);
             status60.setGGVersion(version);
             
-            if (descriptionSize != -1) {
+            if (descriptionSize > 0) {
             	status60.setDescriptionSize(descriptionSize);
             }
             
