@@ -60,7 +60,7 @@ public class HexDump {
                     result = result + ".";
                 }
             }
-            result = result + "|\n";
+            result = result + "|";
         }
         return result;
     }
