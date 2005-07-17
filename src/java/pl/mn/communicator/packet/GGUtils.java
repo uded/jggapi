@@ -20,7 +20,7 @@ package pl.mn.communicator.packet;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.16 2005-01-31 21:22:38 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.17 2005-07-17 21:15:07 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -28,9 +28,12 @@ public class GGUtils {
 	    StringBuffer received = new StringBuffer();
 	    received.append("{");
 	
-	    for (int i=0; i<bytes.length; i++) {
-	    	received.append("'" + bytes[i] + "',");
-	    }
+	    String dump = HexDump.hexDump(bytes);
+	    received.append(dump);
+        
+//	    for (int i=0; i<bytes.length; i++) {
+//	    	received.append("'" + bytes[i] + "',");
+//	    }
 	
 	    received.append("}");
 	
