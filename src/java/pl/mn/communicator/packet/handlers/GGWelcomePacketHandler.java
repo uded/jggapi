@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -29,7 +30,7 @@ import pl.mn.communicator.packet.in.GGWelcome;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGWelcomePacketHandler.java,v 1.12 2005-06-05 14:47:39 winnetou25 Exp $
+ * @version $Id: GGWelcomePacketHandler.java,v 1.13 2005-10-05 20:04:20 winnetou25 Exp $
  */
 public class GGWelcomePacketHandler implements PacketHandler {
 

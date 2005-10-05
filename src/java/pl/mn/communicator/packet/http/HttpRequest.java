@@ -29,7 +29,7 @@ import pl.mn.communicator.IGGConfiguration;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: HttpRequest.java,v 1.4 2005-05-08 14:28:01 winnetou25 Exp $
+ * @version $Id: HttpRequest.java,v 1.5 2005-10-05 20:04:21 winnetou25 Exp $
  */
 public abstract class HttpRequest {
 
@@ -45,8 +45,9 @@ public abstract class HttpRequest {
 
 	    URL url = new URL(getURL());
 		m_huc = (HttpURLConnection) url.openConnection();
-		m_huc.setConnectTimeout(m_ggconfiguration.getSocketTimeoutInMiliseconds());
-		m_huc.setReadTimeout(m_ggconfiguration.getSocketTimeoutInMiliseconds());
+		//available only in JDK 1.5
+		//m_huc.setConnectTimeout(m_ggconfiguration.getSocketTimeoutInMiliseconds());
+		//m_huc.setReadTimeout(m_ggconfiguration.getSocketTimeoutInMiliseconds());
 		
 		m_huc.setRequestMethod("POST");
 		m_huc.setDoInput(true);

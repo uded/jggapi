@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator.packet.in;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -32,7 +33,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus.java,v 1.10 2005-06-26 21:15:18 winnetou25 Exp $
+ * @version $Id: GGStatus.java,v 1.11 2005-10-05 20:04:20 winnetou25 Exp $
  */
 public class GGStatus implements GGIncomingPackage, GGStatuses {
 

@@ -28,9 +28,7 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.URL;
-import java.util.Queue;
 import java.util.StringTokenizer;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.swing.event.EventListenerList;
 
@@ -47,6 +45,8 @@ import pl.mn.communicator.packet.handlers.PacketContext;
 import pl.mn.communicator.packet.in.GGIncomingPackage;
 import pl.mn.communicator.packet.out.GGOutgoingPackage;
 import pl.mn.communicator.packet.out.GGPing;
+import pl.mn.edu.emory.mathcs.backport.java.util.Queue;
+import pl.mn.edu.emory.mathcs.backport.java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * The default implementation of <code>IConnectionService</code>.
@@ -54,7 +54,7 @@ import pl.mn.communicator.packet.out.GGPing;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.14 2005-06-22 12:34:13 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.15 2005-10-05 20:04:20 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 

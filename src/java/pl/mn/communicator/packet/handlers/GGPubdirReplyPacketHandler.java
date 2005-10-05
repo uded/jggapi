@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,7 +31,7 @@ import pl.mn.communicator.packet.in.GGPubdirReply;
  * Created on 2004-12-15
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGPubdirReplyPacketHandler.java,v 1.18 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: GGPubdirReplyPacketHandler.java,v 1.19 2005-10-05 20:04:20 winnetou25 Exp $
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 

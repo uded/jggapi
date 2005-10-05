@@ -17,8 +17,6 @@
  */
 package pl.mn.communicator.gadu;
 
-import junit.framework.Test;
-import junit.framework.TestSuite;
 
 /**
  * @author mnaglik

@@ -1,11 +1,7 @@
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import pl.mn.communicator.GGException;
-import pl.mn.communicator.GGToken;
 import pl.mn.communicator.ISession;
-import pl.mn.communicator.Session;
 import pl.mn.communicator.SessionFactory;
 
 /*

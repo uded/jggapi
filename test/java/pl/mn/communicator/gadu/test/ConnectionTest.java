@@ -19,8 +19,6 @@ package pl.mn.communicator.gadu.test;
 
 import java.io.IOException;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

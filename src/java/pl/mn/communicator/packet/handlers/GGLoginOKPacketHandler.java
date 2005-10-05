@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -28,7 +29,7 @@ import pl.mn.communicator.packet.in.GGLoginOK;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginOKPacketHandler.java,v 1.11 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: GGLoginOKPacketHandler.java,v 1.12 2005-10-05 20:04:20 winnetou25 Exp $
  */
 public class GGLoginOKPacketHandler implements PacketHandler {
 

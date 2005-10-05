@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,7 +31,7 @@ import pl.mn.communicator.packet.in.GGRecvMsg;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGMessageReceivedPacketHandler.java,v 1.14 2005-06-27 15:48:47 winnetou25 Exp $
+ * @version $Id: GGMessageReceivedPacketHandler.java,v 1.15 2005-10-05 20:04:20 winnetou25 Exp $
  */
 public class GGMessageReceivedPacketHandler implements PacketHandler {
 

@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator.packet.handlers;
 
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -30,7 +31,7 @@ import pl.mn.communicator.packet.in.GGStatus60;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60PacketHandler.java,v 1.13 2005-01-29 15:22:03 winnetou25 Exp $
+ * @version $Id: GGStatus60PacketHandler.java,v 1.14 2005-10-05 20:04:20 winnetou25 Exp $
  */
 public class GGStatus60PacketHandler implements PacketHandler {
 

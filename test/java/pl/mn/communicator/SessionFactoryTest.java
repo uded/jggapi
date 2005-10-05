@@ -6,8 +6,6 @@ package pl.mn.communicator;
 import java.io.InputStream;
 import java.util.Properties;
 
-import junit.framework.TestCase;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
