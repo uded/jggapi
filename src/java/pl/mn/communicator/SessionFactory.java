@@ -21,13 +21,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * Created on 2004-12-12
+ * 
  * This is the factory class that helps developers
  * to create a new instance of a session class.
  * <p>
- * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: SessionFactory.java,v 1.13 2005-05-09 22:45:59 winnetou25 Exp $
+ * @version $Id: SessionFactory.java,v 1.14 2005-10-06 12:53:03 winnetou25 Exp $
  */
 public class SessionFactory {
 	
@@ -35,11 +36,11 @@ public class SessionFactory {
     
     public static ISession createSession() {
         try {
-            PropertiesGGConfiguration configuration = PropertiesGGConfiguration.createDefaultPropertiesGGConfiguration();
+            final IGGConfiguration configuration = SimplePropertiesGGConfiguration.createSimplePropertiesGGConfiguration();
             return new Session(configuration);
         } catch (Exception ex) {
-            LOGGER.warn("Unable to load jggapi xml properties!", ex);
-            LOGGER.warn("Falling back to default properties");
+            LOGGER.warn("Unable to load jggapi.properties!", ex);
+            LOGGER.warn("Falling back to default properties.");
             return new Session();
         }
     }
