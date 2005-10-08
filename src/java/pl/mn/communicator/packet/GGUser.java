@@ -21,20 +21,22 @@ package pl.mn.communicator.packet;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUser.java,v 1.1 2005-01-31 21:22:38 winnetou25 Exp $
+ * @version $Id: GGUser.java,v 1.2 2005-10-08 23:49:29 winnetou25 Exp $
  */
 public interface GGUser {
 
 	/** Every user that is added to our contact list */
-    public static final int GG_USER_BUDDY = 0x01;
+    int GG_USER_BUDDY = 0x01;
 
     /** User to whom we are seen in friends only mode */
-    public static final int GG_USER_FRIEND = 0x02;
+    int GG_USER_FRIEND = 0x02;
 
-//  /** Ordinary user that is added to contact list */
-//  public static final int GG_USER_NORMAL = 0x03;
+    /** Ordinary user that is added to contact list */
+    int GG_USER_NORMAL = 0x03;
 
     /** The user from whom we do not want to receive messages */
-    public static final int GG_USER_BLOCKED = 0x04;
+    int GG_USER_BLOCKED = 0x04;
+
+    int GG_USER_UNKNOWN = -0x01;
 
 }

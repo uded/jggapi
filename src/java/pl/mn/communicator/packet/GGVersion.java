@@ -21,10 +21,13 @@ package pl.mn.communicator.packet;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGVersion.java,v 1.6 2004-12-19 21:19:59 winnetou25 Exp $
+ * @version $Id: GGVersion.java,v 1.7 2005-10-08 23:51:44 winnetou25 Exp $
  */
 public interface GGVersion {
-
+	
+	int VERSION_70_build_20 = 0x26;
+	int VERSION_60_1_build_155 = 0x24;
+	int VERSION_60_1_build_140 = 0x22;
 	int VERSION_60_1_build_133 = 0x21;
 	int VERSION_60 = 0x20;
 	int VERSION_5_7_beta_build_121 = 0x1E;

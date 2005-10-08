@@ -20,7 +20,7 @@ package pl.mn.communicator.packet;
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatuses.java,v 1.1 2005-01-31 21:22:38 winnetou25 Exp $
+ * @version $Id: GGStatuses.java,v 1.2 2005-10-08 23:49:29 winnetou25 Exp $
  */
 public interface GGStatuses {
 
@@ -53,5 +53,7 @@ public interface GGStatuses {
 
     /** Bitmask for status for friends only */
     int GG_STATUS_FRIENDS_MASK = 0x00008000; //1|000|000|000|000|000 = 32768 = (2^16)/2
+
+    int GG_STATUS_UNKNOWN = -0x00000001; //1|000|000|000|000|000 = 32768 = (2^16)/2
 
 }

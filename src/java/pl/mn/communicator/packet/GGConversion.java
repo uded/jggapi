@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.in.GGStatus;
  * Created on 2005-01-31
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGConversion.java,v 1.1 2005-01-31 21:22:38 winnetou25 Exp $
+ * @version $Id: GGConversion.java,v 1.2 2005-10-08 23:49:29 winnetou25 Exp $
  */
 public class GGConversion {
 
@@ -43,14 +43,15 @@ public class GGConversion {
 		if ((protocolStatus & GGStatus.GG_STATUS_BLOCKED) == GGStatus.GG_STATUS_BLOCKED) {
 			return User.UserMode.BLOCKED;
 		}
-		return User.UserMode.FRIEND;
+		return User.UserMode.UNKNOWN;
 	}
 	
 	public static byte getProtocolUserMode(User.UserMode userMode) {
 		if (userMode == User.UserMode.BUDDY) return GGUser.GG_USER_BUDDY;
 		if (userMode == User.UserMode.BLOCKED) return GGUser.GG_USER_BLOCKED;
 		if (userMode == User.UserMode.FRIEND) return GGUser.GG_USER_FRIEND;
-		throw new RuntimeException("Unable to convert userMode: "+userMode);
+		
+		return GGUser.GG_USER_UNKNOWN;
 	}
 	
 	public static RemoteStatus getClientRemoteStatus(int status, String description, long returnTimeInMillis) {
@@ -104,7 +105,6 @@ public class GGConversion {
 			remoteStatus.setBlocked(false);
 		}
 		
-		if (remoteStatus == null) throw new RuntimeException("Conversion error");
 		return remoteStatus;
 	}
 	
@@ -136,7 +136,8 @@ public class GGConversion {
 			if (isBlocked) 	protocolStatus |= GGStatus.GG_STATUS_BLOCKED;
 			return protocolStatus;
 		}
-		throw new RuntimeException("Incorrect status: "+clientStatus);
+
+		return GGStatus.GG_STATUS_UNKNOWN;
 	}
 	
 	public static MessageStatus getClientMessageStatus(int protocolMessageStatus) {
@@ -146,7 +147,8 @@ public class GGConversion {
 			case GGSendMsgAck.GG_ACK_BLOCKED: return MessageStatus.BLOCKED;
 			case GGSendMsgAck.GG_ACK_MBOXFULL: return MessageStatus.BLOCKED_MBOX_FULL;
 			case GGSendMsgAck.GG_ACK_QUEUED: return MessageStatus.QUEUED;
-			default: throw new RuntimeException("Unable to convert protocol message status to client message status.");
+			
+			default: return MessageStatus.UNKNOWN;
 		}
 	}
 	
@@ -157,17 +159,21 @@ public class GGConversion {
 			case GGMessageClass.GG_CLASS_CTCP: return MessageClass.PING;
 			case GGMessageClass.GG_CLASS_MSG: return MessageClass.MESSAGE;
 			case GGMessageClass.GG_CLASS_QUEUED: return MessageClass.QUEUED;
-			default: throw new RuntimeException("Unable to convert, messageClass: "+protocolMessageClass);
+			case GGMessageClass.GG_CLASS_QUEUED2: return MessageClass.QUEUED;
+			
+			default: return MessageClass.UNKNOWN;
 		}
 	}
 	
 	public static int getProtocolMessageClass(MessageClass clientMessageClass) {
+		
 		if (clientMessageClass == MessageClass.CHAT) return GGMessageClass.GG_CLASS_CHAT;
 		if (clientMessageClass == MessageClass.DO_NOT_CONFIRM) return GGMessageClass.GG_CLASS_ACK;
 		if (clientMessageClass == MessageClass.MESSAGE) return GGMessageClass.GG_CLASS_MSG;
 		if (clientMessageClass == MessageClass.QUEUED) return GGMessageClass.GG_CLASS_QUEUED;
 		if (clientMessageClass == MessageClass.PING) return GGMessageClass.GG_CLASS_CTCP;
-		throw new RuntimeException("Unable to convert, messageClass: "+clientMessageClass);
+		
+		return GGMessageClass.GG_CLASS_UNKNOWN;
 	}
 
 }

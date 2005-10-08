@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: MessageStatus.java,v 1.7 2005-01-31 21:22:32 winnetou25 Exp $
+ * @version $Id: MessageStatus.java,v 1.8 2005-10-08 23:49:30 winnetou25 Exp $
  */
 public class MessageStatus {
 
@@ -45,6 +45,8 @@ public class MessageStatus {
 
 	/** Message has not been delivered. This status is only in case of GG_CLASS_CTCP */
 	public final static MessageStatus NOT_DELIVERED = new MessageStatus("message_status_not_delivered");
+
+	public final static MessageStatus UNKNOWN = new MessageStatus("message_status_unknown");
 
 	/**
 	 * @see java.lang.Object#toString()

@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: User.java,v 1.9 2005-06-28 10:39:36 winnetou25 Exp $
+ * @version $Id: User.java,v 1.10 2005-10-08 23:49:30 winnetou25 Exp $
  */
 public class User implements IUser {
 	
@@ -97,6 +97,7 @@ public class User implements IUser {
 		public final static UserMode BUDDY = new UserMode("user_mode_buddy");
 		public final static UserMode FRIEND = new UserMode("user_mode_friend");
 		public final static UserMode BLOCKED = new UserMode("user_mode_blocked");
+		public final static UserMode UNKNOWN = new UserMode("user_mode_unknown");
 		
 		/**
 		 * @see java.lang.Object#toString()
