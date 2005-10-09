@@ -19,6 +19,9 @@ package pl.mn.communicator.packet;
 
 import java.util.Date;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import pl.mn.communicator.IStatus;
 import pl.mn.communicator.MessageClass;
 import pl.mn.communicator.MessageStatus;
@@ -32,9 +35,11 @@ import pl.mn.communicator.packet.in.GGStatus;
  * Created on 2005-01-31
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGConversion.java,v 1.2 2005-10-08 23:49:29 winnetou25 Exp $
+ * @version $Id: GGConversion.java,v 1.3 2005-10-09 00:07:51 winnetou25 Exp $
  */
 public class GGConversion {
+
+	private static final Log LOGGER = LogFactory.getLog(GGConversion.class);
 
 	public static User.UserMode getUserMode(int protocolStatus) {
 		if ((protocolStatus & GGStatus.GG_STATUS_FRIENDS_MASK) == GGStatus.GG_STATUS_FRIENDS_MASK) {
@@ -43,6 +48,9 @@ public class GGConversion {
 		if ((protocolStatus & GGStatus.GG_STATUS_BLOCKED) == GGStatus.GG_STATUS_BLOCKED) {
 			return User.UserMode.BLOCKED;
 		}
+
+		LOGGER.warn("Unable to convert from protocolUserMode, falling back to unknown.");
+		
 		return User.UserMode.UNKNOWN;
 	}
 	
@@ -51,6 +59,8 @@ public class GGConversion {
 		if (userMode == User.UserMode.BLOCKED) return GGUser.GG_USER_BLOCKED;
 		if (userMode == User.UserMode.FRIEND) return GGUser.GG_USER_FRIEND;
 		
+		LOGGER.warn("Unable to convert userMode to protocolUserMode, falling back to unknown.");
+
 		return GGUser.GG_USER_UNKNOWN;
 	}
 	
@@ -137,6 +147,8 @@ public class GGConversion {
 			return protocolStatus;
 		}
 
+		LOGGER.warn("Unable to convert status, falling back to unknown.");
+
 		return GGStatus.GG_STATUS_UNKNOWN;
 	}
 	
@@ -148,7 +160,10 @@ public class GGConversion {
 			case GGSendMsgAck.GG_ACK_MBOXFULL: return MessageStatus.BLOCKED_MBOX_FULL;
 			case GGSendMsgAck.GG_ACK_QUEUED: return MessageStatus.QUEUED;
 			
-			default: return MessageStatus.UNKNOWN;
+			default: {
+				LOGGER.warn("Unable to convert message status, falling back to unknown.");
+				return MessageStatus.UNKNOWN;
+			}
 		}
 	}
 	
@@ -161,7 +176,10 @@ public class GGConversion {
 			case GGMessageClass.GG_CLASS_QUEUED: return MessageClass.QUEUED;
 			case GGMessageClass.GG_CLASS_QUEUED2: return MessageClass.QUEUED;
 			
-			default: return MessageClass.UNKNOWN;
+			default: {
+				LOGGER.warn("Unable to convert message class, falling back to unknown.");
+				return MessageClass.UNKNOWN;
+			}
 		}
 	}
 	
@@ -172,7 +190,9 @@ public class GGConversion {
 		if (clientMessageClass == MessageClass.MESSAGE) return GGMessageClass.GG_CLASS_MSG;
 		if (clientMessageClass == MessageClass.QUEUED) return GGMessageClass.GG_CLASS_QUEUED;
 		if (clientMessageClass == MessageClass.PING) return GGMessageClass.GG_CLASS_CTCP;
-		
+
+		LOGGER.warn("Unable to convert protocol message class, falling back to unknown.");
+
 		return GGMessageClass.GG_CLASS_UNKNOWN;
 	}
 
