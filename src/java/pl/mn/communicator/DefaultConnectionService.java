@@ -45,7 +45,6 @@ import pl.mn.communicator.packet.handlers.PacketContext;
 import pl.mn.communicator.packet.in.GGIncomingPackage;
 import pl.mn.communicator.packet.out.GGOutgoingPackage;
 import pl.mn.communicator.packet.out.GGPing;
-import pl.mn.edu.emory.mathcs.backport.java.util.Queue;
 import pl.mn.edu.emory.mathcs.backport.java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
@@ -54,7 +53,7 @@ import pl.mn.edu.emory.mathcs.backport.java.util.concurrent.ConcurrentLinkedQueu
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultConnectionService.java,v 1.15 2005-10-05 20:04:20 winnetou25 Exp $
+ * @version $Id: DefaultConnectionService.java,v 1.16 2005-10-25 22:15:59 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
 
@@ -67,7 +66,7 @@ public class DefaultConnectionService implements IConnectionService {
 	/** reference to session object */
 	private Session m_session = null;
 	
-	private Queue m_senderQueue = new ConcurrentLinkedQueue();
+	private ConcurrentLinkedQueue m_senderQueue = new ConcurrentLinkedQueue();
 	
 	/** chain that handles packages */
 	private PacketChain m_packetChain = null;

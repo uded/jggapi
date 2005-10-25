@@ -1,3 +1,4 @@
+package pl.mn.communicator.gadu;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import pl.mn.communicator.User;
 import pl.mn.communicator.User.UserMode;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.ContactListListener;
+import pl.mn.communicator.event.LoginFailedEvent;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.MessageListener;
 import pl.mn.communicator.event.PublicDirListener;
@@ -97,7 +99,7 @@ public class Main2 {
 //				matiChat.sendMessage("dupka");
 			}
 
-			public void loginFailed() throws GGException {
+			public void loginFailed(final LoginFailedEvent loginFailedEvent) throws GGException {
 				System.out.println("Login Failed.");
 			}
 			

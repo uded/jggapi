@@ -1,3 +1,4 @@
+package pl.mn.communicator.gadu;
 
 
 public class TestData {

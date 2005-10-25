@@ -1,3 +1,4 @@
+package pl.mn.communicator.gadu;
 import java.io.IOException;
 import java.util.Iterator;
 
@@ -10,6 +11,7 @@ import pl.mn.communicator.PublicDirSearchQuery;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionFactory;
 import pl.mn.communicator.event.ConnectionListener;
+import pl.mn.communicator.event.LoginFailedEvent;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.PublicDirListener;
 
@@ -70,7 +72,7 @@ public class Main4 {
 				//session.getConnectionService().disconnect();
 			}
 			
-			public void loginFailed() throws GGException {
+			public void loginFailed(LoginFailedEvent event) throws GGException {
 				System.out.println("Login Failed.");
 			}
 			

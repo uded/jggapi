@@ -27,6 +27,8 @@ import pl.mn.communicator.packet.GGUtils;
 import pl.mn.communicator.packet.in.GGDisconnecting;
 import pl.mn.communicator.packet.in.GGLoginFailed;
 import pl.mn.communicator.packet.in.GGLoginOK;
+import pl.mn.communicator.packet.in.GGNeedEmail;
+import pl.mn.communicator.packet.in.GGNeedEmailPacketHandler;
 import pl.mn.communicator.packet.in.GGNotifyReply;
 import pl.mn.communicator.packet.in.GGNotifyReply60;
 import pl.mn.communicator.packet.in.GGPong;
@@ -42,7 +44,7 @@ import pl.mn.communicator.packet.in.GGWelcome;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: PacketChain.java,v 1.10 2005-06-05 13:53:24 winnetou25 Exp $
+ * @version $Id: PacketChain.java,v 1.11 2005-10-25 22:18:26 winnetou25 Exp $
  */
 public class PacketChain {
 
@@ -80,6 +82,7 @@ public class PacketChain {
 		registerGGPackageHandler(GGWelcome.GG_PACKAGE_WELCOME, new GGWelcomePacketHandler());
 		registerGGPackageHandler(GGLoginOK.GG_LOGIN_OK, new GGLoginOKPacketHandler());
 		registerGGPackageHandler(GGLoginFailed.GG_LOGIN_FAILED, new GGLoginFailedPacketHandler());
+		registerGGPackageHandler(GGNeedEmail.GG_NEED_EMAIL, new GGNeedEmailPacketHandler());
 		registerGGPackageHandler(GGStatus.GG_STATUS, new GGStatusPacketHandler());
 		registerGGPackageHandler(GGStatus60.GG_STATUS60, new GGStatus60PacketHandler());
 		registerGGPackageHandler(GGNotifyReply.GG_NOTIFY_REPLY, new GGNotifyReplyPacketHandler());

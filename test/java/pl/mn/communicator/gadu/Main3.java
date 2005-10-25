@@ -1,3 +1,4 @@
+package pl.mn.communicator.gadu;
 import java.io.IOException;
 
 import pl.mn.communicator.GGException;

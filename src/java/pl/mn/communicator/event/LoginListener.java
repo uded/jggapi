@@ -30,7 +30,7 @@ import pl.mn.communicator.GGException;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LoginListener.java,v 1.11 2005-01-29 17:22:18 winnetou25 Exp $
+ * @version $Id: LoginListener.java,v 1.12 2005-10-25 22:17:37 winnetou25 Exp $
  */
 public interface LoginListener extends EventListener {
 	
@@ -44,7 +44,7 @@ public interface LoginListener extends EventListener {
 	 * Messaged when there was an error while logging in,
 	 * most probably because of an incorrect password.
 	 */
-	void loginFailed() throws GGException;
+	void loginFailed(final LoginFailedEvent loginFailedEvent) throws GGException;
 	
 	void loggedOut() throws GGException;
 	
@@ -58,7 +58,7 @@ public interface LoginListener extends EventListener {
 		/**
 		 * @see pl.mn.communicator.event.LoginListener#loginFailed()
 		 */
-		public void loginFailed() throws GGException { }
+		public void loginFailed(final LoginFailedEvent loginFailedEvent) throws GGException { }
 		
 		/**
 		 * @see pl.mn.communicator.event.LoginListener#loggedOut()

@@ -15,8 +15,7 @@
  * with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
-package pl.mn.communicator.packet.handlers;
-
+package pl.mn.communicator.packet.in;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -24,32 +23,32 @@ import org.apache.commons.logging.LogFactory;
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.event.LoginFailedEvent;
 import pl.mn.communicator.packet.GGUtils;
-import pl.mn.communicator.packet.in.GGLoginFailed;
+import pl.mn.communicator.packet.handlers.GGWelcomePacketHandler;
+import pl.mn.communicator.packet.handlers.PacketContext;
+import pl.mn.communicator.packet.handlers.PacketHandler;
 
 /**
- * Created on 2004-11-28
+ * Created on 2005-10-25
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGLoginFailedPacketHandler.java,v 1.13 2005-10-25 22:18:26 winnetou25 Exp $
+ * @version $Id: GGNeedEmailPacketHandler.java,v 1.1 2005-10-25 22:18:26 winnetou25 Exp $
  */
-public class GGLoginFailedPacketHandler implements PacketHandler {
-
-	private final static Log logger = LogFactory.getLog(GGLoginFailedPacketHandler.class);
+public class GGNeedEmailPacketHandler implements PacketHandler {
 	
-	/**
-	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
-	 */
+	private static final Log LOGGER = LogFactory.getLog(GGWelcomePacketHandler.class);
+	
 	public void handle(PacketContext context) throws GGException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("LoginFailed packet received.");
-			logger.debug("PacketHeader: "+context.getHeader());
-			logger.debug("PacketLoad: "+GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("GGNeedEmail packet received.");
+			LOGGER.debug("PacketHeader: "+context.getHeader());
+			LOGGER.debug("PacketLoad: "+GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
-
-		GGLoginFailed loginFailed = GGLoginFailed.getInstance();
-		context.getSessionAccessor().notifyGGPacketReceived(loginFailed);
+		
+		final GGNeedEmail needEmail = GGNeedEmail.getInstance();
+		context.getSessionAccessor().notifyGGPacketReceived(needEmail);
 		final LoginFailedEvent loginFailedEvent = new LoginFailedEvent(this);
+		loginFailedEvent.setReason(LoginFailedEvent.NEED_EMAIL_REASON);
 		context.getSessionAccessor().notifyLoginFailed(loginFailedEvent);
 	}
-
+	
 }

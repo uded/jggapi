@@ -25,6 +25,7 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import pl.mn.communicator.event.LoginFailedEvent;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.UserListener;
 import pl.mn.communicator.packet.out.GGLogin60;
@@ -35,7 +36,7 @@ import pl.mn.communicator.packet.out.GGLogin60;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultLoginService.java,v 1.2 2005-06-05 14:49:46 winnetou25 Exp $
+ * @version $Id: DefaultLoginService.java,v 1.3 2005-10-25 22:17:09 winnetou25 Exp $
  */
 public class DefaultLoginService implements ILoginService, UserListener {
     
@@ -156,11 +157,11 @@ public class DefaultLoginService implements ILoginService, UserListener {
         }
     }
     
-    protected void notifyLoginFailed() throws GGException {
+    protected void notifyLoginFailed(final LoginFailedEvent loginFailedEvent) throws GGException {
         m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
         for (Iterator it = m_loginListeners.iterator(); it.hasNext();) {
             LoginListener loginListener = (LoginListener) it.next();
-            loginListener.loginFailed();
+            loginListener.loginFailed(loginFailedEvent);
         }
     }
     

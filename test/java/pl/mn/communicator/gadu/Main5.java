@@ -1,3 +1,4 @@
+package pl.mn.communicator.gadu;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -10,9 +11,9 @@ import pl.mn.communicator.LoginContext;
 import pl.mn.communicator.PersonalInfo;
 import pl.mn.communicator.PublicDirSearchReply;
 import pl.mn.communicator.SessionFactory;
-import pl.mn.communicator.User;
 import pl.mn.communicator.event.ConnectionListener;
 import pl.mn.communicator.event.ContactListListener;
+import pl.mn.communicator.event.LoginFailedEvent;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.PublicDirListener;
 
@@ -92,8 +93,14 @@ public class Main5 {
 				//session.getConnectionService().disconnect();
 			}
 			
-			public void loginFailed() throws GGException {
-				System.out.println("Login Failed.");
+			public void loginFailed(LoginFailedEvent loginFailedEvent) throws GGException {
+				String reasonString = null;
+				if (loginFailedEvent.getReason() == LoginFailedEvent.INCORRECT_PASSWORD) {
+					reasonString = "Incorrect Password";
+				} else if (loginFailedEvent.getReason() == LoginFailedEvent.NEED_EMAIL_REASON) {
+					reasonString = "Need Email";
+				}
+				System.out.println("Login Failed, reason: "+reasonString);
 			}
 			
 			/**
