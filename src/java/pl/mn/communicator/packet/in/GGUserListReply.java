@@ -32,7 +32,7 @@ import pl.mn.communicator.LocalUser;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReply.java,v 1.9 2005-05-16 21:16:41 winnetou25 Exp $
+ * @version $Id: GGUserListReply.java,v 1.10 2005-10-25 19:52:30 winnetou25 Exp $
  */
 public class GGUserListReply implements GGIncomingPackage {
 
@@ -87,45 +87,72 @@ public class GGUserListReply implements GGIncomingPackage {
 	
 //	imie;nazwisko;pseudo;wyswietlane;telefon;grupa;uin;adres@email;0;;0; //stara wersja
 //	imiê;nazwisko;pseudonim;wyœwietlane;telefon_komórkowy;grupa;uin;adres_email;dostêpny;œcie¿ka_dostêpny;wiadomoœæ;œcie¿ka_wiadomoœæ;ukrywanie;telefon_domowy
-	private LocalUser createLocalUser(List entries) {
-		String firstName = (String) entries.get(0);
-		String lastName = (String) entries.get(1);
-		String nickName = (String) entries.get(2);
-		String displayName = (String) entries.get(3);
-		String telephone = (String) entries.get(4);
-		String group = (String) entries.get(5);
-		String uin = (String) entries.get(6);
-		String email = (String) entries.get(7);
+	private LocalUser createLocalUser(final List entries) {
+		String firstName = null;
+		String lastName = null;
+		String nickName = null;
+		String displayName = null;
+		String telephone = null;
+		String group = null;
+		String uin = null;
+		String email = null;
 
-		LocalUser localUser = new LocalUser();
-		if (!firstName.equals("")) {
+		final Iterator it = entries.iterator();
+
+		if (it.hasNext()) {
+			firstName = (String) it.next();
+		}
+		if (it.hasNext()) {
+			lastName = (String) it.next();
+		}
+		if (it.hasNext()) {
+			nickName = (String) it.next();
+		}
+		if (it.hasNext()) {
+			displayName = (String) it.next();
+		}
+		if (it.hasNext()) {
+			telephone = (String) it.next();
+		}
+		if (it.hasNext()) {
+			group = (String) it.next();
+		}
+		if (it.hasNext()) {
+			uin = (String) it.next();
+		}
+		if (it.hasNext()) {
+			email = (String) it.next();
+		}
+		
+		final LocalUser localUser = new LocalUser();
+		if (!isEmpty(firstName)) {
 			localUser.setFirstName(firstName);
 		}
-		if (!lastName.equals("")) {
+		if (!isEmpty(lastName)) {
 			localUser.setLastName(lastName);
 		}
-		if (!nickName.equals("")) {
+		if (!isEmpty(nickName)) {
 			localUser.setNickName(nickName);
 		}
-		if (!displayName.equals("")) {
+		if (!isEmpty(displayName)) {
 			localUser.setDisplayName(displayName);
 		}
-		if (!telephone.equals("")) {
+		if (!isEmpty(telephone)) {
 			localUser.setTelephone(telephone);
 		}
-		if (!group.equals("")) {
+		if (!isEmpty(group)) {
 			localUser.setGroup(group);
 		}
 		int uinInt = -1;
 		try {
 		    uinInt = Integer.valueOf(uin).intValue();
-			if (uinInt != -1 && !uin.equals("")) {
+			if (uinInt != -1 && !isEmpty(uin)) {
 			    localUser.setUin(uinInt);
 			}
 		} catch (NumberFormatException ex) {
 		    //ignore
 		}
-		if (!email.equals("")) {
+		if (!isEmpty(email)) {
 			localUser.setEmailAddress(email);
 		}
 		
@@ -150,6 +177,10 @@ public class GGUserListReply implements GGIncomingPackage {
 	
 	public boolean isGetMoreReply() {
 		return m_type == GG_USERLIST_GET_MORE_REPLY;
+	}
+	
+	private boolean isEmpty(String text) {
+		return (text == null || text.trim().equals(""));
 	}
 	
 }
