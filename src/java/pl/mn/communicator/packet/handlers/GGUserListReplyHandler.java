@@ -31,11 +31,10 @@ import pl.mn.communicator.packet.in.GGUserListReply;
  * Created on 2004-12-11
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReplyHandler.java,v 1.13 2005-10-24 20:44:02 winnetou25 Exp $
+ * @version $Id: GGUserListReplyHandler.java,v 1.14 2005-10-25 21:38:08 winnetou25 Exp $
  */
 public class GGUserListReplyHandler implements PacketHandler {
 
-	
 	private final static Log LOGGER = LogFactory.getLog(GGUserListReplyHandler.class);
 	
 	/**
