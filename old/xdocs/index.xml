@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<document>
+	<properties>
+		<title>JGGApi</title>
+		<author>Marcin Naglik</author>
+		<author>Mateusz Szczap</author>
+	</properties>
+	<body>
+		<title>Overview</title>
+		<section name="JGGApi - Gadu-Gadu protocol implementation.">
+			<p> <b>JGGApi</b> is a Gadu-Gadu protocol implementation based on 
+				specification from <b>EKG</b>. Gadu-Gadu is a very famous 
+				Instant Messanger in Poland. </p>
+			<p> Thanks to the libary it is very easy to create applications 
+				that communicate with Gadu-Gadu server. It uses commonly used 
+				design patterns (GoF) that minimizie the learnining curve for 
+				developers that are going to contribute to this project. It has 
+				a good internal structure and realizes a paradigm of 
+				programming - <em>programming by extension</em> not by 
+				modification. What is more, it will help developers that are 
+				going to write applications similar to <b>Kadu</b>, <b>Gaim</b> 
+				or command-line <b>EKG</b> to fasten their development process. 
+				</p>
+			<p> if you want to start using library and to learn how to use it, 
+				it is suggested that you take a look at our <a 
+				href="guide.html">Getting Started</a> guide. </p>
+		</section>
+		<section name="News">
+			<ul>
+				<li>04-01-2005: Written "session lifecycle" section in <a href="guide.html">Getting Started</a> Guide.</li>
+				<li>03-01-2005: Released <a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-1.0-dev</a> version of <b>JGGApi</b>.</li>
+				<li>03-01-2005: Written first part of <b>JGGApi</b> <a href="guide.html">Getting Started</a> Guide.</li>
+			</ul>
+		</section>
+		<section name="Releases">
+			<p> There is an old version of the library that has already been 
+				released. It is <b>jggapi-0.94</b> and you can download it here:
+				<a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-0.94</a>. 
+				It works fine but it has limited functionality and does not 
+				have a support for searching in public directory, loading and 
+				storing information there and also it does not support contact 
+				list at all. </p>
+			<p> The new version of library <a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-1.0-dev</a> has many 
+				improvements and clearer design. It is not compatible with the 
+				old version, interfaces have changed significantly but porting 
+				from an old version should not be a difficult task. It also has 
+				the support for features that are not available in previous 
+				version. Note that this version has suffix <em>dev</em> because 
+				it has not been tested extensively. It would be very 
+				appreciated if users could provide feedback about the usage of 
+				this library.
+			</p>
+			<p> 
+				It is strongly recommended that you use the newest version 
+				instead of an old one because support for 0.94 will no longer 
+				be provided.
+			</p>
+		</section>
+		<section name="Features">
+			<p> The version (1.0-dev) allows: <ul> <li>Sending and receiving 
+				messages.</li> <li>Gives possibility to retrieve confirmation 
+				of message delivery.</li> <li>Exporting and importing of the 
+				user's contact list.</li> <li>Setting status and notification 
+				of statuses that are changed by monitored users.</li> 
+				<li>Ability to read and write personal information to the 
+				public directory.</li> <li>Possibility to search public 
+				directory based on user defined criteria.</li> </ul> </p>
+		</section>
+		<section name="Known Bugs">
+			<ul>
+				<li> The current version is not thread safe but the thread 
+					safety check will be perfomed soon. </li>
+				<li> Initial status that is set in <code>LoginContext</code> 
+					does not work. At beginning we send <code>Login60</code> 
+					packet but the Gadu-Gadu server is ignoring it. Therefore 
+					we have to sent status packet after connecting. What is 
+					more, it is known that this is also done by a standard 
+					Gadu-Gadu client, i.e. <i>explicite</i> setting status. 
+					</li>
+				<li> Write support for larger contact lists. Current 
+					implementation is limited to contact lists that are not 
+					more than 2048 bytes long. </li>
+				<li> Add ability to send larger notify lists, i.e. list that is 
+					send at the beginning to notify Gadu-Gadu server what users 
+					we want to monitor. </li>
+				<li> The libary is not tested enough therefore adding JUnit 
+					tests is of high importance. </li>
+			</ul>
+		</section>
+	</body>
+</document>

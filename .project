@@ -1,29 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>jggapi</name>
-	<comment>The JGGApi project is implementation of proprietary Gadu-Gadu protocol based on specification from EKG. It is fully object oriented and uses common design patterns that reduce the learning curve of the library.</comment>
-	<projects>
-	</projects>
-	<buildSpec>
-		<buildCommand>
-			<name>com.atlassw.tools.eclipse.checkstyle.CheckstyleBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.eclipse.jdt.core.javabuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
-			<name>org.mevenide.ui.mavenbuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-	</buildSpec>
-	<natures>
-		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>com.atlassw.tools.eclipse.checkstyle.CheckstyleNature</nature>
-		<nature>org.mevenide.ui.mavennature</nature>
-	</natures>
+  <name>jggapi</name>
+  <comment>The JGGApi project is implementation of proprietary Gadu-Gadu
+		protocol based on specification from EKG. It is fully object
+		oriented and uses common design patterns that reduce the
+		learning curve of the library.</comment>
+  <projects/>
+  <buildSpec>
+    <buildCommand>
+      <name>org.eclipse.jdt.core.javabuilder</name>
+      <arguments/>
+    </buildCommand>
+  </buildSpec>
+  <natures>
+    <nature>org.eclipse.jdt.core.javanature</nature>
+  </natures>
 </projectDescription>

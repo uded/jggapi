@@ -95,6 +95,7 @@
     </dependencies>
     <build>
         <sourceDirectory>src/java</sourceDirectory>
+        <sourceDirectory>src/thirdparty</sourceDirectory>
         <resources>
             <resource>
                 <directory>${basedir}</directory>

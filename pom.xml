@@ -1,0 +1,170 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<name>Java Gadu-Gadu protocol implementation</name>
+	<groupId>jggapi</groupId>
+	<artifactId>jggapi</artifactId>
+	<packaging>jar</packaging>
+	<version>1.6</version>
+	<url>http://jggapi.sourceforge.net</url>
+	<licenses>
+		<license>
+			<name>GPL license</name>
+			<url>
+				http://www.opensource.org/licenses/gpl-license.php
+			</url>
+		</license>
+	</licenses>
+	<ciManagement>
+		<system>Sourceforge Issue Tracker</system>
+		<url>http://sourceforge.net/tracker/?group_id=79198</url>
+	</ciManagement>
+	<organization>
+		<name>SourceForge.net</name>
+		<url>http://sourceforge.net/projects/jggapi/</url>
+	</organization>
+	<inceptionYear>2004</inceptionYear>
+	<description>
+		The JGGApi project is implementation of proprietary Gadu-Gadu
+		protocol based on specification from EKG. It is fully object
+		oriented and uses common design patterns that reduce the
+		learning curve of the library.
+	</description>
+	<issueManagement>
+		<system>SourceForge Issue Tracker</system>
+		<url>http://sourceforge.net/tracker/?group_id=79198</url>
+	</issueManagement>
+	<scm>
+		<connection>
+			scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jggapi:jggapi
+		</connection>
+		<developerConnection>
+			scm:cvs:ssh:username@cvs.sourceforge.net:/cvsroot/jggapi:jggapi
+		</developerConnection>
+		<url>
+			http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jggapi/
+		</url>
+	</scm>
+	<developers>
+		<developer>
+			<name>Marcin Naglik</name>
+			<id>mnaglik</id>
+			<email>mnaglik@gazeta.pl</email>
+			<organization>Unknown</organization>
+			<timezone>GMT+1</timezone>
+			<roles>
+				<role>Founder</role>
+				<role>Lead Developer</role>
+			</roles>
+		</developer>
+		<developer>
+			<name>Mateusz Szczap</name>
+			<id>mati</id>
+			<email>mati@sz.home.pl</email>
+			<organization>NCDC</organization>
+			<timezone>GMT+1</timezone>
+			<roles>
+				<role>Lead Developer</role>
+			</roles>
+		</developer>
+	</developers>
+	<contributors>
+		<contributor>
+			<name>Maciej Sawitus</name>
+			<email>ms189438@zodiac.mimuw.edu.pl</email>
+			<organization>Uniwersytet Warszawski</organization>
+			<organizationUrl>http://www.uw.edu.pl/</organizationUrl>
+			<roles>
+				<role>JGGApi tester and bug reporter</role>
+			</roles>
+			<timezone>GMT+1</timezone>
+		</contributor>
+		<contributor>
+			<name>Mehul Bhatt</name>
+			<email>mehul_b1@hotmail.com</email>
+			<roles>
+				<role>JGGApi tester and bug reporter</role>
+			</roles>
+		</contributor>
+	</contributors>
+	<dependencies>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.4</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.0.4</version>
+			<type>jar</type>
+		</dependency>
+		<dependency>
+			<groupId>backport-util-concurrent</groupId>
+			<artifactId>backport-util-concurrent</artifactId>
+			<version>1.1_01</version>
+			<type>jar</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<directory>target</directory>
+		<finalName>${artifactId}-${version}</finalName>
+		<sourceDirectory>src/main/java</sourceDirectory>
+		<testSourceDirectory>src/test/java</testSourceDirectory>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.4</source>
+					<target>1.4</target>
+				</configuration>
+			</plugin>
+			<plugin>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptor>src/main/assembly/dep.xml</descriptor>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>
+					maven-project-info-reports-plugin
+				</artifactId>
+			</plugin>
+		</plugins>
+	</reporting>
+	<distributionManagement>
+		<site>
+			<id>website</id>
+			<url>/home/groups/${pom.groupId.substring(0,1)}/${pom.groupId.substring(0,2)}/${pom.artifactId}/htdocs/</url>
+			<name>Web Site</name>
+		</site>
+	</distributionManagement>
+	<!--  
+		<reporting>
+		<plugins>
+		<plugin>
+		<artifactId>maven-compile-plugin</artifactId>
+		</plugin>
+		<plugin>
+		<artifactId>maven-javadoc-plugin</artifactId>
+		</plugin>
+		<plugin>
+		<artifactId>maven-assembly-plugin</artifactId>
+		</plugin>
+		</plugins>
+		</reporting>
+	-->
+</project>
