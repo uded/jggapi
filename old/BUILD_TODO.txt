@@ -1,0 +1,1 @@
+1. Different logging configuration for distribution than development

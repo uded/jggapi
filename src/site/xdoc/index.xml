@@ -36,10 +36,9 @@
 				released. It is <b>jggapi-0.94</b> and you can download it here:
 				<a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-0.94</a>. 
 				It works fine but it has limited functionality and does not 
-				have a support for searching in public directory, loading and 
-				storing information there and also it does not support contact 
-				list at all. </p>
-			<p> The new version of library <a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-1.0-dev</a> has many 
+				have support for searching, loading and saving information in/from/to public directory and does not
+				support contact list at all. </p>
+			<p> The new version of library <a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-1.0</a> has many 
 				improvements and clearer design. It is not compatible with the 
 				old version, interfaces have changed significantly but porting 
 				from an old version should not be a difficult task. It also has 
@@ -52,7 +51,7 @@
 			<p> 
 				It is strongly recommended that you use the newest version 
 				instead of an old one because support for 0.94 will no longer 
-				be provided.
+				be supported.
 			</p>
 		</section>
 		<section name="Features">
@@ -65,7 +64,7 @@
 				public directory.</li> <li>Possibility to search public 
 				directory based on user defined criteria.</li> </ul> </p>
 		</section>
-		<section name="Known Bugs">
+		<section name="Known Bugs and Limitations">
 			<ul>
 				<li> The current version is not thread safe but the thread 
 					safety check will be perfomed soon. </li>

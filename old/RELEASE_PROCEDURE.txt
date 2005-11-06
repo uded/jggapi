@@ -1,0 +1,7 @@
+1. mvn clean
+2. mvn compile
+3. mvn package
+4. mvn source:jar
+5. mvn javadoc:javadoc
+6. mvn site
+7. mvn assebly:assembly

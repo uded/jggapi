@@ -11,9 +11,7 @@
 	<licenses>
 		<license>
 			<name>GPL license</name>
-			<url>
-				http://www.opensource.org/licenses/gpl-license.php
-			</url>
+			<url>http://www.opensource.org/licenses/gpl-license.php</url>
 		</license>
 	</licenses>
 	<ciManagement>
@@ -36,22 +34,16 @@
 		<url>http://sourceforge.net/tracker/?group_id=79198</url>
 	</issueManagement>
 	<scm>
-		<connection>
-			scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jggapi:jggapi
-		</connection>
-		<developerConnection>
-			scm:cvs:ssh:username@cvs.sourceforge.net:/cvsroot/jggapi:jggapi
-		</developerConnection>
-		<url>
-			http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jggapi/
-		</url>
+		<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</connection>
+		<developerConnection>scm:cvs:ssh:username@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</developerConnection>
+		<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jggapi/</url>
 	</scm>
 	<developers>
 		<developer>
 			<name>Marcin Naglik</name>
 			<id>mnaglik</id>
 			<email>mnaglik@gazeta.pl</email>
-			<organization>Unknown</organization>
+			<organization>Sourceforge</organization>
 			<timezone>GMT+1</timezone>
 			<roles>
 				<role>Founder</role>
@@ -62,7 +54,7 @@
 			<name>Mateusz Szczap</name>
 			<id>mati</id>
 			<email>mati@sz.home.pl</email>
-			<organization>NCDC</organization>
+			<organization>Sourceforge</organization>
 			<timezone>GMT+1</timezone>
 			<roles>
 				<role>Lead Developer</role>
@@ -74,7 +66,7 @@
 			<name>Maciej Sawitus</name>
 			<email>ms189438@zodiac.mimuw.edu.pl</email>
 			<organization>Uniwersytet Warszawski</organization>
-			<organizationUrl>http://www.uw.edu.pl/</organizationUrl>
+			<organizationUrl>http://www.uw.edu.pl</organizationUrl>
 			<roles>
 				<role>JGGApi tester and bug reporter</role>
 			</roles>
@@ -87,14 +79,33 @@
 				<role>JGGApi tester and bug reporter</role>
 			</roles>
 		</contributor>
+		<contributor>
+			<name>Kazimierz Pogoda</name>
+			<email>morisil@ncdc.pl</email>
+			<organization>NCDC</organization>
+			<organizationUrl>http://www.ncdc.pl</organizationUrl>
+			<roles>
+				<role>JGGApi thread-safety review</role>
+			</roles>
+		</contributor>
+		<contributor>
+			<name>Marcin Krystek</name>
+			<email>mkrystek@man.poznan.pl</email>
+			<organization>Politechnika Poznanska</organization>
+			<organizationUrl>http://www.put.poznan.pl</organizationUrl>
+			<roles>
+				<role>JGGApi testing and comments</role>
+			</roles>
+		</contributor>
+		<contributor>
+			<name>Jakub Żmijewski</name>
+			<email>zmija2a@poczta.onet.pl</email>
+			<roles>
+				<role>JGGApi testing and comments</role>
+			</roles>
+		</contributor>
 	</contributors>
 	<dependencies>
-		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.0.4</version>
-			<type>jar</type>
-		</dependency>
 		<dependency>
 			<groupId>commons-logging</groupId>
 			<artifactId>commons-logging</artifactId>
@@ -130,7 +141,9 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<configuration>
-					<descriptor>src/main/assembly/dep.xml</descriptor>
+					<descriptor>src/main/assembly/all.xml</descriptor>
+					<descriptorId>all</descriptorId>
+					<!-- <includeSite>true</includeSite> -->
 				</configuration>
 			</plugin>
 		</plugins>
@@ -139,9 +152,7 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>
-					maven-project-info-reports-plugin
-				</artifactId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</reporting>
@@ -152,19 +163,4 @@
 			<name>Web Site</name>
 		</site>
 	</distributionManagement>
-	<!--  
-		<reporting>
-		<plugins>
-		<plugin>
-		<artifactId>maven-compile-plugin</artifactId>
-		</plugin>
-		<plugin>
-		<artifactId>maven-javadoc-plugin</artifactId>
-		</plugin>
-		<plugin>
-		<artifactId>maven-assembly-plugin</artifactId>
-		</plugin>
-		</plugins>
-		</reporting>
-	-->
 </project>
