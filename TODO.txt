@@ -1,0 +1,6 @@
+
+
+
+Future improvements:
+1. Decorated GaduInputStream and GaduOutputStream
+2. Apply state pattern to GGState

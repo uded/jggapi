@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project>
 	<modelVersion>4.0.0</modelVersion>
 	<name>Java Gadu-Gadu protocol implementation</name>
 	<groupId>jggapi</groupId>
@@ -38,6 +36,17 @@
 		<developerConnection>scm:cvs:ssh:username@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</developerConnection>
 		<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jggapi/</url>
 	</scm>
+	  <distributionManagement>
+	    <repository>
+	      <id>jggapi-repository</id>
+	      <name>JGGApi Repository</name>
+	      <url>scp://shell1.sf.net/home/groups/j/jg/jggapi/htdocs/repo/</url>
+	    </repository>
+	    <site>
+	      <id>website</id>
+	      <url>scp://shell1.sf.net/home/groups/j/jg/jggapi/htdocs/</url>
+	    </site>
+	  </distributionManagement>
 	<developers>
 		<developer>
 			<name>Marcin Naglik</name>
@@ -146,6 +155,20 @@
 					<!-- <includeSite>true</includeSite> -->
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antlr-plugin</artifactId>
+				<configuration>
+					<grammars>java.g</grammars>
+				</configuration>
+				<executions>
+					<execution>
+			    		<goals>
+			        		<goal>generate</goal>
+			        	</goals>
+			    	</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 	<reporting>
@@ -156,11 +179,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<distributionManagement>
-		<site>
-			<id>website</id>
-			<url>/home/groups/${pom.groupId.substring(0,1)}/${pom.groupId.substring(0,2)}/${pom.artifactId}/htdocs/</url>
-			<name>Web Site</name>
-		</site>
-	</distributionManagement>
 </project>

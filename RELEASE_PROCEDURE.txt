@@ -1,0 +1,10 @@
+1. mvn clean
+2. mvn compile
+3. mvn package
+4. mvn source:jar
+5. mvn install
+6. mvn javadoc:javadoc
+7. mvn site
+8. mvn assebly:assembly
+9. mvn site-deploy
+10. mvn deploy
