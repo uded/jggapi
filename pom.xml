@@ -1,6 +1,6 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<name>Java Gadu-Gadu protocol implementation</name>
+	<name>JGGApi</name>
 	<groupId>jggapi</groupId>
 	<artifactId>jggapi</artifactId>
 	<packaging>jar</packaging>
@@ -155,7 +155,8 @@
 					<!-- <includeSite>true</includeSite> -->
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- 
+				<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antlr-plugin</artifactId>
 				<configuration>
@@ -169,6 +170,7 @@
 			    	</execution>
 				</executions>
 			</plugin>
+			-->
 		</plugins>
 	</build>
 	<reporting>

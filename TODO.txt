@@ -1,6 +1,15 @@
-
-
-
 Future improvements:
-1. Decorated GaduInputStream and GaduOutputStream
-2. Apply state pattern to GGState
+
+Bugs:
+1. Handle contact lists over 2048 characters.
+
+Update:
+1. Decorated GaduInputStream and GaduOutputStream.
+2. Apply state pattern to GGState.
+3. Switch to NIO.
+
+Features:
+1. Handle SSL connections.
+2. Era Omnix discovery.
+3. DCC connections: send and receive images, RTF messages and files.
+4. Voice chat.
