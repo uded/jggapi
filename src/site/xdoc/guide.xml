@@ -7,19 +7,15 @@
     </properties>
 
     <body>
-		<title>JGGApi Guide</title>
-        <section name="Getting Started with JGGApi">
-
-			<subsection name="Induction">
+		<title><H1>JGGApi Guide</H1></title>
+        <section name="Induction">
 				<p>
-				JGGApi is a library that was designed to be used by high-level developers. It handles low level
-				binary Gadu-Gadu protocol implementation. High level developers can use well described interfaces to interact
-				with Gadu-Gadu server as most of protocol details is hidden. 
+				JGGApi is a library that was designed to be used by high-level developers. It handles low-level
+				binary Gadu-Gadu protocol implementation. High-level developers can use well described interfaces to interact
+				with Gadu-Gadu server as most of complicated protocol details is hidden. 
 				</p>			
 				<p>
-				One of the most important classes in JGGApi is a <code>Session</code> class.
-				Well described interfaces can be accessed from <code>Session</code> instance, they are
-				so-called JGGApi services:
+				One of the most important class in JGGApi is a <code>Session</code> class. It is an entry point to so-called JGGApi services:
 				</p>
 				<p>
 				<b>JGGApi services:</b>
@@ -33,8 +29,8 @@
 					<li>IRegistrationService - registering and unregistering new account, changing password, sending forgotten password by e-mail.</li>
 				</ul>
 				</p>
-				</subsection>
-				<subsection name="Session lifecycle">
+		</section>
+		<section name="Session lifecycle">
 				<p>
 				<code>Session</code> can be in various states. We can check current <code>SessionState</code>
 				by invoking <code>getSessionState()</code> method on <code>Session</code> object.
@@ -92,21 +88,21 @@ session.addSessionStateListener(new SessionStateListener() {
 ]]>
 				</source>
 				</p>
-			</subsection>
-			<subsection name="Connecting and disconnecting">
+			</section>
+			<section name="Connecting and disconnecting">
 				<p>
-				Create <code>Session</code> object by invoking static method from SessionFactory. After that create 
-				a <code>LoginContext</code> instance. <code>LoginContext</code> contains various information that are
+				Create <code>Session</code> object by invoking static method on SessionFactory.
+				After that create a <code>LoginContext</code> instance. <code>LoginContext</code> contains various information that are
 				of high importance in logging process. It holds Gadu-Gadu uin and password for it.
-				In addition, it contains information about initial status, local and remote IP addresses,
-				maximal image size that the user accepts and initial list of monitored users.
-				Note that monitored users list also includes list of users that are banned,
-				ie. the ones from which we do not wish to receive any notification and messages.
+				In addition, it has information about initial status, maximal image size that the user
+				accepts and initial list of monitored users. Note that monitored users list also includes
+				list of users that are banned, ie. the ones from which we do not wish to receive any notification and messages.
 				</p>
 				<p>		
-				In order to connect to Gadu-Gadu server one has to use <code>ConnectionService</code>
+				In order to connect to Gadu-Gadu server you have to use <code>ConnectionService</code>
 				that can be referenced from previously created <code>Session</code> object.		
-				After that add <code>ConnectionListener</code> to listen for connection related events.
+				After that add <code>ConnectionListener</code> to listen for connection related events and finally
+				invoke <code>connect()</code> method on <code>ConnectionService</code>.
 				</p>
 				<p>
 				<b>Code snippet:</b>
@@ -126,7 +122,7 @@ session.getConnectionService().connect();
 				<p>
 				The code above code snippet establishes socket connection to Gadu-Gadu server. It is important to note that it does
 				<b>NOT</b> log in user. When connection to server is successful, <code>connectionEstablished()</code> method
-				from connection handler class is invoked and SessionState changes to AUTHENTICATION_AWAITING.
+				from connection handler class is invoked and SessionState changes to <code>SessionState.AUTHENTICATION_AWAITING</code>.
 				</p>
 				<p>
 				In order to disconnect from Gadu-Gadu server you have to invoke <code>disconnect()</code> method
@@ -147,29 +143,39 @@ session.getConnectionService().addConnectionListener(new ConnectionListener.Stub
 session.getConnectionService().disconnect();
 				</source>
 				</p>
-			</subsection>
-			<subsection name="Logging in and logging out">
+			</section>
+			<section name="Logging in and logging out">
 				<p>
-				In order to log in connection to Gadu-Gadu server must be established.
+				In order to log in connection to Gadu-Gadu server must be established. Session state must be in <code>SessionState.AUTHENTICATION_AWAITING</code> mode.
 				</p>
 				<p>
-				One can log in using <code>LoginService</code>. If the uin and password match Gadu-Gadu server
-				replies that logging was successful or that server did not authenticate. In order to receive such events one has to register in
-				<code>LoginService</code> as a login handler that implements <code>LoginListener</code>
-				interface.
+				In order to log in you will have to use <code>LoginService</code> previously obtained
+				from <code>Session</code> instance. 
+				In addition, you will need to create a <code>LoginContext</code> instance.
+				<code>LoginContext</code> contains various information that are of high importance in logging process. It holds Gadu-Gadu uin and password for it.
+				What is more, it has information about initial status, maximal image size that the user
+				accepts and initial list of monitored users. Note that monitored users list also includes
+				list of users that are banned, ie. the ones from which we do not wish to receive any notification or messages.
 				</p>
 				<p>
-				Code snippet:
+				You can add <code>LoginListener</code> to be notified of login related events. If your uin
+				and password match and you will be successfuly authenticated, to let you know about this,
+				<code>loginOK()</code> method will be triggered. In case authentication process was not successful,
+				you will be notified of this through invocation of <code>loginFailed()</code> method on
+				<code>LoginListener</code>.
+				The <code>LoginFailedEvent</code> object contains cause of unsuccessful login.
+				</p>
+				<p>
+				<b>Code snippet:</b>
 				<source>
 <![CDATA[
 ISession session = ...
 ILoginService loginService = session.getLoginService();
 loginService.addLoginListener(new LoginListener.Stub() {
-	public void loginOK() {
+	public void loginOK() throws GGException {
 		System.out.println("Login OK.");
 	}
-
-	public void loginFailed() {
+	public void loginFailed(final LoginFailedEvent loginFailedEvent) throws GGException {
 		System.out.println("Login Failed.");
 	}
 });
@@ -177,12 +183,19 @@ loginService.addLoginListener(new LoginListener.Stub() {
 				</source>
 				</p>
 				<p>
-				If you want to log out from Gadu-Gadu server you have to invoke <code>logout</code>
+				If you want to log out from Gadu-Gadu server you have to invoke <code>logout()</code>
 				method on <code>LoginService</code>. After doing that status will be set to unavailable
-				and there will be no way to send messages or interact with Gadu-Gadu server.
+				and there will be no way to send messages or interact with Gadu-Gadu server whatsoever.
+				The session state will change in such situation to <code>SessionState.LOGGED_OUT</code>.
 				</p>
 				<p>
-				Code snippet:
+				Alternatively, you can invoke <code>logout(java.lang.String description, java.lang.Date returnDate)</code>
+				passing your description that will be set when status is unavailable and/or your anticipated
+				return time. If you do not wish to pass your return time you are free to pass <code>null</code>
+				as a second parameter.
+				</p>
+				<p>
+				<b>Code snippet:</b>
 				<source>
 <![CDATA[
 ISession session = ...
@@ -190,21 +203,23 @@ ILoginService loginService = session.getLoginService();
 loginService.logout();
 ]]>
 				</source>
+				Alternative appoach:
+				<source>
+<![CDATA[
+ISession session = ...
+ILoginService loginService = session.getLoginService();
+loginService.logout("Vegetarians rocks! Wake up, stop killing animals!", null);
+]]>
+				</source>
 				</p>
+			</section>
+			<section name="Sending and receiving messages">
 				<p>
-				There is also another method to logout that takes description as a <code>java.lang.String</code>
-				and return date as <code>java.util.Date</code>. Please consult Java Docs to get more information on
-				this.
-				</p>
-			</subsection>
-					
-			<subsection name="Sending and receiving messages">
-				<p>
-				In order to send and receive messages one has to use <code>MessageService</code>
-				that can be accessed via <code>Session</code> object.
-				Before sending, an outgoing message has to be created. There is a <code>
-				OutgoingMessage</code> class that has three static methods to create it's instance.
-				The most common static method is: <code>OutgoingMessage.createNewMessage(176798, "body")</code>
+				In order to send and receive messages you have to use <code>MessageService</code>
+				that similarly to previous services can be obtained from <code>Session</code> object.
+				Before sending, an outgoing message has to be created. There is a <code>OutgoingMessage</code>
+				class that has three static methods to create it's instance.
+				The most common static method is: <code>OutgoingMessage.createNewMessage(int, java.lang.Sting)</code>.
 				</p>
 				<p>
 				The above method simply creates a new <code>OutgoingMessage</code> instance.
@@ -212,11 +227,11 @@ loginService.logout();
 				message to be send.
 				</p>
 				<p>
-				After creating <code>OutgoingMessage</code> object one can send it through <code>MessageService</code>.
-				In order to do it please invoke <code>sendMessage</code> method from <code>MessageService</code>.
+				After creating <code>OutgoingMessage</code> object you can send it through <code>MessageService</code>.
+				In order to do it you have to invoke <code>sendMessage(IOutgoingMessage outgoingMessage)</code> method from <code>MessageService</code>.
 				</p>
 				<p>
-				Code snippet:
+				<b>Code snippet:</b>
 				<source>
 <![CDATA[
 ISession session = ...
@@ -227,17 +242,17 @@ messageService.sendMessage(outMessage);
 				</source>
 				</p>
 				<p>
-				If one wants to receive messages from other users one has to register as a <code>MessageListener</code>
+				If you want to be notified of message related events you have to register <code>MessageListener</code>
 				in <code>MessageService</code>.
 				</p>
 				<p>
-				Code snippet:
+				<b>Code snippet:</b>
 				<source>
 <![CDATA[
-ISession session = ...
-IMessageService messageService = session.getMessageService();
+final ISession session = ...
+final IMessageService messageService = session.getMessageService();
 messageService.addMessageListener(new MessageListener.Stub() {
-	public void messageArrived(final IncomingMessage incommingMessage) {
+	public void messageArrived(IIncommingMessage incommingMessage) {
 		System.out.println("MessageArrived, from user: "+incommingMessage.getUin());
 		System.out.println("MessageBody: "+incommingMessage.getMessageBody());
 		System.out.println("MessageID: "+incommingMessage.getMessageID());
@@ -250,14 +265,13 @@ messageService.addMessageListener(new MessageListener.Stub() {
 				</p>
 				<p>
 				There is also possibilty to receive confirmation whether a certain outgoing message
-				was delivered or not. In order to do that one has to register as <code>MessageListener</code>
-				in <code>LoginService</code>. After message that was previously sent is delivered Gadu-Gadu sents
-				confirmation packet and the client is notified by invocation of <code>messageDelivered</code> method
-				from <code>MessageListener</code>. The message can be identified by an unique <code>messageID</code>
-				that is generated when one creates <code>OutgoingMessage</code>.
+				was delivered. In order to do that you have to register as <code>MessageListener</code>
+				in <code>MessageService</code>. When message is delivered JGGApi will notify you though invocation
+				of <code>messageDelivered(int uin, int messageID, MessageStatus deliveryStatus)</code> method in <code>MessageListener</code>
+				The message can be identified by an unique <code>messageID</code> which is generated when you creates an instance of <code>OutgoingMessage</code>.
 				</p>
 				<p>
-				Code snippet:
+				<b>Code snippet:</b>
 				<source>
 <![CDATA[
 ISession session = ...
@@ -274,7 +288,6 @@ messageService.sendMessage(outMessage);
 ]]>
 				</source>
 				</p>
-			</subsection>
 		</section>
     </body>
 </document>
