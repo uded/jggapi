@@ -31,7 +31,7 @@ import pl.mn.communicator.packet.out.GGUserListRequest;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: DefaultContactListService.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: DefaultContactListService.java,v 1.2 2005-11-19 19:56:57 winnetou25 Exp $
  */
 public class DefaultContactListService implements IContactListService {
 
@@ -52,7 +52,7 @@ public class DefaultContactListService implements IContactListService {
 	public void clearContactList() throws GGException {
 		checkSessionState();
 		try {
-			GGUserListRequest clearContactListRequest = GGUserListRequest.createClearUsetListRequest();
+			GGUserListRequest clearContactListRequest = GGUserListRequest.createClearUserListRequest();
 			m_session.getSessionAccessor().sendPackage(clearContactListRequest);
 		} catch (IOException ex) {
 			throw new GGException("Unable to clear contact list", ex);

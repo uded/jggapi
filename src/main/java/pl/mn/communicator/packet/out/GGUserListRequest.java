@@ -26,7 +26,7 @@ import pl.mn.communicator.LocalUser;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListRequest.java,v 1.1 2005-11-05 23:34:53 winnetou25 Exp $
+ * @version $Id: GGUserListRequest.java,v 1.2 2005-11-19 19:56:56 winnetou25 Exp $
  */
 public class GGUserListRequest implements GGOutgoingPackage {
  
@@ -46,9 +46,14 @@ public class GGUserListRequest implements GGOutgoingPackage {
 	}
 
 	private String prepareRequest() {
-	   	StringBuffer buffer = new StringBuffer();
+	   	final StringBuffer buffer = new StringBuffer();
     	for (Iterator it = m_usersToExport.iterator(); it.hasNext();) {
-    		LocalUser localUser = (LocalUser) it.next();
+    		final LocalUser localUser = (LocalUser) it.next();
+    		if (localUser.isBlocked()) {
+    			buffer.append("i;;;;;;"+String.valueOf(localUser.getUin()));
+    	    	buffer.append("\n");
+    	    	continue;
+    		}
 	    	if (localUser.getFirstName() != null) {
 	    	    buffer.append(localUser.getFirstName());
 	    	}
@@ -121,10 +126,11 @@ public class GGUserListRequest implements GGOutgoingPackage {
     	return toSend;
     }
     
-    public static GGUserListRequest createClearUsetListRequest() {
+    public static GGUserListRequest createClearUserListRequest() {
     	GGUserListRequest listRequest = new GGUserListRequest();
     	listRequest.m_request = "";
     	listRequest.m_type = GG_USER_LIST_PUT;
+    	
     	return listRequest;
     }
 
@@ -134,6 +140,7 @@ public class GGUserListRequest implements GGOutgoingPackage {
     	listRequest.m_type = GG_USER_LIST_PUT;
     	listRequest.m_usersToExport = users;
     	listRequest.m_request = listRequest.prepareRequest();
+    	
     	return listRequest;
     }
     
@@ -141,6 +148,7 @@ public class GGUserListRequest implements GGOutgoingPackage {
     	GGUserListRequest listRequest = new GGUserListRequest();
     	listRequest.m_type = GG_USERLIST_GET;
     	listRequest.m_request = "";
+    	
     	return listRequest;
     }
 

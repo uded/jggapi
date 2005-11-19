@@ -32,7 +32,7 @@ import pl.mn.communicator.LocalUser;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReply.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: GGUserListReply.java,v 1.2 2005-11-19 19:56:57 winnetou25 Exp $
  */
 public class GGUserListReply implements GGIncomingPackage {
 
@@ -154,6 +154,10 @@ public class GGUserListReply implements GGIncomingPackage {
 		}
 		if (!isEmpty(email)) {
 			localUser.setEmailAddress(email);
+		}
+		
+		if (localUser.getDisplayName() == null && localUser.getFirstName() != null && localUser.getFirstName().equals("i")) {
+			localUser.setBlocked(true);
 		}
 		
 		return localUser;

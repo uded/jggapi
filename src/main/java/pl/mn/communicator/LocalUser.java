@@ -21,7 +21,7 @@ package pl.mn.communicator;
  * Created on 2004-11-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: LocalUser.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: LocalUser.java,v 1.2 2005-11-19 19:56:57 winnetou25 Exp $
  */
 public class LocalUser {
 
@@ -48,6 +48,9 @@ public class LocalUser {
 	
 	/** the e-mail address of the user */
 	private String m_emailAddress = null;
+	
+	/** flag to indicate that the user is blocked */
+	private boolean m_isBlocked = false;
 
 	public void setFirstName(String name) {
 		if (name == null) throw new NullPointerException("name cannot be null");
@@ -113,6 +116,14 @@ public class LocalUser {
 	
 	public String getEmailAddress() {
 		return m_emailAddress;
+	}
+	
+	public void setBlocked(boolean isBlocked) {
+		m_isBlocked = isBlocked;
+	}
+	
+	public boolean isBlocked() {
+		return m_isBlocked;
 	}
 	
 }
