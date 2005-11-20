@@ -17,10 +17,14 @@
  */
 package pl.mn.communicator.packet;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.2 2005-11-20 16:07:53 winnetou25 Exp $
  */
 public class GGUtils {
 
@@ -176,6 +180,17 @@ public class GGUtils {
         }
 
         return (int) y;
+    }
+    
+    public static int copy(InputStream input, OutputStream output) throws IOException {
+    	byte[] buffer = new byte[1024];
+    	int count = 0;
+    	int n = 0;
+    	while (-1 != (n = input.read(buffer))) {
+    		output.write(buffer, 0, n);
+    		count += n;
+    	}
+    	return count;
     }
 	
 }

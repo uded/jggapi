@@ -1,7 +1,12 @@
 Future improvements:
 
 Bugs:
-1. Handle contact lists over 2048 characters.
+1. Handle contact lists over 2048 characters. Partially DONE
+2. Add support for exporting sms users information
+3. Add support for importing contactList as byte[] array.
+4. How can I know how many put more request there are so that I can notify listener? Maybe some counter?
+5. Add statistic service, so that it is possible to know for instance how many messages were sent for certain session
+   how many bytes received, how many sent, etc
 
 Update:
 1. Decorated GaduInputStream and GaduOutputStream.

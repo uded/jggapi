@@ -32,17 +32,17 @@ import pl.mn.communicator.LocalUser;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReply.java,v 1.2 2005-11-19 19:56:57 winnetou25 Exp $
+ * @version $Id: GGUserListReply.java,v 1.3 2005-11-20 16:08:37 winnetou25 Exp $
  */
 public class GGUserListReply implements GGIncomingPackage {
-
+	
 	public final static int GG_USERLIST_REPLY  = 0x0010;
 	
-	private final static int GG_USERLIST_PUT_REPLY  = 0x00;        /* początek eksportu listy */
-	private final static int GG_USERLIST_PUT_MORE_REPLY  = 0x02;    /* kontynuacja */
-
-	private final static int GG_USERLIST_GET_MORE_REPLY  = 0x04;    /* początek importu listy */
-	private final static int GG_USERLIST_GET_REPLY = 0x06; 			/* ostatnia część importu */ 
+	public final static int GG_USERLIST_PUT_REPLY  = 0x00;        /* początek eksportu listy */
+	public final static int GG_USERLIST_PUT_MORE_REPLY  = 0x02;    /* kontynuacja */
+	
+	public final static int GG_USERLIST_GET_MORE_REPLY  = 0x04;    /* początek importu listy */
+	public final static int GG_USERLIST_GET_REPLY = 0x06; 			/* ostatnia część importu */ 
 	
 	private byte m_type = -1;
 	
@@ -63,22 +63,15 @@ public class GGUserListReply implements GGIncomingPackage {
 	}
 	
 	private Collection createUsersCollection(byte[] data) throws IOException {
-		ArrayList localUsers = new ArrayList();
-
-		String contactListString = new String(data, 1, data.length-1, "windows-1250");
-		BufferedReader bufReader = new BufferedReader(new StringReader(contactListString));
-
-		ArrayList lines = new ArrayList();
-		String line = null; 
-		while ((line = bufReader.readLine()) != null) {
-		    lines.add(line);
-		}
-
-		for (Iterator it = lines.iterator(); it.hasNext();) {
-		    String subline = (String) it.next();
-		    String[] contactListStrings = subline.split(";");
-			List contactList = Arrays.asList(contactListStrings);
-			LocalUser localUser = createLocalUser(contactList);
+		final ArrayList localUsers = new ArrayList();
+		
+		final List lines = GGUserListReply.getLinesStringList(data);
+		
+		for(final Iterator it = lines.iterator(); it.hasNext();) {
+			final String subline = (String) it.next();
+			final String[] contactListStrings = subline.split(";");
+			final List contactList = Arrays.asList(contactListStrings);
+			final LocalUser localUser = createLocalUser(contactList);
 			localUsers.add(localUser);
 		}
 		
@@ -96,9 +89,9 @@ public class GGUserListReply implements GGIncomingPackage {
 		String group = null;
 		String uin = null;
 		String email = null;
-
+		
 		final Iterator it = entries.iterator();
-
+		
 		if (it.hasNext()) {
 			firstName = (String) it.next();
 		}
@@ -145,12 +138,12 @@ public class GGUserListReply implements GGIncomingPackage {
 		}
 		int uinInt = -1;
 		try {
-		    uinInt = Integer.valueOf(uin).intValue();
+			uinInt = Integer.valueOf(uin).intValue();
 			if (uinInt != -1 && !isEmpty(uin)) {
-			    localUser.setUin(uinInt);
+				localUser.setUin(uinInt);
 			}
 		} catch (NumberFormatException ex) {
-		    //ignore
+			//ignore
 		}
 		if (!isEmpty(email)) {
 			localUser.setEmailAddress(email);
@@ -181,6 +174,19 @@ public class GGUserListReply implements GGIncomingPackage {
 	
 	public boolean isGetMoreReply() {
 		return m_type == GG_USERLIST_GET_MORE_REPLY;
+	}
+	
+	public static List getLinesStringList(byte[] data) throws IOException {
+		final String contactListString = new String(data, 1, data.length-1, "windows-1250");
+		final BufferedReader bufReader = new BufferedReader(new StringReader(contactListString));
+		
+		final ArrayList lines = new ArrayList();
+		String line = null; 
+		while ((line = bufReader.readLine()) != null) {
+			lines.add(line);
+		}
+		
+		return lines;
 	}
 	
 	private boolean isEmpty(String text) {

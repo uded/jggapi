@@ -19,6 +19,7 @@ package pl.mn.communicator.packet.out;
 
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.List;
 
 import pl.mn.communicator.LocalUser;
 
@@ -26,17 +27,15 @@ import pl.mn.communicator.LocalUser;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListRequest.java,v 1.2 2005-11-19 19:56:56 winnetou25 Exp $
+ * @version $Id: GGUserListRequest.java,v 1.3 2005-11-20 16:09:03 winnetou25 Exp $
  */
 public class GGUserListRequest implements GGOutgoingPackage {
- 
+	
 	public static final int GG_USERLIST_REQUEST  = 0x0016;
 	
-	private static final byte GG_USER_LIST_PUT = 0x00;
-	//private static final byte GG_USERLIST_PUT_MORE = 0x01;
-	private static final int GG_USERLIST_GET = 0x02;
-
-	private Collection m_usersToExport = null;
+	public static final byte GG_USER_LIST_PUT = 0x00;
+	public static final byte GG_USERLIST_PUT_MORE = 0x01;
+	public static final int GG_USERLIST_GET = 0x02;
 	
 	private byte m_type;
 	
@@ -44,112 +43,137 @@ public class GGUserListRequest implements GGOutgoingPackage {
 	
 	private GGUserListRequest() {
 	}
-
-	private String prepareRequest() {
-	   	final StringBuffer buffer = new StringBuffer();
-    	for (Iterator it = m_usersToExport.iterator(); it.hasNext();) {
-    		final LocalUser localUser = (LocalUser) it.next();
-    		if (localUser.isBlocked()) {
-    			buffer.append("i;;;;;;"+String.valueOf(localUser.getUin()));
-    	    	buffer.append("\n");
-    	    	continue;
-    		}
-	    	if (localUser.getFirstName() != null) {
-	    	    buffer.append(localUser.getFirstName());
-	    	}
-	    	buffer.append(';');
-	    	if (localUser.getLastName() != null) {
-	    	    buffer.append(localUser.getLastName());
-	    	}
-	    	buffer.append(';');
-	    	if (localUser.getNickName() != null) {
-	    	    buffer.append(localUser.getNickName());
-	    	}
-	    	buffer.append(';');
-	    	if (localUser.getDisplayName() != null) {
-	    	    buffer.append(localUser.getDisplayName());
-	    	}
-	    	buffer.append(';');
-	    	if (localUser.getTelephone() != null) {
-	    	    buffer.append(localUser.getTelephone());
-	    	}
-	    	buffer.append(';');
-	    	if (localUser.getGroup() != null) {
-	    	    buffer.append(localUser.getGroup());
-	    	}
-	    	buffer.append(';');
-	    	if (localUser.getUin() != -1) {
-	    	    buffer.append(localUser.getUin());
-	    	}
-	    	buffer.append(';');
-	    	if (localUser.getEmailAddress() != null) {
-	    	    buffer.append(localUser.getEmailAddress());
-	    	}
-	    	buffer.append(';');
-//	    	buffer.append(0);
-//	    	buffer.append(';');
-//	    	buffer.append(';');
-//	    	buffer.append(0);
-//	    	buffer.append(';');
-	    	buffer.append("\n");
-    	}
-    	return buffer.toString();
-	}	
-
+	
 	/**
-     * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getPacketType()
-     */
-    public int getPacketType() {
-    	return GG_USERLIST_REQUEST;
-    }
+	 * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getPacketType()
+	 */
+	public int getPacketType() {
+		return GG_USERLIST_REQUEST;
+	}
+	
+	/**
+	 * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getLength()
+	 */
+	public int getLength() {
+		return 1+m_request.length();
+	}
+	
+	/**
+	 * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getContents()
+	 */
+	public byte[] getContents() {
+		byte[] toSend = new byte[getLength()];
+		
+		toSend[0] = m_type;
+		
+		byte[] bytes = m_request.getBytes();
+		for (int i=0; i<bytes.length; i++) {
+			toSend[1+i] = bytes[i];
+		}
+		
+		return toSend;
+	}
+	
+	public static GGUserListRequest createClearUserListRequest() {
+		GGUserListRequest listRequest = new GGUserListRequest();
+		listRequest.m_request = "";
+		listRequest.m_type = GG_USER_LIST_PUT;
+		
+		return listRequest;
+	}
+	
+	public static void changeRequestType(final GGUserListRequest userListRequest, byte newType) {
+		userListRequest.m_type = newType;
+	}
+	
+	public static GGUserListRequest createPutUserListRequest(final List lines) {
+		if (lines == null) throw new NullPointerException("lines collection cannot be null");
+		GGUserListRequest listRequest = new GGUserListRequest();
+		listRequest.m_type = GG_USER_LIST_PUT;
+		listRequest.m_request = createRequestFromList(lines);
+		
+		return listRequest;
+	}
 
-    /**
-     * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getLength()
-     */
-    public int getLength() {
-    	return 1+m_request.length();
-    }
+	public static GGUserListRequest createPutMoreUserListRequest(final List lines) {
+		if (lines == null) throw new NullPointerException("lines collection cannot be null");
+		GGUserListRequest listRequest = new GGUserListRequest();
+		listRequest.m_type = GG_USERLIST_PUT_MORE;
+		listRequest.m_request = createRequestFromList(lines);
+		
+		return listRequest;
+	}
 
-    /**
-     * @see pl.mn.communicator.packet.out.GGOutgoingPackage#getContents()
-     */
-    public byte[] getContents() {
-    	byte[] toSend = new byte[getLength()];
-    	
-    	toSend[0] = m_type;
+	public static GGUserListRequest createGetUserListRequest() {
+		GGUserListRequest listRequest = new GGUserListRequest();
+		listRequest.m_type = GG_USERLIST_GET;
+		listRequest.m_request = "";
+		
+		return listRequest;
+	}
+	
+	private static String createRequestFromList(final List lines) {
 
-    	byte[] bytes = m_request.getBytes();
-    	for (int i=0; i<bytes.length; i++) {
-    		toSend[1+i] = bytes[i];
-    	}
-    	
-    	return toSend;
-    }
-    
-    public static GGUserListRequest createClearUserListRequest() {
-    	GGUserListRequest listRequest = new GGUserListRequest();
-    	listRequest.m_request = "";
-    	listRequest.m_type = GG_USER_LIST_PUT;
-    	
-    	return listRequest;
-    }
-
-    public static GGUserListRequest createPutUserListRequest(Collection users) {
-    	if (users == null) throw new NullPointerException("users collection cannot be null");
-    	GGUserListRequest listRequest = new GGUserListRequest();
-    	listRequest.m_type = GG_USER_LIST_PUT;
-    	listRequest.m_usersToExport = users;
-    	listRequest.m_request = listRequest.prepareRequest();
-    	
-    	return listRequest;
-    }
-    
-    public static GGUserListRequest createGetUserListRequest() {
-    	GGUserListRequest listRequest = new GGUserListRequest();
-    	listRequest.m_type = GG_USERLIST_GET;
-    	listRequest.m_request = "";
-    	
-    	return listRequest;
-    }
-
+		final StringBuffer buffer = new StringBuffer();
+		
+		for(Iterator it = lines.iterator(); it.hasNext();) {
+			final String line = (String) it.next();
+			buffer.append(line);
+			buffer.append("\n");
+		}
+		
+		return buffer.toString();
+	}
+	
+	public static String prepareRequest(final Collection usersToExport) {
+		final StringBuffer buffer = new StringBuffer();
+		for (Iterator it = usersToExport.iterator(); it.hasNext();) {
+			final LocalUser localUser = (LocalUser) it.next();
+			if (localUser.isBlocked()) {
+				buffer.append("i;;;;;;"+String.valueOf(localUser.getUin()));
+				buffer.append("\n");
+				continue;
+			}
+			if (localUser.getFirstName() != null) {
+				buffer.append(localUser.getFirstName());
+			}
+			buffer.append(';');
+			if (localUser.getLastName() != null) {
+				buffer.append(localUser.getLastName());
+			}
+			buffer.append(';');
+			if (localUser.getNickName() != null) {
+				buffer.append(localUser.getNickName());
+			}
+			buffer.append(';');
+			if (localUser.getDisplayName() != null) {
+				buffer.append(localUser.getDisplayName());
+			}
+			buffer.append(';');
+			if (localUser.getTelephone() != null) {
+				buffer.append(localUser.getTelephone());
+			}
+			buffer.append(';');
+			if (localUser.getGroup() != null) {
+				buffer.append(localUser.getGroup());
+			}
+			buffer.append(';');
+			if (localUser.getUin() != -1) {
+				buffer.append(localUser.getUin());
+			}
+			buffer.append(';');
+			if (localUser.getEmailAddress() != null) {
+				buffer.append(localUser.getEmailAddress());
+			}
+			buffer.append(';');
+//			buffer.append(0);
+//			buffer.append(';');
+//			buffer.append(';');
+//			buffer.append(0);
+//			buffer.append(';');
+			buffer.append("\n");
+		}
+		return buffer.toString();
+	}	
+	
 }

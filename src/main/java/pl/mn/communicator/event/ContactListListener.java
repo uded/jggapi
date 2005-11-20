@@ -32,7 +32,7 @@ import java.util.EventListener;
  * 
  * @see pl.mn.communicator.IContactListService
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ContactListListener.java,v 1.1 2005-11-05 23:34:53 winnetou25 Exp $
+ * @version $Id: ContactListListener.java,v 1.2 2005-11-20 16:07:38 winnetou25 Exp $
  */
 public interface ContactListListener extends EventListener {
 
@@ -49,6 +49,8 @@ public interface ContactListListener extends EventListener {
 	 * @param users the collection of <code>LocalUser</code> objects.
 	 */
 	void contactListReceived(Collection users);
+	
+//	void contactListReceivedAsByteArray(byte[] contactList);
 
 	public static class Stub implements ContactListListener {
 
@@ -61,6 +63,8 @@ public interface ContactListListener extends EventListener {
 		 * @see pl.mn.communicator.event.ContactListListener#contactListReceived(Collection)
 		 */
 		public void contactListReceived(Collection users) { }
+
+//		public void contactListReceivedAsByteArray(byte[] contactList) { }
 		
 	}
 	

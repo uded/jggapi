@@ -17,6 +17,7 @@
  */
 package pl.mn.communicator;
 
+import java.io.InputStream;
 import java.util.Collection;
 
 import pl.mn.communicator.event.ContactListListener;
@@ -28,7 +29,7 @@ import pl.mn.communicator.event.ContactListListener;
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IContactListService.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: IContactListService.java,v 1.2 2005-11-20 16:07:22 winnetou25 Exp $
  */
 public interface IContactListService {
 
@@ -57,6 +58,10 @@ public interface IContactListService {
 	 * @throws GGSessionException if we are currently not logged in.
 	 */
 	void importContactList() throws GGException;
+	
+	void exportContactList(InputStream is) throws GGException;
+	
+	//void importContactList(OutputStream os) throws GGException;
 	
 	/**
 	 * Adds <code>ContactListListener</code> object to the list of listeners

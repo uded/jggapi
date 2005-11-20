@@ -1,4 +1,7 @@
 package pl.mn.communicator.gadu;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Iterator;
@@ -30,7 +33,7 @@ import pl.mn.communicator.event.PublicDirListener;
  * TODO To change the template for this generated type comment go to
  * Window - Preferences - Java - Code Style - Code Templates
  */
-public class Main5 {
+public class Main6 {
 	
 	public static void main(String args[]) throws IOException, GGException {
 		
@@ -59,8 +62,7 @@ public class Main5 {
 		session.getContactListService().addContactListListener(new ContactListListener() {
 
 			public void contactListExported() {
-				// TODO Auto-generated method stub
-				
+				System.out.println("Contact list exported...");
 			}
 
 			public void contactListReceived(Collection users) {
@@ -79,20 +81,13 @@ public class Main5 {
 			public void loginOK() throws GGException {
 				System.out.println("Login OK.");
 
-				session.getContactListService().importContactList();
+				try {
+					FileInputStream fis = new FileInputStream(new File("c:\\kontakty.txt"));
+					session.getContactListService().exportContactList(fis);
+				} catch (FileNotFoundException ex) {
+					ex.printStackTrace();
+				}
 				
-//				final int matiUin = 376798;
-//				
-//				final PublicDirSearchQuery searchQuery = new PublicDirSearchQuery();
-//				searchQuery.setUin(Integer.valueOf(matiUin));
-//				
-//				session.getPublicDirectoryService().search(searchQuery);
-//				
-//				System.out.println("1.");
-//				System.out.println("2.");
-//				System.out.println("3.");
-
-				//session.getConnectionService().disconnect();
 			}
 			
 			public void loginFailed(LoginFailedEvent loginFailedEvent) throws GGException {

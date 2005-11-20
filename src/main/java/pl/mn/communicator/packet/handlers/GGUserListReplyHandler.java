@@ -32,7 +32,7 @@ import pl.mn.communicator.packet.in.GGUserListReply;
  * Created on 2004-12-11
  *
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUserListReplyHandler.java,v 1.2 2005-11-19 19:56:57 winnetou25 Exp $
+ * @version $Id: GGUserListReplyHandler.java,v 1.3 2005-11-20 16:08:10 winnetou25 Exp $
  */
 public class GGUserListReplyHandler implements PacketHandler {
 	
@@ -53,13 +53,8 @@ public class GGUserListReplyHandler implements PacketHandler {
 		try {
 			final GGUserListReply userListReply = new GGUserListReply(context.getPackageContent());
 			context.getSessionAccessor().notifyGGPacketReceived(userListReply);
-			if (userListReply.isPutReply()) {
-				LOGGER.debug("GGUserListReply.PutReply");
-				context.getSessionAccessor().notifyContactListExported();
-			} else if (userListReply.isGetMoreReply()) {
+			if (userListReply.isGetMoreReply()) {
 				LOGGER.debug("GGUserListReply.GetMoreReply");
-				LOGGER.debug("GGUserListReply: clearing private users collection...");
-				m_users.clear();
 				final Collection contactList = userListReply.getContactList();
 				LOGGER.debug("GGUserListReply: adding users to private user collection...");
 				m_users.addAll(contactList);
@@ -71,6 +66,11 @@ public class GGUserListReplyHandler implements PacketHandler {
 				LOGGER.debug("GGUserListReply: clearing private users collection...");
 				m_users.clear();
 				context.getSessionAccessor().notifyContactListReceived(clonedUsers);
+			} else if (userListReply.isPutMoreReply()) {
+				LOGGER.debug("GGUserListReply.PutMoreReply");
+			} else if (userListReply.isPutReply()) {
+				LOGGER.debug("GGUserListReply.PutReply");
+				//context.getSessionAccessor().notifyContactListExported();
 			}
 		} catch (IOException ex) {
 			LOGGER.error("Unable to handle incomming packet: "+GGUtils.prettyBytesToString(context.getPackageContent()), ex);
