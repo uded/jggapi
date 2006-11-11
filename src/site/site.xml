@@ -10,12 +10,14 @@
   </bannerRight>
   <body>
     <links>
+      <item name="JGGApi Wiki" href="http://jggapi.seedwiki.com"/>
       <item name="Gadu-Gadu protocol specification" href="http://dev.null.pl/ekg/docs/protocol.html"/>
     </links>
 
     <menu>
       <item name="Overview" href="/index.html"/>
       <item name="Getting Started" href="/guide.html"/>
+      <item name="Wiki" href="http://jggapi.seedwiki.com"/>
       <item name="FAQ" href="/faq.html"/>
 	  <item name="Java Docs" href="/apidocs/index.html"/>
 	  <item name="CVS Access" href="source-repository.html"/>

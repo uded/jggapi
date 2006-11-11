@@ -26,6 +26,7 @@
 		</section>
 		<section name="News">
 			<ul>
+				<li>11-11-2006: Added JGGApi Wiki hosted at <a href="http://jggapi.seedwiki.com">http://jggapi.seedwiki.com</a></li>
 				<li>12-11-2005: Released <a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-1.6</a> version of <b>JGGApi</b>.</li>
 				<li>04-01-2005: Written "session lifecycle" section in <a href="guide.html">Getting Started</a> Guide.</li>
 				<li>03-01-2005: Released <a href="http://sourceforge.net/project/showfiles.php?group_id=79198">jggapi-1.0-dev</a> version of <b>JGGApi</b>.</li>

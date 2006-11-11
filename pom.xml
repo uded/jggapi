@@ -161,6 +161,7 @@
 					<includeSite>true</includeSite>
 				</configuration>
 			</plugin>
+			<!-- 
 			<plugin>
 				<artifactId>maven-wiki-plugin</artifactId>
 				<configuration>
@@ -169,6 +170,7 @@
 					<includeSite>true</includeSite>
 				</configuration>
 			</plugin>
+			 -->
 		</plugins>
 	</build>
 	<reporting>

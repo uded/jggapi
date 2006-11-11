@@ -5,6 +5,6 @@
 5. mvn install
 6. mvn javadoc:javadoc
 7. mvn site
-8. mvn assebly:assembly
+8. mvn assembly:assembly
 9. mvn site-deploy
 10. mvn deploy
