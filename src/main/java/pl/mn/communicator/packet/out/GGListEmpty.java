@@ -21,7 +21,7 @@ package pl.mn.communicator.packet.out;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGListEmpty.java,v 1.1 2005-11-05 23:34:53 winnetou25 Exp $
+ * @version $Id: GGListEmpty.java,v 1.2 2006-11-19 15:51:44 winnetou25 Exp $
  */
 public class GGListEmpty implements GGOutgoingPackage {
 	
@@ -35,6 +35,8 @@ public class GGListEmpty implements GGOutgoingPackage {
 		m_data = new byte[0];
 	}
 	
+	//this method is not thread-safe, because this is check and act
+	//and it is not protected against race-condition
     public static GGListEmpty getInstance() {
     	if (m_instance == null) {
     		m_instance = new GGListEmpty();
