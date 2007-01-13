@@ -89,15 +89,6 @@
 			</roles>
 		</contributor>
 		<contributor>
-			<name>Kazimierz Pogoda</name>
-			<email>morisil@ncdc.pl</email>
-			<organization>NCDC</organization>
-			<organizationUrl>http://www.ncdc.pl</organizationUrl>
-			<roles>
-				<role>JGGApi thread-safety review</role>
-			</roles>
-		</contributor>
-		<contributor>
 			<name>Marcin Krystek</name>
 			<email>mkrystek@man.poznan.pl</email>
 			<organization>Politechnika Poznanska</organization>
