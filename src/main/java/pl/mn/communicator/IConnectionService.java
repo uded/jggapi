@@ -31,10 +31,18 @@ import pl.mn.communicator.event.PingListener;
  * 
  * @see pl.mn.communicator.event.ConnectionListener
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: IConnectionService.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: IConnectionService.java,v 1.2 2007-04-21 12:12:48 winnetou25 Exp $
  */
 public interface IConnectionService {
 
+	/**
+	 * Looks up IServer for particular UIN, queries Gadu-Gadu service.
+	 * Note: Do not use this method, if you want to use your own bespoke GG server.
+	 * 
+	 * @param uin - uin to lookup IServer instance for
+	 * @return - instance of IServer
+	 * @throws GGException - exception in case there was a problem during lookup
+	 */
 	IServer lookupServer(int uin) throws GGException;
 	
 	/**
