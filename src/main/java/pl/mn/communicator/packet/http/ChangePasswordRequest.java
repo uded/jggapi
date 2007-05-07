@@ -24,12 +24,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import pl.mn.communicator.IGGConfiguration;
+import pl.mn.communicator.packet.GGUtils;
 
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: ChangePasswordRequest.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: ChangePasswordRequest.java,v 1.2 2007-05-07 16:22:30 winnetou25 Exp $
  */
 public class ChangePasswordRequest extends AbstractTokenRequest {
 	
@@ -56,7 +57,7 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	 * @see pl.mn.communicator.packet.http.HttpRequest#getResponse()
 	 */
 	public HttpResponse getResponse() throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), WINDOW_ENCODING));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOW_ENCODING));
 		String line = reader.readLine();
 		
 		return new CommonRegisterResponse(m_uin, line);
@@ -80,13 +81,13 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 		buffer.append(m_uin);
 		buffer.append('&');
 		buffer.append("fmpwd=");
-		buffer.append(URLEncoder.encode(m_oldPassword, WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_oldPassword, GGUtils.WINDOW_ENCODING));
 		buffer.append('&');
 		buffer.append("pwd=");
-		buffer.append(URLEncoder.encode(m_newPassword, WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_newPassword, GGUtils.WINDOW_ENCODING));
 		buffer.append('&');
 		buffer.append("email=");
-		buffer.append(URLEncoder.encode(m_email, WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_email, GGUtils.WINDOW_ENCODING));
 		buffer.append('&');
 		buffer.append("tokenid=");
 		buffer.append(getTokenID());

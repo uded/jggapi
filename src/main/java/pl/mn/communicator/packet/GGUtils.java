@@ -20,14 +20,22 @@ package pl.mn.communicator.packet;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.UnsupportedEncodingException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGUtils.java,v 1.2 2005-11-20 16:07:53 winnetou25 Exp $
+ * @version $Id: GGUtils.java,v 1.3 2007-05-07 16:22:30 winnetou25 Exp $
  */
 public class GGUtils {
 
+	public final static String WINDOW_ENCODING = "windows-1250";
+
+	private static final Log LOGGER = LogFactory.getLog(GGUtils.class);
+	
 	public static String prettyBytesToString(byte[] bytes) {
 	    StringBuffer received = new StringBuffer();
 	    received.append("{");
@@ -124,7 +132,14 @@ public class GGUtils {
 	    byte[] desc = new byte[counter];
 	    System.arraycopy(data, startIndex, desc, 0, counter);
 	
-	    return new String(desc);
+	    String returnString = null;
+	    try  {
+			returnString = new String(desc, WINDOW_ENCODING);
+		} catch (UnsupportedEncodingException ex) {
+			LOGGER.warn("Unable to convert", ex);
+			return new String(desc);
+		} 
+	    return returnString;
 	}
 	
 	public static byte[] convertIntToByteArray(int i) {

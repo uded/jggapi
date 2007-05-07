@@ -29,12 +29,10 @@ import pl.mn.communicator.IGGConfiguration;
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: HttpRequest.java,v 1.1 2005-11-05 23:34:53 winnetou25 Exp $
+ * @version $Id: HttpRequest.java,v 1.2 2007-05-07 16:22:30 winnetou25 Exp $
  */
 public abstract class HttpRequest {
 
-	public final static String WINDOW_ENCODING = "windows-1250";
-	
 	protected final IGGConfiguration m_ggconfiguration;
 	
 	protected final HttpURLConnection m_huc;

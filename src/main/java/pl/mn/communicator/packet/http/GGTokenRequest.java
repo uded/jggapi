@@ -25,12 +25,13 @@ import java.util.StringTokenizer;
 
 import pl.mn.communicator.GGToken;
 import pl.mn.communicator.IGGConfiguration;
+import pl.mn.communicator.packet.GGUtils;
 
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGTokenRequest.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: GGTokenRequest.java,v 1.2 2007-05-07 16:22:30 winnetou25 Exp $
  */
 public class GGTokenRequest extends HttpRequest {
 
@@ -46,7 +47,7 @@ public class GGTokenRequest extends HttpRequest {
 	 * @see pl.mn.communicator.packet.http.HttpRequest#getResponse()
 	 */
 	public HttpResponse getResponse() throws IOException {
-		BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), WINDOW_ENCODING));
+		BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOW_ENCODING));
 		String line1 = reader.readLine();
 		String line2 = reader.readLine();
 		String line3 = reader.readLine();
