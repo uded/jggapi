@@ -33,7 +33,7 @@ import pl.mn.communicator.packet.GGUtils;
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGNotifyReply60.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: GGNotifyReply60.java,v 1.2 2007-05-12 13:54:48 winnetou25 Exp $
  */
 public class GGNotifyReply60 implements GGIncomingPackage {
 
@@ -94,7 +94,7 @@ public class GGNotifyReply60 implements GGIncomingPackage {
 
                 byte[] descBytes = new byte[descriptionSize];
                 System.arraycopy(data, offset+15, descBytes, 0, descriptionSize);
-                description = new String(descBytes);
+                description = GGUtils.byteToString(descBytes, 0);
                 
                 boolean isTimeSet = data[(offset+15+descriptionSize)-5]==0;
 
