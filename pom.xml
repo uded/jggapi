@@ -1,8 +1,8 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
 	<name>Gadu-Gadu API</name>
-	<groupId>pl.radical.open.gadu-gadu</groupId>
-	<artifactId>api</artifactId>
+	<groupId>pl.radical.open</groupId>
+	<artifactId>gg-api</artifactId>
 	<packaging>jar</packaging>
 	<licenses>
 		<license>
