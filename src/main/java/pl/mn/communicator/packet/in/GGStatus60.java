@@ -1,25 +1,13 @@
 /*
- * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
- *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License as published by the Free
- * Software Foundation; either version 2 of the License, or (at your option)
- * any later version.
- *
- * This program is distributed in the hope that it will be useful, but WITHOUT
- * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
- * more details.
- *
- * You should have received a copy of the GNU General Public License along
- * with this program; if not, write to the Free Software Foundation, Inc.,
+ * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved. This program is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
+ * Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in
+ * the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a
+ * copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc.,
  * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
  */
 package pl.mn.communicator.packet.in;
-
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import pl.mn.communicator.IRemoteStatus;
 import pl.mn.communicator.IUser;
@@ -28,108 +16,101 @@ import pl.mn.communicator.User;
 import pl.mn.communicator.packet.GGConversion;
 import pl.mn.communicator.packet.GGStatuses;
 import pl.mn.communicator.packet.GGUtils;
-import pl.mn.communicator.packet.out.GGNewStatus;
 
 /**
- * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: GGStatus60.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+ * @version $Id: GGStatus60.java,v 1.1 2005/11/05 23:34:52 winnetou25 Exp $
  */
 public class GGStatus60 implements GGIncomingPackage, GGStatuses {
 
-//	#define GG_STATUS60 0x000F
-	
-//struct gg_status60 {
-//	int uin;	        /* numer plus flagi w najstarszym bajcie */ 4
-//	char status;	    /* nowy stan */ 1
-//	int remote_ip;		/* adres IP bezpo�rednich po��cze� */ 4
-//	short remote_port;	/* port bezpo�rednich po��cze� */ 2
-//	char version;		/* wersja klienta */ 1
-//	char image_size;	/* maksymalny rozmiar grafiki */ 2
-//	char unknown1;		/* 0x00 * 1
-//	char description[];	/* opis, nie musi wyst�pi� */ n
-//	int time;		/* czas, nie musi wyst�pi� */ 1
-//};
+	// #define GG_STATUS60 0x000F
+
+	// struct gg_status60 {
+	// int uin; /* numer plus flagi w najstarszym bajcie */ 4
+	// char status; /* nowy stan */ 1
+	// int remote_ip; /* adres IP bezpo�rednich po��cze� */ 4
+	// short remote_port; /* port bezpo�rednich po��cze� */ 2
+	// char version; /* wersja klienta */ 1
+	// char image_size; /* maksymalny rozmiar grafiki */ 2
+	// char unknown1; /* 0x00 * 1
+	// char description[]; /* opis, nie musi wyst�pi� */ n
+	// int time; /* czas, nie musi wyst�pi� */ 1
+	// };
 
 	public static final int GG_STATUS60 = 0x0F;
-	
-	private static final Log LOGGER = LogFactory.getLog(GGStatus60.class);
 
 	private IUser m_user = null;
-	
+
 	private RemoteStatus m_status60 = null;
-	
-	public GGStatus60(byte[] data) {
+
+	public GGStatus60(final byte[] data) {
 		handleUser(data);
 		handleStatus60(data);
 	}
-	
+
 	/**
 	 * @see pl.mn.communicator.packet.GGPacket#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_STATUS60;
 	}
-	
+
 	public IUser getUser() {
 		return m_user;
 	}
-	
+
 	public IRemoteStatus getStatus60() {
 		return m_status60;
 	}
-	
-    private void handleUser(byte[] data) {
-    	byte flag = data[3]; //cache flag
-    	data[3] = GGUtils.intToByte(0)[0]; //remove flag
-    	int uin = GGUtils.byteToInt(data);
-    	data[3] = flag;
-    	int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
-        User.UserMode userMode = GGConversion.getUserMode(protocolStatus);
-        m_user =  new User(uin, userMode);
-    }
-    
-    private void handleStatus60(byte[] data) {
-    	byte flag = data[3]; //cache flag
 
-    	int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
-    	int remoteIP = GGUtils.byteToInt(data, 5);
-    	byte[] remoteIPArray = GGUtils.convertIntToByteArray(remoteIP);
-    	int remotePort = GGUtils.byteToShort(data, 9);
-    	int version = GGUtils.unsignedByteToInt(data[11]);
-    	int imageSize = GGUtils.unsignedByteToInt(data[12]);
+	private void handleUser(final byte[] data) {
+		final byte flag = data[3]; // cache flag
+		data[3] = GGUtils.intToByte(0)[0]; // remove flag
+		final int uin = GGUtils.byteToInt(data);
+		data[3] = flag;
+		final int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
+		final User.UserMode userMode = GGConversion.getUserMode(protocolStatus);
+		m_user = new User(uin, userMode);
+	}
 
-    	String description = null;
-    	long timeInMillis = -1;
-    	if ((protocolStatus == GGNewStatus.GG_STATUS_AVAIL_DESCR)
-            	|| (protocolStatus == GGNewStatus.GG_STATUS_BUSY_DESCR)
-				|| (protocolStatus == GGNewStatus.GG_STATUS_INVISIBLE_DESCR)
-				|| (protocolStatus == GGNewStatus.GG_STATUS_NOT_AVAIL_DESCR)) {
-    		description = GGUtils.byteToString(data, 14);
-            if (data.length > (14 + description.length())) {
-                int timeInSeconds = GGUtils.byteToInt(data, data.length - 4);
-                timeInMillis = GGUtils.secondsToMillis(timeInSeconds); 
-            }
-    	}
+	private void handleStatus60(final byte[] data) {
+		final byte flag = data[3]; // cache flag
 
-        m_status60 = GGConversion.getClientRemoteStatus(protocolStatus, description, timeInMillis);
-    	m_status60.setRemoteIP(remoteIPArray);
-    	m_status60.setImageSize(imageSize);
-    	m_status60.setGGVersion(version);
+		final int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
+		final int remoteIP = GGUtils.byteToInt(data, 5);
+		final byte[] remoteIPArray = GGUtils.convertIntToByteArray(remoteIP);
+		final int remotePort = GGUtils.byteToShort(data, 9);
+		final int version = GGUtils.unsignedByteToInt(data[11]);
+		final int imageSize = GGUtils.unsignedByteToInt(data[12]);
 
-        if (remotePort == 0) {
-        	m_status60.setSupportsDirectCommunication(false);
-        } else if (remotePort == 1) {
-        	m_status60.setUserBehindFirewall(true);
-        } else  if (remotePort == 2) {
-        	m_status60.setAreWeInRemoteUserBuddyList(false);
-        } else {
-        	m_status60.setRemotePort(remotePort);
-        }
+		String description = null;
+		long timeInMillis = -1;
+		if (protocolStatus == GGStatuses.GG_STATUS_AVAIL_DESCR || protocolStatus == GGStatuses.GG_STATUS_BUSY_DESCR || protocolStatus == GGStatuses.GG_STATUS_INVISIBLE_DESCR || protocolStatus == GGStatuses.GG_STATUS_NOT_AVAIL_DESCR) {
+			description = GGUtils.byteToString(data, 14);
+			if (data.length > 14 + description.length()) {
+				final int timeInSeconds = GGUtils.byteToInt(data, data.length - 4);
+				timeInMillis = GGUtils.secondsToMillis(timeInSeconds);
+			}
+		}
 
-    	if (flag == 0x40) {
-    		m_status60.setSupportsVoiceCommunication(true);
-    	}
-    }
-	
+		m_status60 = GGConversion.getClientRemoteStatus(protocolStatus, description, timeInMillis);
+		m_status60.setRemoteIP(remoteIPArray);
+		m_status60.setImageSize(imageSize);
+		m_status60.setGGVersion(version);
+
+		if (remotePort == 0) {
+			m_status60.setSupportsDirectCommunication(false);
+		} else if (remotePort == 1) {
+			m_status60.setUserBehindFirewall(true);
+		} else if (remotePort == 2) {
+			m_status60.setAreWeInRemoteUserBuddyList(false);
+		} else {
+			m_status60.setRemotePort(remotePort);
+		}
+
+		if (flag == 0x40) {
+			m_status60.setSupportsVoiceCommunication(true);
+		}
+	}
+
 }

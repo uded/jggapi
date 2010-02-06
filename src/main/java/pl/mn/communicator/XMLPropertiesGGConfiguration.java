@@ -1,4 +1,4 @@
-///*
+// /*
 // * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
 // *
 // * This program is free software; you can redistribute it and/or modify it
@@ -15,43 +15,45 @@
 // * with this program; if not, write to the Free Software Foundation, Inc.,
 // * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 // */
-//package pl.mn.communicator;
+// package pl.mn.communicator;
 //
-//import java.io.IOException;
-//import java.io.InputStream;
-//import java.util.InvalidPropertiesFormatException;
-//import java.util.Properties;
+// import java.io.IOException;
+// import java.io.InputStream;
+// import java.util.InvalidPropertiesFormatException;
+// import java.util.Properties;
 //
-///**
+// /**
 // * Created on 2005-05-09
-// * 
+// *
 // * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
-// * @version $Id: XMLPropertiesGGConfiguration.java,v 1.1 2005-11-05 23:34:52 winnetou25 Exp $
+// * @version $Id: XMLPropertiesGGConfiguration.java,v 1.1 2005/11/05 23:34:52 winnetou25 Exp $
 // */
-//public class XMLPropertiesGGConfiguration extends AbstractGGPropertiesConfiguration {
+// public class XMLPropertiesGGConfiguration extends AbstractGGPropertiesConfiguration {
 //    
-//    public XMLPropertiesGGConfiguration(final String fileName, final IGGConfiguration configuration) throws IOException, InvalidPropertiesFormatException {
-//    	super(fileName, configuration);
-//    }
+// public XMLPropertiesGGConfiguration(final String fileName, final IGGConfiguration configuration) throws IOException,
+// InvalidPropertiesFormatException {
+// super(fileName, configuration);
+// }
 //    
-//    public XMLPropertiesGGConfiguration(final String fileName) throws IOException, InvalidPropertiesFormatException {
-//    	super(fileName);
-//    }
+// public XMLPropertiesGGConfiguration(final String fileName) throws IOException, InvalidPropertiesFormatException {
+// super(fileName);
+// }
 //    
-//    protected Properties createProperties() throws InvalidPropertiesFormatException, IOException {
-//        final ClassLoader cl = Thread.currentThread().getContextClassLoader();
-//        final InputStream is = getResourceAsStream(cl, m_fileName);
+// protected Properties createProperties() throws InvalidPropertiesFormatException, IOException {
+// final ClassLoader cl = Thread.currentThread().getContextClassLoader();
+// final InputStream is = getResourceAsStream(cl, m_fileName);
 //        
-//        final Properties props = new Properties();
-//        props.loadFromXML(is);
+// final Properties props = new Properties();
+// props.loadFromXML(is);
 //        
-//        return props;
-//    }
+// return props;
+// }
 //    
-//    public static XMLPropertiesGGConfiguration createSimpleXMLPropertiesGGConfiguration() throws InvalidPropertiesFormatException, IOException {
-//    	XMLPropertiesGGConfiguration configuration = new XMLPropertiesGGConfiguration("jggapi.xml");
+// public static XMLPropertiesGGConfiguration createSimpleXMLPropertiesGGConfiguration() throws
+// InvalidPropertiesFormatException, IOException {
+// XMLPropertiesGGConfiguration configuration = new XMLPropertiesGGConfiguration("jggapi.xml");
 //    	
-//    	return configuration;
-//    }
+// return configuration;
+// }
 //    
-//}
+// }

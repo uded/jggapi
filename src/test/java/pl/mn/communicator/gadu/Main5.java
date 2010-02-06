@@ -1,8 +1,4 @@
 package pl.mn.communicator.gadu;
-import java.io.IOException;
-import java.util.Collection;
-import java.util.Iterator;
-
 import pl.mn.communicator.GGException;
 import pl.mn.communicator.IServer;
 import pl.mn.communicator.ISession;
@@ -16,6 +12,10 @@ import pl.mn.communicator.event.ContactListListener;
 import pl.mn.communicator.event.LoginFailedEvent;
 import pl.mn.communicator.event.LoginListener;
 import pl.mn.communicator.event.PublicDirListener;
+
+import java.io.IOException;
+import java.util.Collection;
+import java.util.Iterator;
 
 /*
  * Created on 2004-11-28
@@ -31,71 +31,75 @@ import pl.mn.communicator.event.PublicDirListener;
  * Window - Preferences - Java - Code Style - Code Templates
  */
 public class Main5 {
-	
-	public static void main(String args[]) throws IOException, GGException {
-		
+
+	public static void main(final String args[]) throws IOException, GGException {
+
 		final ISession session = SessionFactory.createSession();
-		
+
 		final LoginContext loginContext = new LoginContext(1038285, "test");
-		
+
 		session.getConnectionService().addConnectionListener(new ConnectionListener.Stub() {
-			
+
+			@Override
 			public void connectionEstablished() throws GGException {
 				System.out.println("Connection established.");
 				session.getLoginService().login(loginContext);
 			}
-			
+
+			@Override
 			public void connectionClosed() {
 				System.out.println("Connection closed.");
 			}
-			
-			public void connectionError(Exception ex) throws GGException {
+
+			@Override
+			public void connectionError(final Exception ex) throws GGException {
 				System.out.println("Connection Error: "+ex.getMessage());
 				session.getConnectionService().disconnect();
 			}
-			
+
 		});
-		
+
 		session.getContactListService().addContactListListener(new ContactListListener() {
 
 			public void contactListExported() {
 				// TODO Auto-generated method stub
-				
+
 			}
 
-			public void contactListReceived(Collection users) {
+			public void contactListReceived(final Collection<LocalUser> users) {
 				System.out.println("Contact list received...");
-				for (Iterator iter = users.iterator(); iter.hasNext();) {
-					LocalUser user = (LocalUser) iter.next();
+				for (final LocalUser user : users) {
 					System.out.println("DisplayName: "+user.getDisplayName());
 					System.out.println("EmailAddress: "+user.getEmailAddress());
 					System.out.println("IsBlocked: "+user.isBlocked());
 				}
 			}
-			
+
 		});
 		session.getLoginService().addLoginListener(new LoginListener.Stub() {
-			
+
+			@Override
 			public void loginOK() throws GGException {
 				System.out.println("Login OK.");
 
 				session.getContactListService().importContactList();
-				
-//				final int matiUin = 376798;
-//				
-//				final PublicDirSearchQuery searchQuery = new PublicDirSearchQuery();
-//				searchQuery.setUin(Integer.valueOf(matiUin));
-//				
-//				session.getPublicDirectoryService().search(searchQuery);
-//				
-//				System.out.println("1.");
-//				System.out.println("2.");
-//				System.out.println("3.");
+
+				//				final int matiUin = 376798;
+				//
+				//				final PublicDirSearchQuery searchQuery = new PublicDirSearchQuery();
+				//				searchQuery.setUin(Integer.valueOf(matiUin));
+				//
+				//				session.getPublicDirectoryService().search(searchQuery);
+				//
+				//				System.out.println("1.");
+				//				System.out.println("2.");
+				//				System.out.println("3.");
 
 				//session.getConnectionService().disconnect();
 			}
-			
-			public void loginFailed(LoginFailedEvent loginFailedEvent) throws GGException {
+
+			@Override
+			public void loginFailed(final LoginFailedEvent loginFailedEvent) throws GGException {
 				String reasonString = null;
 				if (loginFailedEvent.getReason() == LoginFailedEvent.INCORRECT_PASSWORD) {
 					reasonString = "Incorrect Password";
@@ -104,40 +108,41 @@ public class Main5 {
 				}
 				System.out.println("Login Failed, reason: "+reasonString);
 			}
-			
+
 			/**
 			 * @see pl.mn.communicator.event.LoginListener.Stub#loggedOut()
 			 */
+			@Override
 			public void loggedOut() throws GGException {
 				System.out.println("Logged out...");
 				session.getConnectionService().disconnect();
 			}
-			
+
 		});
-		
+
 		session.getPublicDirectoryService().addPublicDirListener(new PublicDirListener() {
 
-			public void onPublicDirectoryRead(int queryID, PersonalInfo pubDirReply) {
+			public void onPublicDirectoryRead(final int queryID, final PersonalInfo pubDirReply) {
 				System.out.println("Got pubDir read reply");
 				System.out.println("FirstName: "+pubDirReply.getFirstName());
 				System.out.println("Surname: "+pubDirReply.getLastName());
 			}
 
-			public void onPublicDirectoryUpdated(int queryID) {
+			public void onPublicDirectoryUpdated(final int queryID) {
 				System.out.println("Updated pubDir");
 			}
-			
-			public void onPublicDirectorySearchReply(int queryID, PublicDirSearchReply publicDirSearchReply) {
+
+			public void onPublicDirectorySearchReply(final int queryID, final PublicDirSearchReply publicDirSearchReply) {
 				System.out.println("Got pubdir search results.");
-				for (Iterator it = publicDirSearchReply.listResults(); it.hasNext();) {
-					PublicDirSearchReply.Entry entry = (PublicDirSearchReply.Entry) it.next();
+				for (final Iterator<PublicDirSearchReply.Entry> it = publicDirSearchReply.listResults(); it.hasNext();) {
+					final PublicDirSearchReply.Entry entry = it.next();
 					System.out.println("FirstName: "+entry.getFirstName());
 					System.out.println("City: "+entry.getCity());
 				}
 			}
-			
+
 		});
-		
+
 		final IServer server = session.getConnectionService().lookupServer(loginContext.getUin());
 		session.getConnectionService().connect(server);
 		;
@@ -145,5 +150,5 @@ public class Main5 {
 		session.getConnectionService().disconnect();
 		System.out.println("Bye.");
 	}
-	
+
 }

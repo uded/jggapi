@@ -1,11 +1,9 @@
 <project>
 	<modelVersion>4.0.0</modelVersion>
-	<name>JGGApi</name>
-	<groupId>jggapi</groupId>
-	<artifactId>jggapi</artifactId>
+	<name>Gadu-Gadu API</name>
+	<groupId>pl.radical.open.gadu-gadu</groupId>
+	<artifactId>api</artifactId>
 	<packaging>jar</packaging>
-	<version>1.6</version>
-	<url>http://jggapi.sourceforge.net</url>
 	<licenses>
 		<license>
 			<name>GPL license</name>
@@ -13,40 +11,16 @@
 		</license>
 	</licenses>
 	<ciManagement>
-		<system>Sourceforge Issue Tracker</system>
-		<url>http://sourceforge.net/tracker/?group_id=79198</url>
 	</ciManagement>
 	<organization>
-		<name>SourceForge.net</name>
-		<url>http://sourceforge.net/projects/jggapi/</url>
+		<name>Radical Creations</name>
 	</organization>
-	<inceptionYear>2004</inceptionYear>
-	<description>
-		The JGGApi project is implementation of proprietary Gadu-Gadu
+	<inceptionYear>2010</inceptionYear>
+	<version>1.7</version>
+	<description>The JGGApi project is implementation of proprietary Gadu-Gadu
 		protocol based on specification from EKG. It is fully object
 		oriented and uses common design patterns that reduce the
-		learning curve of the library.
-	</description>
-	<issueManagement>
-		<system>SourceForge Issue Tracker</system>
-		<url>http://sourceforge.net/tracker/?group_id=79198</url>
-	</issueManagement>
-	<scm>
-		<connection>scm:cvs:pserver:anonymous@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</connection>
-		<developerConnection>scm:cvs:ssh:username@cvs.sourceforge.net:/cvsroot/jggapi:jggapi</developerConnection>
-		<url>http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/jggapi/</url>
-	</scm>
-	  <distributionManagement>
-	    <repository>
-	      <id>jggapi-repository</id>
-	      <name>JGGApi Repository</name>
-	      <url>scp://shell1.sf.net/home/groups/j/jg/jggapi/htdocs/repo/</url>
-	    </repository>
-	    <site>
-	      <id>website</id>
-	      <url>scp://shell1.sf.net/home/groups/j/jg/jggapi/htdocs/</url>
-	    </site>
-	  </distributionManagement>
+		learning curve of the library.</description>
 	<developers>
 		<developer>
 			<name>Marcin Naglik</name>
@@ -109,39 +83,24 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
+			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
-			<groupId>commons-logging</groupId>
-			<artifactId>commons-logging</artifactId>
-			<version>1.0.4</version>
-			<type>jar</type>
-		</dependency>
-		<dependency>
-			<groupId>backport-util-concurrent</groupId>
-			<artifactId>backport-util-concurrent</artifactId>
-			<version>1.1_01</version>
-			<type>jar</type>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.10</version>
 		</dependency>
 	</dependencies>
 	<build>
-		<directory>target</directory>
-		<finalName>${artifactId}-${version}</finalName>
-		<sourceDirectory>src/main/java</sourceDirectory>
-		<testSourceDirectory>src/test/java</testSourceDirectory>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
 		<plugins>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.4</source>
-					<target>1.4</target>
+					<source>1.5</source>
+					<target>1.5</target>
+					<showWarnings>true</showWarnings>
+                    <showDeprecation>true</showDeprecation>					
 				</configuration>
 			</plugin>
 			<plugin>
@@ -152,16 +111,6 @@
 					<includeSite>true</includeSite>
 				</configuration>
 			</plugin>
-			<!-- 
-			<plugin>
-				<artifactId>maven-wiki-plugin</artifactId>
-				<configuration>
-					<descriptor>src/main/assembly/all.xml</descriptor>
-					<descriptorId>all</descriptorId>
-					<includeSite>true</includeSite>
-				</configuration>
-			</plugin>
-			 -->
 		</plugins>
 	</build>
 	<reporting>
