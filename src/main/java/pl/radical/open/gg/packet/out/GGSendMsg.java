@@ -26,7 +26,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 
 	public static final int GG_SEND_MSG = 0x0B;
 
-	private static int m_seq = -1;
+	private int m_seq = -1;
 	private int m_recipientUin = -1;
 	private final ArrayList<Integer> m_additionalRecipients = new ArrayList<Integer>();
 	private String m_text = "";
