@@ -11,16 +11,12 @@ import java.util.Collection;
 import java.util.Iterator;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author mehul
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class Connect {
-	private final static Logger log = LoggerFactory.getLogger(Connect.class);
-
 	ILoginService loginService;
 	IConnectionService connectionService;
 	ISession session;

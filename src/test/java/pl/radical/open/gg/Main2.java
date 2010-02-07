@@ -1,22 +1,5 @@
 package pl.radical.open.gg;
 
-import pl.radical.open.gg.GGException;
-import pl.radical.open.gg.IIncommingMessage;
-import pl.radical.open.gg.ILocalStatus;
-import pl.radical.open.gg.IRemoteStatus;
-import pl.radical.open.gg.IServer;
-import pl.radical.open.gg.ISession;
-import pl.radical.open.gg.IUser;
-import pl.radical.open.gg.LocalUser;
-import pl.radical.open.gg.LoginContext;
-import pl.radical.open.gg.MessageStatus;
-import pl.radical.open.gg.OutgoingMessage;
-import pl.radical.open.gg.PersonalInfo;
-import pl.radical.open.gg.PublicDirSearchReply;
-import pl.radical.open.gg.SessionFactory;
-import pl.radical.open.gg.SessionState;
-import pl.radical.open.gg.StatusType;
-import pl.radical.open.gg.User;
 import pl.radical.open.gg.User.UserMode;
 import pl.radical.open.gg.event.ConnectionListener;
 import pl.radical.open.gg.event.ContactListListener;
@@ -40,6 +23,7 @@ import java.util.Collection;
  */
 public class Main2 {
 
+	@SuppressWarnings("deprecation")
 	public static void main(final String args[]) throws IOException, GGException {
 
 		final ISession session = SessionFactory.createSession();
