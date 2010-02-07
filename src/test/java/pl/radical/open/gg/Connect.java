@@ -1,23 +1,5 @@
 package pl.radical.open.gg;
 
-import pl.radical.open.gg.IConnectionService;
-import pl.radical.open.gg.IContactListService;
-import pl.radical.open.gg.IIncommingMessage;
-import pl.radical.open.gg.ILoginService;
-import pl.radical.open.gg.IMessageService;
-import pl.radical.open.gg.IOutgoingMessage;
-import pl.radical.open.gg.IPublicDirectoryService;
-import pl.radical.open.gg.ISession;
-import pl.radical.open.gg.LocalUser;
-import pl.radical.open.gg.LoginContext;
-import pl.radical.open.gg.MessageStatus;
-import pl.radical.open.gg.OutgoingMessage;
-import pl.radical.open.gg.PersonalInfo;
-import pl.radical.open.gg.PublicDirSearchQuery;
-import pl.radical.open.gg.PublicDirSearchReply;
-import pl.radical.open.gg.Server;
-import pl.radical.open.gg.SessionFactory;
-import pl.radical.open.gg.SessionState;
 import pl.radical.open.gg.event.ConnectionListener;
 import pl.radical.open.gg.event.ContactListListener;
 import pl.radical.open.gg.event.LoginListener;
@@ -28,10 +10,16 @@ import pl.radical.open.gg.event.SessionStateListener;
 import java.util.Collection;
 import java.util.Iterator;
 
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author mehul
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class Connect {
+	private final static Logger log = LoggerFactory.getLogger(Connect.class);
 
 	ILoginService loginService;
 	IConnectionService connectionService;
@@ -42,31 +30,30 @@ public class Connect {
 	public PublicDirSearchQuery searchQuery;
 	public Collection<LocalUser> ulist;
 
+	@Test
+	public void testConnection() {
+		final Connect a = new Connect();
+		a.E();
+	}
+
 	public void E() {
 		try {
-
-			loginContext = new LoginContext(1038285, "test");
+			loginContext = new LoginContext(19784352, "BiKe997#");
 
 			session = SessionFactory.createSession();
 
 			session.addSessionStateListener(new SessionStateListener() {
 				public void sessionStateChanged(final SessionState oldSessionState, final SessionState newSessionState) {
-
 					System.out.println("" + newSessionState.toString());
-
 					if (newSessionState.toString().equals("connected")) {
-
 						// F();
-
 					}
 
 					if (newSessionState.toString().equals("authentication_awaiting")) {
-
 						F();
 					}
 
 					if (newSessionState.toString().equals("logged_in")) {
-
 						try {
 							// connectionService.disconnect();
 							System.out.println("IN HERE 1");
@@ -75,9 +62,7 @@ public class Connect {
 							contactListService.importContactList();
 							System.out.println("IN HERE 3");
 							contactListService.addContactListListener(new ContactListListener() {
-
 								public void contactListExported() {
-
 									System.out.println("Contact list exported: ");
 								}
 
@@ -96,14 +81,10 @@ public class Connect {
 										System.out
 										.println("The details are: ===========\nUIN: " + lusr.getUin() + "\nDisplay Name: " + lusr
 												.getDisplayName() + "\n=======================");
-
 									}
-
 									X();
 								}
-
 							});
-							// X();
 
 						} catch (final Exception e) {
 							System.out.println("Exception while getting USER_LIST: " + e);
@@ -111,15 +92,12 @@ public class Connect {
 
 						try {
 							final IMessageService messageService = session.getMessageService();
-
 							messageService.addMessageListener(new MessageListener() {
 
 								public void messageArrived(final IIncommingMessage incommingMessage) {
-
 									System.out
 									.println("================\nMessage Body: " + incommingMessage.getMessageBody() + "\nMessage ID: " + incommingMessage
 											.getMessageID() + "\nFrom ID: " + incommingMessage.getRecipientUin() + "\n========================");
-
 								}
 
 								public void messageDelivered(final int uin, final int messageID, final MessageStatus deliveryStatus) {
@@ -142,8 +120,6 @@ public class Connect {
 
 				}
 			});
-
-			// ///
 
 			connectionService = session.getConnectionService();
 
@@ -253,13 +229,4 @@ public class Connect {
 		}
 
 	}
-
-	// =====================================
-
-	public static void main(final String args[]) {
-		final Connect a = new Connect();
-		a.E();
-
-	}
-
 }
