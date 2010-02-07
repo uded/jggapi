@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>Gadu-Gadu API</name>
 	<groupId>pl.radical.open</groupId>
-	<artifactId>gg-api</artifactId>
+	<artifactId>jggapi-reincarnated</artifactId>
 	<packaging>jar</packaging>
 	<licenses>
 		<license>
