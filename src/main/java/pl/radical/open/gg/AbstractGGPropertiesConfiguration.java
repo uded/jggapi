@@ -102,6 +102,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 
 	protected abstract Properties createProperties() throws IOException, InvalidPropertiesFormatException;
 
+	@SuppressWarnings("unchecked")
 	protected InputStream getResourceAsStream(final ClassLoader loader, final String name) {
 		return (InputStream) AccessController.doPrivileged(new PrivilegedAction() {
 			public Object run() {

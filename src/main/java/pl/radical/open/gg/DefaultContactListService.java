@@ -192,11 +192,11 @@ public class DefaultContactListService implements IContactListService {
 
 	private class ContactListSenderThread extends Thread implements GGPacketListener {
 
-		private List m_packagesToSend = null;
+		private List<GGUserListRequest> m_packagesToSend = null;
 
 		private boolean isRunning = true;
 
-		private ContactListSenderThread(final List packagesToSend) {
+		private ContactListSenderThread(final List<GGUserListRequest> packagesToSend) {
 			if (packagesToSend == null) {
 				throw new IllegalArgumentException("packagesToSend cannot be null");
 			}
@@ -221,7 +221,7 @@ public class DefaultContactListService implements IContactListService {
 			if (m_packagesToSend.isEmpty()) {
 				return;
 			}
-			final GGOutgoingPackage outgoingPackage = (GGOutgoingPackage) m_packagesToSend.remove(0);
+			final GGOutgoingPackage outgoingPackage = m_packagesToSend.remove(0);
 			try {
 				m_session.getSessionAccessor().sendPackage(outgoingPackage);
 			} catch (final IOException ex) {
@@ -248,7 +248,7 @@ public class DefaultContactListService implements IContactListService {
 				return;
 			}
 
-			final GGOutgoingPackage outgoingPackage = (GGOutgoingPackage) m_packagesToSend.remove(0);
+			final GGOutgoingPackage outgoingPackage = m_packagesToSend.remove(0);
 			try {
 				LOGGER.debug("ContactListSenderThread: Sending outgoing package...");
 				m_session.getSessionAccessor().sendPackage(outgoingPackage);
