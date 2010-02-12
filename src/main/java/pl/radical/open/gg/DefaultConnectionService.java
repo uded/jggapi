@@ -48,6 +48,7 @@ import org.slf4j.LoggerFactory;
  * @version $Id: DefaultConnectionService.java,v 1.1 2005/11/05 23:34:52 winnetou25 Exp $
  */
 public class DefaultConnectionService implements IConnectionService {
+	private final static Logger log = LoggerFactory.getLogger(DefaultConnectionService.class);
 
 	private final static String WINDOW_ENCODING = "windows-1250";
 
@@ -84,6 +85,9 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.radical.open.gg.IConnectionService#getServer(int)
 	 */
 	public IServer lookupServer(final int uin) throws GGException {
+		if (log.isTraceEnabled()) {
+			log.trace("lookupServer() executed for user [{}]", uin);
+		}
 		try {
 			final IGGConfiguration configuration = m_session.getGGConfiguration();
 
@@ -314,6 +318,8 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @return <code>Server</code> the server object.
 	 */
 	private static Server parseAddress(final String line) {
+		log.debug("Parsing token information from hub: [{}]", line);
+
 		final int tokensNumber = 3;
 		final StringTokenizer token = new StringTokenizer(line);
 

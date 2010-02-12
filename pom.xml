@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>Gadu-Gadu API</name>
 	<groupId>pl.radical.open</groupId>
-	<artifactId>jggapi-reincarnated</artifactId>
+	<artifactId>jggapi-ng</artifactId>
 	<packaging>jar</packaging>
 	<licenses>
 		<license>
@@ -90,6 +90,11 @@
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.5.10</version>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.18</version>
 		</dependency>
 	</dependencies>
 	<build>
