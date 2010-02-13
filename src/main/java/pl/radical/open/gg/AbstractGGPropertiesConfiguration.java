@@ -1,12 +1,3 @@
-/*
- * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved. This program is free software; you can
- * redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software
- * Foundation; either version 2 of the License, or (at your option) any later version. This program is distributed in
- * the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
- * FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details. You should have received a
- * copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc.,
- * 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
- */
 package pl.radical.open.gg;
 
 import java.io.IOException;
@@ -16,13 +7,16 @@ import java.security.PrivilegedAction;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created on 2005-05-09
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @version $Id: AbstractGGPropertiesConfiguration.java,v 1.1 2005/11/05 23:34:52 winnetou25 Exp $
  */
 public abstract class AbstractGGPropertiesConfiguration implements IGGConfiguration {
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	private IGGConfiguration m_defaultGGConfiguration = new GGConfiguration();
 
@@ -36,6 +30,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 
 	public AbstractGGPropertiesConfiguration(final String fileName) throws IOException, InvalidPropertiesFormatException {
 		if (fileName == null) {
+			log.error("The configuration file '{}' was not found!", fileName);
 			throw new IOException("Unable to find file: " + fileName);
 		}
 		m_fileName = fileName;

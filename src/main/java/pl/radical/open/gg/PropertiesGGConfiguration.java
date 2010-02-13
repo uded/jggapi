@@ -1,4 +1,5 @@
 package pl.radical.open.gg;
+
 // /*
 // * Copyright (c) 2003-2005 JGGApi Development Team. All Rights Reserved.
 // *
