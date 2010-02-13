@@ -36,11 +36,11 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 			throw new GGException("Unable to send message, at least one recipient is required");
 		}
 
-		final int recipientUin = (m_recipientUins.get(0)).intValue();
+		final int recipientUin = m_recipientUins.get(0).intValue();
 		final GGSendMsg sendMsg = new GGSendMsg(OutgoingMessage.createChatMessage(recipientUin, messageBody));
 
 		for (int i = 1; i < m_recipientUins.size(); i++) {
-			final int recipient = (m_recipientUins.get(i)).intValue();
+			final int recipient = m_recipientUins.get(i).intValue();
 			sendMsg.addAdditionalRecipient(recipient);
 		}
 
@@ -57,20 +57,20 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		if (recipientUin < 0) {
 			throw new IllegalArgumentException("recipientUin cannot be less than 0");
 		}
-		m_recipientUins.add(new Integer(recipientUin));
+		m_recipientUins.add(Integer.valueOf(recipientUin));
 	}
 
 	public void removeRecipient(final int recipientUin) {
 		if (recipientUin < 0) {
 			throw new IllegalArgumentException("recipientUin cannot be less than 0");
 		}
-		m_recipientUins.remove(new Integer(recipientUin));
+		m_recipientUins.remove(Integer.valueOf(recipientUin));
 	}
 
 	public int[] getRecipientUins() {
 		final int[] recipientUins = new int[m_recipientUins.size()];
 		for (int i = 0; i < m_recipientUins.size(); i++) {
-			recipientUins[i] = (m_recipientUins.get(i)).intValue();
+			recipientUins[i] = m_recipientUins.get(i).intValue();
 		}
 		return recipientUins;
 	}
@@ -93,7 +93,7 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 
 	private boolean isRegisteredRecipient(final int uin) {
 		for (int i = 0; i < m_recipientUins.size(); i++) {
-			if (uin == (m_recipientUins.get(i)).intValue()) {
+			if (uin == m_recipientUins.get(i).intValue()) {
 				return true;
 			}
 		}

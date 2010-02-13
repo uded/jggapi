@@ -34,35 +34,35 @@ public class HexDump {
 		int i;
 		int j;
 		final int bytesPerLine = 16;
-		String result = "";
+		StringBuffer result = new StringBuffer();
 
 		for (i = 0; i < length; i += bytesPerLine) {
 			// print the offset as a 4 digit hex number
-			result = result + intToHexString(i, 4, '0') + "  ";
+			result = result.append(intToHexString(i, 4, '0')).append("  ");
 
 			// print each byte in hex
 			for (j = i; j < length && j - i < bytesPerLine; j++) {
-				result = result + byteToHexString(data[j]) + " ";
+				result = result.append(byteToHexString(data[j])).append(" ");
 			}
 
 			// skip over to the ascii dump column
 			for (; 0 != j % bytesPerLine; j++) {
-				result = result + "   ";
+				result = result.append("   ");
 			}
-			result = result + "  |";
+			result = result.append("  |");
 
 			// print each byte in ascii
 			for (j = i; j < length && j - i < bytesPerLine; j++) {
 				if ((data[j] & 0xff) > 0x001f && (data[j] & 0xff) < 0x007f) {
-					final Character ch = new Character((char) data[j]);
-					result = result + ch;
+					final Character chr = Character.valueOf((char) data[j]);
+					result = result.append(chr);
 				} else {
-					result = result + ".";
+					result = result.append(".");
 				}
 			}
-			result = result + "|";
+			result = result.append("|");
 		}
-		return result;
+		return result.toString();
 	}
 
 }

@@ -30,8 +30,8 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 
 	public AbstractGGPropertiesConfiguration(final String fileName) throws IOException, InvalidPropertiesFormatException {
 		if (fileName == null) {
-			log.error("The configuration file '{}' was not found!", fileName);
-			throw new IOException("Unable to find file: " + fileName);
+			log.error("Filename is required!");
+			throw new IOException("Filename is required!");
 		}
 		m_fileName = fileName;
 		m_prop = createProperties();

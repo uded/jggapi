@@ -55,7 +55,7 @@ public interface IConnectionService {
 	/**
 	 * Get server user is currently asyncOp to, returns null if user is not asyncOp to any server.
 	 * 
-	 * @return
+	 * @return Server object
 	 */
 	IServer getServer();
 

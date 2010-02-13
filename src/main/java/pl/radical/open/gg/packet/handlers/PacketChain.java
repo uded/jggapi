@@ -43,15 +43,15 @@ public class PacketChain {
 		if (packetHandler == null) {
 			throw new NullPointerException("packetHandler cannot be null");
 		}
-		m_packetHandlers.put(new Integer(packetType), packetHandler);
+		m_packetHandlers.put(Integer.valueOf(packetType), packetHandler);
 	}
 
 	public void unregisterGGPackageHandler(final int packetType) {
-		m_packetHandlers.remove(new Integer(packetType));
+		m_packetHandlers.remove(Integer.valueOf(packetType));
 	}
 
 	public void sendToChain(final PacketContext packageContent) throws GGException {
-		final PacketHandler packetHandler = m_packetHandlers.get(new Integer(packageContent.getHeader().getType()));
+		final PacketHandler packetHandler = m_packetHandlers.get(Integer.valueOf(packageContent.getHeader().getType()));
 		if (packetHandler == null) {
 			logger.warn("Unknown package.");
 			logger.warn("PacketHeader: " + packageContent.getHeader());

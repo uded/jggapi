@@ -15,7 +15,9 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 
 	public final static int GG_REMOVE_NOTIFY = 0x000E;
 
-	/** Gadu-Gadu uin */
+	/**
+	 * Gadu-Gadu uin
+	 */
 	private int m_uin = -1;
 
 	private final User.UserMode m_userMode = null;

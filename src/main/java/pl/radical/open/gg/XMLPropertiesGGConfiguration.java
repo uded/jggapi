@@ -54,7 +54,7 @@ package pl.radical.open.gg;
 // public static XMLPropertiesGGConfiguration createSimpleXMLPropertiesGGConfiguration() throws
 // InvalidPropertiesFormatException, IOException {
 // XMLPropertiesGGConfiguration configuration = new XMLPropertiesGGConfiguration("jggapi.xml");
-//    	
+//        
 // return configuration;
 // }
 //    

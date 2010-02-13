@@ -90,6 +90,8 @@ public class GGConversion {
 				remoteStatus = new RemoteStatus(StatusType.OFFLINE);
 				remoteStatus.setDescription(description);
 				break;
+
+			// FIXME Default??
 		}
 
 		if (remoteStatus != null && returnTimeInMillis != -1) {
@@ -98,7 +100,7 @@ public class GGConversion {
 
 		if ((status & GGStatuses.GG_STATUS_BLOCKED) == GGStatuses.GG_STATUS_BLOCKED) {
 			remoteStatus.setBlocked(true);
-		} else {
+		} else if (remoteStatus != null) { // Zupełnie bezsensowny null był
 			remoteStatus.setBlocked(false);
 		}
 

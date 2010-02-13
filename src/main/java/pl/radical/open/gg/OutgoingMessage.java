@@ -107,14 +107,14 @@ public class OutgoingMessage extends AbstractMessage implements IOutgoingMessage
 		if (recipientUin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
-		m_additionalRecipients.add(new Integer(recipientUin));
+		m_additionalRecipients.add(Integer.valueOf(recipientUin));
 	}
 
 	public void removeAdditionalRecipient(final int recipientUin) {
 		if (recipientUin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
-		m_additionalRecipients.remove(new Integer(recipientUin));
+		m_additionalRecipients.remove(Integer.valueOf(recipientUin));
 	}
 
 	public int[] getAdditionalRecipients() {

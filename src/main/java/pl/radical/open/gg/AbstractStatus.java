@@ -11,13 +11,19 @@ import java.util.Date;
  */
 public abstract class AbstractStatus implements IStatus {
 
-	/** the type of the status */
+	/**
+	 * the type of the status
+	 */
 	private StatusType m_statusType = StatusType.ONLINE;
 
-	/** Status description */
+	/**
+	 * Status description
+	 */
 	private String m_description = null;
 
-	/** Return time */
+	/**
+	 * Return time
+	 */
 	private Date m_returnTime = null;
 
 	protected AbstractStatus(final StatusType statusType, final String description, final Date returnDate) {

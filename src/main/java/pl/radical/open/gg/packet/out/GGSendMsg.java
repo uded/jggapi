@@ -34,13 +34,13 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 
 	public void addAdditionalRecipient(final int uin) {
 		if (uin != m_recipientUin) {
-			m_additionalRecipients.add(new Integer(uin));
+			m_additionalRecipients.add(Integer.valueOf(uin));
 		}
 	}
 
 	public void removeAdditionalRecipient(final int uin) {
 		if (uin != m_recipientUin) {
-			m_additionalRecipients.remove(new Integer(uin));
+			m_additionalRecipients.remove(Integer.valueOf(uin));
 		}
 	}
 

@@ -27,7 +27,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 
 	/** Local IP */
 	private byte[] m_localIP = new byte[] {
-	        (byte) 0, (byte) 0, (byte) 0, (byte) 0
+			(byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
 
 	/** Local port that we are listening on */
@@ -35,7 +35,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 
 	/** ExternalIP */
 	private byte[] m_externalIP = new byte[] {
-	        (byte) 0, (byte) 0, (byte) 0, (byte) 0
+			(byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
 
 	/** External port */
@@ -48,6 +48,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 	private String m_description = null;
 
 	/** Version of the client */
+	// FIXME This need to be updated - not being used at all
 	private final int m_version = GGVersion.VERSION_60_1_build_133;
 
 	/** Return time */

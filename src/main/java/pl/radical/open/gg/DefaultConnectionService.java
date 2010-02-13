@@ -72,7 +72,11 @@ public class DefaultConnectionService implements IConnectionService {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.IConnectionService#getServer(int)
+	 * @see pl.radical.open.gg.IConnectionService#getServer(int) Example return:
+	 * 
+	 *      <pre>
+	 * 0 0 91.197.13.78:8074 91.197.13.78
+	 * </pre>
 	 */
 	public IServer lookupServer(final int uin) throws GGException {
 		if (log.isTraceEnabled()) {
@@ -94,9 +98,13 @@ public class DefaultConnectionService implements IConnectionService {
 			final String line = reader.readLine();
 			reader.close();
 
-			return parseAddress(line);
+			if (line != null && line.length() > 16) {
+				return parseAddress(line);
+			} else {
+				throw new GGException("GG HUB didn't provided a valid IP address of GG server, aborting");
+			}
 		} catch (final IOException ex) {
-			throw new GGException("Unable to get default server for uin: " + String.valueOf(uin), ex);
+			throw new GGException("Unable to get default server for uin: " + uin, ex);
 		}
 	}
 
@@ -105,7 +113,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void connect(final IServer server) throws GGException {
 		if (server == null) {
-			throw new NullPointerException("server cannot be null");
+			throw new GGException("Server cannot be null");
 		}
 		m_server = server;
 		checkConnectionState();
@@ -344,7 +352,7 @@ public class DefaultConnectionService implements IConnectionService {
 				m_dataInput = null;
 				m_dataOutput = null;
 				m_socket.close();
-			} catch (final Exception ex) {
+			} catch (final Exception ex) { // FIXME Czy ten catch jest potrzebny??
 				try {
 					m_active = false;
 					notifyConnectionError(ex);
@@ -394,7 +402,7 @@ public class DefaultConnectionService implements IConnectionService {
 
 		private synchronized void sendPackage(final GGOutgoingPackage outgoingPackage) throws IOException {
 			logger.debug("Sending packet: " + outgoingPackage.getPacketType() + ", packetPayLoad: " + GGUtils
-			        .prettyBytesToString(outgoingPackage.getContents()));
+					.prettyBytesToString(outgoingPackage.getContents()));
 
 			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getPacketType()));
 			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getLength()));

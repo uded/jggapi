@@ -6,11 +6,15 @@ package pl.radical.open.gg;
  */
 public final class Server implements IServer {
 
-	/** The server's address */
-	protected String m_address = null;
+	/**
+	 * The server's address
+	 */
+	private String m_address = null;
 
-	/** The server's port */
-	protected int m_port = -1;
+	/**
+	 * The server's port
+	 */
+	private int m_port = -1;
 
 	/**
 	 * @param address
