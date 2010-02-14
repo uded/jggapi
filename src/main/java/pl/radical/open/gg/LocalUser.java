@@ -36,7 +36,7 @@ public class LocalUser {
 
 	public void setFirstName(final String name) {
 		if (name == null) {
-			throw new NullPointerException("name cannot be null");
+			throw new GGNullPointerException("name cannot be null");
 		}
 		m_name = name;
 	}

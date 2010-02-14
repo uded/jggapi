@@ -26,9 +26,10 @@ public final class Server implements IServer {
 	 * @throws IllegalArgumentException
 	 *             if the port is not value between 0 and 65535.
 	 */
+	// FIXME IllegalArgumentException
 	public Server(final String address, final int port) {
 		if (address == null) {
-			throw new NullPointerException("address cannot be null");
+			throw new GGNullPointerException("address cannot be null");
 		}
 		if (port < 0 || port > 65535) {
 			throw new IllegalArgumentException("port cannot be less than 0 and grather than 65535");

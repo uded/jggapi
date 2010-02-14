@@ -21,7 +21,7 @@ public class DefaultMessageService implements IMessageService {
 	// friendly
 	DefaultMessageService(final Session session) {
 		if (session == null) {
-			throw new NullPointerException("session cannot be null");
+			throw new GGNullPointerException("session cannot be null");
 		}
 		m_session = session;
 	}
@@ -31,7 +31,8 @@ public class DefaultMessageService implements IMessageService {
 	 */
 	public void sendMessage(final IOutgoingMessage outgoingMessage) throws GGException {
 		if (outgoingMessage == null) {
-			throw new NullPointerException("outgoingMessage cannot be null");
+			// FIXME GGException instead?
+			throw new GGNullPointerException("outgoingMessage cannot be null");
 		}
 		checkSessionState();
 		try {
@@ -69,7 +70,7 @@ public class DefaultMessageService implements IMessageService {
 	 */
 	public IGroupChat createGroupChat(final int[] uins) {
 		if (uins == null) {
-			throw new NullPointerException("uins cannot be null");
+			throw new GGNullPointerException("uins cannot be null");
 		}
 		return new GroupChat(m_session, uins);
 	}
@@ -79,7 +80,7 @@ public class DefaultMessageService implements IMessageService {
 	 */
 	public void addMessageListener(final MessageListener messageListener) {
 		if (messageListener == null) {
-			throw new NullPointerException("messageListener cannot be null");
+			throw new GGNullPointerException("messageListener cannot be null");
 		}
 		m_messageListeners.add(messageListener);
 	}
@@ -89,14 +90,14 @@ public class DefaultMessageService implements IMessageService {
 	 */
 	public void removeMessageListener(final MessageListener messageListener) {
 		if (messageListener == null) {
-			throw new NullPointerException("messageListener cannot be null");
+			throw new GGNullPointerException("messageListener cannot be null");
 		}
 		m_messageListeners.remove(messageListener);
 	}
 
 	protected void notifyMessageSent(final IOutgoingMessage outgoingMessage) {
 		if (outgoingMessage == null) {
-			throw new NullPointerException("outgoingMessage cannot be null");
+			throw new GGNullPointerException("outgoingMessage cannot be null");
 		}
 		for (final Object element : m_messageListeners) {
 			final MessageListener messageListener = (MessageListener) element;
@@ -106,7 +107,7 @@ public class DefaultMessageService implements IMessageService {
 
 	protected void notifyMessageArrived(final IIncommingMessage incommingMessage) {
 		if (incommingMessage == null) {
-			throw new NullPointerException("incommingMessage cannot be null");
+			throw new GGNullPointerException("incommingMessage cannot be null");
 		}
 		for (final Object element : m_messageListeners) {
 			final MessageListener messageListener = (MessageListener) element;
@@ -122,7 +123,7 @@ public class DefaultMessageService implements IMessageService {
 			throw new IllegalArgumentException("messageID cannot be less than 0");
 		}
 		if (messageStatus == null) {
-			throw new NullPointerException("messageStatus cannot be less than 0");
+			throw new GGNullPointerException("messageStatus cannot be less than 0");
 		}
 		for (final Object element : m_messageListeners) {
 			final MessageListener messageListener = (MessageListener) element;

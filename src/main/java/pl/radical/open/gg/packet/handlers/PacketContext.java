@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.handlers;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.Session;
 import pl.radical.open.gg.Session.SessionAccessor;
 import pl.radical.open.gg.packet.GGHeader;
@@ -17,13 +18,13 @@ public class PacketContext {
 
 	public PacketContext(final Session session, final GGHeader header, final byte[] packageContent) {
 		if (session == null) {
-			throw new NullPointerException("session cannot be null");
+			throw new GGNullPointerException("session cannot be null");
 		}
 		if (header == null) {
-			throw new NullPointerException("header cannot be null");
+			throw new GGNullPointerException("header cannot be null");
 		}
 		if (packageContent == null) {
-			throw new NullPointerException("packageContent cannot be null");
+			throw new GGNullPointerException("packageContent cannot be null");
 		}
 		m_session = session;
 		m_header = header;

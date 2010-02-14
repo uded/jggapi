@@ -73,14 +73,14 @@ public class Session implements ISession {
 
 	public void addSessionStateListener(final SessionStateListener sessionStateListener) {
 		if (sessionStateListener == null) {
-			throw new NullPointerException("sessionStateListener cannot be null.");
+			throw new GGNullPointerException("sessionStateListener cannot be null.");
 		}
 		m_sessionStateListeners.add(sessionStateListener);
 	}
 
 	public void removeSessionStateListener(final SessionStateListener sessionStateListener) {
 		if (sessionStateListener == null) {
-			throw new NullPointerException("sessionStateListener cannot be null");
+			throw new GGNullPointerException("sessionStateListener cannot be null");
 		}
 		m_sessionStateListeners.remove(sessionStateListener);
 	}
@@ -193,10 +193,10 @@ public class Session implements ISession {
 
 	protected void notifySessionStateChanged(final SessionState oldState, final SessionState newState) {
 		if (oldState == null) {
-			throw new NullPointerException("oldState cannot be null");
+			throw new GGNullPointerException("oldState cannot be null");
 		}
 		if (newState == null) {
-			throw new NullPointerException("newState cannot be null");
+			throw new GGNullPointerException("newState cannot be null");
 		}
 
 		for (final SessionStateListener sessionStateListener : m_sessionStateListeners) {
@@ -313,7 +313,7 @@ public class Session implements ISession {
 
 		private SessionInvocationHandler(final Object delegate) {
 			if (delegate == null) {
-				throw new NullPointerException("delegate cannot be null.");
+				throw new GGNullPointerException("delegate cannot be null.");
 			}
 			m_delegate = delegate;
 		}

@@ -37,12 +37,13 @@ public final class LoginContext {
 	/** the external port of the client */
 	private int m_externalPort = -1;
 
+	// FIXME IllegalArgumentException
 	public LoginContext(final int uin, final String password) {
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (password == null) {
-			throw new NullPointerException("password cannot be null");
+			throw new GGNullPointerException("password cannot be null");
 		}
 		m_uin = uin;
 		m_password = password;
@@ -58,7 +59,7 @@ public final class LoginContext {
 
 	public void setPassword(final String password) {
 		if (password == null) {
-			throw new NullPointerException("password cannot be null");
+			throw new GGNullPointerException("password cannot be null");
 		}
 		m_password = password;
 	}
@@ -72,7 +73,7 @@ public final class LoginContext {
 
 	public void setStatus(final ILocalStatus localStatus) {
 		if (localStatus == null) {
-			throw new NullPointerException("localStatus cannot be null");
+			throw new GGNullPointerException("localStatus cannot be null");
 		}
 		m_localStatus = localStatus;
 	}
@@ -96,9 +97,10 @@ public final class LoginContext {
 		return m_externalIP;
 	}
 
+	// FIXME IllegalArgumentException
 	public void setExternalIP(final byte[] externalIP) {
 		if (externalIP == null) {
-			throw new NullPointerException("externalIP cannot be null");
+			throw new GGNullPointerException("externalIP cannot be null");
 		}
 		if (externalIP.length == 4) {
 			throw new IllegalArgumentException("Incorrect address.");
@@ -121,9 +123,10 @@ public final class LoginContext {
 		return m_localIP;
 	}
 
+	// FIXME IllegalArgumentException
 	public void setLocalIP(final byte[] localIP) {
 		if (localIP == null) {
-			throw new NullPointerException("localIP cannot be null");
+			throw new GGNullPointerException("localIP cannot be null");
 		}
 		m_localIP = localIP;
 		if (localIP.length == 4) {

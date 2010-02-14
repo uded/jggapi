@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.http;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 import pl.radical.open.gg.packet.GGUtils;
 
@@ -18,13 +19,15 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 	private int m_uin = -1;
 	private String m_email = null;
 
+	// FIXME IllegalArgumentException
 	public SendAndRemindPasswordRequest(final IGGConfiguration configuration, final int uin, final String email, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (email == null) {
-			throw new NullPointerException("email cannot be null");
+			// FIXME Other exception instead?
+			throw new GGNullPointerException("email cannot be null");
 		}
 		m_uin = uin;
 		m_email = email;
@@ -86,7 +89,7 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 
 	private int getHashCode(final String uin) {
 		if (uin == null) {
-			throw new NullPointerException("uin cannot be null");
+			throw new GGNullPointerException("uin cannot be null");
 		}
 
 		int a, b, c;

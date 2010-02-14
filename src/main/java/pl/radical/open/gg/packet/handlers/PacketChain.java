@@ -1,6 +1,7 @@
 package pl.radical.open.gg.packet.handlers;
 
 import pl.radical.open.gg.GGException;
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGDisconnecting;
 import pl.radical.open.gg.packet.in.GGLoginFailed;
@@ -41,7 +42,7 @@ public class PacketChain {
 
 	public void registerGGPackageHandler(final int packetType, final PacketHandler packetHandler) {
 		if (packetHandler == null) {
-			throw new NullPointerException("packetHandler cannot be null");
+			throw new GGNullPointerException("packetHandler cannot be null");
 		}
 		m_packetHandlers.put(Integer.valueOf(packetType), packetHandler);
 	}

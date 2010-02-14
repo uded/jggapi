@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.in;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.packet.GGUtils;
 
 /**
@@ -17,7 +18,7 @@ public class GGWelcome implements GGIncomingPackage {
 
 	public GGWelcome(final byte[] data) {
 		if (data == null) {
-			throw new NullPointerException("data cannot be null");
+			throw new GGNullPointerException("data cannot be null");
 		}
 		m_seed = GGUtils.byteToInt(data);
 	}

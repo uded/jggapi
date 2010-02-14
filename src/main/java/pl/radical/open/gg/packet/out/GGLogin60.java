@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.out;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
 import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGStatuses;
@@ -59,7 +60,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (password == null) {
-			throw new NullPointerException("password cannot be null");
+			throw new GGNullPointerException("password cannot be null");
 		}
 		m_uin = uin;
 		m_password = password;
@@ -68,7 +69,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 
 	public void setStatus(final ILocalStatus localStatus) {
 		if (localStatus == null) {
-			throw new NullPointerException("localStatus cannot be null");
+			throw new GGNullPointerException("localStatus cannot be null");
 		}
 		m_status = GGConversion.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
 		if (localStatus.isDescriptionSet()) {
@@ -87,9 +88,10 @@ public class GGLogin60 implements GGOutgoingPackage {
 		return m_password;
 	}
 
+	// FIXME IllegalArgumentException
 	public void setLocalIP(final byte[] localIP) {
 		if (localIP == null) {
-			throw new NullPointerException("localIP cannot be null");
+			throw new GGNullPointerException("localIP cannot be null");
 		}
 		if (localIP.length != 4) {
 			throw new IllegalArgumentException("localIp table has to have 4 entries");
@@ -114,7 +116,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 
 	public void setExternalIP(final byte[] externalIP) {
 		if (externalIP == null) {
-			throw new NullPointerException("externalIP cannot be null");
+			throw new GGNullPointerException("externalIP cannot be null");
 		}
 		if (externalIP.length != 4) {
 			throw new IllegalArgumentException("externalIP table has to have 4 entries");

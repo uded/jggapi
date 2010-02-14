@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.http;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 import pl.radical.open.gg.packet.GGUtils;
 
@@ -20,13 +21,16 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	private String m_email = null;
 	private String m_password = null;
 
+	// FIXME NullPointerException
 	public RegisterGGAccountRequest(final IGGConfiguration configuration, final String email, final String password, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
 		if (email == null) {
-			throw new NullPointerException("email cannot be null");
+			// FIXME Other exception instead?
+			throw new GGNullPointerException("email cannot be null");
 		}
 		if (password == null) {
-			throw new NullPointerException("password cannot be null");
+			// FIXME Other exception instead?
+			throw new GGNullPointerException("password cannot be null");
 		}
 		m_email = email;
 		m_password = password;

@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.http;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 
 import java.io.IOException;
@@ -17,10 +18,12 @@ public abstract class AbstractTokenRequest extends HttpRequest {
 	protected AbstractTokenRequest(final IGGConfiguration configuration, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration);
 		if (tokenID == null) {
-			throw new NullPointerException("tokenID cannot be null");
+			// FIXME Other exception instead?
+			throw new GGNullPointerException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
-			throw new NullPointerException("tokenVal cannot be null");
+			// FIXME Other exception instead?
+			throw new GGNullPointerException("tokenVal cannot be null");
 		}
 		m_tokenID = tokenID;
 		m_tokenVal = tokenVal;
@@ -36,10 +39,10 @@ public abstract class AbstractTokenRequest extends HttpRequest {
 
 	protected int getHashCode(final String email, final String password) {
 		if (password == null) {
-			throw new NullPointerException("password cannot be null");
+			throw new GGNullPointerException("password cannot be null");
 		}
 		if (email == null) {
-			throw new NullPointerException("email cannot be null");
+			throw new GGNullPointerException("email cannot be null");
 		}
 
 		int a, b, c;

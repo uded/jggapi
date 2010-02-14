@@ -55,9 +55,10 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 		return m_remoteIP;
 	}
 
+	// FIXME IllegalArgumentException
 	public void setRemoteIP(final byte[] remoteIP) {
 		if (remoteIP == null) {
-			throw new NullPointerException("remoteIP cannot be null");
+			throw new GGNullPointerException("remoteIP cannot be null");
 		}
 		if (remoteIP.length != 4) {
 			throw new IllegalArgumentException("remoteIP must contain 4 entries");

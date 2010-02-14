@@ -20,7 +20,8 @@ public class SingleChat extends AbstractChat implements ISingleChat {
 
 	public IChat sendMessage(final String messageBody) throws GGException {
 		if (messageBody == null) {
-			throw new NullPointerException("messageBody cannot be less than 0");
+			// FIXME GGException instead??
+			throw new GGNullPointerException("messageBody cannot be less than 0");
 		}
 
 		m_session.getMessageService().sendMessage(OutgoingMessage.createChatMessage(m_recipientUin, messageBody));

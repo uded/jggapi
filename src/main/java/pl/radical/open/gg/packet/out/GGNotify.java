@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.out;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IUser;
 import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGUser;
@@ -19,7 +20,7 @@ public class GGNotify implements GGOutgoingPackage, GGUser {
 
 	public GGNotify(final IUser[] users) {
 		if (users == null) {
-			throw new NullPointerException("users cannot be null");
+			throw new GGNullPointerException("users cannot be null");
 		}
 		m_users = users;
 	}

@@ -37,7 +37,7 @@ public class DefaultContactListService implements IContactListService {
 	// friendly
 	DefaultContactListService(final Session session) {
 		if (session == null) {
-			throw new NullPointerException("session cannot be null");
+			throw new GGNullPointerException("session cannot be null");
 		}
 		m_session = session;
 		m_contactListListeners = new HashSet<ContactListListener>();
@@ -149,7 +149,7 @@ public class DefaultContactListService implements IContactListService {
 	 */
 	public void addContactListListener(final ContactListListener contactListListener) {
 		if (contactListListener == null) {
-			throw new NullPointerException("contactListListener cannot be null");
+			throw new GGNullPointerException("contactListListener cannot be null");
 		}
 		m_contactListListeners.add(contactListListener);
 	}
@@ -159,7 +159,7 @@ public class DefaultContactListService implements IContactListService {
 	 */
 	public void removeContactListlistener(final ContactListListener contactListListener) {
 		if (contactListListener == null) {
-			throw new NullPointerException("conractListListener cannot be null");
+			throw new GGNullPointerException("conractListListener cannot be null");
 		}
 		m_contactListListeners.add(contactListListener);
 	}

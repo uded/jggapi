@@ -28,7 +28,7 @@ public abstract class AbstractStatus implements IStatus {
 
 	protected AbstractStatus(final StatusType statusType, final String description, final Date returnDate) {
 		if (statusType == null) {
-			throw new NullPointerException("statusType cannot be null");
+			throw new GGNullPointerException("statusType cannot be null");
 		}
 		m_statusType = statusType;
 		m_description = description;
@@ -87,7 +87,7 @@ public abstract class AbstractStatus implements IStatus {
 	 */
 	public void setReturnDate(final Date returnTime) {
 		if (returnTime == null) {
-			throw new NullPointerException("returnTime cannot be null");
+			throw new GGNullPointerException("returnTime cannot be null");
 		}
 		m_returnTime = new Date(returnTime.getTime());
 	}

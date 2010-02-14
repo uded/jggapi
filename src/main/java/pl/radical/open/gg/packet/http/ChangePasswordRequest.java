@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.http;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 import pl.radical.open.gg.packet.GGUtils;
 
@@ -21,19 +22,23 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	private String m_oldPassword = null;
 	private String m_newPassword = null;
 
+	// FIXME IllegalArgumentException
 	public ChangePasswordRequest(final IGGConfiguration configuration, final int uin, final String email, final String oldPassword, final String newPassword, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (email == null) {
-			throw new NullPointerException("email cannot be null");
+			// FIXME Other exception instead?
+			throw new GGNullPointerException("email cannot be null");
 		}
 		if (oldPassword == null) {
-			throw new NullPointerException("oldPassword cannot be null");
+			// FIXME Other exception instead?
+			throw new GGNullPointerException("oldPassword cannot be null");
 		}
 		if (newPassword == null) {
-			throw new NullPointerException("newPassword cannot be null");
+			// FIXME Other exception instead?
+			throw new GGNullPointerException("newPassword cannot be null");
 		}
 		m_uin = uin;
 		m_email = email;

@@ -65,7 +65,7 @@ public class DefaultConnectionService implements IConnectionService {
 	// friendly
 	DefaultConnectionService(final Session session) {
 		if (session == null) {
-			throw new NullPointerException("session cannot be null");
+			throw new GGNullPointerException("session cannot be null");
 		}
 		m_session = session;
 		m_packetChain = new PacketChain();
@@ -183,7 +183,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void addConnectionListener(final ConnectionListener connectionListener) {
 		if (connectionListener == null) {
-			throw new NullPointerException("connectionListener cannot be null");
+			throw new GGNullPointerException("connectionListener cannot be null");
 		}
 		m_listeners.add(ConnectionListener.class, connectionListener);
 	}
@@ -193,7 +193,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void removeConnectionListener(final ConnectionListener connectionListener) {
 		if (connectionListener == null) {
-			throw new NullPointerException("connectionListener cannot be null");
+			throw new GGNullPointerException("connectionListener cannot be null");
 		}
 		m_listeners.remove(ConnectionListener.class, connectionListener);
 	}
@@ -203,7 +203,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void addPacketListener(final GGPacketListener packetListener) {
 		if (packetListener == null) {
-			throw new NullPointerException("packetListener cannot be null");
+			throw new GGNullPointerException("packetListener cannot be null");
 		}
 		m_listeners.add(GGPacketListener.class, packetListener);
 	}
@@ -213,7 +213,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void removePacketListener(final GGPacketListener packetListener) {
 		if (packetListener == null) {
-			throw new NullPointerException("packetListener cannot be null");
+			throw new GGNullPointerException("packetListener cannot be null");
 		}
 		m_listeners.remove(GGPacketListener.class, packetListener);
 	}
@@ -221,6 +221,7 @@ public class DefaultConnectionService implements IConnectionService {
 	/**
 	 * @see pl.radical.open.gg.IConnectionService#addPingListener(pl.radical.open.gg.event.PingListener)
 	 */
+	// FIXME IllegalArgumentException
 	public void addPingListener(final PingListener pingListener) {
 		if (pingListener == null) {
 			throw new IllegalArgumentException("pingListener cannot be null");
@@ -231,6 +232,7 @@ public class DefaultConnectionService implements IConnectionService {
 	/**
 	 * @see pl.radical.open.gg.IConnectionService#removePingListener(pl.radical.open.gg.event.PingListener)
 	 */
+	// FIXME IllegalArgumentException
 	public void removePingListener(final PingListener pingListener) {
 		if (pingListener == null) {
 			throw new IllegalArgumentException("pingListener cannot be null");

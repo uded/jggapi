@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.out;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.LocalUser;
 
 import java.util.Collection;
@@ -68,7 +69,7 @@ public class GGUserListRequest implements GGOutgoingPackage {
 
 	public static GGUserListRequest createPutUserListRequest(final List<String> lines) {
 		if (lines == null) {
-			throw new NullPointerException("lines collection cannot be null");
+			throw new GGNullPointerException("lines collection cannot be null");
 		}
 		final GGUserListRequest listRequest = new GGUserListRequest();
 		listRequest.m_type = GG_USER_LIST_PUT;
@@ -79,7 +80,7 @@ public class GGUserListRequest implements GGOutgoingPackage {
 
 	public static GGUserListRequest createPutMoreUserListRequest(final List<String> lines) {
 		if (lines == null) {
-			throw new NullPointerException("lines collection cannot be null");
+			throw new GGNullPointerException("lines collection cannot be null");
 		}
 		final GGUserListRequest listRequest = new GGUserListRequest();
 		listRequest.m_type = GG_USERLIST_PUT_MORE;

@@ -29,7 +29,8 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 
 	public IChat sendMessage(final String messageBody) throws GGException {
 		if (messageBody == null) {
-			throw new NullPointerException("messageBody cannot be less than 0");
+			// FIXME GGException instead?
+			throw new GGNullPointerException("messageBody cannot be less than 0");
 		}
 
 		if (m_recipientUins.isEmpty()) {

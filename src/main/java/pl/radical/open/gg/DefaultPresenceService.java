@@ -39,7 +39,7 @@ public class DefaultPresenceService implements IPresenceService {
 	// friendly
 	DefaultPresenceService(final Session session) {
 		if (session == null) {
-			throw new NullPointerException("session cannot be null");
+			throw new GGNullPointerException("session cannot be null");
 		}
 		m_session = session;
 		m_session.getLoginService().addLoginListener(new LoginHandler());
@@ -50,7 +50,8 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void setStatus(final ILocalStatus localStatus) throws GGException {
 		if (localStatus == null) {
-			throw new NullPointerException("status cannot be null");
+			// FIXME GGException instead?
+			throw new GGNullPointerException("status cannot be null");
 		}
 		checkSessionState();
 		try {
@@ -75,7 +76,8 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void addMonitoredUser(final IUser user) throws GGException {
 		if (user == null) {
-			throw new NullPointerException("user cannot be null");
+			// FIXME GGException instead
+			throw new GGNullPointerException("user cannot be null");
 		}
 		checkSessionState();
 		if (m_monitoredUsers.contains(user)) {
@@ -96,7 +98,8 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void removeMonitoredUser(final IUser user) throws GGException {
 		if (user == null) {
-			throw new NullPointerException("user cannot be null");
+			// FIXME GGException instead
+			throw new GGNullPointerException("user cannot be null");
 		}
 		checkSessionState();
 		if (!m_monitoredUsers.contains(user)) {
@@ -117,7 +120,8 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void changeMonitoredUserStatus(final IUser user) throws GGException {
 		if (user == null) {
-			throw new NullPointerException("user cannot be null");
+			// FIXME GGException instead
+			throw new GGNullPointerException("user cannot be null");
 		}
 		checkSessionState();
 		if (!m_monitoredUsers.contains(user)) {
@@ -154,7 +158,7 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void addUserListener(final UserListener userListener) {
 		if (userListener == null) {
-			throw new NullPointerException("userListener cannot be null");
+			throw new GGNullPointerException("userListener cannot be null");
 		}
 		m_userListeners.add(userListener);
 	}
@@ -164,17 +168,19 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void removeUserListener(final UserListener userListener) {
 		if (userListener == null) {
-			throw new NullPointerException("userListener cannot be null");
+			throw new GGNullPointerException("userListener cannot be null");
 		}
 		m_userListeners.remove(userListener);
 	}
 
 	protected void notifyUserChangedStatus(final IUser user, final IRemoteStatus newStatus) throws GGException {
 		if (user == null) {
-			throw new NullPointerException("user cannot be null");
+			// FIXME GGException instead
+			throw new GGNullPointerException("user cannot be null");
 		}
 		if (newStatus == null) {
-			throw new NullPointerException("newStatus cannot be null");
+			// FIXME GGException instead
+			throw new GGNullPointerException("newStatus cannot be null");
 		}
 		for (final Object element : m_userListeners) {
 			final UserListener userListener = (UserListener) element;
@@ -184,7 +190,8 @@ public class DefaultPresenceService implements IPresenceService {
 
 	protected void notifyLocalUserChangedStatus(final ILocalStatus localStatus) throws GGException {
 		if (localStatus == null) {
-			throw new NullPointerException("localStatus cannot be null");
+			// FIXME GGException instead
+			throw new GGNullPointerException("localStatus cannot be null");
 		}
 		for (final Object element : m_userListeners) {
 			final UserListener userListener = (UserListener) element;

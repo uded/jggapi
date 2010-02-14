@@ -17,7 +17,7 @@ public abstract class AbstractChat implements IChat {
 
 	protected AbstractChat(final Session session) {
 		if (session == null) {
-			throw new NullPointerException("session cannot be null");
+			throw new GGNullPointerException("session cannot be null");
 		}
 		m_session = session;
 		session.getMessageService().addMessageListener(new MessageHandler());
@@ -25,14 +25,14 @@ public abstract class AbstractChat implements IChat {
 
 	public void addChatListener(final MessageListener messageListener) {
 		if (messageListener == null) {
-			throw new NullPointerException("messageListener cannot be null");
+			throw new GGNullPointerException("messageListener cannot be null");
 		}
 		m_listeners.add(messageListener);
 	}
 
 	public void removeChatListener(final MessageListener messageListener) {
 		if (messageListener == null) {
-			throw new NullPointerException("messageListener cannot be null");
+			throw new GGNullPointerException("messageListener cannot be null");
 		}
 		m_listeners.remove(messageListener);
 	}

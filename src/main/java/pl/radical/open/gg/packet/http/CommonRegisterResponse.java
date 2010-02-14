@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet.http;
 
+import pl.radical.open.gg.GGNullPointerException;
+
 import java.util.StringTokenizer;
 
 /**
@@ -14,10 +16,11 @@ public class CommonRegisterResponse extends HttpResponse {
 
 	public CommonRegisterResponse(final int uin, final String responseString) {
 		if (uin < -1) {
+			// FIXME IllegalArgumentException
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (responseString == null) {
-			throw new NullPointerException("responseString cannot be null");
+			throw new GGNullPointerException("responseString cannot be null");
 		}
 		m_uin = uin;
 		m_responseString = responseString;

@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IStatus;
 import pl.radical.open.gg.MessageClass;
 import pl.radical.open.gg.MessageStatus;
@@ -91,7 +92,7 @@ public class GGConversion {
 				remoteStatus.setDescription(description);
 				break;
 
-			// FIXME Default??
+				// FIXME Default??
 		}
 
 		if (remoteStatus != null && returnTimeInMillis != -1) {
@@ -109,7 +110,7 @@ public class GGConversion {
 
 	public static int getProtocolStatus(final IStatus clientStatus, final boolean isFriendsOnly, final boolean isBlocked) {
 		if (clientStatus == null) {
-			throw new NullPointerException("clientStatus cannot be null.");
+			throw new GGNullPointerException("clientStatus cannot be null.");
 		}
 
 		int protocolStatus = -1;

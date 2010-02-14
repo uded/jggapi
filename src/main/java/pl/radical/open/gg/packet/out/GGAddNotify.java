@@ -1,5 +1,6 @@
 package pl.radical.open.gg.packet.out;
 
+import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.User;
 import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGUser;
@@ -23,7 +24,7 @@ public class GGAddNotify implements GGOutgoingPackage, GGUser {
 
 	public GGAddNotify(final int uin, final User.UserMode userMode) {
 		if (userMode == null) {
-			throw new NullPointerException("userMode cannot be null");
+			throw new GGNullPointerException("userMode cannot be null");
 		}
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");

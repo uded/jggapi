@@ -35,7 +35,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	// friendly
 	DefaultLoginService(final Session session) {
 		if (session == null) {
-			throw new NullPointerException("session cannot be null");
+			throw new GGNullPointerException("session cannot be null");
 		}
 		m_session = session;
 	}
@@ -47,7 +47,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 		logger.debug("Logging in, loginContext: " + loginContext);
 
 		if (loginContext == null) {
-			throw new NullPointerException("loginContext cannot be null");
+			throw new GGNullPointerException("loginContext cannot be null");
 		}
 		m_loginContext = loginContext;
 
@@ -126,7 +126,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	 */
 	public void addLoginListener(final LoginListener loginListener) {
 		if (loginListener == null) {
-			throw new NullPointerException("loginListener cannot be null");
+			throw new GGNullPointerException("loginListener cannot be null");
 		}
 		m_loginListeners.add(loginListener);
 	}
@@ -136,7 +136,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	 */
 	public void removeLoginListener(final LoginListener loginListener) {
 		if (loginListener == null) {
-			throw new NullPointerException("loginListener cannot  be null");
+			throw new GGNullPointerException("loginListener cannot  be null");
 		}
 		m_loginListeners.remove(loginListener);
 	}
