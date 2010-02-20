@@ -1,7 +1,6 @@
 package pl.radical.open.gg;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * Created on 2004-12-12 This is the factory class that helps developers to create a new instance of a session class.
@@ -11,7 +10,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SessionFactory {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(SessionFactory.class);
+	private final static Logger LOGGER = Logger.getLogger(SessionFactory.class);
 
 	public static ISession createSession() {
 		try {

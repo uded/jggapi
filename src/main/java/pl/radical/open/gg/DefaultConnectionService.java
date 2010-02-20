@@ -27,8 +27,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.swing.event.EventListenerList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * The default implementation of <code>IConnectionService</code>.
@@ -38,11 +37,11 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class DefaultConnectionService implements IConnectionService {
-	private final static Logger log = LoggerFactory.getLogger(DefaultConnectionService.class);
+	private final static Logger log = Logger.getLogger(DefaultConnectionService.class);
 
 	private final static String WINDOW_ENCODING = "windows-1250";
 
-	private final static Logger logger = LoggerFactory.getLogger(DefaultConnectionService.class);
+	private final static Logger logger = Logger.getLogger(DefaultConnectionService.class);
 
 	private final EventListenerList m_listeners = new EventListenerList();
 
@@ -80,7 +79,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public IServer lookupServer(final int uin) throws GGException {
 		if (log.isTraceEnabled()) {
-			log.trace("lookupServer() executed for user [{}]", uin);
+			log.trace("lookupServer() executed for user [" + uin + "]");
 		}
 		try {
 			final IGGConfiguration configuration = m_session.getGGConfiguration();
@@ -318,7 +317,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @return <code>Server</code> the server object.
 	 */
 	private static Server parseAddress(final String line) {
-		log.debug("Parsing token information from hub: [{}]", line);
+		log.debug("Parsing token information from hub: [" + line + "]");
 
 		final int tokensNumber = 3;
 		final StringTokenizer token = new StringTokenizer(line);

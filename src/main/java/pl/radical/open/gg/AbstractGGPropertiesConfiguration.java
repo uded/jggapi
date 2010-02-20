@@ -7,8 +7,7 @@ import java.security.PrivilegedAction;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * Created on 2005-05-09
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public abstract class AbstractGGPropertiesConfiguration implements IGGConfiguration {
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = Logger.getLogger(getClass());
 
 	private IGGConfiguration m_defaultGGConfiguration = new GGConfiguration();
 

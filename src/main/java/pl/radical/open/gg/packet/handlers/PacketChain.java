@@ -21,8 +21,7 @@ import pl.radical.open.gg.packet.in.GGWelcome;
 
 import java.util.HashMap;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * Created on 2004-11-27
@@ -31,7 +30,7 @@ import org.slf4j.LoggerFactory;
  */
 public class PacketChain {
 
-	private final static Logger logger = LoggerFactory.getLogger(PacketChain.class);
+	private final static Logger logger = Logger.getLogger(PacketChain.class);
 
 	private final HashMap<Integer, PacketHandler> m_packetHandlers;
 

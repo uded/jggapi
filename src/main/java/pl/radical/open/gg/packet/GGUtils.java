@@ -5,8 +5,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
@@ -15,7 +14,7 @@ public class GGUtils {
 
 	public final static String WINDOW_ENCODING = "windows-1250";
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GGUtils.class);
+	private static final Logger LOGGER = Logger.getLogger(GGUtils.class);
 
 	public static String prettyBytesToString(final byte[] bytes) {
 		final StringBuffer received = new StringBuffer();

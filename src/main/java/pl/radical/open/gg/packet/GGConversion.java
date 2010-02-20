@@ -11,8 +11,7 @@ import pl.radical.open.gg.packet.in.GGSendMsgAck;
 
 import java.util.Date;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * Created on 2005-01-31
@@ -21,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GGConversion {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GGConversion.class);
+	private static final Logger LOGGER = Logger.getLogger(GGConversion.class);
 
 	public static User.UserMode getUserMode(final int protocolStatus) {
 		if ((protocolStatus & GGStatuses.GG_STATUS_FRIENDS_MASK) == GGStatuses.GG_STATUS_FRIENDS_MASK) {

@@ -6,8 +6,7 @@ import pl.radical.open.gg.PublicDirSearchReply;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGPubdirReply;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * Created on 2004-12-15
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
 
-	private final static Logger logger = LoggerFactory.getLogger(GGPubdirReplyPacketHandler.class);
+	private final static Logger logger = Logger.getLogger(GGPubdirReplyPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

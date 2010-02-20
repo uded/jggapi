@@ -6,8 +6,7 @@ import pl.radical.open.gg.IncomingMessage;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGRecvMsg;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.log4j.Logger;
 
 /**
  * Created on 2004-11-28
@@ -16,7 +15,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GGMessageReceivedPacketHandler implements PacketHandler {
 
-	private static final Logger logger = LoggerFactory.getLogger(GGMessageReceivedPacketHandler.class);
+	private static final Logger logger = Logger.getLogger(GGMessageReceivedPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
