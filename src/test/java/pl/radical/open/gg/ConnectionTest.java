@@ -3,17 +3,19 @@ package pl.radical.open.gg;
 import static org.junit.Assert.assertEquals;
 
 import pl.radical.open.gg.event.ConnectionListener;
+import pl.radical.open.gg.event.ContactListListener;
 import pl.radical.open.gg.event.LoginFailedEvent;
 import pl.radical.open.gg.event.LoginListener;
 
+import java.util.Collection;
+
+import org.apache.log4j.Logger;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class ConnectionTest {
-	private final Logger log = LoggerFactory.getLogger(getClass().getName());
+	private final Logger log = Logger.getLogger(getClass().getName());
 
-	public static boolean asyncOp = false;
+	static boolean asyncOp = false;
 
 	private static ISession session1;
 	private static ISession session2;
@@ -30,15 +32,26 @@ public class ConnectionTest {
 	}
 
 	@Test
-	public void loginTest() throws InterruptedException {
+	public void loginTest() throws InterruptedException, GGException {
 		ILoginService loginService;
 
-		log.debug("Loging in user1");
 		loginService = session1.getLoginService();
 		loginService.addLoginListener(new LoginListener.Stub() {
 			@Override
-			public void loginOK() {
+			public void loginOK() throws GGException {
 				log.info("Login for user 1 OK");
+				session1.getPresenceService().setStatus(new LocalStatus(StatusType.ONLINE_WITH_DESCRIPTION, "Jestem testowy"));
+
+				final IContactListService cls = session1.getContactListService();
+				cls.addContactListListener(new ContactListListener.Stub() {
+					@Override
+					public void contactListReceived(final Collection<LocalUser> users) {
+						for (final LocalUser localUser : users) {
+							log.info("Otrzymałem użytkownika: " + localUser.getUin());
+						}
+					}
+				});
+				cls.importContactList();
 			}
 
 			@Override
@@ -46,24 +59,38 @@ public class ConnectionTest {
 				log.error("Login failed!");
 			}
 		});
+		log.debug("Loging in user1");
+		loginService.login(new LoginContext(20239471, "RadicalEntropy"));
+
+		Thread.sleep(10000);
+		assertEquals(true, loginService.isLoggedIn());
+
+		if (loginService.isLoggedIn()) {
+			loginService.logout();
+		}
 
 		log.debug("Loging in user2");
-		loginService= session2.getLoginService();
+		loginService = session2.getLoginService();
 		loginService.addLoginListener(new LoginListener.Stub() {
 			@Override
-			public void loginOK() {
+			public void loginOK() throws GGException {
 				log.info("Login for user 2 OK");
-				asyncOp = true;
+				session1.getPresenceService().setStatus(new LocalStatus(StatusType.ONLINE_WITH_DESCRIPTION, "Jestem testowy"));
 			}
 
 			@Override
 			public void loginFailed(final LoginFailedEvent loginFailedEvent) {
 				log.error("Login failed!");
+				return;
 			}
 		});
+		loginService.login(new LoginContext(20241237, "RadicalTest"));
 
-		while(!asyncOp) {
-			Thread.sleep(100);
+		Thread.sleep(10000);
+		assertEquals(true, loginService.isLoggedIn());
+
+		if (loginService.isLoggedIn()) {
+			loginService.logout();
 		}
 	}
 
