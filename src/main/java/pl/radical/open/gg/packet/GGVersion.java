@@ -4,9 +4,15 @@ package pl.radical.open.gg.packet;
  * Created on 2004-12-12
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public interface GGVersion {
 
+	int VERSION_80_build_4881 = 0x2D;
+	int VERSION_77_build_3315 = 0x2A;
+	int VERSION_76_build_1688 = 0x29;
+	int VERSION_7_5_0_build_2201 = 0x28;
+	int VERSION_70_build_22 = 0x27;
 	int VERSION_70_build_20 = 0x26;
 	int VERSION_70_build_1 = 0x25;
 	int VERSION_60_1_build_155 = 0x24;
