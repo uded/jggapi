@@ -8,6 +8,7 @@ package pl.radical.open.gg.packet;
  */
 public interface GGVersion {
 
+	int VERSION_80_build_8283 = 0x2E;
 	int VERSION_80_build_4881 = 0x2D;
 	int VERSION_77_build_3315 = 0x2A;
 	int VERSION_76_build_1688 = 0x29;
@@ -15,7 +16,7 @@ public interface GGVersion {
 	int VERSION_70_build_22 = 0x27;
 	int VERSION_70_build_20 = 0x26;
 	int VERSION_70_build_1 = 0x25;
-	int VERSION_60_1_build_155 = 0x24;
+	int VERSION_60_1_build_155 = 0x24; // 7.6 (1359)
 	int VERSION_60_1_build_140 = 0x22;
 	int VERSION_60_1_build_133 = 0x21;
 	int VERSION_60 = 0x20;
