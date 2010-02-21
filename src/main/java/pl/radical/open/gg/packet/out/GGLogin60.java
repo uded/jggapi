@@ -9,7 +9,10 @@ import pl.radical.open.gg.packet.GGVersion;
 
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @deprecated This implementation is deprecated and was replaced by {@link GGLogin80} in current protocol
+ *             implementation
  */
+@Deprecated
 public class GGLogin60 implements GGOutgoingPackage {
 
 	public final static int GG_LOGIN60 = 0x0015;
