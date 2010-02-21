@@ -1,9 +1,14 @@
 package pl.radical.open.gg.packet;
 
+import pl.radical.open.gg.GGException;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.nio.ByteBuffer;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
 
@@ -173,6 +178,33 @@ public class GGUtils {
 		}
 
 		return (int) y;
+	}
+
+	private static char[] getLoginHashSHA(final char[] password, final int seed) throws GGException {
+		try {
+			final MessageDigest md = MessageDigest.getInstance("SHA-1");
+
+			final byte[] passArr = new String(password).getBytes();
+			final byte[] seedArr = intToByte(seed);
+
+			final ByteBuffer str2hash = ByteBuffer.allocate(passArr.length + seedArr.length);
+			md.update(str2hash.put(passArr).put(seedArr));
+
+			return byteToString(md.digest(), 0).toCharArray();
+		} catch (final NoSuchAlgorithmException e) {
+			throw new GGException("SHA-1 algorithm was not loaded properly", e);
+		}
+	}
+
+	public static char[] getLoginHash(final char[] password, final int seed, final GGHashType hashType) throws GGException {
+		switch (hashType) {
+			case GG_LOGIN_HASH_GG32:
+				return Integer.toString(getLoginHash(password, seed)).toCharArray();
+			case GG_LOGIN_HASH_SHA1:
+				return getLoginHashSHA(password, seed);
+			default:
+				throw new GGException("Hash algorithm to be used during login was not specified");
+		}
 	}
 
 	public static int copy(final InputStream input, final OutputStream output) throws IOException {
