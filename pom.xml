@@ -1,7 +1,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<name>Gadu-Gadu API</name>
+	<name>Gadu-Gadu API Next Generation</name>
 	<groupId>pl.radical.open</groupId>
 	<artifactId>jggapi-ng</artifactId>
 	<packaging>jar</packaging>
@@ -11,6 +11,10 @@
 			<url>http://www.opensource.org/licenses/gpl-license.php</url>
 		</license>
 	</licenses>
+	<issueManagement>
+		<system>Redmine</system>
+		<url>http://projekty.radical.com.pl/projects/jggapi-ng/issues</url>
+	</issueManagement>
 	<ciManagement>
 	</ciManagement>
 	<scm>
@@ -22,8 +26,7 @@
 	</organization>
 	<inceptionYear>2010</inceptionYear>
 	<version>1.7</version>
-	<description>The JGGApi project is implementation of proprietary Gadu-Gadu protocol based on specification from EKG. It
-		is fully object oriented and uses common design patterns that reduce the learning curve of the library.</description>
+	<description>The JGGApi project is implementation of proprietary Gadu-Gadu protocol based on specification from EKG. It is fully object oriented and uses common design patterns that reduce the learning curve of the library.</description>
 	<developers>
 		<developer>
 			<name>Marcin Naglik</name>
@@ -34,6 +37,7 @@
 			<roles>
 				<role>Founder</role>
 				<role>Lead Developer</role>
+				<role>Inactive</role>
 			</roles>
 		</developer>
 		<developer>
@@ -41,6 +45,17 @@
 			<id>mati</id>
 			<email>mati@sz.home.pl</email>
 			<organization>Sourceforge</organization>
+			<timezone>GMT+1</timezone>
+			<roles>
+				<role>Lead Developer</role>
+				<role>Inactive</role>
+			</roles>
+		</developer>
+		<developer>
+			<id>uded</id>
+			<name>Łukasz Rżanek</name>
+			<email>lukasz.rzanek@radical.com.pl</email>
+			<organization>Radical Creations</organization>
 			<timezone>GMT+1</timezone>
 			<roles>
 				<role>Lead Developer</role>
@@ -97,6 +112,11 @@
 			<artifactId>log4j</artifactId>
 			<version>1.2.14</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-primitives</groupId>
+			<artifactId>commons-primitives</artifactId>
+			<version>1.0</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -184,8 +204,8 @@
 										<matchType>exact</matchType>
 									</tag>
 									<tag>
-									   <matchString>XXX</matchString>
-									   <matchType>exact</matchType>
+										<matchString>XXX</matchString>
+										<matchType>exact</matchType>
 									</tag>
 								</tags>
 							</tagClass>

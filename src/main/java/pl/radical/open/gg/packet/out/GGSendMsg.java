@@ -7,6 +7,9 @@ import pl.radical.open.gg.packet.GGMessageClass;
 
 import java.util.ArrayList;
 
+import org.apache.commons.collections.primitives.ArrayByteList;
+import org.apache.commons.collections.primitives.ByteList;
+
 /**
  * Class representing packet that will send Gadu-Gadu message.
  * 
@@ -63,50 +66,50 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
-		final byte[] toSend = new byte[getLength()];
+		final ByteList byteList = new ArrayByteList(getLength());
 
-		toSend[0] = (byte) (m_recipientUin & 0xFF);
-		toSend[1] = (byte) (m_recipientUin >> 8 & 0xFF);
-		toSend[2] = (byte) (m_recipientUin >> 16 & 0xFF);
-		toSend[3] = (byte) (m_recipientUin >> 24 & 0xFF);
+		byteList.add((byte) (m_recipientUin & 0xFF));
+		byteList.add((byte) (m_recipientUin >> 8 & 0xFF));
+		byteList.add((byte) (m_recipientUin >> 16 & 0xFF));
+		byteList.add((byte) (m_recipientUin >> 24 & 0xFF));
 
-		toSend[4] = (byte) (m_seq & 0xFF);
-		toSend[5] = (byte) (m_seq >> 8 & 0xFF);
-		toSend[6] = (byte) (m_seq >> 16 & 0xFF);
-		toSend[7] = (byte) (m_seq >> 24 & 0xFF);
+		byteList.add((byte) (m_seq & 0xFF));
+		byteList.add((byte) (m_seq >> 8 & 0xFF));
+		byteList.add((byte) (m_seq >> 16 & 0xFF));
+		byteList.add((byte) (m_seq >> 24 & 0xFF));
 
-		toSend[8] = (byte) (m_protocolMessageClass & 0xFF);
-		toSend[9] = (byte) (m_protocolMessageClass >> 8 & 0xFF);
-		toSend[10] = (byte) (m_protocolMessageClass >> 16 & 0xFF);
-		toSend[11] = (byte) (m_protocolMessageClass >> 24 & 0xFF);
+		byteList.add((byte) (m_protocolMessageClass & 0xFF));
+		byteList.add((byte) (m_protocolMessageClass >> 8 & 0xFF));
+		byteList.add((byte) (m_protocolMessageClass >> 16 & 0xFF));
+		byteList.add((byte) (m_protocolMessageClass >> 24 & 0xFF));
 
 		// TODO check if this conversion needs charset
 		final byte[] textBytes = m_text.getBytes();
 
 		for (int i = 0; i < m_text.length(); i++) {
-			toSend[12 + i] = textBytes[i];
+			byteList.add(textBytes[i]);
 		}
 
 		final int recipientCount = m_additionalRecipients.size();
 
 		if (recipientCount > 0) {
-			toSend[12 + m_text.length() + 1] = 0x01;
+			byteList.add((byte) 0x01);
 
-			toSend[12 + m_text.length() + 2] = (byte) (recipientCount & 0xFF);
-			toSend[12 + m_text.length() + 3] = (byte) (recipientCount >> 8 & 0xFF);
-			toSend[12 + m_text.length() + 4] = (byte) (recipientCount >> 16 & 0xFF);
-			toSend[12 + m_text.length() + 5] = (byte) (recipientCount >> 24 & 0xFF);
+			byteList.add((byte) (recipientCount & 0xFF));
+			byteList.add((byte) (recipientCount >> 8 & 0xFF));
+			byteList.add((byte) (recipientCount >> 16 & 0xFF));
+			byteList.add((byte) (recipientCount >> 24 & 0xFF));
 
 			for (int i = 0; i < recipientCount; i++) {
 				final int recipientUin = m_additionalRecipients.get(i).intValue();
-				toSend[12 + m_text.length() + 6 + i] = (byte) (recipientUin & 0xFF);
-				toSend[12 + m_text.length() + 7 + i] = (byte) (recipientUin >> 8 & 0xFF);
-				toSend[12 + m_text.length() + 8 + i] = (byte) (recipientUin >> 16 & 0xFF);
-				toSend[12 + m_text.length() + 9 + i] = (byte) (recipientUin >> 24 & 0xFF);
+				byteList.add((byte) (recipientUin & 0xFF));
+				byteList.add((byte) (recipientUin >> 8 & 0xFF));
+				byteList.add((byte) (recipientUin >> 16 & 0xFF));
+				byteList.add((byte) (recipientUin >> 24 & 0xFF));
 			}
 		}
 
-		return toSend;
+		return byteList.toArray();
 	}
 
 }

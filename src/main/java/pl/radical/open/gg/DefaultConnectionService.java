@@ -406,9 +406,9 @@ public class DefaultConnectionService implements IConnectionService {
 					.prettyBytesToString(outgoingPackage.getContents()));
 
 			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getPacketType()));
-			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getLength()));
+			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getContents().length));
 
-			if (outgoingPackage.getLength() > 0) {
+			if (outgoingPackage.getContents().length > 0) {
 				m_dataOutput.write(outgoingPackage.getContents());
 			}
 

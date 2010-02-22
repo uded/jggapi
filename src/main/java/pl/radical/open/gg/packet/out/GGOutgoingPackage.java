@@ -8,6 +8,7 @@ import pl.radical.open.gg.packet.GGPacket;
  */
 public interface GGOutgoingPackage extends GGPacket {
 
+	@Deprecated
 	int getLength();
 
 	byte[] getContents();

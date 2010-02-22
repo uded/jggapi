@@ -7,6 +7,9 @@ import pl.radical.open.gg.packet.GGStatuses;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.GGVersion;
 
+import org.apache.commons.collections.primitives.ArrayByteList;
+import org.apache.commons.collections.primitives.ByteList;
+
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @deprecated This implementation is deprecated and was replaced by {@link GGLogin80} in current protocol
@@ -166,63 +169,63 @@ public class GGLogin60 implements GGOutgoingPackage {
 	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
-		final byte[] toSend = new byte[getLength()];
+		final ByteList byteList = new ArrayByteList(getLength());
 
-		toSend[0] = (byte) (m_uin & 0xFF);
-		toSend[1] = (byte) (m_uin >> 8 & 0xFF);
-		toSend[2] = (byte) (m_uin >> 16 & 0xFF);
-		toSend[3] = (byte) (m_uin >> 24 & 0xFF);
+		byteList.add((byte) (m_uin & 0xFF));
+		byteList.add((byte) (m_uin >> 8 & 0xFF));
+		byteList.add((byte) (m_uin >> 16 & 0xFF));
+		byteList.add((byte) (m_uin >> 24 & 0xFF));
 
-		toSend[4] = (byte) (m_loginHash & 0xFF);
-		toSend[5] = (byte) (m_loginHash >> 8 & 0xFF);
-		toSend[6] = (byte) (m_loginHash >> 16 & 0xFF);
-		toSend[7] = (byte) (m_loginHash >> 24 & 0xFF);
+		byteList.add((byte) (m_loginHash & 0xFF));
+		byteList.add((byte) (m_loginHash >> 8 & 0xFF));
+		byteList.add((byte) (m_loginHash >> 16 & 0xFF));
+		byteList.add((byte) (m_loginHash >> 24 & 0xFF));
 
-		toSend[8] = (byte) (m_status & 0xFF);
-		toSend[9] = (byte) (m_status >> 8 & 0xFF);
-		toSend[10] = (byte) (m_status >> 16 & 0xFF);
-		toSend[11] = (byte) (m_status >> 24 & 0xFF);
+		byteList.add((byte) (m_status & 0xFF));
+		byteList.add((byte) (m_status >> 8 & 0xFF));
+		byteList.add((byte) (m_status >> 16 & 0xFF));
+		byteList.add((byte) (m_status >> 24 & 0xFF));
 
-		toSend[12] = (byte) (m_version & 0xFF);
-		toSend[13] = (byte) (m_version >> 8 & 0xFF);
-		toSend[14] = (byte) (m_version >> 16 & 0xFF);
-		toSend[15] = (byte) (m_version >> 24 & 0xFF);
+		byteList.add((byte) (m_version & 0xFF));
+		byteList.add((byte) (m_version >> 8 & 0xFF));
+		byteList.add((byte) (m_version >> 16 & 0xFF));
+		byteList.add((byte) (m_version >> 24 & 0xFF));
 
-		toSend[16] = (byte) 0x00;
+		byteList.add((byte) 0x00);
 
-		toSend[17] = m_localIP[0];
-		toSend[18] = m_localIP[1];
-		toSend[19] = m_localIP[2];
-		toSend[20] = m_localIP[3];
+		byteList.add(m_localIP[0]);
+		byteList.add(m_localIP[1]);
+		byteList.add(m_localIP[2]);
+		byteList.add(m_localIP[3]);
 
-		toSend[21] = (byte) (m_localPort & 0xFF);
-		toSend[22] = (byte) (m_localPort >> 8 & 0xFF);
+		byteList.add((byte) (m_localPort & 0xFF));
+		byteList.add((byte) (m_localPort >> 8 & 0xFF));
 
-		toSend[23] = m_externalIP[0];
-		toSend[24] = m_externalIP[1];
-		toSend[25] = m_externalIP[2];
-		toSend[26] = m_externalIP[3];
+		byteList.add(m_externalIP[0]);
+		byteList.add(m_externalIP[1]);
+		byteList.add(m_externalIP[2]);
+		byteList.add(m_externalIP[3]);
 
-		toSend[27] = (byte) (m_externalPort & 0xFF);
-		toSend[28] = (byte) (m_externalPort >> 8 & 0xFF);
+		byteList.add((byte) (m_externalPort & 0xFF));
+		byteList.add((byte) (m_externalPort >> 8 & 0xFF));
 
-		toSend[29] = m_imageSize;
-		toSend[30] = (byte) 0xBE;
+		byteList.add(m_imageSize);
+		byteList.add((byte) 0xBE);
 
 		if (m_description != null) {
 			final byte[] descBytes = m_description.getBytes();
-			for (int i = 0; i < descBytes.length; i++) {
-				toSend[31 + i] = descBytes[i];
+			for (final byte descByte : descBytes) {
+				byteList.add(descByte);
 				if (m_time != -1) {
-					toSend[31 + descBytes.length + 1] = (byte) (m_time >> 24 & 0xFF);
-					toSend[31 + descBytes.length + 2] = (byte) (m_time >> 16 & 0xFF);
-					toSend[31 + descBytes.length + 3] = (byte) (m_time >> 8 & 0xFF);
-					toSend[31 + descBytes.length + 4] = (byte) (m_time & 0xFF);
+					byteList.add((byte) (m_time >> 24 & 0xFF));
+					byteList.add((byte) (m_time >> 16 & 0xFF));
+					byteList.add((byte) (m_time >> 8 & 0xFF));
+					byteList.add((byte) (m_time & 0xFF));
 				}
 			}
 		}
 
-		return toSend;
+		return byteList.toArray();
 	}
 
 }

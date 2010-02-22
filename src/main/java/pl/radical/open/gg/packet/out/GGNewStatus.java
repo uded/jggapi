@@ -6,6 +6,9 @@ import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGStatuses;
 import pl.radical.open.gg.packet.GGUtils;
 
+import org.apache.commons.collections.primitives.ArrayByteList;
+import org.apache.commons.collections.primitives.ByteList;
+
 /**
  * Packet that sets new status of the Gadu-Gadu user.
  * 
@@ -59,28 +62,28 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatuses {
 	public byte[] getContents() {
 		final int statusToSend = GGConversion.getProtocolStatus(m_localStatus, m_localStatus.isFriendsOnly(), false);
 
-		final byte[] toSend = new byte[getLength()];
+		final ByteList byteList = new ArrayByteList(getLength());
 
-		toSend[0] = (byte) (statusToSend & 0xFF);
-		toSend[1] = (byte) (statusToSend >> 8 & 0xFF);
-		toSend[2] = (byte) (statusToSend >> 16 & 0xFF);
-		toSend[3] = (byte) (statusToSend >> 24 & 0xFF);
+		byteList.add((byte) (statusToSend & 0xFF));
+		byteList.add((byte) (statusToSend >> 8 & 0xFF));
+		byteList.add((byte) (statusToSend >> 16 & 0xFF));
+		byteList.add((byte) (statusToSend >> 24 & 0xFF));
 
 		if (m_localStatus.getStatusType().isDescriptionStatus() && m_localStatus.isDescriptionSet()) {
 			final String description = trimDescription(m_localStatus.getDescription());
 			final byte[] descBytes = description.getBytes();
-			for (int i = 0; i < descBytes.length; i++) {
-				toSend[4 + i] = descBytes[i];
+			for (final byte descByte : descBytes) {
+				byteList.add(descByte);
 			}
 			if (m_localStatus.isReturnDateSet()) {
 				final int timeInSeconds = GGUtils.millisToSeconds(m_localStatus.getReturnDate().getTime());
-				toSend[4 + description.length() + 1] = (byte) (timeInSeconds & 0xFF);
-				toSend[4 + description.length() + 2] = (byte) (timeInSeconds >> 8 & 0xFF);
-				toSend[4 + description.length() + 3] = (byte) (timeInSeconds >> 16 & 0xFF);
-				toSend[4 + description.length() + 4] = (byte) (timeInSeconds >> 24 & 0xFF);
+				byteList.add((byte) (timeInSeconds & 0xFF));
+				byteList.add((byte) (timeInSeconds >> 8 & 0xFF));
+				byteList.add((byte) (timeInSeconds >> 16 & 0xFF));
+				byteList.add((byte) (timeInSeconds >> 24 & 0xFF));
 			}
 		}
-		return toSend;
+		return byteList.toArray();
 	}
 
 	private String trimDescription(String description) {
