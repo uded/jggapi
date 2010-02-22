@@ -328,13 +328,21 @@ public class DefaultConnectionService implements IConnectionService {
 		if (log.isTraceEnabled()) {
 			log.trace("Parsing token information from hub: [" + line + "]");
 		}
-		final Pattern p = Pattern.compile("\\d\\s\\d\\s((?:\\d{1,3}\\.?+){4}\\:\\d{2,4})\\s((?:\\d{1,3}\\.?+){4})");
+		final Pattern p = Pattern.compile("\\d\\s\\d\\s((?:\\d{1,3}\\.?+){4})\\:(\\d{2,4})\\s((?:\\d{1,3}\\.?+){4})");
 		final Matcher m = p.matcher(line);
 
 		if (!m.matches()) {
 			throw new IllegalArgumentException("String returned by GG HUB is not what was expected");
 		} else {
 			final Server[] servers = new Server[2];
+
+			if (log.isDebugEnabled()) {
+				log.debug("Znaleziono prawidłowy string w danych przesłanych przez GG HUB:");
+				for (int i = 1; i <= m.groupCount(); i++) {
+					log.debug("--->  znaleziona grupa w adresie [{}]: {}", i, m.group(i));
+				}
+			}
+
 			servers[0] = new Server(m.group(1), Integer.parseInt(m.group(2)));
 			servers[1] = new Server(m.group(3), 443);
 			return servers;
