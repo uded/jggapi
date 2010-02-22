@@ -126,7 +126,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Unknown property
 	 */
-	private final byte m_unknown2 = 0x64;
+	private final int m_unknown2 = 0x64;
 
 	/**
 	 * Version of the client
@@ -253,13 +253,11 @@ public class GGLogin80 implements GGOutgoingPackage {
 	public byte[] getContents() {
 		final ByteList byteList = new ArrayByteList();
 
-		// UIN
 		byteList.add((byte) (m_uin & 0xFF));
 		byteList.add((byte) (m_uin >> 8 & 0xFF));
 		byteList.add((byte) (m_uin >> 16 & 0xFF));
 		byteList.add((byte) (m_uin >> 24 & 0xFF));
 
-		// language
 		byteList.add(M_LANGUAGE.getBytes()[0]);
 		byteList.add(M_LANGUAGE.getBytes()[1]);
 
@@ -271,8 +269,12 @@ public class GGLogin80 implements GGOutgoingPackage {
 
 		// login hash
 		final byte[] loginHashBytes = new String(m_loginHash).getBytes();
-		for (final byte b : loginHashBytes) {
-			byteList.add(b);
+		for (int i = 0; i < 64; i++) {
+			if (i < loginHashBytes.length) {
+				byteList.add(loginHashBytes[i]);
+			} else {
+				byteList.add((byte) 0);
+			}
 		}
 
 		// status
@@ -317,7 +319,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 		byteList.add(m_imageSize);
 
 		// unknown 2
-		byteList.add(m_unknown2); // ?
+		byteList.add((byte) m_unknown2); // ?
 
 		// version length
 		byteList.add((byte) (m_version_len & 0xFF));

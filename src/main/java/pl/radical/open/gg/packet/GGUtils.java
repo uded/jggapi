@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGUtils {
-
 	public final static String WINDOW_ENCODING = "windows-1250";
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(GGUtils.class);
@@ -70,6 +69,24 @@ public class GGUtils {
 		i += tmp;
 
 		return i;
+	}
+
+	public static byte[] intToByteArray(final int i) {
+		final byte[] result = new byte[4];
+		result[0] = (byte) (i & 0xFF);
+		result[1] = (byte) (i >> 8 & 0xFF);
+		result[2] = (byte) (i >> 16 & 0xFF);
+		result[3] = (byte) (i >> 24 & 0xFF);
+
+		return result;
+	}
+
+	public static byte[] shortToByteArray(final short s) {
+		final byte[] result = new byte[2];
+		result[0] = (byte) (s & 0xFF);
+		result[1] = (byte) (s >> 8 & 0xFF);
+
+		return result;
 	}
 
 	public static long secondsToMillis(final int seconds) {
@@ -191,7 +208,13 @@ public class GGUtils {
 			final ByteBuffer str2hash = ByteBuffer.allocate(passArr.length + seedArr.length);
 			md.update(str2hash.put(passArr).put(seedArr));
 
-			return byteToString(md.digest(), 0).toCharArray();
+			final byte[] hash = md.digest();
+
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("Zwrócony hash: [{}]", byteToShort(hash, 0));
+			}
+
+			return byteToString(hash, 0).toCharArray();
 		} catch (final NoSuchAlgorithmException e) {
 			throw new GGException("SHA-1 algorithm was not loaded properly", e);
 		}
