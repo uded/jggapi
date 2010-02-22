@@ -336,10 +336,10 @@ public class DefaultConnectionService implements IConnectionService {
 		} else {
 			final Server[] servers = new Server[2];
 
-			if (log.isDebugEnabled()) {
-				log.debug("Znaleziono prawidłowy string w danych przesłanych przez GG HUB:");
+			if (log.isTraceEnabled()) {
+				log.trace("Znaleziono prawidłowy string w danych przesłanych przez GG HUB:");
 				for (int i = 1; i <= m.groupCount(); i++) {
-					log.debug("--->  znaleziona grupa w adresie [{}]: {}", i, m.group(i));
+					log.trace("--->  znaleziona grupa w adresie [{}]: {}", i, m.group(i));
 				}
 			}
 
