@@ -101,23 +101,30 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.7</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>1.5.10</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>commons-primitives</groupId>
-			<artifactId>commons-primitives</artifactId>
-			<version>1.0</version>
-		</dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.10</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-primitives</groupId>
+            <artifactId>commons-primitives</artifactId>
+            <version>1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.7</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>0.9.18</version>
+            <type>jar</type>
+            <scope>test</scope>
+        </dependency>
 	</dependencies>
 	<build>
 		<plugins>
