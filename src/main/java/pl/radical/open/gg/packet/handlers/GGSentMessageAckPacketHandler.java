@@ -6,7 +6,8 @@ import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGSendMsgAck;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created on 2004-11-28
@@ -15,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class GGSentMessageAckPacketHandler implements PacketHandler {
 
-	private final static Logger logger = Logger.getLogger(GGSentMessageAckPacketHandler.class);
+	private final static Logger logger = LoggerFactory.getLogger(GGSentMessageAckPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

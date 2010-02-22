@@ -6,7 +6,8 @@ import pl.radical.open.gg.IUser;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGStatus;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created on 2004-11-28
@@ -15,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class GGStatusPacketHandler implements PacketHandler {
 
-	private final Logger logger = Logger.getLogger(GGStatusPacketHandler.class);
+	private final Logger logger = LoggerFactory.getLogger(GGStatusPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

@@ -5,7 +5,8 @@ import pl.radical.open.gg.SessionState;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGWelcome;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created on 2004-11-27
@@ -14,7 +15,7 @@ import org.apache.log4j.Logger;
  */
 public class GGWelcomePacketHandler implements PacketHandler {
 
-	private static final Logger logger = Logger.getLogger(GGWelcomePacketHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(GGWelcomePacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

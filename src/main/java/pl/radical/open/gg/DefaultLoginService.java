@@ -10,7 +10,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The default implementation of <code>ILoginService</code>.
@@ -21,7 +22,7 @@ import org.apache.log4j.Logger;
  */
 public class DefaultLoginService implements ILoginService, UserListener {
 
-	private final static Logger logger = Logger.getLogger(DefaultLoginService.class);
+	private final static Logger logger = LoggerFactory.getLogger(DefaultLoginService.class);
 
 	/** The session associated with this service */
 	private Session m_session = null;

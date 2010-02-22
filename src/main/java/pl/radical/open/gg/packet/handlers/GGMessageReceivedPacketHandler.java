@@ -6,7 +6,8 @@ import pl.radical.open.gg.IncomingMessage;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGRecvMsg;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created on 2004-11-28
@@ -15,7 +16,7 @@ import org.apache.log4j.Logger;
  */
 public class GGMessageReceivedPacketHandler implements PacketHandler {
 
-	private static final Logger logger = Logger.getLogger(GGMessageReceivedPacketHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(GGMessageReceivedPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
@@ -30,7 +31,7 @@ public class GGMessageReceivedPacketHandler implements PacketHandler {
 		final GGRecvMsg recvMsg = new GGRecvMsg(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(recvMsg);
 		final IIncommingMessage incommingMessage = new IncomingMessage(recvMsg.getSenderUin(), recvMsg.getMessage(), recvMsg
-		        .getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
+				.getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
 		context.getSessionAccessor().notifyMessageArrived(incommingMessage);
 	}
 

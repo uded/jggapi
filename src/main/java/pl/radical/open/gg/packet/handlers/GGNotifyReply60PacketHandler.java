@@ -9,7 +9,8 @@ import pl.radical.open.gg.packet.in.GGNotifyReply60;
 
 import java.util.Map;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created on 2004-12-12
@@ -19,7 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class GGNotifyReply60PacketHandler implements PacketHandler {
 
-	private final static Logger logger = Logger.getLogger(GGNotifyReply60PacketHandler.class);
+	private final static Logger logger = LoggerFactory.getLogger(GGNotifyReply60PacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

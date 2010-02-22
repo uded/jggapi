@@ -27,7 +27,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import javax.swing.event.EventListenerList;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * The default implementation of <code>IConnectionService</code>.
@@ -37,11 +38,9 @@ import org.apache.log4j.Logger;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class DefaultConnectionService implements IConnectionService {
-	private final static Logger log = Logger.getLogger(DefaultConnectionService.class);
+	private final static Logger log = LoggerFactory.getLogger(DefaultConnectionService.class);
 
 	private final static String WINDOW_ENCODING = "windows-1250";
-
-	private final static Logger logger = Logger.getLogger(DefaultConnectionService.class);
 
 	private final EventListenerList m_listeners = new EventListenerList();
 
@@ -147,7 +146,7 @@ public class DefaultConnectionService implements IConnectionService {
 			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 			notifyConnectionClosed();
 		} catch (final IOException ex) {
-			logger.error("IOException occured while trying to disconnect", ex);
+			log.error("IOException occured while trying to disconnect", ex);
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 			throw new GGException("Unable to close connection to server", ex);
 		}
@@ -358,7 +357,7 @@ public class DefaultConnectionService implements IConnectionService {
 					m_active = false;
 					notifyConnectionError(ex);
 				} catch (final GGException ex2) {
-					logger.warn("Unable to notify listeners", ex);
+					log.warn("Unable to notify listeners", ex);
 				}
 			}
 		}
@@ -397,12 +396,12 @@ public class DefaultConnectionService implements IConnectionService {
 		}
 
 		private void closeConnection() throws IOException {
-			logger.debug("Closing connection...");
+			log.debug("Closing connection...");
 			m_active = false;
 		}
 
 		private synchronized void sendPackage(final GGOutgoingPackage outgoingPackage) throws IOException {
-			logger.debug("Sending packet: " + outgoingPackage.getPacketType() + ", packetPayLoad: " + GGUtils
+			log.debug("Sending packet: " + outgoingPackage.getPacketType() + ", packetPayLoad: " + GGUtils
 					.prettyBytesToString(outgoingPackage.getContents()));
 
 			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getPacketType()));
@@ -435,34 +434,34 @@ public class DefaultConnectionService implements IConnectionService {
 		public void run() {
 			while (m_active && m_connectionThread.isActive()) {
 				try {
-					logger.debug("Pinging...");
+					log.debug("Pinging...");
 					sendPackage(GGPing.getPing());
 					notifyPingSent();
 					final int pingInterval = m_session.getGGConfiguration().getPingIntervalInMiliseconds();
 					Thread.sleep(pingInterval);
 				} catch (final IOException ex) {
 					m_active = false;
-					// logger.error("PingerThreadError: ", ex);
+					// log.error("PingerThreadError: ", ex);
 					try {
 						notifyConnectionError(ex);
 					} catch (final GGException e) {
-						logger.warn("Unable to notify connection error listeners", ex);
+						log.warn("Unable to notify connection error listeners", ex);
 					}
 				} catch (final InterruptedException ex) {
 					m_active = false;
-					logger.debug("PingerThread was interruped", ex);
+					log.debug("PingerThread was interruped", ex);
 				}
 			}
 		}
 
 		private void startPinging() {
-			logger.debug("Starting pinging...");
+			log.debug("Starting pinging...");
 			m_active = true;
 			start();
 		}
 
 		private void stopPinging() {
-			logger.debug("Stopping pinging...");
+			log.debug("Stopping pinging...");
 			m_active = false;
 		}
 	}

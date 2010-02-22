@@ -7,7 +7,8 @@ import pl.radical.open.gg.packet.handlers.GGWelcomePacketHandler;
 import pl.radical.open.gg.packet.handlers.PacketContext;
 import pl.radical.open.gg.packet.handlers.PacketHandler;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created on 2005-10-25
@@ -16,7 +17,7 @@ import org.apache.log4j.Logger;
  */
 public class GGNeedEmailPacketHandler implements PacketHandler {
 
-	private static final Logger LOGGER = Logger.getLogger(GGWelcomePacketHandler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(GGWelcomePacketHandler.class);
 
 	public void handle(final PacketContext context) throws GGException {
 		if (LOGGER.isDebugEnabled()) {

@@ -9,7 +9,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created on 2004-12-11
@@ -18,7 +19,7 @@ import org.apache.log4j.Logger;
  */
 public class GGUserListReplyHandler implements PacketHandler {
 
-	private final static Logger LOGGER = Logger.getLogger(GGUserListReplyHandler.class);
+	private final static Logger LOGGER = LoggerFactory.getLogger(GGUserListReplyHandler.class);
 
 	private final ArrayList<LocalUser> m_users = new ArrayList<LocalUser>();
 

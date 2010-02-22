@@ -4,7 +4,8 @@ import pl.radical.open.gg.GGException;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGLoginOK;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created on 2004-11-27
@@ -13,7 +14,7 @@ import org.apache.log4j.Logger;
  */
 public class GGLoginOKPacketHandler implements PacketHandler {
 
-	private static final Logger logger = Logger.getLogger(GGLoginOKPacketHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger(GGLoginOKPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
