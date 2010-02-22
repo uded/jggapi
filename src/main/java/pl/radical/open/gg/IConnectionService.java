@@ -25,7 +25,7 @@ public interface IConnectionService {
 	 * @throws GGException
 	 *             - exception in case there was a problem during lookup
 	 */
-	IServer lookupServer(int uin) throws GGException;
+	IServer[] lookupServer(int uin) throws GGException;
 
 	/**
 	 * Tries to connect to Gadu-Gadu server that has been previously assigned to <code>Session</code> instance.
@@ -35,7 +35,7 @@ public interface IConnectionService {
 	 * @throws GGSessionException
 	 *             if there is an incorrect session state.
 	 */
-	void connect(IServer server) throws GGException;
+	void connect(IServer[] server) throws GGException;
 
 	/**
 	 * Tries to close the connection to the Gadu-Gadu server.

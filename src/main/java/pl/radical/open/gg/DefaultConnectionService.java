@@ -22,8 +22,9 @@ import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.net.URL;
-import java.util.StringTokenizer;
 import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.event.EventListenerList;
 
@@ -76,14 +77,17 @@ public class DefaultConnectionService implements IConnectionService {
 	 * 0 0 91.197.13.78:8074 91.197.13.78
 	 * </pre>
 	 */
-	public IServer lookupServer(final int uin) throws GGException {
+	public IServer[] lookupServer(final int uin) throws GGException {
 		if (log.isTraceEnabled()) {
 			log.trace("lookupServer() executed for user [" + uin + "]");
 		}
 		try {
 			final IGGConfiguration configuration = m_session.getGGConfiguration();
 
-			final URL url = new URL(configuration.getServerLookupURL() + "?fmnumber=" + String.valueOf(uin));
+			final URL url = new URL(configuration.getServerLookupURL() + "?fmnumber=" + String.valueOf(uin) + "&version=8.0.0.7669");
+			if (log.isDebugEnabled()) {
+				log.debug("GG HUB URL address: {}", url);
+			}
 
 			final HttpURLConnection con = (HttpURLConnection) url.openConnection();
 			con.setConnectTimeout(configuration.getSocketTimeoutInMiliseconds());
@@ -96,7 +100,11 @@ public class DefaultConnectionService implements IConnectionService {
 			final String line = reader.readLine();
 			reader.close();
 
-			if (line != null && line.length() > 16) {
+			if (log.isDebugEnabled()) {
+				log.debug("Dane zwrócone przez serwer: {}", line);
+			}
+
+			if (line != null && line.length() > 22) {
 				return parseAddress(line);
 			} else {
 				throw new GGException("GG HUB didn't provided a valid IP address of GG server, aborting");
@@ -109,17 +117,18 @@ public class DefaultConnectionService implements IConnectionService {
 	/**
 	 * @see pl.radical.open.gg.IConnectionService#connect()
 	 */
-	public void connect(final IServer server) throws GGException {
+	// TODO Add HTTPS support as a fallback
+	public void connect(final IServer[] server) throws GGException {
 		if (server == null) {
 			throw new GGException("Server cannot be null");
 		}
-		m_server = server;
+		m_server = server[0];
 		checkConnectionState();
 		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
 		try {
 			m_connectionThread = new ConnectionThread();
 			m_connectionPinger = new PingerThread();
-			m_connectionThread.openConnection(server.getAddress(), server.getPort());
+			m_connectionThread.openConnection(server[0].getAddress(), server[0].getPort());
 			m_connectionPinger.startPinging();
 		} catch (final IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
@@ -315,18 +324,21 @@ public class DefaultConnectionService implements IConnectionService {
 	 *            line to be parsed.
 	 * @return <code>Server</code> the server object.
 	 */
-	private static Server parseAddress(final String line) {
-		log.debug("Parsing token information from hub: [" + line + "]");
-
-		final int tokensNumber = 3;
-		final StringTokenizer token = new StringTokenizer(line);
-
-		for (int i = 0; i < tokensNumber; i++) {
-			token.nextToken();
+	private static Server[] parseAddress(final String line) {
+		if (log.isTraceEnabled()) {
+			log.trace("Parsing token information from hub: [" + line + "]");
 		}
-		final StringTokenizer tokenizer = new StringTokenizer(token.nextToken(), ":");
+		final Pattern p = Pattern.compile("\\d\\s\\d\\s((?:\\d{1,3}\\.?+){4}\\:\\d{2,4})\\s((?:\\d{1,3}\\.?+){4})");
+		final Matcher m = p.matcher(line);
 
-		return new Server(tokenizer.nextToken(), Integer.parseInt(tokenizer.nextToken()));
+		if (!m.matches()) {
+			throw new IllegalArgumentException("String returned by GG HUB is not what was expected");
+		} else {
+			final Server[] servers = new Server[2];
+			servers[0] = new Server(m.group(1), Integer.parseInt(m.group(2)));
+			servers[1] = new Server(m.group(3), 443);
+			return servers;
+		}
 	}
 
 	private class ConnectionThread extends Thread {
@@ -401,8 +413,19 @@ public class DefaultConnectionService implements IConnectionService {
 		}
 
 		private synchronized void sendPackage(final GGOutgoingPackage outgoingPackage) throws IOException {
-			log.debug("Sending packet: " + outgoingPackage.getPacketType() + ", packetPayLoad: " + GGUtils
-					.prettyBytesToString(outgoingPackage.getContents()));
+			// log.debug("Sending packet: {}, packetPayLoad: {}", outgoingPackage.getPacketType(),
+			// GGUtils.prettyBytesToString(outgoingPackage.getContents()));
+
+			if (log.isDebugEnabled()) {
+				final byte[] c = outgoingPackage.getContents();
+				final StringBuffer buff = new StringBuffer(c.length * 2);
+				final byte[] uin = {
+						c[0], c[1], c[2], c[3]
+				};
+				buff.append(GGUtils.byteToInt(uin));
+
+				log.debug("Sending packet: [{}], packetPayLoad: [{}]", Integer.toHexString(outgoingPackage.getPacketType()), buff.toString());
+			}
 
 			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getPacketType()));
 			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getContents().length));
