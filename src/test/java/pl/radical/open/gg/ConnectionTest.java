@@ -9,11 +9,12 @@ import pl.radical.open.gg.event.LoginListener;
 
 import java.util.Collection;
 
-import org.apache.log4j.Logger;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class ConnectionTest {
-	private final Logger log = Logger.getLogger(getClass().getName());
+	private final Logger log = LoggerFactory.getLogger(getClass().getName());
 
 	static boolean asyncOp = false;
 
