@@ -6,10 +6,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -198,26 +197,18 @@ public class GGUtils {
 		return (int) y;
 	}
 
-	private static char[] getLoginHashSHA(final char[] password, final int seed) throws GGException {
-		try {
-			final MessageDigest md = MessageDigest.getInstance("SHA-1");
+	private static char[] getLoginHashSHA(final char[] password, final int seed) {
+		final StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(password);
+		stringBuilder.append(Integer.toBinaryString(seed));
 
-			final byte[] passArr = new String(password).getBytes();
-			final byte[] seedArr = intToByte(seed);
+		final byte[] hash = DigestUtils.sha(stringBuilder.toString());
 
-			final ByteBuffer str2hash = ByteBuffer.allocate(passArr.length + seedArr.length);
-			md.update(str2hash.put(passArr).put(seedArr));
-
-			final byte[] hash = md.digest();
-
-			if (LOGGER.isDebugEnabled()) {
-				LOGGER.debug("Zwrócony hash: [{}]", byteToShort(hash, 0));
-			}
-
-			return byteToString(hash, 0).toCharArray();
-		} catch (final NoSuchAlgorithmException e) {
-			throw new GGException("SHA-1 algorithm was not loaded properly", e);
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Zwrócony hash: [{}]", Hex.encodeHexString(hash));
 		}
+
+		return byteToString(hash, 0).toCharArray();
 	}
 
 	public static char[] getLoginHash(final char[] password, final int seed, final GGHashType hashType) throws GGException {
