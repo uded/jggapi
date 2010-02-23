@@ -22,14 +22,22 @@ public class ConnectionTest {
 	private static ISession session2;
 
 	@Test(timeout = 1000 * 30)
-	public void connectionTest() throws GGException, InterruptedException {
+	public void connectionTest() {
 		log.info("Executing connectionTest() method");
 
-		session1 = connectUser(SessionFactory.createSession(), 20239471, "RadicalEntropy");
-		assertEquals(true, session1.getConnectionService().isConnected());
+		try {
+			session1 = connectUser(SessionFactory.createSession(), 20239471, "RadicalEntropy");
+			assertEquals(true, session1.getConnectionService().isConnected());
 
-		session2 = connectUser(SessionFactory.createSession(), 20241237, "RadicalTest");
-		assertEquals(true, session2.getConnectionService().isConnected());
+			session2 = connectUser(SessionFactory.createSession(), 20241237, "RadicalTest");
+			assertEquals(true, session2.getConnectionService().isConnected());
+		} catch (final GGException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (final InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// @Test
