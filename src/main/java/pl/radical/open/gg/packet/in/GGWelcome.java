@@ -25,10 +25,11 @@ public class GGWelcome implements GGIncomingPackage {
 			log.error("Was expecting a data in constructor, got null");
 			throw new IllegalArgumentException("data cannot be null");
 		}
+
+		m_seed = GGUtils.byteToInt(data);
 		if (log.isTraceEnabled()) {
 			log.trace("Seed to be used in this connection: {}", m_seed);
 		}
-		m_seed = GGUtils.byteToInt(data);
 	}
 
 	/**
