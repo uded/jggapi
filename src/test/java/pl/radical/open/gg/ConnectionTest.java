@@ -112,17 +112,32 @@ public class ConnectionTest {
 			public void connectionEstablished() throws GGException {
 				log.info("Connection established.");
 				ConnectionTest.asyncOp = true;
+				super.connectionEstablished();
+			}
+
+			@Override
+			public void connectionClosed() throws GGException {
+				log.info("Connection closed.");
+				super.connectionClosed();
+			}
+
+			@Override
+			public void connectionError(final Exception ex) throws GGException {
+				log.error("Connection error", ex);
+				super.connectionError(ex);
 			}
 		});
 
 		final IConnectionService connectionService = session.getConnectionService();
 		final IServer[] server = connectionService.lookupServer(loginContext.getUin());
+
 		connectionService.connect(server);
 
 		while (!asyncOp) {
 			Thread.sleep(100);
 		}
 		asyncOp = false;
+
 		return session;
 	}
 }
