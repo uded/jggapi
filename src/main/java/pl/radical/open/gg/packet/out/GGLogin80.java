@@ -63,7 +63,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Login hash type that will be used to authenticate the user
 	 */
-	private final GGHashType m_hashType = GGHashType.GG_LOGIN_HASH_SHA1;
+	private final GGHashType m_hashType = GGHashType.GG_LOGIN_HASH_GG32;
 
 
 	/**
@@ -273,7 +273,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 			if (i < loginHashBytes.length) {
 				byteList.add(loginHashBytes[i]);
 			} else {
-				byteList.add((byte) 0);
+				byteList.add(Character.UNASSIGNED);
 			}
 		}
 
