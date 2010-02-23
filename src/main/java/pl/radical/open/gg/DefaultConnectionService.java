@@ -421,19 +421,20 @@ public class DefaultConnectionService implements IConnectionService {
 		}
 
 		private synchronized void sendPackage(final GGOutgoingPackage outgoingPackage) throws IOException {
-			// log.debug("Sending packet: {}, packetPayLoad: {}", outgoingPackage.getPacketType(),
-			// GGUtils.prettyBytesToString(outgoingPackage.getContents()));
+			log.debug("Sending packet: {}, packetPayLoad: {}", outgoingPackage.getPacketType(), GGUtils.prettyBytesToString(outgoingPackage
+			        .getContents()));
 
-			if (log.isDebugEnabled()) {
-				final byte[] c = outgoingPackage.getContents();
-				final StringBuffer buff = new StringBuffer(c.length * 2);
-				final byte[] uin = {
-						c[0], c[1], c[2], c[3]
-				};
-				buff.append(GGUtils.byteToInt(uin));
-
-				log.debug("Sending packet: [{}], packetPayLoad: [{}]", Integer.toHexString(outgoingPackage.getPacketType()), buff.toString());
-			}
+			// if (log.isDebugEnabled()) {
+			// final byte[] c = outgoingPackage.getContents();
+			// final StringBuffer buff = new StringBuffer(c.length * 2);
+			// final byte[] uin = {
+			// c[0], c[1], c[2], c[3]
+			// };
+			// buff.append(GGUtils.byteToInt(uin));
+			//
+			// log.debug("Sending packet: [{}], packetPayLoad: [{}]",
+			// Integer.toHexString(outgoingPackage.getPacketType()), buff.toString());
+			// }
 
 			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getPacketType()));
 			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getContents().length));
