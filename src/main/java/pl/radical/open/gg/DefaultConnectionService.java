@@ -28,6 +28,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.event.EventListenerList;
 
+import org.apache.commons.codec.binary.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -420,27 +421,14 @@ public class DefaultConnectionService implements IConnectionService {
 			m_active = false;
 		}
 
-		private synchronized void sendPackage(final GGOutgoingPackage outgoingPackage) throws IOException {
-			log.debug("Sending packet: {}, packetPayLoad: {}", outgoingPackage.getPacketType(), GGUtils.prettyBytesToString(outgoingPackage
-			        .getContents()));
+		private synchronized void sendPackage(final GGOutgoingPackage op) throws IOException {
+			log.debug("Sending packet: {}, packetPayLoad: {}", op.getPacketType(), Hex.encodeHexString(op.getContents()));
 
-			// if (log.isDebugEnabled()) {
-			// final byte[] c = outgoingPackage.getContents();
-			// final StringBuffer buff = new StringBuffer(c.length * 2);
-			// final byte[] uin = {
-			// c[0], c[1], c[2], c[3]
-			// };
-			// buff.append(GGUtils.byteToInt(uin));
-			//
-			// log.debug("Sending packet: [{}], packetPayLoad: [{}]",
-			// Integer.toHexString(outgoingPackage.getPacketType()), buff.toString());
-			// }
+			m_dataOutput.write(GGUtils.intToByte(op.getPacketType()));
+			m_dataOutput.write(GGUtils.intToByte(op.getContents().length));
 
-			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getPacketType()));
-			m_dataOutput.write(GGUtils.intToByte(outgoingPackage.getContents().length));
-
-			if (outgoingPackage.getContents().length > 0) {
-				m_dataOutput.write(outgoingPackage.getContents());
+			if (op.getContents().length > 0) {
+				m_dataOutput.write(op.getContents());
 			}
 
 			m_dataOutput.flush();
