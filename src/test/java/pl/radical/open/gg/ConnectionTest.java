@@ -29,8 +29,8 @@ public class ConnectionTest {
 			session1 = connectUser(SessionFactory.createSession(), 20239471, "RadicalEntropy");
 			assertEquals(true, session1.getConnectionService().isConnected());
 
-			session2 = connectUser(SessionFactory.createSession(), 20241237, "RadicalTest");
-			assertEquals(true, session2.getConnectionService().isConnected());
+			// session2 = connectUser(SessionFactory.createSession(), 20241237, "RadicalTest");
+			// assertEquals(true, session2.getConnectionService().isConnected());
 		} catch (final GGException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class ConnectionTest {
 		}
 	}
 
-	// @Test
+	@Test
 	public void loginTest() throws GGException, InterruptedException {
 		ILoginService loginService;
 
@@ -71,12 +71,9 @@ public class ConnectionTest {
 		log.debug("Loging in user1");
 		loginService.login(new LoginContext(20239471, "RadicalEntropy"));
 
-		Thread.sleep(45000);
+		Thread.sleep(10000);
 		assertEquals(true, loginService.isLoggedIn());
 
-		if (loginService.isLoggedIn()) {
-			loginService.logout();
-		}
 
 		// log.debug("Loging in user2");
 		// loginService = session2.getLoginService();
@@ -98,10 +95,6 @@ public class ConnectionTest {
 		//
 		// Thread.sleep(10000);
 		// assertEquals(true, loginService.isLoggedIn());
-		//
-		// if (loginService.isLoggedIn()) {
-		// loginService.logout();
-		// }
 	}
 
 	private ISession connectUser(final ISession session, final int uid, final String password) throws GGException, InterruptedException {
