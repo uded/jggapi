@@ -1,11 +1,9 @@
-package pl.radical.open.gg.packet.in;
+package pl.radical.open.gg.packet.handlers;
 
 import pl.radical.open.gg.GGException;
 import pl.radical.open.gg.event.LoginFailedEvent;
 import pl.radical.open.gg.packet.GGUtils;
-import pl.radical.open.gg.packet.handlers.GGWelcomePacketHandler;
-import pl.radical.open.gg.packet.handlers.PacketContext;
-import pl.radical.open.gg.packet.handlers.PacketHandler;
+import pl.radical.open.gg.packet.in.GGNeedEmail;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
