@@ -29,7 +29,7 @@ public interface GGStatuses {
 	/**
 	 * Status available
 	 */
-	int GG_STATUS_AVAIL = 0x00000002;
+	int GG_STATUS_AVAIL = 0x00002;
 
 	/**
 	 * Status available with description

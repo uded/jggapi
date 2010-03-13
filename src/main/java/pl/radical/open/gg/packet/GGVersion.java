@@ -7,9 +7,9 @@ package pl.radical.open.gg.packet;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public final class GGVersion {
-	public static final int VERSION_80_build_8283 = 0x2E;
-	public static final int VERSION_80_build_4881 = 0x2D;
-	public static final int VERSION_77_build_3315 = 0x2A;
+	public static final int VERSION_80_build_8283 = 0x2e;
+	public static final int VERSION_80_build_4881 = 0x2d;
+	public static final int VERSION_77_build_3315 = 0x2a;
 	public static final int VERSION_76_build_1688 = 0x29;
 	public static final int VERSION_7_5_0_build_2201 = 0x28;
 	public static final int VERSION_70_build_22 = 0x27;

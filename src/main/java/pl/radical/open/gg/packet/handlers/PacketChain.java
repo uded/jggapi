@@ -4,10 +4,10 @@ import pl.radical.open.gg.GGException;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGDisconnecting;
+import pl.radical.open.gg.packet.in.GGLogin80OK;
 import pl.radical.open.gg.packet.in.GGLoginFailed;
 import pl.radical.open.gg.packet.in.GGLoginOK;
 import pl.radical.open.gg.packet.in.GGNeedEmail;
-import pl.radical.open.gg.packet.in.GGNeedEmailPacketHandler;
 import pl.radical.open.gg.packet.in.GGNotifyReply;
 import pl.radical.open.gg.packet.in.GGNotifyReply60;
 import pl.radical.open.gg.packet.in.GGPong;
@@ -66,6 +66,7 @@ public class PacketChain {
 	private void registerDefaultHandlers() {
 		registerGGPackageHandler(GGWelcome.GG_PACKAGE_WELCOME, new GGWelcomePacketHandler());
 		registerGGPackageHandler(GGLoginOK.GG_LOGIN_OK, new GGLoginOKPacketHandler());
+		registerGGPackageHandler(GGLogin80OK.GG_LOGIN80_OK, new GGLogin80OKPacketHandler());
 		registerGGPackageHandler(GGLoginFailed.GG_LOGIN_FAILED, new GGLoginFailedPacketHandler());
 		registerGGPackageHandler(GGNeedEmail.GG_NEED_EMAIL, new GGNeedEmailPacketHandler());
 		registerGGPackageHandler(GGStatus.GG_STATUS, new GGStatusPacketHandler());

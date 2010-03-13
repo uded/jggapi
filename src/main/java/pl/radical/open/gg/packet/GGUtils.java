@@ -9,6 +9,10 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
+import org.apache.commons.collections.primitives.ArrayByteList;
+import org.apache.commons.collections.primitives.ArrayCharList;
+import org.apache.commons.collections.primitives.ByteList;
+import org.apache.commons.collections.primitives.CharList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -197,24 +201,41 @@ public class GGUtils {
 		return (int) y;
 	}
 
-	private static char[] getLoginHashSHA(final char[] password, final int seed) {
+	public static char[] byteToCharArray(final byte[] bytes) {
+		final CharList cl = new ArrayCharList();
+		for (final byte b : bytes) {
+			cl.add((char) b);
+		}
+
+		return cl.toArray();
+	}
+
+	private static byte[] getLoginHashSHA(final char[] password, final int seed) {
+		final char[] binarySeed = Hex.encodeHex(intToByte(seed));
+
 		final StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(password);
-		stringBuilder.append(Integer.toBinaryString(seed));
+
+		final ByteList bl = new ArrayByteList();
+		for (final char c : password) {
+			bl.add((byte) c);
+		}
+		stringBuilder.append(bl.toArray());
+		stringBuilder.append(binarySeed);
 
 		final byte[] hash = DigestUtils.sha(stringBuilder.toString());
 
 		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Zwrócony hash: [{}]", Hex.encodeHexString(hash));
+			LOGGER.debug("Łańcuch do budowy digesta: '{}'", stringBuilder.toString());
+			LOGGER.debug("Seed: [{}], SHA hash: [{}]", new String(binarySeed), Hex.encodeHexString(hash));
 		}
 
-		return byteToString(hash, 0).toCharArray();
+		return hash;
 	}
 
-	public static char[] getLoginHash(final char[] password, final int seed, final GGHashType hashType) throws GGException {
+	public static byte[] getLoginHash(final char[] password, final int seed, final GGHashType hashType) throws GGException {
 		switch (hashType) {
 			case GG_LOGIN_HASH_GG32:
-				return Integer.toString(getLoginHash(password, seed)).toCharArray();
+				return intToByte(getLoginHash(password, seed));
 			case GG_LOGIN_HASH_SHA1:
 				return getLoginHashSHA(password, seed);
 			default:

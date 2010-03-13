@@ -3,7 +3,7 @@ package pl.radical.open.gg;
 import pl.radical.open.gg.event.LoginFailedEvent;
 import pl.radical.open.gg.event.LoginListener;
 import pl.radical.open.gg.event.UserListener;
-import pl.radical.open.gg.packet.out.GGLogin60;
+import pl.radical.open.gg.packet.out.GGLogin80;
 
 import java.io.IOException;
 import java.util.Date;
@@ -62,7 +62,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 			final String password = loginContext.getPassword();
 			final int seed = m_session.getSessionAccessor().getLoginSeed();
 
-			final GGLogin60 login = new GGLogin60(uin, password.toCharArray(), seed);
+			final GGLogin80 login = new GGLogin80(uin, password.toCharArray(), seed);
 			login.setStatus(loginContext.getStatus());
 
 			if (loginContext.getImageSize() != -1) {

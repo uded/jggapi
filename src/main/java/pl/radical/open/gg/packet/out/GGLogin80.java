@@ -5,6 +5,7 @@ import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
 import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGHashType;
+import pl.radical.open.gg.packet.GGStatusFlags;
 import pl.radical.open.gg.packet.GGStatuses;
 import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.GGVersion;
@@ -69,7 +70,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Computed login hash based on seed retreived from Gadu-Gadu server
 	 */
-	private char[] m_loginHash = null;
+	private byte[] m_loginHash = null;
 
 
 	/**
@@ -81,13 +82,13 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Starting protocols flags
 	 */
-	private final int m_flags = 0x01;
+	private final int m_flags = GGStatusFlags.FLAG_UNKNOWN.value() + GGStatusFlags.FLAG_RECEIVELINKS.value();
 
 
 	/**
 	 * Protocol options - 0x00000367
 	 */
-	private final int m_features = 0x00000367;
+	private final int m_features = 0x00000007;
 
 
 	/**
@@ -101,7 +102,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Local port that we are listening on
 	 */
-	private int m_localPort = 1550;
+	private int m_localPort = 0;
 
 
 	/**
@@ -115,13 +116,13 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * External port
 	 */
-	private int m_externalPort = 1550;
+	private int m_externalPort = 0;
 
 
 	/**
 	 * size of image in kilobytes
 	 */
-	private byte m_imageSize = 64;
+	private byte m_imageSize = (byte) -1;
 
 	/**
 	 * Unknown property
@@ -131,12 +132,12 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Version of the client
 	 */
-	private final int m_version_len = GGVersion.VERSION_80_build_8283;
+	private final int m_version_len = GGVersion.VERSION_60_1_build_133;
 
 	/**
 	 * Version descriptive string
 	 */
-	private final String m_version = "Gadu-Gadu Client build 10.0.0.10450";
+	private final String m_version = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
 
 	/**
 	 * The length of the status description
@@ -253,47 +254,41 @@ public class GGLogin80 implements GGOutgoingPackage {
 	public byte[] getContents() {
 		final ByteList byteList = new ArrayByteList();
 
-		byteList.add((byte) (m_uin & 0xFF));
-		byteList.add((byte) (m_uin >> 8 & 0xFF));
-		byteList.add((byte) (m_uin >> 16 & 0xFF));
-		byteList.add((byte) (m_uin >> 24 & 0xFF));
+		byteList.add((byte) m_uin);
+		byteList.add((byte) (m_uin >>> 8));
+		byteList.add((byte) (m_uin >>> 16));
+		byteList.add((byte) (m_uin >>> 24));
 
 		byteList.add(M_LANGUAGE.getBytes()[0]);
 		byteList.add(M_LANGUAGE.getBytes()[1]);
 
-		// login hash type
-		byteList.add((byte) (m_hashType.getValue() & 0xFF));
-		byteList.add((byte) (m_hashType.getValue() >> 8 & 0xFF));
-		byteList.add((byte) (m_hashType.getValue() >> 16 & 0xFF));
-		byteList.add((byte) (m_hashType.getValue() >> 24 & 0xFF));
+		byteList.add((byte) m_hashType.getValue());
 
-		// login hash
-		final byte[] loginHashBytes = new String(m_loginHash).getBytes();
 		for (int i = 0; i < 64; i++) {
-			if (i < loginHashBytes.length) {
-				byteList.add(loginHashBytes[i]);
+			if (i < m_loginHash.length) {
+				byteList.add(m_loginHash[i]);
 			} else {
 				byteList.add(Character.UNASSIGNED);
 			}
 		}
 
 		// status
-		byteList.add((byte) (m_status & 0xFF));
-		byteList.add((byte) (m_status >> 8 & 0xFF));
-		byteList.add((byte) (m_status >> 16 & 0xFF));
-		byteList.add((byte) (m_status >> 24 & 0xFF));
+		byteList.add((byte) m_status);
+		byteList.add((byte) (m_status >>> 8));
+		byteList.add((byte) (m_status >>> 16));
+		byteList.add((byte) (m_status >>> 24));
 
 		// flags
-		byteList.add((byte) (m_flags & 0xFF));
-		byteList.add((byte) (m_flags >> 8 & 0xFF));
-		byteList.add((byte) (m_flags >> 16 & 0xFF));
-		byteList.add((byte) (m_flags >> 24 & 0xFF));
+		byteList.add((byte) m_flags);
+		byteList.add((byte) (m_flags >>> 8));
+		byteList.add((byte) (m_flags >>> 16));
+		byteList.add((byte) (m_flags >>> 24));
 
 		// features (?? byte)
-		byteList.add((byte) (m_features & 0xFF));
-		byteList.add((byte) (m_features >> 8 & 0xFF));
-		byteList.add((byte) (m_features >> 16 & 0xFF));
-		byteList.add((byte) (m_features >> 24 & 0xFF));
+		byteList.add((byte) m_features);
+		byteList.add((byte) (m_features >>> 8));
+		byteList.add((byte) (m_features >>> 16));
+		byteList.add((byte) (m_features >>> 24));
 
 		// local IP
 		byteList.add(m_localIP[0]);
@@ -336,7 +331,6 @@ public class GGLogin80 implements GGOutgoingPackage {
 		byteList.add((byte) (m_description_size >> 8 & 0xFF));
 		byteList.add((byte) (m_description_size >> 16 & 0xFF));
 		byteList.add((byte) (m_description_size >> 24 & 0xFF));
-
 
 		if (m_description != null) {
 			final byte[] descBytes = m_description.getBytes();
