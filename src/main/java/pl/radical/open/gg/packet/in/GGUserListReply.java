@@ -1,6 +1,7 @@
 package pl.radical.open.gg.packet.in;
 
 import pl.radical.open.gg.LocalUser;
+import pl.radical.open.gg.packet.handlers.GGUserListReplyHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,8 +16,11 @@ import java.util.List;
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGUserListReply implements GGIncomingPackage {
+@IncomingPacket(type = 0x0010, handler = GGUserListReplyHandler.class)
+// FIXME Wyczyścić - coś mi się nie zgadza typ pakietów
+public class GGUserListReply {
 
 	public final static int GG_USERLIST_REPLY = 0x0010;
 

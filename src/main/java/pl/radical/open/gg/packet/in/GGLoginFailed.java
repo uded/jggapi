@@ -1,14 +1,15 @@
 package pl.radical.open.gg.packet.in;
 
+import pl.radical.open.gg.packet.handlers.GGLoginFailedPacketHandler;
+
 /**
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGLoginFailed implements GGIncomingPackage {
-
-	public final static int GG_LOGIN_FAILED = 9;
-
+@IncomingPacket(type = 0x0009, handler = GGLoginFailedPacketHandler.class)
+public class GGLoginFailed {
 	private static GGLoginFailed m_instance = null;
 
 	private GGLoginFailed() {
@@ -21,12 +22,4 @@ public class GGLoginFailed implements GGIncomingPackage {
 		}
 		return m_instance;
 	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_LOGIN_FAILED;
-	}
-
 }

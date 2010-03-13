@@ -7,14 +7,16 @@ import pl.radical.open.gg.User;
 import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGStatuses;
 import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.handlers.GGStatusPacketHandler;
 
 /**
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGStatus implements GGIncomingPackage, GGStatuses {
-
-	public static final int GG_STATUS = 0x02;
+@IncomingPacket(type = 0x0002, handler = GGStatusPacketHandler.class)
+@Deprecated
+public class GGStatus implements GGStatuses {
 
 	private IUser m_user = null;
 	private RemoteStatus m_status = null;
@@ -22,10 +24,6 @@ public class GGStatus implements GGIncomingPackage, GGStatuses {
 	public GGStatus(final byte[] data) {
 		handleUser(data);
 		handleStatus(data);
-	}
-
-	public int getPacketType() {
-		return GG_STATUS;
 	}
 
 	public IUser getUser() {

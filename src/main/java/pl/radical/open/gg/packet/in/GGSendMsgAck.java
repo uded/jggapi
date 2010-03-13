@@ -1,16 +1,16 @@
 package pl.radical.open.gg.packet.in;
 
 import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.handlers.GGSentMessageAckPacketHandler;
 
 /**
  * Acknowledgment of successuly delivered message that is recieved from Gadu-Gadu server.
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGSendMsgAck implements GGIncomingPackage {
-
-	public final static int GG_SEND_MSG_ACK = 0x0005;
-
+@IncomingPacket(type = 0x0005, handler = GGSentMessageAckPacketHandler.class)
+public class GGSendMsgAck {
 	// Message statuses
 
 	/** Message has not been delivered. */
@@ -36,13 +36,6 @@ public class GGSendMsgAck implements GGIncomingPackage {
 		m_messageStatus = GGUtils.byteToInt(data, 0);
 		m_recipient = GGUtils.byteToInt(data, 4);
 		m_messageSeq = GGUtils.byteToInt(data, 8);
-	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_SEND_MSG_ACK;
 	}
 
 	/**

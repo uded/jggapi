@@ -7,16 +7,17 @@ import pl.radical.open.gg.PublicDirSearchReply;
 import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGPubdirConsts;
 import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.handlers.GGPubdirReplyPacketHandler;
 
 import java.util.StringTokenizer;
 
 /**
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGPubdirReply implements GGIncomingPackage, GGPubdirConsts {
-
-	public static final int GG_PUBDIR50_REPLY = 0x000E;
+@IncomingPacket(type = 0x000e, handler = GGPubdirReplyPacketHandler.class)
+public class GGPubdirReply implements GGPubdirConsts {
 
 	private byte m_replyType = -1;
 	private int m_querySeq = -1;
@@ -44,13 +45,6 @@ public class GGPubdirReply implements GGIncomingPackage, GGPubdirConsts {
 
 	public PublicDirSearchReply getPubdirSearchReply() {
 		return m_publicDirSearchReply;
-	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_PUBDIR50_REPLY;
 	}
 
 	public boolean isPubdirSearchReply() {

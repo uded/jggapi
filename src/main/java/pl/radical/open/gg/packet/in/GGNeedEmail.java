@@ -1,25 +1,19 @@
 package pl.radical.open.gg.packet.in;
 
+import pl.radical.open.gg.packet.handlers.GGNeedEmailPacketHandler;
+
 /**
  * Created on 2004-12-11
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGNeedEmail implements GGIncomingPackage {
-
+@IncomingPacket(type = 0x0014, handler = GGNeedEmailPacketHandler.class)
+public class GGNeedEmail {
 	private static GGNeedEmail m_instance = null;
-
-	public final static int GG_NEED_EMAIL = 0x14;
 
 	private GGNeedEmail() {
 		// prevent instant
-	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_NEED_EMAIL;
 	}
 
 	public static GGNeedEmail getInstance() {

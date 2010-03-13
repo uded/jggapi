@@ -6,6 +6,7 @@ import pl.radical.open.gg.User;
 import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGStatuses;
 import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.handlers.GGNotifyReply60PacketHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,31 +15,14 @@ import java.util.Map;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public class GGNotifyReply60 implements GGIncomingPackage {
-
-	public static final int GG_NOTIFY_REPLY60 = 0x0011;
+@IncomingPacket(type = 0x0011, handler = GGNotifyReply60PacketHandler.class)
+@Deprecated
+public class GGNotifyReply60 {
 
 	private final Map<IUser, RemoteStatus> m_statuses = new HashMap<IUser, RemoteStatus>();
 
-	// struct gg_notify_reply60 {
-	// int uin; /* numerek plus flagi w najstarszym bajcie */ - 4
-	// char status; /* status danej osoby */ - 1
-	// int remote_ip; /* adres IP bezpośrednich połączeń */ - 4
-	// short remote_port; /* port bezpośrednich połączeń */ - 2
-	// char version; /* wersja klienta */ - 1
-	// char image_size; /* maksymalny rozmiar obrazków w KB */ -1
-	// char unknown1; /* 0x00 */ -1
-	// char description_size; /* rozmiar opisu i czasu, nie musi wystąpić */ -1
-	// char description[]; /* opis, nie musi wystąpić */
-	// int time; /* czas, nie musi wystąpić */ 4
-	// };
-
 	public GGNotifyReply60(final byte[] data) {
 		handlePacket(data);
-	}
-
-	public int getPacketType() {
-		return GG_NOTIFY_REPLY60;
 	}
 
 	public Map<IUser, RemoteStatus> getUsersStatus() {

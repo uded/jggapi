@@ -7,27 +7,15 @@ import pl.radical.open.gg.User;
 import pl.radical.open.gg.packet.GGConversion;
 import pl.radical.open.gg.packet.GGStatuses;
 import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.handlers.GGStatus60PacketHandler;
 
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGStatus60 implements GGIncomingPackage, GGStatuses {
-
-	// #define GG_STATUS60 0x000F
-
-	// struct gg_status60 {
-	// int uin; /* numer plus flagi w najstarszym bajcie */ 4
-	// char status; /* nowy stan */ 1
-	// int remote_ip; /* adres IP bezpo�rednich po��cze� */ 4
-	// short remote_port; /* port bezpo�rednich po��cze� */ 2
-	// char version; /* wersja klienta */ 1
-	// char image_size; /* maksymalny rozmiar grafiki */ 2
-	// char unknown1; /* 0x00 * 1
-	// char description[]; /* opis, nie musi wyst�pi� */ n
-	// int time; /* czas, nie musi wyst�pi� */ 1
-	// };
-
-	public static final int GG_STATUS60 = 0x0F;
+@IncomingPacket(type = 0x000f, handler = GGStatus60PacketHandler.class)
+@Deprecated
+public class GGStatus60 implements GGStatuses {
 
 	private IUser m_user = null;
 
@@ -36,13 +24,6 @@ public class GGStatus60 implements GGIncomingPackage, GGStatuses {
 	public GGStatus60(final byte[] data) {
 		handleUser(data);
 		handleStatus60(data);
-	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.GGPacket#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_STATUS60;
 	}
 
 	public IUser getUser() {

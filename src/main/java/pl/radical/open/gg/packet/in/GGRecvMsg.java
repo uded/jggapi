@@ -2,16 +2,18 @@ package pl.radical.open.gg.packet.in;
 
 import pl.radical.open.gg.packet.GGMessageClass;
 import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.handlers.GGMessageReceivedPacketHandler;
 
 /**
  * Class representing Gadu-Gadu received message packet.
  * 
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGRecvMsg implements GGIncomingPackage, GGMessageClass {
-
-	public static final int GG_RECV_MSG = 0x000A;
+@IncomingPacket(type = 0x000a, handler = GGMessageReceivedPacketHandler.class)
+@Deprecated
+public class GGRecvMsg implements GGMessageClass {
 
 	private int m_sender = -1;
 	private int m_seq = -1;
@@ -25,13 +27,6 @@ public class GGRecvMsg implements GGIncomingPackage, GGMessageClass {
 		m_time = GGUtils.secondsToMillis(GGUtils.byteToInt(data, 8));
 		m_msgClass = GGUtils.byteToInt(data, 12);
 		m_message = GGUtils.byteToString(data, 16);
-	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_RECV_MSG;
 	}
 
 	/**

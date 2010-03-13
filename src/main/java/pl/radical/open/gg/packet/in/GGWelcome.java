@@ -1,6 +1,7 @@
 package pl.radical.open.gg.packet.in;
 
 import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.handlers.GGWelcomePacketHandler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,10 +14,9 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGWelcome implements GGIncomingPackage {
+@IncomingPacket(type = 0x0001, handler = GGWelcomePacketHandler.class)
+public class GGWelcome {
 	private final Logger log = LoggerFactory.getLogger(getClass());
-
-	public static final int GG_PACKAGE_WELCOME = 0x1;
 
 	private int m_seed = -1;
 
@@ -30,13 +30,6 @@ public class GGWelcome implements GGIncomingPackage {
 		if (log.isTraceEnabled()) {
 			log.trace("Seed to be used in this connection: {}", m_seed);
 		}
-	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_PACKAGE_WELCOME;
 	}
 
 	public int getSeed() {

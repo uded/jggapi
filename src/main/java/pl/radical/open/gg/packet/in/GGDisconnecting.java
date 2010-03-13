@@ -1,11 +1,13 @@
 package pl.radical.open.gg.packet.in;
 
+import pl.radical.open.gg.packet.handlers.GGDisconnectingPacketHandler;
+
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGDisconnecting implements GGIncomingPackage {
-
-	public static final int GG_DISCONNECTING = 0x000B;
+@IncomingPacket(type = 0x000b, handler = GGDisconnectingPacketHandler.class)
+public class GGDisconnecting {
 
 	private static GGDisconnecting m_instance = null;
 
@@ -19,12 +21,4 @@ public class GGDisconnecting implements GGIncomingPackage {
 		}
 		return m_instance;
 	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_DISCONNECTING;
-	}
-
 }
