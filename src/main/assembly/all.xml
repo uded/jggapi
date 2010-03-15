@@ -7,13 +7,6 @@
   </formats>
   <fileSets>
     <fileSet>
-      <includes>
-        <include>README.txt</include>
-        <include>LICENSE.txt</include>
-        <include>TODO.txt</include>
-      </includes>
-    </fileSet>
-    <fileSet>
 		<directory>lib</directory>
       <includes>
         <include>*.jar</include>
