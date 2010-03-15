@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet;
 
+import pl.radical.open.gg.utils.GGUtils;
+
 /**
  * Gadu-Gadu packet header.
  * 
