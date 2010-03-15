@@ -2,9 +2,10 @@ package pl.radical.open.gg.packet.out;
 
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.User;
-import pl.radical.open.gg.packet.GGConversion;
-import pl.radical.open.gg.packet.GGUser;
-import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.dicts.GGUser;
+import pl.radical.open.gg.utils.GGConversion;
+import pl.radical.open.gg.utils.GGUtils;
 
 /**
  * @see pl.radical.open.gg.packet.in.GGNotifyReply
@@ -13,7 +14,7 @@ import pl.radical.open.gg.packet.GGUtils;
  */
 public class GGAddNotify implements GGOutgoingPackage, GGUser {
 
-	public final int GG_ADD_NOTIFY = 0x000D;
+	public final int GG_ADD_NOTIFY = 0x000d;
 
 	/** Gadu-Gadu uin number */
 	private int m_uin = -1;
@@ -43,21 +44,21 @@ public class GGAddNotify implements GGOutgoingPackage, GGUser {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getPacketType()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_ADD_NOTIFY;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getLength()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
 		return 5;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
 		final byte[] data = new byte[getLength()];

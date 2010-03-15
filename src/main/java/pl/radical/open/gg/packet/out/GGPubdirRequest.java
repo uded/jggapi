@@ -4,7 +4,8 @@ import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.Gender;
 import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchQuery;
-import pl.radical.open.gg.packet.GGPubdirConsts;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.dicts.GGPubdirConsts;
 
 import java.util.Random;
 
@@ -27,21 +28,21 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getPacketType()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_PUBDIR50_REQUEST;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getLength()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
 		return 5 + m_request.getBytes().length;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
 		final byte[] toSend = new byte[getLength()];

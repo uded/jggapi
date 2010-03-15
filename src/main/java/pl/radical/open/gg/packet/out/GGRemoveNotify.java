@@ -2,9 +2,10 @@ package pl.radical.open.gg.packet.out;
 
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.User;
-import pl.radical.open.gg.packet.GGConversion;
-import pl.radical.open.gg.packet.GGUser;
-import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.dicts.GGUser;
+import pl.radical.open.gg.utils.GGConversion;
+import pl.radical.open.gg.utils.GGUtils;
 
 /**
  * Packet that deletes certain user from the list of monitored users.<BR>
@@ -45,21 +46,21 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getPacketType()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_REMOVE_NOTIFY;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getLength()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
 		return 5;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
 		final byte[] dane = new byte[getLength()];

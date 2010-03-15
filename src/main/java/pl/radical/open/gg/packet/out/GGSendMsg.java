@@ -2,8 +2,9 @@ package pl.radical.open.gg.packet.out;
 
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IOutgoingMessage;
-import pl.radical.open.gg.packet.GGConversion;
-import pl.radical.open.gg.packet.GGMessageClass;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.dicts.GGMessageClass;
+import pl.radical.open.gg.utils.GGConversion;
 
 import java.util.ArrayList;
 
@@ -49,21 +50,21 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getPacketType()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_SEND_MSG;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getLength()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
 		return 4 + 4 + 4 + m_text.length() + 1 + 5 + m_additionalRecipients.size() * 4;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
 		final ByteList byteList = new ArrayByteList(getLength());

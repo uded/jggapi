@@ -2,10 +2,11 @@ package pl.radical.open.gg.packet.out;
 
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
-import pl.radical.open.gg.packet.GGConversion;
-import pl.radical.open.gg.packet.GGStatuses;
-import pl.radical.open.gg.packet.GGUtils;
-import pl.radical.open.gg.packet.GGVersion;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.dicts.GGStatuses;
+import pl.radical.open.gg.packet.dicts.GGVersion;
+import pl.radical.open.gg.utils.GGConversion;
+import pl.radical.open.gg.utils.GGUtils;
 
 import org.apache.commons.collections.primitives.ArrayByteList;
 import org.apache.commons.collections.primitives.ByteList;
@@ -56,7 +57,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 
 	/** Version of the client */
 	// FIXME This need to be updated - not being used at all
-	private final int m_version = GGVersion.VERSION_60_1_build_133;
+	private final int m_version = GGVersion.VERSION_60_1_build_133.getCode();
 
 	/** Return time */
 	private int m_time = -1;
@@ -145,14 +146,14 @@ public class GGLogin60 implements GGOutgoingPackage {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getPacketType()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_LOGIN60;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getLength()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
 		int length = 4 + 4 + 4 + 4 + 1 + 4 + 2 + 4 + 2 + 1 + 1;
@@ -166,7 +167,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
 		final ByteList byteList = new ArrayByteList(getLength());

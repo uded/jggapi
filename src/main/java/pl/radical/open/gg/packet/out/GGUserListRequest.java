@@ -2,6 +2,7 @@ package pl.radical.open.gg.packet.out;
 
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.LocalUser;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
 
 import java.util.Collection;
 import java.util.List;
@@ -26,21 +27,21 @@ public class GGUserListRequest implements GGOutgoingPackage {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getPacketType()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_USERLIST_REQUEST;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getLength()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
 		return 1 + m_request.length();
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
 		final byte[] toSend = new byte[getLength()];

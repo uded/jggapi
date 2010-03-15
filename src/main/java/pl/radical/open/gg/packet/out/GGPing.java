@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet.out;
 
+import pl.radical.open.gg.packet.GGOutgoingPackage;
+
 /**
  * Outgoing packet, ping type that is from time to time being send to Gadu-Gadu server.
  * 
@@ -29,21 +31,21 @@ public final class GGPing implements GGOutgoingPackage {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getPacketType()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
 	public int getPacketType() {
 		return GG_PING;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getLength()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
 		return m_data.length;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.packet.out.GGOutgoingPackage#getContents()
+	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
 		return m_data;
