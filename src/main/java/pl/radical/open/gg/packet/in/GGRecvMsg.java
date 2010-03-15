@@ -1,8 +1,11 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.packet.GGMessageClass;
-import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.IncomingPacket;
+import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.packet.handlers.GGMessageReceivedPacketHandler;
+import pl.radical.open.gg.utils.GGUtils;
 
 /**
  * Class representing Gadu-Gadu received message packet.
@@ -13,7 +16,7 @@ import pl.radical.open.gg.packet.handlers.GGMessageReceivedPacketHandler;
  */
 @IncomingPacket(type = 0x000a, handler = GGMessageReceivedPacketHandler.class)
 @Deprecated
-public class GGRecvMsg implements GGMessageClass {
+public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, GGIncomingPackage {
 
 	private int m_sender = -1;
 	private int m_seq = -1;

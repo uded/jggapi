@@ -1,5 +1,8 @@
 package pl.radical.open.gg.packet.in;
 
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGNeedEmailPacketHandler;
 
 /**
@@ -9,7 +12,7 @@ import pl.radical.open.gg.packet.handlers.GGNeedEmailPacketHandler;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x0014, handler = GGNeedEmailPacketHandler.class)
-public class GGNeedEmail {
+public class GGNeedEmail extends GGBaseIncomingPacket implements GGIncomingPackage {
 	private static GGNeedEmail m_instance = null;
 
 	private GGNeedEmail() {

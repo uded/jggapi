@@ -1,6 +1,9 @@
 package pl.radical.open.gg.packet.in;
 
 import pl.radical.open.gg.LocalUser;
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGUserListReplyHandler;
 
 import java.io.BufferedReader;
@@ -20,7 +23,7 @@ import java.util.List;
  */
 @IncomingPacket(type = 0x0010, handler = GGUserListReplyHandler.class)
 // FIXME Wyczyścić - coś mi się nie zgadza typ pakietów
-public class GGUserListReply {
+public class GGUserListReply extends GGBaseIncomingPacket implements GGIncomingPackage {
 
 	public final static int GG_USERLIST_REPLY = 0x0010;
 
@@ -39,13 +42,6 @@ public class GGUserListReply {
 		if (isGetMoreReply() || isGetReply()) {
 			m_users = createUsersCollection(data);
 		}
-	}
-
-	/**
-	 * @see pl.radical.open.gg.packet.in.GGIncomingPackage#getPacketType()
-	 */
-	public int getPacketType() {
-		return GG_USERLIST_PUT_REPLY;
 	}
 
 	private Collection<LocalUser> createUsersCollection(final byte[] data) throws IOException {

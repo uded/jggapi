@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class DefaultLoginService implements ILoginService, UserListener {
 

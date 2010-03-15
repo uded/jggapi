@@ -4,10 +4,13 @@ import pl.radical.open.gg.Gender;
 import pl.radical.open.gg.IRemoteStatus;
 import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchReply;
-import pl.radical.open.gg.packet.GGConversion;
-import pl.radical.open.gg.packet.GGPubdirConsts;
-import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.IncomingPacket;
+import pl.radical.open.gg.packet.dicts.GGPubdirConsts;
 import pl.radical.open.gg.packet.handlers.GGPubdirReplyPacketHandler;
+import pl.radical.open.gg.utils.GGConversion;
+import pl.radical.open.gg.utils.GGUtils;
 
 import java.util.StringTokenizer;
 
@@ -17,7 +20,7 @@ import java.util.StringTokenizer;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x000e, handler = GGPubdirReplyPacketHandler.class)
-public class GGPubdirReply implements GGPubdirConsts {
+public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConsts, GGIncomingPackage {
 
 	private byte m_replyType = -1;
 	private int m_querySeq = -1;

@@ -1,5 +1,8 @@
 package pl.radical.open.gg.packet.in;
 
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGLoginFailedPacketHandler;
 
 /**
@@ -9,7 +12,7 @@ import pl.radical.open.gg.packet.handlers.GGLoginFailedPacketHandler;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x0009, handler = GGLoginFailedPacketHandler.class)
-public class GGLoginFailed {
+public class GGLoginFailed extends GGBaseIncomingPacket implements GGIncomingPackage {
 	private static GGLoginFailed m_instance = null;
 
 	private GGLoginFailed() {

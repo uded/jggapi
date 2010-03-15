@@ -1,5 +1,8 @@
 package pl.radical.open.gg.packet.in;
 
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGPongPacketHandler;
 
 /**
@@ -10,7 +13,7 @@ import pl.radical.open.gg.packet.handlers.GGPongPacketHandler;
  */
 @IncomingPacket(type = 0x0007, handler = GGPongPacketHandler.class)
 @Deprecated
-public class GGPong {
+public class GGPong extends GGBaseIncomingPacket implements GGIncomingPackage {
 
 	private static GGPong m_instance = null;
 
