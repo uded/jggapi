@@ -4,12 +4,12 @@ import pl.radical.open.gg.event.ConnectionListener;
 import pl.radical.open.gg.event.GGPacketListener;
 import pl.radical.open.gg.event.PingListener;
 import pl.radical.open.gg.packet.GGHeader;
-import pl.radical.open.gg.packet.GGUtils;
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.handlers.PacketChain;
 import pl.radical.open.gg.packet.handlers.PacketContext;
-import pl.radical.open.gg.packet.in.GGIncomingPackage;
-import pl.radical.open.gg.packet.out.GGOutgoingPackage;
 import pl.radical.open.gg.packet.out.GGPing;
+import pl.radical.open.gg.utils.GGUtils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 public class DefaultConnectionService implements IConnectionService {
 	private final static Logger log = LoggerFactory.getLogger(DefaultConnectionService.class);
 
-	private final static String WINDOW_ENCODING = "windows-1250";
+	private final static String WINDOWS_ENCODING = "windows-1250";
 
 	private final EventListenerList m_listeners = new EventListenerList();
 
@@ -96,7 +96,7 @@ public class DefaultConnectionService implements IConnectionService {
 
 			con.setDoInput(true);
 			con.connect();
-			final BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream(), WINDOW_ENCODING));
+			final BufferedReader reader = new BufferedReader(new InputStreamReader(con.getInputStream(), WINDOWS_ENCODING));
 
 			final String line = reader.readLine();
 			reader.close();

@@ -1,6 +1,6 @@
 package pl.radical.open.gg;
 
-import pl.radical.open.gg.packet.GGConversion;
+import pl.radical.open.gg.utils.GGConversion;
 
 import java.util.Date;
 

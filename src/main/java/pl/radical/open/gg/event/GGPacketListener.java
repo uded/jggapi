@@ -1,7 +1,7 @@
 package pl.radical.open.gg.event;
 
-import pl.radical.open.gg.packet.in.GGIncomingPackage;
-import pl.radical.open.gg.packet.out.GGOutgoingPackage;
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
 
 import java.util.EventListener;
 

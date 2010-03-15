@@ -42,7 +42,7 @@ public final class LoginContext {
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
-		if (password == null) {
+		if (password.isEmpty()) {
 			throw new GGNullPointerException("password cannot be null");
 		}
 		m_uin = uin;
@@ -58,7 +58,7 @@ public final class LoginContext {
 	}
 
 	public void setPassword(final String password) {
-		if (password == null) {
+		if (password.isEmpty()) {
 			throw new GGNullPointerException("password cannot be null");
 		}
 		m_password = password;

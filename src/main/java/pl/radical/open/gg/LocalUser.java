@@ -35,7 +35,7 @@ public class LocalUser {
 	private boolean m_isBlocked = false;
 
 	public void setFirstName(final String name) {
-		if (name == null) {
+		if (name.isEmpty()) {
 			throw new GGNullPointerException("name cannot be null");
 		}
 		m_name = name;

@@ -2,8 +2,8 @@ package pl.radical.open.gg;
 
 import pl.radical.open.gg.event.LoginFailedEvent;
 import pl.radical.open.gg.event.SessionStateListener;
-import pl.radical.open.gg.packet.in.GGIncomingPackage;
-import pl.radical.open.gg.packet.out.GGOutgoingPackage;
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;

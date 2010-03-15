@@ -2,11 +2,11 @@ package pl.radical.open.gg;
 
 import pl.radical.open.gg.event.LoginListener;
 import pl.radical.open.gg.event.UserListener;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.out.GGAddNotify;
 import pl.radical.open.gg.packet.out.GGListEmpty;
 import pl.radical.open.gg.packet.out.GGNewStatus;
 import pl.radical.open.gg.packet.out.GGNotify;
-import pl.radical.open.gg.packet.out.GGOutgoingPackage;
 import pl.radical.open.gg.packet.out.GGRemoveNotify;
 
 import java.io.IOException;

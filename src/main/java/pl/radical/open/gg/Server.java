@@ -30,7 +30,7 @@ public final class Server implements IServer {
 	 *             if the port is not value between 0 and 65535.
 	 */
 	public Server(final String address, final int port) {
-		if (address == null) {
+		if (address.isEmpty()) {
 			throw new IllegalArgumentException("address cannot be null");
 		}
 		if (!address.matches("(?:\\d{1,3}\\.?+){4}")) {

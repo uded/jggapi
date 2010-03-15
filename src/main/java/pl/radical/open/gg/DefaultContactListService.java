@@ -2,11 +2,11 @@ package pl.radical.open.gg;
 
 import pl.radical.open.gg.event.ContactListListener;
 import pl.radical.open.gg.event.GGPacketListener;
-import pl.radical.open.gg.packet.GGUtils;
-import pl.radical.open.gg.packet.in.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGIncomingPackage;
+import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.in.GGUserListReply;
-import pl.radical.open.gg.packet.out.GGOutgoingPackage;
 import pl.radical.open.gg.packet.out.GGUserListRequest;
+import pl.radical.open.gg.utils.GGUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
