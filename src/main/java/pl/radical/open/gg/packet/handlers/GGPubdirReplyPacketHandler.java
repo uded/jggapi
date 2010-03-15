@@ -3,8 +3,8 @@ package pl.radical.open.gg.packet.handlers;
 import pl.radical.open.gg.GGException;
 import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchReply;
-import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGPubdirReply;
+import pl.radical.open.gg.utils.GGUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,17 +15,16 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
-
-	private final static Logger logger = LoggerFactory.getLogger(GGPubdirReplyPacketHandler.class);
+	private final static Logger log = LoggerFactory.getLogger(GGPubdirReplyPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("Received GGPubdirReply packet.");
-			logger.debug("PacketHeader: " + context.getHeader());
-			logger.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (log.isDebugEnabled()) {
+			log.debug("Received GGPubdirReply packet.");
+			log.debug("PacketHeader: " + context.getHeader());
+			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGPubdirReply pubdirReply = new GGPubdirReply(context.getPackageContent());

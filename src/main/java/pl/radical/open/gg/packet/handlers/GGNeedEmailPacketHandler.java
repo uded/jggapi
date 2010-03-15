@@ -2,8 +2,8 @@ package pl.radical.open.gg.packet.handlers;
 
 import pl.radical.open.gg.GGException;
 import pl.radical.open.gg.event.LoginFailedEvent;
-import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGNeedEmail;
+import pl.radical.open.gg.utils.GGUtils;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,14 +14,13 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGNeedEmailPacketHandler implements PacketHandler {
-
-	private static final Logger LOGGER = LoggerFactory.getLogger(GGWelcomePacketHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(GGWelcomePacketHandler.class);
 
 	public void handle(final PacketContext context) throws GGException {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("GGNeedEmail packet received.");
-			LOGGER.debug("PacketHeader: " + context.getHeader());
-			LOGGER.debug("PacketLoad: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (log.isDebugEnabled()) {
+			log.debug("GGNeedEmail packet received.");
+			log.debug("PacketHeader: " + context.getHeader());
+			log.debug("PacketLoad: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGNeedEmail needEmail = GGNeedEmail.getInstance();

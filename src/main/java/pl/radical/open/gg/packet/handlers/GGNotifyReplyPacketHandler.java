@@ -5,8 +5,8 @@ import pl.radical.open.gg.IRemoteStatus;
 import pl.radical.open.gg.IUser;
 import pl.radical.open.gg.RemoteStatus;
 import pl.radical.open.gg.User;
-import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGNotifyReply;
+import pl.radical.open.gg.utils.GGUtils;
 
 import java.util.Map;
 
@@ -19,17 +19,16 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGNotifyReplyPacketHandler implements PacketHandler {
-
-	private final static Logger logger = LoggerFactory.getLogger(GGNotifyReplyPacketHandler.class);
+	private final static Logger log = LoggerFactory.getLogger(GGNotifyReplyPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("NotifyPacketReply received.");
-			logger.debug("PacketHeader: " + context.getHeader());
-			logger.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (log.isDebugEnabled()) {
+			log.debug("NotifyPacketReply received.");
+			log.debug("PacketHeader: " + context.getHeader());
+			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGNotifyReply notifyReply = new GGNotifyReply(context.getPackageContent());

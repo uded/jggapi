@@ -2,8 +2,8 @@ package pl.radical.open.gg.packet.handlers;
 
 import pl.radical.open.gg.GGException;
 import pl.radical.open.gg.LocalUser;
-import pl.radical.open.gg.packet.GGUtils;
 import pl.radical.open.gg.packet.in.GGUserListReply;
+import pl.radical.open.gg.utils.GGUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,8 +18,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGUserListReplyHandler implements PacketHandler {
-
-	private final static Logger LOGGER = LoggerFactory.getLogger(GGUserListReplyHandler.class);
+	private final static Logger log = LoggerFactory.getLogger(GGUserListReplyHandler.class);
 
 	private final ArrayList<LocalUser> m_users = new ArrayList<LocalUser>();
 
@@ -27,36 +26,36 @@ public class GGUserListReplyHandler implements PacketHandler {
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("GGUserlistReply packet received.");
-			LOGGER.debug("PacketHeader: " + context.getHeader());
-			LOGGER.debug("Got packet: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (log.isDebugEnabled()) {
+			log.debug("GGUserlistReply packet received.");
+			log.debug("PacketHeader: " + context.getHeader());
+			log.debug("Got packet: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		try {
 			final GGUserListReply userListReply = new GGUserListReply(context.getPackageContent());
 			context.getSessionAccessor().notifyGGPacketReceived(userListReply);
 			if (userListReply.isGetMoreReply()) {
-				LOGGER.debug("GGUserListReply.GetMoreReply");
+				log.debug("GGUserListReply.GetMoreReply");
 				final Collection<LocalUser> contactList = userListReply.getContactList();
-				LOGGER.debug("GGUserListReply: adding users to private user collection...");
+				log.debug("GGUserListReply: adding users to private user collection...");
 				m_users.addAll(contactList);
 			} else if (userListReply.isGetReply()) {
-				LOGGER.debug("GGUserListReply.GetReply");
+				log.debug("GGUserListReply.GetReply");
 				final Collection<LocalUser> contactList = userListReply.getContactList();
 				m_users.addAll(contactList);
 				final ArrayList<LocalUser> clonedUsers = new ArrayList<LocalUser>(m_users);
-				LOGGER.debug("GGUserListReply: clearing private users collection...");
+				log.debug("GGUserListReply: clearing private users collection...");
 				m_users.clear();
 				context.getSessionAccessor().notifyContactListReceived(clonedUsers);
 			} else if (userListReply.isPutMoreReply()) {
-				LOGGER.debug("GGUserListReply.PutMoreReply");
+				log.debug("GGUserListReply.PutMoreReply");
 			} else if (userListReply.isPutReply()) {
-				LOGGER.debug("GGUserListReply.PutReply");
+				log.debug("GGUserListReply.PutReply");
 				// context.getSessionAccessor().notifyContactListExported();
 			}
 		} catch (final IOException ex) {
-			LOGGER.error("Unable to handle incomming packet: " + GGUtils.prettyBytesToString(context.getPackageContent()), ex);
+			log.error("Unable to handle incomming packet: " + GGUtils.prettyBytesToString(context.getPackageContent()), ex);
 			throw new GGException("Unable to handle incoming user list packet.", ex);
 		}
 

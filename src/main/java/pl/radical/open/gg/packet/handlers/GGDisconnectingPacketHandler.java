@@ -12,15 +12,14 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGDisconnectingPacketHandler implements PacketHandler {
-
-	private final static Logger logger = LoggerFactory.getLogger(GGDisconnectingPacketHandler.class);
+	private final static Logger log = LoggerFactory.getLogger(GGDisconnectingPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (logger.isDebugEnabled()) {
-			logger.debug("GGDisconnecting packet received.");
+		if (log.isDebugEnabled()) {
+			log.debug("GGDisconnecting packet received.");
 		}
 
 		final GGDisconnecting disconnecting = GGDisconnecting.getInstance();
