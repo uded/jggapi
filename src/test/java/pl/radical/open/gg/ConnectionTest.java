@@ -21,6 +21,7 @@ public class ConnectionTest {
 	private static ISession session1;
 	private static ISession session2;
 
+
 	@Test(timeout = 1000 * 30)
 	public void connectionTest() {
 		log.info("Executing connectionTest() method");
@@ -40,7 +41,7 @@ public class ConnectionTest {
 		}
 	}
 
-	@Test
+	@Test(timeout = 1000 * 60)
 	public void loginTest() throws GGException, InterruptedException {
 		ILoginService loginService;
 
@@ -66,12 +67,13 @@ public class ConnectionTest {
 			@Override
 			public void loginFailed(final LoginFailedEvent loginFailedEvent) {
 				log.error("Login failed!");
+				System.exit(15);
 			}
 		});
 		log.debug("Loging in user1");
 		loginService.login(new LoginContext(20239471, "RadicalEntropy"));
 
-		Thread.sleep(10000);
+		Thread.sleep(59000);
 		assertEquals(true, loginService.isLoggedIn());
 
 
