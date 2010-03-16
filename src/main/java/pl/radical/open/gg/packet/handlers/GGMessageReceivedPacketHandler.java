@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@SuppressWarnings("deprecation")
 public class GGMessageReceivedPacketHandler implements PacketHandler {
 	private static final Logger log = LoggerFactory.getLogger(GGMessageReceivedPacketHandler.class);
 

@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@SuppressWarnings("deprecation")
 public class GGLoginOKPacketHandler implements PacketHandler {
 	private static final Logger log = LoggerFactory.getLogger(GGLoginOKPacketHandler.class);
 

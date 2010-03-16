@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@SuppressWarnings("deprecation")
 public class GGNotifyReply60PacketHandler implements PacketHandler {
 	private final static Logger log = LoggerFactory.getLogger(GGNotifyReply60PacketHandler.class);
 
