@@ -40,7 +40,7 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOW_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line = reader.readLine();
 
 		return new SendAndRemindPasswordResponse(line);

@@ -53,7 +53,7 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOW_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line = reader.readLine();
 
 		return new CommonRegisterResponse(m_uin, line);
@@ -79,13 +79,13 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 		buffer.append(m_uin);
 		buffer.append('&');
 		buffer.append("fmpwd=");
-		buffer.append(URLEncoder.encode(m_oldPassword, GGUtils.WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_oldPassword, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("pwd=");
-		buffer.append(URLEncoder.encode(m_newPassword, GGUtils.WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_newPassword, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("email=");
-		buffer.append(URLEncoder.encode(m_email, GGUtils.WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_email, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("tokenid=");
 		buffer.append(getTokenID());

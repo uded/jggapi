@@ -30,7 +30,7 @@ public class GGTokenRequest extends HttpRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOW_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line1 = reader.readLine();
 		final String line2 = reader.readLine();
 		final String line3 = reader.readLine();

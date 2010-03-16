@@ -21,9 +21,9 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGUtils {
-	public final static String WINDOW_ENCODING = "windows-1250";
+	public final static String WINDOWS_ENCODING = "windows-1250";
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GGUtils.class);
+	private static final Logger log = LoggerFactory.getLogger(GGUtils.class);
 
 	public static String prettyBytesToString(final byte[] bytes) {
 		final StringBuffer received = new StringBuffer();
@@ -140,9 +140,9 @@ public class GGUtils {
 
 		String returnString = null;
 		try {
-			returnString = new String(desc, WINDOW_ENCODING);
+			returnString = new String(desc, WINDOWS_ENCODING);
 		} catch (final UnsupportedEncodingException ex) {
-			LOGGER.warn("Unable to convert", ex);
+			log.warn("Unable to convert", ex);
 			return new String(desc);
 		}
 		return returnString;
@@ -225,9 +225,9 @@ public class GGUtils {
 
 		final byte[] hash = DigestUtils.sha(stringBuilder.toString());
 
-		if (LOGGER.isDebugEnabled()) {
-			LOGGER.debug("Łańcuch do budowy digesta: '{}'", stringBuilder.toString());
-			LOGGER.debug("Seed: [{}], SHA hash: [{}]", new String(binarySeed), Hex.encodeHexString(hash));
+		if (log.isDebugEnabled()) {
+			log.debug("Łańcuch do budowy digesta: '{}'", stringBuilder.toString());
+			log.debug("Seed: [{}], SHA hash: [{}]", new String(binarySeed), Hex.encodeHexString(hash));
 		}
 
 		return hash;

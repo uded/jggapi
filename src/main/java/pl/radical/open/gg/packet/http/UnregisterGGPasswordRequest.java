@@ -41,7 +41,7 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOW_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line = reader.readLine();
 
 		return new CommonRegisterResponse(m_uin, line);
@@ -67,7 +67,7 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 		buffer.append(m_uin);
 		buffer.append('&');
 		buffer.append("fmpwd=");
-		buffer.append(URLEncoder.encode(m_password, GGUtils.WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_password, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("delete=1");
 		buffer.append('&');

@@ -43,7 +43,7 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOW_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line = reader.readLine();
 
 		return new RegisterGGAccountResponse(line);
@@ -65,16 +65,16 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	protected String getRequestBody() throws UnsupportedEncodingException {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("pwd=");
-		buffer.append(URLEncoder.encode(m_password, GGUtils.WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_password, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("email=");
-		buffer.append(URLEncoder.encode(m_email, GGUtils.WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(m_email, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("tokenid=");
-		buffer.append(URLEncoder.encode(getTokenID(), GGUtils.WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(getTokenID(), GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("tokenval=");
-		buffer.append(URLEncoder.encode(getTokenVal(), GGUtils.WINDOW_ENCODING));
+		buffer.append(URLEncoder.encode(getTokenVal(), GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("code=");
 		buffer.append(getHashCode(m_email, m_password));

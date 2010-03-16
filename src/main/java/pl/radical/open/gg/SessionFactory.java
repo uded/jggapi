@@ -11,15 +11,15 @@ import org.slf4j.LoggerFactory;
  */
 public class SessionFactory {
 
-	private final static Logger LOGGER = LoggerFactory.getLogger(SessionFactory.class);
+	private final static Logger log = LoggerFactory.getLogger(SessionFactory.class);
 
 	public static ISession createSession() {
 		try {
 			final IGGConfiguration configuration = SimplePropertiesGGConfiguration.createSimplePropertiesGGConfiguration();
 			return new Session(configuration);
 		} catch (final Exception ex) {
-			LOGGER.warn("Unable to load jggapi.properties!", ex);
-			LOGGER.warn("Falling back to default properties.");
+			log.warn("Unable to load jggapi.properties!", ex);
+			log.warn("Falling back to default properties.");
 			return new Session();
 		}
 	}

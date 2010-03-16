@@ -26,7 +26,7 @@ import com.google.common.base.Predicate;
  */
 public class PacketChain {
 
-	private final static Logger logger = LoggerFactory.getLogger(PacketChain.class);
+	private final static Logger log = LoggerFactory.getLogger(PacketChain.class);
 
 	private final HashMap<Integer, PacketHandler> m_packetHandlers;
 
