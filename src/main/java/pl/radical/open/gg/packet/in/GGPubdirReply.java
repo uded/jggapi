@@ -4,8 +4,8 @@ import pl.radical.open.gg.Gender;
 import pl.radical.open.gg.IRemoteStatus;
 import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchReply;
-import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGPubdirConsts;
 import pl.radical.open.gg.packet.handlers.GGPubdirReplyPacketHandler;
@@ -19,7 +19,7 @@ import java.util.StringTokenizer;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-@IncomingPacket(type = 0x000e, handler = GGPubdirReplyPacketHandler.class)
+@IncomingPacket(type = 0x000e, label = "GG_PUBDIR50_REPLY", handler = GGPubdirReplyPacketHandler.class)
 public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConsts, GGIncomingPackage {
 
 	private byte m_replyType = -1;

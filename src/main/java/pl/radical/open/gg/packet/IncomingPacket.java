@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 public @interface IncomingPacket {
 	int type();
 
-	Class handler();
+	Class<?> handler();
 
 	String label();
 }

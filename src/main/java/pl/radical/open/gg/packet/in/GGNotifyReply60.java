@@ -3,8 +3,8 @@ package pl.radical.open.gg.packet.in;
 import pl.radical.open.gg.IUser;
 import pl.radical.open.gg.RemoteStatus;
 import pl.radical.open.gg.User;
-import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
 import pl.radical.open.gg.packet.handlers.GGNotifyReply60PacketHandler;
@@ -18,7 +18,7 @@ import java.util.Map;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-@IncomingPacket(type = 0x0011, handler = GGNotifyReply60PacketHandler.class)
+@IncomingPacket(type = 0x0011, label = "GG_NOTIFY_REPLY60", handler = GGNotifyReply60PacketHandler.class)
 @Deprecated
 public class GGNotifyReply60 extends GGBaseIncomingPacket implements GGIncomingPackage {
 

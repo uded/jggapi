@@ -2,8 +2,8 @@ package pl.radical.open.gg.packet.in;
 
 import pl.radical.open.gg.RemoteStatus;
 import pl.radical.open.gg.User;
-import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
 import pl.radical.open.gg.packet.handlers.GGNotifyReplyPacketHandler;
@@ -18,7 +18,7 @@ import java.util.Map;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-@IncomingPacket(type = 0x000c, handler = GGNotifyReplyPacketHandler.class)
+@IncomingPacket(type = 0x000c, label = "GG_NOTIFY_REPLY", handler = GGNotifyReplyPacketHandler.class)
 @Deprecated
 public class GGNotifyReply extends GGBaseIncomingPacket implements GGIncomingPackage {
 

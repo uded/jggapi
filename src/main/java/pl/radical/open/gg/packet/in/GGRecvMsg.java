@@ -1,7 +1,7 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.packet.handlers.GGMessageReceivedPacketHandler;
@@ -14,7 +14,7 @@ import pl.radical.open.gg.utils.GGUtils;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-@IncomingPacket(type = 0x000a, handler = GGMessageReceivedPacketHandler.class)
+@IncomingPacket(type = 0x000a, label = "GG_RECV_MSG", handler = GGMessageReceivedPacketHandler.class)
 @Deprecated
 public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, GGIncomingPackage {
 

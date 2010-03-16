@@ -1,8 +1,8 @@
 package pl.radical.open.gg.packet.in;
 
 import pl.radical.open.gg.LocalUser;
-import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGUserListReplyHandler;
 
@@ -21,8 +21,9 @@ import java.util.List;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-@IncomingPacket(type = 0x0010, handler = GGUserListReplyHandler.class)
-// FIXME Wyczyścić - coś mi się nie zgadza typ pakietów
+@IncomingPacket(type = 0x0010, label = "GG_USERLIST_REPLY", handler = GGUserListReplyHandler.class)
+@Deprecated
+//FIXME Wyczyścić - coś mi się nie zgadza typ pakietów
 public class GGUserListReply extends GGBaseIncomingPacket implements GGIncomingPackage {
 
 	public final static int GG_USERLIST_REPLY = 0x0010;

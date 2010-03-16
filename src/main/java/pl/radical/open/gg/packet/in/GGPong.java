@@ -1,7 +1,7 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGPongPacketHandler;
 
@@ -11,7 +11,7 @@ import pl.radical.open.gg.packet.handlers.GGPongPacketHandler;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-@IncomingPacket(type = 0x0007, handler = GGPongPacketHandler.class)
+@IncomingPacket(type = 0x0007, label = "GG_PONG", handler = GGPongPacketHandler.class)
 @Deprecated
 public class GGPong extends GGBaseIncomingPacket implements GGIncomingPackage {
 
