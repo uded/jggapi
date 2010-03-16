@@ -39,7 +39,7 @@ public class Session implements ISession {
 
 	private final HashMap<String, Object> m_proxies = new HashMap<String, Object>();
 
-	public Session(final IGGConfiguration configuration) {
+	public Session(final IGGConfiguration configuration) throws GGException {
 		this();
 		if (configuration == null) {
 			throw new IllegalArgumentException("configuration cannot be null");
@@ -47,7 +47,7 @@ public class Session implements ISession {
 		m_configuration = configuration;
 	}
 
-	public Session() {
+	public Session() throws GGException {
 		m_sessionAccessor = new SessionAccessor();
 		m_sessionAttributes = new HashMap<String, Integer>();
 		m_sessionStateListeners = new HashSet<SessionStateListener>();

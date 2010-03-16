@@ -13,7 +13,7 @@ public class SessionFactory {
 
 	private final static Logger log = LoggerFactory.getLogger(SessionFactory.class);
 
-	public static ISession createSession() {
+	public static ISession createSession() throws GGException {
 		try {
 			final IGGConfiguration configuration = SimplePropertiesGGConfiguration.createSimplePropertiesGGConfiguration();
 			return new Session(configuration);

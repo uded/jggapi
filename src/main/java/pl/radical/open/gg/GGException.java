@@ -9,9 +9,6 @@ package pl.radical.open.gg;
  */
 public class GGException extends Exception {
 
-	/**
-     * 
-     */
 	private static final long serialVersionUID = -2956708463640990150L;
 
 	public GGException(final String message) {

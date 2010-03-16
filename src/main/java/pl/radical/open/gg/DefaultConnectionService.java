@@ -63,7 +63,7 @@ public class DefaultConnectionService implements IConnectionService {
 	private IServer m_server = null;
 
 	// friendly
-	DefaultConnectionService(final Session session) {
+	DefaultConnectionService(final Session session) throws GGException {
 		if (session == null) {
 			throw new GGNullPointerException("session cannot be null");
 		}
