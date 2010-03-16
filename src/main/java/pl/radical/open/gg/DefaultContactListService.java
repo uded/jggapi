@@ -60,7 +60,9 @@ public class DefaultContactListService implements IContactListService {
 	 * @see pl.radical.open.gg.IContactListService#exportContactList(java.util.Collection)
 	 */
 	public void exportContactList(final Collection<LocalUser> localUsers) throws GGException {
-		log.debug("Exporting contact list users...");
+		if (log.isDebugEnabled()) {
+			log.debug("Exporting contact list users...");
+		}
 		checkSessionState();
 		try {
 			final List<GGUserListRequest> packageList = createExportContactListPackageList(localUsers);
@@ -200,7 +202,9 @@ public class DefaultContactListService implements IContactListService {
 				try {
 					Thread.sleep(1000);
 				} catch (final InterruptedException ex) {
-					log.debug("ContactListSenderThread: thread interrupted.");
+					if (log.isDebugEnabled()) {
+						log.debug("ContactListSenderThread: thread interrupted.");
+					}
 					terminate();
 				}
 			}
@@ -220,7 +224,9 @@ public class DefaultContactListService implements IContactListService {
 		}
 
 		public void terminate() {
-			log.debug("ContactListSenderThread: terminating...");
+			if (log.isDebugEnabled()) {
+				log.debug("ContactListSenderThread: terminating...");
+			}
 			isRunning = false;
 			m_session.getConnectionService().removePacketListener(this);
 		}
@@ -233,14 +239,18 @@ public class DefaultContactListService implements IContactListService {
 				return;
 			}
 			if (m_packagesToSend.isEmpty()) {
-				log.debug("ContactListSenderThread: Nothing more to send.");
+				if (log.isDebugEnabled()) {
+					log.debug("ContactListSenderThread: Nothing more to send.");
+				}
 				terminate();
 				return;
 			}
 
 			final GGOutgoingPackage outgoingPackage = m_packagesToSend.remove(0);
 			try {
-				log.debug("ContactListSenderThread: Sending outgoing package...");
+				if (log.isDebugEnabled()) {
+					log.debug("ContactListSenderThread: Sending outgoing package...");
+				}
 				m_session.getSessionAccessor().sendPackage(outgoingPackage);
 			} catch (final IOException ex) {
 				log.warn("Unable to send contact list packet", ex);

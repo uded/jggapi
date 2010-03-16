@@ -417,12 +417,16 @@ public class DefaultConnectionService implements IConnectionService {
 		}
 
 		private void closeConnection() throws IOException {
-			log.debug("Closing connection...");
+			if (log.isDebugEnabled()) {
+				log.debug("Closing connection...");
+			}
 			m_active = false;
 		}
 
 		private synchronized void sendPackage(final GGOutgoingPackage op) throws IOException {
-			log.debug("Sending packet: {}, packetPayLoad: {}", op.getPacketType(), Hex.encodeHexString(op.getContents()));
+			if (log.isDebugEnabled()) {
+				log.debug("Sending packet: {}, packetPayLoad: {}", op.getPacketType(), Hex.encodeHexString(op.getContents()));
+			}
 
 			m_dataOutput.write(GGUtils.intToByte(op.getPacketType()));
 			m_dataOutput.write(GGUtils.intToByte(op.getContents().length));
@@ -454,7 +458,9 @@ public class DefaultConnectionService implements IConnectionService {
 		public void run() {
 			while (m_active && m_connectionThread.isActive()) {
 				try {
-					log.debug("Pinging...");
+					if (log.isDebugEnabled()) {
+						log.debug("Pinging...");
+					}
 					sendPackage(GGPing.getPing());
 					notifyPingSent();
 					final int pingInterval = m_session.getGGConfiguration().getPingIntervalInMiliseconds();
@@ -469,19 +475,25 @@ public class DefaultConnectionService implements IConnectionService {
 					}
 				} catch (final InterruptedException ex) {
 					m_active = false;
-					log.debug("PingerThread was interruped", ex);
+					if (log.isDebugEnabled()) {
+						log.debug("PingerThread was interruped", ex);
+					}
 				}
 			}
 		}
 
 		private void startPinging() {
-			log.debug("Starting pinging...");
+			if (log.isDebugEnabled()) {
+				log.debug("Starting pinging...");
+			}
 			m_active = true;
 			start();
 		}
 
 		private void stopPinging() {
-			log.debug("Stopping pinging...");
+			if (log.isDebugEnabled()) {
+				log.debug("Stopping pinging...");
+			}
 			m_active = false;
 		}
 	}
