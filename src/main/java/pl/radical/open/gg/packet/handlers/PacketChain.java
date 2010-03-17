@@ -69,7 +69,7 @@ public class PacketChain {
 	}
 
 	private void registerDefaultHandlers() throws GGException {
-		final Predicate<String> filter = new FilterBuilder().include("pl\\.radical\\.open\\.gg\\.packet\\.in.*");
+		final Predicate<String> filter = new FilterBuilder().include("pl.radical.open.gg.packet.in.*");
 		final Configuration configuration = new ConfigurationBuilder()
 		.filterInputsBy(filter)
 		.setScanners(new TypeAnnotationsScanner())
@@ -79,7 +79,7 @@ public class PacketChain {
 		final Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IncomingPacket.class);
 
 		if (classes.size() == 0) {
-			log.error("Nie znalazłem żadnych klas do rejestracji!");
+			throw new GGException("No classes found to register as packet handlers!");
 		}
 
 		for (final Class<?> c : classes) {
