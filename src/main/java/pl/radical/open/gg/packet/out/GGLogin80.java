@@ -53,7 +53,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Language of the client, default to "pl"
 	 */
-	final String M_LANGUAGE = "pl";
+	final static String M_LANGUAGE = "pl";
 
 
 	/**
@@ -89,7 +89,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Protocol options - 0x00000367
 	 */
-	private final int m_features = 0x00000007;
+	private final static int m_features = 0x00000007;
 
 
 	/**
@@ -128,7 +128,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Unknown property
 	 */
-	private final int m_unknown2 = 0x64;
+	private final static int m_unknown2 = 0x64;
 
 	/**
 	 * Version of the client
@@ -138,7 +138,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Version descriptive string
 	 */
-	private final String m_version = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
+	private final static String m_version = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
 
 	/**
 	 * The length of the status description

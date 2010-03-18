@@ -24,10 +24,10 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 
 	private ILocalStatus m_localStatus = null;
 
-	final int FLAGS_UNKNOWN = 0x00000001;
-	final int FLAGS_VIDEOCHAT = 0x00000002;
-	final int FLAGS_MOBILE = 0x00100000;
-	final int FLAGS_LINKS = 0x00800000;
+	final static int FLAGS_UNKNOWN = 0x00000001;
+	final static int FLAGS_VIDEOCHAT = 0x00000002;
+	final static int FLAGS_MOBILE = 0x00100000;
+	final static int FLAGS_LINKS = 0x00800000;
 
 	/**
 	 * The protocol status constructor.

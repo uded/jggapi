@@ -12,7 +12,7 @@ public final class GGPing implements GGOutgoingPackage {
 
 	public static final int GG_PING = 0x08;
 
-	private static byte[] m_data = null;
+	private static byte[] m_data = new byte[0];
 
 	private static GGPing m_ping = null;
 
@@ -20,7 +20,6 @@ public final class GGPing implements GGOutgoingPackage {
 	 * Prywatny konstruktor.
 	 */
 	private GGPing() {
-		m_data = new byte[0];
 	}
 
 	public static GGPing getPing() {

@@ -12,10 +12,9 @@ public class GGListEmpty implements GGOutgoingPackage {
 
 	private static GGListEmpty m_instance = null;
 
-	private static byte[] m_data = null;
+	private static byte[] m_data = new byte[0];
 
 	private GGListEmpty() { // private constructor
-		m_data = new byte[0];
 	}
 
 	// this method is not thread-safe, because this is check and act
