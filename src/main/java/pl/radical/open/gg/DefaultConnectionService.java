@@ -132,7 +132,7 @@ public class DefaultConnectionService implements IConnectionService {
 			m_connectionPinger.startPinging();
 		} catch (final IOException ex) {
 			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
-			throw new GGException("Unable to connect to Gadu-Gadu server: " + server, ex);
+			throw new GGException("Unable to connect to Gadu-Gadu server: " + server[0], ex);
 		}
 	}
 
