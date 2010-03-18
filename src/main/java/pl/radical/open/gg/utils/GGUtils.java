@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
@@ -212,22 +214,19 @@ public class GGUtils {
 		return cl.toArray();
 	}
 
-	private static byte[] getLoginHashSHA(final char[] password, final int seed) {
-		final char[] binarySeed = Hex.encodeHex(intToByte(seed));
+	private static byte[] getLoginHashSHA(final char[] password, final int seed) throws GGException {
+		MessageDigest hash = null;
+        try {
+	        hash = MessageDigest.getInstance("SHA1");
+        } catch (NoSuchAlgorithmException e) {
+	        log.error("Brak algorytmu SHA1",e);
+	        throw new GGException("Brak algorytmu SHA1", e);
+        }
+    	
+    	hash.update(new String(password).getBytes());   	
+    	hash.update(GGUtils.intToByte(seed));	
 
-		final StringBuilder stringBuilder = new StringBuilder();
-
-		stringBuilder.append(password);
-		stringBuilder.append(binarySeed);
-
-		final byte[] hash = DigestUtils.sha(stringBuilder.toString());
-
-		if (log.isDebugEnabled()) {
-			log.debug("Łańcuch do budowy digesta: '{}'", stringBuilder.toString());
-			log.debug("Seed: [{}], SHA hash: [{}]", new String(binarySeed), Hex.encodeHexString(hash));
-		}
-
-		return hash;
+    	return hash.digest();
 	}
 
 	public static byte[] getLoginHash(final char[] password, final int seed, final GGHashType hashType) throws GGException {
