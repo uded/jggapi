@@ -11,6 +11,7 @@
 			<url>http://www.opensource.org/licenses/gpl-license.php</url>
 		</license>
 	</licenses>
+	<url>http://projekty.radical.com.pl/projects/jggapi-ng</url>
 	<issueManagement>
 		<system>Redmine</system>
 		<url>http://projekty.radical.com.pl/projects/jggapi-ng/issues</url>
@@ -28,6 +29,16 @@
 	<version>1.7</version>
 	<description>The JGGApi project is implementation of proprietary Gadu-Gadu protocol based on specification from EKG. It is fully object oriented and uses common design patterns that reduce the learning curve of the library.</description>
 	<developers>
+		<developer>
+			<id>uded</id>
+			<name>Łukasz Rżanek</name>
+			<email>lukasz.rzanek@radical.com.pl</email>
+			<organization>Radical Creations</organization>
+			<timezone>GMT+1</timezone>
+			<roles>
+				<role>Lead Developer</role>
+			</roles>
+		</developer>
 		<developer>
 			<name>Marcin Naglik</name>
 			<id>mnaglik</id>
@@ -51,16 +62,6 @@
 				<role>Inactive</role>
 			</roles>
 		</developer>
-		<developer>
-			<id>uded</id>
-			<name>Łukasz Rżanek</name>
-			<email>lukasz.rzanek@radical.com.pl</email>
-			<organization>Radical Creations</organization>
-			<timezone>GMT+1</timezone>
-			<roles>
-				<role>Lead Developer</role>
-			</roles>
-		</developer>
 	</developers>
 	<contributors>
 		<contributor>
@@ -70,6 +71,7 @@
 			<organizationUrl>http://www.uw.edu.pl</organizationUrl>
 			<roles>
 				<role>JGGApi tester and bug reporter</role>
+				<role>Inactive</role>
 			</roles>
 			<timezone>GMT+1</timezone>
 		</contributor>
@@ -78,6 +80,7 @@
 			<email>mehul_b1@hotmail.com</email>
 			<roles>
 				<role>JGGApi tester and bug reporter</role>
+				<role>Inactive</role>
 			</roles>
 		</contributor>
 		<contributor>
@@ -87,6 +90,7 @@
 			<organizationUrl>http://www.put.poznan.pl</organizationUrl>
 			<roles>
 				<role>JGGApi testing and comments</role>
+				<role>Inactive</role>
 			</roles>
 		</contributor>
 		<contributor>
@@ -94,6 +98,7 @@
 			<email>zmija2a@poczta.onet.pl</email>
 			<roles>
 				<role>JGGApi testing and comments</role>
+				<role>Inactive</role>
 			</roles>
 		</contributor>
 	</contributors>
@@ -108,40 +113,40 @@
 		</repository>
 	</repositories>
 	<dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.5.10</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-primitives</groupId>
-            <artifactId>commons-primitives</artifactId>
-            <version>1.0</version>
-        </dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.10</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-primitives</groupId>
+			<artifactId>commons-primitives</artifactId>
+			<version>1.0</version>
+		</dependency>
 
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.7</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>0.9.18</version>
-            <type>jar</type>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-        	<groupId>commons-codec</groupId>
-        	<artifactId>commons-codec</artifactId>
-        	<version>1.4</version>
-        </dependency>
-        <dependency>
-        	<groupId>org.reflections</groupId>
-        	<artifactId>reflections</artifactId>
-        	<version>0.9.5-RC1</version>
-        </dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.7</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>ch.qos.logback</groupId>
+			<artifactId>logback-classic</artifactId>
+			<version>0.9.18</version>
+			<type>jar</type>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.reflections</groupId>
+			<artifactId>reflections</artifactId>
+			<version>0.9.5-RC1</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
