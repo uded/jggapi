@@ -10,9 +10,7 @@ import java.io.UnsupportedEncodingException;
 
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.collections.primitives.ArrayByteList;
 import org.apache.commons.collections.primitives.ArrayCharList;
-import org.apache.commons.collections.primitives.ByteList;
 import org.apache.commons.collections.primitives.CharList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -219,11 +217,7 @@ public class GGUtils {
 
 		final StringBuilder stringBuilder = new StringBuilder();
 
-		final ByteList bl = new ArrayByteList();
-		for (final char c : password) {
-			bl.add((byte) c);
-		}
-		stringBuilder.append(bl.toArray());
+		stringBuilder.append(password);
 		stringBuilder.append(binarySeed);
 
 		final byte[] hash = DigestUtils.sha(stringBuilder.toString());
