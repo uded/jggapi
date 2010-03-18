@@ -29,12 +29,15 @@ public class GGUtils {
 		final StringBuffer received = new StringBuffer();
 		received.append("{");
 
-		final String dump = HexDump.hexDump(bytes);
-		received.append(dump);
-
-		// for (int i=0; i<bytes.length; i++) {
-		// received.append("'" + bytes[i] + "',");
-		// }
+		final char[] dump = Hex.encodeHex(bytes);
+		int i = 0;
+		for (final char c : dump) {
+			received.append(c);
+			i++;
+			if (i % 2 == 0) {
+				received.append(" ");
+			}
+		}
 
 		received.append("}");
 

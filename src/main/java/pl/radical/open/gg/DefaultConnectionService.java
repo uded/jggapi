@@ -28,7 +28,6 @@ import java.util.regex.Pattern;
 
 import javax.swing.event.EventListenerList;
 
-import org.apache.commons.codec.binary.Hex;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -425,7 +424,7 @@ public class DefaultConnectionService implements IConnectionService {
 
 		private synchronized void sendPackage(final GGOutgoingPackage op) throws IOException {
 			if (log.isDebugEnabled()) {
-				log.debug("Sending packet: {}, packetPayLoad: {}", op.getPacketType(), Hex.encodeHexString(op.getContents()));
+				log.debug("Sending packet: {}, packetPayLoad: {}", op.getPacketType(), GGUtils.prettyBytesToString(op.getContents()));
 			}
 
 			m_dataOutput.write(GGUtils.intToByte(op.getPacketType()));
