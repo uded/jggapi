@@ -65,7 +65,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Login hash type that will be used to authenticate the user
 	 */
-	private final GGHashType m_hashType = GGHashType.GG_LOGIN_HASH_GG32;
+	private final GGHashType m_hashType = GGHashType.GG_LOGIN_HASH_SHA1;
 
 
 	/**

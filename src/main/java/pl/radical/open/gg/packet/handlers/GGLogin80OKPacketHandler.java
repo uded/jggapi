@@ -20,7 +20,7 @@ public class GGLogin80OKPacketHandler implements PacketHandler {
 	 */
 	public void handle(final PacketContext context) throws GGException {
 		if (log.isDebugEnabled()) {
-			log.debug("LoginOK packet received.");
+			log.debug("LoginOK80 packet received.");
 			log.debug("PacketHeader: " + context.getHeader());
 			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
