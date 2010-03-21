@@ -1,9 +1,5 @@
 package pl.radical.open.gg.packet.handlers;
 
-import pl.radical.open.gg.GGException;
-import pl.radical.open.gg.packet.IncomingPacket;
-import pl.radical.open.gg.utils.GGUtils;
-
 import java.util.HashMap;
 import java.util.Set;
 
@@ -15,6 +11,10 @@ import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import pl.radical.open.gg.GGException;
+import pl.radical.open.gg.packet.IncomingPacket;
+import pl.radical.open.gg.utils.GGUtils;
 
 import com.google.common.base.Predicate;
 
@@ -69,11 +69,10 @@ public class PacketChain {
 	}
 
 	private void registerDefaultHandlers() throws GGException {
-		final Predicate<String> filter = new FilterBuilder().include("pl.radical.open.gg.packet.in.*");
+		
 		final Configuration configuration = new ConfigurationBuilder()
-		.filterInputsBy(filter)
 		.setScanners(new TypeAnnotationsScanner())
-		.setUrls(ClasspathHelper.getUrlForClass(IncomingPacket.class));
+		.setUrls(ClasspathHelper.getUrlsForPackagePrefix("pl.radical.open.gg.packet.in"));
 		final Reflections reflections = new Reflections(configuration);
 
 		final Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IncomingPacket.class);
