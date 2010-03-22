@@ -30,8 +30,8 @@ public class ConnectionTest {
 			session1 = connectUser(SessionFactory.createSession(), 20239471, "RadicalEntropy");
 			assertEquals(true, session1.getConnectionService().isConnected());
 
-			// session2 = connectUser(SessionFactory.createSession(), 20241237, "RadicalTest");
-			// assertEquals(true, session2.getConnectionService().isConnected());
+			session2 = connectUser(SessionFactory.createSession(), 20241237, "RadicalTest");
+			assertEquals(true, session2.getConnectionService().isConnected());
 		} catch (final GGException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -73,30 +73,29 @@ public class ConnectionTest {
 		log.debug("Loging in user1");
 		loginService.login(new LoginContext(20239471, "RadicalEntropy"));
 
-		Thread.sleep(59000);
+		Thread.sleep(10000);
 		assertEquals(true, loginService.isLoggedIn());
 
 
-		// log.debug("Loging in user2");
-		// loginService = session2.getLoginService();
-		// loginService.addLoginListener(new LoginListener.Stub() {
-		// @Override
-		// public void loginOK() throws GGException {
-		// log.info("Login for user 2 OK");
-		// session1.getPresenceService().setStatus(new LocalStatus(StatusType.ONLINE_WITH_DESCRIPTION,
-		// "Jestem testowy"));
-		// }
-		//
-		// @Override
-		// public void loginFailed(final LoginFailedEvent loginFailedEvent) {
-		// log.error("Login failed!");
-		// return;
-		// }
-		// });
-		// loginService.login(new LoginContext(20241237, "RadicalTest"));
-		//
-		// Thread.sleep(10000);
-		// assertEquals(true, loginService.isLoggedIn());
+		log.debug("Loging in user2");
+		loginService = session2.getLoginService();
+		loginService.addLoginListener(new LoginListener.Stub() {
+			@Override
+			public void loginOK() throws GGException {
+				log.info("Login for user 2 OK");
+				session1.getPresenceService().setStatus(new LocalStatus(StatusType.ONLINE_WITH_DESCRIPTION, "Jestem testowy"));
+			}
+
+			@Override
+			public void loginFailed(final LoginFailedEvent loginFailedEvent) {
+				log.error("Login failed!");
+				return;
+			}
+		});
+		loginService.login(new LoginContext(20241237, "RadicalTest"));
+
+		Thread.sleep(10000);
+		assertEquals(true, loginService.isLoggedIn());
 	}
 
 	private ISession connectUser(final ISession session, final int uid, final String password) throws GGException, InterruptedException {
