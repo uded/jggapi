@@ -10,10 +10,12 @@ import pl.radical.open.gg.packet.in.GGRecvMsg80;
 import pl.radical.open.gg.utils.GGUtils;
 
 /**
+ * Created on 2010-03-18
  * 
- * @author Klatkowski
- *
+ * @author <a href="mailto:klacia.85@gmail.com">Kamil Klatkowski</a>
+ * @since 1.7.0
  */
+
 public class GGRecvMsg80PacketHandler implements PacketHandler {
 
 	private static final Logger log = LoggerFactory.getLogger(GGRecvMsg80PacketHandler.class);

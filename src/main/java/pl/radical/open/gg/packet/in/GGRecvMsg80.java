@@ -9,39 +9,48 @@ import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.packet.handlers.GGRecvMsg80PacketHandler;
 import pl.radical.open.gg.utils.GGUtils;
+import pl.radical.open.gg.utils.HexDump;
+
+/**
+ * Created on 2010-03-18
+ * 
+ * @author <a href="mailto:klacia.85@gmail.com">Kamil Klatkowski</a>
+ * @since 1.7.0
+ */
 
 @IncomingPacket(type = 0x002E, label = "GG_RECV_MSG80", handler = GGRecvMsg80PacketHandler.class)
 public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPackage, GGMessageClass {
 
-    private int m_sender = -1;
-    private int m_seq = -1;
-    private long m_time = -1;
-    private int m_msgClass = -1;
-    private int m_offsetPlain = -1;
-    private int m_offsetAttributes = -1 ;
-    private String m_htmlMessage = null;				/* message in HTML format */
-    private String m_plainMessage = null;				/* message in plain text */
-    private byte[] m_attributes = null;				/* messages's attributes */
+    private int sender = -1;
+    private int seq = -1;
+    private long time = -1;
+    private int msgClass = -1;
+    private int offsetPlain = -1;
+    private int offsetAttributes = -1 ;
+    private String htmlMessage = null;				/* message in HTML format */
+    private String plainMessage = null;				/* message in plain text */
+    private byte[] attributes = null;				/* messages's attributes */
 
     public GGRecvMsg80(byte[] data) {
-        m_sender = GGUtils.byteToInt(data);
-        m_seq = GGUtils.byteToInt(data, 4);
-        m_time = GGUtils.secondsToMillis(GGUtils.byteToInt(data, 8));
-        m_msgClass = GGUtils.byteToInt(data, 12);
-        m_offsetPlain = GGUtils.byteToInt(data,16);
-        m_offsetAttributes = GGUtils.byteToInt(data,20);
+        sender = GGUtils.byteToInt(data);
+        seq = GGUtils.byteToInt(data, 4);
+        time = GGUtils.secondsToMillis(GGUtils.byteToInt(data, 8));
+        msgClass = GGUtils.byteToInt(data, 12);
+        offsetPlain = GGUtils.byteToInt(data,16);
+        offsetAttributes = GGUtils.byteToInt(data,20);
         
         if(getOffsetAttributes()==data.length){
-        	m_offsetAttributes = 0;
+        	offsetAttributes = 0;
         }else{
-        	final ByteList byteList = new ArrayByteList(data.length-m_offsetAttributes);
-        	for(int i = m_offsetAttributes; i < data.length ; i++){
+        	final ByteList byteList = new ArrayByteList(data.length-offsetAttributes);
+        	for(int i = offsetAttributes; i < data.length ; i++){
         		byteList.add(data[i]);
         	}
+        	attributes = byteList.toArray();
         }
-        
-        if(data.length > getOffsetPlain())
-        	m_plainMessage = GGUtils.byteToString(data,m_offsetPlain);
+                
+        if(data.length > offsetPlain)
+        	plainMessage = GGUtils.byteToString(data,offsetPlain);
         
         //FIXME no htmlMessage
     }
@@ -51,7 +60,7 @@ public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPacka
      * @return int msgClass
      */
     public int getMsgClass() {
-        return m_msgClass;
+        return msgClass;
     }
 
     /**
@@ -59,7 +68,7 @@ public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPacka
      * @return int the sender uin.
      */
     public int getSenderUin() {
-        return m_sender;
+        return sender;
     }
 
     /**
@@ -67,7 +76,7 @@ public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPacka
      * @return int message sequence number.
      */
     public int getMessageSeq() {
-        return m_seq;
+        return seq;
     }
 
     /**
@@ -75,47 +84,47 @@ public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPacka
      * @return int the time in seconds.
      */
     public long getTime() {
-        return m_time;
+        return time;
     }
 
 	public int getOffsetPlain() {
-		return m_offsetPlain;
+		return offsetPlain;
 	}
 
 	public void setOffsetPlain(int mOffsetPlain) {
-		m_offsetPlain = mOffsetPlain;
+		offsetPlain = mOffsetPlain;
 	}
 
 	public int getOffsetAttributes() {
-		return m_offsetAttributes;
+		return offsetAttributes;
 	}
 
 	public void setOffsetAttributes(int mOffsetAttributes) {
-		m_offsetAttributes = mOffsetAttributes;
+		offsetAttributes = mOffsetAttributes;
 	}
 
 	public String getHtmlMessage() {
-		return m_htmlMessage;
+		return htmlMessage;
 	}
 
 	public void setHtmlMessage(String mHtmlMessage) {
-		m_htmlMessage = mHtmlMessage;
+		htmlMessage = mHtmlMessage;
 	}
 
 	public String getPlainMessage() {
-		return m_plainMessage;
+		return plainMessage;
 	}
 
 	public void setPlainMessage(String mPlainMessage) {
-		m_plainMessage = mPlainMessage;
+		plainMessage = mPlainMessage;
 	}
 
 	public byte[] getAttributes() {
-		return m_attributes;
+		return attributes;
 	}
 
 	public void setAttributes(byte[] mAttributes) {
-		m_attributes = mAttributes;
+		attributes = mAttributes;
 	}
     
 
