@@ -9,7 +9,6 @@ import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.packet.handlers.GGRecvMsg80PacketHandler;
 import pl.radical.open.gg.utils.GGUtils;
-import pl.radical.open.gg.utils.HexDump;
 
 /**
  * Created on 2010-03-18
