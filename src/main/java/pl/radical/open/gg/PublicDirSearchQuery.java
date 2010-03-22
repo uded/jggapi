@@ -1,5 +1,7 @@
 package pl.radical.open.gg;
 
+import pl.radical.open.gg.dicts.Gender;
+
 /**
  * This class should be used when there is a need to search in Gadu-Gadu's public directory.
  * <p>
@@ -12,41 +14,41 @@ package pl.radical.open.gg;
  */
 public class PublicDirSearchQuery extends PublicDirSearch {
 
-	private String m_lastName = null;
-	private Gender m_gender = null;
-	private Boolean m_activeOnly = null;
-	private Integer m_start = null;
+	private String lastName = null;
+	private Gender gender = null;
+	private Boolean activeOnly = null;
+	private Integer start = null;
 
 	public Gender getGender() {
-		return m_gender;
+		return gender;
 	}
 
 	public void setGender(final Gender gender) {
-		m_gender = gender;
+		this.gender = gender;
 	}
 
 	public String getLastName() {
-		return m_lastName;
+		return lastName;
 	}
 
 	public void setLastName(final String lastName) {
-		m_lastName = lastName;
+		this.lastName = lastName;
 	}
 
-	public void setActiveOnly(final Boolean only) {
-		m_activeOnly = only;
+	public void setActiveOnly(final Boolean activeOnly) {
+		this.activeOnly = activeOnly;
 	}
 
 	public Boolean isActiveOnly() {
-		return m_activeOnly;
+		return activeOnly;
 	}
 
 	public void setStart(final Integer start) {
-		m_start = start;
+		this.start = start;
 	}
 
 	public Integer getStart() {
-		return m_start;
+		return start;
 	}
 
 }

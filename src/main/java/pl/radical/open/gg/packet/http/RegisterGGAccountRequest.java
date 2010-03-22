@@ -43,7 +43,7 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line = reader.readLine();
 
 		return new RegisterGGAccountResponse(line);
@@ -54,7 +54,7 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	protected String getURL() {
-		return m_ggconfiguration.getRegistrationURL();
+		return ggConfiguration.getRegistrationURL();
 	}
 
 	/**
@@ -71,10 +71,10 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 		buffer.append(URLEncoder.encode(m_email, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("tokenid=");
-		buffer.append(URLEncoder.encode(getTokenID(), GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(tokenID, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("tokenval=");
-		buffer.append(URLEncoder.encode(getTokenVal(), GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(tokenVal, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("code=");
 		buffer.append(getHashCode(m_email, m_password));

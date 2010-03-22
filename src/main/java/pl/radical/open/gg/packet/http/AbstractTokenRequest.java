@@ -5,44 +5,48 @@ import pl.radical.open.gg.IGGConfiguration;
 
 import java.io.IOException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public abstract class AbstractTokenRequest extends HttpRequest {
+	private final Logger log = LoggerFactory.getLogger(AbstractTokenRequest.class);
 
-	private String m_tokenID = null;
-	private String m_tokenVal = null;
+	String tokenID = null;
+	String tokenVal = null;
 
 	protected AbstractTokenRequest(final IGGConfiguration configuration, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration);
+
+		if (log.isTraceEnabled()) {
+			log.trace("Creating {} object instance", getClass());
+		}
+
 		if (tokenID == null) {
-			// FIXME Other exception instead?
+			log.error("tokeID cannot be null");
 			throw new GGNullPointerException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
-			// FIXME Other exception instead?
+			log.error("tokenVal cannot be null");
 			throw new GGNullPointerException("tokenVal cannot be null");
 		}
-		m_tokenID = tokenID;
-		m_tokenVal = tokenVal;
-	}
-
-	public String getTokenID() {
-		return m_tokenID;
-	}
-
-	public String getTokenVal() {
-		return m_tokenVal;
+		this.tokenID = tokenID;
+		this.tokenVal = tokenVal;
 	}
 
 	protected int getHashCode(final String email, final String password) {
 		if (password == null) {
-			throw new GGNullPointerException("password cannot be null");
+			log.error("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		if (email == null) {
-			throw new GGNullPointerException("email cannot be null");
+			log.error("email cannot be null");
+			throw new IllegalArgumentException("email cannot be null");
 		}
 
 		int a, b, c;
@@ -61,7 +65,13 @@ public abstract class AbstractTokenRequest extends HttpRequest {
 			b = a >>> 24 | a << 8;
 		}
 
-		return b < 0 ? -b : b;
+		final int hashCode = b < 0 ? -b : b;
+
+		if (log.isInfoEnabled()) {
+			log.info("Value of computed hash is {}", hashCode);
+		}
+
+		return hashCode;
 	}
 
 }

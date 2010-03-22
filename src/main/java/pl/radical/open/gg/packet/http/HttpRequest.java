@@ -15,56 +15,55 @@ import java.net.URL;
  */
 public abstract class HttpRequest {
 
-	protected final IGGConfiguration m_ggconfiguration;
+	protected final IGGConfiguration ggConfiguration;
 
-	protected final HttpURLConnection m_huc;
+	protected final HttpURLConnection huc;
 
 	protected HttpRequest(final IGGConfiguration configuration) throws IOException {
 		if (configuration == null) {
 			throw new IllegalArgumentException("configuration cannot be null");
 		}
-		m_ggconfiguration = configuration;
+		ggConfiguration = configuration;
 
 		final URL url = new URL(getURL());
-		m_huc = (HttpURLConnection) url.openConnection();
-		// available only in JDK 1.5
-		// m_huc.setConnectTimeout(m_ggconfiguration.getSocketTimeoutInMiliseconds());
-		// m_huc.setReadTimeout(m_ggconfiguration.getSocketTimeoutInMiliseconds());
+		huc = (HttpURLConnection) url.openConnection();
+		huc.setConnectTimeout(ggConfiguration.getSocketTimeoutInMiliseconds());
+		huc.setReadTimeout(ggConfiguration.getSocketTimeoutInMiliseconds());
 
-		m_huc.setRequestMethod("POST");
-		m_huc.setDoInput(true);
+		huc.setRequestMethod("POST");
+		huc.setDoInput(true);
 		if (wannaWrite()) {
-			m_huc.setDoOutput(true);
+			huc.setDoOutput(true);
 		}
-		m_huc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
-		m_huc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)");
+		huc.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+		huc.setRequestProperty("User-Agent", "Mozilla/4.0 (compatible; MSIE 5.0; Windows 98)");
 	}
 
 	public HttpURLConnection connect() throws IOException {
-		m_huc.setRequestProperty("Content-Length", String.valueOf(getRequestBody().length()));
-		m_huc.connect();
+		huc.setRequestProperty("Content-Length", String.valueOf(getRequestBody().length()));
+		huc.connect();
 
-		return m_huc;
+		return huc;
 	}
 
 	public HttpURLConnection sendRequest() throws IOException {
 		if (wannaWrite()) {
-			final PrintWriter out = new PrintWriter(m_huc.getOutputStream(), true);
+			final PrintWriter out = new PrintWriter(huc.getOutputStream(), true);
 
 			out.println(getRequestBody());
 			out.close();
 		}
 
-		return m_huc;
+		return huc;
 	}
 
 	public HttpURLConnection disconnect() {
-		if (m_huc == null) {
+		if (huc == null) {
 			throw new IllegalStateException("must call connect() and sendRequest() first");
 		}
-		m_huc.disconnect();
+		huc.disconnect();
 
-		return m_huc;
+		return huc;
 	}
 
 	public abstract HttpResponse getResponse() throws IOException;

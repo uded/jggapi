@@ -19,8 +19,8 @@ public class GGTokenRequest extends HttpRequest {
 
 	public GGTokenRequest(final IGGConfiguration configuration) throws IOException {
 		super(configuration);
-		m_huc.setRequestProperty("Accept", "image/gif, image/jpeg, */*");
-		m_huc.setRequestProperty("Accept-Language", "pl");
+		huc.setRequestProperty("Accept", "image/gif, image/jpeg, */*");
+		huc.setRequestProperty("Accept-Language", "pl");
 	}
 
 	/**
@@ -30,7 +30,7 @@ public class GGTokenRequest extends HttpRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line1 = reader.readLine();
 		final String line2 = reader.readLine();
 		final String line3 = reader.readLine();
@@ -43,8 +43,7 @@ public class GGTokenRequest extends HttpRequest {
 	 */
 	@Override
 	protected String getURL() {
-		return m_ggconfiguration.getTokenRequestURL();
-		// return "http://register.gadu-gadu.pl/appsvc/regtoken.asp";
+		return ggConfiguration.getTokenRequestURL();
 	}
 
 	/**
@@ -66,14 +65,14 @@ public class GGTokenRequest extends HttpRequest {
 
 	public static class GGTokenResponse extends HttpResponse {
 
-		private String m_responseLine1 = null;
-		private String m_responseLine2 = null;
-		private String m_responseLine3 = null;
+		private String responseLine1 = null;
+		private String responseLine2 = null;
+		private String responseLine3 = null;
 
 		private GGTokenResponse(final String responseLine1, final String responseLine2, final String responseLine3) {
-			m_responseLine1 = responseLine1;
-			m_responseLine2 = responseLine2;
-			m_responseLine3 = responseLine3;
+			this.responseLine1 = responseLine1;
+			this.responseLine2 = responseLine2;
+			this.responseLine3 = responseLine3;
 		}
 
 		/**
@@ -81,13 +80,13 @@ public class GGTokenRequest extends HttpRequest {
 		 */
 		@Override
 		public boolean isOKResponse() {
-			return m_responseLine1 != null && m_responseLine2 != null && m_responseLine3 != null;
+			return responseLine1 != null && responseLine2 != null && responseLine3 != null;
 		}
 
 		public GGToken getGGToken() {
 			final GGToken token = new GGToken();
 
-			final StringTokenizer tokenizer = new StringTokenizer(m_responseLine1, " ");
+			final StringTokenizer tokenizer = new StringTokenizer(responseLine1, " ");
 
 			final String widthString = tokenizer.nextToken();
 			final String heightString = tokenizer.nextToken();
@@ -96,8 +95,8 @@ public class GGTokenRequest extends HttpRequest {
 			token.setImageWidth(Integer.parseInt(widthString));
 			token.setImageHeight(Integer.parseInt(heightString));
 			token.setTokenLength(Integer.parseInt(lengthString));
-			token.setTokenID(m_responseLine2.trim());
-			token.setTokenURL(m_responseLine3.trim());
+			token.setTokenID(responseLine2.trim());
+			token.setTokenURL(responseLine3.trim());
 
 			return token;
 		}
@@ -107,7 +106,7 @@ public class GGTokenRequest extends HttpRequest {
 		 */
 		@Override
 		public String getResponseMessage() {
-			return m_responseLine1 + "\n" + m_responseLine2 + "\n" + m_responseLine3;
+			return responseLine1 + "\n" + responseLine2 + "\n" + responseLine3;
 		}
 
 	}

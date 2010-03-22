@@ -11,19 +11,19 @@ import java.util.Date;
  */
 public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 
-	private boolean m_blocked = false;
+	private boolean blocked = false;
 
-	private byte[] m_remoteIP = null;
-	private int m_remotePort = -1;
+	private byte[] remoteIP = null;
+	private int remotePort = -1;
 
-	private int m_imageSize = -1;
-	private int m_version = -1;
-	private int m_descriptionSize = -1;
+	private int imageSize = -1;
+	private int version = -1;
+	private int descriptionSize = -1;
 
-	private boolean m_supportsVoiceCommunication = false;
-	private boolean m_supportsDirectCommunication = false;
-	private boolean m_areWeInRemoteUserBuddyList = false;
-	private boolean m_isUserBehindFirewall = false;
+	private boolean supportsVoiceCommunication = false;
+	private boolean supportsDirectCommunication = false;
+	private boolean areWeInRemoteUserBuddyList = false;
+	private boolean isUserBehindFirewall = false;
 
 	public RemoteStatus(final StatusType statusType) {
 		super(statusType);
@@ -38,126 +38,125 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	}
 
 	public void setBlocked(final boolean blocked) {
-		m_blocked = blocked;
+		this.blocked = blocked;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#isBlocked()
 	 */
 	public boolean isBlocked() {
-		return m_blocked;
+		return blocked;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#getRemoteIP()
 	 */
 	public byte[] getRemoteIP() {
-		return m_remoteIP;
+		return remoteIP;
 	}
 
-	// FIXME IllegalArgumentException
 	public void setRemoteIP(final byte[] remoteIP) {
 		if (remoteIP == null) {
-			throw new GGNullPointerException("remoteIP cannot be null");
+			throw new IllegalArgumentException("remoteIP cannot be null");
 		}
 		if (remoteIP.length != 4) {
 			throw new IllegalArgumentException("remoteIP must contain 4 entries");
 		}
-		m_remoteIP = remoteIP;
+		this.remoteIP = remoteIP;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#getRemotePort()
 	 */
 	public int getRemotePort() {
-		return m_remotePort;
+		return remotePort;
 	}
 
 	public void setRemotePort(final int remotePort) {
 		if (remotePort < 0 || remotePort > 65535) {
 			throw new IllegalArgumentException("Incorrect remotePort number");
 		}
-		m_remotePort = remotePort;
+		this.remotePort = remotePort;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#getGGVersion()
 	 */
 	public int getGGVersion() {
-		return m_version;
+		return version;
 	}
 
 	public void setGGVersion(final int version) {
-		m_version = version;
+		this.version = version;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#getImageSize()
 	 */
 	public int getImageSize() {
-		return m_imageSize;
+		return imageSize;
 	}
 
 	public void setImageSize(final int imageSize) {
 		if (imageSize < 0) {
 			throw new IllegalArgumentException("Illegal imageSize");
 		}
-		m_imageSize = imageSize;
+		this.imageSize = imageSize;
 	}
 
 	public boolean supportsVoiceCommunication() {
-		return m_supportsVoiceCommunication;
+		return supportsVoiceCommunication;
 	}
 
 	public void setSupportsVoiceCommunication(final boolean supportsVoiceCommunication) {
-		m_supportsVoiceCommunication = supportsVoiceCommunication;
+		this.supportsVoiceCommunication = supportsVoiceCommunication;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#supportsDirectCommunication()
 	 */
 	public boolean supportsDirectCommunication() {
-		return m_supportsDirectCommunication;
+		return supportsDirectCommunication;
 	}
 
 	public void setSupportsDirectCommunication(final boolean supportsDirectCommunication) {
-		m_supportsDirectCommunication = supportsDirectCommunication;
+		this.supportsDirectCommunication = supportsDirectCommunication;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#areWeInRemoteUserBuddyList()
 	 */
 	public boolean areWeInRemoteUserBuddyList() {
-		return m_areWeInRemoteUserBuddyList;
+		return areWeInRemoteUserBuddyList;
 	}
 
 	public void setAreWeInRemoteUserBuddyList(final boolean areWeInRemoteUserBuddyList) {
-		m_areWeInRemoteUserBuddyList = areWeInRemoteUserBuddyList;
+		this.areWeInRemoteUserBuddyList = areWeInRemoteUserBuddyList;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#getDescription()
 	 */
 	public int getDescriptionSize() {
-		return m_descriptionSize;
+		return descriptionSize;
 	}
 
 	public void setDescriptionSize(final int descriptionSize) {
 		if (descriptionSize < 0) {
 			throw new IllegalArgumentException("descriptionSize cannot be less than 0");
 		}
-		m_descriptionSize = descriptionSize;
+		this.descriptionSize = descriptionSize;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IRemoteStatus#isUserBehindFirewall()
 	 */
 	public boolean isUserBehindFirewall() {
-		return m_isUserBehindFirewall;
+		return isUserBehindFirewall;
 	}
 
 	public void setUserBehindFirewall(final boolean userBehingFirewall) {
-		m_isUserBehindFirewall = true;
+		isUserBehindFirewall = true;
 	}
 
 }

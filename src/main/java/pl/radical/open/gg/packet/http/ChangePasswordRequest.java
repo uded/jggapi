@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.http;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 import pl.radical.open.gg.utils.GGUtils;
 
@@ -10,40 +9,47 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * Created on 2005-01-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class ChangePasswordRequest extends AbstractTokenRequest {
+	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	private int m_uin = -1;
-	private String m_email = null;
-	private String m_oldPassword = null;
-	private String m_newPassword = null;
+	private int uin = 0;
+	private String email = null;
+	private String oldPassword = null;
+	private String newPassword = null;
 
-	// FIXME IllegalArgumentException
 	public ChangePasswordRequest(final IGGConfiguration configuration, final int uin, final String email, final String oldPassword, final String newPassword, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
-		if (uin < 0) {
-			throw new IllegalArgumentException("uin cannot be less than 0");
+
+		if (log.isTraceEnabled()) {
+			log.trace("Creating {} object", getClass());
+		}
+
+		if (uin < 1) {
+			throw new IllegalArgumentException("uin cannot be less than 1");
 		}
 		if (email == null) {
-			// FIXME Other exception instead?
-			throw new GGNullPointerException("email cannot be null");
+			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (oldPassword == null) {
-			// FIXME Other exception instead?
-			throw new GGNullPointerException("oldPassword cannot be null");
+			throw new IllegalArgumentException("oldPassword cannot be null");
 		}
 		if (newPassword == null) {
-			// FIXME Other exception instead?
-			throw new GGNullPointerException("newPassword cannot be null");
+			throw new IllegalArgumentException("newPassword cannot be null");
 		}
-		m_uin = uin;
-		m_email = email;
-		m_oldPassword = oldPassword;
-		m_newPassword = newPassword;
+
+		this.uin = uin;
+		this.email = email;
+		this.oldPassword = oldPassword;
+		this.newPassword = newPassword;
 	}
 
 	/**
@@ -53,10 +59,17 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
-		final String line = reader.readLine();
+		BufferedReader reader = null;
+		try {
+			reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+			final String line = reader.readLine();
 
-		return new CommonRegisterResponse(m_uin, line);
+			return new CommonRegisterResponse(uin, line);
+		} finally {
+			if (reader != null) {
+				reader.close();
+			}
+		}
 	}
 
 	/**
@@ -64,8 +77,7 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	protected String getURL() {
-		return m_ggconfiguration.getRegistrationURL();
-		// return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
+		return ggConfiguration.getRegistrationURL();
 	}
 
 	/**
@@ -76,25 +88,29 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	protected String getRequestBody() throws UnsupportedEncodingException {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("fmnumber=");
-		buffer.append(m_uin);
+		buffer.append(uin);
 		buffer.append('&');
 		buffer.append("fmpwd=");
-		buffer.append(URLEncoder.encode(m_oldPassword, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(oldPassword, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("pwd=");
-		buffer.append(URLEncoder.encode(m_newPassword, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(newPassword, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("email=");
-		buffer.append(URLEncoder.encode(m_email, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(email, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("tokenid=");
-		buffer.append(getTokenID());
+		buffer.append(tokenID);
 		buffer.append('&');
 		buffer.append("tokenval=");
-		buffer.append(getTokenVal());
+		buffer.append(tokenVal);
 		buffer.append('&');
 		buffer.append("code=");
-		buffer.append(getHashCode(m_email, m_newPassword));
+		buffer.append(getHashCode(email, newPassword));
+
+		if (log.isDebugEnabled()) {
+			log.debug("Request body: {}", buffer.toString());
+		}
 
 		return buffer.toString();
 	}

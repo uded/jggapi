@@ -16,18 +16,16 @@ import java.io.UnsupportedEncodingException;
  */
 public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 
-	private int m_uin = -1;
+	private int m_uin = 0;
 	private String m_email = null;
 
-	// FIXME IllegalArgumentException
 	public SendAndRemindPasswordRequest(final IGGConfiguration configuration, final int uin, final String email, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
-		if (uin < 0) {
-			throw new IllegalArgumentException("uin cannot be less than 0");
+		if (uin < 1) {
+			throw new IllegalArgumentException("uin cannot be less than 1");
 		}
 		if (email == null) {
-			// FIXME Other exception instead?
-			throw new GGNullPointerException("email cannot be null");
+			throw new IllegalArgumentException("email cannot be null");
 		}
 		m_uin = uin;
 		m_email = email;
@@ -40,7 +38,7 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line = reader.readLine();
 
 		return new SendAndRemindPasswordResponse(line);
@@ -51,7 +49,7 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	protected String getURL() {
-		return m_ggconfiguration.getSendPasswordURL();
+		return ggConfiguration.getSendPasswordURL();
 		// return "http://retr.gadu-gadu.pl/appsvc/fmsendpwd3.asp";
 	}
 
@@ -68,10 +66,10 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 		buffer.append(m_email);
 		buffer.append('&');
 		buffer.append("tokenid=");
-		buffer.append(getTokenID());
+		buffer.append(tokenID);
 		buffer.append('&');
 		buffer.append("tokenval=");
-		buffer.append(getTokenVal());
+		buffer.append(tokenVal);
 		buffer.append('&');
 		buffer.append("code=");
 		buffer.append(getHashCode(String.valueOf(m_uin)));

@@ -7,10 +7,10 @@ package pl.radical.open.gg;
  */
 public class MessageStatus {
 
-	private String m_messageStatus = null;
+	private String messageStatus = null;
 
 	private MessageStatus(final String messageStatus) {
-		m_messageStatus = messageStatus;
+		this.messageStatus = messageStatus;
 	}
 
 	/** Message has not been blocked. */
@@ -35,7 +35,7 @@ public class MessageStatus {
 	 */
 	@Override
 	public String toString() {
-		return m_messageStatus;
+		return messageStatus;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class MessageStatus {
 	 */
 	@Override
 	public int hashCode() {
-		return m_messageStatus.hashCode();
+		return messageStatus.hashCode();
 	}
 
 }

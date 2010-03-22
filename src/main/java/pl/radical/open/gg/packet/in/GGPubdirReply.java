@@ -1,9 +1,9 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.Gender;
 import pl.radical.open.gg.IRemoteStatus;
 import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchReply;
+import pl.radical.open.gg.dicts.Gender;
 import pl.radical.open.gg.packet.GGBaseIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
@@ -97,6 +97,7 @@ public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConst
 				final String nickName = tokenizer.nextToken();
 				m_pubDirInfo.setNickName(nickName);
 			} else if (token.equals(GENDER)) {
+				// FIXME Review this part
 				final String genderString = tokenizer.nextToken();
 				Gender gender = null;
 				if (genderString.equals("1")) {

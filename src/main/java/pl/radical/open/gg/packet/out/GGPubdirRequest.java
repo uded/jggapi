@@ -1,9 +1,9 @@
 package pl.radical.open.gg.packet.out;
 
 import pl.radical.open.gg.GGNullPointerException;
-import pl.radical.open.gg.Gender;
 import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchQuery;
+import pl.radical.open.gg.dicts.Gender;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.dicts.GGPubdirConsts;
 

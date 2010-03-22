@@ -1,6 +1,7 @@
 package pl.radical.open.gg;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -14,7 +15,7 @@ public class OutgoingMessage extends AbstractMessage implements IOutgoingMessage
 
 	private final static Random RANDOM = new Random();
 
-	private final ArrayList<Integer> m_additionalRecipients = new ArrayList<Integer>();
+	private final List<Integer> additionalRecipients = new ArrayList<Integer>();
 
 	// private constructor
 	private OutgoingMessage(final int uin, final String text, final MessageClass messageClass) {
@@ -107,33 +108,33 @@ public class OutgoingMessage extends AbstractMessage implements IOutgoingMessage
 		if (recipientUin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
-		m_additionalRecipients.add(Integer.valueOf(recipientUin));
+		additionalRecipients.add(Integer.valueOf(recipientUin));
 	}
 
 	public void removeAdditionalRecipient(final int recipientUin) {
 		if (recipientUin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
-		m_additionalRecipients.remove(Integer.valueOf(recipientUin));
+		additionalRecipients.remove(Integer.valueOf(recipientUin));
 	}
 
 	public int[] getAdditionalRecipients() {
-		final int[] additionalRecipients = new int[m_additionalRecipients.size()];
+		final int[] result = new int[additionalRecipients.size()];
 
 		int i = 0;
-		for (final Object element : m_additionalRecipients) {
-			additionalRecipients[i++] = ((Integer) element).intValue();
+		for (final Integer element : additionalRecipients) {
+			result[i++] = element.intValue();
 		}
 
-		return additionalRecipients;
+		return result;
 	}
 
 	public int[] getAllRecipients() {
-		final int[] allRecipients = new int[m_additionalRecipients.size() + 1];
+		final int[] allRecipients = new int[additionalRecipients.size() + 1];
 		allRecipients[0] = m_recipientUin;
 
 		int i = 1;
-		for (final Object element : m_additionalRecipients) {
+		for (final Object element : additionalRecipients) {
 			allRecipients[i++] = ((Integer) element).intValue();
 		}
 

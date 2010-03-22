@@ -16,7 +16,7 @@ import java.util.Iterator;
  */
 public class PublicDirSearchReply {
 
-	private Integer m_nextStart = null;
+	private Integer nextStart = null;
 
 	private final Collection<PublicDirSearchReply.Entry> m_publicDirSearchEntries = new ArrayList<Entry>();
 
@@ -46,7 +46,7 @@ public class PublicDirSearchReply {
 	 * @param nextStart
 	 */
 	public void setNextStart(final Integer nextStart) {
-		m_nextStart = nextStart;
+		this.nextStart = nextStart;
 	}
 
 	/**
@@ -55,7 +55,7 @@ public class PublicDirSearchReply {
 	 * @return <code>Integer</code> value that holds nextStart.
 	 */
 	public Integer getNextStart() {
-		return m_nextStart;
+		return nextStart;
 	}
 
 	public static class Entry extends PublicDirSearch {
@@ -78,24 +78,24 @@ public class PublicDirSearchReply {
 
 	private static class UnmodifiableIterator implements Iterator<PublicDirSearchReply.Entry> {
 
-		private final Iterator<PublicDirSearchReply.Entry> m_iterator;
+		private final Iterator<PublicDirSearchReply.Entry> iterator;
 
-		private UnmodifiableIterator(final Iterator<PublicDirSearchReply.Entry> it) {
-			m_iterator = it;
+		private UnmodifiableIterator(final Iterator<PublicDirSearchReply.Entry> iterator) {
+			this.iterator = iterator;
 		}
 
 		/**
 		 * @see java.util.Iterator#hasNext()
 		 */
 		public boolean hasNext() {
-			return m_iterator.hasNext();
+			return iterator.hasNext();
 		}
 
 		/**
 		 * @see java.util.Iterator#next()
 		 */
 		public PublicDirSearchReply.Entry next() {
-			return m_iterator.next();
+			return iterator.next();
 		}
 
 		/**

@@ -1,5 +1,7 @@
 package pl.radical.open.gg;
 
+import pl.radical.open.gg.dicts.Gender;
+
 /**
  * This class represents personal user's information. It is stored remotely in Gadu-Gadu public directory service.
  * Created on 2004-11-27
@@ -9,91 +11,91 @@ package pl.radical.open.gg;
 public class PersonalInfo {
 
 	/** First name of the user */
-	private String m_firstName = null;
+	private String firstName = null;
 
 	/** Last name of the user */
-	private String m_lastName = null;
+	private String lastName = null;
 
 	/** Birth date of the user */
-	private String m_birthDate = null;
+	private String birthDate = null;
 
 	/** City of the user */
-	private String m_city = null;
+	private String city = null;
 
 	/** The handle that the user want to identify hisself/herself */
-	private String m_nickName = null;
+	private String nickName = null;
 
 	/** The gender of the user */
-	private Gender m_gender = null;
+	private Gender gender = null;
 
 	/** The name of the user's family */
-	private String m_familyName = null;
+	private String familyName = null;
 
 	/** the name of the user's city */
-	private String m_familyCity = null;
+	private String familyCity = null;
 
 	public String getFirstName() {
-		return m_firstName;
+		return firstName;
 	}
 
-	public void setFirstName(final String name) {
-		m_firstName = name;
+	public void setFirstName(final String firstName) {
+		this.firstName = firstName;
 	}
 
 	public String getLastName() {
-		return m_lastName;
+		return lastName;
 	}
 
-	public void setLastName(final String name) {
-		m_lastName = name;
+	public void setLastName(final String lastName) {
+		this.lastName = lastName;
 	}
 
 	public String getBirthDate() {
-		return m_birthDate;
+		return birthDate;
 	}
 
-	public void setBirthDate(final String date) {
-		m_birthDate = date;
+	public void setBirthDate(final String birthDate) {
+		this.birthDate = birthDate;
 	}
 
 	public String getCity() {
-		return m_city;
+		return city;
 	}
 
 	public void setCity(final String city) {
-		m_city = city;
+		this.city = city;
 	}
 
 	public Gender getGender() {
-		return m_gender;
+		return gender;
 	}
 
 	public void setGender(final Gender gender) {
-		m_gender = gender;
+		this.gender = gender;
 	}
 
 	public String getNickName() {
-		return m_nickName;
+		return nickName;
 	}
 
 	public void setNickName(final String nickName) {
-		m_nickName = nickName;
+		this.nickName = nickName;
 	}
 
 	public String getFamilyCity() {
-		return m_familyCity;
+		return familyCity;
 	}
 
 	public void setFamilyCity(final String familyCity) {
-		m_familyCity = familyCity;
+		this.familyCity = familyCity;
 	}
 
 	public String getFamilyName() {
-		return m_familyName;
+		return familyName;
 	}
 
 	public void setFamilyName(final String familyName) {
-		m_familyName = familyName;
+		this.familyName = familyName;
 	}
 
 }

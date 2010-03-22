@@ -9,12 +9,12 @@ public final class Server implements IServer {
 	/**
 	 * The server's address
 	 */
-	private String m_address = null;
+	private String address = null;
 
 	/**
 	 * The server's port
 	 */
-	private int m_port = -1;
+	private int port = -1;
 
 	public Server() {
 	}
@@ -39,21 +39,21 @@ public final class Server implements IServer {
 		if (port < 0 || port > 65535) {
 			throw new IllegalArgumentException("port cannot be less than 0 and grather than 65535");
 		}
-		m_address = address;
-		m_port = port;
+		this.address = address;
+		this.port = port;
 	}
 
 	public String getAddress() {
-		return m_address;
+		return address;
 	}
 
 	public int getPort() {
-		return m_port;
+		return port;
 	}
 
 	@Override
 	public String toString() {
-		return "[" + m_address + ":" + m_port + "]";
+		return "[" + address + ":" + port + "]";
 	}
 
 }

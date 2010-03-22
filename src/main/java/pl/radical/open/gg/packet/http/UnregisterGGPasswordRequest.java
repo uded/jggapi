@@ -17,21 +17,21 @@ import java.net.URLEncoder;
  */
 public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 
-	private int m_uin = -1;
-	private String m_password = null;
+	private int uin = 0;
+	private String password = null;
 
 	// FIXME IllegalArgumentException
 	public UnregisterGGPasswordRequest(final IGGConfiguration configuration, final int uin, final String password, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
-		if (uin < 0) {
-			throw new IllegalArgumentException("uin cannot be less than 0");
+		if (uin < 1) {
+			throw new IllegalArgumentException("uin cannot be less than 1");
 		}
 		if (password == null) {
 			// FIXME Other exception instead?
 			throw new GGNullPointerException("password cannot be null");
 		}
-		m_uin = uin;
-		m_password = password;
+		this.uin = uin;
+		this.password = password;
 	}
 
 	/**
@@ -41,10 +41,10 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(m_huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
 		final String line = reader.readLine();
 
-		return new CommonRegisterResponse(m_uin, line);
+		return new CommonRegisterResponse(uin, line);
 	}
 
 	/**
@@ -52,8 +52,7 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	protected String getURL() {
-		return m_ggconfiguration.getRegistrationURL();
-		// return "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";
+		return ggConfiguration.getRegistrationURL();
 	}
 
 	/**
@@ -64,10 +63,10 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	protected String getRequestBody() throws UnsupportedEncodingException {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("fmnumber=");
-		buffer.append(m_uin);
+		buffer.append(uin);
 		buffer.append('&');
 		buffer.append("fmpwd=");
-		buffer.append(URLEncoder.encode(m_password, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(password, GGUtils.WINDOWS_ENCODING));
 		buffer.append('&');
 		buffer.append("delete=1");
 		buffer.append('&');
@@ -78,10 +77,10 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 		buffer.append("2D388046464"); // TODO losowa liczba?
 		buffer.append('&');
 		buffer.append("tokenid=");
-		buffer.append(getTokenID());
+		buffer.append(tokenID);
 		buffer.append('&');
 		buffer.append("tokenval=");
-		buffer.append(getTokenVal());
+		buffer.append(tokenVal);
 		buffer.append('&');
 		buffer.append("code=");
 		buffer.append(getHashCode("deletedaccount@gadu-gadu.pl", "2D388046464"));

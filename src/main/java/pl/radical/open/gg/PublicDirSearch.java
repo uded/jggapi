@@ -9,68 +9,68 @@ package pl.radical.open.gg;
  */
 public abstract class PublicDirSearch {
 
-	protected Integer m_uin = null;
-	protected String m_firstName = null;
-	protected String m_nickName = null;
-	protected String m_birthYear = null;
-	protected String m_city = null;
-	protected String m_familyName = null;
-	protected String m_familyCity = null;
+	protected Integer uin = null;
+	protected String firstName = null;
+	protected String nickName = null;
+	protected String birthYear = null;
+	protected String city = null;
+	protected String familyName = null;
+	protected String familyCity = null;
 
 	public Integer getUin() {
-		return m_uin;
+		return uin;
 	}
 
 	public void setUin(final Integer uin) {
-		m_uin = uin;
+		this.uin = uin;
 	}
 
 	public String getFirstName() {
-		return m_firstName;
+		return firstName;
 	}
 
 	public void setFirstName(final String firstName) {
-		m_firstName = firstName;
+		this.firstName = firstName;
 	}
 
 	public String getBirthYear() {
-		return m_birthYear;
+		return birthYear;
 	}
 
 	public void setBirthYear(final String birthYear) {
-		m_birthYear = birthYear;
+		this.birthYear = birthYear;
 	}
 
 	public String getNickName() {
-		return m_nickName;
+		return nickName;
 	}
 
 	public void setNickName(final String nickName) {
-		m_nickName = nickName;
+		this.nickName = nickName;
 	}
 
 	public String getCity() {
-		return m_city;
+		return city;
 	}
 
 	public void setCity(final String city) {
-		m_city = city;
+		this.city = city;
 	}
 
 	public String getFamilyName() {
-		return m_familyName;
+		return familyName;
 	}
 
 	public void setFamilyName(final String familyName) {
-		m_familyName = familyName;
+		this.familyName = familyName;
 	}
 
 	public void setFamilyCity(final String familyCity) {
-		m_familyCity = familyCity;
+		this.familyCity = familyCity;
 	}
 
 	public String getFamilyCity() {
-		return m_familyCity;
+		return familyCity;
 	}
 
 }
