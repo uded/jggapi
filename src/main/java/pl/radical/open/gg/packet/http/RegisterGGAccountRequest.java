@@ -2,6 +2,7 @@ package pl.radical.open.gg.packet.http;
 
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
+import pl.radical.open.gg.dicts.Encoding;
 import pl.radical.open.gg.utils.GGUtils;
 
 import java.io.BufferedReader;
@@ -43,7 +44,7 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), Encoding.WINDOWS1250.getValue()));
 		final String line = reader.readLine();
 
 		return new RegisterGGAccountResponse(line);
@@ -65,16 +66,16 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	protected String getRequestBody() throws UnsupportedEncodingException {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("pwd=");
-		buffer.append(URLEncoder.encode(m_password, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(m_password, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("email=");
-		buffer.append(URLEncoder.encode(m_email, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(m_email, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("tokenid=");
-		buffer.append(URLEncoder.encode(tokenID, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(tokenID, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("tokenval=");
-		buffer.append(URLEncoder.encode(tokenVal, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(tokenVal, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("code=");
 		buffer.append(getHashCode(m_email, m_password));

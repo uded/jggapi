@@ -2,6 +2,7 @@ package pl.radical.open.gg.packet.http;
 
 import pl.radical.open.gg.GGToken;
 import pl.radical.open.gg.IGGConfiguration;
+import pl.radical.open.gg.dicts.Encoding;
 import pl.radical.open.gg.utils.GGUtils;
 
 import java.io.BufferedReader;
@@ -30,7 +31,7 @@ public class GGTokenRequest extends HttpRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), Encoding.WINDOWS1250.getValue()));
 		final String line1 = reader.readLine();
 		final String line2 = reader.readLine();
 		final String line3 = reader.readLine();

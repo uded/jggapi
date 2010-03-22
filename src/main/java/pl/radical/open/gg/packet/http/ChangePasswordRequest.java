@@ -1,6 +1,7 @@
 package pl.radical.open.gg.packet.http;
 
 import pl.radical.open.gg.IGGConfiguration;
+import pl.radical.open.gg.dicts.Encoding;
 import pl.radical.open.gg.utils.GGUtils;
 
 import java.io.BufferedReader;
@@ -61,7 +62,7 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	public HttpResponse getResponse() throws IOException {
 		BufferedReader reader = null;
 		try {
-			reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+			reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), Encoding.WINDOWS1250.getValue()));
 			final String line = reader.readLine();
 
 			return new CommonRegisterResponse(uin, line);
@@ -91,13 +92,13 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 		buffer.append(uin);
 		buffer.append('&');
 		buffer.append("fmpwd=");
-		buffer.append(URLEncoder.encode(oldPassword, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(oldPassword, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("pwd=");
-		buffer.append(URLEncoder.encode(newPassword, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(newPassword, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("email=");
-		buffer.append(URLEncoder.encode(email, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(email, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("tokenid=");
 		buffer.append(tokenID);

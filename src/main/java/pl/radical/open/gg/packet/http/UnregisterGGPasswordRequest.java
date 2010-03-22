@@ -2,6 +2,7 @@ package pl.radical.open.gg.packet.http;
 
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
+import pl.radical.open.gg.dicts.Encoding;
 import pl.radical.open.gg.utils.GGUtils;
 
 import java.io.BufferedReader;
@@ -41,7 +42,7 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	public HttpResponse getResponse() throws IOException {
-		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), GGUtils.WINDOWS_ENCODING));
+		final BufferedReader reader = new BufferedReader(new InputStreamReader(huc.getInputStream(), Encoding.WINDOWS1250.getValue()));
 		final String line = reader.readLine();
 
 		return new CommonRegisterResponse(uin, line);
@@ -66,7 +67,7 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 		buffer.append(uin);
 		buffer.append('&');
 		buffer.append("fmpwd=");
-		buffer.append(URLEncoder.encode(password, GGUtils.WINDOWS_ENCODING));
+		buffer.append(URLEncoder.encode(password, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("delete=1");
 		buffer.append('&');

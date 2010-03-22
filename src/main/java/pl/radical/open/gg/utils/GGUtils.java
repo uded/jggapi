@@ -1,6 +1,7 @@
 package pl.radical.open.gg.utils;
 
 import pl.radical.open.gg.GGException;
+import pl.radical.open.gg.dicts.Encoding;
 import pl.radical.open.gg.packet.dicts.GGHashType;
 
 import java.io.IOException;
@@ -21,8 +22,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGUtils {
-	public final static String WINDOWS_ENCODING = "windows-1250";
-
+	
 	private static final Logger log = LoggerFactory.getLogger(GGUtils.class);
 
 	public static String prettyBytesToString(final byte[] bytes) {
@@ -143,7 +143,27 @@ public class GGUtils {
 
 		String returnString = null;
 		try {
-			returnString = new String(desc, WINDOWS_ENCODING);
+			returnString = new String(desc, Encoding.WINDOWS1250.getValue());
+		} catch (final UnsupportedEncodingException ex) {
+			log.warn("Unable to convert", ex);
+			return new String(desc);
+		}
+		return returnString;
+	}
+	
+	public static String byteToString(final byte[] data, final int startIndex,Encoding encoding) {
+		int counter = 0;
+
+		while (counter + startIndex < data.length && data[counter + startIndex] != 0) {
+			counter++;
+		}
+
+		final byte[] desc = new byte[counter];
+		System.arraycopy(data, startIndex, desc, 0, counter);
+
+		String returnString = null;
+		try {
+			returnString = new String(desc, encoding.getValue());
 		} catch (final UnsupportedEncodingException ex) {
 			log.warn("Unable to convert", ex);
 			return new String(desc);
