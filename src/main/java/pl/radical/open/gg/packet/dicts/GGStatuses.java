@@ -5,6 +5,7 @@ package pl.radical.open.gg.packet.dicts;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 // TODO Dodać opisy słowno-muzyczne wersji
+// TODO Change that to enum - interface should not define constants
 public interface GGStatuses {
 
 	/**

@@ -5,6 +5,7 @@ package pl.radical.open.gg.packet.dicts;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+// TODO Change that to enum - interface should not define constants
 public interface GGPubdirConsts {
 
 	int GG_PUBDIR50_WRITE = 0x01;

@@ -5,6 +5,7 @@ package pl.radical.open.gg.packet.dicts;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+// TODO Change that to enum - interface should not define constants
 public interface GGMessageClass {
 
 	int GG_CLASS_QUEUED = 0x0001;
