@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet;
 
-
 /**
  * Incoming Gadu-Gadu packet.
  * 

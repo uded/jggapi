@@ -37,7 +37,6 @@ public interface GGStatuses {
 	 */
 	int GG_STATUS_AVAIL_DESCR = 0x00000004;
 
-
 	/**
 	 * Status busy
 	 */

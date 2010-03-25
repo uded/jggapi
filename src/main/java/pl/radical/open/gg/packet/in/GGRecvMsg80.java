@@ -1,14 +1,14 @@
 package pl.radical.open.gg.packet.in;
 
-import org.apache.commons.collections.primitives.ArrayByteList;
-import org.apache.commons.collections.primitives.ByteList;
-
 import pl.radical.open.gg.packet.GGBaseIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.packet.handlers.GGRecvMsg80PacketHandler;
 import pl.radical.open.gg.utils.GGUtils;
+
+import org.apache.commons.collections.primitives.ArrayByteList;
+import org.apache.commons.collections.primitives.ByteList;
 
 /**
  * Created on 2010-03-18
@@ -20,77 +20,82 @@ import pl.radical.open.gg.utils.GGUtils;
 @IncomingPacket(type = 0x002E, label = "GG_RECV_MSG80", handler = GGRecvMsg80PacketHandler.class)
 public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPackage, GGMessageClass {
 
-    private int sender = -1;
-    private int seq = -1;
-    private long time = -1;
-    private int msgClass = -1;
-    private int offsetPlain = -1;
-    private int offsetAttributes = -1 ;
-    private String htmlMessage = null;				/* message in HTML format */
-    private String plainMessage = null;				/* message in plain text */
-    private byte[] attributes = null;				/* messages's attributes */
+	private int sender = -1;
+	private int seq = -1;
+	private long time = -1;
+	private int msgClass = -1;
+	private int offsetPlain = -1;
+	private int offsetAttributes = -1;
+	private String htmlMessage = null; /* message in HTML format */
+	private String plainMessage = null; /* message in plain text */
+	private byte[] attributes = null; /* messages's attributes */
 
-    public GGRecvMsg80(byte[] data) {
-        sender = GGUtils.byteToInt(data);
-        seq = GGUtils.byteToInt(data, 4);
-        time = GGUtils.secondsToMillis(GGUtils.byteToInt(data, 8));
-        msgClass = GGUtils.byteToInt(data, 12);
-        offsetPlain = GGUtils.byteToInt(data,16);
-        offsetAttributes = GGUtils.byteToInt(data,20);
-        
-        if(getOffsetAttributes()==data.length){
-        	offsetAttributes = 0;
-        }else{
-        	final ByteList byteList = new ArrayByteList(data.length-offsetAttributes);
-        	for(int i = offsetAttributes; i < data.length ; i++){
-        		byteList.add(data[i]);
-        	}
-        	attributes = byteList.toArray();
-        }
-                
-        if(data.length > offsetPlain)
-        	plainMessage = GGUtils.byteToString(data,offsetPlain);
-        
-        //FIXME no htmlMessage
-    }
-        
-    /**
-     * Returns the msgClass.
-     * @return int msgClass
-     */
-    public int getMsgClass() {
-        return msgClass;
-    }
+	public GGRecvMsg80(final byte[] data) {
+		sender = GGUtils.byteToInt(data);
+		seq = GGUtils.byteToInt(data, 4);
+		time = GGUtils.secondsToMillis(GGUtils.byteToInt(data, 8));
+		msgClass = GGUtils.byteToInt(data, 12);
+		offsetPlain = GGUtils.byteToInt(data, 16);
+		offsetAttributes = GGUtils.byteToInt(data, 20);
 
-    /**
-     * Returns the sender uin number.
-     * @return int the sender uin.
-     */
-    public int getSenderUin() {
-        return sender;
-    }
+		if (getOffsetAttributes() == data.length) {
+			offsetAttributes = 0;
+		} else {
+			final ByteList byteList = new ArrayByteList(data.length - offsetAttributes);
+			for (int i = offsetAttributes; i < data.length; i++) {
+				byteList.add(data[i]);
+			}
+			attributes = byteList.toArray();
+		}
 
-    /**
-     * Returns the unique message sequence number.
-     * @return int message sequence number.
-     */
-    public int getMessageSeq() {
-        return seq;
-    }
+		if (data.length > offsetPlain) {
+			plainMessage = GGUtils.byteToString(data, offsetPlain);
+		}
 
-    /**
-     * Time in seconds.
-     * @return int the time in seconds.
-     */
-    public long getTime() {
-        return time;
-    }
+		// FIXME no htmlMessage
+	}
+
+	/**
+	 * Returns the msgClass.
+	 * 
+	 * @return int msgClass
+	 */
+	public int getMsgClass() {
+		return msgClass;
+	}
+
+	/**
+	 * Returns the sender uin number.
+	 * 
+	 * @return int the sender uin.
+	 */
+	public int getSenderUin() {
+		return sender;
+	}
+
+	/**
+	 * Returns the unique message sequence number.
+	 * 
+	 * @return int message sequence number.
+	 */
+	public int getMessageSeq() {
+		return seq;
+	}
+
+	/**
+	 * Time in seconds.
+	 * 
+	 * @return int the time in seconds.
+	 */
+	public long getTime() {
+		return time;
+	}
 
 	public int getOffsetPlain() {
 		return offsetPlain;
 	}
 
-	public void setOffsetPlain(int mOffsetPlain) {
+	public void setOffsetPlain(final int mOffsetPlain) {
 		offsetPlain = mOffsetPlain;
 	}
 
@@ -98,7 +103,7 @@ public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPacka
 		return offsetAttributes;
 	}
 
-	public void setOffsetAttributes(int mOffsetAttributes) {
+	public void setOffsetAttributes(final int mOffsetAttributes) {
 		offsetAttributes = mOffsetAttributes;
 	}
 
@@ -106,7 +111,7 @@ public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPacka
 		return htmlMessage;
 	}
 
-	public void setHtmlMessage(String mHtmlMessage) {
+	public void setHtmlMessage(final String mHtmlMessage) {
 		htmlMessage = mHtmlMessage;
 	}
 
@@ -114,7 +119,7 @@ public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPacka
 		return plainMessage;
 	}
 
-	public void setPlainMessage(String mPlainMessage) {
+	public void setPlainMessage(final String mPlainMessage) {
 		plainMessage = mPlainMessage;
 	}
 
@@ -122,9 +127,8 @@ public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPacka
 		return attributes;
 	}
 
-	public void setAttributes(byte[] mAttributes) {
+	public void setAttributes(final byte[] mAttributes) {
 		attributes = mAttributes;
 	}
-    
 
 }

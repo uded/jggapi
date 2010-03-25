@@ -49,76 +49,64 @@ public class GGLogin80 implements GGOutgoingPackage {
 	 */
 	private int m_uin = -1;
 
-
 	/**
 	 * Language of the client, default to "pl"
 	 */
 	final static String M_LANGUAGE = "pl";
-
 
 	/**
 	 * Password that will be used during logging
 	 */
 	private char[] m_password = null;
 
-
 	/**
 	 * Login hash type that will be used to authenticate the user
 	 */
 	private final GGHashType m_hashType = GGHashType.GG_LOGIN_HASH_SHA1;
-
 
 	/**
 	 * Computed login hash based on seed retreived from Gadu-Gadu server
 	 */
 	private byte[] m_loginHash = null;
 
-
 	/**
 	 * Initial status that will be set after logging
 	 */
 	private int m_status = GGStatuses.GG_STATUS_AVAIL;
-
 
 	/**
 	 * Starting protocols flags
 	 */
 	private final int m_flags = GGStatusFlags.FLAG_UNKNOWN.value() + GGStatusFlags.FLAG_RECEIVELINKS.value();
 
-
 	/**
 	 * Protocol options - 0x00000367
 	 */
 	private final static int m_features = 0x00000007;
 
-
 	/**
 	 * Local IP
 	 */
 	private byte[] m_localIP = new byte[] {
-			(byte) 0, (byte) 0, (byte) 0, (byte) 0
+	        (byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
-
 
 	/**
 	 * Local port that we are listening on
 	 */
 	private int m_localPort = 0;
 
-
 	/**
 	 * ExternalIP
 	 */
 	private byte[] m_externalIP = new byte[] {
-			(byte) 0, (byte) 0, (byte) 0, (byte) 0
+	        (byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
-
 
 	/**
 	 * External port
 	 */
 	private int m_externalPort = 0;
-
 
 	/**
 	 * size of image in kilobytes
@@ -144,7 +132,6 @@ public class GGLogin80 implements GGOutgoingPackage {
 	 * The length of the status description
 	 */
 	private int m_description_size;
-
 
 	/**
 	 * Description that will be set after successfuly logging

@@ -177,7 +177,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 
 			if (!response.isOKResponse()) {
 				throw new GGException("Error occured while trying to unregister Gadu-Gadu account, reason: " + response
-						.getResponseMessage());
+				        .getResponseMessage());
 			}
 
 		} catch (final IOException ex) {

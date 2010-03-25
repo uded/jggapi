@@ -8,7 +8,7 @@ package pl.radical.open.gg.dicts;
  */
 
 public enum Encoding {
-	
+
 	WINDOWS1250("windows-1250"),
 	UTF8("UTF8");
 

@@ -95,7 +95,7 @@ public class GGConversion {
 				remoteStatus.setDescription(description);
 				break;
 
-				// FIXME Default??
+			// FIXME Default??
 		}
 
 		if (remoteStatus != null && returnTimeInMillis != -1) {

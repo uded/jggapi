@@ -31,7 +31,7 @@ public class GGMessageReceivedPacketHandler implements PacketHandler {
 		final GGRecvMsg recvMsg = new GGRecvMsg(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(recvMsg);
 		final IIncommingMessage incommingMessage = new IncomingMessage(recvMsg.getSenderUin(), recvMsg.getMessage(), recvMsg
-				.getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
+		        .getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
 		context.getSessionAccessor().notifyMessageArrived(incommingMessage);
 	}
 

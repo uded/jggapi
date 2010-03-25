@@ -3,7 +3,6 @@ package pl.radical.open.gg.packet.http;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 import pl.radical.open.gg.dicts.Encoding;
-import pl.radical.open.gg.utils.GGUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

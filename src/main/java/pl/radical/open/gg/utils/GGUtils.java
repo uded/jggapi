@@ -12,7 +12,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections.primitives.ArrayCharList;
 import org.apache.commons.collections.primitives.CharList;
 import org.slf4j.Logger;
@@ -22,7 +21,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGUtils {
-	
+
 	private static final Logger log = LoggerFactory.getLogger(GGUtils.class);
 
 	public static String prettyBytesToString(final byte[] bytes) {
@@ -150,8 +149,8 @@ public class GGUtils {
 		}
 		return returnString;
 	}
-	
-	public static String byteToString(final byte[] data, final int startIndex,Encoding encoding) {
+
+	public static String byteToString(final byte[] data, final int startIndex, final Encoding encoding) {
 		int counter = 0;
 
 		while (counter + startIndex < data.length && data[counter + startIndex] != 0) {
@@ -236,17 +235,17 @@ public class GGUtils {
 
 	private static byte[] getLoginHashSHA(final char[] password, final int seed) throws GGException {
 		MessageDigest hash = null;
-        try {
-	        hash = MessageDigest.getInstance("SHA1");
-        } catch (NoSuchAlgorithmException e) {
-	        log.error("Brak algorytmu SHA1",e);
-	        throw new GGException("Brak algorytmu SHA1", e);
-        }
-    	
-    	hash.update(new String(password).getBytes());   	
-    	hash.update(GGUtils.intToByte(seed));	
+		try {
+			hash = MessageDigest.getInstance("SHA1");
+		} catch (final NoSuchAlgorithmException e) {
+			log.error("Brak algorytmu SHA1", e);
+			throw new GGException("Brak algorytmu SHA1", e);
+		}
 
-    	return hash.digest();
+		hash.update(new String(password).getBytes());
+		hash.update(GGUtils.intToByte(seed));
+
+		return hash.digest();
 	}
 
 	public static byte[] getLoginHash(final char[] password, final int seed, final GGHashType hashType) throws GGException {
