@@ -2,25 +2,25 @@ package pl.radical.open.gg;
 
 import static org.junit.Assert.assertEquals;
 
-import pl.radical.open.gg.event.ConnectionListener;
-import pl.radical.open.gg.event.ContactListListener;
-import pl.radical.open.gg.event.LoginFailedEvent;
-import pl.radical.open.gg.event.LoginListener;
-
 import java.util.Collection;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import pl.radical.open.gg.event.ConnectionListener;
+import pl.radical.open.gg.event.ContactListListener;
+import pl.radical.open.gg.event.LoginFailedEvent;
+import pl.radical.open.gg.event.LoginListener;
+
+
 public class ConnectionTest {
 	private final Logger log = LoggerFactory.getLogger(getClass().getName());
 
 	static boolean asyncOp = false;
 
-	private static ISession session1;
-	private static ISession session2;
-
+	public static ISession session1;
+	public static ISession session2;
 
 	@Test(timeout = 1000 * 30)
 	public void connectionTest() {
@@ -134,4 +134,5 @@ public class ConnectionTest {
 
 		return session;
 	}
+
 }
