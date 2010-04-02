@@ -116,7 +116,7 @@
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
-			<version>1.5.10</version>
+			<version>1.5.11</version>
 		</dependency>
 		<dependency>
 			<groupId>commons-primitives</groupId>
@@ -133,7 +133,7 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>0.9.18</version>
+			<version>0.9.19</version>
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
@@ -156,6 +156,7 @@
 				<configuration>
 					<source>1.6</source>
 					<target>1.6</target>
+					<encoding>utf-8</encoding>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>
 				</configuration>
