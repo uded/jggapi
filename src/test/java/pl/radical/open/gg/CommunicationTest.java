@@ -16,6 +16,7 @@ public class CommunicationTest {
 	private ISession session1;
 	private ISession session2;
 	
+	
 	private int user1 = 20239471;
 	private int user2 = 20241237;
 
@@ -28,9 +29,11 @@ public class CommunicationTest {
 			
 	}
 	
-	@Test(timeout = 1000 * 30)
+	@Test(timeout = 1000 * 60)
 	public void sendRecvMsgTest() throws GGException, InterruptedException {
 	
+		ConnectionTest.communicationLatch.await();
+		
 		final String hello = "hello hello hello";
 		asyncOp = false;
 		

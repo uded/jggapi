@@ -21,7 +21,8 @@ public class ConnectionTest {
 	static ISession session1;
 	static ISession session2;
 
-	CountDownLatch connectLatch = new CountDownLatch(2);
+	final static CountDownLatch connectLatch = new CountDownLatch(2);
+	final static CountDownLatch communicationLatch = new CountDownLatch(2);
 
 	@Test(timeout = 1000 * 30)
 	public void connectionTest() {
@@ -114,6 +115,7 @@ public class ConnectionTest {
 		@Override
 		public void run() {
 			try {
+				System.out.println("connectLatch.getCount() = " + connectLatch.getCount());
 				connectLatch.await();
 
 				loginService = session.getLoginService();
@@ -121,6 +123,7 @@ public class ConnectionTest {
 					@Override
 					public void loginOK() throws GGException {
 						log.info("Login for user {} OK", loginContext.getUin());
+						communicationLatch.countDown();
 					}
 
 					@Override
