@@ -115,7 +115,6 @@ public class ConnectionTest {
 		@Override
 		public void run() {
 			try {
-				System.out.println("connectLatch.getCount() = " + connectLatch.getCount());
 				connectLatch.await();
 
 				loginService = session.getLoginService();
