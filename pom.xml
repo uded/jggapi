@@ -19,7 +19,7 @@
 	<ciManagement>
 	</ciManagement>
 	<scm>
-		<connection>scm:svn:https://svn.radical.com.pl/jabber/trunk/jggapi/</connection>
+		<connection>scm:git:http://github.com/uded/jggapi.git</connection>
 		<developerConnection>scm:svn:https://svn.radical.com.pl/jabber/trunk/jggapi/</developerConnection>
 	</scm>
 	<organization>
@@ -127,13 +127,13 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.8.1</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>0.9.19</version>
+			<version>0.9.20</version>
 			<type>jar</type>
 			<scope>test</scope>
 		</dependency>
@@ -206,7 +206,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>versions-maven-plugin</artifactId>
-				<version>1.1</version>
 				<reportSets>
 					<reportSet>
 						<id></id>
@@ -236,7 +235,7 @@
 					<linkXref>true</linkXref>
 					<sourceEncoding>utf-8</sourceEncoding>
 					<minimumTokens>100</minimumTokens>
-					<targetJdk>1.5</targetJdk>
+					<targetJdk>1.6</targetJdk>
 				</configuration>
 			</plugin>
 			<plugin>
