@@ -17,10 +17,13 @@
 		<url>http://projekty.radical.com.pl/projects/jggapi-ng/issues</url>
 	</issueManagement>
 	<ciManagement>
+		<system>Hudson</system>
+		<url>http://dev.radical.com.pl/hudson/job/jGGapi/</url>
 	</ciManagement>
 	<scm>
 		<connection>scm:git:http://github.com/uded/jggapi.git</connection>
 		<developerConnection>scm:svn:https://svn.radical.com.pl/jabber/trunk/jggapi/</developerConnection>
+		<url>http://projekty.radical.com.pl/projects/jggapi-ng/repository</url>
 	</scm>
 	<organization>
 		<name>Radical Creations</name>
@@ -287,10 +290,6 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>javancss-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>scmchangelog-maven-plugin</artifactId>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
