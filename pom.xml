@@ -148,6 +148,18 @@
 			<version>0.9.5-RC1</version>
 		</dependency>
 	</dependencies>
+
+    <distributionManagement>
+        <repository>
+            <id>radical-releases</id>
+            <url>http://dev.radical.com.pl/maven/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>radical-snapshot</id>
+            <url>http://dev.radical.com.pl/maven/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>	
+	
 	<build>
 		<plugins>
 			<plugin>
