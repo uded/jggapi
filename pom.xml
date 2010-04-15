@@ -65,6 +65,15 @@
 				<role>Inactive</role>
 			</roles>
 		</developer>
+		<developer>
+			<id>kklatkowski</id>
+			<name>Kamil Klatkowski</name>
+			<email>klacia.85@gmail.com</email>
+			<timezone>GMT+1</timezone>
+			<roles>
+				<role>Developer</role>
+			</roles>
+		</developer>
 	</developers>
 	<contributors>
 		<contributor>
@@ -198,11 +207,16 @@
 					</excludes>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>versions-maven-plugin</artifactId>
-			</plugin>
 		</plugins>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>1.1</version>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 	</build>
 	<reporting>
 		<plugins>
