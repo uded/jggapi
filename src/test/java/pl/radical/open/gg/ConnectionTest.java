@@ -10,6 +10,9 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
+ */
 public class ConnectionTest {
 	private final Logger log = LoggerFactory.getLogger(getClass().getName());
 
