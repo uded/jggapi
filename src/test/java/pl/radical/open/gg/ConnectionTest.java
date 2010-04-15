@@ -90,7 +90,7 @@ public class ConnectionTest {
 		}
 	}
 
-	@Test(timeout = 1000 * 60)
+	@Test(timeout = 1000 * 30)
 	public void loginTest() throws GGException, InterruptedException {
 		log.info("Executing loginTest() method");
 
