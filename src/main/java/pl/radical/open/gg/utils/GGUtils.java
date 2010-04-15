@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class GGUtils {
 
@@ -239,7 +240,7 @@ public class GGUtils {
 			hash = MessageDigest.getInstance("SHA1");
 		} catch (final NoSuchAlgorithmException e) {
 			log.error("Brak algorytmu SHA1", e);
-			throw new GGException("Brak algorytmu SHA1", e);
+			throw new GGException("SHA1 algorithm not usable!", e);
 		}
 
 		hash.update(new String(password).getBytes());
