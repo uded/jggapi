@@ -161,19 +161,41 @@
 		</dependency>
 	</dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>radical-releases</id>
-            <url>http://dev.radical.com.pl/maven/content/repositories/releases</url>
-        </repository>
-        <snapshotRepository>
-            <id>radical-snapshot</id>
-            <url>http://dev.radical.com.pl/maven/content/repositories/snapshots</url>
-        </snapshotRepository>
-    </distributionManagement>	
-	
+	<distributionManagement>
+		<repository>
+			<id>radical-releases</id>
+			<url>http://dev.radical.com.pl/maven/content/repositories/releases</url>
+		</repository>
+		<snapshotRepository>
+			<id>radical-snapshot</id>
+			<url>http://dev.radical.com.pl/maven/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
+
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>enforce-java-version</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<message>This project is to be compiled with at least Java 6.</message>
+								<requireJavaVersion>
+									<version>[1.6,)</version>
+								</requireJavaVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -199,9 +221,9 @@
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.5</version>
 				<configuration>
-				    <includes>
-				        <include>**/AlljGGapiTest.java</include>
-				    </includes>
+					<includes>
+						<include>**/AlljGGapiTest.java</include>
+					</includes>
 					<excludes>
 						<exclude>**/Test.java</exclude>
 					</excludes>
