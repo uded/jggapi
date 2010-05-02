@@ -38,7 +38,7 @@ public class Session implements ISession {
 	private DefaultContactListService m_contactListService = null;
 	private DefaultPublicDirectoryService m_publicDirectoryService = null;
 
-	private final HashMap<String, Object> m_proxies = new HashMap<String, Object>();
+	private final Map<String, Object> m_proxies = new HashMap<String, Object>();
 
 	public Session(final IGGConfiguration configuration) throws GGException {
 		this();
