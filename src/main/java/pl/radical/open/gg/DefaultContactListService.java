@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultContactListService implements IContactListService {
 
-	private final static Logger log = LoggerFactory.getLogger(DefaultContactListService.class);
+	private static final Logger log = LoggerFactory.getLogger(DefaultContactListService.class);
 
 	private HashSet<ContactListListener> m_contactListListeners = null;
 

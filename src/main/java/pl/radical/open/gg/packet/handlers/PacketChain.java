@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class PacketChain {
-	private final static Logger log = LoggerFactory.getLogger(PacketChain.class);
+	private static final Logger log = LoggerFactory.getLogger(PacketChain.class);
 
 	private final HashMap<Integer, PacketHandler> m_packetHandlers = new HashMap<Integer, PacketHandler>();
 

@@ -39,9 +39,9 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class DefaultConnectionService implements IConnectionService {
-	private final static Logger log = LoggerFactory.getLogger(DefaultConnectionService.class);
+	private static final Logger log = LoggerFactory.getLogger(DefaultConnectionService.class);
 
-	private final static String WINDOWS_ENCODING = "windows-1250";
+	private static final String WINDOWS_ENCODING = "windows-1250";
 
 	private final EventListenerList m_listeners = new EventListenerList();
 

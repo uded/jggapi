@@ -307,7 +307,7 @@ public class Session implements ISession {
 
 	}
 
-	private final static class SessionInvocationHandler implements InvocationHandler {
+	private static final class SessionInvocationHandler implements InvocationHandler {
 
 		private Object m_delegate = null;
 

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
  */
 public class SessionFactory {
 
-	private final static Logger log = LoggerFactory.getLogger(SessionFactory.class);
+	private static final Logger log = LoggerFactory.getLogger(SessionFactory.class);
 
 	public static ISession createSession() throws GGException {
 		try {

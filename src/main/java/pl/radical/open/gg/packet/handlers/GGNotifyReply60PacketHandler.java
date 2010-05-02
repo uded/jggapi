@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
  */
 @SuppressWarnings("deprecation")
 public class GGNotifyReply60PacketHandler implements PacketHandler {
-	private final static Logger log = LoggerFactory.getLogger(GGNotifyReply60PacketHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(GGNotifyReply60PacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

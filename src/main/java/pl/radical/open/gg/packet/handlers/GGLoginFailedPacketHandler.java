@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGLoginFailedPacketHandler implements PacketHandler {
-	private final static Logger log = LoggerFactory.getLogger(GGLoginFailedPacketHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(GGLoginFailedPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

@@ -19,7 +19,7 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 
 	public static final int GG_PUBDIR50_REQUEST = 0x0014;
 
-	private final static Random SEQUENCER = new Random();
+	private static final Random SEQUENCER = new Random();
 
 	private byte m_requestType = -1;
 	private int m_seq = -1;

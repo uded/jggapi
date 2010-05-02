@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
  */
 @SuppressWarnings("deprecation")
 public class GGStatus60PacketHandler implements PacketHandler {
-	private final static Logger log = LoggerFactory.getLogger(GGStatus60PacketHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(GGStatus60PacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

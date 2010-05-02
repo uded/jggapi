@@ -13,7 +13,7 @@ import java.util.Random;
  */
 public class OutgoingMessage extends AbstractMessage implements IOutgoingMessage {
 
-	private final static Random RANDOM = new Random();
+	private static final Random RANDOM = new Random();
 
 	private final List<Integer> additionalRecipients = new ArrayList<Integer>();
 

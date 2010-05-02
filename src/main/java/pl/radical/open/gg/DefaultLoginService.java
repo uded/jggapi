@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultLoginService implements ILoginService, UserListener {
 
-	private final static Logger log = LoggerFactory.getLogger(DefaultLoginService.class);
+	private static final Logger log = LoggerFactory.getLogger(DefaultLoginService.class);
 
 	/** The session associated with this service */
 	private Session m_session = null;

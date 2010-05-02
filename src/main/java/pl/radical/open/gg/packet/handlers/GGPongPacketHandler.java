@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  */
 @SuppressWarnings("deprecation")
 public class GGPongPacketHandler implements PacketHandler {
-	private final static Logger log = LoggerFactory.getLogger(GGPongPacketHandler.class);
+	private static final Logger log = LoggerFactory.getLogger(GGPongPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

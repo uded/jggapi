@@ -86,7 +86,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Protocol options - 0x00000367
 	 */
-	private final static int m_features = 0x00000007;
+	private static final int m_features = 0x00000007;
 
 	/**
 	 * Local IP
@@ -120,7 +120,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Unknown property
 	 */
-	private final static int m_unknown2 = 0x64;
+	private static final int m_unknown2 = 0x64;
 
 	/**
 	 * Version of the client
@@ -130,7 +130,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Version descriptive string
 	 */
-	private final static String m_version = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
+	private static final String m_version = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
 
 	/**
 	 * The length of the status description
