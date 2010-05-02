@@ -8,11 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created on 2004-11-27
- * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 @SuppressWarnings("deprecation")
+@Deprecated
 public class GGLoginOKPacketHandler implements PacketHandler {
 	private static final Logger log = LoggerFactory.getLogger(GGLoginOKPacketHandler.class);
 
