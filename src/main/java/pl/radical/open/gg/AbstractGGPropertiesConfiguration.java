@@ -42,7 +42,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 */
 	public int getConnectionThreadSleepTimeInMiliseconds() {
 		final String connectionThreadSleepTime = String.valueOf(m_defaultGGConfiguration.getConnectionThreadSleepTimeInMiliseconds());
-		return new Integer(m_prop.getProperty("connection.thread.sleep.time", connectionThreadSleepTime)).intValue();
+		return Integer.valueOf(m_prop.getProperty("connection.thread.sleep.time", connectionThreadSleepTime));
 	}
 
 	/**
@@ -50,7 +50,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 */
 	public int getPingIntervalInMiliseconds() {
 		final String pingInterval = String.valueOf(m_defaultGGConfiguration.getPingIntervalInMiliseconds());
-		return new Integer(m_prop.getProperty("ping.interval", pingInterval)).intValue();
+		return Integer.valueOf(m_prop.getProperty("ping.interval", pingInterval));
 	}
 
 	/**
@@ -58,7 +58,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 */
 	public int getSocketTimeoutInMiliseconds() {
 		final String defaultSocketTimeout = String.valueOf(m_defaultGGConfiguration.getSocketTimeoutInMiliseconds());
-		return new Integer(m_prop.getProperty("socket.timeout", defaultSocketTimeout)).intValue();
+		return Integer.valueOf(m_prop.getProperty("socket.timeout", defaultSocketTimeout));
 	}
 
 	/**

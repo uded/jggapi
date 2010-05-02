@@ -16,16 +16,16 @@ import org.slf4j.LoggerFactory;
  */
 @SuppressWarnings("deprecation")
 public class GGStatusPacketHandler implements PacketHandler {
-	private final Logger log = LoggerFactory.getLogger(GGStatusPacketHandler.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(GGStatusPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("Received GGStatus packet.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOGGER.isDebugEnabled()) {
+			LOGGER.debug("Received GGStatus packet.");
+			LOGGER.debug("PacketHeader: " + context.getHeader());
+			LOGGER.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 		final GGStatus status = new GGStatus(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(status);

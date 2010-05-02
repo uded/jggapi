@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class CommonRegisterResponse extends HttpResponse {
-	private final Logger log = LoggerFactory.getLogger(CommonRegisterResponse.class);
+	private static final Logger log = LoggerFactory.getLogger(CommonRegisterResponse.class);
 
 	private int uin = 0;
 	private String responseString = null;

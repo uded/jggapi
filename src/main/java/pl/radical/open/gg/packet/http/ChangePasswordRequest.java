@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class ChangePasswordRequest extends AbstractTokenRequest {
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger log = LoggerFactory.getLogger(ChangePasswordRequest.class);
 
 	private int uin = 0;
 	private String email = null;

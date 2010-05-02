@@ -15,7 +15,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public abstract class AbstractTokenRequest extends HttpRequest {
-	private final Logger log = LoggerFactory.getLogger(AbstractTokenRequest.class);
+	private static final Logger log = LoggerFactory.getLogger(AbstractTokenRequest.class);
 
 	String tokenID = null;
 	String tokenVal = null;
