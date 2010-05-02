@@ -4,8 +4,6 @@ import pl.radical.open.gg.Session;
 import pl.radical.open.gg.Session.SessionAccessor;
 import pl.radical.open.gg.packet.GGHeader;
 
-import java.security.InvalidParameterException;
-
 /**
  * Created on 2004-11-27
  * 
@@ -18,13 +16,13 @@ public class PacketContext {
 
 	public PacketContext(final Session session, final GGHeader header, final byte[] packageContent) {
 		if (session == null) {
-			throw new InvalidParameterException("session cannot be null");
+			throw new IllegalArgumentException("session cannot be null");
 		}
 		if (header == null) {
-			throw new InvalidParameterException("header cannot be null");
+			throw new IllegalArgumentException("header cannot be null");
 		}
 		if (packageContent == null) {
-			throw new InvalidParameterException("packageContent cannot be null");
+			throw new IllegalArgumentException("packageContent cannot be null");
 		}
 		this.session = session;
 		this.header = header;
