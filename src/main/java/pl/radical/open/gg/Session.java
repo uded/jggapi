@@ -13,6 +13,7 @@ import java.lang.reflect.Proxy;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -26,7 +27,7 @@ public class Session implements ISession {
 
 	private SessionAccessor m_sessionAccessor = null;
 	private Set<SessionStateListener> m_sessionStateListeners = null;
-	private HashMap<String, Integer> m_sessionAttributes = null;
+	private Map<String, Integer> m_sessionAttributes = null;
 	private IGGConfiguration m_configuration = new GGConfiguration();
 
 	private DefaultConnectionService m_connectionService = null;
@@ -93,7 +94,7 @@ public class Session implements ISession {
 			final ClassLoader classLoader = Session.class.getClassLoader();
 			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_connectionService);
 			final IConnectionService connectionServiceProxy = (IConnectionService) Proxy.newProxyInstance(classLoader, new Class[] {
-				IConnectionService.class
+					IConnectionService.class
 			}, invocationHandler);
 			m_proxies.put(IConnectionService.class.getName(), connectionServiceProxy);
 		}
@@ -108,7 +109,7 @@ public class Session implements ISession {
 			final ClassLoader classLoader = Session.class.getClassLoader();
 			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_loginService);
 			final ILoginService loginServiceProxy = (ILoginService) Proxy.newProxyInstance(classLoader, new Class[] {
-				ILoginService.class
+					ILoginService.class
 			}, invocationHandler);
 			m_proxies.put(ILoginService.class.getName(), loginServiceProxy);
 		}
@@ -123,7 +124,7 @@ public class Session implements ISession {
 			final ClassLoader classLoader = Session.class.getClassLoader();
 			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_messageService);
 			final IMessageService messageServiceProxy = (IMessageService) Proxy.newProxyInstance(classLoader, new Class[] {
-				IMessageService.class
+					IMessageService.class
 			}, invocationHandler);
 			m_proxies.put(IMessageService.class.getName(), messageServiceProxy);
 		}
@@ -138,7 +139,7 @@ public class Session implements ISession {
 			final ClassLoader classLoader = Session.class.getClassLoader();
 			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_presenceService);
 			final IPresenceService presenceServiceProxy = (IPresenceService) Proxy.newProxyInstance(classLoader, new Class[] {
-				IPresenceService.class
+					IPresenceService.class
 			}, invocationHandler);
 			m_proxies.put(IPresenceService.class.getName(), presenceServiceProxy);
 		}
@@ -153,9 +154,9 @@ public class Session implements ISession {
 			final ClassLoader classLoader = Session.class.getClassLoader();
 			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_publicDirectoryService);
 			final IPublicDirectoryService publicDirectoryServiceProxy = (IPublicDirectoryService) Proxy
-			        .newProxyInstance(classLoader, new Class[] {
-				        IPublicDirectoryService.class
-			        }, invocationHandler);
+			.newProxyInstance(classLoader, new Class[] {
+					IPublicDirectoryService.class
+			}, invocationHandler);
 			m_proxies.put(IPublicDirectoryService.class.getName(), publicDirectoryServiceProxy);
 		}
 		return (IPublicDirectoryService) m_proxies.get(IPublicDirectoryService.class.getName());
@@ -169,7 +170,7 @@ public class Session implements ISession {
 			final ClassLoader classLoader = Session.class.getClassLoader();
 			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_contactListService);
 			final IContactListService contactListServiceProxy = (IContactListService) Proxy.newProxyInstance(classLoader, new Class[] {
-				IContactListService.class
+					IContactListService.class
 			}, invocationHandler);
 			m_proxies.put(IContactListService.class.getName(), contactListServiceProxy);
 		}
@@ -184,7 +185,7 @@ public class Session implements ISession {
 			final ClassLoader classLoader = Session.class.getClassLoader();
 			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_registrationService);
 			final IRegistrationService registrationServiceProxy = (IRegistrationService) Proxy.newProxyInstance(classLoader, new Class[] {
-				IRegistrationService.class
+					IRegistrationService.class
 			}, invocationHandler);
 			m_proxies.put(IRegistrationService.class.getName(), registrationServiceProxy);
 		}

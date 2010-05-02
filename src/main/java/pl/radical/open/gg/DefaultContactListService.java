@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class DefaultContactListService implements IContactListService {
 
 	private static final Logger log = LoggerFactory.getLogger(DefaultContactListService.class);
 
-	private HashSet<ContactListListener> m_contactListListeners = null;
+	private Set<ContactListListener> m_contactListListeners = null;
 
 	private Session m_session = null;
 

@@ -5,6 +5,7 @@ import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.utils.GGUtils;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.reflections.Configuration;
@@ -24,7 +25,7 @@ import org.slf4j.LoggerFactory;
 public class PacketChain {
 	private static final Logger log = LoggerFactory.getLogger(PacketChain.class);
 
-	private final HashMap<Integer, PacketHandler> m_packetHandlers = new HashMap<Integer, PacketHandler>();
+	private final Map<Integer, PacketHandler> m_packetHandlers = new HashMap<Integer, PacketHandler>();
 
 	public PacketChain() throws GGException {
 		registerDefaultHandlers();
@@ -68,7 +69,7 @@ public class PacketChain {
 	private void registerDefaultHandlers() throws GGException {
 
 		final Configuration configuration = new ConfigurationBuilder().setScanners(new TypeAnnotationsScanner()).setUrls(ClasspathHelper
-		        .getUrlsForPackagePrefix("pl.radical.open.gg.packet.in"));
+				.getUrlsForPackagePrefix("pl.radical.open.gg.packet.in"));
 		final Reflections reflections = new Reflections(configuration);
 
 		final Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IncomingPacket.class);

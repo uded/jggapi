@@ -4,6 +4,7 @@ import pl.radical.open.gg.packet.out.GGSendMsg;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created on 2005-01-29
@@ -12,7 +13,7 @@ import java.util.ArrayList;
  */
 public class GroupChat extends AbstractChat implements IGroupChat {
 
-	private final ArrayList<Integer> m_recipientUins = new ArrayList<Integer>(); // users with whom we chat
+	private final List<Integer> m_recipientUins = new ArrayList<Integer>(); // users with whom we chat
 
 	// friendly
 	GroupChat(final Session session) {

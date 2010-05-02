@@ -5,6 +5,7 @@ import pl.radical.open.gg.packet.out.GGPubdirRequest;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.Set;
 
 /**
  * The default implementation of <code>IPublicDirectoryService</code>.
@@ -15,7 +16,7 @@ import java.util.HashSet;
  */
 public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
-	private final HashSet<PublicDirListener> m_directoryListeners = new HashSet<PublicDirListener>();
+	private final Set<PublicDirListener> m_directoryListeners = new HashSet<PublicDirListener>();
 
 	private Session m_session = null;
 

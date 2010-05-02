@@ -8,6 +8,7 @@ import pl.radical.open.gg.utils.GGUtils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class GGUserListReplyHandler implements PacketHandler {
 	private static final Logger log = LoggerFactory.getLogger(GGUserListReplyHandler.class);
 
-	private final ArrayList<LocalUser> m_users = new ArrayList<LocalUser>();
+	private final List<LocalUser> m_users = new ArrayList<LocalUser>();
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)

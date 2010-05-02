@@ -8,6 +8,7 @@ import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.utils.GGConversion;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.collections.primitives.ArrayByteList;
 import org.apache.commons.collections.primitives.ByteList;
@@ -25,7 +26,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 
 	private int m_seq = -1;
 	private int m_recipientUin = -1;
-	private final ArrayList<Integer> m_additionalRecipients = new ArrayList<Integer>();
+	private final List<Integer> m_additionalRecipients = new ArrayList<Integer>();
 	private String m_text = "";
 	private int m_protocolMessageClass = GG_CLASS_MSG;
 
