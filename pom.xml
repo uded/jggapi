@@ -114,11 +114,11 @@
 			</roles>
 		</contributor>
 	</contributors>
-	
+
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>reflections-repo</id>
@@ -126,7 +126,7 @@
 			<url>http://reflections.googlecode.com/svn/repo</url>
 		</repository>
 	</repositories>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -188,8 +188,8 @@
 							<goal>enforce</goal>
 						</goals>
 						<configuration>
+							<message>This project is to be compiled with at least Java 6.</message>
 							<rules>
-								<message>This project is to be compiled with at least Java 6.</message>
 								<requireJavaVersion>
 									<version>[1.6,)</version>
 								</requireJavaVersion>
