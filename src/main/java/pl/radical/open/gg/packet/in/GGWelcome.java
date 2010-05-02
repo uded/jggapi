@@ -19,24 +19,24 @@ import org.slf4j.LoggerFactory;
  */
 @IncomingPacket(type = 0x0001, label = "GG_WELCOME", handler = GGWelcomePacketHandler.class)
 public class GGWelcome extends GGBaseIncomingPacket implements GGIncomingPackage {
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	private static final Logger LOGGER = LoggerFactory.getLogger(GGWelcome.class);
 
-	private int m_seed = -1;
+	private int seed = -1;
 
 	public GGWelcome(final byte[] data) {
 		if (data == null) {
-			log.error("Was expecting a data in constructor, got null");
+			LOGGER.error("Was expecting a data in constructor, got null");
 			throw new IllegalArgumentException("data cannot be null");
 		}
 
-		m_seed = GGUtils.byteToInt(data);
-		if (log.isTraceEnabled()) {
-			log.trace("Seed to be used in this connection: {}", m_seed);
+		seed = GGUtils.byteToInt(data);
+		if (LOGGER.isTraceEnabled()) {
+			LOGGER.trace("Seed to be used in this connection: {}", seed);
 		}
 	}
 
 	public int getSeed() {
-		return m_seed;
+		return seed;
 	}
 
 }

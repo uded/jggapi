@@ -10,11 +10,15 @@ import pl.radical.open.gg.utils.GGUtils;
  */
 public class GGHeader {
 
-	/** Gadu-Gadu packet type */
-	private int m_type = -1;
+	/**
+	 * Gadu-Gadu packet type
+	 */
+	private int type = -1;
 
-	/** Gadu-Gadu packet length */
-	private int m_length = -1;
+	/**
+	 * Gadu-Gadu packet length
+	 */
+	private int length = -1;
 
 	/**
 	 * Constructor for Header.
@@ -23,8 +27,8 @@ public class GGHeader {
 	 *            dane naglowka
 	 */
 	public GGHeader(final byte[] data) {
-		m_type = GGUtils.byteToInt(data, 0);
-		m_length = GGUtils.byteToInt(data, 4);
+		type = GGUtils.byteToInt(data, 0);
+		length = GGUtils.byteToInt(data, 4);
 	}
 
 	/**
@@ -33,7 +37,7 @@ public class GGHeader {
 	 * @return int packet type.
 	 */
 	public int getType() {
-		return m_type;
+		return type;
 	}
 
 	/**
@@ -42,7 +46,7 @@ public class GGHeader {
 	 * @return int packet length.
 	 */
 	public int getLength() {
-		return m_length;
+		return length;
 	}
 
 	/**
@@ -50,7 +54,7 @@ public class GGHeader {
 	 */
 	@Override
 	public String toString() {
-		return "[PacketType: " + m_type + ", packetLength: " + m_length + "]";
+		return "[PacketType: " + type + ", packetLength: " + length + "]";
 	}
 
 }
