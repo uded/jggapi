@@ -1,14 +1,16 @@
 package pl.radical.open.gg.packet.out;
 
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 
 /**
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@OutgoingPacket(type = 0x0012, label = "GG_LIST_EMPTY")
 public class GGListEmpty implements GGOutgoingPackage {
 
-	public static final int GG_EMPTY_LIST = 0x0012;
+	public static final int GG_LIST_EMPTY = 0x0012;
 
 	private static GGListEmpty m_instance = null;
 
@@ -30,7 +32,7 @@ public class GGListEmpty implements GGOutgoingPackage {
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
 	public int getPacketType() {
-		return GG_EMPTY_LIST;
+		return GG_LIST_EMPTY;
 	}
 
 	/**

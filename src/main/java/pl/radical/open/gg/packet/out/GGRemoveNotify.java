@@ -3,6 +3,7 @@ package pl.radical.open.gg.packet.out;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.User;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 import pl.radical.open.gg.packet.dicts.GGUser;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;
@@ -13,6 +14,7 @@ import pl.radical.open.gg.utils.GGUtils;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@OutgoingPacket(type = 0x000e, label = "GG_REMOVE_NOTIFY")
 public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 
 	public final static int GG_REMOVE_NOTIFY = 0x000E;

@@ -5,6 +5,7 @@ import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchQuery;
 import pl.radical.open.gg.dicts.Gender;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 import pl.radical.open.gg.packet.dicts.GGPubdirConsts;
 
 import java.util.Random;
@@ -13,6 +14,7 @@ import java.util.Random;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@OutgoingPacket(type = 0x0014, label = "GG_PUBDIR50_REQUEST")
 public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 
 	public static final int GG_PUBDIR50_REQUEST = 0x0014;

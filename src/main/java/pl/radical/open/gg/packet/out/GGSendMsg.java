@@ -3,6 +3,7 @@ package pl.radical.open.gg.packet.out;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IOutgoingMessage;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.utils.GGConversion;
 
@@ -17,6 +18,7 @@ import org.apache.commons.collections.primitives.ByteList;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@OutgoingPacket(type = 0x0B, label = "GG_SEND_MSG")
 public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 
 	public static final int GG_SEND_MSG = 0x0B;

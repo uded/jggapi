@@ -3,15 +3,24 @@ package pl.radical.open.gg.packet.out;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.User;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 import pl.radical.open.gg.packet.dicts.GGUser;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;
 
 /**
+ * <pre>
+ * struct gg_add_notify {
+ * 	int uin;	&laquo; numerek &raquo;
+ * 	char type;	&laquo; rodzaj użytkownika &raquo;
+ * };
+ * </pre>
+ * 
  * @see pl.radical.open.gg.packet.in.GGNotifyReply
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@OutgoingPacket(type = 0x00d, label = "GG_ADD_NOTIFY")
 public class GGAddNotify implements GGOutgoingPackage, GGUser {
 
 	public final int GG_ADD_NOTIFY = 0x000d;

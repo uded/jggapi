@@ -3,6 +3,7 @@ package pl.radical.open.gg.packet.out;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.LocalUser;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 
 import java.util.Collection;
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.List;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@OutgoingPacket(type = 0x0016, label = "GG_USERLIST_REQUEST")
 public class GGUserListRequest implements GGOutgoingPackage {
 
 	public static final int GG_USERLIST_REQUEST = 0x0016;

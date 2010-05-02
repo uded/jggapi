@@ -3,6 +3,7 @@ package pl.radical.open.gg.packet.out;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
 import pl.radical.open.gg.packet.dicts.GGVersion;
 import pl.radical.open.gg.utils.GGConversion;
@@ -17,6 +18,7 @@ import org.apache.commons.collections.primitives.ByteList;
  *             implementation
  */
 @Deprecated
+@OutgoingPacket(type = 0x0015, label = "GG_LOGIN60")
 public class GGLogin60 implements GGOutgoingPackage {
 
 	public final static int GG_LOGIN60 = 0x0015;
@@ -35,7 +37,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 
 	/** Local IP */
 	private byte[] m_localIP = new byte[] {
-	        (byte) 0, (byte) 0, (byte) 0, (byte) 0
+			(byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
 
 	/** Local port that we are listening on */
@@ -43,7 +45,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 
 	/** ExternalIP */
 	private byte[] m_externalIP = new byte[] {
-	        (byte) 0, (byte) 0, (byte) 0, (byte) 0
+			(byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
 
 	/** External port */

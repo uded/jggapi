@@ -3,6 +3,7 @@ package pl.radical.open.gg.packet.out;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;
@@ -16,6 +17,7 @@ import org.apache.commons.collections.primitives.ByteList;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+@OutgoingPacket(type = 0x002, label = "GG_NEW_STATUS")
 public class GGNewStatus implements GGOutgoingPackage, GGStatuses {
 
 	public static final int GG_NEW_STATUS = 0x0002;

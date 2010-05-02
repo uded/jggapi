@@ -4,6 +4,7 @@ import pl.radical.open.gg.GGException;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 import pl.radical.open.gg.packet.dicts.GGHashType;
 import pl.radical.open.gg.packet.dicts.GGStatusFlags;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
@@ -15,6 +16,8 @@ import org.apache.commons.collections.primitives.ArrayByteList;
 import org.apache.commons.collections.primitives.ByteList;
 
 /**
+ * Login to the Gadu-Gadu network.
+ * 
  * <pre>
  * struct gg_login80 {
  *        int uin;              &laquo; numer Gadu-Gadu &raquo;
@@ -40,6 +43,7 @@ import org.apache.commons.collections.primitives.ByteList;
  * 
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
+@OutgoingPacket(type = 0x0031, label = "GG_LOGIN80")
 public class GGLogin80 implements GGOutgoingPackage {
 
 	public final static int GG_LOGIN80 = 0x0031;
@@ -47,7 +51,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Gadu-Gadu number that will be used during logging
 	 */
-	private int m_uin = -1;
+	private int uin = -1;
 
 	/**
 	 * Language of the client, default to "pl"
@@ -88,7 +92,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	 * Local IP
 	 */
 	private byte[] m_localIP = new byte[] {
-	        (byte) 0, (byte) 0, (byte) 0, (byte) 0
+			(byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
 
 	/**
@@ -100,7 +104,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	 * ExternalIP
 	 */
 	private byte[] m_externalIP = new byte[] {
-	        (byte) 0, (byte) 0, (byte) 0, (byte) 0
+			(byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
 
 	/**
@@ -145,7 +149,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 		if (password == null) {
 			throw new GGNullPointerException("password cannot be null");
 		}
-		m_uin = uin;
+		this.uin = uin;
 		m_password = password;
 		m_loginHash = GGUtils.getLoginHash(password, seed, m_hashType);
 	}
@@ -162,7 +166,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	}
 
 	public int getUin() {
-		return m_uin;
+		return uin;
 	}
 
 	public char[] getPassword() {
@@ -242,10 +246,10 @@ public class GGLogin80 implements GGOutgoingPackage {
 	public byte[] getContents() {
 		final ByteList byteList = new ArrayByteList();
 
-		byteList.add((byte) m_uin);
-		byteList.add((byte) (m_uin >>> 8));
-		byteList.add((byte) (m_uin >>> 16));
-		byteList.add((byte) (m_uin >>> 24));
+		byteList.add((byte) uin);
+		byteList.add((byte) (uin >>> 8));
+		byteList.add((byte) (uin >>> 16));
+		byteList.add((byte) (uin >>> 24));
 
 		byteList.add(M_LANGUAGE.getBytes()[0]);
 		byteList.add(M_LANGUAGE.getBytes()[1]);

@@ -3,6 +3,7 @@ package pl.radical.open.gg.packet.out;
 import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.OutgoingPacket;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;
@@ -13,9 +14,10 @@ import org.apache.commons.collections.primitives.ByteList;
 /**
  * Packet that sets new status of the Gadu-Gadu user.
  * 
- * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
- * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
+ * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
+ * @author Radical Creations &copy;2010
  */
+@OutgoingPacket(type = 0x0038, label = "GG_NEW_STATUS80")
 public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 
 	public static final int GG_NEW_STATUS80 = 0x0038;
