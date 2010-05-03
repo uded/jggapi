@@ -64,7 +64,7 @@ public class DefaultConnectionService implements IConnectionService {
 	// friendly
 	DefaultConnectionService(final Session session) throws GGException {
 		if (session == null) {
-			throw new GGNullPointerException("session cannot be null");
+			throw new IllegalArgumentException("session cannot be null");
 		}
 		m_session = session;
 		m_packetChain = new PacketChain();
@@ -190,7 +190,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void addConnectionListener(final ConnectionListener connectionListener) {
 		if (connectionListener == null) {
-			throw new GGNullPointerException("connectionListener cannot be null");
+			throw new IllegalArgumentException("connectionListener cannot be null");
 		}
 		m_listeners.add(ConnectionListener.class, connectionListener);
 	}
@@ -200,7 +200,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void removeConnectionListener(final ConnectionListener connectionListener) {
 		if (connectionListener == null) {
-			throw new GGNullPointerException("connectionListener cannot be null");
+			throw new IllegalArgumentException("connectionListener cannot be null");
 		}
 		m_listeners.remove(ConnectionListener.class, connectionListener);
 	}
@@ -210,7 +210,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void addPacketListener(final GGPacketListener packetListener) {
 		if (packetListener == null) {
-			throw new GGNullPointerException("packetListener cannot be null");
+			throw new IllegalArgumentException("packetListener cannot be null");
 		}
 		m_listeners.add(GGPacketListener.class, packetListener);
 	}
@@ -220,7 +220,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void removePacketListener(final GGPacketListener packetListener) {
 		if (packetListener == null) {
-			throw new GGNullPointerException("packetListener cannot be null");
+			throw new IllegalArgumentException("packetListener cannot be null");
 		}
 		m_listeners.remove(GGPacketListener.class, packetListener);
 	}

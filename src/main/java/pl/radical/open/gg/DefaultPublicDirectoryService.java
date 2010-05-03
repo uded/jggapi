@@ -23,7 +23,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	// friendly
 	DefaultPublicDirectoryService(final Session session) {
 		if (session == null) {
-			throw new GGNullPointerException("session cannot be null");
+			throw new IllegalArgumentException("session cannot be null");
 		}
 		m_session = session;
 	}
@@ -33,7 +33,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	 */
 	public void search(final PublicDirSearchQuery publicDirQuery) throws GGException {
 		if (publicDirQuery == null) {
-			throw new GGNullPointerException("publicDirQuery cannot be null");
+			throw new IllegalArgumentException("publicDirQuery cannot be null");
 		}
 		checkSessionState();
 
@@ -65,7 +65,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	public void writeToPublicDirectory(final PersonalInfo publicDirInfo) throws GGException {
 		if (publicDirInfo == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("publicDirInfo cannot be null");
+			throw new IllegalArgumentException("publicDirInfo cannot be null");
 		}
 		checkSessionState();
 		try {
@@ -81,7 +81,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	 */
 	public void addPublicDirListener(final PublicDirListener publicDirListener) {
 		if (publicDirListener == null) {
-			throw new GGNullPointerException("publicDirListener cannot be null");
+			throw new IllegalArgumentException("publicDirListener cannot be null");
 		}
 		m_directoryListeners.add(publicDirListener);
 	}
@@ -91,14 +91,14 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	 */
 	public void removePublicDirListener(final PublicDirListener publicDirListener) {
 		if (publicDirListener == null) {
-			throw new GGNullPointerException("pubDirListener cannot be null");
+			throw new IllegalArgumentException("pubDirListener cannot be null");
 		}
 		m_directoryListeners.remove(publicDirListener);
 	}
 
 	protected void notifyPubdirRead(final int queryID, final PersonalInfo publicDirInfo) {
 		if (publicDirInfo == null) {
-			throw new GGNullPointerException("publicDirInfo cannot be null");
+			throw new IllegalArgumentException("publicDirInfo cannot be null");
 		}
 		for (final Object element : m_directoryListeners) {
 			final PublicDirListener publicDirListener = (PublicDirListener) element;
@@ -115,7 +115,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
 	protected void notifyPubdirGotSearchResults(final int queryID, final PublicDirSearchReply publicDirSearchReply) {
 		if (publicDirSearchReply == null) {
-			throw new GGNullPointerException("publicDirSearchReply cannot be null");
+			throw new IllegalArgumentException("publicDirSearchReply cannot be null");
 		}
 		for (final Object element : m_directoryListeners) {
 			final PublicDirListener publicDirListener = (PublicDirListener) element;

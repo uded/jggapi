@@ -1,7 +1,5 @@
 package pl.radical.open.gg.packet.http;
 
-import pl.radical.open.gg.GGNullPointerException;
-
 import java.util.StringTokenizer;
 
 import org.slf4j.Logger;
@@ -24,7 +22,7 @@ public class CommonRegisterResponse extends HttpResponse {
 			throw new IllegalArgumentException("uin cannot be less than 1");
 		}
 		if (responseString == null) {
-			throw new GGNullPointerException("responseString cannot be null");
+			throw new IllegalArgumentException("responseString cannot be null");
 		}
 		this.uin = uin;
 		this.responseString = responseString;

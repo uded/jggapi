@@ -21,7 +21,7 @@ public class User implements IUser {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (userMode == null) {
-			throw new GGNullPointerException("userMode cannot be null");
+			throw new IllegalArgumentException("userMode cannot be null");
 		}
 		m_uin = uin;
 		m_userMode = userMode;
@@ -40,7 +40,7 @@ public class User implements IUser {
 
 	public void setUserMode(final UserMode userMode) {
 		if (userMode == null) {
-			throw new GGNullPointerException("userMode cannot be null");
+			throw new IllegalArgumentException("userMode cannot be null");
 		}
 		m_userMode = userMode;
 	}

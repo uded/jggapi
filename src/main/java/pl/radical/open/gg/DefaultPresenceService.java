@@ -24,25 +24,33 @@ import java.util.Set;
  */
 public class DefaultPresenceService implements IPresenceService {
 
-	/** Set of listeners that will be notified of user related events */
-	private final Set<UserListener> m_userListeners = new HashSet<UserListener>();
+	/**
+	 * Set of listeners that will be notified of user related events
+	 */
+	private final Set<UserListener> userListeners = new HashSet<UserListener>();
 
-	/** The session associated with this service */
-	private Session m_session = null;
+	/**
+	 * The session associated with this service
+	 */
+	private Session session = null;
 
-	/** The actual status */
-	private ILocalStatus m_localStatus = new LocalStatus(StatusType.OFFLINE);
+	/**
+	 * The actual status
+	 */
+	private ILocalStatus localStatus = new LocalStatus(StatusType.OFFLINE);
 
-	/** The set of users that are monitored */
-	private Collection<IUser> m_monitoredUsers = new HashSet<IUser>();
+	/**
+	 * The set of users that are monitored
+	 */
+	private Collection<IUser> monitoredUsers = new HashSet<IUser>();
 
 	// friendly
 	DefaultPresenceService(final Session session) {
 		if (session == null) {
-			throw new GGNullPointerException("session cannot be null");
+			throw new IllegalArgumentException("session cannot be null");
 		}
-		m_session = session;
-		m_session.getLoginService().addLoginListener(new LoginHandler());
+		this.session = session;
+		session.getLoginService().addLoginListener(new LoginHandler());
 	}
 
 	/**
@@ -51,14 +59,14 @@ public class DefaultPresenceService implements IPresenceService {
 	public void setStatus(final ILocalStatus localStatus) throws GGException {
 		if (localStatus == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("status cannot be null");
+			throw new IllegalArgumentException("status cannot be null");
 		}
 		checkSessionState();
 		try {
 			final GGNewStatus newStatus = new GGNewStatus(localStatus);
-			m_session.getSessionAccessor().sendPackage(newStatus);
-			m_localStatus = localStatus;
-			notifyLocalUserChangedStatus(localStatus);
+			session.getSessionAccessor().sendPackage(newStatus);
+			this.localStatus = localStatus;
+			notifyLocalUserChangedStatus(this.localStatus);
 		} catch (final IOException ex) {
 			throw new GGException("Unable to set status: " + localStatus, ex);
 		}
@@ -68,7 +76,7 @@ public class DefaultPresenceService implements IPresenceService {
 	 * @see pl.radical.open.gg.IPresenceService#getStatus()
 	 */
 	public ILocalStatus getStatus() {
-		return m_localStatus;
+		return localStatus;
 	}
 
 	/**
@@ -77,17 +85,17 @@ public class DefaultPresenceService implements IPresenceService {
 	public void addMonitoredUser(final IUser user) throws GGException {
 		if (user == null) {
 			// FIXME GGException instead
-			throw new GGNullPointerException("user cannot be null");
+			throw new IllegalArgumentException("user cannot be null");
 		}
 		checkSessionState();
-		if (m_monitoredUsers.contains(user)) {
+		if (monitoredUsers.contains(user)) {
 			return;
 		}
 
 		try {
 			final GGAddNotify addNotify = new GGAddNotify(user.getUin(), user.getUserMode());
-			m_session.getSessionAccessor().sendPackage(addNotify);
-			m_monitoredUsers.add(user);
+			session.getSessionAccessor().sendPackage(addNotify);
+			monitoredUsers.add(user);
 		} catch (final IOException ex) {
 			throw new GGException("Error occured while adding user to be monitored.", ex);
 		}
@@ -99,17 +107,17 @@ public class DefaultPresenceService implements IPresenceService {
 	public void removeMonitoredUser(final IUser user) throws GGException {
 		if (user == null) {
 			// FIXME GGException instead
-			throw new GGNullPointerException("user cannot be null");
+			throw new IllegalArgumentException("user cannot be null");
 		}
 		checkSessionState();
-		if (!m_monitoredUsers.contains(user)) {
+		if (!monitoredUsers.contains(user)) {
 			throw new GGException("User: " + user + "+ is not monitored");
 		}
 
 		try {
 			final GGRemoveNotify removeNotify = new GGRemoveNotify(user.getUin(), user.getUserMode());
-			m_session.getSessionAccessor().sendPackage(removeNotify);
-			m_monitoredUsers.remove(user);
+			session.getSessionAccessor().sendPackage(removeNotify);
+			monitoredUsers.remove(user);
 		} catch (final IOException ex) {
 			throw new GGException("Unable to remove monitored user", ex);
 		}
@@ -121,18 +129,18 @@ public class DefaultPresenceService implements IPresenceService {
 	public void changeMonitoredUserStatus(final IUser user) throws GGException {
 		if (user == null) {
 			// FIXME GGException instead
-			throw new GGNullPointerException("user cannot be null");
+			throw new IllegalArgumentException("user cannot be null");
 		}
 		checkSessionState();
-		if (!m_monitoredUsers.contains(user)) {
+		if (!monitoredUsers.contains(user)) {
 			throw new GGException("User: " + user + "+ is not monitored");
 		}
 
 		try {
 			final GGRemoveNotify removeNotify = new GGRemoveNotify(user.getUin(), user.getUserMode());
-			m_session.getSessionAccessor().sendPackage(removeNotify);
+			session.getSessionAccessor().sendPackage(removeNotify);
 			final GGAddNotify addNotify = new GGAddNotify(user.getUin(), user.getUserMode());
-			m_session.getSessionAccessor().sendPackage(addNotify);
+			session.getSessionAccessor().sendPackage(addNotify);
 		} catch (final IOException ex) {
 			throw new GGException("Unable to remove monitored user", ex);
 		}
@@ -142,14 +150,14 @@ public class DefaultPresenceService implements IPresenceService {
 	 * @see pl.radical.open.gg.IPresenceService#getMonitoredUsers()
 	 */
 	public Collection<IUser> getMonitoredUsers() {
-		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
+		if (session.getSessionState() != SessionState.LOGGED_IN) {
 			return Collections.emptySet();
 		}
 
-		if (m_monitoredUsers.size() == 0) {
+		if (monitoredUsers.size() == 0) {
 			return Collections.emptySet();
 		} else {
-			return Collections.unmodifiableCollection(m_monitoredUsers);
+			return Collections.unmodifiableCollection(monitoredUsers);
 		}
 	}
 
@@ -158,9 +166,9 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void addUserListener(final UserListener userListener) {
 		if (userListener == null) {
-			throw new GGNullPointerException("userListener cannot be null");
+			throw new IllegalArgumentException("userListener cannot be null");
 		}
-		m_userListeners.add(userListener);
+		userListeners.add(userListener);
 	}
 
 	/**
@@ -168,21 +176,21 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void removeUserListener(final UserListener userListener) {
 		if (userListener == null) {
-			throw new GGNullPointerException("userListener cannot be null");
+			throw new IllegalArgumentException("userListener cannot be null");
 		}
-		m_userListeners.remove(userListener);
+		userListeners.remove(userListener);
 	}
 
 	protected void notifyUserChangedStatus(final IUser user, final IRemoteStatus newStatus) throws GGException {
 		if (user == null) {
 			// FIXME GGException instead
-			throw new GGNullPointerException("user cannot be null");
+			throw new IllegalArgumentException("user cannot be null");
 		}
 		if (newStatus == null) {
 			// FIXME GGException instead
-			throw new GGNullPointerException("newStatus cannot be null");
+			throw new IllegalArgumentException("newStatus cannot be null");
 		}
-		for (final Object element : m_userListeners) {
+		for (final Object element : userListeners) {
 			final UserListener userListener = (UserListener) element;
 			userListener.userStatusChanged(user, newStatus);
 		}
@@ -191,17 +199,17 @@ public class DefaultPresenceService implements IPresenceService {
 	protected void notifyLocalUserChangedStatus(final ILocalStatus localStatus) throws GGException {
 		if (localStatus == null) {
 			// FIXME GGException instead
-			throw new GGNullPointerException("localStatus cannot be null");
+			throw new IllegalArgumentException("localStatus cannot be null");
 		}
-		for (final Object element : m_userListeners) {
+		for (final Object element : userListeners) {
 			final UserListener userListener = (UserListener) element;
 			userListener.localStatusChanged(localStatus);
 		}
 	}
 
 	private void checkSessionState() throws GGSessionException {
-		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
-			throw new GGSessionException(m_session.getSessionState());
+		if (session.getSessionState() != SessionState.LOGGED_IN) {
+			throw new GGSessionException(session.getSessionState());
 		}
 	}
 
@@ -212,18 +220,18 @@ public class DefaultPresenceService implements IPresenceService {
 		 */
 		@Override
 		public void loginOK() throws GGException {
-			m_localStatus = m_session.getLoginService().getLoginContext().getStatus();
-			m_monitoredUsers = m_session.getLoginService().getLoginContext().getMonitoredUsers();
-			setStatus(m_localStatus);
+			localStatus = session.getLoginService().getLoginContext().getStatus();
+			monitoredUsers = session.getLoginService().getLoginContext().getMonitoredUsers();
+			setStatus(localStatus);
 			GGOutgoingPackage outgoingPackage = null;
-			if (m_monitoredUsers.size() == 0) {
+			if (monitoredUsers.isEmpty()) {
 				outgoingPackage = GGListEmpty.getInstance();
 			} else {
-				final IUser[] users = m_monitoredUsers.toArray(IUser.EMPTY_ARRAY);
+				final IUser[] users = monitoredUsers.toArray(IUser.EMPTY_ARRAY);
 				outgoingPackage = new GGNotify(users);
 			}
 			try {
-				m_session.getSessionAccessor().sendPackage(outgoingPackage);
+				session.getSessionAccessor().sendPackage(outgoingPackage);
 			} catch (final IOException ex) {
 				throw new GGException("Unable to send initial list of users to monitor", ex);
 			}

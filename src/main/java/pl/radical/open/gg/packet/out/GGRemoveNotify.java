@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.out;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.User;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.OutgoingPacket;
@@ -33,7 +32,7 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (userMode == null) {
-			throw new GGNullPointerException("userMode cannot be null");
+			throw new IllegalArgumentException("userMode cannot be null");
 		}
 		m_uin = uin;
 		m_userType = GGConversion.getProtocolUserMode(userMode);

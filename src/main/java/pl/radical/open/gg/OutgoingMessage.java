@@ -84,7 +84,7 @@ public class OutgoingMessage extends AbstractMessage implements IOutgoingMessage
 	 */
 	public void setMessageBody(final String messageBody) {
 		if (messageBody.isEmpty()) {
-			throw new GGNullPointerException("messageBody cannot be null");
+			throw new IllegalArgumentException("messageBody cannot be null");
 		}
 		m_messageBody = messageBody;
 	}

@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.http;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 import pl.radical.open.gg.dicts.Encoding;
 
@@ -26,11 +25,11 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 		super(configuration, tokenID, tokenVal);
 		if (email == null) {
 			// FIXME Other exception instead?
-			throw new GGNullPointerException("email cannot be null");
+			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (password == null) {
 			// FIXME Other exception instead?
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		m_email = email;
 		m_password = password;

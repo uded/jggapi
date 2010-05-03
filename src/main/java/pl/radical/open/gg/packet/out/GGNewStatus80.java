@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.out;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.OutgoingPacket;
@@ -36,7 +35,7 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 	 */
 	public GGNewStatus80(final ILocalStatus localStatus) {
 		if (localStatus == null) {
-			throw new GGNullPointerException("status cannot be null");
+			throw new IllegalArgumentException("status cannot be null");
 		}
 		m_localStatus = localStatus;
 	}

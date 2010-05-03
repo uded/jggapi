@@ -1,7 +1,6 @@
 package pl.radical.open.gg.packet.out;
 
 import pl.radical.open.gg.GGException;
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.ILocalStatus;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.OutgoingPacket;
@@ -149,7 +148,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (password == null) {
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		this.uin = uin;
 		m_password = Arrays.copyOf(password, password.length);
@@ -158,7 +157,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 
 	public void setStatus(final ILocalStatus localStatus) {
 		if (localStatus == null) {
-			throw new GGNullPointerException("localStatus cannot be null");
+			throw new IllegalArgumentException("localStatus cannot be null");
 		}
 		m_status = GGConversion.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
 		if (localStatus.isDescriptionSet()) {
@@ -202,7 +201,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 
 	public void setExternalIP(final byte[] externalIP) {
 		if (externalIP == null) {
-			throw new GGNullPointerException("externalIP cannot be null");
+			throw new IllegalArgumentException("externalIP cannot be null");
 		}
 		if (externalIP.length != 4) {
 			throw new IllegalArgumentException("externalIP table has to have 4 entries");

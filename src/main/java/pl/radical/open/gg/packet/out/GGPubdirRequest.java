@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.out;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchQuery;
 import pl.radical.open.gg.dicts.Gender;
@@ -124,7 +123,7 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 
 	public static GGPubdirRequest createWritePubdirRequest(final PersonalInfo publicDirInfo) {
 		if (publicDirInfo == null) {
-			throw new GGNullPointerException("publicDirInfo cannot be null");
+			throw new IllegalArgumentException("publicDirInfo cannot be null");
 		}
 		final GGPubdirRequest pubdirRequest = new GGPubdirRequest();
 		pubdirRequest.m_requestType = GG_PUBDIR50_WRITE;

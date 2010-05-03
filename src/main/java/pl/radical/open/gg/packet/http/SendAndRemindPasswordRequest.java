@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.http;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 import pl.radical.open.gg.dicts.Encoding;
 
@@ -87,7 +86,7 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 
 	private int getHashCode(final String uin) {
 		if (uin == null) {
-			throw new GGNullPointerException("uin cannot be null");
+			throw new IllegalArgumentException("uin cannot be null");
 		}
 
 		int a, b, c;

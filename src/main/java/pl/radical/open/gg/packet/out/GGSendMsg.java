@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.out;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IOutgoingMessage;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.OutgoingPacket;
@@ -32,7 +31,7 @@ public class GGSendMsg implements GGOutgoingPackage, GGMessageClass {
 
 	public GGSendMsg(final IOutgoingMessage outgoingMessage) {
 		if (outgoingMessage == null) {
-			throw new GGNullPointerException("outgoingMessage cannot be null");
+			throw new IllegalArgumentException("outgoingMessage cannot be null");
 		}
 		m_text = outgoingMessage.getMessageBody();
 		m_seq = outgoingMessage.getMessageID();

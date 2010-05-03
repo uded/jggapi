@@ -44,7 +44,7 @@ public final class LoginContext {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (password.isEmpty()) {
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		m_uin = uin;
 		m_password = password;
@@ -60,7 +60,7 @@ public final class LoginContext {
 
 	public void setPassword(final String password) {
 		if (password.isEmpty()) {
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		m_password = password;
 	}
@@ -74,7 +74,7 @@ public final class LoginContext {
 
 	public void setStatus(final ILocalStatus localStatus) {
 		if (localStatus == null) {
-			throw new GGNullPointerException("localStatus cannot be null");
+			throw new IllegalArgumentException("localStatus cannot be null");
 		}
 		m_localStatus = localStatus;
 	}
@@ -101,7 +101,7 @@ public final class LoginContext {
 	// FIXME IllegalArgumentException
 	public void setExternalIP(final byte[] externalIP) {
 		if (externalIP == null) {
-			throw new GGNullPointerException("externalIP cannot be null");
+			throw new IllegalArgumentException("externalIP cannot be null");
 		}
 		if (externalIP.length == 4) {
 			throw new IllegalArgumentException("Incorrect address.");

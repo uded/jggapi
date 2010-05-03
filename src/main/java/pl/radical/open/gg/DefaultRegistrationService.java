@@ -25,7 +25,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 	// friendly
 	public DefaultRegistrationService(final Session session) {
 		if (session == null) {
-			throw new GGNullPointerException("session cannot be null");
+			throw new IllegalArgumentException("session cannot be null");
 		}
 		m_session = session;
 	}
@@ -65,23 +65,23 @@ public class DefaultRegistrationService implements IRegistrationService {
 		}
 		if (email == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("email cannot be null");
+			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (oldPassword == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("oldPassword cannot be null");
+			throw new IllegalArgumentException("oldPassword cannot be null");
 		}
 		if (newPassword == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("newPassword cannot be null");
+			throw new IllegalArgumentException("newPassword cannot be null");
 		}
 		if (tokenID == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("tokenID cannot be null");
+			throw new IllegalArgumentException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("tokenVal cannot be null");
+			throw new IllegalArgumentException("tokenVal cannot be null");
 		}
 
 		ChangePasswordRequest changePasswordRequest = null;
@@ -111,19 +111,19 @@ public class DefaultRegistrationService implements IRegistrationService {
 	public int registerAccount(final String email, final String password, final String tokenID, final String tokenVal) throws GGException {
 		if (email == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("email cannot be null");
+			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (password == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		if (tokenID == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		if (tokenVal == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 
 		RegisterGGAccountRequest request = null;
@@ -156,15 +156,15 @@ public class DefaultRegistrationService implements IRegistrationService {
 		}
 		if (password == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		if (tokenID == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("tokenID cannot be null");
+			throw new IllegalArgumentException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("tokenVal cannot be null");
+			throw new IllegalArgumentException("tokenVal cannot be null");
 		}
 
 		UnregisterGGPasswordRequest unregisterGGPasswordRequest = null;
@@ -177,7 +177,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 
 			if (!response.isOKResponse()) {
 				throw new GGException("Error occured while trying to unregister Gadu-Gadu account, reason: " + response
-				        .getResponseMessage());
+						.getResponseMessage());
 			}
 
 		} catch (final IOException ex) {
@@ -198,15 +198,15 @@ public class DefaultRegistrationService implements IRegistrationService {
 		}
 		if (email == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("email cannot be null");
+			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (tokenID == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("tokenID cannot be null");
+			throw new IllegalArgumentException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
 			// FIXME GGException instead?
-			throw new GGNullPointerException("tokenVal cannot be null");
+			throw new IllegalArgumentException("tokenVal cannot be null");
 		}
 
 		SendAndRemindPasswordRequest request = null;

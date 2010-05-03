@@ -24,10 +24,10 @@ public abstract class AbstractMessage implements IMessage {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (messageBody == null) {
-			throw new GGNullPointerException("messageBody cannot be null");
+			throw new IllegalArgumentException("messageBody cannot be null");
 		}
 		if (messageClass == null) {
-			throw new GGNullPointerException("messageClass cannot be null");
+			throw new IllegalArgumentException("messageClass cannot be null");
 		}
 		m_recipientUin = recepientUin;
 		m_messageBody = messageBody;

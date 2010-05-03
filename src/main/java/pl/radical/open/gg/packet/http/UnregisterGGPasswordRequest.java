@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.http;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 import pl.radical.open.gg.dicts.Encoding;
 
@@ -28,7 +27,7 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 		}
 		if (password == null) {
 			// FIXME Other exception instead?
-			throw new GGNullPointerException("password cannot be null");
+			throw new IllegalArgumentException("password cannot be null");
 		}
 		this.uin = uin;
 		this.password = password;

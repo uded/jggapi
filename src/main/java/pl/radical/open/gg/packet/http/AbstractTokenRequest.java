@@ -1,6 +1,5 @@
 package pl.radical.open.gg.packet.http;
 
-import pl.radical.open.gg.GGNullPointerException;
 import pl.radical.open.gg.IGGConfiguration;
 
 import java.io.IOException;
@@ -29,11 +28,11 @@ public abstract class AbstractTokenRequest extends HttpRequest {
 
 		if (tokenID == null) {
 			log.error("tokeID cannot be null");
-			throw new GGNullPointerException("tokenID cannot be null");
+			throw new IllegalArgumentException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
 			log.error("tokenVal cannot be null");
-			throw new GGNullPointerException("tokenVal cannot be null");
+			throw new IllegalArgumentException("tokenVal cannot be null");
 		}
 		this.tokenID = tokenID;
 		this.tokenVal = tokenVal;
