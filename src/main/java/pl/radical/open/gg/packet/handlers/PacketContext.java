@@ -4,6 +4,8 @@ import pl.radical.open.gg.Session;
 import pl.radical.open.gg.Session.SessionAccessor;
 import pl.radical.open.gg.packet.GGHeader;
 
+import java.util.Arrays;
+
 /**
  * Created on 2004-11-27
  * 
@@ -26,7 +28,7 @@ public class PacketContext {
 		}
 		this.session = session;
 		this.header = header;
-		this.packageContent = packageContent;
+		this.packageContent = Arrays.copyOf(packageContent, packageContent.length);
 	}
 
 	public SessionAccessor getSessionAccessor() {

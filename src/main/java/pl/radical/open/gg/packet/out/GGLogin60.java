@@ -9,6 +9,8 @@ import pl.radical.open.gg.packet.dicts.GGVersion;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;
 
+import java.util.Arrays;
+
 import org.apache.commons.collections.primitives.ArrayByteList;
 import org.apache.commons.collections.primitives.ByteList;
 
@@ -72,7 +74,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 			throw new GGNullPointerException("password cannot be null");
 		}
 		m_uin = uin;
-		m_password = password;
+		m_password = Arrays.copyOf(password, password.length);
 		m_loginHash = GGUtils.getLoginHash(password, seed);
 	}
 
@@ -130,7 +132,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 		if (externalIP.length != 4) {
 			throw new IllegalArgumentException("externalIP table has to have 4 entries");
 		}
-		m_externalIP = externalIP;
+		m_externalIP = Arrays.copyOf(externalIP, externalIP.length);
 	}
 
 	public void setExternalPort(final int externalPort) {

@@ -7,6 +7,8 @@ import pl.radical.open.gg.packet.dicts.GGUser;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;
 
+import java.util.Arrays;
+
 /**
  * @see pl.radical.open.gg.packet.in.GGNotifyReply
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
@@ -17,13 +19,13 @@ public class GGNotify implements GGOutgoingPackage, GGUser {
 	public static final int GG_NOTIFY_FIRST = 0x0F;
 	public static final int GG_NOTIFY_LAST = 0x10;
 
-	private IUser[] m_users = new IUser[0];
+	private IUser[] users = new IUser[0];
 
 	public GGNotify(final IUser[] users) {
 		if (users == null) {
 			throw new GGNullPointerException("users cannot be null");
 		}
-		m_users = users;
+		this.users = Arrays.copyOf(users, users.length);
 	}
 
 	/**
@@ -37,7 +39,7 @@ public class GGNotify implements GGOutgoingPackage, GGUser {
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
-		return m_users.length * 5;
+		return users.length * 5;
 	}
 
 	/**
@@ -46,8 +48,8 @@ public class GGNotify implements GGOutgoingPackage, GGUser {
 	public byte[] getContents() {
 		final byte[] toSend = new byte[getLength()];
 
-		for (int i = 0; i < m_users.length; i++) {
-			final IUser user = m_users[i];
+		for (int i = 0; i < users.length; i++) {
+			final IUser user = users[i];
 			final byte[] uinByte = GGUtils.intToByte(user.getUin());
 
 			for (int j = 0; j < uinByte.length; j++) {

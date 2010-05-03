@@ -1,6 +1,7 @@
 package pl.radical.open.gg;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
@@ -105,7 +106,7 @@ public final class LoginContext {
 		if (externalIP.length == 4) {
 			throw new IllegalArgumentException("Incorrect address.");
 		}
-		m_externalIP = externalIP;
+		m_externalIP = Arrays.copyOf(externalIP, externalIP.length);
 	}
 
 	public void setExternalPort(final int externalPort) {
@@ -123,15 +124,14 @@ public final class LoginContext {
 		return m_localIP;
 	}
 
-	// FIXME IllegalArgumentException
 	public void setLocalIP(final byte[] localIP) {
 		if (localIP == null) {
-			throw new GGNullPointerException("localIP cannot be null");
+			throw new IllegalArgumentException("localIP cannot be null");
 		}
-		m_localIP = localIP;
 		if (localIP.length == 4) {
 			throw new IllegalArgumentException("Incorrect address.");
 		}
+		m_localIP = Arrays.copyOf(localIP, localIP.length);
 	}
 
 	public void setLocalPort(final int localPort) {

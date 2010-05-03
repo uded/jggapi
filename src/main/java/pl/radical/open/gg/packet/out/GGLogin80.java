@@ -12,6 +12,8 @@ import pl.radical.open.gg.packet.dicts.GGVersion;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;
 
+import java.util.Arrays;
+
 import org.apache.commons.collections.primitives.ArrayByteList;
 import org.apache.commons.collections.primitives.ByteList;
 
@@ -150,7 +152,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 			throw new GGNullPointerException("password cannot be null");
 		}
 		this.uin = uin;
-		m_password = password;
+		m_password = Arrays.copyOf(password, password.length);
 		m_loginHash = GGUtils.getLoginHash(password, seed, m_hashType);
 	}
 
@@ -180,7 +182,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 		if (localIP.length != 4) {
 			throw new IllegalArgumentException("localIp table has to have 4 entries");
 		}
-		m_localIP = localIP;
+		m_localIP = Arrays.copyOf(localIP, localIP.length);
 	}
 
 	public byte[] getLocalIP() {
@@ -205,7 +207,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 		if (externalIP.length != 4) {
 			throw new IllegalArgumentException("externalIP table has to have 4 entries");
 		}
-		m_externalIP = externalIP;
+		m_externalIP = Arrays.copyOf(externalIP, externalIP.length);
 	}
 
 	public void setExternalPort(final int externalPort) {

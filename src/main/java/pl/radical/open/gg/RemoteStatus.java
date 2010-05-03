@@ -1,5 +1,6 @@
 package pl.radical.open.gg;
 
+import java.util.Arrays;
 import java.util.Date;
 
 /**
@@ -62,7 +63,7 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 		if (remoteIP.length != 4) {
 			throw new IllegalArgumentException("remoteIP must contain 4 entries");
 		}
-		this.remoteIP = remoteIP;
+		this.remoteIP = Arrays.copyOf(remoteIP, remoteIP.length);
 	}
 
 	/**
