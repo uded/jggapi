@@ -118,7 +118,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.radical.open.gg.IConnectionService#connect()
 	 */
 	// TODO Add HTTPS support as a fallback
-	public void connect(final IServer[] server) throws GGException {
+	public void connect(final IServer[] server) throws GGException { // NOPMD by LRzanek on 04.05.10 02:28
 		if (server == null) {
 			throw new GGException("Server cannot be null");
 		}

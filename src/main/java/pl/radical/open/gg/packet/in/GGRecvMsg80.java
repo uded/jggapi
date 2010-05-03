@@ -7,6 +7,8 @@ import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.packet.handlers.GGRecvMsg80PacketHandler;
 import pl.radical.open.gg.utils.GGUtils;
 
+import java.util.Arrays;
+
 import org.apache.commons.collections.primitives.ArrayByteList;
 import org.apache.commons.collections.primitives.ByteList;
 
@@ -128,7 +130,7 @@ public final class GGRecvMsg80 extends AbstractGGIncomingPacket implements GGInc
 	}
 
 	public void setAttributes(final byte[] mAttributes) {
-		attributes = mAttributes;
+		attributes = Arrays.copyOf(mAttributes, mAttributes.length);
 	}
 
 }

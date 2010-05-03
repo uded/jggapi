@@ -105,7 +105,7 @@ public class GGLogin60 implements GGOutgoingPackage {
 		if (localIP.length != 4) {
 			throw new IllegalArgumentException("localIp table has to have 4 entries");
 		}
-		this.localIP = localIP;
+		this.localIP = Arrays.copyOf(localIP, localIP.length);
 	}
 
 	public byte[] getLocalIP() {
