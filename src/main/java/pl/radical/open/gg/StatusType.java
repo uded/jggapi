@@ -3,7 +3,7 @@ package pl.radical.open.gg;
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public class StatusType {
+public final class StatusType {
 
 	private String status = null;
 

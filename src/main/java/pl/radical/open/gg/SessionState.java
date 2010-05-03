@@ -5,7 +5,7 @@ package pl.radical.open.gg;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public class SessionState {
+public final class SessionState {
 
 	private String m_sessionState = null;
 

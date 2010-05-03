@@ -11,7 +11,7 @@ import java.util.Random;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public class OutgoingMessage extends AbstractMessage implements IOutgoingMessage {
+public final class OutgoingMessage extends AbstractMessage implements IOutgoingMessage {
 
 	private static final Random RANDOM = new Random();
 
