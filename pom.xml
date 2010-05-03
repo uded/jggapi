@@ -227,9 +227,6 @@
 					<includes>
 						<include>**/AlljGGapiTest.java</include>
 					</includes>
-					<excludes>
-						<exclude>**/*.java</exclude>
-					</excludes>
 				</configuration>
 			</plugin>
 		</plugins>
