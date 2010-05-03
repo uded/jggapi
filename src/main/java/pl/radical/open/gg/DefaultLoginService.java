@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultLoginService implements ILoginService, UserListener {
 
-	private static final Logger log = LoggerFactory.getLogger(DefaultLoginService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultLoginService.class);
 
 	/** The session associated with this service */
 	private Session session = null;
@@ -45,7 +45,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	 * @see pl.radical.open.gg.ILoginService#login()
 	 */
 	public void login(final LoginContext loginContext) throws GGException {
-		log.debug("Logging in, loginContext: " + loginContext);
+		LOG.debug("Logging in, loginContext: " + loginContext);
 
 		if (loginContext == null) {
 			throw new IllegalArgumentException("loginContext cannot be null");
@@ -92,7 +92,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	 * @see pl.radical.open.gg.ILoginService#logout()
 	 */
 	public void logout() throws GGException {
-		log.debug("Logging out, loginContext: " + loginContext);
+		LOG.debug("Logging out, loginContext: " + loginContext);
 
 		logout(false, null, null, true);
 	}

@@ -20,7 +20,7 @@ import java.util.StringTokenizer;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x000e, label = "GG_PUBDIR50_REPLY", handler = GGPubdirReplyPacketHandler.class)
-public class GGPubdirReply extends AbstractGGIncomingPacket implements GGPubdirConsts, GGIncomingPackage {
+public final class GGPubdirReply extends AbstractGGIncomingPacket implements GGPubdirConsts, GGIncomingPackage {
 
 	private byte replyType = -1;
 	private int querySeq = -1;

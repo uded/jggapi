@@ -12,7 +12,7 @@ import pl.radical.open.gg.packet.handlers.GGLoginFailedPacketHandler;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x0009, label = "GG_LOGIN_FAILED", handler = GGLoginFailedPacketHandler.class)
-public class GGLoginFailed extends AbstractGGIncomingPacket implements GGIncomingPackage {
+public final class GGLoginFailed extends AbstractGGIncomingPacket implements GGIncomingPackage {
 	private static GGLoginFailed instance = null;
 
 	private GGLoginFailed() {

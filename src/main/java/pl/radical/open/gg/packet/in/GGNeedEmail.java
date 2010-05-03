@@ -12,7 +12,7 @@ import pl.radical.open.gg.packet.handlers.GGNeedEmailPacketHandler;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x0014, label = "GG_NEED_EMAIL", handler = GGNeedEmailPacketHandler.class)
-public class GGNeedEmail extends AbstractGGIncomingPacket implements GGIncomingPackage {
+public final class GGNeedEmail extends AbstractGGIncomingPacket implements GGIncomingPackage {
 	private static GGNeedEmail instance = null;
 
 	private GGNeedEmail() {

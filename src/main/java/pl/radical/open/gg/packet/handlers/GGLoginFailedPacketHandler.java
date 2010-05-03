@@ -14,16 +14,16 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGLoginFailedPacketHandler implements PacketHandler {
-	private static final Logger log = LoggerFactory.getLogger(GGLoginFailedPacketHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGLoginFailedPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("LoginFailed packet received.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketLoad: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("LoginFailed packet received.");
+			LOG.debug("PacketHeader: " + context.getHeader());
+			LOG.debug("PacketLoad: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGLoginFailed loginFailed = GGLoginFailed.getInstance();

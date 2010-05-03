@@ -3,12 +3,14 @@ package pl.radical.open.gg.packet.out;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.OutgoingPacket;
 
+import java.util.Arrays;
+
 /**
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 @OutgoingPacket(type = 0x0012, label = "GG_LIST_EMPTY")
-public class GGListEmpty implements GGOutgoingPackage {
+public final class GGListEmpty implements GGOutgoingPackage {
 
 	public static final int GG_LIST_EMPTY = 0x0012;
 
@@ -22,7 +24,7 @@ public class GGListEmpty implements GGOutgoingPackage {
 	// this method is not thread-safe, because this is check and act
 	// and it is not protected against race-condition
 	public static GGListEmpty getInstance() {
-		if (instance == null) {
+		if (instance == null) { // NOPMD by LRzanek on 04.05.10 01:38
 			instance = new GGListEmpty();
 		}
 		return instance;
@@ -46,7 +48,7 @@ public class GGListEmpty implements GGOutgoingPackage {
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
-		return data;
+		return Arrays.copyOf(data, data.length);
 	}
 
 }

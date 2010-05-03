@@ -8,108 +8,108 @@ package pl.radical.open.gg;
 public class LocalUser {
 
 	/** Gadu-Gadu user's uin */
-	private int m_uin = -1;
+	private int uin = -1;
 
 	/** the name of the user */
-	private String m_name = null;
+	private String name = null;
 
 	/** the last name of the user */
-	private String m_lastName = null;
+	private String lastName = null;
 
 	/** the nick name of the user */
-	private String m_nickName = null;
+	private String nickName = null;
 
 	/** the name that is an alias for the user */
-	private String m_displayName = null;
+	private String displayName = null;
 
 	/** the telehone of the user */
-	private String m_telephone = null;
+	private String telephone = null;
 
 	/** the group that the user belongs */
-	private String m_group = null;
+	private String group = null;
 
 	/** the e-mail address of the user */
-	private String m_emailAddress = null;
+	private String emailAddress = null;
 
 	/** flag to indicate that the user is blocked */
-	private boolean m_isBlocked = false;
+	private boolean blocked = false;
 
 	public void setFirstName(final String name) {
 		if (name.isEmpty()) {
 			throw new IllegalArgumentException("name cannot be null");
 		}
-		m_name = name;
+		this.name = name;
 	}
 
 	public String getFirstName() {
-		return m_name;
+		return name;
 	}
 
 	public void setLastName(final String surname) {
-		m_lastName = surname;
+		lastName = surname;
 	}
 
 	public String getLastName() {
-		return m_lastName;
+		return lastName;
 	}
 
 	public void setNickName(final String nickName) {
-		m_nickName = nickName;
+		this.nickName = nickName;
 	}
 
 	public String getNickName() {
-		return m_nickName;
+		return nickName;
 	}
 
 	public void setDisplayName(final String displayName) {
-		m_displayName = displayName;
+		this.displayName = displayName;
 	}
 
 	public String getDisplayName() {
-		return m_displayName;
+		return displayName;
 	}
 
 	public void setTelephone(final String telephone) {
-		m_telephone = telephone;
+		this.telephone = telephone;
 	}
 
 	public String getTelephone() {
-		return m_telephone;
+		return telephone;
 	}
 
 	public String getGroup() {
-		return m_group;
+		return group;
 	}
 
 	public void setGroup(final String group) {
-		m_group = group;
+		this.group = group;
 	}
 
 	public void setUin(final int uin) {
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
-		m_uin = uin;
+		this.uin = uin;
 	}
 
 	public int getUin() {
-		return m_uin;
+		return uin;
 	}
 
 	public void setEmailAddress(final String emailAddress) {
-		m_emailAddress = emailAddress;
+		this.emailAddress = emailAddress;
 	}
 
 	public String getEmailAddress() {
-		return m_emailAddress;
+		return emailAddress;
 	}
 
 	public void setBlocked(final boolean isBlocked) {
-		m_isBlocked = isBlocked;
+		this.blocked = isBlocked;
 	}
 
 	public boolean isBlocked() {
-		return m_isBlocked;
+		return blocked;
 	}
 
 }

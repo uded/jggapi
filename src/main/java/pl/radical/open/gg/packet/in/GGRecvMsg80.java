@@ -18,7 +18,7 @@ import org.apache.commons.collections.primitives.ByteList;
  */
 
 @IncomingPacket(type = 0x002E, label = "GG_RECV_MSG80", handler = GGRecvMsg80PacketHandler.class)
-public class GGRecvMsg80 extends AbstractGGIncomingPacket implements GGIncomingPackage, GGMessageClass {
+public final class GGRecvMsg80 extends AbstractGGIncomingPacket implements GGIncomingPackage, GGMessageClass {
 
 	private int sender = -1;
 	private int seq = -1;

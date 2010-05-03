@@ -14,16 +14,16 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGWelcomePacketHandler implements PacketHandler {
-	private static final Logger log = LoggerFactory.getLogger(GGWelcomePacketHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGWelcomePacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("GGWelcome packet received.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketLoad: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("GGWelcome packet received.");
+			LOG.debug("PacketHeader: " + context.getHeader());
+			LOG.debug("PacketLoad: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGWelcome welcome = new GGWelcome(context.getPackageContent());

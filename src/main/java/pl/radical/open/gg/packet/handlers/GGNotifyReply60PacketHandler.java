@@ -20,16 +20,16 @@ import org.slf4j.LoggerFactory;
  */
 @SuppressWarnings("deprecation")
 public class GGNotifyReply60PacketHandler implements PacketHandler {
-	private static final Logger log = LoggerFactory.getLogger(GGNotifyReply60PacketHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGNotifyReply60PacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("NotifyPacketReply60 packet received.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("NotifyPacketReply60 packet received.");
+			LOG.debug("PacketHeader: " + context.getHeader());
+			LOG.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGNotifyReply60 notifyReply = new GGNotifyReply60(context.getPackageContent());

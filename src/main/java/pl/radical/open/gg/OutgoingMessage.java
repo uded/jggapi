@@ -101,7 +101,7 @@ public final class OutgoingMessage extends AbstractMessage implements IOutgoingM
 		if (recipientUin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
-		m_recipientUin = recipientUin;
+		super.recipientUin = recipientUin;
 	}
 
 	public void addAdditionalRecipient(final int recipientUin) {
@@ -131,7 +131,7 @@ public final class OutgoingMessage extends AbstractMessage implements IOutgoingM
 
 	public int[] getAllRecipients() {
 		final int[] allRecipients = new int[additionalRecipients.size() + 1];
-		allRecipients[0] = m_recipientUin;
+		allRecipients[0] = super.recipientUin;
 
 		int i = 1;
 		for (final Object element : additionalRecipients) {

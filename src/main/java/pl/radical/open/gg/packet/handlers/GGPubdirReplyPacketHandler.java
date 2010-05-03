@@ -15,16 +15,16 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGPubdirReplyPacketHandler implements PacketHandler {
-	private static final Logger log = LoggerFactory.getLogger(GGPubdirReplyPacketHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGPubdirReplyPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("Received GGPubdirReply packet.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Received GGPubdirReply packet.");
+			LOG.debug("PacketHeader: " + context.getHeader());
+			LOG.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGPubdirReply pubdirReply = new GGPubdirReply(context.getPackageContent());

@@ -10,7 +10,7 @@ import pl.radical.open.gg.packet.handlers.GGDisconnectingPacketHandler;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x000b, label = "GG_DISCONNECTING", handler = GGDisconnectingPacketHandler.class)
-public class GGDisconnecting extends AbstractGGIncomingPacket implements GGIncomingPackage {
+public final class GGDisconnecting extends AbstractGGIncomingPacket implements GGIncomingPackage {
 
 	private static GGDisconnecting instance = null;
 

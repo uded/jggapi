@@ -18,16 +18,16 @@ import org.slf4j.LoggerFactory;
 
 public class GGRecvMsg80PacketHandler implements PacketHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(GGRecvMsg80PacketHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGRecvMsg80PacketHandler.class);
 
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("GGRecvMsg80 packet received.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("GGRecvMsg80 packet received.");
+			LOG.debug("PacketHeader: " + context.getHeader());
+			LOG.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGRecvMsg80 recvMsg = new GGRecvMsg80(context.getPackageContent());

@@ -39,7 +39,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class DefaultConnectionService implements IConnectionService {
-	private static final Logger log = LoggerFactory.getLogger(DefaultConnectionService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultConnectionService.class);
 
 	private static final String WINDOWS_ENCODING = "windows-1250";
 
@@ -78,15 +78,15 @@ public class DefaultConnectionService implements IConnectionService {
 	 * </pre>
 	 */
 	public IServer[] lookupServer(final int uin) throws GGException {
-		if (log.isTraceEnabled()) {
-			log.trace("lookupServer() executed for user [" + uin + "]");
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("lookupServer() executed for user [" + uin + "]");
 		}
 		try {
 			final IGGConfiguration configuration = session.getGGConfiguration();
 
 			final URL url = new URL(configuration.getServerLookupURL() + "?fmnumber=" + String.valueOf(uin) + "&version=8.0.0.7669");
-			if (log.isDebugEnabled()) {
-				log.debug("GG HUB URL address: {}", url);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("GG HUB URL address: {}", url);
 			}
 
 			final HttpURLConnection con = (HttpURLConnection) url.openConnection();
@@ -100,8 +100,8 @@ public class DefaultConnectionService implements IConnectionService {
 			final String line = reader.readLine();
 			reader.close();
 
-			if (log.isDebugEnabled()) {
-				log.debug("Dane zwrócone przez serwer: {}", line);
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Dane zwrócone przez serwer: {}", line);
 			}
 
 			if (line != null && line.length() > 22) {
@@ -155,7 +155,7 @@ public class DefaultConnectionService implements IConnectionService {
 			session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 			notifyConnectionClosed();
 		} catch (final IOException ex) {
-			log.error("IOException occured while trying to disconnect", ex);
+			LOG.error("IOException occured while trying to disconnect", ex);
 			session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 			throw new GGException("Unable to close connection to server", ex);
 		}
@@ -323,8 +323,8 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @return <code>Server</code> the server object.
 	 */
 	private static Server[] parseAddress(final String line) {
-		if (log.isTraceEnabled()) {
-			log.trace("Parsing token information from hub: [" + line + "]");
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Parsing token information from hub: [" + line + "]");
 		}
 		final Pattern p = Pattern.compile("\\d\\s\\d\\s((?:\\d{1,3}\\.?+){4})\\:(\\d{2,4})\\s((?:\\d{1,3}\\.?+){4})");
 		final Matcher m = p.matcher(line);
@@ -334,10 +334,10 @@ public class DefaultConnectionService implements IConnectionService {
 		} else {
 			final Server[] servers = new Server[2];
 
-			if (log.isTraceEnabled()) {
-				log.trace("Znaleziono prawidłowy string w danych przesłanych przez GG HUB:");
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Znaleziono prawidłowy string w danych przesłanych przez GG HUB:");
 				for (int i = 1; i <= m.groupCount(); i++) {
-					log.trace("--->  znaleziona grupa w adresie [{}]: {}", i, m.group(i));
+					LOG.trace("--->  znaleziona grupa w adresie [{}]: {}", i, m.group(i));
 				}
 			}
 
@@ -375,7 +375,7 @@ public class DefaultConnectionService implements IConnectionService {
 					active = false;
 					notifyConnectionError(ex);
 				} catch (final GGException ex2) {
-					log.warn("Unable to notify listeners", ex);
+					LOG.warn("Unable to notify listeners", ex);
 				}
 			}
 		}
@@ -414,15 +414,15 @@ public class DefaultConnectionService implements IConnectionService {
 		}
 
 		private void closeConnection() throws IOException {
-			if (log.isDebugEnabled()) {
-				log.debug("Closing connection...");
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Closing connection...");
 			}
 			active = false;
 		}
 
 		private synchronized void sendPackage(final GGOutgoingPackage op) throws IOException {
-			if (log.isDebugEnabled()) {
-				log.debug("Sending packet: {}, packetPayLoad: {}", op.getPacketType(), GGUtils.prettyBytesToString(op.getContents()));
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Sending packet: {}, packetPayLoad: {}", op.getPacketType(), GGUtils.prettyBytesToString(op.getContents()));
 			}
 
 			dataOutput.write(GGUtils.intToByte(op.getPacketType()));
@@ -455,8 +455,8 @@ public class DefaultConnectionService implements IConnectionService {
 		public void run() {
 			while (active && connectionThread.isActive()) {
 				try {
-					if (log.isDebugEnabled()) {
-						log.debug("Pinging...");
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("Pinging...");
 					}
 					sendPackage(GGPing.getPing());
 					notifyPingSent();
@@ -464,32 +464,32 @@ public class DefaultConnectionService implements IConnectionService {
 					Thread.sleep(pingInterval);
 				} catch (final IOException ex) {
 					active = false;
-					// log.error("PingerThreadError: ", ex);
+					// LOG.error("PingerThreadError: ", ex);
 					try {
 						notifyConnectionError(ex);
 					} catch (final GGException e) {
-						log.warn("Unable to notify connection error listeners", ex);
+						LOG.warn("Unable to notify connection error listeners", ex);
 					}
 				} catch (final InterruptedException ex) {
 					active = false;
-					if (log.isDebugEnabled()) {
-						log.debug("PingerThread was interruped", ex);
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("PingerThread was interruped", ex);
 					}
 				}
 			}
 		}
 
 		private void startPinging() {
-			if (log.isDebugEnabled()) {
-				log.debug("Starting pinging...");
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Starting pinging...");
 			}
 			active = true;
 			start();
 		}
 
 		private void stopPinging() {
-			if (log.isDebugEnabled()) {
-				log.debug("Stopping pinging...");
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("Stopping pinging...");
 			}
 			active = false;
 		}

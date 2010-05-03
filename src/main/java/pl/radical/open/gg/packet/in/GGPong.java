@@ -13,7 +13,7 @@ import pl.radical.open.gg.packet.handlers.GGPongPacketHandler;
  */
 @IncomingPacket(type = 0x0007, label = "GG_PONG", handler = GGPongPacketHandler.class)
 @Deprecated
-public class GGPong extends AbstractGGIncomingPacket implements GGIncomingPackage {
+public final class GGPong extends AbstractGGIncomingPacket implements GGIncomingPackage {
 
 	private static GGPong instance = null;
 

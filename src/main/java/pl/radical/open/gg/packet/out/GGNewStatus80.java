@@ -25,10 +25,24 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 
 	private ILocalStatus localStatus = null;
 
-	final static int FLAGS_UNKNOWN = 0x00000001;
-	final static int FLAGS_VIDEOCHAT = 0x00000002;
-	final static int FLAGS_MOBILE = 0x00100000;
-	final static int FLAGS_LINKS = 0x00800000;
+	// TODO Nie wiem, po co to
+	private enum Flags {
+		FLAGS_UNKNOWN(0x00000001),
+		FLAGS_VIDEOCHAT(0x00000002),
+		FLAGS_MOBILE(0x00100000),
+		FLAGS_LINKS(0x00800000);
+
+		private int value;
+
+		private Flags(final int value) {
+			this.value = value;
+		}
+
+		public int getValue() {
+			return value;
+		}
+
+	}
 
 	/**
 	 * The protocol status constructor.
@@ -76,10 +90,10 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 		byteList.add((byte) (statusToSend >> 16 & 0xFF));
 		byteList.add((byte) (statusToSend >> 24 & 0xFF));
 
-		byteList.add((byte) (FLAGS_UNKNOWN & 0xFF));
-		byteList.add((byte) (FLAGS_UNKNOWN >> 8 & 0xFF));
-		byteList.add((byte) (FLAGS_UNKNOWN >> 16 & 0xFF));
-		byteList.add((byte) (FLAGS_UNKNOWN >> 24 & 0xFF));
+		byteList.add((byte) (Flags.FLAGS_UNKNOWN.value & 0xFF));
+		byteList.add((byte) (Flags.FLAGS_UNKNOWN.value >> 8 & 0xFF));
+		byteList.add((byte) (Flags.FLAGS_UNKNOWN.value >> 16 & 0xFF));
+		byteList.add((byte) (Flags.FLAGS_UNKNOWN.value >> 24 & 0xFF));
 
 		if (localStatus.getStatusType().isDescriptionStatus() && localStatus.isDescriptionSet()) {
 			byteList.add((byte) (localStatus.getDescription().length() & 0xFF));

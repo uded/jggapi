@@ -15,16 +15,16 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGSentMessageAckPacketHandler implements PacketHandler {
-	private static final Logger log = LoggerFactory.getLogger(GGSentMessageAckPacketHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGSentMessageAckPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("GGSentMessageAck packet received.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("GGSentMessageAck packet received.");
+			LOG.debug("PacketHeader: " + context.getHeader());
+			LOG.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGSendMsgAck sendMessageAck = new GGSendMsgAck(context.getPackageContent());

@@ -29,7 +29,7 @@ import org.slf4j.LoggerFactory;
  */
 public class DefaultContactListService implements IContactListService {
 
-	private static final Logger log = LoggerFactory.getLogger(DefaultContactListService.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultContactListService.class);
 
 	private Set<ContactListListener> m_contactListListeners = null;
 
@@ -61,8 +61,8 @@ public class DefaultContactListService implements IContactListService {
 	 * @see pl.radical.open.gg.IContactListService#exportContactList(java.util.Collection)
 	 */
 	public void exportContactList(final Collection<LocalUser> localUsers) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("Exporting contact list users...");
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Exporting contact list users...");
 		}
 		checkSessionState();
 		try {
@@ -203,8 +203,8 @@ public class DefaultContactListService implements IContactListService {
 				try {
 					Thread.sleep(1000);
 				} catch (final InterruptedException ex) {
-					if (log.isDebugEnabled()) {
-						log.debug("ContactListSenderThread: thread interrupted.");
+					if (LOG.isDebugEnabled()) {
+						LOG.debug("ContactListSenderThread: thread interrupted.");
 					}
 					terminate();
 				}
@@ -220,13 +220,13 @@ public class DefaultContactListService implements IContactListService {
 			try {
 				m_session.getSessionAccessor().sendPackage(outgoingPackage);
 			} catch (final IOException ex) {
-				log.warn("Unable to send contact list packet", ex);
+				LOG.warn("Unable to send contact list packet", ex);
 			}
 		}
 
 		public void terminate() {
-			if (log.isDebugEnabled()) {
-				log.debug("ContactListSenderThread: terminating...");
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("ContactListSenderThread: terminating...");
 			}
 			isRunning = false;
 			m_session.getConnectionService().removePacketListener(this);
@@ -240,8 +240,8 @@ public class DefaultContactListService implements IContactListService {
 				return;
 			}
 			if (m_packagesToSend.isEmpty()) {
-				if (log.isDebugEnabled()) {
-					log.debug("ContactListSenderThread: Nothing more to send.");
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("ContactListSenderThread: Nothing more to send.");
 				}
 				terminate();
 				return;
@@ -249,12 +249,12 @@ public class DefaultContactListService implements IContactListService {
 
 			final GGOutgoingPackage outgoingPackage = m_packagesToSend.remove(0);
 			try {
-				if (log.isDebugEnabled()) {
-					log.debug("ContactListSenderThread: Sending outgoing package...");
+				if (LOG.isDebugEnabled()) {
+					LOG.debug("ContactListSenderThread: Sending outgoing package...");
 				}
 				m_session.getSessionAccessor().sendPackage(outgoingPackage);
 			} catch (final IOException ex) {
-				log.warn("Unable to send contact list packet", ex);
+				LOG.warn("Unable to send contact list packet", ex);
 				terminate();
 			}
 		}
