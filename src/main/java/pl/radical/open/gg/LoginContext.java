@@ -38,7 +38,6 @@ public final class LoginContext {
 	/** the external port of the client */
 	private int m_externalPort = -1;
 
-	// FIXME IllegalArgumentException
 	public LoginContext(final int uin, final String password) {
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
@@ -98,7 +97,6 @@ public final class LoginContext {
 		return m_externalIP;
 	}
 
-	// FIXME IllegalArgumentException
 	public void setExternalIP(final byte[] externalIP) {
 		if (externalIP == null) {
 			throw new IllegalArgumentException("externalIP cannot be null");

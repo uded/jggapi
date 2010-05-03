@@ -23,7 +23,7 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 
 	private static final int MAX_DESCRIPTION = 255;
 
-	private ILocalStatus m_localStatus = null;
+	private ILocalStatus localStatus = null;
 
 	final static int FLAGS_UNKNOWN = 0x00000001;
 	final static int FLAGS_VIDEOCHAT = 0x00000002;
@@ -37,7 +37,7 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 		if (localStatus == null) {
 			throw new IllegalArgumentException("status cannot be null");
 		}
-		m_localStatus = localStatus;
+		this.localStatus = localStatus;
 	}
 
 	/**
@@ -53,9 +53,9 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 	public int getLength() {
 		int length = 4;
 
-		if (m_localStatus.getStatusType().isDescriptionStatus() && m_localStatus.isDescriptionSet()) {
-			length += m_localStatus.getDescription().length() + 1;
-			if (m_localStatus.isReturnDateSet()) {
+		if (localStatus.getStatusType().isDescriptionStatus() && localStatus.isDescriptionSet()) {
+			length += localStatus.getDescription().length() + 1;
+			if (localStatus.isReturnDateSet()) {
 				length += 4;
 			}
 		}
@@ -67,7 +67,7 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
-		final int statusToSend = GGConversion.getProtocolStatus(m_localStatus, m_localStatus.isFriendsOnly(), false);
+		final int statusToSend = GGConversion.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
 
 		final ByteList byteList = new ArrayByteList(getLength());
 
@@ -81,19 +81,19 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 		byteList.add((byte) (FLAGS_UNKNOWN >> 16 & 0xFF));
 		byteList.add((byte) (FLAGS_UNKNOWN >> 24 & 0xFF));
 
-		if (m_localStatus.getStatusType().isDescriptionStatus() && m_localStatus.isDescriptionSet()) {
-			byteList.add((byte) (m_localStatus.getDescription().length() & 0xFF));
-			byteList.add((byte) (m_localStatus.getDescription().length() >> 8 & 0xFF));
-			byteList.add((byte) (m_localStatus.getDescription().length() >> 16 & 0xFF));
-			byteList.add((byte) (m_localStatus.getDescription().length() >> 24 & 0xFF));
+		if (localStatus.getStatusType().isDescriptionStatus() && localStatus.isDescriptionSet()) {
+			byteList.add((byte) (localStatus.getDescription().length() & 0xFF));
+			byteList.add((byte) (localStatus.getDescription().length() >> 8 & 0xFF));
+			byteList.add((byte) (localStatus.getDescription().length() >> 16 & 0xFF));
+			byteList.add((byte) (localStatus.getDescription().length() >> 24 & 0xFF));
 
-			final String description = trimDescription(m_localStatus.getDescription());
+			final String description = trimDescription(localStatus.getDescription());
 			final byte[] descBytes = description.getBytes();
 			for (final byte descByte : descBytes) {
 				byteList.add(descByte);
 			}
-			if (m_localStatus.isReturnDateSet()) {
-				final int timeInSeconds = GGUtils.millisToSeconds(m_localStatus.getReturnDate().getTime());
+			if (localStatus.isReturnDateSet()) {
+				final int timeInSeconds = GGUtils.millisToSeconds(localStatus.getReturnDate().getTime());
 				byteList.add((byte) (timeInSeconds & 0xFF));
 				byteList.add((byte) (timeInSeconds >> 8 & 0xFF));
 				byteList.add((byte) (timeInSeconds >> 16 & 0xFF));

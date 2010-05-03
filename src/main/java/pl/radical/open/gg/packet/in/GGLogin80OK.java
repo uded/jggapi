@@ -14,17 +14,17 @@ import pl.radical.open.gg.packet.handlers.GGLogin80OKPacketHandler;
 @IncomingPacket(type = 0x0035, label = "GG_LOGIN_OK80", handler = GGLogin80OKPacketHandler.class)
 public class GGLogin80OK extends GGBaseIncomingPacket implements GGIncomingPackage {
 
-	private static GGLogin80OK m_instance = null;
+	private static GGLogin80OK instance = null;
 
 	private GGLogin80OK() {
 		// prevent instant
 	}
 
 	public static GGLogin80OK getInstance() {
-		if (m_instance == null) {
-			m_instance = new GGLogin80OK();
+		if (instance == null) {
+			instance = new GGLogin80OK();
 		}
-		return m_instance;
+		return instance;
 	}
 
 }

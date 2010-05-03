@@ -31,35 +31,35 @@ public class GGSendMsgAck extends GGBaseIncomingPacket implements GGIncomingPack
 	/** Message has not been delivered. This status is only in case of GG_CLASS_CTCP */
 	public final static int GG_ACK_NOT_DELIVERED = 0x0006;
 
-	private int m_messageStatus = -1;
-	private int m_recipient = -1;
-	private int m_messageSeq = -1;
+	private int messageStatus = -1;
+	private int recipient = -1;
+	private int messageSeq = -1;
 
 	public GGSendMsgAck(final byte[] data) {
-		m_messageStatus = GGUtils.byteToInt(data, 0);
-		m_recipient = GGUtils.byteToInt(data, 4);
-		m_messageSeq = GGUtils.byteToInt(data, 8);
+		messageStatus = GGUtils.byteToInt(data, 0);
+		recipient = GGUtils.byteToInt(data, 4);
+		messageSeq = GGUtils.byteToInt(data, 8);
 	}
 
 	/**
 	 * @return Status of the message. Available statuses are listed above.
 	 */
 	public int getMessageStatus() {
-		return m_messageStatus;
+		return messageStatus;
 	}
 
 	/**
 	 * @return Gadu-Gadu uin number of the person to whom message was sent.
 	 */
 	public int getRecipientUin() {
-		return m_recipient;
+		return recipient;
 	}
 
 	/**
 	 * @return Sequence number of the message that has been sent.
 	 */
 	public int getMessageSeq() {
-		return m_messageSeq;
+		return messageSeq;
 	}
 
 }

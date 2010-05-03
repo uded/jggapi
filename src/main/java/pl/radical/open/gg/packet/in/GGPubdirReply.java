@@ -22,15 +22,15 @@ import java.util.StringTokenizer;
 @IncomingPacket(type = 0x000e, label = "GG_PUBDIR50_REPLY", handler = GGPubdirReplyPacketHandler.class)
 public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConsts, GGIncomingPackage {
 
-	private byte m_replyType = -1;
-	private int m_querySeq = -1;
+	private byte replyType = -1;
+	private int querySeq = -1;
 
-	private PersonalInfo m_pubDirInfo = null;
-	private PublicDirSearchReply m_publicDirSearchReply = null;
+	private PersonalInfo pubDirInfo = null;
+	private PublicDirSearchReply publicDirSearchReply = null;
 
 	public GGPubdirReply(final byte[] data) {
-		m_replyType = data[0];
-		m_querySeq = GGUtils.byteToInt(data, 1);
+		replyType = data[0];
+		querySeq = GGUtils.byteToInt(data, 1);
 		if (isPubdirReadReply()) {
 			handlePubdirReadReply(data);
 		} else if (isPubdirSearchReply()) {
@@ -39,27 +39,27 @@ public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConst
 	}
 
 	public int getQuerySeq() {
-		return m_querySeq;
+		return querySeq;
 	}
 
 	public PersonalInfo getPubdirReadReply() {
-		return m_pubDirInfo;
+		return pubDirInfo;
 	}
 
 	public PublicDirSearchReply getPubdirSearchReply() {
-		return m_publicDirSearchReply;
+		return publicDirSearchReply;
 	}
 
 	public boolean isPubdirSearchReply() {
-		return m_replyType == GG_PUBDIR50_SEARCH_REPLY;
+		return replyType == GG_PUBDIR50_SEARCH_REPLY;
 	}
 
 	public boolean isPubdirReadReply() {
-		return m_replyType == GG_PUBDIR50_SEARCH;
+		return replyType == GG_PUBDIR50_SEARCH;
 	}
 
 	public boolean isPubdirWriteReply() {
-		return m_replyType == GG_PUBDIR50_WRITE;
+		return replyType == GG_PUBDIR50_WRITE;
 	}
 
 	private String byteToString(final byte[] data, final int startIndex) {
@@ -78,24 +78,24 @@ public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConst
 	private void handlePubdirReadReply(final byte[] data) {
 		final String string = byteToString(data, 5);
 		final StringTokenizer tokenizer = new StringTokenizer(string, "\0");
-		m_pubDirInfo = new PersonalInfo();
+		pubDirInfo = new PersonalInfo();
 		while (tokenizer.hasMoreTokens()) {
 			final String token = tokenizer.nextToken();
 			if (token.equals(FIRST_NAME)) {
 				final String firstName = tokenizer.nextToken();
-				m_pubDirInfo.setFirstName(firstName);
+				pubDirInfo.setFirstName(firstName);
 			} else if (token.equals(LAST_NAME)) {
 				final String lastName = tokenizer.nextToken();
-				m_pubDirInfo.setLastName(lastName);
+				pubDirInfo.setLastName(lastName);
 			} else if (token.equals(BIRTH_YEAR)) {
 				final String birthDate = tokenizer.nextToken();
-				m_pubDirInfo.setBirthDate(birthDate);
+				pubDirInfo.setBirthDate(birthDate);
 			} else if (token.equals(CITY)) {
 				final String city = tokenizer.nextToken();
-				m_pubDirInfo.setCity(city);
+				pubDirInfo.setCity(city);
 			} else if (token.equals(NICK_NAME)) {
 				final String nickName = tokenizer.nextToken();
-				m_pubDirInfo.setNickName(nickName);
+				pubDirInfo.setNickName(nickName);
 			} else if (token.equals(GENDER)) {
 				// FIXME Review this part
 				final String genderString = tokenizer.nextToken();
@@ -105,29 +105,29 @@ public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConst
 				} else if (genderString.equals("2")) {
 					gender = Gender.FEMALE;
 				}
-				m_pubDirInfo.setGender(gender);
+				pubDirInfo.setGender(gender);
 			} else if (token.equals(FAMILY_NAME)) {
 				final String familyName = tokenizer.nextToken();
-				m_pubDirInfo.setFamilyName(familyName);
+				pubDirInfo.setFamilyName(familyName);
 			} else if (token.equals(FAMILY_CITY)) {
 				final String familyCity = tokenizer.nextToken();
-				m_pubDirInfo.setFamilyCity(familyCity);
+				pubDirInfo.setFamilyCity(familyCity);
 			}
 		}
 	}
 
 	private void handlePubdirSearchReply(final byte[] data) {
 		final String string = byteToString(data, 5);
-		m_publicDirSearchReply = new PublicDirSearchReply();
+		publicDirSearchReply = new PublicDirSearchReply();
 		final StringTokenizer tokenizer = new StringTokenizer(string, "\0");
-		PublicDirSearchReply.Entry entry = m_publicDirSearchReply.createSearchEntry();
+		PublicDirSearchReply.Entry entry = publicDirSearchReply.createSearchEntry();
 
 		boolean processedUin = false;
 		while (tokenizer.hasMoreTokens()) {
 			final String token = tokenizer.nextToken();
 			if (processedUin && token.equals(UIN)) {
 				processedUin = false;
-				entry = m_publicDirSearchReply.createSearchEntry();
+				entry = publicDirSearchReply.createSearchEntry();
 				final String uin = tokenizer.nextToken();
 				entry.setUin(Integer.valueOf(uin));
 				processedUin = true;
@@ -154,7 +154,7 @@ public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConst
 				entry.setNickName(nickName);
 			} else if (token.equals(NEXT_START)) {
 				final String nextNumber = tokenizer.nextToken();
-				m_publicDirSearchReply.setNextStart(Integer.valueOf(nextNumber));
+				publicDirSearchReply.setNextStart(Integer.valueOf(nextNumber));
 				break;
 			}
 		}

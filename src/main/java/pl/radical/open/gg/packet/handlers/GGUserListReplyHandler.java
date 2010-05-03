@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class GGUserListReplyHandler implements PacketHandler {
 	private static final Logger log = LoggerFactory.getLogger(GGUserListReplyHandler.class);
 
-	private final List<LocalUser> m_users = new ArrayList<LocalUser>();
+	private final List<LocalUser> users = new ArrayList<LocalUser>();
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
@@ -45,20 +45,20 @@ public class GGUserListReplyHandler implements PacketHandler {
 				if (log.isDebugEnabled()) {
 					log.debug("GGUserListReply: adding users to private user collection...");
 				}
-				m_users.addAll(contactList);
+				users.addAll(contactList);
 			} else if (userListReply.isGetReply()) {
 				if (log.isDebugEnabled()) {
 					log.debug("GGUserListReply.GetReply");
 				}
 
 				final Collection<LocalUser> contactList = userListReply.getContactList();
-				m_users.addAll(contactList);
-				final ArrayList<LocalUser> clonedUsers = new ArrayList<LocalUser>(m_users);
+				users.addAll(contactList);
+				final ArrayList<LocalUser> clonedUsers = new ArrayList<LocalUser>(users);
 
 				if (log.isDebugEnabled()) {
 					log.debug("GGUserListReply: clearing private users collection...");
 				}
-				m_users.clear();
+				users.clear();
 				context.getSessionAccessor().notifyContactListReceived(clonedUsers);
 			} else if (userListReply.isPutMoreReply()) {
 				if (log.isDebugEnabled()) {

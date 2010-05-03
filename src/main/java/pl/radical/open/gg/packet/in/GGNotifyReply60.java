@@ -22,14 +22,14 @@ import java.util.Map;
 @Deprecated
 public class GGNotifyReply60 extends GGBaseIncomingPacket implements GGIncomingPackage {
 
-	private final Map<IUser, RemoteStatus> m_statuses = new HashMap<IUser, RemoteStatus>();
+	private final Map<IUser, RemoteStatus> statuses = new HashMap<IUser, RemoteStatus>();
 
 	public GGNotifyReply60(final byte[] data) {
 		handlePacket(data);
 	}
 
 	public Map<IUser, RemoteStatus> getUsersStatus() {
-		return m_statuses;
+		return statuses;
 	}
 
 	private void handlePacket(final byte[] data) {
@@ -98,7 +98,7 @@ public class GGNotifyReply60 extends GGBaseIncomingPacket implements GGIncomingP
 				status60.setSupportsVoiceCommunication(true);
 			}
 
-			m_statuses.put(user, status60);
+			statuses.put(user, status60);
 		}
 	}
 

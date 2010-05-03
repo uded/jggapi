@@ -64,7 +64,6 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	 */
 	public void writeToPublicDirectory(final PersonalInfo publicDirInfo) throws GGException {
 		if (publicDirInfo == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("publicDirInfo cannot be null");
 		}
 		checkSessionState();

@@ -17,22 +17,19 @@ import java.util.StringTokenizer;
  */
 public class RegisterGGAccountRequest extends AbstractTokenRequest {
 
-	private String m_email = null;
-	private String m_password = null;
+	private String email = null;
+	private String password = null;
 
-	// FIXME NullPointerException
 	public RegisterGGAccountRequest(final IGGConfiguration configuration, final String email, final String password, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
 		if (email == null) {
-			// FIXME Other exception instead?
 			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (password == null) {
-			// FIXME Other exception instead?
 			throw new IllegalArgumentException("password cannot be null");
 		}
-		m_email = email;
-		m_password = password;
+		this.email = email;
+		this.password = password;
 	}
 
 	/**
@@ -64,10 +61,10 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 	protected String getRequestBody() throws UnsupportedEncodingException {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("pwd=");
-		buffer.append(URLEncoder.encode(m_password, Encoding.WINDOWS1250.getValue()));
+		buffer.append(URLEncoder.encode(password, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("email=");
-		buffer.append(URLEncoder.encode(m_email, Encoding.WINDOWS1250.getValue()));
+		buffer.append(URLEncoder.encode(email, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("tokenid=");
 		buffer.append(URLEncoder.encode(tokenID, Encoding.WINDOWS1250.getValue()));
@@ -76,7 +73,7 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 		buffer.append(URLEncoder.encode(tokenVal, Encoding.WINDOWS1250.getValue()));
 		buffer.append('&');
 		buffer.append("code=");
-		buffer.append(getHashCode(m_email, m_password));
+		buffer.append(getHashCode(email, password));
 
 		return buffer.toString();
 	}
@@ -91,10 +88,10 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 
 	public static class RegisterGGAccountResponse extends HttpResponse {
 
-		private String m_responseString = null;
+		private String responseString = null;
 
 		public RegisterGGAccountResponse(final String responseString) {
-			m_responseString = responseString;
+			this.responseString = responseString;
 		}
 
 		/**
@@ -102,7 +99,7 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 		 */
 		@Override
 		public boolean isOKResponse() {
-			return m_responseString.startsWith("reg_success");
+			return responseString.startsWith("reg_success");
 		}
 
 		/**
@@ -110,12 +107,12 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 		 */
 		@Override
 		public String getResponseMessage() {
-			return m_responseString;
+			return responseString;
 		}
 
 		public int getNewUin() {
 			if (isOKResponse()) {
-				final StringTokenizer tokenizer = new StringTokenizer(m_responseString, ":");
+				final StringTokenizer tokenizer = new StringTokenizer(responseString, ":");
 				tokenizer.nextToken();
 				final String token2 = tokenizer.nextToken(); // new assigned uin
 				return Integer.parseInt(token2);

@@ -14,9 +14,9 @@ public final class GGPing implements GGOutgoingPackage {
 
 	public static final int GG_PING = 0x08;
 
-	private static byte[] m_data = new byte[0];
+	private static byte[] data = new byte[0];
 
-	private static GGPing m_ping = null;
+	private static GGPing ping = null;
 
 	/**
 	 * Prywatny konstruktor.
@@ -25,10 +25,10 @@ public final class GGPing implements GGOutgoingPackage {
 	}
 
 	public static GGPing getPing() {
-		if (m_ping == null) {
-			m_ping = new GGPing();
+		if (ping == null) {
+			ping = new GGPing();
 		}
-		return m_ping;
+		return ping;
 	}
 
 	/**
@@ -42,14 +42,14 @@ public final class GGPing implements GGOutgoingPackage {
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
-		return m_data.length;
+		return data.length;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
-		return m_data;
+		return data;
 	}
 
 }

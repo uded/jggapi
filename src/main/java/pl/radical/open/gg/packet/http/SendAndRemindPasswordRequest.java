@@ -15,8 +15,8 @@ import java.io.UnsupportedEncodingException;
  */
 public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 
-	private int m_uin = 0;
-	private String m_email = null;
+	private int uin = 0;
+	private String email = null;
 
 	public SendAndRemindPasswordRequest(final IGGConfiguration configuration, final int uin, final String email, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
@@ -26,8 +26,8 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 		if (email == null) {
 			throw new IllegalArgumentException("email cannot be null");
 		}
-		m_uin = uin;
-		m_email = email;
+		this.uin = uin;
+		this.email = email;
 	}
 
 	/**
@@ -59,10 +59,10 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 	protected String getRequestBody() {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("userid=");
-		buffer.append(m_uin);
+		buffer.append(uin);
 		buffer.append('&');
 		buffer.append("email=");
-		buffer.append(m_email);
+		buffer.append(email);
 		buffer.append('&');
 		buffer.append("tokenid=");
 		buffer.append(tokenID);
@@ -71,7 +71,7 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 		buffer.append(tokenVal);
 		buffer.append('&');
 		buffer.append("code=");
-		buffer.append(getHashCode(String.valueOf(m_uin)));
+		buffer.append(getHashCode(String.valueOf(uin)));
 
 		return buffer.toString();
 	}
@@ -104,10 +104,10 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 
 	public static class SendAndRemindPasswordResponse extends HttpResponse {
 
-		private final String m_responseString;
+		private final String responseString;
 
 		public SendAndRemindPasswordResponse(final String responseString) {
-			m_responseString = responseString;
+			this.responseString = responseString;
 		}
 
 		/**
@@ -115,7 +115,7 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 		 */
 		@Override
 		public boolean isOKResponse() {
-			return m_responseString.equals("pwdsend_success");
+			return responseString.equals("pwdsend_success");
 		}
 
 		/**
@@ -123,7 +123,7 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 		 */
 		@Override
 		public String getResponseMessage() {
-			return m_responseString;
+			return responseString;
 		}
 
 	}

@@ -8,14 +8,13 @@ package pl.radical.open.gg;
  */
 public class User implements IUser {
 
-	private int m_uin = -1;
-	private UserMode m_userMode = null;
+	private int uin = -1;
+	private UserMode userMode = null;
 
 	public User(final int uin) {
 		this(uin, UserMode.BUDDY);
 	}
 
-	// FIXME IllegalArgumentException
 	public User(final int uin, final UserMode userMode) {
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
@@ -23,26 +22,26 @@ public class User implements IUser {
 		if (userMode == null) {
 			throw new IllegalArgumentException("userMode cannot be null");
 		}
-		m_uin = uin;
-		m_userMode = userMode;
+		this.uin = uin;
+		this.userMode = userMode;
 	}
 
 	public int getUin() {
-		return m_uin;
+		return uin;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IUser#getUserMode()
 	 */
 	public UserMode getUserMode() {
-		return m_userMode;
+		return userMode;
 	}
 
 	public void setUserMode(final UserMode userMode) {
 		if (userMode == null) {
 			throw new IllegalArgumentException("userMode cannot be null");
 		}
-		m_userMode = userMode;
+		this.userMode = userMode;
 	}
 
 	/**
@@ -52,7 +51,7 @@ public class User implements IUser {
 	public boolean equals(final Object o) {
 		if (o instanceof IUser) {
 			final IUser user = (IUser) o;
-			if (user.getUin() == m_uin) {
+			if (user.getUin() == uin) {
 				return true;
 			}
 		}
@@ -64,7 +63,7 @@ public class User implements IUser {
 	 */
 	@Override
 	public int hashCode() {
-		return m_uin;
+		return uin;
 	}
 
 	/**
@@ -72,7 +71,7 @@ public class User implements IUser {
 	 */
 	@Override
 	public String toString() {
-		return "[Uin: " + m_uin + ", userMode: " + m_userMode + "]";
+		return "[Uin: " + uin + ", userMode: " + userMode + "]";
 	}
 
 	public static class UserMode {

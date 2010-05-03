@@ -58,7 +58,6 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void setStatus(final ILocalStatus localStatus) throws GGException {
 		if (localStatus == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("status cannot be null");
 		}
 		checkSessionState();
@@ -84,7 +83,6 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void addMonitoredUser(final IUser user) throws GGException {
 		if (user == null) {
-			// FIXME GGException instead
 			throw new IllegalArgumentException("user cannot be null");
 		}
 		checkSessionState();
@@ -106,7 +104,6 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void removeMonitoredUser(final IUser user) throws GGException {
 		if (user == null) {
-			// FIXME GGException instead
 			throw new IllegalArgumentException("user cannot be null");
 		}
 		checkSessionState();
@@ -128,7 +125,6 @@ public class DefaultPresenceService implements IPresenceService {
 	 */
 	public void changeMonitoredUserStatus(final IUser user) throws GGException {
 		if (user == null) {
-			// FIXME GGException instead
 			throw new IllegalArgumentException("user cannot be null");
 		}
 		checkSessionState();
@@ -183,11 +179,9 @@ public class DefaultPresenceService implements IPresenceService {
 
 	protected void notifyUserChangedStatus(final IUser user, final IRemoteStatus newStatus) throws GGException {
 		if (user == null) {
-			// FIXME GGException instead
 			throw new IllegalArgumentException("user cannot be null");
 		}
 		if (newStatus == null) {
-			// FIXME GGException instead
 			throw new IllegalArgumentException("newStatus cannot be null");
 		}
 		for (final Object element : userListeners) {
@@ -198,7 +192,6 @@ public class DefaultPresenceService implements IPresenceService {
 
 	protected void notifyLocalUserChangedStatus(final ILocalStatus localStatus) throws GGException {
 		if (localStatus == null) {
-			// FIXME GGException instead
 			throw new IllegalArgumentException("localStatus cannot be null");
 		}
 		for (final Object element : userListeners) {

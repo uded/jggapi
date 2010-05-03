@@ -21,12 +21,11 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 	/**
 	 * Gadu-Gadu uin
 	 */
-	private int m_uin = -1;
+	private int uin = -1;
 
-	private final User.UserMode m_userMode = null;
-	private byte m_userType = GG_USER_BUDDY;
+	private final User.UserMode userMode = null;
+	private byte userType = GG_USER_BUDDY;
 
-	// FIXME IllegalArgumentException
 	public GGRemoveNotify(final int uin, final User.UserMode userMode) {
 		if (uin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");
@@ -34,16 +33,16 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 		if (userMode == null) {
 			throw new IllegalArgumentException("userMode cannot be null");
 		}
-		m_uin = uin;
-		m_userType = GGConversion.getProtocolUserMode(userMode);
+		this.uin = uin;
+		userType = GGConversion.getProtocolUserMode(userMode);
 	}
 
 	public int getUin() {
-		return m_uin;
+		return uin;
 	}
 
 	public User.UserMode getUserMode() {
-		return m_userMode;
+		return userMode;
 	}
 
 	/**
@@ -66,10 +65,10 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 	public byte[] getContents() {
 		final byte[] dane = new byte[getLength()];
 
-		final byte[] uin = GGUtils.intToByte(m_uin);
-		System.arraycopy(uin, 0, dane, 0, uin.length);
+		final byte[] uinRaw = GGUtils.intToByte(uin);
+		System.arraycopy(uinRaw, 0, dane, 0, uinRaw.length);
 
-		dane[4] = m_userType;
+		dane[4] = userType;
 
 		return dane;
 	}

@@ -64,23 +64,18 @@ public class DefaultRegistrationService implements IRegistrationService {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (email == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (oldPassword == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("oldPassword cannot be null");
 		}
 		if (newPassword == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("newPassword cannot be null");
 		}
 		if (tokenID == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("tokenVal cannot be null");
 		}
 
@@ -110,19 +105,15 @@ public class DefaultRegistrationService implements IRegistrationService {
 	 */
 	public int registerAccount(final String email, final String password, final String tokenID, final String tokenVal) throws GGException {
 		if (email == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (password == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("password cannot be null");
 		}
 		if (tokenID == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("password cannot be null");
 		}
 		if (tokenVal == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("password cannot be null");
 		}
 
@@ -155,15 +146,12 @@ public class DefaultRegistrationService implements IRegistrationService {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (password == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("password cannot be null");
 		}
 		if (tokenID == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("tokenVal cannot be null");
 		}
 
@@ -197,15 +185,12 @@ public class DefaultRegistrationService implements IRegistrationService {
 			throw new IllegalArgumentException("uin cannot be less than 0");
 		}
 		if (email == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("email cannot be null");
 		}
 		if (tokenID == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("tokenVal cannot be null");
 		}
 

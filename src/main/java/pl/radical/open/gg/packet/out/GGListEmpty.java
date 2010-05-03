@@ -12,9 +12,9 @@ public class GGListEmpty implements GGOutgoingPackage {
 
 	public static final int GG_LIST_EMPTY = 0x0012;
 
-	private static GGListEmpty m_instance = null;
+	private static GGListEmpty instance = null;
 
-	private static byte[] m_data = new byte[0];
+	private static byte[] data = new byte[0];
 
 	private GGListEmpty() { // private constructor
 	}
@@ -22,10 +22,10 @@ public class GGListEmpty implements GGOutgoingPackage {
 	// this method is not thread-safe, because this is check and act
 	// and it is not protected against race-condition
 	public static GGListEmpty getInstance() {
-		if (m_instance == null) {
-			m_instance = new GGListEmpty();
+		if (instance == null) {
+			instance = new GGListEmpty();
 		}
-		return m_instance;
+		return instance;
 	}
 
 	/**
@@ -39,14 +39,14 @@ public class GGListEmpty implements GGOutgoingPackage {
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
-		return m_data.length;
+		return data.length;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
 	public byte[] getContents() {
-		return m_data;
+		return data;
 	}
 
 }

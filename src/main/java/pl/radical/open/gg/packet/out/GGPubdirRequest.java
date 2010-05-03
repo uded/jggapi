@@ -20,12 +20,12 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 
 	private static final Random SEQUENCER = new Random();
 
-	private byte m_requestType = -1;
-	private int m_seq = -1;
-	private String m_request = "";
+	private byte requestType = -1;
+	private int seq = -1;
+	private String request = "";
 
 	private GGPubdirRequest() {
-		m_seq = SEQUENCER.nextInt(99999);
+		seq = SEQUENCER.nextInt(99999);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
-		return 5 + m_request.getBytes().length;
+		return 5 + request.getBytes().length;
 	}
 
 	/**
@@ -48,13 +48,13 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 	public byte[] getContents() {
 		final byte[] toSend = new byte[getLength()];
 
-		toSend[0] = m_requestType;
-		toSend[1] = (byte) (m_seq & 0xFF);
-		toSend[2] = (byte) (m_seq >> 8 & 0xFF);
-		toSend[3] = (byte) (m_seq >> 16 & 0xFF);
-		toSend[4] = (byte) (m_seq >> 24 & 0xFF);
+		toSend[0] = requestType;
+		toSend[1] = (byte) (seq & 0xFF);
+		toSend[2] = (byte) (seq >> 8 & 0xFF);
+		toSend[3] = (byte) (seq >> 16 & 0xFF);
+		toSend[4] = (byte) (seq >> 24 & 0xFF);
 
-		final byte[] requestBytes = m_request.getBytes();
+		final byte[] requestBytes = request.getBytes();
 		for (int i = 0; i < requestBytes.length; i++) {
 			toSend[5 + i] = requestBytes[i];
 		}
@@ -64,7 +64,7 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 
 	public static GGPubdirRequest createSearchPubdirRequest(final PublicDirSearchQuery publicDirQuery) {
 		final GGPubdirRequest pubdirRequest = new GGPubdirRequest();
-		pubdirRequest.m_requestType = GG_PUBDIR50_SEARCH;
+		pubdirRequest.requestType = GG_PUBDIR50_SEARCH;
 
 		final StringBuffer buffer = new StringBuffer();
 		if (publicDirQuery.getUin() != null) {
@@ -110,14 +110,14 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 			final String startEntry = getEntry(START, String.valueOf(startInteger.intValue()));
 			buffer.append(startEntry);
 		}
-		pubdirRequest.m_request = buffer.toString();
+		pubdirRequest.request = buffer.toString();
 		return pubdirRequest;
 	}
 
 	public static GGPubdirRequest createReadPubdirRequest() {
 		final GGPubdirRequest pubdirRequest = new GGPubdirRequest();
-		pubdirRequest.m_requestType = GG_PUBDIR50_READ;
-		pubdirRequest.m_request = "";
+		pubdirRequest.requestType = GG_PUBDIR50_READ;
+		pubdirRequest.request = "";
 		return pubdirRequest;
 	}
 
@@ -126,8 +126,8 @@ public class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts {
 			throw new IllegalArgumentException("publicDirInfo cannot be null");
 		}
 		final GGPubdirRequest pubdirRequest = new GGPubdirRequest();
-		pubdirRequest.m_requestType = GG_PUBDIR50_WRITE;
-		pubdirRequest.m_request = prepareWriteRequest(publicDirInfo);
+		pubdirRequest.requestType = GG_PUBDIR50_WRITE;
+		pubdirRequest.request = prepareWriteRequest(publicDirInfo);
 		return pubdirRequest;
 	}
 

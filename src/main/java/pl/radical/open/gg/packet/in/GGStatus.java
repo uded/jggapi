@@ -21,8 +21,8 @@ import pl.radical.open.gg.utils.GGUtils;
 @Deprecated
 public class GGStatus extends GGBaseIncomingPacket implements GGStatuses, GGIncomingPackage {
 
-	private IUser m_user = null;
-	private RemoteStatus m_status = null;
+	private IUser user = null;
+	private RemoteStatus status = null;
 
 	public GGStatus(final byte[] data) {
 		handleUser(data);
@@ -30,18 +30,18 @@ public class GGStatus extends GGBaseIncomingPacket implements GGStatuses, GGInco
 	}
 
 	public IUser getUser() {
-		return m_user;
+		return user;
 	}
 
 	public IRemoteStatus getStatus() {
-		return m_status;
+		return status;
 	}
 
 	private void handleUser(final byte[] data) {
 		final int uin = GGUtils.byteToInt(data);
 		final int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
 		final User.UserMode userMode = GGConversion.getUserMode(protocolStatus);
-		m_user = new User(uin, userMode);
+		user = new User(uin, userMode);
 	}
 
 	private void handleStatus(final byte[] data) {
@@ -55,7 +55,7 @@ public class GGStatus extends GGBaseIncomingPacket implements GGStatuses, GGInco
 				timeInMillis = GGUtils.secondsToMillis(timeInSeconds);
 			}
 		}
-		m_status = GGConversion.getClientRemoteStatus(protocolStatus, description, timeInMillis);
+		status = GGConversion.getClientRemoteStatus(protocolStatus, description, timeInMillis);
 	}
 
 }

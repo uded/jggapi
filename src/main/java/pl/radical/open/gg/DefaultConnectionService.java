@@ -228,7 +228,6 @@ public class DefaultConnectionService implements IConnectionService {
 	/**
 	 * @see pl.radical.open.gg.IConnectionService#addPingListener(pl.radical.open.gg.event.PingListener)
 	 */
-	// FIXME IllegalArgumentException
 	public void addPingListener(final PingListener pingListener) {
 		if (pingListener == null) {
 			throw new IllegalArgumentException("pingListener cannot be null");
@@ -239,7 +238,6 @@ public class DefaultConnectionService implements IConnectionService {
 	/**
 	 * @see pl.radical.open.gg.IConnectionService#removePingListener(pl.radical.open.gg.event.PingListener)
 	 */
-	// FIXME IllegalArgumentException
 	public void removePingListener(final PingListener pingListener) {
 		if (pingListener == null) {
 			throw new IllegalArgumentException("pingListener cannot be null");

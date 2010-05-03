@@ -25,7 +25,7 @@ import org.slf4j.LoggerFactory;
 public class PacketChain {
 	private static final Logger log = LoggerFactory.getLogger(PacketChain.class);
 
-	private final Map<Integer, PacketHandler> m_packetHandlers = new HashMap<Integer, PacketHandler>();
+	private final Map<Integer, PacketHandler> packetHandlers = new HashMap<Integer, PacketHandler>();
 
 	public PacketChain() throws GGException {
 		registerDefaultHandlers();
@@ -35,7 +35,7 @@ public class PacketChain {
 		if (packetHandler == null) {
 			throw new IllegalArgumentException("packetHandler cannot be null");
 		}
-		m_packetHandlers.put(Integer.valueOf(packetType), packetHandler);
+		packetHandlers.put(Integer.valueOf(packetType), packetHandler);
 	}
 
 	public void registerGGPackageHandler(final int packetType, final Class<?> packetHandler) throws GGException {
@@ -44,7 +44,7 @@ public class PacketChain {
 		}
 
 		try {
-			m_packetHandlers.put(Integer.valueOf(packetType), (PacketHandler) packetHandler.newInstance());
+			packetHandlers.put(Integer.valueOf(packetType), (PacketHandler) packetHandler.newInstance());
 		} catch (final InstantiationException e) {
 			log.error("Unable to create an object of type {}", packetHandler.getClass().getName(), e);
 			throw new GGException("Unable to create an object of type " + packetHandler.getClass().getName(), e);
@@ -55,7 +55,7 @@ public class PacketChain {
 	}
 
 	public void sendToChain(final PacketContext packageContent) throws GGException {
-		final PacketHandler packetHandler = m_packetHandlers.get(Integer.valueOf(packageContent.getHeader().getType()));
+		final PacketHandler packetHandler = packetHandlers.get(Integer.valueOf(packageContent.getHeader().getType()));
 		if (packetHandler == null) {
 			log.warn("Unknown package.");
 			log.warn("PacketHeader: " + packageContent.getHeader());

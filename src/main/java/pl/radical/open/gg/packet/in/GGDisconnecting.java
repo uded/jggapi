@@ -12,16 +12,16 @@ import pl.radical.open.gg.packet.handlers.GGDisconnectingPacketHandler;
 @IncomingPacket(type = 0x000b, label = "GG_DISCONNECTING", handler = GGDisconnectingPacketHandler.class)
 public class GGDisconnecting extends GGBaseIncomingPacket implements GGIncomingPackage {
 
-	private static GGDisconnecting m_instance = null;
+	private static GGDisconnecting instance = null;
 
 	private GGDisconnecting() {
 		// private constructor
 	}
 
 	public static GGDisconnecting getInstance() {
-		if (m_instance == null) {
-			m_instance = new GGDisconnecting();
+		if (instance == null) {
+			instance = new GGDisconnecting();
 		}
-		return m_instance;
+		return instance;
 	}
 }

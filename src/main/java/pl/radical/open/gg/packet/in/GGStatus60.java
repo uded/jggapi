@@ -20,9 +20,9 @@ import pl.radical.open.gg.utils.GGUtils;
 @Deprecated
 public class GGStatus60 extends GGBaseIncomingPacket implements GGStatuses, GGIncomingPackage {
 
-	private IUser m_user = null;
+	private IUser user = null;
 
-	private RemoteStatus m_status60 = null;
+	private RemoteStatus status60 = null;
 
 	public GGStatus60(final byte[] data) {
 		handleUser(data);
@@ -30,11 +30,11 @@ public class GGStatus60 extends GGBaseIncomingPacket implements GGStatuses, GGIn
 	}
 
 	public IUser getUser() {
-		return m_user;
+		return user;
 	}
 
 	public IRemoteStatus getStatus60() {
-		return m_status60;
+		return status60;
 	}
 
 	private void handleUser(final byte[] data) {
@@ -44,7 +44,7 @@ public class GGStatus60 extends GGBaseIncomingPacket implements GGStatuses, GGIn
 		data[3] = flag;
 		final int protocolStatus = GGUtils.unsignedByteToInt(data[4]);
 		final User.UserMode userMode = GGConversion.getUserMode(protocolStatus);
-		m_user = new User(uin, userMode);
+		user = new User(uin, userMode);
 	}
 
 	private void handleStatus60(final byte[] data) {
@@ -67,23 +67,23 @@ public class GGStatus60 extends GGBaseIncomingPacket implements GGStatuses, GGIn
 			}
 		}
 
-		m_status60 = GGConversion.getClientRemoteStatus(protocolStatus, description, timeInMillis);
-		m_status60.setRemoteIP(remoteIPArray);
-		m_status60.setImageSize(imageSize);
-		m_status60.setGGVersion(version);
+		status60 = GGConversion.getClientRemoteStatus(protocolStatus, description, timeInMillis);
+		status60.setRemoteIP(remoteIPArray);
+		status60.setImageSize(imageSize);
+		status60.setGGVersion(version);
 
 		if (remotePort == 0) {
-			m_status60.setSupportsDirectCommunication(false);
+			status60.setSupportsDirectCommunication(false);
 		} else if (remotePort == 1) {
-			m_status60.setUserBehindFirewall(true);
+			status60.setUserBehindFirewall(true);
 		} else if (remotePort == 2) {
-			m_status60.setAreWeInRemoteUserBuddyList(false);
+			status60.setAreWeInRemoteUserBuddyList(false);
 		} else {
-			m_status60.setRemotePort(remotePort);
+			status60.setRemotePort(remotePort);
 		}
 
 		if (flag == 0x40) {
-			m_status60.setSupportsVoiceCommunication(true);
+			status60.setSupportsVoiceCommunication(true);
 		}
 	}
 

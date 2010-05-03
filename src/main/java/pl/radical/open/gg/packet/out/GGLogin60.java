@@ -98,7 +98,6 @@ public class GGLogin60 implements GGOutgoingPackage {
 		return m_password;
 	}
 
-	// FIXME IllegalArgumentException
 	public void setLocalIP(final byte[] localIP) {
 		if (localIP == null) {
 			throw new IllegalArgumentException("localIP cannot be null");

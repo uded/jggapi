@@ -20,9 +20,9 @@ public class GGUserListRequest implements GGOutgoingPackage {
 	public static final byte GG_USERLIST_PUT_MORE = 0x01;
 	public static final int GG_USERLIST_GET = 0x02;
 
-	private byte m_type;
+	private byte type;
 
-	private String m_request;
+	private String request;
 
 	private GGUserListRequest() {
 	}
@@ -38,7 +38,7 @@ public class GGUserListRequest implements GGOutgoingPackage {
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
 	public int getLength() {
-		return 1 + m_request.length();
+		return 1 + request.length();
 	}
 
 	/**
@@ -47,9 +47,9 @@ public class GGUserListRequest implements GGOutgoingPackage {
 	public byte[] getContents() {
 		final byte[] toSend = new byte[getLength()];
 
-		toSend[0] = m_type;
+		toSend[0] = type;
 
-		final byte[] bytes = m_request.getBytes();
+		final byte[] bytes = request.getBytes();
 		for (int i = 0; i < bytes.length; i++) {
 			toSend[1 + i] = bytes[i];
 		}
@@ -59,14 +59,14 @@ public class GGUserListRequest implements GGOutgoingPackage {
 
 	public static GGUserListRequest createClearUserListRequest() {
 		final GGUserListRequest listRequest = new GGUserListRequest();
-		listRequest.m_request = "";
-		listRequest.m_type = GG_USER_LIST_PUT;
+		listRequest.request = "";
+		listRequest.type = GG_USER_LIST_PUT;
 
 		return listRequest;
 	}
 
 	public static void changeRequestType(final GGUserListRequest userListRequest, final byte newType) {
-		userListRequest.m_type = newType;
+		userListRequest.type = newType;
 	}
 
 	public static GGUserListRequest createPutUserListRequest(final List<String> lines) {
@@ -74,8 +74,8 @@ public class GGUserListRequest implements GGOutgoingPackage {
 			throw new IllegalArgumentException("lines collection cannot be null");
 		}
 		final GGUserListRequest listRequest = new GGUserListRequest();
-		listRequest.m_type = GG_USER_LIST_PUT;
-		listRequest.m_request = createRequestFromList(lines);
+		listRequest.type = GG_USER_LIST_PUT;
+		listRequest.request = createRequestFromList(lines);
 
 		return listRequest;
 	}
@@ -85,16 +85,16 @@ public class GGUserListRequest implements GGOutgoingPackage {
 			throw new IllegalArgumentException("lines collection cannot be null");
 		}
 		final GGUserListRequest listRequest = new GGUserListRequest();
-		listRequest.m_type = GG_USERLIST_PUT_MORE;
-		listRequest.m_request = createRequestFromList(lines);
+		listRequest.type = GG_USERLIST_PUT_MORE;
+		listRequest.request = createRequestFromList(lines);
 
 		return listRequest;
 	}
 
 	public static GGUserListRequest createGetUserListRequest() {
 		final GGUserListRequest listRequest = new GGUserListRequest();
-		listRequest.m_type = GG_USERLIST_GET;
-		listRequest.m_request = "";
+		listRequest.type = GG_USERLIST_GET;
+		listRequest.request = "";
 
 		return listRequest;
 	}

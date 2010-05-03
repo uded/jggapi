@@ -34,14 +34,14 @@ public class GGUserListReply extends GGBaseIncomingPacket implements GGIncomingP
 	public final static int GG_USERLIST_GET_MORE_REPLY = 0x04; /* początek importu listy */
 	public final static int GG_USERLIST_GET_REPLY = 0x06; /* ostatnia część importu */
 
-	private byte m_type = -1;
+	private byte type = -1;
 
-	private Collection<LocalUser> m_users = null;
+	private Collection<LocalUser> users = null;
 
 	public GGUserListReply(final byte[] data) throws IOException {
-		m_type = data[0];
+		type = data[0];
 		if (isGetMoreReply() || isGetReply()) {
-			m_users = createUsersCollection(data);
+			users = createUsersCollection(data);
 		}
 	}
 
@@ -139,23 +139,23 @@ public class GGUserListReply extends GGBaseIncomingPacket implements GGIncomingP
 	}
 
 	public Collection<LocalUser> getContactList() {
-		return m_users;
+		return users;
 	}
 
 	public boolean isPutReply() {
-		return m_type == GG_USERLIST_PUT_REPLY;
+		return type == GG_USERLIST_PUT_REPLY;
 	}
 
 	public boolean isPutMoreReply() {
-		return m_type == GG_USERLIST_PUT_MORE_REPLY;
+		return type == GG_USERLIST_PUT_MORE_REPLY;
 	}
 
 	public boolean isGetReply() {
-		return m_type == GG_USERLIST_GET_REPLY;
+		return type == GG_USERLIST_GET_REPLY;
 	}
 
 	public boolean isGetMoreReply() {
-		return m_type == GG_USERLIST_GET_MORE_REPLY;
+		return type == GG_USERLIST_GET_MORE_REPLY;
 	}
 
 	public static List<String> getLinesStringList(final byte[] data) throws IOException {

@@ -15,17 +15,17 @@ import pl.radical.open.gg.packet.handlers.GGPongPacketHandler;
 @Deprecated
 public class GGPong extends GGBaseIncomingPacket implements GGIncomingPackage {
 
-	private static GGPong m_instance = null;
+	private static GGPong instance = null;
 
 	private GGPong() {
 		// private contructor
 	}
 
 	public static GGPong getInstance() {
-		if (m_instance == null) {
-			m_instance = new GGPong();
+		if (instance == null) {
+			instance = new GGPong();
 		}
-		return m_instance;
+		return instance;
 	}
 
 }

@@ -18,7 +18,6 @@ public abstract class AbstractMessage implements IMessage {
 
 	protected int m_messageID = -1;
 
-	// FIXME IllegalArgumentException
 	protected AbstractMessage(final int recepientUin, final String messageBody, final MessageClass messageClass) {
 		if (recepientUin < 0) {
 			throw new IllegalArgumentException("uin cannot be less than 0");

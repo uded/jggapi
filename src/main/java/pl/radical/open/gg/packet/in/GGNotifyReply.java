@@ -22,7 +22,7 @@ import java.util.Map;
 @Deprecated
 public class GGNotifyReply extends GGBaseIncomingPacket implements GGIncomingPackage {
 
-	private final Map<User, RemoteStatus> m_statuses = new HashMap<User, RemoteStatus>();
+	private final Map<User, RemoteStatus> statuses = new HashMap<User, RemoteStatus>();
 
 	/**
 	 * @param data
@@ -33,7 +33,7 @@ public class GGNotifyReply extends GGBaseIncomingPacket implements GGIncomingPac
 	}
 
 	public Map<User, RemoteStatus> getUsersStatus() {
-		return m_statuses;
+		return statuses;
 	}
 
 	private void analize(final byte[] data) {
@@ -82,7 +82,7 @@ public class GGNotifyReply extends GGBaseIncomingPacket implements GGIncomingPac
 
 			final User.UserMode userMode = GGConversion.getUserMode(status);
 			final User user = new User(uin, userMode);
-			m_statuses.put(user, statusBiz);
+			statuses.put(user, statusBiz);
 		}
 	}
 

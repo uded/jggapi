@@ -19,14 +19,12 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 	private int uin = 0;
 	private String password = null;
 
-	// FIXME IllegalArgumentException
 	public UnregisterGGPasswordRequest(final IGGConfiguration configuration, final int uin, final String password, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
 		if (uin < 1) {
 			throw new IllegalArgumentException("uin cannot be less than 1");
 		}
 		if (password == null) {
-			// FIXME Other exception instead?
 			throw new IllegalArgumentException("password cannot be null");
 		}
 		this.uin = uin;

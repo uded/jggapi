@@ -31,7 +31,6 @@ public class DefaultMessageService implements IMessageService {
 	 */
 	public void sendMessage(final IOutgoingMessage outgoingMessage) throws GGException {
 		if (outgoingMessage == null) {
-			// FIXME GGException instead?
 			throw new IllegalArgumentException("outgoingMessage cannot be null");
 		}
 		checkSessionState();

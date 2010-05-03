@@ -18,18 +18,18 @@ import pl.radical.open.gg.utils.GGUtils;
 @Deprecated
 public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, GGIncomingPackage {
 
-	private int m_sender = -1;
-	private int m_seq = -1;
-	private long m_time = -1;
-	private int m_msgClass = -1;
-	private String m_message = "";
+	private int sender = -1;
+	private int seq = -1;
+	private long time = -1;
+	private int msgClass = -1;
+	private String message = "";
 
 	public GGRecvMsg(final byte[] data) {
-		m_sender = GGUtils.byteToInt(data);
-		m_seq = GGUtils.byteToInt(data, 4);
-		m_time = GGUtils.secondsToMillis(GGUtils.byteToInt(data, 8));
-		m_msgClass = GGUtils.byteToInt(data, 12);
-		m_message = GGUtils.byteToString(data, 16);
+		sender = GGUtils.byteToInt(data);
+		seq = GGUtils.byteToInt(data, 4);
+		time = GGUtils.secondsToMillis(GGUtils.byteToInt(data, 8));
+		msgClass = GGUtils.byteToInt(data, 12);
+		message = GGUtils.byteToString(data, 16);
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, G
 	 * @return String
 	 */
 	public String getMessage() {
-		return m_message;
+		return message;
 	}
 
 	/**
@@ -47,7 +47,7 @@ public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, G
 	 * @return int msgClass
 	 */
 	public int getMsgClass() {
-		return m_msgClass;
+		return msgClass;
 	}
 
 	/**
@@ -56,7 +56,7 @@ public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, G
 	 * @return int the sender uin.
 	 */
 	public int getSenderUin() {
-		return m_sender;
+		return sender;
 	}
 
 	/**
@@ -65,7 +65,7 @@ public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, G
 	 * @return int message sequence number.
 	 */
 	public int getMessageSeq() {
-		return m_seq;
+		return seq;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, G
 	 * @return int the time in seconds.
 	 */
 	public long getTime() {
-		return m_time;
+		return time;
 	}
 
 }

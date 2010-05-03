@@ -13,16 +13,16 @@ import pl.radical.open.gg.packet.handlers.GGLoginFailedPacketHandler;
  */
 @IncomingPacket(type = 0x0009, label = "GG_LOGIN_FAILED", handler = GGLoginFailedPacketHandler.class)
 public class GGLoginFailed extends GGBaseIncomingPacket implements GGIncomingPackage {
-	private static GGLoginFailed m_instance = null;
+	private static GGLoginFailed instance = null;
 
 	private GGLoginFailed() {
 		// prevent instant
 	}
 
 	public static GGLoginFailed getInstance() {
-		if (m_instance == null) {
-			m_instance = new GGLoginFailed();
+		if (instance == null) {
+			instance = new GGLoginFailed();
 		}
-		return m_instance;
+		return instance;
 	}
 }

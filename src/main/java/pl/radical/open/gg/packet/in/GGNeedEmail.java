@@ -13,17 +13,17 @@ import pl.radical.open.gg.packet.handlers.GGNeedEmailPacketHandler;
  */
 @IncomingPacket(type = 0x0014, label = "GG_NEED_EMAIL", handler = GGNeedEmailPacketHandler.class)
 public class GGNeedEmail extends GGBaseIncomingPacket implements GGIncomingPackage {
-	private static GGNeedEmail m_instance = null;
+	private static GGNeedEmail instance = null;
 
 	private GGNeedEmail() {
 		// prevent instant
 	}
 
 	public static GGNeedEmail getInstance() {
-		if (m_instance == null) {
-			m_instance = new GGNeedEmail();
+		if (instance == null) {
+			instance = new GGNeedEmail();
 		}
-		return m_instance;
+		return instance;
 	}
 
 }
