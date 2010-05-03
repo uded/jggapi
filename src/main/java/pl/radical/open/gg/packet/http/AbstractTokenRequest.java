@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public abstract class AbstractTokenRequest extends HttpRequest {
-	private static final Logger log = LoggerFactory.getLogger(AbstractTokenRequest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AbstractTokenRequest.class);
 
 	String tokenID = null;
 	String tokenVal = null;
@@ -22,16 +22,16 @@ public abstract class AbstractTokenRequest extends HttpRequest {
 	protected AbstractTokenRequest(final IGGConfiguration configuration, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration);
 
-		if (log.isTraceEnabled()) {
-			log.trace("Creating {} object instance", getClass());
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Creating {} object instance", getClass());
 		}
 
 		if (tokenID == null) {
-			log.error("tokeID cannot be null");
+			LOG.error("tokeID cannot be null");
 			throw new IllegalArgumentException("tokenID cannot be null");
 		}
 		if (tokenVal == null) {
-			log.error("tokenVal cannot be null");
+			LOG.error("tokenVal cannot be null");
 			throw new IllegalArgumentException("tokenVal cannot be null");
 		}
 		this.tokenID = tokenID;
@@ -40,11 +40,11 @@ public abstract class AbstractTokenRequest extends HttpRequest {
 
 	protected int getHashCode(final String email, final String password) {
 		if (password == null) {
-			log.error("password cannot be null");
+			LOG.error("password cannot be null");
 			throw new IllegalArgumentException("password cannot be null");
 		}
 		if (email == null) {
-			log.error("email cannot be null");
+			LOG.error("email cannot be null");
 			throw new IllegalArgumentException("email cannot be null");
 		}
 
@@ -66,8 +66,8 @@ public abstract class AbstractTokenRequest extends HttpRequest {
 
 		final int hashCode = b < 0 ? -b : b;
 
-		if (log.isInfoEnabled()) {
-			log.info("Value of computed hash is {}", hashCode);
+		if (LOG.isInfoEnabled()) {
+			LOG.info("Value of computed hash is {}", hashCode);
 		}
 
 		return hashCode;

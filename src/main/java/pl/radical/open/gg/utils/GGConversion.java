@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  */
 public class GGConversion {
 
-	private static final Logger log = LoggerFactory.getLogger(GGConversion.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGConversion.class);
 
 	public static User.UserMode getUserMode(final int protocolStatus) {
 		if ((protocolStatus & GGStatuses.GG_STATUS_FRIENDS_MASK) == GGStatuses.GG_STATUS_FRIENDS_MASK) {
@@ -33,7 +33,7 @@ public class GGConversion {
 			return User.UserMode.BLOCKED;
 		}
 
-		log.warn("Unable to convert from protocolUserMode, falling back to unknown.");
+		LOG.warn("Unable to convert from protocolUserMode, falling back to unknown.");
 
 		return User.UserMode.UNKNOWN;
 	}
@@ -49,7 +49,7 @@ public class GGConversion {
 			return GGUser.GG_USER_FRIEND;
 		}
 
-		log.warn("Unable to convert userMode to protocolUserMode, falling back to unknown.");
+		LOG.warn("Unable to convert userMode to protocolUserMode, falling back to unknown.");
 
 		return GGUser.GG_USER_UNKNOWN;
 	}
@@ -145,7 +145,7 @@ public class GGConversion {
 			return protocolStatus;
 		}
 
-		log.warn("Unable to convert status, falling back to unknown.");
+		LOG.warn("Unable to convert status, falling back to unknown.");
 
 		return GGStatuses.GG_STATUS_UNKNOWN;
 	}
@@ -164,7 +164,7 @@ public class GGConversion {
 				return MessageStatus.QUEUED;
 
 			default: {
-				log.warn("Unable to convert message status, falling back to unknown.");
+				LOG.warn("Unable to convert message status, falling back to unknown.");
 				return MessageStatus.UNKNOWN;
 			}
 		}
@@ -186,7 +186,7 @@ public class GGConversion {
 				return MessageClass.QUEUED;
 
 			default: {
-				log.warn("Unable to convert message class, falling back to unknown.");
+				LOG.warn("Unable to convert message class, falling back to unknown.");
 				return MessageClass.UNKNOWN;
 			}
 		}
@@ -210,7 +210,7 @@ public class GGConversion {
 			return GGMessageClass.GG_CLASS_CTCP;
 		}
 
-		log.warn("Unable to convert protocol message class, falling back to unknown.");
+		LOG.warn("Unable to convert protocol message class, falling back to unknown.");
 
 		return GGMessageClass.GG_CLASS_UNKNOWN;
 	}

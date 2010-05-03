@@ -13,16 +13,16 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("deprecation")
 @Deprecated
 public class GGLoginOKPacketHandler implements PacketHandler {
-	private static final Logger log = LoggerFactory.getLogger(GGLoginOKPacketHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGLoginOKPacketHandler.class);
 
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("LoginOK packet received.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("LoginOK packet received.");
+			LOG.debug("PacketHeader: " + context.getHeader());
+			LOG.debug("PacketBody: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGLoginOK loginOk = GGLoginOK.getInstance();

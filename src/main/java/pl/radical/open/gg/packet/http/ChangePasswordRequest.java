@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class ChangePasswordRequest extends AbstractTokenRequest {
-	private static final Logger log = LoggerFactory.getLogger(ChangePasswordRequest.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ChangePasswordRequest.class);
 
 	private int uin = 0;
 	private String email = null;
@@ -29,8 +29,8 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	public ChangePasswordRequest(final IGGConfiguration configuration, final int uin, final String email, final String oldPassword, final String newPassword, final String tokenID, final String tokenVal) throws IOException {
 		super(configuration, tokenID, tokenVal);
 
-		if (log.isTraceEnabled()) {
-			log.trace("Creating {} object", getClass());
+		if (LOG.isTraceEnabled()) {
+			LOG.trace("Creating {} object", getClass());
 		}
 
 		if (uin < 1) {
@@ -108,8 +108,8 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 		buffer.append("code=");
 		buffer.append(getHashCode(email, newPassword));
 
-		if (log.isDebugEnabled()) {
-			log.debug("Request body: {}", buffer.toString());
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("Request body: {}", buffer.toString());
 		}
 
 		return buffer.toString();

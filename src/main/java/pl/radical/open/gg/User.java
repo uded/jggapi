@@ -74,6 +74,7 @@ public class User implements IUser {
 		return "[Uin: " + uin + ", userMode: " + userMode + "]";
 	}
 
+	// FIXME Enum?
 	public static class UserMode {
 
 		private String type = null;

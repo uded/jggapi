@@ -23,11 +23,11 @@ import org.slf4j.LoggerFactory;
  */
 public class GGUtils {
 
-	private static final Logger log = LoggerFactory.getLogger(GGUtils.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGUtils.class);
 
 	public static String prettyBytesToString(final byte[] bytes) {
 		final StringBuffer received = new StringBuffer();
-		received.append("{");
+		received.append('{');
 
 		final char[] dump = Hex.encodeHex(bytes);
 		int i = 0;
@@ -35,11 +35,11 @@ public class GGUtils {
 			received.append(c);
 			i++;
 			if (i % 2 == 0) {
-				received.append(" ");
+				received.append(' ');
 			}
 		}
 
-		received.append("}");
+		received.append('}');
 
 		return received.toString();
 	}
@@ -145,7 +145,8 @@ public class GGUtils {
 		try {
 			returnString = new String(desc, Encoding.WINDOWS1250.getValue());
 		} catch (final UnsupportedEncodingException ex) {
-			log.warn("Unable to convert", ex);
+			LOG.warn("Unable to convert", ex);
+			// FIXME Co to jest u diabła???
 			return new String(desc);
 		}
 		return returnString;
@@ -165,18 +166,18 @@ public class GGUtils {
 		try {
 			returnString = new String(desc, encoding.getValue());
 		} catch (final UnsupportedEncodingException ex) {
-			log.warn("Unable to convert", ex);
+			LOG.warn("Unable to convert", ex);
 			return new String(desc);
 		}
 		return returnString;
 	}
 
-	public static byte[] convertIntToByteArray(final int i) {
+	public static byte[] convertIntToByteArray(final int value) {
 		final byte[] bytes = new byte[4];
-		bytes[0] = (byte) (i & 0xFF);
-		bytes[1] = (byte) (i >> 8 & 0xFF);
-		bytes[2] = (byte) (i >> 16 & 0xFF);
-		bytes[3] = (byte) (i >> 24 & 0xFF);
+		bytes[0] = (byte) (value & 0xFF);
+		bytes[1] = (byte) (value >> 8 & 0xFF);
+		bytes[2] = (byte) (value >> 16 & 0xFF);
+		bytes[3] = (byte) (value >> 24 & 0xFF);
 
 		return bytes;
 	}
@@ -239,7 +240,7 @@ public class GGUtils {
 		try {
 			hash = MessageDigest.getInstance("SHA1");
 		} catch (final NoSuchAlgorithmException e) {
-			log.error("Brak algorytmu SHA1", e);
+			LOG.error("Brak algorytmu SHA1", e);
 			throw new GGException("SHA1 algorithm not usable!", e);
 		}
 

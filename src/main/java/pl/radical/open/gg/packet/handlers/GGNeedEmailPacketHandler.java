@@ -14,13 +14,13 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGNeedEmailPacketHandler implements PacketHandler {
-	private static final Logger log = LoggerFactory.getLogger(GGWelcomePacketHandler.class);
+	private static final Logger LOG = LoggerFactory.getLogger(GGWelcomePacketHandler.class);
 
 	public void handle(final PacketContext context) throws GGException {
-		if (log.isDebugEnabled()) {
-			log.debug("GGNeedEmail packet received.");
-			log.debug("PacketHeader: " + context.getHeader());
-			log.debug("PacketLoad: " + GGUtils.prettyBytesToString(context.getPackageContent()));
+		if (LOG.isDebugEnabled()) {
+			LOG.debug("GGNeedEmail packet received.");
+			LOG.debug("PacketHeader: " + context.getHeader());
+			LOG.debug("PacketLoad: " + GGUtils.prettyBytesToString(context.getPackageContent()));
 		}
 
 		final GGNeedEmail needEmail = GGNeedEmail.getInstance();

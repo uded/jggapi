@@ -87,7 +87,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Protocol options - 0x00000367
 	 */
-	private static final int features = 0x00000007;
+	private static final int FEATURES = 0x00000007;
 
 	/**
 	 * Local IP
@@ -121,7 +121,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Unknown property
 	 */
-	private static final int unknown2 = 0x64;
+	private static final int UNKNOWN2 = 0x64;
 
 	/**
 	 * Version of the client
@@ -131,12 +131,12 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Version descriptive string
 	 */
-	private static final String version = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
+	private static final String VERSION = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
 
 	/**
 	 * The length of the status description
 	 */
-	private int description_size;
+	private int descriptionSize;
 
 	/**
 	 * Description that will be set after successfuly logging
@@ -162,7 +162,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 		status = GGConversion.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
 		if (localStatus.isDescriptionSet()) {
 			description = localStatus.getDescription();
-			description_size = description.length();
+			descriptionSize = description.length();
 		}
 	}
 
@@ -277,11 +277,11 @@ public class GGLogin80 implements GGOutgoingPackage {
 		byteList.add((byte) (flags >>> 16));
 		byteList.add((byte) (flags >>> 24));
 
-		// features (?? byte)
-		byteList.add((byte) features);
-		byteList.add((byte) (features >>> 8));
-		byteList.add((byte) (features >>> 16));
-		byteList.add((byte) (features >>> 24));
+		// FEATURES (?? byte)
+		byteList.add((byte) FEATURES);
+		byteList.add((byte) (FEATURES >>> 8));
+		byteList.add((byte) (FEATURES >>> 16));
+		byteList.add((byte) (FEATURES >>> 24));
 
 		// local IP
 		byteList.add(localIP[0]);
@@ -307,23 +307,23 @@ public class GGLogin80 implements GGOutgoingPackage {
 		byteList.add(imageSize);
 
 		// unknown 2
-		byteList.add((byte) unknown2); // ?
+		byteList.add((byte) UNKNOWN2); // ?
 
-		// version length
+		// VERSION length
 		byteList.add((byte) (version_len & 0xFF));
 		byteList.add((byte) (version_len >> 8 & 0xFF));
 		byteList.add((byte) (version_len >> 16 & 0xFF));
 		byteList.add((byte) (version_len >> 24 & 0xFF));
 
-		for (final byte b : version.getBytes()) {
+		for (final byte b : VERSION.getBytes()) {
 			byteList.add(b);
 		}
 
 		// description size
-		byteList.add((byte) (description_size & 0xFF));
-		byteList.add((byte) (description_size >> 8 & 0xFF));
-		byteList.add((byte) (description_size >> 16 & 0xFF));
-		byteList.add((byte) (description_size >> 24 & 0xFF));
+		byteList.add((byte) (descriptionSize & 0xFF));
+		byteList.add((byte) (descriptionSize >> 8 & 0xFF));
+		byteList.add((byte) (descriptionSize >> 16 & 0xFF));
+		byteList.add((byte) (descriptionSize >> 24 & 0xFF));
 
 		if (description != null) {
 			final byte[] descBytes = description.getBytes();

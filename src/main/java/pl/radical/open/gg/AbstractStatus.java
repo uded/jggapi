@@ -14,25 +14,25 @@ public abstract class AbstractStatus implements IStatus {
 	/**
 	 * the type of the status
 	 */
-	private StatusType m_statusType = StatusType.ONLINE;
+	private StatusType statusType = StatusType.ONLINE;
 
 	/**
 	 * Status description
 	 */
-	private String m_description = null;
+	private String description = null;
 
 	/**
 	 * Return time
 	 */
-	private Date m_returnTime = null;
+	private Date returnTime = null;
 
-	protected AbstractStatus(final StatusType statusType, final String description, final Date returnDate) {
+	protected AbstractStatus(final StatusType statusType, final String description, final Date returnTime) {
 		if (statusType == null) {
 			throw new IllegalArgumentException("statusType cannot be null");
 		}
-		m_statusType = statusType;
-		m_description = description;
-		m_returnTime = returnDate;
+		this.statusType = statusType;
+		this.description = description;
+		this.returnTime = returnTime;
 	}
 
 	protected AbstractStatus(final StatusType statusType, final String description) {
@@ -47,11 +47,11 @@ public abstract class AbstractStatus implements IStatus {
 	 * @see pl.radical.open.gg.IStatus#getStatusType()
 	 */
 	public StatusType getStatusType() {
-		return m_statusType;
+		return statusType;
 	}
 
 	public void setStatusType(final StatusType status) {
-		m_statusType = status;
+		statusType = status;
 	}
 
 	/**
@@ -60,7 +60,7 @@ public abstract class AbstractStatus implements IStatus {
 	 * @return <code>String</code> description as string.
 	 */
 	public String getDescription() {
-		return m_description;
+		return description;
 	}
 
 	/**
@@ -68,17 +68,17 @@ public abstract class AbstractStatus implements IStatus {
 	 *            the description to set.
 	 */
 	public void setDescription(final String description) {
-		m_description = description;
+		this.description = description;
 	}
 
 	/**
 	 * @return <code>Date</code> the return time.
 	 */
 	public Date getReturnDate() {
-		if (m_returnTime == null) {
+		if (returnTime == null) {
 			return null;
 		}
-		return new Date(m_returnTime.getTime());
+		return new Date(returnTime.getTime());
 	}
 
 	/**
@@ -89,21 +89,21 @@ public abstract class AbstractStatus implements IStatus {
 		if (returnTime == null) {
 			throw new IllegalArgumentException("returnTime cannot be null");
 		}
-		m_returnTime = new Date(returnTime.getTime());
+		this.returnTime = new Date(returnTime.getTime());
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IStatus#isDescriptionSet()
 	 */
 	public boolean isDescriptionSet() {
-		return m_description != null;
+		return description != null;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IStatus#isReturnDateSet()
 	 */
 	public boolean isReturnDateSet() {
-		return m_returnTime != null;
+		return returnTime != null;
 	}
 
 }

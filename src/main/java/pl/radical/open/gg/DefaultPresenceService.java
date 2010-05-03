@@ -216,7 +216,7 @@ public class DefaultPresenceService implements IPresenceService {
 			localStatus = session.getLoginService().getLoginContext().getStatus();
 			monitoredUsers = session.getLoginService().getLoginContext().getMonitoredUsers();
 			setStatus(localStatus);
-			GGOutgoingPackage outgoingPackage = null;
+			GGOutgoingPackage outgoingPackage;
 			if (monitoredUsers.isEmpty()) {
 				outgoingPackage = GGListEmpty.getInstance();
 			} else {

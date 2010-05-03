@@ -8,67 +8,67 @@ package pl.radical.open.gg;
 public class GGToken {
 
 	/** the width of a picture */
-	private int m_imageWidth;
+	private int imageWidth;
 
 	/** the height of a picture */
-	private int m_imageHeight;
+	private int imageHeight;
 
 	/** the length of token */
-	private int m_tokenLength;
+	private int tokenLength;
 
 	/** the id of token */
-	private String m_tokenID;
+	private String tokenID;
 
 	/** the token URL */
-	private String m_tokenURL;
+	private String tokenURL;
 
 	/**
 	 * @return Returns the imageWidth.
 	 */
 	public int getImageWidth() {
-		return m_imageWidth;
+		return imageWidth;
 	}
 
 	public void setImageWidth(final int imageWidth) {
 		if (imageWidth < 0) {
 			throw new IllegalArgumentException("imageWidth cannot be null");
 		}
-		m_imageWidth = imageWidth;
+		this.imageWidth = imageWidth;
 	}
 
 	public int getImageHeight() {
-		return m_imageHeight;
+		return imageHeight;
 	}
 
 	public void setImageHeight(final int imageHeight) {
 		if (imageHeight < 0) {
 			throw new IllegalArgumentException("imageHeight cannot be null");
 		}
-		m_imageHeight = imageHeight;
+		this.imageHeight = imageHeight;
 	}
 
 	public String getTokenURL() {
-		return m_tokenURL;
+		return tokenURL;
 	}
 
 	public void setTokenURL(final String tokenURL) {
-		m_tokenURL = tokenURL;
+		this.tokenURL = tokenURL;
 	}
 
 	public String getTokenID() {
-		return m_tokenID;
+		return tokenID;
 	}
 
 	public void setTokenID(final String tokenID) {
-		m_tokenID = tokenID;
+		this.tokenID = tokenID;
 	}
 
 	public int getTokenLength() {
-		return m_tokenLength;
+		return tokenLength;
 	}
 
 	public void setTokenLength(final int tokenLength) {
-		m_tokenLength = tokenLength;
+		this.tokenLength = tokenLength;
 	}
 
 	public String getFullTokenURL() {
