@@ -57,91 +57,91 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Language of the client, default to "pl"
 	 */
-	final static String M_LANGUAGE = "pl";
+	final static String LANGUAGE = "pl";
 
 	/**
 	 * Password that will be used during logging
 	 */
-	private char[] m_password = null;
+	private char[] password = null;
 
 	/**
 	 * Login hash type that will be used to authenticate the user
 	 */
-	private final GGHashType m_hashType = GGHashType.GG_LOGIN_HASH_SHA1;
+	private final GGHashType hashType = GGHashType.GG_LOGIN_HASH_SHA1;
 
 	/**
 	 * Computed login hash based on seed retreived from Gadu-Gadu server
 	 */
-	private byte[] m_loginHash = null;
+	private byte[] loginHash = null;
 
 	/**
 	 * Initial status that will be set after logging
 	 */
-	private int m_status = GGStatuses.GG_STATUS_AVAIL;
+	private int status = GGStatuses.GG_STATUS_AVAIL;
 
 	/**
 	 * Starting protocols flags
 	 */
-	private final int m_flags = GGStatusFlags.FLAG_UNKNOWN.value() + GGStatusFlags.FLAG_RECEIVELINKS.value();
+	private final int flags = GGStatusFlags.FLAG_UNKNOWN.value() + GGStatusFlags.FLAG_RECEIVELINKS.value();
 
 	/**
 	 * Protocol options - 0x00000367
 	 */
-	private static final int m_features = 0x00000007;
+	private static final int features = 0x00000007;
 
 	/**
 	 * Local IP
 	 */
-	private byte[] m_localIP = new byte[] {
+	private byte[] localIP = new byte[] {
 			(byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
 
 	/**
 	 * Local port that we are listening on
 	 */
-	private int m_localPort = 0;
+	private int localPort = 0;
 
 	/**
 	 * ExternalIP
 	 */
-	private byte[] m_externalIP = new byte[] {
+	private byte[] externalIP = new byte[] {
 			(byte) 0, (byte) 0, (byte) 0, (byte) 0
 	};
 
 	/**
 	 * External port
 	 */
-	private int m_externalPort = 0;
+	private int externalPort = 0;
 
 	/**
 	 * size of image in kilobytes
 	 */
-	private byte m_imageSize = (byte) -1;
+	private byte imageSize = (byte) -1;
 
 	/**
 	 * Unknown property
 	 */
-	private static final int m_unknown2 = 0x64;
+	private static final int unknown2 = 0x64;
 
 	/**
 	 * Version of the client
 	 */
-	private final int m_version_len = GGVersion.VERSION_60_1_build_133.getCode();
+	private final int version_len = GGVersion.VERSION_60_1_build_133.getCode();
 
 	/**
 	 * Version descriptive string
 	 */
-	private static final String m_version = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
+	private static final String version = "Gadu-Gadu Client Build 8.0.0.8731";// "Gadu-Gadu Client build 10.0.0.10450";
 
 	/**
 	 * The length of the status description
 	 */
-	private int m_description_size;
+	private int description_size;
 
 	/**
 	 * Description that will be set after successfuly logging
 	 */
-	private String m_description = null;
+	private String description = null;
 
 	public GGLogin80(final int uin, final char[] password, final int seed) throws GGException {
 		if (uin < 0) {
@@ -151,18 +151,18 @@ public class GGLogin80 implements GGOutgoingPackage {
 			throw new IllegalArgumentException("password cannot be null");
 		}
 		this.uin = uin;
-		m_password = Arrays.copyOf(password, password.length);
-		m_loginHash = GGUtils.getLoginHash(password, seed, m_hashType);
+		this.password = Arrays.copyOf(password, password.length);
+		loginHash = GGUtils.getLoginHash(password, seed, hashType);
 	}
 
 	public void setStatus(final ILocalStatus localStatus) {
 		if (localStatus == null) {
 			throw new IllegalArgumentException("localStatus cannot be null");
 		}
-		m_status = GGConversion.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
+		status = GGConversion.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
 		if (localStatus.isDescriptionSet()) {
-			m_description = localStatus.getDescription();
-			m_description_size = m_description.length();
+			description = localStatus.getDescription();
+			description_size = description.length();
 		}
 	}
 
@@ -171,7 +171,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	}
 
 	public char[] getPassword() {
-		return m_password;
+		return password;
 	}
 
 	public void setLocalIP(final byte[] localIP) {
@@ -181,22 +181,22 @@ public class GGLogin80 implements GGOutgoingPackage {
 		if (localIP.length != 4) {
 			throw new IllegalArgumentException("localIp table has to have 4 entries");
 		}
-		m_localIP = Arrays.copyOf(localIP, localIP.length);
+		this.localIP = Arrays.copyOf(localIP, localIP.length);
 	}
 
 	public byte[] getLocalIP() {
-		return m_localIP;
+		return localIP;
 	}
 
 	public void setLocalPort(final int port) {
 		if (port < 0) {
 			throw new IllegalArgumentException("port cannot be null");
 		}
-		m_localPort = port;
+		localPort = port;
 	}
 
 	public int getLocalPort() {
-		return m_localPort;
+		return localPort;
 	}
 
 	public void setExternalIP(final byte[] externalIP) {
@@ -206,21 +206,21 @@ public class GGLogin80 implements GGOutgoingPackage {
 		if (externalIP.length != 4) {
 			throw new IllegalArgumentException("externalIP table has to have 4 entries");
 		}
-		m_externalIP = Arrays.copyOf(externalIP, externalIP.length);
+		this.externalIP = Arrays.copyOf(externalIP, externalIP.length);
 	}
 
 	public void setExternalPort(final int externalPort) {
 		if (externalPort < 0) {
 			throw new IllegalArgumentException("port cannot be null");
 		}
-		m_externalPort = externalPort;
+		this.externalPort = externalPort;
 	}
 
 	public void setImageSize(final byte imageSize) {
 		if (imageSize < 0) {
 			throw new IllegalArgumentException("imageSize cannot be less than 0");
 		}
-		m_imageSize = imageSize;
+		this.imageSize = imageSize;
 	}
 
 	/**
@@ -235,8 +235,8 @@ public class GGLogin80 implements GGOutgoingPackage {
 	 */
 	public int getLength() {
 		int length = 4 + 2 + 4 + 4 + 4 + 1 + 4 + 2 + 4 + 2 + 1 + 1;
-		if (m_description != null) {
-			length += m_description.length() + 1;
+		if (description != null) {
+			length += description.length() + 1;
 		}
 		return length;
 	}
@@ -252,81 +252,81 @@ public class GGLogin80 implements GGOutgoingPackage {
 		byteList.add((byte) (uin >>> 16));
 		byteList.add((byte) (uin >>> 24));
 
-		byteList.add(M_LANGUAGE.getBytes()[0]);
-		byteList.add(M_LANGUAGE.getBytes()[1]);
+		byteList.add(LANGUAGE.getBytes()[0]);
+		byteList.add(LANGUAGE.getBytes()[1]);
 
-		byteList.add((byte) m_hashType.getValue());
+		byteList.add((byte) hashType.getValue());
 
 		for (int i = 0; i < 64; i++) {
-			if (i < m_loginHash.length) {
-				byteList.add(m_loginHash[i]);
+			if (i < loginHash.length) {
+				byteList.add(loginHash[i]);
 			} else {
 				byteList.add(Character.UNASSIGNED);
 			}
 		}
 
 		// status
-		byteList.add((byte) m_status);
-		byteList.add((byte) (m_status >>> 8));
-		byteList.add((byte) (m_status >>> 16));
-		byteList.add((byte) (m_status >>> 24));
+		byteList.add((byte) status);
+		byteList.add((byte) (status >>> 8));
+		byteList.add((byte) (status >>> 16));
+		byteList.add((byte) (status >>> 24));
 
 		// flags
-		byteList.add((byte) m_flags);
-		byteList.add((byte) (m_flags >>> 8));
-		byteList.add((byte) (m_flags >>> 16));
-		byteList.add((byte) (m_flags >>> 24));
+		byteList.add((byte) flags);
+		byteList.add((byte) (flags >>> 8));
+		byteList.add((byte) (flags >>> 16));
+		byteList.add((byte) (flags >>> 24));
 
 		// features (?? byte)
-		byteList.add((byte) m_features);
-		byteList.add((byte) (m_features >>> 8));
-		byteList.add((byte) (m_features >>> 16));
-		byteList.add((byte) (m_features >>> 24));
+		byteList.add((byte) features);
+		byteList.add((byte) (features >>> 8));
+		byteList.add((byte) (features >>> 16));
+		byteList.add((byte) (features >>> 24));
 
 		// local IP
-		byteList.add(m_localIP[0]);
-		byteList.add(m_localIP[1]);
-		byteList.add(m_localIP[2]);
-		byteList.add(m_localIP[3]);
+		byteList.add(localIP[0]);
+		byteList.add(localIP[1]);
+		byteList.add(localIP[2]);
+		byteList.add(localIP[3]);
 
 		// local port
-		byteList.add((byte) (m_localPort & 0xFF));
-		byteList.add((byte) (m_localPort >> 8 & 0xFF));
+		byteList.add((byte) (localPort & 0xFF));
+		byteList.add((byte) (localPort >> 8 & 0xFF));
 
 		// external IP
-		byteList.add(m_externalIP[0]);
-		byteList.add(m_externalIP[1]);
-		byteList.add(m_externalIP[2]);
-		byteList.add(m_externalIP[3]);
+		byteList.add(externalIP[0]);
+		byteList.add(externalIP[1]);
+		byteList.add(externalIP[2]);
+		byteList.add(externalIP[3]);
 
 		// external port
-		byteList.add((byte) (m_externalPort & 0xFF));
-		byteList.add((byte) (m_externalPort >> 8 & 0xFF));
+		byteList.add((byte) (externalPort & 0xFF));
+		byteList.add((byte) (externalPort >> 8 & 0xFF));
 
 		// image size
-		byteList.add(m_imageSize);
+		byteList.add(imageSize);
 
 		// unknown 2
-		byteList.add((byte) m_unknown2); // ?
+		byteList.add((byte) unknown2); // ?
 
 		// version length
-		byteList.add((byte) (m_version_len & 0xFF));
-		byteList.add((byte) (m_version_len >> 8 & 0xFF));
-		byteList.add((byte) (m_version_len >> 16 & 0xFF));
-		byteList.add((byte) (m_version_len >> 24 & 0xFF));
+		byteList.add((byte) (version_len & 0xFF));
+		byteList.add((byte) (version_len >> 8 & 0xFF));
+		byteList.add((byte) (version_len >> 16 & 0xFF));
+		byteList.add((byte) (version_len >> 24 & 0xFF));
 
-		for (final byte b : m_version.getBytes()) {
+		for (final byte b : version.getBytes()) {
 			byteList.add(b);
 		}
 
 		// description size
-		byteList.add((byte) (m_description_size & 0xFF));
-		byteList.add((byte) (m_description_size >> 8 & 0xFF));
-		byteList.add((byte) (m_description_size >> 16 & 0xFF));
-		byteList.add((byte) (m_description_size >> 24 & 0xFF));
+		byteList.add((byte) (description_size & 0xFF));
+		byteList.add((byte) (description_size >> 8 & 0xFF));
+		byteList.add((byte) (description_size >> 16 & 0xFF));
+		byteList.add((byte) (description_size >> 24 & 0xFF));
 
-		if (m_description != null) {
-			final byte[] descBytes = m_description.getBytes();
+		if (description != null) {
+			final byte[] descBytes = description.getBytes();
 			for (final byte b : descBytes) {
 				byteList.add(b);
 			}
