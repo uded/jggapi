@@ -21,8 +21,7 @@ import org.slf4j.LoggerFactory;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public class GGConversion {
-
+public final class GGConversion {
 	private static final Logger LOG = LoggerFactory.getLogger(GGConversion.class);
 
 	public static User.UserMode getUserMode(final int protocolStatus) {
@@ -150,69 +149,84 @@ public class GGConversion {
 		return GGStatuses.GG_STATUS_UNKNOWN;
 	}
 
-	public static MessageStatus getClientMessageStatus(final int protocolMessageStatus) {
-		switch (protocolMessageStatus) {
+	public static MessageStatus getClientMessageStatus(final int protocolMsgStatus) {
+		MessageStatus msgStatus;
+		switch (protocolMsgStatus) {
 			case GGSendMsgAck.GG_ACK_DELIVERED:
-				return MessageStatus.DELIVERED;
+				msgStatus = MessageStatus.DELIVERED;
+				break;
 			case GGSendMsgAck.GG_ACK_NOT_DELIVERED:
-				return MessageStatus.NOT_DELIVERED;
+				msgStatus = MessageStatus.NOT_DELIVERED;
+				break;
 			case GGSendMsgAck.GG_ACK_BLOCKED:
-				return MessageStatus.BLOCKED;
+				msgStatus = MessageStatus.BLOCKED;
+				break;
 			case GGSendMsgAck.GG_ACK_MBOXFULL:
-				return MessageStatus.BLOCKED_MBOX_FULL;
+				msgStatus = MessageStatus.BLOCKED_MBOX_FULL;
+				break;
 			case GGSendMsgAck.GG_ACK_QUEUED:
-				return MessageStatus.QUEUED;
-
+				msgStatus = MessageStatus.QUEUED;
+				break;
 			default: {
 				LOG.warn("Unable to convert message status, falling back to unknown.");
-				return MessageStatus.UNKNOWN;
+				msgStatus = MessageStatus.UNKNOWN;
 			}
 		}
+		return msgStatus;
 	}
 
-	public static MessageClass getClientMessageClass(final int protocolMessageClass) {
-		switch (protocolMessageClass) {
+	public static MessageClass getClientMessageClass(final int protocolMsgClass) {
+		MessageClass msgClass;
+		switch (protocolMsgClass) {
 			case GGMessageClass.GG_CLASS_ACK:
-				return MessageClass.DO_NOT_CONFIRM;
+				msgClass = MessageClass.DO_NOT_CONFIRM;
+				break;
 			case GGMessageClass.GG_CLASS_CHAT:
-				return MessageClass.CHAT;
+				msgClass = MessageClass.CHAT;
+				break;
 			case GGMessageClass.GG_CLASS_CTCP:
-				return MessageClass.PING;
+				msgClass = MessageClass.PING;
+				break;
 			case GGMessageClass.GG_CLASS_MSG:
-				return MessageClass.MESSAGE;
+				msgClass = MessageClass.MESSAGE;
+				break;
 			case GGMessageClass.GG_CLASS_QUEUED:
-				return MessageClass.QUEUED;
+				msgClass = MessageClass.QUEUED;
+				break;
 			case GGMessageClass.GG_CLASS_QUEUED2:
-				return MessageClass.QUEUED;
-
+				msgClass = MessageClass.QUEUED;
+				break;
 			default: {
 				LOG.warn("Unable to convert message class, falling back to unknown.");
-				return MessageClass.UNKNOWN;
+				msgClass = MessageClass.UNKNOWN;
 			}
 		}
+		return msgClass;
 	}
 
-	public static int getProtocolMessageClass(final MessageClass clientMessageClass) {
-
-		if (clientMessageClass == MessageClass.CHAT) {
-			return GGMessageClass.GG_CLASS_CHAT;
+	public static int getProtocolMessageClass(final MessageClass clientMsgClass) {
+		int result;
+		switch (clientMsgClass) {
+			case CHAT:
+				result = GGMessageClass.GG_CLASS_CHAT;
+				break;
+			case DO_NOT_CONFIRM:
+				result = GGMessageClass.GG_CLASS_ACK;
+				break;
+			case MESSAGE:
+				result = GGMessageClass.GG_CLASS_MSG;
+				break;
+			case QUEUED:
+				result = GGMessageClass.GG_CLASS_QUEUED;
+				break;
+			case PING:
+				result = GGMessageClass.GG_CLASS_CTCP;
+				break;
+			default:
+				LOG.warn("Unable to convert protocol message class, falling back to unknown.");
+				result = GGMessageClass.GG_CLASS_UNKNOWN;
 		}
-		if (clientMessageClass == MessageClass.DO_NOT_CONFIRM) {
-			return GGMessageClass.GG_CLASS_ACK;
-		}
-		if (clientMessageClass == MessageClass.MESSAGE) {
-			return GGMessageClass.GG_CLASS_MSG;
-		}
-		if (clientMessageClass == MessageClass.QUEUED) {
-			return GGMessageClass.GG_CLASS_QUEUED;
-		}
-		if (clientMessageClass == MessageClass.PING) {
-			return GGMessageClass.GG_CLASS_CTCP;
-		}
-
-		LOG.warn("Unable to convert protocol message class, falling back to unknown.");
-
-		return GGMessageClass.GG_CLASS_UNKNOWN;
+		return result;
 	}
 
 }

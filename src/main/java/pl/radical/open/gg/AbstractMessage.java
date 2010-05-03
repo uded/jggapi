@@ -8,7 +8,7 @@ package pl.radical.open.gg;
 public abstract class AbstractMessage implements IMessage {
 
 	/** Uin of the Gadu-Gadu user */
-	protected int m_recipientUin = -1;
+	protected int recipientUin = -1;
 
 	/** The body of the message */
 	protected String m_messageBody = null;
@@ -28,7 +28,7 @@ public abstract class AbstractMessage implements IMessage {
 		if (messageClass == null) {
 			throw new IllegalArgumentException("messageClass cannot be null");
 		}
-		m_recipientUin = recepientUin;
+		this.recipientUin = recepientUin;
 		m_messageBody = messageBody;
 		m_messageClass = messageClass;
 	}
@@ -37,7 +37,7 @@ public abstract class AbstractMessage implements IMessage {
 	 * @see pl.radical.open.gg.IMessage#getRecipientUin()
 	 */
 	public int getRecipientUin() {
-		return m_recipientUin;
+		return recipientUin;
 	}
 
 	/**
@@ -66,7 +66,7 @@ public abstract class AbstractMessage implements IMessage {
 	 */
 	@Override
 	public String toString() {
-		return "[RecipientUin: " + m_recipientUin + ", messageBody: " + m_messageBody + ", messageClass: " + m_messageClass + "]";
+		return "[RecipientUin: " + recipientUin + ", messageBody: " + m_messageBody + ", messageClass: " + m_messageClass + "]";
 	}
 
 }

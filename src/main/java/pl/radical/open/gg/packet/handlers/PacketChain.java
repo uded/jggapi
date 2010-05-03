@@ -8,22 +8,24 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang.ClassUtils;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 import org.reflections.scanners.TypeAnnotationsScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import de.huxhorn.lilith.slf4j.Logger;
+import de.huxhorn.lilith.slf4j.LoggerFactory;
 
 /**
  * Created on 2004-11-27
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
- * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>�?ukasz Rżanek</a>
  */
 public class PacketChain {
-	private static final Logger log = LoggerFactory.getLogger(PacketChain.class);
+	private static final Logger LOG = LoggerFactory.getLogger(PacketChain.class);
 
 	private final Map<Integer, PacketHandler> packetHandlers = new HashMap<Integer, PacketHandler>();
 
@@ -46,7 +48,7 @@ public class PacketChain {
 		try {
 			packetHandlers.put(Integer.valueOf(packetType), (PacketHandler) packetHandler.newInstance());
 		} catch (final InstantiationException e) {
-			log.error("Unable to create an object of type {}", packetHandler.getClass().getName(), e);
+			LOG.error("Unable to create an object of type {}", packetHandler.getClass().getName(), e);
 			throw new GGException("Unable to create an object of type " + packetHandler.getClass().getName(), e);
 		} catch (final IllegalAccessException e) {
 			// TODO Auto-generated catch block
@@ -57,17 +59,16 @@ public class PacketChain {
 	public void sendToChain(final PacketContext packageContent) throws GGException {
 		final PacketHandler packetHandler = packetHandlers.get(Integer.valueOf(packageContent.getHeader().getType()));
 		if (packetHandler == null) {
-			log.warn("Unknown package.");
-			log.warn("PacketHeader: " + packageContent.getHeader());
-			log.warn("PacketBody: " + GGUtils.prettyBytesToString(packageContent.getPackageContent()));
+			LOG.warn("Unknown package.");
+			LOG.warn("PacketHeader: " + packageContent.getHeader());
+			LOG.warn("PacketBody: " + GGUtils.prettyBytesToString(packageContent.getPackageContent()));
 			return;
 		}
 
 		packetHandler.handle(packageContent);
 	}
 
-	private void registerDefaultHandlers() throws GGException {
-
+	protected void registerDefaultHandlers() throws GGException {
 		final Configuration configuration = new ConfigurationBuilder().setScanners(new TypeAnnotationsScanner()).setUrls(ClasspathHelper
 				.getUrlsForPackagePrefix("pl.radical.open.gg.packet.in"));
 		final Reflections reflections = new Reflections(configuration);
@@ -79,15 +80,14 @@ public class PacketChain {
 		}
 
 		for (final Class<?> c : classes) {
-			final String incomingClass = c.getName();
 			final IncomingPacket annotation = c.getAnnotation(IncomingPacket.class);
-			final Class<?> handler = c.getAnnotation(IncomingPacket.class).handler();
 
-			if (log.isDebugEnabled()) {
-				log.debug("Registering class {} with handler {}", incomingClass, handler.getName());
+			if (LOG.isTraceEnabled()) {
+				LOG.trace("Registering class {} with handler {} for packet [{}]", ClassUtils.getShortClassName(c.getName()), ClassUtils
+						.getShortClassName(annotation.handler().getName()), Integer.toString(c.getAnnotation(IncomingPacket.class).type()));
 			}
 
-			registerGGPackageHandler(annotation.type(), handler);
+			registerGGPackageHandler(annotation.type(), annotation.handler());
 		}
 	}
 }

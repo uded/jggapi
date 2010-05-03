@@ -22,9 +22,11 @@ import pl.radical.open.gg.utils.GGUtils;
 @OutgoingPacket(type = 0x00d, label = "GG_ADD_NOTIFY")
 public class GGAddNotify implements GGOutgoingPackage, GGUser {
 
-	public final int GG_ADD_NOTIFY = 0x000d;
+	public static final int GG_ADD_NOTIFY = 0x000d;
 
-	/** Gadu-Gadu uin number */
+	/**
+	 * Gadu-Gadu uin number
+	 */
 	private int uin = -1;
 
 	private User.UserMode userMode = User.UserMode.BUDDY;
@@ -71,7 +73,7 @@ public class GGAddNotify implements GGOutgoingPackage, GGUser {
 	public byte[] getContents() {
 		final byte[] data = new byte[getLength()];
 
-		final byte[] uinRaw = GGUtils.intToByte(this.uin);
+		final byte[] uinRaw = GGUtils.intToByte(uin);
 		System.arraycopy(uinRaw, 0, data, 0, uinRaw.length);
 
 		data[4] = userType;

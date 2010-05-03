@@ -78,20 +78,20 @@ public class GGUtils {
 		return i;
 	}
 
-	public static byte[] intToByteArray(final int i) {
+	public static byte[] intToByteArray(final int value) {
 		final byte[] result = new byte[4];
-		result[0] = (byte) (i & 0xFF);
-		result[1] = (byte) (i >> 8 & 0xFF);
-		result[2] = (byte) (i >> 16 & 0xFF);
-		result[3] = (byte) (i >> 24 & 0xFF);
+		result[0] = (byte) (value & 0xFF);
+		result[1] = (byte) (value >> 8 & 0xFF);
+		result[2] = (byte) (value >> 16 & 0xFF);
+		result[3] = (byte) (value >> 24 & 0xFF);
 
 		return result;
 	}
 
-	public static byte[] shortToByteArray(final short s) {
+	public static byte[] shortToByteArray(final short value) {
 		final byte[] result = new byte[2];
-		result[0] = (byte) (s & 0xFF);
-		result[1] = (byte) (s >> 8 & 0xFF);
+		result[0] = (byte) (value & 0xFF);
+		result[1] = (byte) (value >> 8 & 0xFF);
 
 		return result;
 	}
@@ -104,11 +104,11 @@ public class GGUtils {
 		return (int) (millis / 1000L);
 	}
 
-	public static int unsignedByteToInt(final byte i) {
-		if (i < 0) {
-			return (i & 0x7F) + 0x80;
+	public static int unsignedByteToInt(final byte value) {
+		if (value < 0) {
+			return (value & 0x7F) + 0x80;
 		} else {
-			return i;
+			return value;
 		}
 	}
 
@@ -123,12 +123,12 @@ public class GGUtils {
 		return toSend;
 	}
 
-	public static long unsignedIntToLong(int i) {
+	public static long unsignedIntToLong(int value) {
 		long plus = 0;
-		plus -= i & 0x80000000;
-		i &= 0x7FFFFFFF;
+		plus -= value & 0x80000000;
+		value &= 0x7FFFFFFF;
 
-		return i + plus;
+		return value + plus;
 	}
 
 	public static String byteToString(final byte[] data, final int startIndex) {
@@ -183,9 +183,7 @@ public class GGUtils {
 	}
 
 	public static int getLoginHash(final char[] password, final int seed) {
-		long x;
-		long y;
-		long z;
+		long x, y, z;
 
 		y = seed;
 
@@ -227,38 +225,40 @@ public class GGUtils {
 	}
 
 	public static char[] byteToCharArray(final byte[] bytes) {
-		final CharList cl = new ArrayCharList();
+		final CharList charList = new ArrayCharList();
 		for (final byte b : bytes) {
-			cl.add((char) b);
+			charList.add((char) b);
 		}
 
-		return cl.toArray();
+		return charList.toArray();
 	}
 
 	private static byte[] getLoginHashSHA(final char[] password, final int seed) throws GGException {
-		MessageDigest hash = null;
 		try {
-			hash = MessageDigest.getInstance("SHA1");
+			final MessageDigest hash = MessageDigest.getInstance("SHA1");
+			hash.update(new String(password).getBytes());
+			hash.update(GGUtils.intToByte(seed));
+			return hash.digest();
 		} catch (final NoSuchAlgorithmException e) {
-			LOG.error("Brak algorytmu SHA1", e);
+			LOG.error("SHA1 algorithm not usable", e);
 			throw new GGException("SHA1 algorithm not usable!", e);
 		}
-
-		hash.update(new String(password).getBytes());
-		hash.update(GGUtils.intToByte(seed));
-
-		return hash.digest();
 	}
 
 	public static byte[] getLoginHash(final char[] password, final int seed, final GGHashType hashType) throws GGException {
+		byte[] result;
+
 		switch (hashType) {
 			case GG_LOGIN_HASH_GG32:
-				return intToByte(getLoginHash(password, seed));
+				result = intToByte(getLoginHash(password, seed));
+				break;
 			case GG_LOGIN_HASH_SHA1:
-				return getLoginHashSHA(password, seed);
+				result = getLoginHashSHA(password, seed);
+				break;
 			default:
 				throw new GGException("Hash algorithm to be used during login was not specified");
 		}
+		return result;
 	}
 
 	public static int copy(final InputStream input, final OutputStream output) throws IOException {

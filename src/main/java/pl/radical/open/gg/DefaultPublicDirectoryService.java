@@ -71,7 +71,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 			final GGPubdirRequest pubdirRequest = GGPubdirRequest.createWritePubdirRequest(publicDirInfo);
 			m_session.getSessionAccessor().sendPackage(pubdirRequest);
 		} catch (final IOException ex) {
-			throw new GGException("Unable to write or update information in public directory.");
+			throw new GGException("Unable to write or update information in public directory.", ex);
 		}
 	}
 

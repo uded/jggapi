@@ -1,5 +1,6 @@
 package pl.radical.open.gg;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -9,7 +10,7 @@ import java.util.Date;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public interface IStatus {
+public interface IStatus extends Serializable {
 
 	/**
 	 * Get the StatusType.

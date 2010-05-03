@@ -48,7 +48,7 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		try {
 			session.getSessionAccessor().sendPackage(sendMsg);
 		} catch (final IOException ex) {
-			throw new GGException("Unable to send group chat message");
+			throw new GGException("Unable to send group chat message", ex);
 		}
 
 		return this;

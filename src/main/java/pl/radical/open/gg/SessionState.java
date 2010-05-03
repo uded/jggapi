@@ -1,16 +1,19 @@
 package pl.radical.open.gg;
 
+import java.io.Serializable;
+
 /**
  * Created on 2004-11-28
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public final class SessionState {
+public final class SessionState implements Serializable {
+	private static final long serialVersionUID = 1691964475548638059L;
 
-	private String m_sessionState = null;
+	private String sessionState = null;
 
 	private SessionState(final String sessionState) {
-		m_sessionState = sessionState;
+		this.sessionState = sessionState;
 	}
 
 	/** This state is when we are waiting for the client to start socket connection to Gadu-Gadu server. */
@@ -45,7 +48,7 @@ public final class SessionState {
 	 */
 	@Override
 	public String toString() {
-		return m_sessionState;
+		return sessionState;
 	}
 
 	/**
@@ -53,7 +56,7 @@ public final class SessionState {
 	 */
 	@Override
 	public int hashCode() {
-		return m_sessionState.hashCode();
+		return sessionState.hashCode();
 	}
 
 }

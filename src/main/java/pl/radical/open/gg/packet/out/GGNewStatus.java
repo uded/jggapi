@@ -89,13 +89,11 @@ public class GGNewStatus implements GGOutgoingPackage, GGStatuses {
 	}
 
 	private String trimDescription(String description) {
-		if (description == null) {
-			return null;
-		}
-		if (description.length() > MAX_DESCRIPTION) {
-			description = description.substring(0, MAX_DESCRIPTION - 1);
-		}
+		if (description != null && description.length() > MAX_DESCRIPTION) {
+			return description.substring(0, MAX_DESCRIPTION - 1);
+		} else {
 		return description;
+		}
 	}
 
 }

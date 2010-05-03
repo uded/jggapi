@@ -12,7 +12,7 @@ import java.util.List;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 @OutgoingPacket(type = 0x0016, label = "GG_USERLIST_REQUEST")
-public class GGUserListRequest implements GGOutgoingPackage {
+public final class GGUserListRequest implements GGOutgoingPackage {
 
 	public static final int GG_USERLIST_REQUEST = 0x0016;
 
