@@ -25,40 +25,40 @@ public class Session implements ISession {
 
 	private SessionState m_sessionState = SessionState.CONNECTION_AWAITING;
 
-	private SessionAccessor m_sessionAccessor = null;
-	private Set<SessionStateListener> m_sessionStateListeners = null;
-	private Map<String, Integer> m_sessionAttributes = null;
-	private IGGConfiguration m_configuration = new GGConfiguration();
+	private SessionAccessor sessionAccessor = null;
+	private Set<SessionStateListener> sessionStateListeners = null;
+	private Map<String, Integer> sessionAttributes = null;
+	private IGGConfiguration configuration = new GGConfiguration();
 
-	private DefaultConnectionService m_connectionService = null;
-	private DefaultLoginService m_loginService = null;
-	private DefaultPresenceService m_presenceService = null;
-	private DefaultMessageService m_messageService = null;
-	private DefaultRegistrationService m_registrationService = null;
-	private DefaultContactListService m_contactListService = null;
-	private DefaultPublicDirectoryService m_publicDirectoryService = null;
+	private DefaultConnectionService connectionService = null;
+	private DefaultLoginService loginService = null;
+	private DefaultPresenceService presenceService = null;
+	private DefaultMessageService messageService = null;
+	private DefaultRegistrationService registrationService = null;
+	private DefaultContactListService contactListService = null;
+	private DefaultPublicDirectoryService publicDirectoryService = null;
 
-	private final Map<String, Object> m_proxies = new HashMap<String, Object>();
+	private final Map<String, Object> proxies = new HashMap<String, Object>();
 
 	public Session(final IGGConfiguration configuration) throws GGException {
 		this();
 		if (configuration == null) {
 			throw new IllegalArgumentException("configuration cannot be null");
 		}
-		m_configuration = configuration;
+		this.configuration = configuration;
 	}
 
 	public Session() throws GGException {
-		m_sessionAccessor = new SessionAccessor();
-		m_sessionAttributes = new HashMap<String, Integer>();
-		m_sessionStateListeners = new HashSet<SessionStateListener>();
-		m_connectionService = new DefaultConnectionService(this);
-		m_loginService = new DefaultLoginService(this);
-		m_messageService = new DefaultMessageService(this);
-		m_presenceService = new DefaultPresenceService(this);
-		m_contactListService = new DefaultContactListService(this);
-		m_publicDirectoryService = new DefaultPublicDirectoryService(this);
-		m_registrationService = new DefaultRegistrationService(this);
+		sessionAccessor = new SessionAccessor();
+		sessionAttributes = new HashMap<String, Integer>();
+		sessionStateListeners = new HashSet<SessionStateListener>();
+		connectionService = new DefaultConnectionService(this);
+		loginService = new DefaultLoginService(this);
+		messageService = new DefaultMessageService(this);
+		presenceService = new DefaultPresenceService(this);
+		contactListService = new DefaultContactListService(this);
+		publicDirectoryService = new DefaultPublicDirectoryService(this);
+		registrationService = new DefaultRegistrationService(this);
 	}
 
 	public SessionState getSessionState() {
@@ -69,127 +69,127 @@ public class Session implements ISession {
 	 * @see pl.radical.open.gg.ISession#getConfiguration()
 	 */
 	public IGGConfiguration getGGConfiguration() {
-		return m_configuration;
+		return configuration;
 	}
 
 	public void addSessionStateListener(final SessionStateListener sessionStateListener) {
 		if (sessionStateListener == null) {
 			throw new IllegalArgumentException("sessionStateListener cannot be null.");
 		}
-		m_sessionStateListeners.add(sessionStateListener);
+		sessionStateListeners.add(sessionStateListener);
 	}
 
 	public void removeSessionStateListener(final SessionStateListener sessionStateListener) {
 		if (sessionStateListener == null) {
 			throw new IllegalArgumentException("sessionStateListener cannot be null");
 		}
-		m_sessionStateListeners.remove(sessionStateListener);
+		sessionStateListeners.remove(sessionStateListener);
 	}
 
 	/**
 	 * @see pl.radical.open.gg.ISession#getConnectionService()
 	 */
 	public IConnectionService getConnectionService() {
-		if (!m_proxies.containsKey(IConnectionService.class.getName())) {
+		if (!proxies.containsKey(IConnectionService.class.getName())) {
 			final ClassLoader classLoader = Session.class.getClassLoader();
-			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_connectionService);
+			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(connectionService);
 			final IConnectionService connectionServiceProxy = (IConnectionService) Proxy.newProxyInstance(classLoader, new Class[] {
 					IConnectionService.class
 			}, invocationHandler);
-			m_proxies.put(IConnectionService.class.getName(), connectionServiceProxy);
+			proxies.put(IConnectionService.class.getName(), connectionServiceProxy);
 		}
-		return (IConnectionService) m_proxies.get(IConnectionService.class.getName());
+		return (IConnectionService) proxies.get(IConnectionService.class.getName());
 	}
 
 	/**
 	 * @see pl.radical.open.gg.ISession#getLoginService()
 	 */
 	public ILoginService getLoginService() {
-		if (!m_proxies.containsKey(ILoginService.class.getName())) {
+		if (!proxies.containsKey(ILoginService.class.getName())) {
 			final ClassLoader classLoader = Session.class.getClassLoader();
-			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_loginService);
+			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(loginService);
 			final ILoginService loginServiceProxy = (ILoginService) Proxy.newProxyInstance(classLoader, new Class[] {
 					ILoginService.class
 			}, invocationHandler);
-			m_proxies.put(ILoginService.class.getName(), loginServiceProxy);
+			proxies.put(ILoginService.class.getName(), loginServiceProxy);
 		}
-		return (ILoginService) m_proxies.get(ILoginService.class.getName());
+		return (ILoginService) proxies.get(ILoginService.class.getName());
 	}
 
 	/**
 	 * @see pl.radical.open.gg.ISession#getMessageService()
 	 */
 	public IMessageService getMessageService() {
-		if (!m_proxies.containsKey(IMessageService.class.getName())) {
+		if (!proxies.containsKey(IMessageService.class.getName())) {
 			final ClassLoader classLoader = Session.class.getClassLoader();
-			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_messageService);
+			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(messageService);
 			final IMessageService messageServiceProxy = (IMessageService) Proxy.newProxyInstance(classLoader, new Class[] {
 					IMessageService.class
 			}, invocationHandler);
-			m_proxies.put(IMessageService.class.getName(), messageServiceProxy);
+			proxies.put(IMessageService.class.getName(), messageServiceProxy);
 		}
-		return (IMessageService) m_proxies.get(IMessageService.class.getName());
+		return (IMessageService) proxies.get(IMessageService.class.getName());
 	}
 
 	/**
 	 * @see pl.radical.open.gg.ISession#getPresenceService()
 	 */
 	public IPresenceService getPresenceService() {
-		if (!m_proxies.containsKey(IPresenceService.class.getName())) {
+		if (!proxies.containsKey(IPresenceService.class.getName())) {
 			final ClassLoader classLoader = Session.class.getClassLoader();
-			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_presenceService);
+			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(presenceService);
 			final IPresenceService presenceServiceProxy = (IPresenceService) Proxy.newProxyInstance(classLoader, new Class[] {
 					IPresenceService.class
 			}, invocationHandler);
-			m_proxies.put(IPresenceService.class.getName(), presenceServiceProxy);
+			proxies.put(IPresenceService.class.getName(), presenceServiceProxy);
 		}
-		return (IPresenceService) m_proxies.get(IPresenceService.class.getName());
+		return (IPresenceService) proxies.get(IPresenceService.class.getName());
 	}
 
 	/**
 	 * @see pl.radical.open.gg.ISession#getPublicDirectoryService()
 	 */
 	public IPublicDirectoryService getPublicDirectoryService() {
-		if (!m_proxies.containsKey(IPublicDirectoryService.class.getName())) {
+		if (!proxies.containsKey(IPublicDirectoryService.class.getName())) {
 			final ClassLoader classLoader = Session.class.getClassLoader();
-			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_publicDirectoryService);
+			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(publicDirectoryService);
 			final IPublicDirectoryService publicDirectoryServiceProxy = (IPublicDirectoryService) Proxy
 			.newProxyInstance(classLoader, new Class[] {
 					IPublicDirectoryService.class
 			}, invocationHandler);
-			m_proxies.put(IPublicDirectoryService.class.getName(), publicDirectoryServiceProxy);
+			proxies.put(IPublicDirectoryService.class.getName(), publicDirectoryServiceProxy);
 		}
-		return (IPublicDirectoryService) m_proxies.get(IPublicDirectoryService.class.getName());
+		return (IPublicDirectoryService) proxies.get(IPublicDirectoryService.class.getName());
 	}
 
 	/**
 	 * @see pl.radical.open.gg.ISession#getContactListService()
 	 */
 	public IContactListService getContactListService() {
-		if (!m_proxies.containsKey(IContactListService.class.getName())) {
+		if (!proxies.containsKey(IContactListService.class.getName())) {
 			final ClassLoader classLoader = Session.class.getClassLoader();
-			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_contactListService);
+			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(contactListService);
 			final IContactListService contactListServiceProxy = (IContactListService) Proxy.newProxyInstance(classLoader, new Class[] {
 					IContactListService.class
 			}, invocationHandler);
-			m_proxies.put(IContactListService.class.getName(), contactListServiceProxy);
+			proxies.put(IContactListService.class.getName(), contactListServiceProxy);
 		}
-		return (IContactListService) m_proxies.get(IContactListService.class.getName());
+		return (IContactListService) proxies.get(IContactListService.class.getName());
 	}
 
 	/**
 	 * @see pl.radical.open.gg.ISession#getRegistrationService()
 	 */
 	public IRegistrationService getRegistrationService() {
-		if (!m_proxies.containsKey(IRegistrationService.class.getName())) {
+		if (!proxies.containsKey(IRegistrationService.class.getName())) {
 			final ClassLoader classLoader = Session.class.getClassLoader();
-			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(m_registrationService);
+			final SessionInvocationHandler invocationHandler = new SessionInvocationHandler(registrationService);
 			final IRegistrationService registrationServiceProxy = (IRegistrationService) Proxy.newProxyInstance(classLoader, new Class[] {
 					IRegistrationService.class
 			}, invocationHandler);
-			m_proxies.put(IRegistrationService.class.getName(), registrationServiceProxy);
+			proxies.put(IRegistrationService.class.getName(), registrationServiceProxy);
 		}
-		return (IRegistrationService) m_proxies.get(IRegistrationService.class.getName());
+		return (IRegistrationService) proxies.get(IRegistrationService.class.getName());
 	}
 
 	protected void notifySessionStateChanged(final SessionState oldState, final SessionState newState) {
@@ -200,7 +200,7 @@ public class Session implements ISession {
 			throw new IllegalArgumentException("newState cannot be null");
 		}
 
-		for (final SessionStateListener sessionStateListener : m_sessionStateListeners) {
+		for (final SessionStateListener sessionStateListener : sessionStateListeners) {
 			if (oldState != newState) {
 				sessionStateListener.sessionStateChanged(oldState, newState);
 			}
@@ -209,7 +209,7 @@ public class Session implements ISession {
 
 	// TODO restrict accesss by AspectJ friendly
 	public SessionAccessor getSessionAccessor() {
-		return m_sessionAccessor;
+		return sessionAccessor;
 	}
 
 	public class SessionAccessor {
@@ -223,87 +223,87 @@ public class Session implements ISession {
 		}
 
 		public void sendPackage(final GGOutgoingPackage outgoingPackage) throws IOException {
-			m_connectionService.sendPackage(outgoingPackage);
+			connectionService.sendPackage(outgoingPackage);
 		}
 
 		public void notifyConnectionEstablished() throws GGException {
-			m_connectionService.notifyConnectionEstablished();
+			connectionService.notifyConnectionEstablished();
 		}
 
 		public void notifyConnectionClosed() throws GGException {
-			m_connectionService.notifyConnectionClosed();
+			connectionService.notifyConnectionClosed();
 		}
 
 		public void notifyConnectionError(final Exception exception) throws GGException {
-			m_connectionService.notifyConnectionError(exception);
+			connectionService.notifyConnectionError(exception);
 		}
 
 		public void notifyPongReceived() {
-			m_connectionService.notifyPongReceived();
+			connectionService.notifyPongReceived();
 		}
 
 		public void notifyLoginOK() throws GGException {
-			m_loginService.notifyLoginOK();
+			loginService.notifyLoginOK();
 		}
 
 		public void notifyLoggedOut() throws GGException {
-			m_loginService.notifyLoggedOut();
+			loginService.notifyLoggedOut();
 		}
 
 		public void notifyLoginFailed(final LoginFailedEvent loginFailedEvent) throws GGException {
-			m_loginService.notifyLoginFailed(loginFailedEvent);
+			loginService.notifyLoginFailed(loginFailedEvent);
 		}
 
 		public void notifyUserChangedStatus(final IUser user, final IRemoteStatus newStatus) throws GGException {
-			m_presenceService.notifyUserChangedStatus(user, newStatus);
+			presenceService.notifyUserChangedStatus(user, newStatus);
 		}
 
 		public void notifyMessageArrived(final IIncommingMessage incommingMessage) {
-			m_messageService.notifyMessageArrived(incommingMessage);
+			messageService.notifyMessageArrived(incommingMessage);
 		}
 
 		public void notifyMessageDelivered(final int uin, final int messageID, final MessageStatus messageStatus) {
-			m_messageService.notifyMessageDelivered(uin, messageID, messageStatus);
+			messageService.notifyMessageDelivered(uin, messageID, messageStatus);
 		}
 
 		public void notifyGGPacketReceived(final GGIncomingPackage incomingPackage) {
-			m_connectionService.notifyPacketReceived(incomingPackage);
+			connectionService.notifyPacketReceived(incomingPackage);
 		}
 
 		public void notifyContactListExported() {
-			m_contactListService.notifyContactListExported();
+			contactListService.notifyContactListExported();
 		}
 
 		public void notifyContactListReceived(final Collection<LocalUser> contacts) {
-			m_contactListService.notifyContactListReceived(contacts);
+			contactListService.notifyContactListReceived(contacts);
 		}
 
 		public void notifyPubdirRead(final int queryID, final PersonalInfo publicDirInfo) {
-			m_publicDirectoryService.notifyPubdirRead(queryID, publicDirInfo);
+			publicDirectoryService.notifyPubdirRead(queryID, publicDirInfo);
 		}
 
 		public void notifyPubdirUpdated(final int queryID) {
-			m_publicDirectoryService.notifyPubdirUpdated(queryID);
+			publicDirectoryService.notifyPubdirUpdated(queryID);
 		}
 
 		public void notifyPubdirGotSearchResults(final int queryID, final PublicDirSearchReply searchReply) {
-			m_publicDirectoryService.notifyPubdirGotSearchResults(queryID, searchReply);
+			publicDirectoryService.notifyPubdirGotSearchResults(queryID, searchReply);
 		}
 
 		public void setLoginSeed(final int seed) {
-			m_sessionAttributes.put("seed", Integer.valueOf(seed));
+			sessionAttributes.put("seed", Integer.valueOf(seed));
 		}
 
 		public int getLoginSeed() {
-			if (!m_sessionAttributes.containsKey("seed")) {
+			if (!sessionAttributes.containsKey("seed")) {
 				return -1;
 			}
-			final Integer seedInteger = m_sessionAttributes.get("seed");
+			final Integer seedInteger = sessionAttributes.get("seed");
 			return seedInteger.intValue();
 		}
 
 		public void disconnect() throws GGException {
-			m_connectionService.disconnect();
+			connectionService.disconnect();
 		}
 
 	}

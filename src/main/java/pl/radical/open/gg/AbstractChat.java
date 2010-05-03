@@ -12,14 +12,14 @@ import java.util.Set;
  */
 public abstract class AbstractChat implements IChat {
 
-	protected Set<MessageListener> m_listeners = new HashSet<MessageListener>();
-	protected Session m_session = null;
+	protected Set<MessageListener> messageListeners = new HashSet<MessageListener>();
+	protected Session session = null;
 
 	protected AbstractChat(final Session session) {
 		if (session == null) {
 			throw new IllegalArgumentException("session cannot be null");
 		}
-		m_session = session;
+		this.session = session;
 		session.getMessageService().addMessageListener(new MessageHandler());
 	}
 
@@ -27,25 +27,25 @@ public abstract class AbstractChat implements IChat {
 		if (messageListener == null) {
 			throw new IllegalArgumentException("messageListener cannot be null");
 		}
-		m_listeners.add(messageListener);
+		messageListeners.add(messageListener);
 	}
 
 	public void removeChatListener(final MessageListener messageListener) {
 		if (messageListener == null) {
 			throw new IllegalArgumentException("messageListener cannot be null");
 		}
-		m_listeners.remove(messageListener);
+		messageListeners.remove(messageListener);
 	}
 
 	protected void fireChatMessageArrived(final IIncommingMessage message) {
-		for (final Object element : m_listeners) {
+		for (final Object element : messageListeners) {
 			final MessageListener listener = (MessageListener) element;
 			listener.messageArrived(message);
 		}
 	}
 
 	protected void fireChatMessageDelivered(final int uin, final int messageID, final MessageStatus deliveryStatus) {
-		for (final Object element : m_listeners) {
+		for (final Object element : messageListeners) {
 			final MessageListener listener = (MessageListener) element;
 			listener.messageDelivered(uin, messageID, deliveryStatus);
 		}

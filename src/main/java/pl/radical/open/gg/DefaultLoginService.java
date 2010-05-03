@@ -26,19 +26,19 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	private static final Logger log = LoggerFactory.getLogger(DefaultLoginService.class);
 
 	/** The session associated with this service */
-	private Session m_session = null;
+	private Session session = null;
 
 	/** The set of <code>LoginListener</code>'s */
-	private final Set<LoginListener> m_loginListeners = new HashSet<LoginListener>();
+	private final Set<LoginListener> loginListeners = new HashSet<LoginListener>();
 
-	private LoginContext m_loginContext = null;
+	private LoginContext loginContext = null;
 
 	// friendly
 	DefaultLoginService(final Session session) {
 		if (session == null) {
 			throw new IllegalArgumentException("session cannot be null");
 		}
-		m_session = session;
+		this.session = session;
 	}
 
 	/**
@@ -50,18 +50,18 @@ public class DefaultLoginService implements ILoginService, UserListener {
 		if (loginContext == null) {
 			throw new IllegalArgumentException("loginContext cannot be null");
 		}
-		m_loginContext = loginContext;
+		this.loginContext = loginContext;
 
-		if (m_session.getSessionState() != SessionState.AUTHENTICATION_AWAITING) {
-			throw new GGSessionException(m_session.getSessionState());
+		if (session.getSessionState() != SessionState.AUTHENTICATION_AWAITING) {
+			throw new GGSessionException(session.getSessionState());
 		}
 
-		m_session.getPresenceService().addUserListener(this);
+		session.getPresenceService().addUserListener(this);
 
 		try {
 			final int uin = loginContext.getUin();
 			final String password = loginContext.getPassword();
-			final int seed = m_session.getSessionAccessor().getLoginSeed();
+			final int seed = session.getSessionAccessor().getLoginSeed();
 
 			final GGLogin80 login = new GGLogin80(uin, password.toCharArray(), seed);
 			login.setStatus(loginContext.getStatus());
@@ -81,9 +81,9 @@ public class DefaultLoginService implements ILoginService, UserListener {
 			if (loginContext.getExternalPort() != -1) {
 				login.setExternalPort(loginContext.getExternalPort());
 			}
-			m_session.getSessionAccessor().sendPackage(login);
+			session.getSessionAccessor().sendPackage(login);
 		} catch (final IOException ex) {
-			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
+			session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 			throw new GGException("Unable to login, loginContext: " + loginContext, ex);
 		}
 	}
@@ -92,7 +92,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	 * @see pl.radical.open.gg.ILoginService#logout()
 	 */
 	public void logout() throws GGException {
-		log.debug("Logging out, loginContext: " + m_loginContext);
+		log.debug("Logging out, loginContext: " + loginContext);
 
 		logout(false, null, null, true);
 	}
@@ -112,14 +112,14 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	 * @see pl.radical.open.gg.ILoginService#getLoginContext()
 	 */
 	public LoginContext getLoginContext() {
-		return m_loginContext;
+		return loginContext;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.ILoginService#isLoggedIn()
 	 */
 	public boolean isLoggedIn() {
-		return m_session.getSessionState() == SessionState.LOGGED_IN;
+		return session.getSessionState() == SessionState.LOGGED_IN;
 	}
 
 	/**
@@ -129,7 +129,7 @@ public class DefaultLoginService implements ILoginService, UserListener {
 		if (loginListener == null) {
 			throw new IllegalArgumentException("loginListener cannot be null");
 		}
-		m_loginListeners.add(loginListener);
+		loginListeners.add(loginListener);
 	}
 
 	/**
@@ -139,27 +139,27 @@ public class DefaultLoginService implements ILoginService, UserListener {
 		if (loginListener == null) {
 			throw new IllegalArgumentException("loginListener cannot  be null");
 		}
-		m_loginListeners.remove(loginListener);
+		loginListeners.remove(loginListener);
 	}
 
 	protected void notifyLoginOK() throws GGException {
-		m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_IN);
-		for (final Object element : m_loginListeners) {
+		session.getSessionAccessor().setSessionState(SessionState.LOGGED_IN);
+		for (final Object element : loginListeners) {
 			final LoginListener loginListener = (LoginListener) element;
 			loginListener.loginOK();
 		}
 	}
 
 	protected void notifyLoginFailed(final LoginFailedEvent loginFailedEvent) throws GGException {
-		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
-		for (final Object element : m_loginListeners) {
+		session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
+		for (final Object element : loginListeners) {
 			final LoginListener loginListener = (LoginListener) element;
 			loginListener.loginFailed(loginFailedEvent);
 		}
 	}
 
 	protected void notifyLoggedOut() throws GGException {
-		for (final Object element : m_loginListeners) {
+		for (final Object element : loginListeners) {
 			final LoginListener loginListener = (LoginListener) element;
 			loginListener.loggedOut();
 		}
@@ -184,8 +184,8 @@ public class DefaultLoginService implements ILoginService, UserListener {
 	}
 
 	private void checkSessionState() throws GGException {
-		if (m_session.getSessionState() != SessionState.LOGGED_IN) {
-			throw new GGSessionException(m_session.getSessionState());
+		if (session.getSessionState() != SessionState.LOGGED_IN) {
+			throw new GGSessionException(session.getSessionState());
 		}
 	}
 
@@ -195,11 +195,11 @@ public class DefaultLoginService implements ILoginService, UserListener {
 		if (!offLineWithStatus) {
 			if (sendStatus) {
 				final ILocalStatus localStatus = new LocalStatus(StatusType.OFFLINE);
-				m_session.getPresenceService().setStatus(localStatus);
+				session.getPresenceService().setStatus(localStatus);
 			}
-			m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
-			m_loginContext = null;
-			m_session.getSessionAccessor().notifyLoggedOut();
+			session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
+			loginContext = null;
+			session.getSessionAccessor().notifyLoggedOut();
 		} else {
 			if (description == null) {
 				throw new IllegalArgumentException("description cannot be null");
@@ -210,10 +210,10 @@ public class DefaultLoginService implements ILoginService, UserListener {
 					if (returnDate != null) {
 						localStatus.setReturnDate(returnDate);
 					}
-					m_session.getPresenceService().setStatus(localStatus);
+					session.getPresenceService().setStatus(localStatus);
 				}
-				m_loginContext = null;
-				m_session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
+				loginContext = null;
+				session.getSessionAccessor().setSessionState(SessionState.LOGGED_OUT);
 				notifyLoggedOut();
 			}
 		}

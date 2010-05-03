@@ -7,10 +7,10 @@ package pl.radical.open.gg;
  */
 public class MessageClass {
 
-	private String m_messageClass = null;
+	private String messageClass = null;
 
 	private MessageClass(final String messageClass) {
-		m_messageClass = messageClass;
+		this.messageClass = messageClass;
 	}
 
 	/** the message has been queued because the user it not available */
@@ -35,7 +35,7 @@ public class MessageClass {
 	 */
 	@Override
 	public String toString() {
-		return m_messageClass;
+		return messageClass;
 	}
 
 	/**
@@ -43,7 +43,7 @@ public class MessageClass {
 	 */
 	@Override
 	public int hashCode() {
-		return m_messageClass.hashCode();
+		return messageClass.hashCode();
 	}
 
 }

@@ -76,10 +76,10 @@ public class User implements IUser {
 
 	public static class UserMode {
 
-		private String m_type = null;
+		private String type = null;
 
 		private UserMode(final String type) {
-			m_type = type;
+			this.type = type;
 		}
 
 		public final static UserMode BUDDY = new UserMode("user_mode_buddy");
@@ -92,7 +92,7 @@ public class User implements IUser {
 		 */
 		@Override
 		public String toString() {
-			return m_type;
+			return type;
 		}
 
 		/**
@@ -100,7 +100,7 @@ public class User implements IUser {
 		 */
 		@Override
 		public int hashCode() {
-			return m_type.hashCode() * 37;
+			return type.hashCode() * 37;
 		}
 	}
 

@@ -18,7 +18,7 @@ public class PublicDirSearchReply {
 
 	private Integer nextStart = null;
 
-	private final Collection<PublicDirSearchReply.Entry> m_publicDirSearchEntries = new ArrayList<Entry>();
+	private final Collection<PublicDirSearchReply.Entry> publicDirSearchEntries = new ArrayList<Entry>();
 
 	/**
 	 * Method that creates a new entry and adds it to entries collection.
@@ -27,7 +27,7 @@ public class PublicDirSearchReply {
 	 */
 	public PublicDirSearchReply.Entry createSearchEntry() {
 		final Entry entry = new Entry();
-		m_publicDirSearchEntries.add(entry);
+		publicDirSearchEntries.add(entry);
 		return entry;
 	}
 
@@ -37,7 +37,7 @@ public class PublicDirSearchReply {
 	 * @return <code>Iterator</code> over search results entries.
 	 */
 	public Iterator<PublicDirSearchReply.Entry> listResults() {
-		return new UnmodifiableIterator(m_publicDirSearchEntries.iterator());
+		return new UnmodifiableIterator(publicDirSearchEntries.iterator());
 	}
 
 	/**
@@ -60,18 +60,18 @@ public class PublicDirSearchReply {
 
 	public static class Entry extends PublicDirSearch {
 
-		private IStatus m_status = null;
+		private IStatus status = null;
 
 		private Entry() {
 			// private contructor
 		}
 
 		public void setStatus(final IStatus status) {
-			m_status = status;
+			this.status = status;
 		}
 
 		public IStatus getStatus() {
-			return m_status;
+			return status;
 		}
 
 	}

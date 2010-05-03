@@ -23,7 +23,7 @@ public class SingleChat extends AbstractChat implements ISingleChat {
 			throw new IllegalArgumentException("messageBody cannot be less than 0");
 		}
 
-		m_session.getMessageService().sendMessage(OutgoingMessage.createChatMessage(m_recipientUin, messageBody));
+		session.getMessageService().sendMessage(OutgoingMessage.createChatMessage(m_recipientUin, messageBody));
 
 		return this;
 	}

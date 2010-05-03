@@ -14,7 +14,7 @@ import java.util.Date;
 public class IncomingMessage extends AbstractMessage implements IIncommingMessage {
 
 	/** The time the message was sent */
-	private Date m_messageDate = null;
+	private Date messageDate = null;
 
 	/**
 	 * Constructor for <code>IncomingMessage</code>.
@@ -36,7 +36,7 @@ public class IncomingMessage extends AbstractMessage implements IIncommingMessag
 		if (messageID < 0) {
 			throw new IllegalArgumentException("messageID cannot be less than 0");
 		}
-		m_messageDate = new Date(messageDate);
+		this.messageDate = new Date(messageDate);
 		m_messageID = messageID;
 	}
 
@@ -46,7 +46,7 @@ public class IncomingMessage extends AbstractMessage implements IIncommingMessag
 	 * @return Date the time this message was sent.
 	 */
 	public Date getMessageDate() {
-		return m_messageDate;
+		return messageDate;
 	}
 
 }

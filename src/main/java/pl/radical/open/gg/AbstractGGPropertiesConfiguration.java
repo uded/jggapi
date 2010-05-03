@@ -18,14 +18,14 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractGGPropertiesConfiguration implements IGGConfiguration {
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
-	private IGGConfiguration m_defaultGGConfiguration = new GGConfiguration();
+	private IGGConfiguration defaultGGConfiguration = new GGConfiguration();
 
-	private Properties m_prop = null;
-	protected String m_fileName = null;
+	private Properties properties = null;
+	protected String fileName = null;
 
 	public AbstractGGPropertiesConfiguration(final String fileName, final IGGConfiguration configuration) throws IOException, InvalidPropertiesFormatException {
 		this(fileName);
-		m_defaultGGConfiguration = configuration;
+		defaultGGConfiguration = configuration;
 	}
 
 	public AbstractGGPropertiesConfiguration(final String fileName) throws IOException, InvalidPropertiesFormatException {
@@ -33,48 +33,48 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 			log.error("Filename is required!");
 			throw new IOException("Filename is required!");
 		}
-		m_fileName = fileName;
-		m_prop = createProperties();
+		this.fileName = fileName;
+		properties = createProperties();
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IGGConfiguration#getConnectionThreadSleepTimeInMiliseconds()
 	 */
 	public int getConnectionThreadSleepTimeInMiliseconds() {
-		final String connectionThreadSleepTime = String.valueOf(m_defaultGGConfiguration.getConnectionThreadSleepTimeInMiliseconds());
-		return Integer.valueOf(m_prop.getProperty("connection.thread.sleep.time", connectionThreadSleepTime));
+		final String connectionThreadSleepTime = String.valueOf(defaultGGConfiguration.getConnectionThreadSleepTimeInMiliseconds());
+		return Integer.valueOf(properties.getProperty("connection.thread.sleep.time", connectionThreadSleepTime));
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IGGConfiguration#getPingIntervalInMiliseconds()
 	 */
 	public int getPingIntervalInMiliseconds() {
-		final String pingInterval = String.valueOf(m_defaultGGConfiguration.getPingIntervalInMiliseconds());
-		return Integer.valueOf(m_prop.getProperty("ping.interval", pingInterval));
+		final String pingInterval = String.valueOf(defaultGGConfiguration.getPingIntervalInMiliseconds());
+		return Integer.valueOf(properties.getProperty("ping.interval", pingInterval));
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IGGConfiguration#getSocketTimeoutInMiliseconds()
 	 */
 	public int getSocketTimeoutInMiliseconds() {
-		final String defaultSocketTimeout = String.valueOf(m_defaultGGConfiguration.getSocketTimeoutInMiliseconds());
-		return Integer.valueOf(m_prop.getProperty("socket.timeout", defaultSocketTimeout));
+		final String defaultSocketTimeout = String.valueOf(defaultGGConfiguration.getSocketTimeoutInMiliseconds());
+		return Integer.valueOf(properties.getProperty("socket.timeout", defaultSocketTimeout));
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IGGConfiguration#getRegistrationURL()
 	 */
 	public String getRegistrationURL() {
-		final String registrationURL = m_defaultGGConfiguration.getRegistrationURL();
-		return m_prop.getProperty("server.registration.url", registrationURL);
+		final String registrationURL = defaultGGConfiguration.getRegistrationURL();
+		return properties.getProperty("server.registration.url", registrationURL);
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IGGConfiguration#getSendPasswordURL()
 	 */
 	public String getSendPasswordURL() {
-		final String sendPasswordURL = m_defaultGGConfiguration.getSendPasswordURL();
-		return m_prop.getProperty("send.password.url", sendPasswordURL);
+		final String sendPasswordURL = defaultGGConfiguration.getSendPasswordURL();
+		return properties.getProperty("send.password.url", sendPasswordURL);
 	}
 
 	/**
@@ -83,16 +83,16 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getServerLookupURL()
 	 */
 	public String getServerLookupURL() {
-		final String serverLookupURL = m_defaultGGConfiguration.getServerLookupURL();
-		return m_prop.getProperty("server.lookup.url", serverLookupURL);
+		final String serverLookupURL = defaultGGConfiguration.getServerLookupURL();
+		return properties.getProperty("server.lookup.url", serverLookupURL);
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IGGConfiguration#getTokenRequestURL()
 	 */
 	public String getTokenRequestURL() {
-		final String tokenRequestURL = m_defaultGGConfiguration.getServerLookupURL();
-		return m_prop.getProperty("token.request.url", tokenRequestURL);
+		final String tokenRequestURL = defaultGGConfiguration.getServerLookupURL();
+		return properties.getProperty("token.request.url", tokenRequestURL);
 	}
 
 	protected abstract Properties createProperties() throws IOException, InvalidPropertiesFormatException;

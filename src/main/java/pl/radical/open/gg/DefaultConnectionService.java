@@ -43,31 +43,31 @@ public class DefaultConnectionService implements IConnectionService {
 
 	private static final String WINDOWS_ENCODING = "windows-1250";
 
-	private final EventListenerList m_listeners = new EventListenerList();
+	private final EventListenerList eventListenerList = new EventListenerList();
 
 	/** reference to session object */
-	private Session m_session = null;
+	private Session session = null;
 
-	private final ConcurrentLinkedQueue<GGOutgoingPackage> m_senderQueue = new ConcurrentLinkedQueue<GGOutgoingPackage>();
+	private final ConcurrentLinkedQueue<GGOutgoingPackage> senderQueue = new ConcurrentLinkedQueue<GGOutgoingPackage>();
 
 	/** chain that handles packages */
-	private PacketChain m_packetChain = null;
+	private PacketChain packetChain = null;
 
 	/** thread that monitors connection */
-	private ConnectionThread m_connectionThread = null;
+	private ConnectionThread connectionThread = null;
 
 	/** the thread that pings the connection to keep it alive */
-	private PingerThread m_connectionPinger = null;
+	private PingerThread connectionPinger = null;
 
-	private IServer m_server = null;
+	private IServer server = null;
 
 	// friendly
 	DefaultConnectionService(final Session session) throws GGException {
 		if (session == null) {
 			throw new IllegalArgumentException("session cannot be null");
 		}
-		m_session = session;
-		m_packetChain = new PacketChain();
+		this.session = session;
+		packetChain = new PacketChain();
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class DefaultConnectionService implements IConnectionService {
 			log.trace("lookupServer() executed for user [" + uin + "]");
 		}
 		try {
-			final IGGConfiguration configuration = m_session.getGGConfiguration();
+			final IGGConfiguration configuration = session.getGGConfiguration();
 
 			final URL url = new URL(configuration.getServerLookupURL() + "?fmnumber=" + String.valueOf(uin) + "&version=8.0.0.7669");
 			if (log.isDebugEnabled()) {
@@ -122,16 +122,16 @@ public class DefaultConnectionService implements IConnectionService {
 		if (server == null) {
 			throw new GGException("Server cannot be null");
 		}
-		m_server = server[0];
+		this.server = server[0];
 		checkConnectionState();
-		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
+		session.getSessionAccessor().setSessionState(SessionState.CONNECTING);
 		try {
-			m_connectionThread = new ConnectionThread();
-			m_connectionPinger = new PingerThread();
-			m_connectionThread.openConnection(server[0].getAddress(), server[0].getPort());
-			m_connectionPinger.startPinging();
+			connectionThread = new ConnectionThread();
+			connectionPinger = new PingerThread();
+			connectionThread.openConnection(server[0].getAddress(), server[0].getPort());
+			connectionPinger.startPinging();
 		} catch (final IOException ex) {
-			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
+			session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 			throw new GGException("Unable to connect to Gadu-Gadu server: " + server[0], ex);
 		}
 	}
@@ -141,28 +141,28 @@ public class DefaultConnectionService implements IConnectionService {
 	 */
 	public void disconnect() throws GGException {
 		checkDisconnectionState();
-		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
+		session.getSessionAccessor().setSessionState(SessionState.DISCONNECTING);
 		try {
-			if (m_connectionPinger != null) {
-				m_connectionPinger.stopPinging();
-				m_connectionPinger = null;
+			if (connectionPinger != null) {
+				connectionPinger.stopPinging();
+				connectionPinger = null;
 			}
-			if (m_connectionThread != null) {
-				m_connectionThread.closeConnection();
-				m_connectionThread = null;
+			if (connectionThread != null) {
+				connectionThread.closeConnection();
+				connectionThread = null;
 			}
-			m_server = null;
-			m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
+			server = null;
+			session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
 			notifyConnectionClosed();
 		} catch (final IOException ex) {
 			log.error("IOException occured while trying to disconnect", ex);
-			m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
+			session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 			throw new GGException("Unable to close connection to server", ex);
 		}
 	}
 
 	private void checkDisconnectionState() throws GGSessionException {
-		if (m_session.getSessionState() == SessionState.DISCONNECTED) {
+		if (session.getSessionState() == SessionState.DISCONNECTED) {
 			throw new GGSessionException(SessionState.DISCONNECTED);
 		}
 	}
@@ -171,9 +171,9 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.radical.open.gg.IConnectionService#isConnected()
 	 */
 	public boolean isConnected() {
-		final boolean authenticated = m_session.getSessionState() == SessionState.LOGGED_IN;
-		final boolean authenticationAwaiting = m_session.getSessionState() == SessionState.AUTHENTICATION_AWAITING;
-		final boolean connected = m_session.getSessionState() == SessionState.CONNECTED;
+		final boolean authenticated = session.getSessionState() == SessionState.LOGGED_IN;
+		final boolean authenticationAwaiting = session.getSessionState() == SessionState.AUTHENTICATION_AWAITING;
+		final boolean connected = session.getSessionState() == SessionState.CONNECTED;
 
 		return authenticated || authenticationAwaiting || connected;
 	}
@@ -182,7 +182,7 @@ public class DefaultConnectionService implements IConnectionService {
 	 * @see pl.radical.open.gg.IConnectionService#getServer()
 	 */
 	public IServer getServer() {
-		return m_server;
+		return server;
 	}
 
 	/**
@@ -192,7 +192,7 @@ public class DefaultConnectionService implements IConnectionService {
 		if (connectionListener == null) {
 			throw new IllegalArgumentException("connectionListener cannot be null");
 		}
-		m_listeners.add(ConnectionListener.class, connectionListener);
+		eventListenerList.add(ConnectionListener.class, connectionListener);
 	}
 
 	/**
@@ -202,7 +202,7 @@ public class DefaultConnectionService implements IConnectionService {
 		if (connectionListener == null) {
 			throw new IllegalArgumentException("connectionListener cannot be null");
 		}
-		m_listeners.remove(ConnectionListener.class, connectionListener);
+		eventListenerList.remove(ConnectionListener.class, connectionListener);
 	}
 
 	/**
@@ -212,7 +212,7 @@ public class DefaultConnectionService implements IConnectionService {
 		if (packetListener == null) {
 			throw new IllegalArgumentException("packetListener cannot be null");
 		}
-		m_listeners.add(GGPacketListener.class, packetListener);
+		eventListenerList.add(GGPacketListener.class, packetListener);
 	}
 
 	/**
@@ -222,7 +222,7 @@ public class DefaultConnectionService implements IConnectionService {
 		if (packetListener == null) {
 			throw new IllegalArgumentException("packetListener cannot be null");
 		}
-		m_listeners.remove(GGPacketListener.class, packetListener);
+		eventListenerList.remove(GGPacketListener.class, packetListener);
 	}
 
 	/**
@@ -232,7 +232,7 @@ public class DefaultConnectionService implements IConnectionService {
 		if (pingListener == null) {
 			throw new IllegalArgumentException("pingListener cannot be null");
 		}
-		m_listeners.add(PingListener.class, pingListener);
+		eventListenerList.add(PingListener.class, pingListener);
 	}
 
 	/**
@@ -242,12 +242,12 @@ public class DefaultConnectionService implements IConnectionService {
 		if (pingListener == null) {
 			throw new IllegalArgumentException("pingListener cannot be null");
 		}
-		m_listeners.remove(PingListener.class, pingListener);
+		eventListenerList.remove(PingListener.class, pingListener);
 	}
 
 	protected void notifyConnectionEstablished() throws GGException {
-		m_session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
-		final ConnectionListener[] connectionListeners = m_listeners.getListeners(ConnectionListener.class);
+		session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
+		final ConnectionListener[] connectionListeners = eventListenerList.getListeners(ConnectionListener.class);
 		for (final ConnectionListener connectionListener : connectionListeners) {
 			connectionListener.connectionEstablished();
 		}
@@ -255,64 +255,64 @@ public class DefaultConnectionService implements IConnectionService {
 	}
 
 	protected void notifyConnectionClosed() throws GGException {
-		m_session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
-		final ConnectionListener[] connectionListeners = m_listeners.getListeners(ConnectionListener.class);
+		session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
+		final ConnectionListener[] connectionListeners = eventListenerList.getListeners(ConnectionListener.class);
 		for (final ConnectionListener connectionListener : connectionListeners) {
 			connectionListener.connectionClosed();
 		}
 	}
 
 	protected void notifyConnectionError(final Exception ex) throws GGException {
-		final ConnectionListener[] connectionListeners = m_listeners.getListeners(ConnectionListener.class);
+		final ConnectionListener[] connectionListeners = eventListenerList.getListeners(ConnectionListener.class);
 		for (final ConnectionListener connectionListener : connectionListeners) {
 			connectionListener.connectionError(ex);
 		}
-		m_session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
+		session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);
 	}
 
 	protected void notifyPingSent() {
-		final PingListener[] pingListeners = m_listeners.getListeners(PingListener.class);
+		final PingListener[] pingListeners = eventListenerList.getListeners(PingListener.class);
 		for (final PingListener pingListener : pingListeners) {
-			pingListener.pingSent(m_server);
+			pingListener.pingSent(server);
 		}
 	}
 
 	protected void notifyPongReceived() {
-		final PingListener[] pingListeners = m_listeners.getListeners(PingListener.class);
+		final PingListener[] pingListeners = eventListenerList.getListeners(PingListener.class);
 		for (final PingListener pingListener : pingListeners) {
-			pingListener.pongReceived(m_server);
+			pingListener.pongReceived(server);
 		}
 	}
 
 	protected void notifyPacketReceived(final GGIncomingPackage incomingPackage) {
-		final GGPacketListener[] packetListeners = m_listeners.getListeners(GGPacketListener.class);
+		final GGPacketListener[] packetListeners = eventListenerList.getListeners(GGPacketListener.class);
 		for (final GGPacketListener packetListener : packetListeners) {
 			packetListener.receivedPacket(incomingPackage);
 		}
 	}
 
 	protected void notifyPacketSent(final GGOutgoingPackage outgoingPackage) {
-		final GGPacketListener[] packetListeners = m_listeners.getListeners(GGPacketListener.class);
+		final GGPacketListener[] packetListeners = eventListenerList.getListeners(GGPacketListener.class);
 		for (final GGPacketListener packetListener : packetListeners) {
 			packetListener.sentPacket(outgoingPackage);
 		}
 	}
 
 	protected void sendPackage(final GGOutgoingPackage outgoingPackage) throws IOException {
-		m_senderQueue.add(outgoingPackage);
+		senderQueue.add(outgoingPackage);
 	}
 
 	private void checkConnectionState() throws GGSessionException {
-		if (m_session.getSessionState() == SessionState.CONNECTION_AWAITING) {
+		if (session.getSessionState() == SessionState.CONNECTION_AWAITING) {
 			return;
 		}
-		if (m_session.getSessionState() == SessionState.DISCONNECTED) {
+		if (session.getSessionState() == SessionState.DISCONNECTED) {
 			return;
 		}
-		if (m_session.getSessionState() == SessionState.CONNECTION_ERROR) {
+		if (session.getSessionState() == SessionState.CONNECTION_ERROR) {
 			return;
 		}
-		throw new GGSessionException(m_session.getSessionState());
+		throw new GGSessionException(session.getSessionState());
 	}
 
 	/**
@@ -351,28 +351,28 @@ public class DefaultConnectionService implements IConnectionService {
 
 		private static final int HEADER_LENGTH = 8;
 
-		private Socket m_socket = null;
-		private BufferedInputStream m_dataInput = null;
-		private BufferedOutputStream m_dataOutput = null;
-		private boolean m_active = true;
+		private Socket socket = null;
+		private BufferedInputStream dataInput = null;
+		private BufferedOutputStream dataOutput = null;
+		private boolean active = true;
 
 		@Override
 		public void run() {
 			try {
-				while (m_active) {
+				while (active) {
 					handleInput();
-					if (!m_senderQueue.isEmpty()) {
+					if (!senderQueue.isEmpty()) {
 						handleOutput();
 					}
-					final int sleepTime = m_session.getGGConfiguration().getConnectionThreadSleepTimeInMiliseconds();
+					final int sleepTime = session.getGGConfiguration().getConnectionThreadSleepTimeInMiliseconds();
 					Thread.sleep(sleepTime);
 				}
-				m_dataInput = null;
-				m_dataOutput = null;
-				m_socket.close();
+				dataInput = null;
+				dataOutput = null;
+				socket.close();
 			} catch (final Exception ex) { // FIXME Czy ten catch jest potrzebny??
 				try {
-					m_active = false;
+					active = false;
 					notifyConnectionError(ex);
 				} catch (final GGException ex2) {
 					log.warn("Unable to notify listeners", ex);
@@ -382,34 +382,34 @@ public class DefaultConnectionService implements IConnectionService {
 
 		private void handleInput() throws IOException, GGException {
 			final byte[] headerData = new byte[HEADER_LENGTH];
-			if (m_dataInput.available() > 0) {
-				m_dataInput.read(headerData);
+			if (dataInput.available() > 0) {
+				dataInput.read(headerData);
 				decodePacket(new GGHeader(headerData));
 			}
 		}
 
 		private void handleOutput() throws IOException {
-			while (!m_senderQueue.isEmpty() && !m_socket.isClosed() && m_dataOutput != null) {
-				final GGOutgoingPackage outgoingPackage = m_senderQueue.poll();
+			while (!senderQueue.isEmpty() && !socket.isClosed() && dataOutput != null) {
+				final GGOutgoingPackage outgoingPackage = senderQueue.poll();
 				sendPackage(outgoingPackage);
 				notifyPacketSent(outgoingPackage);
 			}
 		}
 
 		private boolean isActive() {
-			return m_active;
+			return active;
 		}
 
 		private void openConnection(final String host, final int port) throws IOException {
 			// add runtime checking for port
-			m_socket = new Socket();
+			socket = new Socket();
 			final SocketAddress socketAddress = new InetSocketAddress(InetAddress.getByName(host), port);
-			final int socketTimeoutInMiliseconds = m_session.getGGConfiguration().getSocketTimeoutInMiliseconds();
-			m_socket.connect(socketAddress, socketTimeoutInMiliseconds);
-			m_socket.setKeepAlive(true);
-			m_socket.setSoTimeout(socketTimeoutInMiliseconds);
-			m_dataInput = new BufferedInputStream(m_socket.getInputStream());
-			m_dataOutput = new BufferedOutputStream(m_socket.getOutputStream());
+			final int socketTimeoutInMiliseconds = session.getGGConfiguration().getSocketTimeoutInMiliseconds();
+			socket.connect(socketAddress, socketTimeoutInMiliseconds);
+			socket.setKeepAlive(true);
+			socket.setSoTimeout(socketTimeoutInMiliseconds);
+			dataInput = new BufferedInputStream(socket.getInputStream());
+			dataOutput = new BufferedOutputStream(socket.getOutputStream());
 			start();
 		}
 
@@ -417,7 +417,7 @@ public class DefaultConnectionService implements IConnectionService {
 			if (log.isDebugEnabled()) {
 				log.debug("Closing connection...");
 			}
-			m_active = false;
+			active = false;
 		}
 
 		private synchronized void sendPackage(final GGOutgoingPackage op) throws IOException {
@@ -425,45 +425,45 @@ public class DefaultConnectionService implements IConnectionService {
 				log.debug("Sending packet: {}, packetPayLoad: {}", op.getPacketType(), GGUtils.prettyBytesToString(op.getContents()));
 			}
 
-			m_dataOutput.write(GGUtils.intToByte(op.getPacketType()));
-			m_dataOutput.write(GGUtils.intToByte(op.getContents().length));
+			dataOutput.write(GGUtils.intToByte(op.getPacketType()));
+			dataOutput.write(GGUtils.intToByte(op.getContents().length));
 
 			if (op.getContents().length > 0) {
-				m_dataOutput.write(op.getContents());
+				dataOutput.write(op.getContents());
 			}
 
-			m_dataOutput.flush();
+			dataOutput.flush();
 		}
 
 		private void decodePacket(final GGHeader header) throws IOException, GGException {
 			final byte[] keyBytes = new byte[header.getLength()];
-			m_dataInput.read(keyBytes);
-			final PacketContext context = new PacketContext(m_session, header, keyBytes);
-			m_packetChain.sendToChain(context);
+			dataInput.read(keyBytes);
+			final PacketContext context = new PacketContext(session, header, keyBytes);
+			packetChain.sendToChain(context);
 		}
 
 	}
 
 	private class PingerThread extends Thread {
 
-		private boolean m_active = false;
+		private boolean active = false;
 
 		/**
 		 * @see java.lang.Thread#run()
 		 */
 		@Override
 		public void run() {
-			while (m_active && m_connectionThread.isActive()) {
+			while (active && connectionThread.isActive()) {
 				try {
 					if (log.isDebugEnabled()) {
 						log.debug("Pinging...");
 					}
 					sendPackage(GGPing.getPing());
 					notifyPingSent();
-					final int pingInterval = m_session.getGGConfiguration().getPingIntervalInMiliseconds();
+					final int pingInterval = session.getGGConfiguration().getPingIntervalInMiliseconds();
 					Thread.sleep(pingInterval);
 				} catch (final IOException ex) {
-					m_active = false;
+					active = false;
 					// log.error("PingerThreadError: ", ex);
 					try {
 						notifyConnectionError(ex);
@@ -471,7 +471,7 @@ public class DefaultConnectionService implements IConnectionService {
 						log.warn("Unable to notify connection error listeners", ex);
 					}
 				} catch (final InterruptedException ex) {
-					m_active = false;
+					active = false;
 					if (log.isDebugEnabled()) {
 						log.debug("PingerThread was interruped", ex);
 					}
@@ -483,7 +483,7 @@ public class DefaultConnectionService implements IConnectionService {
 			if (log.isDebugEnabled()) {
 				log.debug("Starting pinging...");
 			}
-			m_active = true;
+			active = true;
 			start();
 		}
 
@@ -491,7 +491,7 @@ public class DefaultConnectionService implements IConnectionService {
 			if (log.isDebugEnabled()) {
 				log.debug("Stopping pinging...");
 			}
-			m_active = false;
+			active = false;
 		}
 	}
 

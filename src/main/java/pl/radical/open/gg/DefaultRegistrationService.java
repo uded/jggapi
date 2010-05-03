@@ -20,14 +20,14 @@ import java.io.IOException;
 public class DefaultRegistrationService implements IRegistrationService {
 
 	/** reference to session object */
-	private Session m_session = null;
+	private Session session = null;
 
 	// friendly
 	public DefaultRegistrationService(final Session session) {
 		if (session == null) {
 			throw new IllegalArgumentException("session cannot be null");
 		}
-		m_session = session;
+		this.session = session;
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 
 		GGTokenRequest tokenRequest = null;
 		try {
-			tokenRequest = new GGTokenRequest(m_session.getGGConfiguration());
+			tokenRequest = new GGTokenRequest(session.getGGConfiguration());
 			tokenRequest.connect();
 			final GGTokenRequest.GGTokenResponse response = (GGTokenResponse) tokenRequest.getResponse();
 
@@ -81,7 +81,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 
 		ChangePasswordRequest changePasswordRequest = null;
 		try {
-			changePasswordRequest = new ChangePasswordRequest(m_session.getGGConfiguration(), uin, email, oldPassword, newPassword, tokenID, tokenVal);
+			changePasswordRequest = new ChangePasswordRequest(session.getGGConfiguration(), uin, email, oldPassword, newPassword, tokenID, tokenVal);
 			changePasswordRequest.connect();
 			changePasswordRequest.sendRequest();
 
@@ -119,7 +119,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 
 		RegisterGGAccountRequest request = null;
 		try {
-			request = new RegisterGGAccountRequest(m_session.getGGConfiguration(), email, password, tokenID, tokenVal);
+			request = new RegisterGGAccountRequest(session.getGGConfiguration(), email, password, tokenID, tokenVal);
 			request.connect();
 			request.sendRequest();
 			final RegisterGGAccountRequest.RegisterGGAccountResponse response = (RegisterGGAccountResponse) request.getResponse();
@@ -157,7 +157,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 
 		UnregisterGGPasswordRequest unregisterGGPasswordRequest = null;
 		try {
-			unregisterGGPasswordRequest = new UnregisterGGPasswordRequest(m_session.getGGConfiguration(), uin, password, tokenID, tokenVal);
+			unregisterGGPasswordRequest = new UnregisterGGPasswordRequest(session.getGGConfiguration(), uin, password, tokenID, tokenVal);
 			unregisterGGPasswordRequest.connect();
 			unregisterGGPasswordRequest.sendRequest();
 
@@ -196,7 +196,7 @@ public class DefaultRegistrationService implements IRegistrationService {
 
 		SendAndRemindPasswordRequest request = null;
 		try {
-			request = new SendAndRemindPasswordRequest(m_session.getGGConfiguration(), uin, email, tokenID, tokenVal);
+			request = new SendAndRemindPasswordRequest(session.getGGConfiguration(), uin, email, tokenID, tokenVal);
 			request.connect();
 			request.sendRequest();
 

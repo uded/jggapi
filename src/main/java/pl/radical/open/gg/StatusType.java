@@ -5,10 +5,10 @@ package pl.radical.open.gg;
  */
 public class StatusType {
 
-	private String m_status = null;
+	private String status = null;
 
 	private StatusType(final String status) {
-		m_status = status;
+		this.status = status;
 	}
 
 	/** Status online */
@@ -36,12 +36,12 @@ public class StatusType {
 	public final static StatusType INVISIBLE_WITH_DESCRIPTION = new StatusType("invisible_with_description");
 
 	public boolean isDescriptionStatus() {
-		return m_status.endsWith("description");
+		return status.endsWith("description");
 	}
 
 	@Override
 	public String toString() {
-		return m_status;
+		return status;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class StatusType {
 	 */
 	@Override
 	public int hashCode() {
-		return m_status.hashCode() * 37;
+		return status.hashCode() * 37;
 	}
 
 }

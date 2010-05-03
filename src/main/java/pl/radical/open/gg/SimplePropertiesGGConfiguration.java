@@ -23,7 +23,7 @@ public class SimplePropertiesGGConfiguration extends AbstractGGPropertiesConfigu
 	@Override
 	protected Properties createProperties() throws InvalidPropertiesFormatException, IOException {
 		final ClassLoader cl = Thread.currentThread().getContextClassLoader();
-		final InputStream is = getResourceAsStream(cl, m_fileName);
+		final InputStream is = getResourceAsStream(cl, fileName);
 
 		final Properties props = new Properties();
 		props.load(is);

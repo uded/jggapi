@@ -12,7 +12,7 @@ import java.util.Date;
 public class LocalStatus extends AbstractStatus implements ILocalStatus {
 
 	/** the field that indicated whether or user that logs on wants to be seen only by friends */
-	private boolean m_friendsOnly = false;
+	private boolean friendsOnly = false;
 
 	public LocalStatus(final StatusType statusType) {
 		super(statusType);
@@ -30,11 +30,11 @@ public class LocalStatus extends AbstractStatus implements ILocalStatus {
 	 * @see pl.radical.open.gg.ILocalStatus#isFriendsOnly()
 	 */
 	public boolean isFriendsOnly() {
-		return m_friendsOnly;
+		return friendsOnly;
 	}
 
 	public void setFriendsOnly(final boolean bool) {
-		m_friendsOnly = bool;
+		friendsOnly = bool;
 	}
 
 }

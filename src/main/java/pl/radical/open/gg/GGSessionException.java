@@ -12,15 +12,15 @@ public class GGSessionException extends GGException {
      * 
      */
 	private static final long serialVersionUID = 4199162248270553752L;
-	private final SessionState m_sessionState;
+	private final SessionState sessionState;
 
 	public GGSessionException(final SessionState actualSessionState) {
 		super("Incorrect session state: " + actualSessionState);
-		m_sessionState = actualSessionState;
+		sessionState = actualSessionState;
 	}
 
 	public SessionState getSessionState() {
-		return m_sessionState;
+		return sessionState;
 	}
 
 }
