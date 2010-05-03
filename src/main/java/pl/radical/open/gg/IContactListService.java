@@ -48,7 +48,7 @@ public interface IContactListService {
 	 */
 	void importContactList() throws GGException;
 
-	void exportContactList(InputStream is) throws GGException;
+	void exportContactList(InputStream input) throws GGException;
 
 	// void importContactList(OutputStream os) throws GGException;
 
@@ -59,7 +59,7 @@ public interface IContactListService {
 	 * @param contactListListener
 	 *            the listener to be notified of contact list events.
 	 */
-	void addContactListListener(ContactListListener contactListListener);
+	void addContactListListener(ContactListListener listListener);
 
 	/**
 	 * Removes <code>ContactListListener</code> object from the list of listeners that are notified of events such as
@@ -68,6 +68,6 @@ public interface IContactListService {
 	 * @param contactListListener
 	 *            the listener object to be removed from contact list events notification.
 	 */
-	void removeContactListlistener(ContactListListener contactListListener);
+	void removeContactListlistener(ContactListListener listListener);
 
 }

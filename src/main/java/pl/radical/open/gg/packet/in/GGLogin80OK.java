@@ -1,6 +1,6 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.AbstractGGIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGLogin80OKPacketHandler;
@@ -12,7 +12,7 @@ import pl.radical.open.gg.packet.handlers.GGLogin80OKPacketHandler;
  * @since 1.6.9.0
  */
 @IncomingPacket(type = 0x0035, label = "GG_LOGIN_OK80", handler = GGLogin80OKPacketHandler.class)
-public class GGLogin80OK extends GGBaseIncomingPacket implements GGIncomingPackage {
+public class GGLogin80OK extends AbstractGGIncomingPacket implements GGIncomingPackage {
 
 	private static GGLogin80OK instance = null;
 

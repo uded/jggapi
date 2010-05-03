@@ -1,6 +1,6 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.AbstractGGIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGMessageClass;
@@ -18,7 +18,7 @@ import org.apache.commons.collections.primitives.ByteList;
  */
 
 @IncomingPacket(type = 0x002E, label = "GG_RECV_MSG80", handler = GGRecvMsg80PacketHandler.class)
-public class GGRecvMsg80 extends GGBaseIncomingPacket implements GGIncomingPackage, GGMessageClass {
+public class GGRecvMsg80 extends AbstractGGIncomingPacket implements GGIncomingPackage, GGMessageClass {
 
 	private int sender = -1;
 	private int seq = -1;

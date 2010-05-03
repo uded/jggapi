@@ -1,6 +1,6 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.AbstractGGIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGWelcomePacketHandler;
@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x0001, label = "GG_WELCOME", handler = GGWelcomePacketHandler.class)
-public class GGWelcome extends GGBaseIncomingPacket implements GGIncomingPackage {
+public class GGWelcome extends AbstractGGIncomingPacket implements GGIncomingPackage {
 	private static final Logger LOGGER = LoggerFactory.getLogger(GGWelcome.class);
 
 	private int seed = -1;

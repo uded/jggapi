@@ -2,9 +2,6 @@ package pl.radical.open.gg.packet.http;
 
 import java.util.StringTokenizer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * Created on 2005-01-28
  * 
@@ -12,9 +9,9 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class CommonRegisterResponse extends HttpResponse {
-	private static final Logger LOG = LoggerFactory.getLogger(CommonRegisterResponse.class);
 
 	private int uin = 0;
+
 	private String responseString = null;
 
 	public CommonRegisterResponse(final int uin, final String responseString) {
@@ -33,18 +30,18 @@ public class CommonRegisterResponse extends HttpResponse {
 	 */
 	@Override
 	public boolean isOKResponse() {
-		final boolean c1 = responseString.startsWith("reg_success");
-		boolean c2 = false;
+		final boolean case1 = responseString.startsWith("reg_success");
+		boolean case2 = false;
 
-		if (c1) {
+		if (case1) {
 			final StringTokenizer tokenizer = new StringTokenizer(responseString, ":");
 			tokenizer.nextToken();
 			final String token2 = tokenizer.nextToken(); // uin
 			if (Integer.parseInt(token2) == uin) {
-				c2 = true;
+				case2 = true;
 			}
 		}
-		return c1 && c2;
+		return case1 && case2;
 	}
 
 	/**

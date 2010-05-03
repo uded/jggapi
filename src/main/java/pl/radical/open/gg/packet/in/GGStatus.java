@@ -4,7 +4,7 @@ import pl.radical.open.gg.IRemoteStatus;
 import pl.radical.open.gg.IUser;
 import pl.radical.open.gg.RemoteStatus;
 import pl.radical.open.gg.User;
-import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.AbstractGGIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
@@ -19,7 +19,7 @@ import pl.radical.open.gg.utils.GGUtils;
  */
 @IncomingPacket(type = 0x0002, label = "GG_STATUS", handler = GGStatusPacketHandler.class)
 @Deprecated
-public class GGStatus extends GGBaseIncomingPacket implements GGStatuses, GGIncomingPackage {
+public class GGStatus extends AbstractGGIncomingPacket implements GGStatuses, GGIncomingPackage {
 
 	private IUser user = null;
 	private RemoteStatus status = null;

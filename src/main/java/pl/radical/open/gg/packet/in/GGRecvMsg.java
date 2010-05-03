@@ -1,6 +1,6 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.AbstractGGIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGMessageClass;
@@ -16,7 +16,7 @@ import pl.radical.open.gg.utils.GGUtils;
  */
 @IncomingPacket(type = 0x000a, label = "GG_RECV_MSG", handler = GGMessageReceivedPacketHandler.class)
 @Deprecated
-public class GGRecvMsg extends GGBaseIncomingPacket implements GGMessageClass, GGIncomingPackage {
+public class GGRecvMsg extends AbstractGGIncomingPacket implements GGMessageClass, GGIncomingPackage {
 
 	private int sender = -1;
 	private int seq = -1;

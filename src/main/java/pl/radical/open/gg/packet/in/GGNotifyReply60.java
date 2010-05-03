@@ -3,7 +3,7 @@ package pl.radical.open.gg.packet.in;
 import pl.radical.open.gg.IUser;
 import pl.radical.open.gg.RemoteStatus;
 import pl.radical.open.gg.User;
-import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.AbstractGGIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @IncomingPacket(type = 0x0011, label = "GG_NOTIFY_REPLY60", handler = GGNotifyReply60PacketHandler.class)
 @Deprecated
-public class GGNotifyReply60 extends GGBaseIncomingPacket implements GGIncomingPackage {
+public class GGNotifyReply60 extends AbstractGGIncomingPacket implements GGIncomingPackage {
 
 	private final Map<IUser, RemoteStatus> statuses = new HashMap<IUser, RemoteStatus>();
 

@@ -152,12 +152,7 @@ public final class LoginContext {
 	 */
 	@Override
 	public String toString() {
-		final StringBuffer buffer = new StringBuffer();
-		buffer.append("LoginContext[");
-		buffer.append("uin=" + m_uin);
-		buffer.append(",password=xxx(masking)]");
-
-		return buffer.toString();
+		return String.format("LoginContext[%d,password=xxx(masking)]", m_uin);
 	}
 
 }

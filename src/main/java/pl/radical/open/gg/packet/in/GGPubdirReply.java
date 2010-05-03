@@ -4,7 +4,7 @@ import pl.radical.open.gg.IRemoteStatus;
 import pl.radical.open.gg.PersonalInfo;
 import pl.radical.open.gg.PublicDirSearchReply;
 import pl.radical.open.gg.dicts.Gender;
-import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.AbstractGGIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.dicts.GGPubdirConsts;
@@ -20,7 +20,7 @@ import java.util.StringTokenizer;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x000e, label = "GG_PUBDIR50_REPLY", handler = GGPubdirReplyPacketHandler.class)
-public class GGPubdirReply extends GGBaseIncomingPacket implements GGPubdirConsts, GGIncomingPackage {
+public class GGPubdirReply extends AbstractGGIncomingPacket implements GGPubdirConsts, GGIncomingPackage {
 
 	private byte replyType = -1;
 	private int querySeq = -1;

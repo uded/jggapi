@@ -16,16 +16,16 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public abstract class AbstractGGPropertiesConfiguration implements IGGConfiguration {
-	private final Logger log = LoggerFactory.getLogger(getClass());
+	private final Logger log = LoggerFactory.getLogger(getClass()); // NOPMD by LRzanek on 03.05.10 16:35
 
-	private IGGConfiguration defaultGGConfiguration = new GGConfiguration();
+	private IGGConfiguration configuration = new GGConfiguration();
 
 	private Properties properties = null;
 	protected String fileName = null;
 
 	public AbstractGGPropertiesConfiguration(final String fileName, final IGGConfiguration configuration) throws IOException, InvalidPropertiesFormatException {
 		this(fileName);
-		defaultGGConfiguration = configuration;
+		this.configuration = configuration;
 	}
 
 	public AbstractGGPropertiesConfiguration(final String fileName) throws IOException, InvalidPropertiesFormatException {
@@ -41,7 +41,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getConnectionThreadSleepTimeInMiliseconds()
 	 */
 	public int getConnectionThreadSleepTimeInMiliseconds() {
-		final String connectionThreadSleepTime = String.valueOf(defaultGGConfiguration.getConnectionThreadSleepTimeInMiliseconds());
+		final String connectionThreadSleepTime = String.valueOf(configuration.getConnectionThreadSleepTimeInMiliseconds());
 		return Integer.valueOf(properties.getProperty("connection.thread.sleep.time", connectionThreadSleepTime));
 	}
 
@@ -49,7 +49,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getPingIntervalInMiliseconds()
 	 */
 	public int getPingIntervalInMiliseconds() {
-		final String pingInterval = String.valueOf(defaultGGConfiguration.getPingIntervalInMiliseconds());
+		final String pingInterval = String.valueOf(configuration.getPingIntervalInMiliseconds());
 		return Integer.valueOf(properties.getProperty("ping.interval", pingInterval));
 	}
 
@@ -57,7 +57,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getSocketTimeoutInMiliseconds()
 	 */
 	public int getSocketTimeoutInMiliseconds() {
-		final String defaultSocketTimeout = String.valueOf(defaultGGConfiguration.getSocketTimeoutInMiliseconds());
+		final String defaultSocketTimeout = String.valueOf(configuration.getSocketTimeoutInMiliseconds());
 		return Integer.valueOf(properties.getProperty("socket.timeout", defaultSocketTimeout));
 	}
 
@@ -65,7 +65,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getRegistrationURL()
 	 */
 	public String getRegistrationURL() {
-		final String registrationURL = defaultGGConfiguration.getRegistrationURL();
+		final String registrationURL = configuration.getRegistrationURL();
 		return properties.getProperty("server.registration.url", registrationURL);
 	}
 
@@ -73,7 +73,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getSendPasswordURL()
 	 */
 	public String getSendPasswordURL() {
-		final String sendPasswordURL = defaultGGConfiguration.getSendPasswordURL();
+		final String sendPasswordURL = configuration.getSendPasswordURL();
 		return properties.getProperty("send.password.url", sendPasswordURL);
 	}
 
@@ -83,7 +83,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getServerLookupURL()
 	 */
 	public String getServerLookupURL() {
-		final String serverLookupURL = defaultGGConfiguration.getServerLookupURL();
+		final String serverLookupURL = configuration.getServerLookupURL();
 		return properties.getProperty("server.lookup.url", serverLookupURL);
 	}
 
@@ -91,7 +91,7 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getTokenRequestURL()
 	 */
 	public String getTokenRequestURL() {
-		final String tokenRequestURL = defaultGGConfiguration.getServerLookupURL();
+		final String tokenRequestURL = configuration.getServerLookupURL();
 		return properties.getProperty("token.request.url", tokenRequestURL);
 	}
 

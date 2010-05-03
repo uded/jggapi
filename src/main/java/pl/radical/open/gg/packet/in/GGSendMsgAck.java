@@ -1,6 +1,6 @@
 package pl.radical.open.gg.packet.in;
 
-import pl.radical.open.gg.packet.GGBaseIncomingPacket;
+import pl.radical.open.gg.packet.AbstractGGIncomingPacket;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGSentMessageAckPacketHandler;
@@ -13,7 +13,7 @@ import pl.radical.open.gg.utils.GGUtils;
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 @IncomingPacket(type = 0x0005, label = "GG_SEND_MSG_ACK", handler = GGSentMessageAckPacketHandler.class)
-public class GGSendMsgAck extends GGBaseIncomingPacket implements GGIncomingPackage {
+public class GGSendMsgAck extends AbstractGGIncomingPacket implements GGIncomingPackage {
 	// Message statuses
 
 	/** Message has not been delivered. */
