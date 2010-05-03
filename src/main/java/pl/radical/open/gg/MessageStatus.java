@@ -5,6 +5,7 @@ package pl.radical.open.gg;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+// FIXME enum!
 public final class MessageStatus {
 
 	private String messageStatus = null;
@@ -14,21 +15,21 @@ public final class MessageStatus {
 	}
 
 	/** Message has not been blocked. */
-	public final static MessageStatus BLOCKED = new MessageStatus("message_status_blocked");
+	public static final MessageStatus BLOCKED = new MessageStatus("message_status_blocked");
 
 	/** Message has been successfuly delivered. */
-	public final static MessageStatus DELIVERED = new MessageStatus("message_status_delivered");
+	public static final MessageStatus DELIVERED = new MessageStatus("message_status_delivered");
 
 	/** Message has been queued for later delivery. */
-	public final static MessageStatus QUEUED = new MessageStatus("message_status_queued");
+	public static final MessageStatus QUEUED = new MessageStatus("message_status_queued");
 
 	/** Message has not been delivered because remote queue is full (max. 20 messages). */
-	public final static MessageStatus BLOCKED_MBOX_FULL = new MessageStatus("message_status_mbox_full");
+	public static final MessageStatus BLOCKED_MBOX_FULL = new MessageStatus("message_status_mbox_full");
 
 	/** Message has not been delivered. This status is only in case of GG_CLASS_CTCP */
-	public final static MessageStatus NOT_DELIVERED = new MessageStatus("message_status_not_delivered");
+	public static final MessageStatus NOT_DELIVERED = new MessageStatus("message_status_not_delivered");
 
-	public final static MessageStatus UNKNOWN = new MessageStatus("message_status_unknown");
+	public static final MessageStatus UNKNOWN = new MessageStatus("message_status_unknown");
 
 	/**
 	 * @see java.lang.Object#toString()

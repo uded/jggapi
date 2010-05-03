@@ -32,7 +32,7 @@ public class CommunicationTest {
 	@Test(timeout = 1000 * 60)
 	public void sendRecvMsgTest() throws GGException, InterruptedException {
 
-		ConnectionTest.communicationLatch.await();
+		ConnectionTest.COMMUNICATION_LATCH.await();
 
 		final String hello = "hello hello hello";
 		asyncOp = false;

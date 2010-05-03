@@ -10,8 +10,8 @@ import java.util.EventObject;
 public class LoginFailedEvent extends EventObject {
 	private static final long serialVersionUID = 8954960680213823334L;
 
-	public final static int NEED_EMAIL_REASON = 0;
-	public final static int WRONG_PASSWORD = 1;
+	public static final int NEED_EMAIL_REASON = 0;
+	public static final int WRONG_PASSWORD = 1;
 
 	private int reason = WRONG_PASSWORD;
 
@@ -19,11 +19,11 @@ public class LoginFailedEvent extends EventObject {
 		super(source);
 	}
 
-	public int getReason() {
+	public final int getReason() {
 		return reason;
 	}
 
-	public void setReason(final int reason) {
+	public final void setReason(final int reason) {
 		if (reason == NEED_EMAIL_REASON || reason == WRONG_PASSWORD) {
 			this.reason = reason;
 		} else {

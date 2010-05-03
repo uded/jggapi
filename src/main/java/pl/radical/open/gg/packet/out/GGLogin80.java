@@ -47,7 +47,7 @@ import org.apache.commons.collections.primitives.ByteList;
 @OutgoingPacket(type = 0x0031, label = "GG_LOGIN80")
 public class GGLogin80 implements GGOutgoingPackage {
 
-	public final static int GG_LOGIN80 = 0x0031;
+	public static final int GG_LOGIN80 = 0x0031;
 
 	/**
 	 * Gadu-Gadu number that will be used during logging
@@ -57,7 +57,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Language of the client, default to "pl"
 	 */
-	final static String LANGUAGE = "pl";
+	static final String LANGUAGE = "pl";
 
 	/**
 	 * Password that will be used during logging

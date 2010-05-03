@@ -7,6 +7,7 @@ import java.io.Serializable;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
+// FIXME enum!
 public final class SessionState implements Serializable {
 	private static final long serialVersionUID = 1691964475548638059L;
 
@@ -17,31 +18,31 @@ public final class SessionState implements Serializable {
 	}
 
 	/** This state is when we are waiting for the client to start socket connection to Gadu-Gadu server. */
-	public final static SessionState CONNECTION_AWAITING = new SessionState("connection_awaiting");
+	public static final SessionState CONNECTION_AWAITING = new SessionState("connection_awaiting");
 
 	/** This state is when we are connecting to the Gadu-Gadu server. */
-	public final static SessionState CONNECTING = new SessionState("connecting");
+	public static final SessionState CONNECTING = new SessionState("connecting");
 
 	/** This state is when we have physically asyncOp to Gadu-Gadu server. */
-	public final static SessionState CONNECTED = new SessionState("asyncOp");
+	public static final SessionState CONNECTED = new SessionState("asyncOp");
 
 	/** This state is when there is an unexpected connection error */
-	public final static SessionState CONNECTION_ERROR = new SessionState("connection_error");
+	public static final SessionState CONNECTION_ERROR = new SessionState("connection_error");
 
 	/** This state is when Gadu-Gadu server replied and we are waiting for the user to log in. */
-	public final static SessionState AUTHENTICATION_AWAITING = new SessionState("authentication_awaiting");
+	public static final SessionState AUTHENTICATION_AWAITING = new SessionState("authentication_awaiting");
 
 	/** This state is when user has been successfuly authenticated. */
-	public final static SessionState LOGGED_IN = new SessionState("logged_in");
+	public static final SessionState LOGGED_IN = new SessionState("logged_in");
 
 	/** This state is when the Gadu-Gadu server is disconnecting us or when we are disconnecting. */
-	public final static SessionState DISCONNECTING = new SessionState("disconnecting");
+	public static final SessionState DISCONNECTING = new SessionState("disconnecting");
 
 	/** This state is we are disconnected by Gadu-Gadu server or when we have deliberately disconnected from it. */
-	public final static SessionState DISCONNECTED = new SessionState("disconnected");
+	public static final SessionState DISCONNECTED = new SessionState("disconnected");
 
 	/** This state is when there was an connection error and session is no longer valid */
-	public final static SessionState LOGGED_OUT = new SessionState("logged_out");
+	public static final SessionState LOGGED_OUT = new SessionState("logged_out");
 
 	/**
 	 * @see java.lang.Object#toString()

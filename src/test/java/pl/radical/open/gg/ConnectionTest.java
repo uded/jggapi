@@ -24,11 +24,11 @@ public class ConnectionTest {
 	static ISession session1;
 	static ISession session2;
 
-	final static CountDownLatch connectLatch = new CountDownLatch(2);
-	final static CountDownLatch communicationLatch = new CountDownLatch(2);
+	static final CountDownLatch CONNECT_LATCH = new CountDownLatch(2);
+	static final CountDownLatch COMMUNICATION_LATCH = new CountDownLatch(2);
 
 	@Test(timeout = 1000 * 30)
-	public void connectionTest() {
+	public final void connectionTest() {
 		log.info("Executing connectionTest() method");
 
 		ConnectUser cu;
@@ -61,7 +61,7 @@ public class ConnectionTest {
 					@Override
 					public void connectionEstablished() throws GGException {
 						log.info("Connection established for user {}." + loginContext.getUin());
-						connectLatch.countDown();
+						CONNECT_LATCH.countDown();
 						super.connectionEstablished();
 					}
 
@@ -94,7 +94,7 @@ public class ConnectionTest {
 	}
 
 	@Test(timeout = 1000 * 30)
-	public void loginTest() throws GGException, InterruptedException {
+	public final void loginTest() throws GGException, InterruptedException {
 		log.info("Executing loginTest() method");
 
 		final Thread t1 = new Thread(new LoginUser(session1, loginContext1));
@@ -118,14 +118,14 @@ public class ConnectionTest {
 		@Override
 		public void run() {
 			try {
-				connectLatch.await();
+				CONNECT_LATCH.await();
 
 				loginService = session.getLoginService();
 				loginService.addLoginListener(new LoginListener.Stub() {
 					@Override
 					public void loginOK() throws GGException {
 						log.info("Login for user {} OK", loginContext.getUin());
-						communicationLatch.countDown();
+						COMMUNICATION_LATCH.countDown();
 					}
 
 					@Override

@@ -16,7 +16,7 @@ import pl.radical.open.gg.utils.GGUtils;
 @OutgoingPacket(type = 0x000e, label = "GG_REMOVE_NOTIFY")
 public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 
-	public final static int GG_REMOVE_NOTIFY = 0x000E;
+	public static final int GG_REMOVE_NOTIFY = 0x000E;
 
 	/**
 	 * Gadu-Gadu uin

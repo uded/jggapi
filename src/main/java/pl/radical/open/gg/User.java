@@ -83,10 +83,10 @@ public class User implements IUser {
 			this.type = type;
 		}
 
-		public final static UserMode BUDDY = new UserMode("user_mode_buddy");
-		public final static UserMode FRIEND = new UserMode("user_mode_friend");
-		public final static UserMode BLOCKED = new UserMode("user_mode_blocked");
-		public final static UserMode UNKNOWN = new UserMode("user_mode_unknown");
+		public static final UserMode BUDDY = new UserMode("user_mode_buddy");
+		public static final UserMode FRIEND = new UserMode("user_mode_friend");
+		public static final UserMode BLOCKED = new UserMode("user_mode_blocked");
+		public static final UserMode UNKNOWN = new UserMode("user_mode_unknown");
 
 		/**
 		 * @see java.lang.Object#toString()

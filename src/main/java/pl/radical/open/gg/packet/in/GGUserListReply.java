@@ -26,13 +26,13 @@ import java.util.List;
 // FIXME Wyczyścić - coś mi się nie zgadza typ pakietów
 public final class GGUserListReply extends AbstractGGIncomingPacket implements GGIncomingPackage {
 
-	public final static int GG_USERLIST_REPLY = 0x0010;
+	public static final int GG_USERLIST_REPLY = 0x0010;
 
-	public final static int GG_USERLIST_PUT_REPLY = 0x00; /* początek eksportu listy */
-	public final static int GG_USERLIST_PUT_MORE_REPLY = 0x02; /* kontynuacja */
+	public static final int GG_USERLIST_PUT_REPLY = 0x00; /* początek eksportu listy */
+	public static final int GG_USERLIST_PUT_MORE_REPLY = 0x02; /* kontynuacja */
 
-	public final static int GG_USERLIST_GET_MORE_REPLY = 0x04; /* początek importu listy */
-	public final static int GG_USERLIST_GET_REPLY = 0x06; /* ostatnia część importu */
+	public static final int GG_USERLIST_GET_MORE_REPLY = 0x04; /* początek importu listy */
+	public static final int GG_USERLIST_GET_REPLY = 0x06; /* ostatnia część importu */
 
 	private byte type = -1;
 

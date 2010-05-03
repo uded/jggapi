@@ -17,19 +17,19 @@ public class GGSendMsgAck extends AbstractGGIncomingPacket implements GGIncoming
 	// Message statuses
 
 	/** Message has not been delivered. */
-	public final static int GG_ACK_BLOCKED = 0x0001;
+	public static final int GG_ACK_BLOCKED = 0x0001;
 
 	/** Message has been successfuly delivered. */
-	public final static int GG_ACK_DELIVERED = 0x0002;
+	public static final int GG_ACK_DELIVERED = 0x0002;
 
 	/** Message has been queued for later delivery. */
-	public final static int GG_ACK_QUEUED = 0x0003;
+	public static final int GG_ACK_QUEUED = 0x0003;
 
 	/** Message has not been delivered because remote queue is full (max. 20 messages). */
-	public final static int GG_ACK_MBOXFULL = 0x0004;
+	public static final int GG_ACK_MBOXFULL = 0x0004;
 
 	/** Message has not been delivered. This status is only in case of GG_CLASS_CTCP */
-	public final static int GG_ACK_NOT_DELIVERED = 0x0006;
+	public static final int GG_ACK_NOT_DELIVERED = 0x0006;
 
 	private int messageStatus = -1;
 	private int recipient = -1;
