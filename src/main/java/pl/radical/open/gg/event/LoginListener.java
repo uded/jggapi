@@ -28,7 +28,7 @@ public interface LoginListener extends EventListener {
 
 	void loggedOut() throws GGException;
 
-	public static class Stub implements LoginListener {
+	class Stub implements LoginListener {
 
 		/**
 		 * @see pl.radical.open.gg.event.LoginListener#loginOK()

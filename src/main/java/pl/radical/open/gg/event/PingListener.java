@@ -15,7 +15,7 @@ public interface PingListener extends EventListener {
 
 	void pongReceived(IServer server);
 
-	static class Stub implements PingListener {
+	class Stub implements PingListener {
 
 		/**
 		 * @see pl.radical.open.gg.event.PingListener#pingSent()

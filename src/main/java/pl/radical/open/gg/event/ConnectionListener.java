@@ -32,7 +32,7 @@ public interface ConnectionListener extends EventListener {
 	 */
 	void connectionError(Exception e) throws GGException;
 
-	public static class Stub implements ConnectionListener {
+	class Stub implements ConnectionListener {
 
 		/**
 		 * @see pl.radical.open.gg.event.ConnectionListener#connectionEstablished()

@@ -34,7 +34,7 @@ public interface ContactListListener extends EventListener {
 
 	// void contactListReceivedAsByteArray(byte[] contactList);
 
-	public static class Stub implements ContactListListener {
+	class Stub implements ContactListListener {
 
 		/**
 		 * @see pl.radical.open.gg.event.ContactListListener#contactListExported()

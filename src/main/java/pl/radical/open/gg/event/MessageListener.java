@@ -42,7 +42,7 @@ public interface MessageListener extends EventListener {
 	 */
 	void messageDelivered(int uin, int messageID, MessageStatus deliveryStatus);
 
-	public static class Stub implements MessageListener {
+	class Stub implements MessageListener {
 
 		/**
 		 * @see pl.radical.open.gg.event.MessageListener#messageArrived(IncomingMessage)

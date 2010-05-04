@@ -35,7 +35,7 @@ public interface GGPacketListener extends EventListener {
 	 */
 	void receivedPacket(GGIncomingPackage incomingPacket);
 
-	public static class Stub implements GGPacketListener {
+	class Stub implements GGPacketListener {
 
 		/**
 		 * @see pl.radical.open.gg.event.GGPacketListener#receivedPacket(GGIncomingPackage)
