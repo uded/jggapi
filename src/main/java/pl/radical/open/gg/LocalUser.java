@@ -5,33 +5,51 @@ package pl.radical.open.gg;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public class LocalUser {
+public final class LocalUser {
 
-	/** Gadu-Gadu user's uin */
+	/**
+	 * Gadu-Gadu user's uin
+	 */
 	private int uin = -1;
 
-	/** the name of the user */
+	/**
+	 * the name of the user
+	 */
 	private String name = null;
 
-	/** the last name of the user */
+	/**
+	 * the last name of the user
+	 */
 	private String lastName = null;
 
-	/** the nick name of the user */
+	/**
+	 * the nick name of the user
+	 */
 	private String nickName = null;
 
-	/** the name that is an alias for the user */
+	/**
+	 * the name that is an alias for the user
+	 */
 	private String displayName = null;
 
-	/** the telehone of the user */
+	/**
+	 * the telehone of the user
+	 */
 	private String telephone = null;
 
-	/** the group that the user belongs */
+	/**
+	 * the group that the user belongs
+	 */
 	private String group = null;
 
-	/** the e-mail address of the user */
+	/**
+	 * the e-mail address of the user
+	 */
 	private String emailAddress = null;
 
-	/** flag to indicate that the user is blocked */
+	/**
+	 * flag to indicate that the user is blocked
+	 */
 	private boolean blocked = false;
 
 	public void setFirstName(final String name) {
@@ -105,7 +123,7 @@ public class LocalUser {
 	}
 
 	public void setBlocked(final boolean isBlocked) {
-		this.blocked = isBlocked;
+		blocked = isBlocked;
 	}
 
 	public boolean isBlocked() {
