@@ -1,7 +1,7 @@
 package pl.radical.open.gg.packet.handlers;
 
 import pl.radical.open.gg.GGException;
-import pl.radical.open.gg.SessionState;
+import pl.radical.open.gg.packet.dicts.SessionState;
 import pl.radical.open.gg.packet.in.GGWelcome;
 import pl.radical.open.gg.utils.GGUtils;
 

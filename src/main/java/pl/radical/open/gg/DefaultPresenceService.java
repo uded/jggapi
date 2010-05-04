@@ -3,6 +3,7 @@ package pl.radical.open.gg;
 import pl.radical.open.gg.event.LoginListener;
 import pl.radical.open.gg.event.UserListener;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.dicts.SessionState;
 import pl.radical.open.gg.packet.dicts.StatusType;
 import pl.radical.open.gg.packet.out.GGAddNotify;
 import pl.radical.open.gg.packet.out.GGListEmpty;

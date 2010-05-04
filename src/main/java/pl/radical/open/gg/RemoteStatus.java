@@ -24,10 +24,10 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	private int version = -1;
 	private int descriptionSize = -1;
 
-	private boolean supportsVoiceCommunication = false;
-	private boolean supportsDirectCommunication = false;
-	private boolean areWeInRemoteUserBuddyList = false;
-	private boolean isUserBehindFirewall = false;
+	private boolean voiceCommunicationSupported = false;
+	private boolean directCommunicationSupported = false;
+	private boolean inRemoteUserBuddyList = false;
+	private boolean userBehindFirewall = false;
 
 	public RemoteStatus(final StatusType statusType) {
 		super(statusType);
@@ -108,34 +108,34 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 		this.imageSize = imageSize;
 	}
 
-	public boolean supportsVoiceCommunication() {
-		return supportsVoiceCommunication;
+	public boolean isVoiceCommunicationSupported() {
+		return voiceCommunicationSupported;
 	}
 
-	public void setSupportsVoiceCommunication(final boolean supportsVoiceCommunication) {
-		this.supportsVoiceCommunication = supportsVoiceCommunication;
-	}
-
-	/**
-	 * @see pl.radical.open.gg.IRemoteStatus#supportsDirectCommunication()
-	 */
-	public boolean supportsDirectCommunication() {
-		return supportsDirectCommunication;
-	}
-
-	public void setSupportsDirectCommunication(final boolean supportsDirectCommunication) {
-		this.supportsDirectCommunication = supportsDirectCommunication;
+	public void setSupportsVoiceCommunication(final boolean voiceCommunicationSupported) {
+		this.voiceCommunicationSupported = voiceCommunicationSupported;
 	}
 
 	/**
-	 * @see pl.radical.open.gg.IRemoteStatus#areWeInRemoteUserBuddyList()
+	 * @see pl.radical.open.gg.IRemoteStatus#isDirectCommunicationSupported()
 	 */
-	public boolean areWeInRemoteUserBuddyList() {
-		return areWeInRemoteUserBuddyList;
+	public boolean isDirectCommunicationSupported() {
+		return directCommunicationSupported;
 	}
 
-	public void setAreWeInRemoteUserBuddyList(final boolean areWeInRemoteUserBuddyList) {
-		this.areWeInRemoteUserBuddyList = areWeInRemoteUserBuddyList;
+	public void setSupportsDirectCommunication(final boolean directCommunicationSupported) {
+		this.directCommunicationSupported = directCommunicationSupported;
+	}
+
+	/**
+	 * @see pl.radical.open.gg.IRemoteStatus#isinRemoteUserBuddyList()
+	 */
+	public boolean isinRemoteUserBuddyList() {
+		return inRemoteUserBuddyList;
+	}
+
+	public void setInRemoteUserBuddyList(final boolean inRemoteUserBuddyList) {
+		this.inRemoteUserBuddyList = inRemoteUserBuddyList;
 	}
 
 	/**
@@ -156,11 +156,11 @@ public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
 	 * @see pl.radical.open.gg.IRemoteStatus#isUserBehindFirewall()
 	 */
 	public boolean isUserBehindFirewall() {
-		return isUserBehindFirewall;
+		return userBehindFirewall;
 	}
 
 	public void setUserBehindFirewall(final boolean userBehingFirewall) {
-		isUserBehindFirewall = true;
+		userBehindFirewall = true;
 	}
 
 }

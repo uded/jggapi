@@ -5,6 +5,7 @@ import pl.radical.open.gg.event.SessionStateListener;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
 import pl.radical.open.gg.packet.dicts.MessageStatus;
+import pl.radical.open.gg.packet.dicts.SessionState;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationHandler;

@@ -7,69 +7,69 @@ package pl.radical.open.gg;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public abstract class PublicDirSearch {
+public class PublicDirSearch {
 
-	protected Integer uin = null;
-	protected String firstName = null;
-	protected String nickName = null;
-	protected String birthYear = null;
-	protected String city = null;
-	protected String familyName = null;
-	protected String familyCity = null;
+	private Integer uin = null;
+	private String firstName = null;
+	private String nickName = null;
+	private String birthYear = null;
+	private String city = null;
+	private String familyName = null;
+	private String familyCity = null;
 
-	public Integer getUin() {
+	public final Integer getUin() {
 		return uin;
 	}
 
-	public void setUin(final Integer uin) {
+	public final void setUin(final Integer uin) {
 		this.uin = uin;
 	}
 
-	public String getFirstName() {
+	public final String getFirstName() {
 		return firstName;
 	}
 
-	public void setFirstName(final String firstName) {
+	public final void setFirstName(final String firstName) {
 		this.firstName = firstName;
 	}
 
-	public String getBirthYear() {
+	public final String getBirthYear() {
 		return birthYear;
 	}
 
-	public void setBirthYear(final String birthYear) {
+	public final void setBirthYear(final String birthYear) {
 		this.birthYear = birthYear;
 	}
 
-	public String getNickName() {
+	public final String getNickName() {
 		return nickName;
 	}
 
-	public void setNickName(final String nickName) {
+	public final void setNickName(final String nickName) {
 		this.nickName = nickName;
 	}
 
-	public String getCity() {
+	public final String getCity() {
 		return city;
 	}
 
-	public void setCity(final String city) {
+	public final void setCity(final String city) {
 		this.city = city;
 	}
 
-	public String getFamilyName() {
+	public final String getFamilyName() {
 		return familyName;
 	}
 
-	public void setFamilyName(final String familyName) {
+	public final void setFamilyName(final String familyName) {
 		this.familyName = familyName;
 	}
 
-	public void setFamilyCity(final String familyCity) {
+	public final void setFamilyCity(final String familyCity) {
 		this.familyCity = familyCity;
 	}
 
-	public String getFamilyCity() {
+	public final String getFamilyCity() {
 		return familyCity;
 	}
 

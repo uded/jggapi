@@ -1,6 +1,7 @@
 package pl.radical.open.gg;
 
 import pl.radical.open.gg.event.SessionStateListener;
+import pl.radical.open.gg.packet.dicts.SessionState;
 
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>

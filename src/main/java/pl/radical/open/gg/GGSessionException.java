@@ -1,5 +1,7 @@
 package pl.radical.open.gg;
 
+import pl.radical.open.gg.packet.dicts.SessionState;
+
 /**
  * Created on 2004-11-30 Exception that is thrown when user tries to move from certain state to state that is not
  * allowed at that moment.

@@ -77,7 +77,7 @@ public class GGStatus60 extends AbstractGGIncomingPacket implements GGStatuses, 
 		} else if (remotePort == 1) {
 			status60.setUserBehindFirewall(true);
 		} else if (remotePort == 2) {
-			status60.setAreWeInRemoteUserBuddyList(false);
+			status60.setInRemoteUserBuddyList(false);
 		} else {
 			status60.setRemotePort(remotePort);
 		}

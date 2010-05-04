@@ -6,6 +6,7 @@ import pl.radical.open.gg.event.PingListener;
 import pl.radical.open.gg.packet.GGHeader;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.dicts.SessionState;
 import pl.radical.open.gg.packet.handlers.PacketChain;
 import pl.radical.open.gg.packet.handlers.PacketContext;
 import pl.radical.open.gg.packet.out.GGPing;
@@ -188,21 +189,21 @@ public class DefaultConnectionService implements IConnectionService {
 	/**
 	 * @see pl.radical.open.gg.IConnectionService#addConnectionListener(pl.radical.open.gg.event.ConnectionListener)
 	 */
-	public void addConnectionListener(final ConnectionListener connectionListener) {
-		if (connectionListener == null) {
+	public void addConnectionListener(final ConnectionListener connListener) {
+		if (connListener == null) {
 			throw new IllegalArgumentException("connectionListener cannot be null");
 		}
-		eventListenerList.add(ConnectionListener.class, connectionListener);
+		eventListenerList.add(ConnectionListener.class, connListener);
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IConnectionService#removeConnectionListener(pl.radical.open.gg.event.ConnectionListener)
 	 */
-	public void removeConnectionListener(final ConnectionListener connectionListener) {
-		if (connectionListener == null) {
+	public void removeConnectionListener(final ConnectionListener connListener) {
+		if (connListener == null) {
 			throw new IllegalArgumentException("connectionListener cannot be null");
 		}
-		eventListenerList.remove(ConnectionListener.class, connectionListener);
+		eventListenerList.remove(ConnectionListener.class, connListener);
 	}
 
 	/**
@@ -247,8 +248,8 @@ public class DefaultConnectionService implements IConnectionService {
 
 	protected void notifyConnectionEstablished() throws GGException {
 		session.getSessionAccessor().setSessionState(SessionState.AUTHENTICATION_AWAITING);
-		final ConnectionListener[] connectionListeners = eventListenerList.getListeners(ConnectionListener.class);
-		for (final ConnectionListener connectionListener : connectionListeners) {
+		final ConnectionListener[] connListeners = eventListenerList.getListeners(ConnectionListener.class);
+		for (final ConnectionListener connectionListener : connListeners) {
 			connectionListener.connectionEstablished();
 		}
 		// this could be also realized as a ConnectionHandler in session class
@@ -256,15 +257,15 @@ public class DefaultConnectionService implements IConnectionService {
 
 	protected void notifyConnectionClosed() throws GGException {
 		session.getSessionAccessor().setSessionState(SessionState.DISCONNECTED);
-		final ConnectionListener[] connectionListeners = eventListenerList.getListeners(ConnectionListener.class);
-		for (final ConnectionListener connectionListener : connectionListeners) {
+		final ConnectionListener[] connListeners = eventListenerList.getListeners(ConnectionListener.class);
+		for (final ConnectionListener connectionListener : connListeners) {
 			connectionListener.connectionClosed();
 		}
 	}
 
 	protected void notifyConnectionError(final Exception ex) throws GGException {
-		final ConnectionListener[] connectionListeners = eventListenerList.getListeners(ConnectionListener.class);
-		for (final ConnectionListener connectionListener : connectionListeners) {
+		final ConnectionListener[] connListeners = eventListenerList.getListeners(ConnectionListener.class);
+		for (final ConnectionListener connectionListener : connListeners) {
 			connectionListener.connectionError(ex);
 		}
 		session.getSessionAccessor().setSessionState(SessionState.CONNECTION_ERROR);

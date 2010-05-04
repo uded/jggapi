@@ -1,6 +1,7 @@
 package pl.radical.open.gg;
 
 import pl.radical.open.gg.event.PublicDirListener;
+import pl.radical.open.gg.packet.dicts.SessionState;
 import pl.radical.open.gg.packet.out.GGPubdirRequest;
 
 import java.io.IOException;

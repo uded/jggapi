@@ -1,6 +1,6 @@
 package pl.radical.open.gg.event;
 
-import pl.radical.open.gg.SessionState;
+import pl.radical.open.gg.packet.dicts.SessionState;
 
 import java.util.EventListener;
 

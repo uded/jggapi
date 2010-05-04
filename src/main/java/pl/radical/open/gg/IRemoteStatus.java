@@ -50,21 +50,21 @@ public interface IRemoteStatus extends IStatus {
 	 * 
 	 * @return whether or not the user supports voice communication.
 	 */
-	boolean supportsVoiceCommunication();
+	boolean isVoiceCommunicationSupported();
 
 	/**
 	 * Flag indicating whether the user supports direct communication.
 	 * 
 	 * @return whether or not the user support direct communication.
 	 */
-	boolean supportsDirectCommunication();
+	boolean isDirectCommunicationSupported();
 
 	/**
 	 * Flag indicating whether or not we are in the remote user's buddy list.
 	 * 
 	 * @return whether or not we are in remote user's buddy list.
 	 */
-	boolean areWeInRemoteUserBuddyList();
+	boolean isinRemoteUserBuddyList();
 
 	/**
 	 * Flag indicating that remote user is behing firewall.

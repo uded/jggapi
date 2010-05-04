@@ -3,6 +3,7 @@ package pl.radical.open.gg;
 import pl.radical.open.gg.event.LoginFailedEvent;
 import pl.radical.open.gg.event.LoginListener;
 import pl.radical.open.gg.event.UserListener;
+import pl.radical.open.gg.packet.dicts.SessionState;
 import pl.radical.open.gg.packet.dicts.StatusType;
 import pl.radical.open.gg.packet.out.GGLogin80;
 

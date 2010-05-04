@@ -23,13 +23,15 @@ public class IncomingMessage extends AbstractMessage implements IIncommingMessag
 	 *            Gadu-Gadu number of the user that sent the message.
 	 * @param messageBody
 	 *            the body of the message.
+	 * @param messageClass
+	 *            class of the message
 	 * @throws IllegalArgumentException
 	 *             if the uin or messageID or messageDate is a negative value.
 	 * @throws NullPointerException
 	 *             if the messageBody is null.
 	 */
-	public IncomingMessage(final int uin, final String messageBody, final int messageID, final long messageDate, final int protocolMessageClass) {
-		super(uin, messageBody, GGConversion.getClientMessageClass(protocolMessageClass));
+	public IncomingMessage(final int uin, final String messageBody, final int messageID, final long messageDate, final int messageClass) {
+		super(uin, messageBody, GGConversion.getClientMessageClass(messageClass));
 		if (messageDate < 0) {
 			throw new IllegalArgumentException("messageDate cannot be less than 0");
 		}
@@ -45,8 +47,8 @@ public class IncomingMessage extends AbstractMessage implements IIncommingMessag
 	 * 
 	 * @return Date the time this message was sent.
 	 */
-	public Date getMessageDate() {
-		return messageDate;
+	public final Date getMessageDate() {
+		return (Date) messageDate.clone();
 	}
 
 }

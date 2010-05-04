@@ -9,11 +9,11 @@ public class GGConfiguration implements IGGConfiguration {
 
 	public static final int DEFAULT_SOCKET_TIMEOUT = 25 * 1000;
 	public static final int DEFAULT_PING_INTERVAL = 10 * 1000;
-	public static final int DEFAULT_CONNECTION_THREAD_SLEEP_TIME = 100;
+	public static final int DEFAULT_CONN_THREAD_SLEEP_TIME = 100;
 
 	private int pingIntervalInMiliseconds = DEFAULT_PING_INTERVAL;
 	private int socketTimeoutInSeconds = DEFAULT_SOCKET_TIMEOUT;
-	private int connectionTimeOutInMiliseconds = DEFAULT_CONNECTION_THREAD_SLEEP_TIME;
+	private int connectionTimeOutInMiliseconds = DEFAULT_CONN_THREAD_SLEEP_TIME;
 
 	private String serverLookupURL = "http://appmsg.gadu-gadu.pl/appsvc/appmsg.asp";
 	private String serverRegistrationURL = "http://register.gadu-gadu.pl/appsvc/fmregister3.asp";

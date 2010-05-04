@@ -4,6 +4,7 @@ import pl.radical.open.gg.event.ContactListListener;
 import pl.radical.open.gg.event.GGPacketListener;
 import pl.radical.open.gg.packet.GGIncomingPackage;
 import pl.radical.open.gg.packet.GGOutgoingPackage;
+import pl.radical.open.gg.packet.dicts.SessionState;
 import pl.radical.open.gg.packet.in.GGUserListReply;
 import pl.radical.open.gg.packet.out.GGUserListRequest;
 import pl.radical.open.gg.utils.GGUtils;

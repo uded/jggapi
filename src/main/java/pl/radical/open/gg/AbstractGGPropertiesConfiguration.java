@@ -41,8 +41,8 @@ public abstract class AbstractGGPropertiesConfiguration implements IGGConfigurat
 	 * @see pl.radical.open.gg.IGGConfiguration#getConnectionThreadSleepTimeInMiliseconds()
 	 */
 	public int getConnectionThreadSleepTimeInMiliseconds() {
-		final String connectionThreadSleepTime = String.valueOf(configuration.getConnectionThreadSleepTimeInMiliseconds());
-		return Integer.valueOf(properties.getProperty("connection.thread.sleep.time", connectionThreadSleepTime));
+		final String connThreadSleepTime = String.valueOf(configuration.getConnectionThreadSleepTimeInMiliseconds());
+		return Integer.valueOf(properties.getProperty("connection.thread.sleep.time", connThreadSleepTime));
 	}
 
 	/**
