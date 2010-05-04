@@ -55,9 +55,7 @@ public final class GGPubdirRequest implements GGOutgoingPackage, GGPubdirConsts 
 		toSend[4] = (byte) (seq >> 24 & 0xFF);
 
 		final byte[] requestBytes = request.getBytes();
-		for (int i = 0; i < requestBytes.length; i++) {
-			toSend[5 + i] = requestBytes[i];
-		}
+		System.arraycopy(requestBytes, 0, toSend, 5, requestBytes.length);
 
 		return toSend;
 	}

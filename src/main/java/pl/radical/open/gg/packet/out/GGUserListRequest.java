@@ -50,9 +50,7 @@ public final class GGUserListRequest implements GGOutgoingPackage {
 		toSend[0] = type;
 
 		final byte[] bytes = request.getBytes();
-		for (int i = 0; i < bytes.length; i++) {
-			toSend[1 + i] = bytes[i];
-		}
+		System.arraycopy(bytes, 0, toSend, 1, bytes.length);
 
 		return toSend;
 	}
@@ -152,13 +150,14 @@ public final class GGUserListRequest implements GGOutgoingPackage {
 			if (localUser.getEmailAddress() != null) {
 				buffer.append(localUser.getEmailAddress());
 			}
-			buffer.append(';');
-			// buffer.append(0);
-			// buffer.append(';');
 			// buffer.append(';');
 			// buffer.append(0);
 			// buffer.append(';');
-			buffer.append('\n');
+			// buffer.append(';');
+			// buffer.append(0);
+			// buffer.append(';');
+			// buffer.append('\n');
+			buffer.append(";\n");
 		}
 		return buffer.toString();
 	}
