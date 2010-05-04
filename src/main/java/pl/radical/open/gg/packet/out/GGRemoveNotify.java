@@ -23,7 +23,7 @@ public class GGRemoveNotify implements GGOutgoingPackage, GGUser {
 	 */
 	private int uin = -1;
 
-	private final User.UserMode userMode = null;
+	private User.UserMode userMode = null;
 	private byte userType = GG_USER_BUDDY;
 
 	public GGRemoveNotify(final int uin, final User.UserMode userMode) {
