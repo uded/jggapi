@@ -1,8 +1,11 @@
 package pl.radical.open.gg;
 
 import static org.junit.Assert.assertEquals;
+import static pl.radical.open.gg.AlljGGapiTest.TEST_UIN_1;
+import static pl.radical.open.gg.AlljGGapiTest.TEST_UIN_2;
 
 import pl.radical.open.gg.event.MessageListener;
+import pl.radical.open.gg.packet.dicts.MessageStatus;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -15,10 +18,6 @@ public class CommunicationTest {
 
 	private ISession session1;
 	private ISession session2;
-
-
-	public int user1 = 20239471;
-	public int user2 = 20241237;
 
 	private final Logger log = LoggerFactory.getLogger(getClass().getName());
 
@@ -40,31 +39,33 @@ public class CommunicationTest {
 		final IMessageService messageService1 = session1.getMessageService();
 		final IMessageService messageService2 = session2.getMessageService();
 
-		final OutgoingMessage outMessage = OutgoingMessage.createNewMessage(user2, hello);
-		log.debug("Sending message ["+hello+"] to "+user2);
-		messageService1.sendMessage(outMessage);
+		final OutgoingMessage outMessage = OutgoingMessage.createNewMessage(TEST_UIN_2, hello);
+		log.debug("Sending message [{}] to ", "hello", TEST_UIN_2);
+		if (session1.getLoginService().isLoggedIn()) {
+			messageService1.sendMessage(outMessage);
 
-		messageService2.addMessageListener(new MessageListener(){
+			messageService2.addMessageListener(new MessageListener(){
 
-			@Override
-			public void messageArrived(final IIncommingMessage incommingMessage) {
-				log.info("Message ["+incommingMessage.getMessageBody()+"] received from "+incommingMessage.getRecipientUin());
-				assertEquals(user1, incommingMessage.getRecipientUin());
-				assertEquals(hello,incommingMessage.getMessageBody());
-				CommunicationTest.asyncOp = true;
-			}
+				@Override
+				public void messageArrived(final IIncommingMessage incommingMessage) {
+					log.info("Message ["+incommingMessage.getMessageBody()+"] received from "+incommingMessage.getRecipientUin());
+					assertEquals(TEST_UIN_1, incommingMessage.getRecipientUin());
+					assertEquals(hello,incommingMessage.getMessageBody());
+					CommunicationTest.asyncOp = true;
+				}
 
-			@Override
-			public void messageDelivered(final int uin, final int messageID, final MessageStatus deliveryStatus) {
-				// TODO Auto-generated method stub
+				@Override
+				public void messageDelivered(final int uin, final int messageID, final MessageStatus deliveryStatus) {
+					// TODO Auto-generated method stub
 
-			}
+				}
 
-			@Override
-			public void messageSent(final IOutgoingMessage outgoingMessage) {
-				// TODO Auto-generated method stub
+				@Override
+				public void messageSent(final IOutgoingMessage outgoingMessage) {
+					// TODO Auto-generated method stub
 
-			}});
+				}});
+		}
 
 		while (!asyncOp) {
 			Thread.sleep(100);

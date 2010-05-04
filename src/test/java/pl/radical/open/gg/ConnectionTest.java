@@ -1,14 +1,21 @@
 package pl.radical.open.gg;
 
+import static pl.radical.open.gg.AlljGGapiTest.TEST_PASS_1;
+import static pl.radical.open.gg.AlljGGapiTest.TEST_PASS_2;
+import static pl.radical.open.gg.AlljGGapiTest.TEST_UIN_1;
+import static pl.radical.open.gg.AlljGGapiTest.TEST_UIN_2;
+
 import pl.radical.open.gg.event.ConnectionListener;
 import pl.radical.open.gg.event.LoginFailedEvent;
 import pl.radical.open.gg.event.LoginListener;
 
+import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 /**
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
@@ -16,19 +23,29 @@ import org.slf4j.LoggerFactory;
 public class ConnectionTest {
 	private final Logger log = LoggerFactory.getLogger(getClass().getName());
 
-	static boolean asyncOp = false;
+	private final LoginContext loginContext1 = new LoginContext(TEST_UIN_1, TEST_PASS_1);
+	private final LoginContext loginContext2 = new LoginContext(TEST_UIN_2, TEST_PASS_2);
 
-	private final LoginContext loginContext1 = new LoginContext(20239471, "RadicalEntropy");
-	private final LoginContext loginContext2 = new LoginContext(20241237, "RadicalTest");
-
-	static ISession session1;
-	static ISession session2;
+	protected static ISession session1;
+	protected static ISession session2;
 
 	static final CountDownLatch CONNECT_LATCH = new CountDownLatch(2);
 	static final CountDownLatch COMMUNICATION_LATCH = new CountDownLatch(2);
 
+	public final void badConnectionTest() {
+		final int uin = new Random().nextInt(15000000) + 5000000;
+		final LoginContext loginContextBad = new LoginContext(uin, "pass");
+
+		final ConnectUser cu = new ConnectUser(loginContextBad);
+		final Thread badConnectT = new Thread(cu);
+		badConnectT.run();
+
+		final Thread badLoginT = new Thread(new LoginUser(cu.getSession(), loginContextBad));
+		badLoginT.run();
+	}
+
 	@Test(timeout = 1000 * 30)
-	public final void connectionTest() {
+	public final void connectionTest() throws InterruptedException {
 		log.info("Executing connectionTest() method");
 
 		ConnectUser cu;
@@ -37,6 +54,8 @@ public class ConnectionTest {
 		final Thread t1 = new Thread(cu);
 		t1.run();
 		session1 = cu.getSession();
+
+		Thread.sleep(1000);
 
 		cu = new ConnectUser(loginContext2);
 		final Thread t2 = new Thread(cu);
@@ -60,14 +79,14 @@ public class ConnectionTest {
 				session.getConnectionService().addConnectionListener(new ConnectionListener.Stub() {
 					@Override
 					public void connectionEstablished() throws GGException {
-						log.info("Connection established for user {}." + loginContext.getUin());
+						log.info("Connection established for user [{}].", loginContext.getUin());
 						CONNECT_LATCH.countDown();
 						super.connectionEstablished();
 					}
 
 					@Override
 					public void connectionClosed() throws GGException {
-						log.info("Connection closed for user {}." + loginContext.getUin());
+						log.info("Connection closed for user [{}].", loginContext.getUin());
 						super.connectionClosed();
 					}
 
