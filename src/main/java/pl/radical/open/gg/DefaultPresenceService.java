@@ -152,7 +152,7 @@ public class DefaultPresenceService implements IPresenceService {
 			return Collections.emptySet();
 		}
 
-		if (monitoredUsers.size() == 0) {
+		if (monitoredUsers.isEmpty()) {
 			return Collections.emptySet();
 		} else {
 			return Collections.unmodifiableCollection(monitoredUsers);

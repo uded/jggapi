@@ -75,7 +75,7 @@ public class PacketChain {
 
 		final Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IncomingPacket.class);
 
-		if (classes.size() == 0) {
+		if (classes.isEmpty()) {
 			throw new GGException("No classes found to register as packet handlers!");
 		}
 
