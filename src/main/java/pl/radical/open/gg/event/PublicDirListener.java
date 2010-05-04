@@ -26,7 +26,7 @@ public interface PublicDirListener extends EventListener {
 	 * @param publicDirSearchReply
 	 *            the object that represents Gadu-Gadu's server reply.
 	 */
-	void onPublicDirectorySearchReply(int queryID, PublicDirSearchReply publicDirSearchReply);
+	void onPublicDirectorySearchReply(int queryID, PublicDirSearchReply dirSearchReply);
 
 	/**
 	 * Messaged when we have successfully retrieved our personal information from the Gadu-Gadu's public directory.
@@ -46,7 +46,7 @@ public interface PublicDirListener extends EventListener {
 	 */
 	void onPublicDirectoryUpdated(int queryID);
 
-	public static class Stub implements PublicDirListener {
+	class Stub implements PublicDirListener {
 
 		/**
 		 * @see pl.radical.open.gg.event.PublicDirListener#onPublicDirectoryUpdated(int)
@@ -57,7 +57,7 @@ public interface PublicDirListener extends EventListener {
 		/**
 		 * @see pl.radical.open.gg.event.PublicDirListener#onPublicDirectorySearchReply(int, PublicDirSearchReply)
 		 */
-		public void onPublicDirectorySearchReply(final int queryID, final PublicDirSearchReply publicDirSearchReply) {
+		public void onPublicDirectorySearchReply(final int queryID, final PublicDirSearchReply dirSearchReply) {
 		}
 
 		/**
