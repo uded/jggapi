@@ -13,13 +13,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class CommunicationTest {
+	private static final Logger LOG = LoggerFactory.getLogger(CommunicationTest.class);
 
 	static boolean asyncOp = false;
 
 	private ISession session1;
 	private ISession session2;
-
-	private final Logger log = LoggerFactory.getLogger(getClass().getName());
 
 	@Before
 	public void setUpSession() {
@@ -40,7 +39,7 @@ public class CommunicationTest {
 		final IMessageService messageService2 = session2.getMessageService();
 
 		final OutgoingMessage outMessage = OutgoingMessage.createNewMessage(TEST_UIN_2, hello);
-		log.debug("Sending message [{}] to ", "hello", TEST_UIN_2);
+		LOG.debug("Sending message [{}] to ", "hello", TEST_UIN_2);
 		if (session1.getLoginService().isLoggedIn()) {
 			messageService1.sendMessage(outMessage);
 
@@ -48,7 +47,7 @@ public class CommunicationTest {
 
 				@Override
 				public void messageArrived(final IIncommingMessage incommingMessage) {
-					log.info("Message ["+incommingMessage.getMessageBody()+"] received from "+incommingMessage.getRecipientUin());
+					LOG.info("Message [" + incommingMessage.getMessageBody() + "] received from " + incommingMessage.getRecipientUin());
 					assertEquals(TEST_UIN_1, incommingMessage.getRecipientUin());
 					assertEquals(hello,incommingMessage.getMessageBody());
 					CommunicationTest.asyncOp = true;

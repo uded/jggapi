@@ -21,7 +21,7 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
  */
 public class ConnectionTest {
-	private final Logger log = LoggerFactory.getLogger(getClass().getName());
+	private static final Logger LOG = LoggerFactory.getLogger(ConnectionTest.class);
 
 	private final LoginContext loginContext1 = new LoginContext(TEST_UIN_1, TEST_PASS_1);
 	private final LoginContext loginContext2 = new LoginContext(TEST_UIN_2, TEST_PASS_2);
@@ -46,7 +46,7 @@ public class ConnectionTest {
 
 	@Test(timeout = 1000 * 30)
 	public final void connectionTest() throws InterruptedException {
-		log.info("Executing connectionTest() method");
+		LOG.info("Executing connectionTest() method");
 
 		ConnectUser cu;
 
@@ -79,20 +79,20 @@ public class ConnectionTest {
 				session.getConnectionService().addConnectionListener(new ConnectionListener.Stub() {
 					@Override
 					public void connectionEstablished() throws GGException {
-						log.info("Connection established for user [{}].", loginContext.getUin());
+						LOG.info("Connection established for user [{}].", loginContext.getUin());
 						CONNECT_LATCH.countDown();
 						super.connectionEstablished();
 					}
 
 					@Override
 					public void connectionClosed() throws GGException {
-						log.info("Connection closed for user [{}].", loginContext.getUin());
+						LOG.info("Connection closed for user [{}].", loginContext.getUin());
 						super.connectionClosed();
 					}
 
 					@Override
 					public void connectionError(final Exception ex) throws GGException {
-						log.error("Connection error", ex);
+						LOG.error("Connection error", ex);
 						super.connectionError(ex);
 					}
 				});
@@ -100,10 +100,10 @@ public class ConnectionTest {
 				final IConnectionService connectionService = session.getConnectionService();
 				final IServer[] server = connectionService.lookupServer(loginContext.getUin());
 
-				log.info("Connecting user: {}", loginContext.getUin());
+				LOG.info("Connecting user: {}", loginContext.getUin());
 				connectionService.connect(server);
 			} catch (final GGException e) {
-				log.error("Connection failed", e);
+				LOG.error("Connection failed", e);
 			}
 		}
 
@@ -114,7 +114,7 @@ public class ConnectionTest {
 
 	@Test(timeout = 1000 * 30)
 	public final void loginTest() throws GGException, InterruptedException {
-		log.info("Executing loginTest() method");
+		LOG.info("Executing loginTest() method");
 
 		final Thread t1 = new Thread(new LoginUser(session1, loginContext1));
 		t1.run();
@@ -143,21 +143,21 @@ public class ConnectionTest {
 				loginService.addLoginListener(new LoginListener.Stub() {
 					@Override
 					public void loginOK() throws GGException {
-						log.info("Login for user {} OK", loginContext.getUin());
+						LOG.info("Login for user {} OK", loginContext.getUin());
 						COMMUNICATION_LATCH.countDown();
 					}
 
 					@Override
 					public void loginFailed(final LoginFailedEvent loginFailedEvent) {
-						log.error("Login failed!");
+						LOG.error("Login failed!");
 						System.exit(15);
 					}
 				});
 
-				log.debug("Loging in user: {}", loginContext.getUin());
+				LOG.debug("Loging in user: {}", loginContext.getUin());
 				loginService.login(loginContext);
 			} catch (final Exception e) {
-				log.error("Cannot login the user", e);
+				LOG.error("Cannot login the user", e);
 			}
 		}
 	}
