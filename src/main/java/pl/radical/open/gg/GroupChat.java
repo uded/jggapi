@@ -55,7 +55,7 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 		return this;
 	}
 
-	public void addRecipient(final int recipientUin) {
+	public final void addRecipient(final int recipientUin) {
 		if (recipientUin < 0) {
 			throw new IllegalArgumentException("recipientUin cannot be less than 0");
 		}

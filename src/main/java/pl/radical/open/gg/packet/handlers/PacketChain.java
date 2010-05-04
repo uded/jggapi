@@ -68,7 +68,7 @@ public class PacketChain {
 		packetHandler.handle(packageContent);
 	}
 
-	protected void registerDefaultHandlers() throws GGException {
+	protected final void registerDefaultHandlers() throws GGException {
 		final Configuration configuration = new ConfigurationBuilder().setScanners(new TypeAnnotationsScanner()).setUrls(ClasspathHelper
 				.getUrlsForPackagePrefix("pl.radical.open.gg.packet.in"));
 		final Reflections reflections = new Reflections(configuration);
