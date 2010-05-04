@@ -85,7 +85,7 @@ public class DefaultConnectionService implements IConnectionService {
 		try {
 			final IGGConfiguration configuration = session.getGGConfiguration();
 
-			final URL url = new URL(configuration.getServerLookupURL() + "?fmnumber=" + String.valueOf(uin) + "&version=8.0.0.7669");
+			final URL url = new URL(configuration.getServerLookupURL() + "?fmnumber=" + Integer.valueOf(uin) + "&version=8.0.0.7669");
 			if (LOG.isDebugEnabled()) {
 				LOG.debug("GG HUB URL address: {}", url);
 			}
@@ -304,16 +304,14 @@ public class DefaultConnectionService implements IConnectionService {
 	}
 
 	private void checkConnectionState() throws GGSessionException {
-		if (session.getSessionState() == SessionState.CONNECTION_AWAITING) {
-			return;
+		switch (session.getSessionState()) {
+			case CONNECTION_AWAITING:
+			case DISCONNECTED:
+			case CONNECTION_ERROR:
+				break;
+			default:
+				throw new GGSessionException(session.getSessionState());
 		}
-		if (session.getSessionState() == SessionState.DISCONNECTED) {
-			return;
-		}
-		if (session.getSessionState() == SessionState.CONNECTION_ERROR) {
-			return;
-		}
-		throw new GGSessionException(session.getSessionState());
 	}
 
 	/**
