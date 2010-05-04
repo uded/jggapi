@@ -89,23 +89,17 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("fmnumber=");
 		buffer.append(uin);
-		buffer.append('&');
-		buffer.append("fmpwd=");
+		buffer.append("&fmpwd=");
 		buffer.append(URLEncoder.encode(oldPassword, Encoding.WINDOWS1250.getValue()));
-		buffer.append('&');
-		buffer.append("pwd=");
+		buffer.append("&pwd=");
 		buffer.append(URLEncoder.encode(newPassword, Encoding.WINDOWS1250.getValue()));
-		buffer.append('&');
-		buffer.append("email=");
+		buffer.append("&email=");
 		buffer.append(URLEncoder.encode(email, Encoding.WINDOWS1250.getValue()));
-		buffer.append('&');
-		buffer.append("tokenid=");
+		buffer.append("&tokenid=");
 		buffer.append(tokenID);
-		buffer.append('&');
-		buffer.append("tokenval=");
+		buffer.append("&tokenval=");
 		buffer.append(tokenVal);
-		buffer.append('&');
-		buffer.append("code=");
+		buffer.append("&code=");
 		buffer.append(getHashCode(email, newPassword));
 
 		if (LOG.isDebugEnabled()) {

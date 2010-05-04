@@ -62,17 +62,13 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("pwd=");
 		buffer.append(URLEncoder.encode(password, Encoding.WINDOWS1250.getValue()));
-		buffer.append('&');
-		buffer.append("email=");
+		buffer.append("&email=");
 		buffer.append(URLEncoder.encode(email, Encoding.WINDOWS1250.getValue()));
-		buffer.append('&');
-		buffer.append("tokenid=");
+		buffer.append("&tokenid=");
 		buffer.append(URLEncoder.encode(tokenID, Encoding.WINDOWS1250.getValue()));
-		buffer.append('&');
-		buffer.append("tokenval=");
+		buffer.append("&tokenval=");
 		buffer.append(URLEncoder.encode(tokenVal, Encoding.WINDOWS1250.getValue()));
-		buffer.append('&');
-		buffer.append("code=");
+		buffer.append("&code=");
 		buffer.append(getHashCode(email, password));
 
 		return buffer.toString();
@@ -111,13 +107,14 @@ public class RegisterGGAccountRequest extends AbstractTokenRequest {
 		}
 
 		public int getNewUin() {
+			int result = -1;
 			if (isOKResponse()) {
 				final StringTokenizer tokenizer = new StringTokenizer(responseString, ":");
 				tokenizer.nextToken();
 				final String token2 = tokenizer.nextToken(); // new assigned uin
-				return Integer.parseInt(token2);
+				result = Integer.parseInt(token2);
 			}
-			return -1;
+			return result;
 		}
 
 	}

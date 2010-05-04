@@ -105,7 +105,7 @@ public final class GGUserListRequest implements GGOutgoingPackage {
 
 		for (final String line : lines) {
 			buffer.append(line);
-			buffer.append("\n");
+			buffer.append('\n');
 		}
 
 		return buffer.toString();
@@ -116,8 +116,9 @@ public final class GGUserListRequest implements GGOutgoingPackage {
 		for (final Object element : usersToExport) {
 			final LocalUser localUser = (LocalUser) element;
 			if (localUser.isBlocked()) {
-				buffer.append("i;;;;;;" + String.valueOf(localUser.getUin()));
-				buffer.append("\n");
+				buffer.append("i;;;;;;");
+				buffer.append(Integer.valueOf(localUser.getUin()));
+				buffer.append('\n');
 				continue;
 			}
 			if (localUser.getFirstName() != null) {
@@ -157,7 +158,7 @@ public final class GGUserListRequest implements GGOutgoingPackage {
 			// buffer.append(';');
 			// buffer.append(0);
 			// buffer.append(';');
-			buffer.append("\n");
+			buffer.append('\n');
 		}
 		return buffer.toString();
 	}

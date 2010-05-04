@@ -61,25 +61,18 @@ public class UnregisterGGPasswordRequest extends AbstractTokenRequest {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("fmnumber=");
 		buffer.append(uin);
-		buffer.append('&');
-		buffer.append("fmpwd=");
+		buffer.append("&fmpwd=");
 		buffer.append(URLEncoder.encode(password, Encoding.WINDOWS1250.getValue()));
-		buffer.append('&');
-		buffer.append("delete=1");
-		buffer.append('&');
-		buffer.append("email=");
+		buffer.append("&delete=1"); // NOPMD by LRzanek on 05.05.10 01:24
+		buffer.append("&email=");
 		buffer.append("deletedaccount@gadu-gadu.pl");
-		buffer.append('&');
-		buffer.append("pwd=");
+		buffer.append("&pwd=");
 		buffer.append("2D388046464"); // TODO losowa liczba?
-		buffer.append('&');
-		buffer.append("tokenid=");
+		buffer.append("&tokenid=");
 		buffer.append(tokenID);
-		buffer.append('&');
-		buffer.append("tokenval=");
+		buffer.append("&tokenval=");
 		buffer.append(tokenVal);
-		buffer.append('&');
-		buffer.append("code=");
+		buffer.append("&code=");
 		buffer.append(getHashCode("deletedaccount@gadu-gadu.pl", "2D388046464"));
 
 		return buffer.toString();

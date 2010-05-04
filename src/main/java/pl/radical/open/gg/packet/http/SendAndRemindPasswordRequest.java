@@ -60,17 +60,13 @@ public class SendAndRemindPasswordRequest extends AbstractTokenRequest {
 		final StringBuffer buffer = new StringBuffer();
 		buffer.append("userid=");
 		buffer.append(uin);
-		buffer.append('&');
-		buffer.append("email=");
+		buffer.append("&email=");
 		buffer.append(email);
-		buffer.append('&');
-		buffer.append("tokenid=");
+		buffer.append("&tokenid=");
 		buffer.append(tokenID);
-		buffer.append('&');
-		buffer.append("tokenval=");
+		buffer.append("&tokenval=");
 		buffer.append(tokenVal);
-		buffer.append('&');
-		buffer.append("code=");
+		buffer.append("&code=");
 		buffer.append(getHashCode(String.valueOf(uin)));
 
 		return buffer.toString();
