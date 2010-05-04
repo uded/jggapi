@@ -203,7 +203,7 @@ public class Session implements ISession {
 		}
 
 		for (final SessionStateListener sessionStateListener : sessionStateListeners) {
-			if (oldState != newState) {
+			if (!oldState.equals(newState)) {
 				sessionStateListener.sessionStateChanged(oldState, newState);
 			}
 		}
@@ -217,7 +217,7 @@ public class Session implements ISession {
 	public class SessionAccessor {
 
 		public void setSessionState(final SessionState sessionState) {
-			if (m_sessionState != sessionState) {
+			if (!m_sessionState.equals(sessionState)) {
 				final SessionState oldState = m_sessionState;
 				m_sessionState = sessionState;
 				notifySessionStateChanged(oldState, sessionState);
