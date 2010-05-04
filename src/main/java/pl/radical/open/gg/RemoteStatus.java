@@ -13,6 +13,7 @@ import java.util.Date;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class RemoteStatus extends AbstractStatus implements IRemoteStatus {
+	private static final long serialVersionUID = 6536864191847671371L;
 
 	private boolean blocked = false;
 

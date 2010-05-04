@@ -12,8 +12,11 @@ import java.util.Date;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class LocalStatus extends AbstractStatus implements ILocalStatus {
+	private static final long serialVersionUID = 3362577231868177656L;
 
-	/** the field that indicated whether or user that logs on wants to be seen only by friends */
+	/**
+	 * the field that indicated whether or user that logs on wants to be seen only by friends
+	 */
 	private boolean friendsOnly = false;
 
 	public LocalStatus(final StatusType statusType) {
