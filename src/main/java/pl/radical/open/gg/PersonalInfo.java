@@ -8,7 +8,7 @@ import pl.radical.open.gg.dicts.Gender;
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
-public class PersonalInfo {
+public final class PersonalInfo {
 
 	/** First name of the user */
 	private String firstName = null;
