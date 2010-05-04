@@ -51,8 +51,8 @@ public class PacketChain {
 			LOG.error("Unable to create an object of type {}", packetHandler.getClass().getName(), e);
 			throw new GGException("Unable to create an object of type " + packetHandler.getClass().getName(), e);
 		} catch (final IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error("Inproper use of object.newInstance()", e);
+			throw new GGException("Inproper use of object.newInstance()", e);
 		}
 	}
 
