@@ -1,5 +1,7 @@
 package pl.radical.open.gg;
 
+import pl.radical.open.gg.packet.dicts.StatusType;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;

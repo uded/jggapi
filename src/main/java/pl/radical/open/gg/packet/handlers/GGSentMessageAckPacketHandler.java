@@ -1,7 +1,7 @@
 package pl.radical.open.gg.packet.handlers;
 
 import pl.radical.open.gg.GGException;
-import pl.radical.open.gg.MessageStatus;
+import pl.radical.open.gg.packet.dicts.MessageStatus;
 import pl.radical.open.gg.packet.in.GGSendMsgAck;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;

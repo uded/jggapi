@@ -2,13 +2,13 @@ package pl.radical.open.gg.utils;
 
 import pl.radical.open.gg.IStatus;
 import pl.radical.open.gg.MessageClass;
-import pl.radical.open.gg.MessageStatus;
 import pl.radical.open.gg.RemoteStatus;
-import pl.radical.open.gg.StatusType;
 import pl.radical.open.gg.User;
 import pl.radical.open.gg.packet.dicts.GGMessageClass;
 import pl.radical.open.gg.packet.dicts.GGStatuses;
 import pl.radical.open.gg.packet.dicts.GGUser;
+import pl.radical.open.gg.packet.dicts.MessageStatus;
+import pl.radical.open.gg.packet.dicts.StatusType;
 import pl.radical.open.gg.packet.in.GGSendMsgAck;
 
 import java.util.Date;

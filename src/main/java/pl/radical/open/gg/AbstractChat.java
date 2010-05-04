@@ -1,6 +1,7 @@
 package pl.radical.open.gg;
 
 import pl.radical.open.gg.event.MessageListener;
+import pl.radical.open.gg.packet.dicts.MessageStatus;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -68,7 +69,7 @@ public abstract class AbstractChat implements IChat {
 		}
 
 		/**
-		 * @see pl.radical.open.gg.event.MessageListener#messageDelivered(int, int, pl.radical.open.gg.MessageStatus)
+		 * @see pl.radical.open.gg.event.MessageListener#messageDelivered(int, int, pl.radical.open.gg.packet.dicts.MessageStatus)
 		 */
 		@Override
 		public void messageDelivered(final int uin, final int messageID, final MessageStatus deliveryStatus) {

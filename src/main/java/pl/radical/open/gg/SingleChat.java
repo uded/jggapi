@@ -1,5 +1,7 @@
 package pl.radical.open.gg;
 
+import pl.radical.open.gg.packet.dicts.MessageStatus;
+
 /**
  * Created on 2005-01-29
  * 
@@ -51,7 +53,7 @@ public class SingleChat extends AbstractChat implements ISingleChat {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.AbstractChat#acceptsOutgoing(int, int, pl.radical.open.gg.MessageStatus)
+	 * @see pl.radical.open.gg.AbstractChat#acceptsOutgoing(int, int, pl.radical.open.gg.packet.dicts.MessageStatus)
 	 */
 	@Override
 	protected boolean acceptsOutgoing(final int uin, final int messageID, final MessageStatus deliveryStatus) {

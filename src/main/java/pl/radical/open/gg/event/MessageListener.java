@@ -3,7 +3,7 @@ package pl.radical.open.gg.event;
 import pl.radical.open.gg.IIncommingMessage;
 import pl.radical.open.gg.IOutgoingMessage;
 import pl.radical.open.gg.IncomingMessage;
-import pl.radical.open.gg.MessageStatus;
+import pl.radical.open.gg.packet.dicts.MessageStatus;
 
 import java.util.EventListener;
 

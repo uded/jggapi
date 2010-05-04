@@ -1,5 +1,6 @@
 package pl.radical.open.gg;
 
+import pl.radical.open.gg.packet.dicts.MessageStatus;
 import pl.radical.open.gg.packet.out.GGSendMsg;
 
 import java.io.IOException;
@@ -85,7 +86,7 @@ public class GroupChat extends AbstractChat implements IGroupChat {
 	}
 
 	/**
-	 * @see pl.radical.open.gg.AbstractChat#acceptsOutgoing(int, int, pl.radical.open.gg.MessageStatus)
+	 * @see pl.radical.open.gg.AbstractChat#acceptsOutgoing(int, int, pl.radical.open.gg.packet.dicts.MessageStatus)
 	 */
 	@Override
 	protected boolean acceptsOutgoing(final int uin, final int messageID, final MessageStatus deliveryStatus) {

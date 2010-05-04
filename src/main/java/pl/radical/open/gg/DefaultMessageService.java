@@ -1,6 +1,7 @@
 package pl.radical.open.gg;
 
 import pl.radical.open.gg.event.MessageListener;
+import pl.radical.open.gg.packet.dicts.MessageStatus;
 import pl.radical.open.gg.packet.out.GGSendMsg;
 
 import java.io.IOException;
