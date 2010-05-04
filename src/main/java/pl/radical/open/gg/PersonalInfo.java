@@ -10,28 +10,44 @@ import pl.radical.open.gg.dicts.Gender;
  */
 public final class PersonalInfo {
 
-	/** First name of the user */
+	/**
+	 * First name of the user
+	 */
 	private String firstName = null;
 
-	/** Last name of the user */
+	/**
+	 * Last name of the user
+	 */
 	private String lastName = null;
 
-	/** Birth date of the user */
+	/**
+	 * Birth date of the user
+	 */
 	private String birthDate = null;
 
-	/** City of the user */
+	/**
+	 * City of the user
+	 */
 	private String city = null;
 
-	/** The handle that the user want to identify hisself/herself */
+	/**
+	 * The handle that the user want to identify hisself/herself
+	 */
 	private String nickName = null;
 
-	/** The gender of the user */
+	/**
+	 * The gender of the user
+	 */
 	private Gender gender = null;
 
-	/** The name of the user's family */
+	/**
+	 * The name of the user's family
+	 */
 	private String familyName = null;
 
-	/** the name of the user's city */
+	/**
+	 * the name of the user's city
+	 */
 	private String familyCity = null;
 
 	public String getFirstName() {
