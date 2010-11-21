@@ -21,7 +21,7 @@
 		<url>http://dev.radical.com.pl/hudson/job/jGGapi/</url>
 	</ciManagement>
 	<scm>
-		<connection>scm:git:http://github.com/uded/jggapi.git</connection>
+		<connection>scm:git:https://github.com/uded/jggapi.git</connection>
 		<developerConnection>scm:svn:https://svn.radical.com.pl/jabber/trunk/jggapi/</developerConnection>
 		<url>http://projekty.radical.com.pl/projects/jggapi-ng/repository</url>
 	</scm>
@@ -137,7 +137,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.8.1</version>
+			<version>4.8.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
