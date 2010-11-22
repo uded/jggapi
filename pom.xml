@@ -18,7 +18,7 @@
 	</issueManagement>
 	<ciManagement>
 		<system>Hudson</system>
-		<url>http://dev.radical.com.pl/hudson/job/jGGapi/</url>
+		<url>https://dev.radical.com.pl/hudson/job/jGGapi/</url>
 	</ciManagement>
 	<scm>
 		<connection>scm:git:https://github.com/uded/jggapi.git</connection>
@@ -172,11 +172,11 @@
 	<distributionManagement>
 		<repository>
 			<id>radical-releases</id>
-			<url>http://dev.radical.com.pl/maven/content/repositories/releases</url>
+			<url>https://dev.radical.com.pl/maven/content/repositories/releases</url>
 		</repository>
 		<snapshotRepository>
 			<id>radical-snapshot</id>
-			<url>http://dev.radical.com.pl/maven/content/repositories/snapshots</url>
+			<url>https://dev.radical.com.pl/maven/content/repositories/snapshots</url>
 		</snapshotRepository>
 	</distributionManagement>
 
