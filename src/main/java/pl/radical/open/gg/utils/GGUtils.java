@@ -21,9 +21,11 @@ import org.slf4j.LoggerFactory;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
-public class GGUtils {
-
+public final class GGUtils {
 	private static final Logger LOG = LoggerFactory.getLogger(GGUtils.class);
+
+	private GGUtils() {
+	}
 
 	public static String prettyBytesToString(final byte[] bytes) {
 		final StringBuffer received = new StringBuffer();
@@ -105,11 +107,11 @@ public class GGUtils {
 	}
 
 	public static int unsignedByteToInt(final byte value) {
+		int result = value;
 		if (value < 0) {
-			return (value & 0x7F) + 0x80;
-		} else {
-			return value;
+			result = (value & 0x7F) + 0x80;
 		}
+		return result;
 	}
 
 	public static byte[] intToByte(final int buf) {
@@ -147,7 +149,7 @@ public class GGUtils {
 		} catch (final UnsupportedEncodingException ex) {
 			LOG.warn("Unable to convert", ex);
 			// FIXME Co to jest u diabła???
-			return new String(desc);
+			returnString = new String(desc);
 		}
 		return returnString;
 	}
@@ -167,7 +169,7 @@ public class GGUtils {
 			returnString = new String(desc, encoding.getValue());
 		} catch (final UnsupportedEncodingException ex) {
 			LOG.warn("Unable to convert", ex);
-			return new String(desc);
+			returnString = new String(desc);
 		}
 		return returnString;
 	}
