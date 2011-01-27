@@ -24,6 +24,9 @@ import org.slf4j.LoggerFactory;
 public final class GGConversion {
 	private static final Logger LOG = LoggerFactory.getLogger(GGConversion.class);
 
+	private GGConversion() {
+	}
+
 	public static User.UserMode getUserMode(final int protocolStatus) {
 		if ((protocolStatus & GGStatuses.GG_STATUS_FRIENDS_MASK) == GGStatuses.GG_STATUS_FRIENDS_MASK) {
 			return User.UserMode.FRIEND;
@@ -93,7 +96,7 @@ public final class GGConversion {
 				remoteStatus.setDescription(description);
 				break;
 
-				// FIXME Default??
+			// FIXME Default??
 		}
 
 		if (remoteStatus != null && returnTimeInMillis != -1) {
@@ -116,23 +119,37 @@ public final class GGConversion {
 
 		int protocolStatus = -1;
 
-		if (clientStatus.getStatusType() == StatusType.ONLINE) {
-			protocolStatus = GGStatuses.GG_STATUS_AVAIL;
-		} else if (clientStatus.getStatusType() == StatusType.ONLINE_WITH_DESCRIPTION) {
-			protocolStatus = GGStatuses.GG_STATUS_AVAIL_DESCR;
-		} else if (clientStatus.getStatusType() == StatusType.BUSY) {
-			protocolStatus = GGStatuses.GG_STATUS_BUSY;
-		} else if (clientStatus.getStatusType() == StatusType.BUSY_WITH_DESCRIPTION) {
-			protocolStatus = GGStatuses.GG_STATUS_BUSY_DESCR;
-		} else if (clientStatus.getStatusType() == StatusType.OFFLINE) {
-			protocolStatus = GGStatuses.GG_STATUS_NOT_AVAIL;
-		} else if (clientStatus.getStatusType() == StatusType.OFFLINE_WITH_DESCRIPTION) {
-			protocolStatus = GGStatuses.GG_STATUS_NOT_AVAIL_DESCR;
-		} else if (clientStatus.getStatusType() == StatusType.INVISIBLE) {
-			protocolStatus = GGStatuses.GG_STATUS_INVISIBLE;
-		} else if (clientStatus.getStatusType() == StatusType.INVISIBLE_WITH_DESCRIPTION) {
-			protocolStatus = GGStatuses.GG_STATUS_INVISIBLE_DESCR;
+		switch (clientStatus.getStatusType()) {
+			// FIXME Tu brakuje w cholerę statusów!
+			case ONLINE:
+				protocolStatus = GGStatuses.GG_STATUS_AVAIL;
+				break;
+			case ONLINE_WITH_DESCRIPTION:
+				protocolStatus = GGStatuses.GG_STATUS_AVAIL_DESCR;
+				break;
+			case BUSY:
+				protocolStatus = GGStatuses.GG_STATUS_BUSY;
+				break;
+			case BUSY_WITH_DESCRIPTION:
+				protocolStatus = GGStatuses.GG_STATUS_BUSY_DESCR;
+				break;
+			case OFFLINE:
+				protocolStatus = GGStatuses.GG_STATUS_NOT_AVAIL;
+				break;
+			case OFFLINE_WITH_DESCRIPTION:
+				protocolStatus = GGStatuses.GG_STATUS_NOT_AVAIL_DESCR;
+				break;
+			case INVISIBLE:
+				protocolStatus = GGStatuses.GG_STATUS_INVISIBLE;
+				break;
+			case INVISIBLE_WITH_DESCRIPTION:
+				protocolStatus = GGStatuses.GG_STATUS_INVISIBLE_DESCR;
+				break;
+			default:
+				// TODO Czy to aby dobry pomysł?
+				protocolStatus = GGStatuses.GG_STATUS_UNKNOWN;
 		}
+
 
 		if (protocolStatus != -1) {
 			if (isFriendsOnly) {
