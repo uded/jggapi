@@ -23,6 +23,7 @@ public class GGRecvMsg80PacketHandler implements PacketHandler {
 	/**
 	 * @see pl.mn.communicator.packet.handlers.PacketHandler#handle(pl.mn.communicator.packet.handlers.Context)
 	 */
+	@Override
 	public void handle(final PacketContext context) throws GGException {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("GGRecvMsg80 packet received.");
@@ -31,10 +32,13 @@ public class GGRecvMsg80PacketHandler implements PacketHandler {
 		}
 
 		final GGRecvMsg80 recvMsg = new GGRecvMsg80(context.getPackageContent());
+		if (LOG.isTraceEnabled()) {
+			LOG.trace(recvMsg.toString());
+		}
 		context.getSessionAccessor().notifyGGPacketReceived(recvMsg);
 		// FIXME only plain message
-		final IIncommingMessage incommingMessage = new IncomingMessage(recvMsg.getSenderUin(), recvMsg.getPlainMessage(), recvMsg
-		        .getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
+		final IIncommingMessage incommingMessage = new IncomingMessage(recvMsg.getSender(), recvMsg.getPlainMessage(), recvMsg
+				.getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
 		context.getSessionAccessor().notifyMessageArrived(incommingMessage);
 	}
 
