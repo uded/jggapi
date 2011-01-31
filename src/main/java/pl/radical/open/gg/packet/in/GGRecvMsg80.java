@@ -43,6 +43,7 @@ public final class GGRecvMsg80 extends AbstractGGIncomingPacket implements GGInc
 		if (getOffsetAttributes() == data.length) {
 			offsetAttributes = 0;
 		} else {
+			// TODO Migrate to guava - might be simpler
 			final ByteList byteList = new ArrayByteList(data.length - offsetAttributes);
 			for (int i = offsetAttributes; i < data.length; i++) {
 				byteList.add(data[i]);
