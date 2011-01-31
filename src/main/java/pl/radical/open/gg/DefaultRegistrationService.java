@@ -3,14 +3,16 @@ package pl.radical.open.gg;
 import pl.radical.open.gg.packet.http.ChangePasswordRequest;
 import pl.radical.open.gg.packet.http.CommonRegisterResponse;
 import pl.radical.open.gg.packet.http.GGTokenRequest;
+import pl.radical.open.gg.packet.http.GGTokenRequest.GGTokenResponse;
 import pl.radical.open.gg.packet.http.HttpResponse;
 import pl.radical.open.gg.packet.http.RegisterGGAccountRequest;
+import pl.radical.open.gg.packet.http.RegisterGGAccountRequest.RegisterGGAccountResponse;
 import pl.radical.open.gg.packet.http.SendAndRemindPasswordRequest;
 import pl.radical.open.gg.packet.http.UnregisterGGPasswordRequest;
-import pl.radical.open.gg.packet.http.GGTokenRequest.GGTokenResponse;
-import pl.radical.open.gg.packet.http.RegisterGGAccountRequest.RegisterGGAccountResponse;
 
 import java.io.IOException;
+
+import com.google.common.base.Preconditions;
 
 /**
  * Created on 2004-11-29
@@ -33,8 +35,8 @@ public class DefaultRegistrationService implements IRegistrationService {
 	/**
 	 * @see pl.radical.open.gg.IRegistrationService#getRegToken()
 	 */
+	@Override
 	public GGToken getRegistrationToken() throws GGException {
-
 		GGTokenRequest tokenRequest = null;
 		try {
 			tokenRequest = new GGTokenRequest(session.getGGConfiguration());
@@ -59,25 +61,14 @@ public class DefaultRegistrationService implements IRegistrationService {
 	 * @see pl.radical.open.gg.IRegistrationService#changePassword(int, java.lang.String, java.lang.String,
 	 *      java.lang.String, java.lang.String, java.lang.String)
 	 */
+	@Override
 	public void changePassword(final int uin, final String email, final String oldPassword, final String newPassword, final String tokenID, final String tokenVal) throws GGException {
-		if (uin < 0) {
-			throw new IllegalArgumentException("uin cannot be less than 0");
-		}
-		if (email == null) {
-			throw new IllegalArgumentException("email cannot be null");
-		}
-		if (oldPassword == null) {
-			throw new IllegalArgumentException("oldPassword cannot be null");
-		}
-		if (newPassword == null) {
-			throw new IllegalArgumentException("newPassword cannot be null");
-		}
-		if (tokenID == null) {
-			throw new IllegalArgumentException("tokenID cannot be null");
-		}
-		if (tokenVal == null) {
-			throw new IllegalArgumentException("tokenVal cannot be null");
-		}
+		Preconditions.checkArgument(uin < 0, new IllegalArgumentException("uin cannot be less than 0"));
+		Preconditions.checkNotNull(email, new IllegalArgumentException("email cannot be null"));
+		Preconditions.checkNotNull(oldPassword, new IllegalArgumentException("oldPassword cannot be null"));
+		Preconditions.checkNotNull(newPassword, new IllegalArgumentException("newPassword cannot be null"));
+		Preconditions.checkNotNull(tokenID, new IllegalArgumentException("tokenID cannot be null"));
+		Preconditions.checkNotNull(tokenVal, new IllegalArgumentException("tokenVal cannot be null"));
 
 		ChangePasswordRequest changePasswordRequest = null;
 		try {
@@ -103,19 +94,12 @@ public class DefaultRegistrationService implements IRegistrationService {
 	 * @see pl.radical.open.gg.IRegistrationService#registerAccount(java.lang.String email, java.lang.String password,
 	 *      int qa, String answer)
 	 */
+	@Override
 	public int registerAccount(final String email, final String password, final String tokenID, final String tokenVal) throws GGException {
-		if (email == null) {
-			throw new IllegalArgumentException("email cannot be null");
-		}
-		if (password == null) {
-			throw new IllegalArgumentException("password cannot be null");
-		}
-		if (tokenID == null) {
-			throw new IllegalArgumentException("password cannot be null");
-		}
-		if (tokenVal == null) {
-			throw new IllegalArgumentException("password cannot be null");
-		}
+		Preconditions.checkNotNull(email, new IllegalArgumentException("email cannot be null"));
+		Preconditions.checkNotNull(password, new IllegalArgumentException("password cannot be null"));
+		Preconditions.checkNotNull(tokenID, new IllegalArgumentException("tokenID cannot be null"));
+		Preconditions.checkNotNull(tokenVal, new IllegalArgumentException("tokenVal cannot be null"));
 
 		RegisterGGAccountRequest request = null;
 		try {
@@ -141,19 +125,12 @@ public class DefaultRegistrationService implements IRegistrationService {
 	/**
 	 * @see pl.radical.open.gg.IRegistrationService#unregisterAccount(int, java.lang.String)
 	 */
+	@Override
 	public void unregisterAccount(final int uin, final String password, final String tokenID, final String tokenVal) throws GGException {
-		if (uin < 0) {
-			throw new IllegalArgumentException("uin cannot be less than 0");
-		}
-		if (password == null) {
-			throw new IllegalArgumentException("password cannot be null");
-		}
-		if (tokenID == null) {
-			throw new IllegalArgumentException("tokenID cannot be null");
-		}
-		if (tokenVal == null) {
-			throw new IllegalArgumentException("tokenVal cannot be null");
-		}
+		Preconditions.checkArgument(uin < 0, new IllegalArgumentException("uin cannot be less than 0"));
+		Preconditions.checkNotNull(password, new IllegalArgumentException("password cannot be null"));
+		Preconditions.checkNotNull(tokenID, new IllegalArgumentException("tokenID cannot be null"));
+		Preconditions.checkNotNull(tokenVal, new IllegalArgumentException("tokenVal cannot be null"));
 
 		UnregisterGGPasswordRequest unregisterGGPasswordRequest = null;
 		try {
@@ -180,19 +157,12 @@ public class DefaultRegistrationService implements IRegistrationService {
 	/**
 	 * @see pl.radical.open.gg.IRegistrationService#remindAndSendPassword(int)
 	 */
+	@Override
 	public void sendPassword(final int uin, final String email, final String tokenID, final String tokenVal) throws GGException {
-		if (uin < 0) {
-			throw new IllegalArgumentException("uin cannot be less than 0");
-		}
-		if (email == null) {
-			throw new IllegalArgumentException("email cannot be null");
-		}
-		if (tokenID == null) {
-			throw new IllegalArgumentException("tokenID cannot be null");
-		}
-		if (tokenVal == null) {
-			throw new IllegalArgumentException("tokenVal cannot be null");
-		}
+		Preconditions.checkArgument(uin < 0, new IllegalArgumentException("uin cannot be less than 0"));
+		Preconditions.checkNotNull(email, new IllegalArgumentException("email cannot be null"));
+		Preconditions.checkNotNull(tokenID, new IllegalArgumentException("tokenID cannot be null"));
+		Preconditions.checkNotNull(tokenVal, new IllegalArgumentException("tokenVal cannot be null"));
 
 		SendAndRemindPasswordRequest request = null;
 		try {
