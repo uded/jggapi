@@ -161,12 +161,22 @@
 			<artifactId>reflections</artifactId>
 			<version>0.9.5-RC2</version>
 		</dependency>
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>r08</version>
+		</dependency>
 
 		<!-- Logging -->
 		<dependency>
 			<groupId>de.huxhorn.lilith</groupId>
 			<artifactId>de.huxhorn.lilith.slf4j</artifactId>
 			<version>0.9.40</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>0.9.3</version>
 		</dependency>
 	</dependencies>
 
@@ -220,7 +230,6 @@
 				</executions>
 				<configuration>
 					<scanners>org.reflections.scanners.TypeAnnotationsScanner</scanners>
-					<includeExclude>+pl.radical.</includeExclude>
 				</configuration>
 			</plugin>
 
