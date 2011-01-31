@@ -6,10 +6,9 @@ import pl.radical.open.gg.packet.IncomingPacket;
 import pl.radical.open.gg.packet.handlers.GGLogin80OKPacketHandler;
 
 /**
- * Created on 2004-12-11
- * 
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  * @since 1.6.9.0
+ * @since 2010-03-13
  */
 @IncomingPacket(type = 0x0035, label = "GG_LOGIN_OK80", handler = GGLogin80OKPacketHandler.class)
 public final class GGLogin80OK extends AbstractGGIncomingPacket implements GGIncomingPackage {
