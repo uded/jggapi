@@ -8,7 +8,6 @@ package pl.radical.open.gg;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public class GGException extends Exception {
-
 	private static final long serialVersionUID = -2956708463640990150L;
 
 	public GGException(final String message) {
