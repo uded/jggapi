@@ -12,6 +12,7 @@ import java.util.Date;
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
 public abstract class AbstractStatus implements IStatus {
+	private static final long serialVersionUID = 6725453160298927876L;
 
 	/**
 	 * the type of the status
@@ -48,10 +49,12 @@ public abstract class AbstractStatus implements IStatus {
 	/**
 	 * @see pl.radical.open.gg.IStatus#getStatusType()
 	 */
+	@Override
 	public StatusType getStatusType() {
 		return statusType;
 	}
 
+	@Override
 	public void setStatusType(final StatusType status) {
 		statusType = status;
 	}
@@ -61,6 +64,7 @@ public abstract class AbstractStatus implements IStatus {
 	 * 
 	 * @return <code>String</code> description as string.
 	 */
+	@Override
 	public String getDescription() {
 		return description;
 	}
@@ -69,6 +73,7 @@ public abstract class AbstractStatus implements IStatus {
 	 * @param description
 	 *            the description to set.
 	 */
+	@Override
 	public void setDescription(final String description) {
 		this.description = description;
 	}
@@ -76,6 +81,7 @@ public abstract class AbstractStatus implements IStatus {
 	/**
 	 * @return <code>Date</code> the return time.
 	 */
+	@Override
 	public Date getReturnDate() {
 		if (returnTime == null) {
 			return null;
@@ -87,6 +93,7 @@ public abstract class AbstractStatus implements IStatus {
 	 * @param returnTime
 	 *            The return time to set.
 	 */
+	@Override
 	public void setReturnDate(final Date returnTime) {
 		if (returnTime == null) {
 			throw new IllegalArgumentException("returnTime cannot be null");
@@ -97,6 +104,7 @@ public abstract class AbstractStatus implements IStatus {
 	/**
 	 * @see pl.radical.open.gg.IStatus#isDescriptionSet()
 	 */
+	@Override
 	public boolean isDescriptionSet() {
 		return description != null;
 	}
@@ -104,6 +112,7 @@ public abstract class AbstractStatus implements IStatus {
 	/**
 	 * @see pl.radical.open.gg.IStatus#isReturnDateSet()
 	 */
+	@Override
 	public boolean isReturnDateSet() {
 		return returnTime != null;
 	}
