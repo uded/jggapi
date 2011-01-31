@@ -21,6 +21,7 @@ public class GGMessageReceivedPacketHandler implements PacketHandler {
 	/**
 	 * @see pl.radical.open.gg.packet.handlers.PacketHandler#handle(pl.radical.open.gg.packet.handlers.Context)
 	 */
+	@Override
 	public void handle(final PacketContext context) throws GGException {
 		if (LOG.isDebugEnabled()) {
 			LOG.debug("GGMessage packet received.");
@@ -30,7 +31,7 @@ public class GGMessageReceivedPacketHandler implements PacketHandler {
 
 		final GGRecvMsg recvMsg = new GGRecvMsg(context.getPackageContent());
 		context.getSessionAccessor().notifyGGPacketReceived(recvMsg);
-		final IIncommingMessage incommingMessage = new IncomingMessage(recvMsg.getSenderUin(), recvMsg.getMessage(), recvMsg
+		final IIncommingMessage incommingMessage = new IncomingMessage(recvMsg.getSender(), recvMsg.getMessage(), recvMsg
 		        .getMessageSeq(), recvMsg.getTime(), recvMsg.getMsgClass());
 		context.getSessionAccessor().notifyMessageArrived(incommingMessage);
 	}
