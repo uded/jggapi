@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.google.common.base.Preconditions;
+
 /**
  * The default implementation of <code>IPublicDirectoryService</code>.
  * <p>
@@ -23,21 +25,17 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 
 	// friendly
 	DefaultPublicDirectoryService(final Session session) {
-		if (session == null) {
-			throw new IllegalArgumentException("session cannot be null");
-		}
+		Preconditions.checkNotNull(session, new IllegalArgumentException("session cannot be null"));
 		m_session = session;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IPublicDirectoryService#search(pl.radical.open.gg.PublicDirSearchQuery)
 	 */
+	@Override
 	public void search(final PublicDirSearchQuery publicDirQuery) throws GGException {
-		if (publicDirQuery == null) {
-			throw new IllegalArgumentException("publicDirQuery cannot be null");
-		}
+		Preconditions.checkNotNull(publicDirQuery, new IllegalArgumentException("publicDirQuery cannot be null"));
 		checkSessionState();
-
 		try {
 			final GGPubdirRequest pubdirRequest = GGPubdirRequest.createSearchPubdirRequest(publicDirQuery);
 			m_session.getSessionAccessor().sendPackage(pubdirRequest);
@@ -49,9 +47,9 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	/**
 	 * * @see pl.radical.open.gg.IPublicDirectoryService#readFromPublicDirectory()
 	 */
+	@Override
 	public void readFromPublicDirectory() throws GGException {
 		checkSessionState();
-
 		try {
 			final GGPubdirRequest pubdirRequest = GGPubdirRequest.createReadPubdirRequest();
 			m_session.getSessionAccessor().sendPackage(pubdirRequest);
@@ -63,10 +61,9 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	/**
 	 * @see pl.radical.open.gg.IPublicDirectoryService#writeToPublicDirectory(pl.radical.open.gg.PersonalInfo)
 	 */
+	@Override
 	public void writeToPublicDirectory(final PersonalInfo publicDirInfo) throws GGException {
-		if (publicDirInfo == null) {
-			throw new IllegalArgumentException("publicDirInfo cannot be null");
-		}
+		Preconditions.checkNotNull(publicDirInfo, new IllegalArgumentException("publicDirInfo cannot be null"));
 		checkSessionState();
 		try {
 			final GGPubdirRequest pubdirRequest = GGPubdirRequest.createWritePubdirRequest(publicDirInfo);
@@ -79,27 +76,23 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	/**
 	 * @see pl.radical.open.gg.IPublicDirectoryService#addPublicDirListener(pl.radical.open.gg.event.PublicDirListener)
 	 */
+	@Override
 	public void addPublicDirListener(final PublicDirListener publicDirListener) {
-		if (publicDirListener == null) {
-			throw new IllegalArgumentException("publicDirListener cannot be null");
-		}
+		Preconditions.checkNotNull(publicDirListener, new IllegalArgumentException("publicDirListener cannot be null"));
 		m_directoryListeners.add(publicDirListener);
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IPublicDirectoryService#removePublicDirListener(pl.radical.open.gg.event.PublicDirListener)
 	 */
+	@Override
 	public void removePublicDirListener(final PublicDirListener publicDirListener) {
-		if (publicDirListener == null) {
-			throw new IllegalArgumentException("pubDirListener cannot be null");
-		}
+		Preconditions.checkNotNull(publicDirListener, new IllegalArgumentException("pubDirListener cannot be null"));
 		m_directoryListeners.remove(publicDirListener);
 	}
 
 	protected void notifyPubdirRead(final int queryID, final PersonalInfo publicDirInfo) {
-		if (publicDirInfo == null) {
-			throw new IllegalArgumentException("publicDirInfo cannot be null");
-		}
+		Preconditions.checkNotNull(publicDirInfo, new IllegalArgumentException("publicDirInfo cannot be null"));
 		for (final Object element : m_directoryListeners) {
 			final PublicDirListener publicDirListener = (PublicDirListener) element;
 			publicDirListener.onPublicDirectoryRead(queryID, publicDirInfo);
@@ -114,9 +107,7 @@ public class DefaultPublicDirectoryService implements IPublicDirectoryService {
 	}
 
 	protected void notifyPubdirGotSearchResults(final int queryID, final PublicDirSearchReply publicDirSearchReply) {
-		if (publicDirSearchReply == null) {
-			throw new IllegalArgumentException("publicDirSearchReply cannot be null");
-		}
+		Preconditions.checkNotNull(publicDirSearchReply, new IllegalArgumentException("publicDirSearchReply cannot be null"));
 		for (final Object element : m_directoryListeners) {
 			final PublicDirListener publicDirListener = (PublicDirListener) element;
 			publicDirListener.onPublicDirectorySearchReply(queryID, publicDirSearchReply);

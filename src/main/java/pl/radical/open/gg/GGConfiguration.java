@@ -20,66 +20,45 @@ public class GGConfiguration implements IGGConfiguration {
 	private String tokenRequestURL = "http://register.gadu-gadu.pl/appsvc/regtoken.asp";
 	private String sendPasswordURL = "http://retr.gadu-gadu.pl/appsvc/fmsendpwd3.asp";
 
-	public int getPingIntervalInMiliseconds() {
+	@Override
+    public int getPingIntervalInMiliseconds() {
 		return pingIntervalInMiliseconds;
 	}
 
-	public int getSocketTimeoutInMiliseconds() {
+	@Override
+    public int getSocketTimeoutInMiliseconds() {
 		return socketTimeoutInSeconds;
 	}
 
-	public String getServerLookupURL() {
+	@Override
+    public String getServerLookupURL() {
 		return serverLookupURL;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IGGConfiguration#getRegistrationURL()
 	 */
-	public String getRegistrationURL() {
+	@Override
+    public String getRegistrationURL() {
 		return serverRegistrationURL;
 	}
 
 	/**
 	 * @see pl.radical.open.gg.IGGConfiguration#getTokenRequestURL()
 	 */
-	public String getTokenRequestURL() {
+	@Override
+    public String getTokenRequestURL() {
 		return tokenRequestURL;
 	}
 
-	public String getSendPasswordURL() {
+	@Override
+    public String getSendPasswordURL() {
 		return sendPasswordURL;
 	}
 
-	public int getConnectionThreadSleepTimeInMiliseconds() {
+	@Override
+    public int getConnectionThreadSleepTimeInMiliseconds() {
 		return connectionTimeOutInMiliseconds;
-	}
-
-	public void setConnectionThreadSleepTimeInMiliseconds(final int connectionThreadSleepTimeInMilis) {
-		connectionTimeOutInMiliseconds = connectionThreadSleepTimeInMilis;
-	}
-
-	public void setPingIntervalInMiliseconds(final int intervalInMiliseconds) {
-		pingIntervalInMiliseconds = intervalInMiliseconds;
-	}
-
-	public void setServerLookupURL(final String url) {
-		serverLookupURL = url;
-	}
-
-	public void setTokenRequestURL(final String url) {
-		tokenRequestURL = url;
-	}
-
-	public void setSendPasswordURL(final String url) {
-		sendPasswordURL = url;
-	}
-
-	public void setRegistrationURL(final String url) {
-		serverRegistrationURL = url;
-	}
-
-	public void setSocketTimeoutInMiliseconds(final int timeoutInSeconds) {
-		socketTimeoutInSeconds = timeoutInSeconds;
 	}
 
 }
