@@ -173,10 +173,13 @@
 			<artifactId>de.huxhorn.lilith.slf4j</artifactId>
 			<version>0.9.40</version>
 		</dependency>
+		
+		<!-- Compiler support for annotations -->
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<version>0.9.3</version>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 
