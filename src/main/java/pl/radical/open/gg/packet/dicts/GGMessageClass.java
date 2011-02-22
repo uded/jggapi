@@ -18,8 +18,10 @@ public interface GGMessageClass {
 
 	int GG_CLASS_ACK = 0x0020;
 
+	// FIXME Gdzie to jest używane?
 	int GG_CLASS_QUEUED2 = 0x0009;
 
+	// TODO Lokalne, nie wiem po co trzymać...
 	int GG_CLASS_UNKNOWN = -0x0001;
 
 }
