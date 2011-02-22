@@ -29,7 +29,7 @@
 		<name>Radical Creations</name>
 	</organization>
 	<inceptionYear>2010</inceptionYear>
-	<version>1.7</version>
+	<version>1.7-SNAPSHOT</version>
 	<description>The JGGApi project is implementation of proprietary Gadu-Gadu protocol based on specification from EKG. It is fully object oriented and uses common design patterns that reduce the learning curve of the library.</description>
 	<developers>
 		<developer>
