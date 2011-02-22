@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet.dicts;
 
+import lombok.Getter;
+
 /**
  * Created on 2004-12-11
  * 
@@ -23,13 +25,11 @@ public enum MessageStatus {
 
 	UNKNOWN("message_status_unknown");
 
+	@Getter
 	private String messageStatus = null;
 
 	private MessageStatus(final String messageStatus) {
 		this.messageStatus = messageStatus;
 	}
 
-	public String getMessageStatus() {
-		return messageStatus;
-	}
 }

@@ -1,5 +1,7 @@
 package pl.radical.open.gg;
 
+import lombok.Getter;
+
 /**
  * Created on 2004-12-11
  * 
@@ -33,19 +35,11 @@ public enum MessageClass {
 
 	UNKNOWN("message_class_unknown");
 
+	@Getter
 	private String messageClass = null;
 
 	private MessageClass(final String messageClass) {
 		this.messageClass = messageClass;
-	}
-
-	public String getMessageClass() {
-		return messageClass;
-	}
-
-	@Override
-	public String toString() {
-		return messageClass;
 	}
 
 }

@@ -7,6 +7,8 @@ import pl.radical.open.gg.packet.dicts.GGStatuses;
 import pl.radical.open.gg.utils.GGConversion;
 import pl.radical.open.gg.utils.GGUtils;
 
+import lombok.Getter;
+
 import org.apache.commons.collections.primitives.ArrayByteList;
 import org.apache.commons.collections.primitives.ByteList;
 
@@ -32,14 +34,11 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 		FLAGS_MOBILE(0x00100000),
 		FLAGS_LINKS(0x00800000);
 
+		@Getter
 		private int value;
 
 		private Flags(final int value) {
 			this.value = value;
-		}
-
-		public int getValue() {
-			return value;
 		}
 
 	}
@@ -57,6 +56,7 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 	/**
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
+	@Override
 	public int getPacketType() {
 		return GG_NEW_STATUS80;
 	}
@@ -64,6 +64,7 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 	/**
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
+	@Override
 	public int getLength() {
 		int length = 4;
 
@@ -80,6 +81,7 @@ public class GGNewStatus80 implements GGOutgoingPackage, GGStatuses {
 	/**
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
+	@Override
 	public byte[] getContents() {
 		final int statusToSend = GGConversion.getProtocolStatus(localStatus, localStatus.isFriendsOnly(), false);
 
