@@ -18,7 +18,7 @@
 	</issueManagement>
 	<ciManagement>
 		<system>Hudson</system>
-		<url>https://dev.radical.com.pl/hudson/job/jGGapi/</url>
+		<url>https://dev.radical.com.pl/jenkins/job/jGGapi/</url>
 	</ciManagement>
 	<scm>
 		<connection>scm:git:https://github.com/uded/jggapi.git</connection>
