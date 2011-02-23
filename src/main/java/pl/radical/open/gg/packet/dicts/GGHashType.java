@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet.dicts;
 
+import lombok.Getter;
+
 /**
  * A hash type to be used during a login process
  * 
@@ -9,13 +11,10 @@ public enum GGHashType {
 	GG_LOGIN_HASH_GG32(0x01),
 	GG_LOGIN_HASH_SHA1(0x02);
 
+	@Getter
 	private int value;
 
 	private GGHashType(final int value) {
 		this.value = value;
-	}
-
-	public int getValue() {
-		return value;
 	}
 }

@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet.dicts;
 
+import lombok.Getter;
+
 /**
  * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
  * @since 1.6.9.0
@@ -22,13 +24,11 @@ public enum GGStatusFlags {
 	 */
 	FLAG_RECEIVELINKS(0x00800000);
 
+	@Getter
 	private int value;
 
 	private GGStatusFlags(final int value) {
 		this.value = value;
 	}
 
-	public int value() {
-		return value;
-	}
 }

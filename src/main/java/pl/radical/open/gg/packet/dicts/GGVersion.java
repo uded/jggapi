@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet.dicts;
 
+import lombok.Getter;
+
 /**
  * Created on 2004-12-12
  * 
@@ -33,8 +35,10 @@ public enum GGVersion {
 	VERSION_4_5_12(0x0F), // 4.5.12
 	VERSION_4_0_30(0x0B); // 4.0.30, 4.0.29, 4.0.28, 4.0.25
 
+	@Getter
 	private int code;
 
+	@Getter
 	private String description;
 
 	private GGVersion(final int code) {
@@ -44,14 +48,6 @@ public enum GGVersion {
 	private GGVersion(final int code, final String description) {
 		this.code = code;
 		this.description = description;
-	}
-
-	public int getCode() {
-		return code;
-	}
-
-	public String getDescription() {
-		return description;
 	}
 
 }

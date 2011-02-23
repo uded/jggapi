@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet.dicts;
 
+import lombok.Getter;
+
 
 /**
  * Created on 2004-11-28
@@ -52,13 +54,11 @@ public enum SessionState {
 	 */
 	LOGGED_OUT("logged_out");
 
+	@Getter
 	private String sessionState = null;
 
 	private SessionState(final String sessionState) {
 		this.sessionState = sessionState;
 	}
 
-	public String getSessionState() {
-		return sessionState;
-	}
 }

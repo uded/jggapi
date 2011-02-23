@@ -1,5 +1,7 @@
 package pl.radical.open.gg.packet.dicts;
 
+import lombok.Getter;
+
 /**
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  */
@@ -28,19 +30,14 @@ public enum StatusType {
 	/** Status invisible with description */
 	INVISIBLE_WITH_DESCRIPTION("invisible_with_description", true);
 
+	@Getter
 	private String status = null;
-	private boolean description;
+
+	@Getter
+	private boolean descriptionStatus;
 
 	private StatusType(final String status, final boolean description) {
 		this.status = status;
-	}
-
-	public boolean isDescriptionStatus() {
-		return description;
-	}
-
-	public String getStatus() {
-		return status;
 	}
 
 }

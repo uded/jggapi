@@ -82,7 +82,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * Starting protocols flags
 	 */
-	private final int flags = GGStatusFlags.FLAG_UNKNOWN.value() + GGStatusFlags.FLAG_RECEIVELINKS.value();
+	private final int flags = GGStatusFlags.FLAG_UNKNOWN.getValue() + GGStatusFlags.FLAG_RECEIVELINKS.getValue();
 
 	/**
 	 * Protocol options - 0x00000367
@@ -226,6 +226,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getPacketType()
 	 */
+	@Override
 	public int getPacketType() {
 		return GG_LOGIN80;
 	}
@@ -233,6 +234,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getLength()
 	 */
+	@Override
 	public int getLength() {
 		int length = 4 + 2 + 4 + 4 + 4 + 1 + 4 + 2 + 4 + 2 + 1 + 1;
 		if (description != null) {
@@ -244,6 +246,7 @@ public class GGLogin80 implements GGOutgoingPackage {
 	/**
 	 * @see pl.radical.open.gg.packet.GGOutgoingPackage#getContents()
 	 */
+	@Override
 	public byte[] getContents() {
 		final ByteList byteList = new ArrayByteList();
 
