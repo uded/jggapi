@@ -86,7 +86,7 @@ public class ChangePasswordRequest extends AbstractTokenRequest {
 	 */
 	@Override
 	protected String getRequestBody() throws UnsupportedEncodingException {
-		final StringBuffer buffer = new StringBuffer();
+		final StringBuilder buffer = new StringBuilder();
 		buffer.append("fmnumber=");
 		buffer.append(uin);
 		buffer.append("&fmpwd=");
