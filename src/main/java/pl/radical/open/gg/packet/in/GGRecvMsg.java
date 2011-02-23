@@ -16,6 +16,8 @@ import lombok.EqualsAndHashCode;
  * @author <a href="mailto:mnaglik@gazeta.pl">Marcin Naglik</a>
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
  * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
+ * 
+ * @deprecated This implementation was replaced by {@link GGRecvMsg80} in current protocol implementation
  */
 @IncomingPacket(type = 0x000a, label = "GG_RECV_MSG", handler = GGMessageReceivedPacketHandler.class)
 @Deprecated
