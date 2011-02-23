@@ -55,14 +55,10 @@ public class CommunicationTest {
 
 				@Override
 				public void messageDelivered(final int uin, final int messageID, final MessageStatus deliveryStatus) {
-					// TODO Auto-generated method stub
-
 				}
 
 				@Override
 				public void messageSent(final IOutgoingMessage outgoingMessage) {
-					// TODO Auto-generated method stub
-
 				}});
 		}
 
