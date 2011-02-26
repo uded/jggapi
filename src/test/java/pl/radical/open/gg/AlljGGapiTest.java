@@ -27,10 +27,11 @@ public final class AlljGGapiTest {
 
 	@BeforeClass
 	public static void setUpContexts() {
+		LOG.info("TEST STARTING UP...");
 	}
 
 	@AfterClass
 	public static void tearDown() {
-
+		LOG.info("ALL TESTING FINISHED!");
 	}
 }
