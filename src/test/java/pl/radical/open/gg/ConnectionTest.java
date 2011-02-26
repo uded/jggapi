@@ -1,9 +1,9 @@
 package pl.radical.open.gg;
 
-import static pl.radical.open.gg.AlljGGapiTest.TEST_PASS_1;
-import static pl.radical.open.gg.AlljGGapiTest.TEST_PASS_2;
-import static pl.radical.open.gg.AlljGGapiTest.TEST_UIN_1;
-import static pl.radical.open.gg.AlljGGapiTest.TEST_UIN_2;
+import static pl.radical.open.gg.AlljGGapiTest.loginContext1;
+import static pl.radical.open.gg.AlljGGapiTest.loginContext2;
+import static pl.radical.open.gg.AlljGGapiTest.session1;
+import static pl.radical.open.gg.AlljGGapiTest.session2;
 
 import pl.radical.open.gg.event.ConnectionListener;
 import pl.radical.open.gg.event.LoginFailedEvent;
@@ -16,18 +16,11 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
 /**
- * @author <a href="mailto:lukasz@radical.com.pl">Łukasz Rżanek</a>
+ * @author <a href="mailto:lukasz.rzanek@radical.com.pl>Łukasz Rżanek</a>
  */
 public class ConnectionTest {
 	private static final Logger LOG = LoggerFactory.getLogger(ConnectionTest.class);
-
-	private final LoginContext loginContext1 = new LoginContext(TEST_UIN_1, TEST_PASS_1);
-	private final LoginContext loginContext2 = new LoginContext(TEST_UIN_2, TEST_PASS_2);
-
-	protected static ISession session1;
-	protected static ISession session2;
 
 	static final CountDownLatch CONNECT_LATCH = new CountDownLatch(2);
 	static final CountDownLatch COMMUNICATION_LATCH = new CountDownLatch(2);

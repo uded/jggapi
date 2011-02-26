@@ -3,29 +3,21 @@ package pl.radical.open.gg;
 import static org.junit.Assert.assertEquals;
 import static pl.radical.open.gg.AlljGGapiTest.TEST_UIN_1;
 import static pl.radical.open.gg.AlljGGapiTest.TEST_UIN_2;
+import static pl.radical.open.gg.AlljGGapiTest.session1;
+import static pl.radical.open.gg.AlljGGapiTest.session2;
 
 import pl.radical.open.gg.event.MessageListener;
 import pl.radical.open.gg.packet.dicts.MessageStatus;
 
-import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 public class CommunicationTest {
 	private static final Logger LOG = LoggerFactory.getLogger(CommunicationTest.class);
 
 	static boolean asyncOp = false;
-
-	private ISession session1;
-	private ISession session2;
-
-	@Before
-	public void setUpSession() {
-		session1 = ConnectionTest.session1;
-		session2 = ConnectionTest.session2;
-
-	}
 
 	@Test(timeout = 1000 * 60)
 	public void sendRecvMsgTest() throws GGException, InterruptedException {
