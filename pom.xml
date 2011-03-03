@@ -126,6 +126,14 @@
 		</repository>
 	</repositories>
 
+	<pluginRepositories>
+		<pluginRepository>
+			<id>reflections-repo</id>
+			<name>Reflections Maven2 Repository</name>
+			<url>http://reflections.googlecode.com/svn/repo</url>
+		</pluginRepository>
+	</pluginRepositories>
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
