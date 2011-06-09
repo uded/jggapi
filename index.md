@@ -1,4 +1,4 @@
-JGGApi - Gadu-Gadu protocol implementation.
+# JGGApi - Gadu-Gadu protocol implementation.
 
 JGGApi is a Gadu-Gadu protocol implementation based on specification from EKG. Gadu-Gadu is a very famous Instant 
 Messanger in Poland.
