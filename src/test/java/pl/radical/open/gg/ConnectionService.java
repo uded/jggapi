@@ -2,9 +2,9 @@ package pl.radical.open.gg;
 
 import javax.annotation.PostConstruct;
 
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.Configuration;
 
-@Service
+@Configuration
 public class ConnectionService {
 	public static final int TEST_UIN_1 = 20239471;
 	public static final int TEST_UIN_2 = 20241237;
