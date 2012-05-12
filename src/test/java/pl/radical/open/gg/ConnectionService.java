@@ -18,5 +18,17 @@ public class ConnectionService {
 	@PostConstruct
 	public void init() throws GGException {
 		session1 = SessionFactory.createSession();
+		IServer[] servers = session1.getConnectionService().lookupServer(TEST_UIN_1);
+		session1.getConnectionService().connect(servers);
+
+		session2 = SessionFactory.createSession();
+	}
+
+	public ISession getSession1() {
+		return session1;
+	}
+
+	public ISession getSession2() {
+		return session1;
 	}
 }

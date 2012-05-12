@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.commons.lang.ClassUtils;
+import org.apache.commons.lang3.ClassUtils;
 import org.reflections.Configuration;
 import org.reflections.Reflections;
 import org.reflections.scanners.TypeAnnotationsScanner;
@@ -69,8 +69,8 @@ public class PacketChain {
 	}
 
 	protected final void registerDefaultHandlers() throws GGException {
-		final Configuration configuration = new ConfigurationBuilder().setScanners(new TypeAnnotationsScanner()).setUrls(ClasspathHelper
-				.getUrlsForPackagePrefix("pl.radical.open.gg.packet.in"));
+		final Configuration configuration = new ConfigurationBuilder().setScanners(new TypeAnnotationsScanner()).setUrls(
+		        ClasspathHelper.getUrlsForPackagePrefix("pl.radical.open.gg.packet.in"));
 		final Reflections reflections = new Reflections(configuration);
 
 		final Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IncomingPacket.class);

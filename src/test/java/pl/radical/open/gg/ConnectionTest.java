@@ -12,6 +12,7 @@ import pl.radical.open.gg.event.LoginListener;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,6 +26,8 @@ public class ConnectionTest {
 	static final CountDownLatch CONNECT_LATCH = new CountDownLatch(2);
 	static final CountDownLatch COMMUNICATION_LATCH = new CountDownLatch(2);
 
+	@Test
+	@Ignore
 	public final void badConnectionTest() {
 		final int uin = new Random().nextInt(15000000) + 5000000;
 		final LoginContext loginContextBad = new LoginContext(uin, "pass");

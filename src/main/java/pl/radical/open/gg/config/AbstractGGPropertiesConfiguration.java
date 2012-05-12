@@ -1,4 +1,7 @@
-package pl.radical.open.gg;
+package pl.radical.open.gg.config;
+
+import pl.radical.open.gg.GGConfiguration;
+import pl.radical.open.gg.IGGConfiguration;
 
 import java.io.IOException;
 import java.io.InputStream;

@@ -1,10 +1,12 @@
 package pl.radical.open.gg;
 
+import pl.radical.open.gg.config.SimplePropertiesGGConfiguration;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * Created on 2004-12-12 This is the factory class that helps developers to create a new instance of a session class.
+ * This is the factory class that helps developers to create a new instance of a session class.
  * <p>
  * 
  * @author <a href="mailto:mati@sz.home.pl">Mateusz Szczap</a>
