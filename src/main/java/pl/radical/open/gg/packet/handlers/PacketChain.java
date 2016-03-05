@@ -70,7 +70,7 @@ public class PacketChain {
 
 	protected final void registerDefaultHandlers() throws GGException {
 		final Configuration configuration = new ConfigurationBuilder().setScanners(new TypeAnnotationsScanner()).setUrls(
-		        ClasspathHelper.getUrlsForPackagePrefix("pl.radical.open.gg.packet.in"));
+		        ClasspathHelper.forPackage("pl.radical.open.gg.packet.in"));
 		final Reflections reflections = new Reflections(configuration);
 
 		final Set<Class<?>> classes = reflections.getTypesAnnotatedWith(IncomingPacket.class);
